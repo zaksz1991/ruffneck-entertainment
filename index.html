@@ -842,7 +842,7 @@ footer{background:var(--midnight);padding:56px 0 22px;border-top:1px solid var(-
       <p class="sh-sub">Practical guides, strategies, and updates on AI, digital marketing, operations, and business productivity — written to be immediately actionable.</p>
     </div>
     <div class="blog-grid">
-      <a href="#blog" class="card blog-card fu fd1"><div class="blog-img bi-c">🤖</div><div class="blog-body"><div class="blog-cat">AI for Business</div><h3 class="blog-title">5 AI Tools Every Small Business Should Use in 2025</h3><p class="blog-snip">Practical AI tools that reduce workload, increase output, and give your business a competitive edge — no coding required.</p></div></a>
+      <a href="#blog" class="card blog-card fu fd1"><div class="blog-img bi-c">🤖</div><div class="blog-body"><div class="blog-cat">AI for Business</div><h3 class="blog-title">5 AI Tools Every Small Business Should Use in 2026</h3><p class="blog-snip">Practical AI tools that reduce workload, increase output, and give your business a competitive edge — no coding required.</p></div></a>
       <a href="#blog" class="card blog-card fu fd2"><div class="blog-img bi-g">📈</div><div class="blog-body"><div class="blog-cat">Digital Marketing</div><h3 class="blog-title">How to Build a Social Media Presence from Zero</h3><p class="blog-snip">A step-by-step system for establishing brand authority on social media platforms without a massive budget.</p></div></a>
       <a href="#blog" class="card blog-card fu fd3"><div class="blog-img bi-p">⚙️</div><div class="blog-body"><div class="blog-cat">Productivity Systems</div><h3 class="blog-title">The SOP Framework That Scales Any Business</h3><p class="blog-snip">How to document your processes, train your team, and create repeatable systems that don't depend on one person.</p></div></a>
       <a href="#blog" class="card blog-card fu fd1"><div class="blog-img bi-g">💼</div><div class="blog-body"><div class="blog-cat">Remote Work Solutions</div><h3 class="blog-title">How to Hire and Manage a Remote Virtual Assistant</h3><p class="blog-snip">The complete playbook for onboarding, managing, and maximizing the output of a remote VA for your business.</p></div></a>
@@ -889,11 +889,11 @@ footer{background:var(--midnight);padding:56px 0 22px;border-top:1px solid var(-
         <div class="gbar"></div>
         <p class="sh-sub">Whether you need a one-off project or a long-term digital partner, we respond within 24 hours. International inquiries welcome.</p>
         <div class="cont-info">
-          <div class="ci-item"><div class="ci-icon">📧</div><div class="ci-d"><strong>Email</strong><a href="mailto:hello@ruffneckentertainment.com">hello@ruffneckentertainment.com</a></div></div>
-          <div class="ci-item"><div class="ci-icon">📍</div><div class="ci-d"><strong>Location</strong><span>Phase 3 Sharada Estate, Gwale, Kano State, Nigeria</span></div></div>
+          <div class="ci-item"><div class="ci-icon">📧</div><div class="ci-d"><strong>Email</strong><a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a></div></div>
+          <div class="ci-item"><div class="ci-icon">📍</div><div class="ci-d"><strong>Location</strong><span>Kano State, Nigeria</span></div></div>
           <div class="ci-item"><div class="ci-icon">🌐</div><div class="ci-d"><strong>Service Reach</strong><span>Nigeria · Africa · Global Remote Delivery</span></div></div>
           <div class="ci-item"><div class="ci-icon">🕒</div><div class="ci-d"><strong>Response Time</strong><span>Within 24 hours on business days</span></div></div>
-          <div class="ci-item"><div class="ci-icon">💬</div><div class="ci-d"><strong>WhatsApp / Phone</strong><span>+234 XXX XXX XXXX (Update with your number)</span></div></div>
+          <div class="ci-item"><div class="ci-icon">💬</div><div class="ci-d"><strong>WhatsApp / Phone</strong><span>+234 803 380 7856 (Update with your number)</span></div></div>
         </div>
         <div style="margin-top:28px">
           <div style="font-family:var(--font-m);font-size:10px;letter-spacing:3px;color:var(--slate);text-transform:uppercase;margin-bottom:14px">Connect With Us</div>
@@ -1019,7 +1019,7 @@ footer{background:var(--midnight);padding:56px 0 22px;border-top:1px solid var(-
       <div class="ft-col">
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:hello@ruffneckentertainment.com">Email Us</a></li>
+          <li><a href="mailto:ruffneckhassan@gmail.com">Email Us</a></li>
           <li><a href="#contact">Book a Free Call</a></li>
           <li><a href="#contact">Get a Quote</a></li>
           <li><a href="#partnerships">Partnership Inquiry</a></li>
@@ -1032,7 +1032,7 @@ footer{background:var(--midnight);padding:56px 0 22px;border-top:1px solid var(-
       </div>
     </div>
     <div class="ft-bot">
-      <p>© 2025 RuffNeck Entertainment. All rights reserved. | Kano, Nigeria | Serving Clients Worldwide</p>
+      <p>© 2026 RuffNeck Entertainment. All rights reserved. | Kano, Nigeria | Serving Clients Worldwide</p>
       <div class="ft-regs">
         <span class="ft-reg">CAC · 3770977</span>
         <span class="ft-reg">SMEDAN · 2025</span>
@@ -1091,7 +1091,11 @@ setInterval(()=>{
 },3000);
 eyebrow.style.transition='opacity .3s';
 
-// FORM SUBMIT
+const response = await fetch('https://formspree.io/f/xgojvjrb', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ name: n, email: e, service: sv, message: m })
+});
 function submitForm(){
   const n=document.getElementById('fn').value.trim();
   const e=document.getElementById('fe').value.trim();
