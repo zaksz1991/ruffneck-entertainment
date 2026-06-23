@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="RuffNeck Entertainment Digital Store — Premium AI templates, business toolkits, CV packs, SOP frameworks and digital products for entrepreneurs and businesses."/>
+<meta name="keywords" content="digital products Nigeria, AI templates, business toolkit, CV template, SOP template, digital download Africa, business resources"/>
+<title>Digital Store | RuffNeck Entertainment</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --midnight:#010408;--navy-deep:#040C1A;--navy:#0B1E3A;
+  --cyan:#00F0FF;--cyan-mid:#00B4D8;--cobalt:#0055AA;
+  --gold:#FFC107;--gold-light:#FFE57F;--gold-dark:#FF8F00;
+  --purple:#7B2FFF;--purple-lt:#B24BFF;--slate:#6A8EB2;
+  --white:#FFFFFF;--off-white:#E8F4F8;
+  --card-bg:rgba(10,26,48,0.72);--border:rgba(0,240,255,0.14);
+  --green:#00C48C;
+  --font-d:'Space Grotesk',sans-serif;--font-m:'Space Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--midnight);color:var(--white);font-family:var(--font-d);font-size:16px;line-height:1.65;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--navy-deep)}::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,240,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,.028) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
+.s{position:relative;z-index:1}
+.c{max-width:1200px;margin:0 auto;padding:0 24px}
+.pad{padding:80px 0}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 0;background:rgba(1,4,8,.92);backdrop-filter:blur(24px);border-bottom:1px solid var(--border)}
+.nav-i{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.nl-txt{display:flex;flex-direction:column;line-height:1.1}
+.nl-txt b{font-size:14px;font-weight:700;letter-spacing:2.5px;color:#fff;text-transform:uppercase}
+.nl-txt span{font-size:8.5px;font-family:var(--font-m);letter-spacing:3px;color:var(--cyan-mid);text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:20px;list-style:none}
+.nav-links a{color:var(--slate);text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--cyan)}
+.nav-cta{background:linear-gradient(135deg,var(--cyan),var(--cobalt));color:var(--midnight)!important;padding:8px 18px;border-radius:4px;font-weight:700!important}
+.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
+.hbg span{width:22px;height:2px;background:var(--cyan);border-radius:2px;display:block}
+.mob-menu{display:none;position:fixed;inset:0;background:rgba(1,4,8,.97);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:24px}
+.mob-menu.open{display:flex}
+.mob-menu a{color:#fff;text-decoration:none;font-size:20px;font-weight:600;letter-spacing:2px;text-transform:uppercase}
+.mob-close{position:absolute;top:22px;right:22px;font-size:26px;cursor:pointer;color:var(--slate);background:none;border:none}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:12px 24px;font-weight:700;font-size:13.5px;border-radius:4px;text-decoration:none;transition:all .25s;cursor:pointer;border:none;font-family:var(--font-d)}
+.btn-p{background:linear-gradient(135deg,var(--cyan),var(--cobalt));color:var(--midnight)}
+.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,240,255,.28)}
+.btn-s{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22)}
+.btn-s:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,240,255,.05)}
+.btn-g{background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:var(--midnight)}
+.btn-g:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,193,7,.28)}
+.btn-gr{background:linear-gradient(135deg,#00C48C,#00A876);color:#fff}
+.btn-gr:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,196,140,.28)}
+
+/* SECTION HEADERS */
+.sh-l{font-family:var(--font-m);font-size:10.5px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;display:block}
+.sh-t{font-size:clamp(26px,3.8vw,42px);font-weight:700;line-height:1.15;letter-spacing:-.5px;margin-bottom:14px}
+.sh-t span{background:linear-gradient(90deg,var(--cyan),var(--cobalt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sh-t .gs{background:linear-gradient(90deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sh-sub{color:var(--slate);font-size:15.5px;max-width:580px;line-height:1.72}
+.sh-c{text-align:center}.sh-c .sh-sub{margin:0 auto}
+.gbar{width:44px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin:14px 0 36px}
+.gbar-c{margin:14px auto 36px}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;transition:all .28s;position:relative;overflow:hidden}
+
+/* STORE HERO */
+.store-hero{padding:140px 0 60px;background:linear-gradient(180deg,var(--navy-deep) 0%,var(--midnight) 100%);position:relative;overflow:hidden}
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,240,255,.055) 0%,transparent 70%);top:-200px;right:-100px}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(123,47,255,.06) 0%,transparent 70%);bottom:-100px;left:-100px}
+.store-hero-inner{text-align:center;position:relative;z-index:1}
+.store-badge{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-m);font-size:10.5px;letter-spacing:3px;color:var(--green);text-transform:uppercase;padding:6px 16px;border:1px solid rgba(0,196,140,.3);border-radius:20px;background:rgba(0,196,140,.06);margin-bottom:20px}
+.store-badge::before{content:'';width:6px;height:6px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
+.store-stats{display:flex;justify-content:center;gap:40px;margin-top:40px;flex-wrap:wrap}
+.ss-item{text-align:center}
+.ss-num{font-size:28px;font-weight:700;background:linear-gradient(90deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
+.ss-lbl{font-size:10px;color:var(--slate);letter-spacing:2px;text-transform:uppercase;font-family:var(--font-m)}
+
+/* TRUST STRIP */
+.trust-strip{background:rgba(0,196,140,.04);border-top:1px solid rgba(0,196,140,.12);border-bottom:1px solid rgba(0,196,140,.12);padding:16px 0}
+.trust-inner{display:flex;justify-content:center;align-items:center;gap:32px;flex-wrap:wrap}
+.trust-item{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--slate)}
+.trust-item .ti{color:var(--green);font-size:14px}
+
+/* FILTER TABS */
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:44px}
+.f-tab{padding:8px 20px;border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--slate);font-family:var(--font-d);transition:all .2s}
+.f-tab:hover,.f-tab.active{background:rgba(0,240,255,.08);border-color:var(--cyan);color:var(--cyan)}
+.f-tab.gold-tab.active{background:rgba(255,193,7,.08);border-color:var(--gold);color:var(--gold)}
+
+/* PRODUCT GRID */
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.prod-card{border-radius:10px;overflow:hidden;transition:all .3s}
+.prod-card:hover{transform:translateY(-5px);border-color:rgba(0,240,255,.35);box-shadow:0 16px 48px rgba(0,0,0,.35)}
+.prod-thumb{height:190px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.pt-ai{background:linear-gradient(135deg,rgba(0,240,255,.15),rgba(0,85,170,.12))}
+.pt-biz{background:linear-gradient(135deg,rgba(255,193,7,.15),rgba(255,143,0,.1))}
+.pt-ops{background:linear-gradient(135deg,rgba(123,47,255,.15),rgba(178,75,255,.1))}
+.pt-mkt{background:linear-gradient(135deg,rgba(0,196,140,.15),rgba(0,168,118,.1))}
+.pt-hr{background:linear-gradient(135deg,rgba(0,180,216,.15),rgba(0,85,170,.1))}
+.prod-emoji{font-size:52px;filter:drop-shadow(0 4px 12px rgba(0,0,0,.3))}
+.prod-badge{position:absolute;top:12px;left:12px;font-family:var(--font-m);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:3px;font-weight:700}
+.badge-new{background:rgba(0,196,140,.9);color:#fff}
+.badge-hot{background:rgba(255,193,7,.9);color:var(--midnight)}
+.badge-best{background:rgba(0,240,255,.9);color:var(--midnight)}
+.badge-sale{background:rgba(255,60,60,.9);color:#fff}
+.prod-body{padding:22px}
+.prod-cat{font-family:var(--font-m);font-size:9.5px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-bottom:6px}
+.prod-name{font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.35}
+.prod-desc{color:var(--slate);font-size:13px;line-height:1.68;margin-bottom:14px}
+.prod-includes{list-style:none;display:flex;flex-direction:column;gap:5px;margin-bottom:16px}
+.prod-includes li{font-size:12.5px;color:var(--off-white);display:flex;align-items:center;gap:6px}
+.prod-includes li::before{content:'✓';color:var(--green);font-weight:700;font-size:11px;flex-shrink:0}
+.prod-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border);gap:10px}
+.prod-price{display:flex;flex-direction:column}
+.price-orig{font-size:11px;color:var(--slate);text-decoration:line-through;font-family:var(--font-m)}
+.price-now{font-size:22px;font-weight:700;background:linear-gradient(90deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.price-usd{font-size:11px;color:var(--slate);margin-top:1px;font-family:var(--font-m)}
+.prod-stars{display:flex;align-items:center;gap:4px;margin-bottom:12px}
+.stars-gold{color:var(--gold);font-size:12px;letter-spacing:1px}
+.stars-count{font-size:11.5px;color:var(--slate)}
+.prod-format{display:flex;gap:5px;margin-bottom:10px;flex-wrap:wrap}
+.fmt-tag{font-family:var(--font-m);font-size:9px;letter-spacing:.8px;padding:2px 7px;border-radius:2px;border:1px solid rgba(0,240,255,.18);color:var(--cyan-mid);text-transform:uppercase}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(1,4,8,.88);z-index:999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(8px)}
+.modal-overlay.open{display:flex}
+.modal{background:var(--navy-deep);border:1px solid var(--border);border-radius:12px;max-width:560px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
+.modal-head{padding:28px 28px 0;border-bottom:1px solid var(--border);padding-bottom:20px}
+.modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.08);border:none;color:var(--slate);font-size:18px;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close:hover{background:rgba(255,255,255,.15);color:#fff}
+.modal-thumb{width:100%;height:160px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:56px;margin-bottom:16px}
+.modal-body{padding:22px 28px}
+.modal-price-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.modal-price-big{font-size:36px;font-weight:700;background:linear-gradient(90deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.modal-price-orig{font-size:14px;color:var(--slate);text-decoration:line-through}
+.modal-includes{list-style:none;display:flex;flex-direction:column;gap:8px;margin:16px 0 20px}
+.modal-includes li{font-size:13.5px;color:var(--off-white);display:flex;align-items:flex-start;gap:8px}
+.modal-includes li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:2px}
+.pay-opts{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.pay-opt{padding:14px 16px;border:1px solid var(--border);border-radius:6px;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:12px}
+.pay-opt:hover,.pay-opt.selected{border-color:var(--cyan);background:rgba(0,240,255,.05)}
+.pay-radio{width:16px;height:16px;border-radius:50%;border:2px solid var(--slate);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.pay-opt.selected .pay-radio{border-color:var(--cyan)}
+.pay-opt.selected .pay-radio::after{content:'';width:8px;height:8px;background:var(--cyan);border-radius:50%}
+.pay-label{font-size:13.5px;font-weight:600}
+.pay-sub{font-size:12px;color:var(--slate)}
+.f-g{display:flex;flex-direction:column;gap:5px;margin-bottom:12px}
+.f-g label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--slate);font-family:var(--font-m)}
+.f-g input{background:rgba(0,240,255,.035);border:1px solid var(--border);border-radius:4px;padding:11px 14px;color:#fff;font-family:var(--font-d);font-size:14px;transition:border-color .2s;outline:none;width:100%}
+.f-g input:focus{border-color:var(--cyan)}
+.order-success{display:none;text-align:center;padding:24px}
+.order-success .ok-icon{font-size:52px;margin-bottom:16px;display:block}
+.order-success h3{font-size:20px;font-weight:700;margin-bottom:8px;color:var(--green)}
+.order-success p{color:var(--slate);font-size:14px;line-height:1.7}
+
+/* BUNDLE SECTION */
+.bundle-card{padding:36px;background:linear-gradient(135deg,rgba(0,240,255,.06),rgba(123,47,255,.06));border:1px solid rgba(0,240,255,.25);border-radius:12px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.bundle-tag{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-m);font-size:9.5px;letter-spacing:2px;color:var(--gold);text-transform:uppercase;border:1px solid rgba(255,193,7,.3);padding:4px 12px;border-radius:20px;background:rgba(255,193,7,.06);margin-bottom:14px}
+.bundle-items{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.bundle-item{font-size:12.5px;color:var(--off-white);display:flex;align-items:center;gap:6px}
+.bundle-item::before{content:'✓';color:var(--green);font-weight:700;font-size:11px}
+.bundle-price-block{text-align:center;min-width:180px}
+.bundle-was{font-size:13px;color:var(--slate);text-decoration:line-through;font-family:var(--font-m);margin-bottom:4px}
+.bundle-now{font-size:48px;font-weight:700;background:linear-gradient(90deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1}
+.bundle-save{font-size:11px;color:var(--green);font-family:var(--font-m);letter-spacing:1px;margin-top:4px;margin-bottom:16px}
+
+/* TESTIMONIALS */
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+.test-card{padding:24px}
+.q{font-size:48px;line-height:1;color:var(--cyan);opacity:.12;font-family:Georgia,serif;margin-bottom:-12px;display:block}
+.t-txt{color:var(--off-white);font-size:13px;line-height:1.78;margin-bottom:18px;font-style:italic}
+.t-auth{display:flex;align-items:center;gap:10px}
+.t-av{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:var(--midnight);flex-shrink:0}
+.t-name{font-size:13px;font-weight:600}
+.t-role{font-size:11.5px;color:var(--slate)}
+.stars{color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:2px}
+
+/* FAQ */
+.faq-list{display:flex;flex-direction:column;gap:10px;margin-top:44px}
+.faq-item{border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.faq-q{padding:18px 20px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:600;transition:background .2s}
+.faq-q:hover{background:rgba(0,240,255,.04)}
+.faq-arrow{color:var(--cyan);font-size:14px;transition:transform .3s;flex-shrink:0}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+.faq-a{display:none;padding:0 20px 18px;color:var(--slate);font-size:14px;line-height:1.75}
+.faq-item.open .faq-a{display:block}
+
+/* HOW IT WORKS */
+.hiw-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:44px;position:relative}
+.hiw-grid::before{content:'';position:absolute;top:28px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),var(--green),transparent);opacity:.2}
+.hiw-step{text-align:center}
+.hiw-num{width:56px;height:56px;border-radius:50%;background:var(--navy-deep);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-family:var(--font-m);font-size:15px;font-weight:700;color:var(--cyan);transition:all .3s}
+.hiw-step:hover .hiw-num{background:rgba(0,196,140,.1);border-color:var(--green);color:var(--green)}
+.hiw-title{font-size:14px;font-weight:600;margin-bottom:7px}
+.hiw-desc{color:var(--slate);font-size:13px;line-height:1.65}
+
+/* CTA BANNER */
+.cta-ban{padding:72px 0;background:linear-gradient(135deg,rgba(0,240,255,.055),rgba(123,47,255,.055));border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
+.cta-ban h2{font-size:clamp(24px,3.5vw,38px);font-weight:700;margin-bottom:12px}
+.cta-ban p{color:var(--slate);font-size:15px;margin-bottom:28px;max-width:520px;margin-left:auto;margin-right:auto}
+.cta-acts{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+
+/* NEWSLETTER */
+.news-wrap{background:var(--navy-deep);border:1px solid var(--border);border-radius:10px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.news-form{display:flex;gap:10px}
+.news-form input{flex:1;background:rgba(0,240,255,.04);border:1px solid var(--border);border-radius:4px;padding:12px 16px;color:#fff;font-family:var(--font-d);font-size:14px;outline:none}
+.news-form input:focus{border-color:var(--cyan)}
+
+/* FOOTER */
+footer{background:var(--midnight);padding:40px 0 20px;border-top:1px solid var(--border)}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.ft-bot p{color:var(--slate);font-size:12px;font-family:var(--font-m)}
+.ft-links{display:flex;gap:20px;flex-wrap:wrap}
+.ft-links a{color:var(--slate);text-decoration:none;font-size:12.5px;transition:color .2s}
+.ft-links a:hover{color:var(--cyan)}
+.ft-reg{font-family:var(--font-m);font-size:9.5px;letter-spacing:1px;color:var(--gold-dark);padding:3px 9px;border:1px solid rgba(255,193,7,.18);border-radius:2px}
+
+/* SCROLL FX */
+.fu{opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease}
+.fu.v{opacity:1;transform:translateY(0)}
+.fd1{transition-delay:.1s}.fd2{transition-delay:.2s}.fd3{transition-delay:.3s}
+
+/* CART BADGE */
+.cart-btn{position:relative;background:rgba(0,240,255,.08);border:1px solid rgba(0,240,255,.2);border-radius:6px;padding:8px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-size:13px;color:var(--cyan);transition:all .2s;text-decoration:none}
+.cart-btn:hover{background:rgba(0,240,255,.14)}
+.cart-count{position:absolute;top:-6px;right:-6px;background:var(--gold);color:var(--midnight);width:18px;height:18px;border-radius:50%;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;font-family:var(--font-m)}
+
+/* CART SIDEBAR */
+.cart-side{position:fixed;top:0;right:-420px;width:400px;height:100vh;background:var(--navy-deep);border-left:1px solid var(--border);z-index:300;transition:right .3s ease;display:flex;flex-direction:column;padding:24px}
+.cart-side.open{right:0}
+.cart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.cart-head h3{font-size:16px;font-weight:700}
+.cart-close{background:none;border:none;color:var(--slate);font-size:20px;cursor:pointer}
+.cart-items{flex:1;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.cart-item{background:rgba(0,240,255,.04);border:1px solid var(--border);border-radius:6px;padding:14px;display:flex;gap:12px;align-items:start}
+.ci-emoji{font-size:28px;flex-shrink:0}
+.ci-info{flex:1}
+.ci-name{font-size:13.5px;font-weight:600;margin-bottom:3px}
+.ci-price{font-size:13px;color:var(--gold);font-weight:600}
+.ci-remove{background:none;border:none;color:var(--slate);cursor:pointer;font-size:16px;flex-shrink:0;padding:0}
+.ci-remove:hover{color:#ff5555}
+.cart-empty{text-align:center;padding:40px 0;color:var(--slate)}
+.cart-empty-icon{font-size:48px;display:block;margin-bottom:12px;opacity:.4}
+.cart-foot{border-top:1px solid var(--border);padding-top:16px;margin-top:16px}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.cart-total span:first-child{color:var(--slate);font-size:14px}
+.cart-total span:last-child{font-size:20px;font-weight:700;color:var(--gold)}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  .prod-grid{grid-template-columns:1fr 1fr}
+  .test-grid{grid-template-columns:1fr}
+  .hiw-grid{grid-template-columns:1fr 1fr}
+  .hiw-grid::before{display:none}
+  .bundle-card{grid-template-columns:1fr}
+  .news-wrap{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .hbg{display:flex}
+}
+@media(max-width:600px){
+  .prod-grid{grid-template-columns:1fr}
+  .hiw-grid{grid-template-columns:1fr}
+  .cart-side{width:100%;right:-100%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-i">
+    <a href="ruffneck-entertainment.html" class="nav-logo">
+      <svg width="38" height="38" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
+        <defs><radialGradient id="nb" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#0B1E3A"/><stop offset="100%" stop-color="#010408"/></radialGradient><linearGradient id="nr" x1="0%" y1="0%" x2="100%" y2="110%"><stop offset="0%" stop-color="#00F0FF"/><stop offset="100%" stop-color="#0055AA"/></linearGradient></defs>
+        <rect width="1024" height="1024" fill="url(#nb)"/><polygon points="512,100 838,288 838,664 512,852 186,664 186,288" fill="none" stroke="#00F0FF" stroke-width="3" opacity="0.9"/><text x="512" y="540" font-family="Impact" font-size="310" font-weight="900" fill="url(#nr)" text-anchor="middle">RN</text>
+      </svg>
+      <div class="nl-txt"><b>RuffNeck</b><span>Digital Store</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="ruffneck-entertainment.html">Home</a></li>
+      <li><a href="ruffneck-entertainment.html#services">Services</a></li>
+      <li><a href="store.html" class="active">Store</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="ruffneck-entertainment.html#contact" class="nav-cta">Get Started</a></li>
+    </ul>
+    <div style="display:flex;align-items:center;gap:10px">
+      <a href="#" class="cart-btn" onclick="toggleCart(event)">🛒 Cart <span class="cart-count" id="cartCount">0</span></a>
+      <button class="hbg" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <button class="mob-close" onclick="toggleMenu()">✕</button>
+  <a href="ruffneck-entertainment.html" onclick="toggleMenu()">Home</a>
+  <a href="ruffneck-entertainment.html#services" onclick="toggleMenu()">Services</a>
+  <a href="store.html" onclick="toggleMenu()">Store</a>
+  <a href="blog.html" onclick="toggleMenu()">Blog</a>
+  <a href="ruffneck-entertainment.html#contact" onclick="toggleMenu()">Contact</a>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-side" id="cartSide">
+  <div class="cart-head">
+    <h3>🛒 Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart(event)">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><span class="cart-empty-icon">🛒</span><p>Your cart is empty.<br/>Add products to get started.</p></div>
+  </div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-total"><span>Total</span><span id="cartTotal">₦0</span></div>
+    <button class="btn btn-g" style="width:100%;justify-content:center" onclick="checkout()">Proceed to Checkout →</button>
+    <p style="text-align:center;font-size:11.5px;color:var(--slate);margin-top:10px">🔒 Secure payment via Paystack or Flutterwave</p>
+  </div>
+</div>
+
+<!-- STORE HERO -->
+<section class="s store-hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="c">
+    <div class="store-hero-inner fu">
+      <div class="store-badge">Instant Digital Download</div>
+      <h1 style="font-size:clamp(32px,5vw,58px);font-weight:700;line-height:1.1;letter-spacing:-1px;margin-bottom:16px">
+        Premium <span style="background:linear-gradient(90deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Digital Products</span><br/>
+        Built for <span style="color:var(--cyan)">Business Growth</span>
+      </h1>
+      <p style="color:var(--slate);font-size:17px;max-width:580px;margin:0 auto 28px;line-height:1.75">Templates, toolkits, frameworks, and training resources — created from 5+ years of real operations and AI experience. Download instantly. Apply immediately.</p>
+      <div class="store-stats">
+        <div class="ss-item"><span class="ss-num">20+</span><span class="ss-lbl">Products</span></div>
+        <div class="ss-item"><span class="ss-num">500+</span><span class="ss-lbl">Downloads</span></div>
+        <div class="ss-item"><span class="ss-num">4.9★</span><span class="ss-lbl">Avg Rating</span></div>
+        <div class="ss-item"><span class="ss-num">Instant</span><span class="ss-lbl">Delivery</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="s trust-strip">
+  <div class="c">
+    <div class="trust-inner">
+      <div class="trust-item"><span class="ti">✓</span>Instant download after payment</div>
+      <div class="trust-item"><span class="ti">✓</span>100% editable & customizable</div>
+      <div class="trust-item"><span class="ti">✓</span>Lifetime access to your files</div>
+      <div class="trust-item"><span class="ti">✓</span>Secure payment via Paystack</div>
+      <div class="trust-item"><span class="ti">✓</span>Email support included</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="s pad" id="products">
+  <div class="c">
+    <div class="sh-c fu">
+      <span class="sh-l">Digital Products</span>
+      <h2 class="sh-t">All Products — <span>Ready to Download</span></h2>
+      <div class="gbar gbar-c"></div>
+      <p class="sh-sub">Professionally designed templates and toolkits created from real business experience. Instantly applicable to your work or organization.</p>
+    </div>
+    <div class="filter-bar fu">
+      <button class="f-tab active" onclick="filterProd('all',this)">All Products</button>
+      <button class="f-tab" onclick="filterProd('ai',this)">AI & Automation</button>
+      <button class="f-tab" onclick="filterProd('business',this)">Business Tools</button>
+      <button class="f-tab" onclick="filterProd('operations',this)">Operations</button>
+      <button class="f-tab" onclick="filterProd('career',this)">Career & CV</button>
+      <button class="f-tab" onclick="filterProd('marketing',this)">Marketing</button>
+    </div>
+    <div class="prod-grid" id="prodGrid">
+
+      <!-- PRODUCT 1 -->
+      <div class="card prod-card fu fd1" data-cat="ai">
+        <div class="prod-thumb pt-ai"><span class="prod-emoji">🤖</span><span class="prod-badge badge-hot">BESTSELLER</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">AI & Automation</div>
+          <h3 class="prod-name">Ultimate AI Prompt Engineering Toolkit</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(47 reviews)</span></div>
+          <p class="prod-desc">500+ battle-tested prompts for business, marketing, operations, HR, and content — organized and ready to deploy in ChatGPT, Claude, or Gemini.</p>
+          <ul class="prod-includes">
+            <li>500+ categorized prompts across 10 business functions</li>
+            <li>AI workflow automation templates</li>
+            <li>Prompt engineering guide (PDF)</li>
+            <li>ChatGPT / Claude quick-start cheatsheet</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">PDF</span><span class="fmt-tag">XLSX</span><span class="fmt-tag">DOCX</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦8,000</span>
+              <span class="price-now">₦4,500</span>
+              <span class="price-usd">≈ $3 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:1,name:'AI Prompt Engineering Toolkit',price:4500,emoji:'🤖'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 2 -->
+      <div class="card prod-card fu fd2" data-cat="business">
+        <div class="prod-thumb pt-biz"><span class="prod-emoji">📊</span><span class="prod-badge badge-new">NEW</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Business Tools</div>
+          <h3 class="prod-name">Business Plan & Financial Model Template</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(28 reviews)</span></div>
+          <p class="prod-desc">Professional business plan template with a 3-year financial model, revenue projections, market analysis framework, and investor-ready formatting.</p>
+          <ul class="prod-includes">
+            <li>Full business plan template (20+ pages)</li>
+            <li>3-year financial projection model (Excel)</li>
+            <li>Market analysis & competitor framework</li>
+            <li>Investor pitch deck template (10 slides)</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">DOCX</span><span class="fmt-tag">XLSX</span><span class="fmt-tag">PPTX</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦10,000</span>
+              <span class="price-now">₦5,500</span>
+              <span class="price-usd">≈ $3.50 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:2,name:'Business Plan & Financial Model',price:5500,emoji:'📊'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 3 -->
+      <div class="card prod-card fu fd3" data-cat="operations">
+        <div class="prod-thumb pt-ops"><span class="prod-emoji">⚙️</span><span class="prod-badge badge-best">TOP RATED</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Operations</div>
+          <h3 class="prod-name">Complete SOP Writing Framework & Templates</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(35 reviews)</span></div>
+          <p class="prod-desc">Build, document, and deploy Standard Operating Procedures for any business function. Includes 15 pre-built SOP templates covering operations, HR, logistics, and admin.</p>
+          <ul class="prod-includes">
+            <li>15 ready-to-use SOP templates</li>
+            <li>SOP writing guide & methodology</li>
+            <li>Process mapping worksheet</li>
+            <li>Staff training checklist framework</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">DOCX</span><span class="fmt-tag">PDF</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦7,000</span>
+              <span class="price-now">₦3,800</span>
+              <span class="price-usd">≈ $2.50 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:3,name:'SOP Writing Framework & Templates',price:3800,emoji:'⚙️'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 4 -->
+      <div class="card prod-card fu fd1" data-cat="career">
+        <div class="prod-thumb pt-hr"><span class="prod-emoji">👤</span><span class="prod-badge badge-hot">POPULAR</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Career & CV</div>
+          <h3 class="prod-name">ATS-Optimized CV & Cover Letter Pack</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(62 reviews)</span></div>
+          <p class="prod-desc">5 professionally designed, ATS-friendly CV templates and 3 cover letter templates — for operations, IT, admin, marketing, and general professionals.</p>
+          <ul class="prod-includes">
+            <li>5 ATS-optimized CV templates</li>
+            <li>3 professional cover letter templates</li>
+            <li>LinkedIn profile optimization guide</li>
+            <li>Job application tracking spreadsheet</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">DOCX</span><span class="fmt-tag">PDF</span><span class="fmt-tag">XLSX</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦6,000</span>
+              <span class="price-now">₦3,000</span>
+              <span class="price-usd">≈ $2 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:4,name:'ATS CV & Cover Letter Pack',price:3000,emoji:'👤'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 5 -->
+      <div class="card prod-card fu fd2" data-cat="marketing">
+        <div class="prod-thumb pt-mkt"><span class="prod-emoji">📣</span><span class="prod-badge badge-new">NEW</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Marketing</div>
+          <h3 class="prod-name">90-Day Social Media Content Calendar</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(41 reviews)</span></div>
+          <p class="prod-desc">A complete 90-day content planning system with daily post ideas, caption frameworks, hashtag banks, and engagement strategies for LinkedIn, Instagram, and Facebook.</p>
+          <ul class="prod-includes">
+            <li>90-day content calendar (Excel)</li>
+            <li>150+ caption templates by category</li>
+            <li>Hashtag strategy guide per platform</li>
+            <li>Content performance tracker</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">XLSX</span><span class="fmt-tag">PDF</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦7,500</span>
+              <span class="price-now">₦4,000</span>
+              <span class="price-usd">≈ $2.60 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:5,name:'90-Day Social Media Content Calendar',price:4000,emoji:'📣'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 6 -->
+      <div class="card prod-card fu fd3" data-cat="operations">
+        <div class="prod-thumb pt-ops"><span class="prod-emoji">📦</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Operations</div>
+          <h3 class="prod-name">Warehouse & Inventory Management Toolkit</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★☆</span><span class="stars-count">(19 reviews)</span></div>
+          <p class="prod-desc">Complete inventory management spreadsheets, stock-taking checklists, logistics coordination templates, and compliance tracking frameworks built from real warehouse experience.</p>
+          <ul class="prod-includes">
+            <li>Inventory tracking master spreadsheet</li>
+            <li>Stock-taking & audit checklist</li>
+            <li>Logistics coordination templates</li>
+            <li>Weighbridge & transport data log</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">XLSX</span><span class="fmt-tag">PDF</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦8,500</span>
+              <span class="price-now">₦5,000</span>
+              <span class="price-usd">≈ $3.30 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:6,name:'Warehouse & Inventory Management Toolkit',price:5000,emoji:'📦'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 7 -->
+      <div class="card prod-card fu fd1" data-cat="business">
+        <div class="prod-thumb pt-biz"><span class="prod-emoji">🤝</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Business Tools</div>
+          <h3 class="prod-name">Client Proposal & Contract Template Bundle</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(33 reviews)</span></div>
+          <p class="prod-desc">Win more clients with professional proposals and protect your business with solid contract templates — all fully editable and ready to send.</p>
+          <ul class="prod-includes">
+            <li>5 service proposal templates</li>
+            <li>3 freelance contract templates</li>
+            <li>Invoice & payment terms template</li>
+            <li>Client onboarding checklist</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">DOCX</span><span class="fmt-tag">PDF</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦9,000</span>
+              <span class="price-now">₦5,000</span>
+              <span class="price-usd">≈ $3.30 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:7,name:'Client Proposal & Contract Bundle',price:5000,emoji:'🤝'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 8 -->
+      <div class="card prod-card fu fd2" data-cat="ai">
+        <div class="prod-thumb pt-ai"><span class="prod-emoji">🧠</span><span class="prod-badge badge-new">NEW</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">AI & Automation</div>
+          <h3 class="prod-name">AI Business Integration Starter Guide</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(24 reviews)</span></div>
+          <p class="prod-desc">Step-by-step guide for integrating AI tools into your daily business operations — no technical background required. Covers ChatGPT, Canva AI, Notion AI, and more.</p>
+          <ul class="prod-includes">
+            <li>60-page implementation guide (PDF)</li>
+            <li>AI tool comparison matrix</li>
+            <li>Weekly AI workflow planner</li>
+            <li>ROI calculator template</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">PDF</span><span class="fmt-tag">XLSX</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦6,500</span>
+              <span class="price-now">₦3,500</span>
+              <span class="price-usd">≈ $2.30 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:8,name:'AI Business Integration Starter Guide',price:3500,emoji:'🧠'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRODUCT 9 -->
+      <div class="card prod-card fu fd3" data-cat="marketing">
+        <div class="prod-thumb pt-mkt"><span class="prod-emoji">📈</span></div>
+        <div class="prod-body">
+          <div class="prod-cat">Marketing</div>
+          <h3 class="prod-name">Digital Marketing KPI Dashboard (Excel)</h3>
+          <div class="prod-stars"><span class="stars-gold">★★★★★</span><span class="stars-count">(16 reviews)</span></div>
+          <p class="prod-desc">Track and visualize all your marketing metrics in one place. Auto-calculating dashboard for social media, email, website, and ad campaign performance.</p>
+          <ul class="prod-includes">
+            <li>Multi-channel KPI dashboard (Excel)</li>
+            <li>Social media metrics tracker</li>
+            <li>Monthly report template (PowerPoint)</li>
+            <li>Marketing goals-setting worksheet</li>
+          </ul>
+          <div class="prod-format"><span class="fmt-tag">XLSX</span><span class="fmt-tag">PPTX</span></div>
+          <div class="prod-footer">
+            <div class="prod-price">
+              <span class="price-orig">₦6,000</span>
+              <span class="price-now">₦3,200</span>
+              <span class="price-usd">≈ $2.10 USD</span>
+            </div>
+            <button class="btn btn-g" onclick="addToCart({id:9,name:'Digital Marketing KPI Dashboard',price:3200,emoji:'📈'})">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLE -->
+<section class="s pad" style="background:var(--navy-deep)" id="bundle">
+  <div class="c">
+    <div class="sh-c fu">
+      <span class="sh-l">Best Value</span>
+      <h2 class="sh-t">Save More with the <span class="gs">Complete Bundle</span></h2>
+      <div class="gbar gbar-c"></div>
+    </div>
+    <div class="bundle-card fu">
+      <div>
+        <div class="bundle-tag">🔥 Limited Time Bundle Deal</div>
+        <h3 style="font-size:24px;font-weight:700;margin-bottom:10px">RuffNeck Complete Business Toolkit</h3>
+        <p style="color:var(--slate);font-size:14.5px;line-height:1.7;margin-bottom:16px">Get all 9 products in one download. Everything you need to run, grow, and automate a professional business — at 60% off individual pricing.</p>
+        <div class="bundle-items">
+          <div class="bundle-item">AI Prompt Engineering Toolkit</div>
+          <div class="bundle-item">Business Plan & Financial Model</div>
+          <div class="bundle-item">SOP Framework & Templates</div>
+          <div class="bundle-item">ATS CV & Cover Letter Pack</div>
+          <div class="bundle-item">90-Day Social Media Calendar</div>
+          <div class="bundle-item">Warehouse & Inventory Toolkit</div>
+          <div class="bundle-item">Proposal & Contract Bundle</div>
+          <div class="bundle-item">AI Business Integration Guide</div>
+          <div class="bundle-item">Digital Marketing KPI Dashboard</div>
+        </div>
+        <div style="font-family:var(--font-m);font-size:10.5px;color:var(--slate);letter-spacing:1px">🔒 One-time purchase · Instant download · Lifetime access</div>
+      </div>
+      <div class="bundle-price-block">
+        <div class="bundle-was">Worth ₦37,500</div>
+        <div class="bundle-now">₦15,000</div>
+        <div class="bundle-save">YOU SAVE ₦22,500 (60% OFF)</div>
+        <button class="btn btn-g" style="width:100%;justify-content:center;padding:14px" onclick="addToCart({id:99,name:'Complete Business Toolkit Bundle',price:15000,emoji:'📦'})">Get the Bundle →</button>
+        <div style="font-size:11px;color:var(--slate);margin-top:8px;text-align:center">≈ $10 USD · All 9 products</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="s pad">
+  <div class="c">
+    <div class="sh-c fu">
+      <span class="sh-l">Simple Process</span>
+      <h2 class="sh-t">How to <span>Get Your Products</span></h2>
+      <div class="gbar gbar-c"></div>
+    </div>
+    <div class="hiw-grid">
+      <div class="hiw-step fu fd1"><div class="hiw-num">01</div><h3 class="hiw-title">Browse & Select</h3><p class="hiw-desc">Find the product or bundle that fits your needs. Read what's included before you buy.</p></div>
+      <div class="hiw-step fu fd2"><div class="hiw-num">02</div><h3 class="hiw-title">Add to Cart</h3><p class="hiw-desc">Add one or multiple products. Review your cart and choose your payment method.</p></div>
+      <div class="hiw-step fu fd3"><div class="hiw-num">03</div><h3 class="hiw-title">Secure Payment</h3><p class="hiw-desc">Pay securely via Paystack (card, bank transfer, USSD) or Flutterwave for international payments.</p></div>
+      <div class="hiw-step fu fd1"><div class="hiw-num">04</div><h3 class="hiw-title">Instant Download</h3><p class="hiw-desc">Your download link is delivered to your email immediately. Access your files forever.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="s pad" style="background:var(--navy-deep)">
+  <div class="c">
+    <div class="sh-c fu">
+      <span class="sh-l">Customer Reviews</span>
+      <h2 class="sh-t">What Buyers <span>Are Saying</span></h2>
+      <div class="gbar gbar-c"></div>
+    </div>
+    <div class="test-grid">
+      <div class="card test-card fu fd1"><span class="q">"</span><p class="t-txt">The AI Prompt Toolkit alone saved me hours every week. I use it every single day for client emails, social media, and reports. Best ₦4,500 I've spent on my business.</p><div class="t-auth"><div class="t-av">TK</div><div><div class="stars">★★★★★</div><div class="t-name">Taiwo Kolawole</div><div class="t-role">Digital Marketer, Lagos</div></div></div></div>
+      <div class="card test-card fu fd2"><span class="q">"</span><p class="t-txt">The SOP templates helped us document all our processes in one week. My team now works independently without constantly asking me questions. Incredibly practical.</p><div class="t-auth"><div class="t-av">MU</div><div><div class="stars">★★★★★</div><div class="t-name">Maryam Usman</div><div class="t-role">Operations Manager, Abuja</div></div></div></div>
+      <div class="card test-card fu fd3"><span class="q">"</span><p class="t-txt">Got a job interview within 2 weeks of using the CV template. The LinkedIn guide was also a game changer. Very professional quality for an extremely fair price.</p><div class="t-auth"><div class="t-av">CI</div><div><div class="stars">★★★★★</div><div class="t-name">Chidi Ikenna</div><div class="t-role">IT Professional, Port Harcourt</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="s pad">
+  <div class="c" style="max-width:800px">
+    <div class="sh-c fu">
+      <span class="sh-l">FAQ</span>
+      <h2 class="sh-t">Frequently Asked <span>Questions</span></h2>
+      <div class="gbar gbar-c"></div>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item fu"><div class="faq-q" onclick="toggleFaq(this)">How do I receive my products after purchase?<span class="faq-arrow">▼</span></div><div class="faq-a">After payment is confirmed, a download link is automatically sent to your email address within minutes. You can also access your purchase from the confirmation page. Files are available for lifetime re-download.</div></div>
+      <div class="faq-item fu"><div class="faq-q" onclick="toggleFaq(this)">What formats are the products available in?<span class="faq-arrow">▼</span></div><div class="faq-a">Products come in DOCX (Microsoft Word), XLSX (Microsoft Excel), PDF, and PPTX (PowerPoint) formats. All are fully editable. Each product page clearly lists the formats included.</div></div>
+      <div class="faq-item fu"><div class="faq-q" onclick="toggleFaq(this)">Can I use these templates for client work?<span class="faq-arrow">▼</span></div><div class="faq-a">Yes. All templates include a personal and commercial use license. You can customize and use them for your own business or for client projects. Resale of the raw templates is not permitted.</div></div>
+      <div class="faq-item fu"><div class="faq-q" onclick="toggleFaq(this)">Do you offer refunds?<span class="faq-arrow">▼</span></div><div class="faq-a">Due to the digital nature of these products, we do not offer refunds once downloaded. However, if you experience a technical issue accessing your files, contact us at hello@ruffneckentertainment.com and we will resolve it within 24 hours.</div></div>
+      <div class="faq-item fu"><div class="faq-q" onclick="toggleFaq(this)">What payment methods are accepted?<span class="faq-arrow">▼</span></div><div class="faq-a">We accept all major payment methods via Paystack — debit/credit cards (Visa, Mastercard, Verve), bank transfer, and USSD. International buyers can pay via Flutterwave using cards or PayPal. All transactions are encrypted and secure.</div></div>
+      <div class="faq-item fu"><div class="faq-q" onclick="toggleFaq(this)">Can I request a custom product or template?<span class="faq-arrow">▼</span></div><div class="faq-a">Absolutely. We offer custom template and document creation services. Contact us via the main website contact form or email hello@ruffneckentertainment.com with your requirements and we'll provide a quote within 24 hours.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="s pad" style="background:var(--navy-deep)">
+  <div class="c">
+    <div class="news-wrap fu">
+      <div>
+        <span class="sh-l">Free Resources</span>
+        <h3 style="font-size:26px;font-weight:700;margin-bottom:10px">Get a <span style="color:var(--gold)">Free Template</span> + New Product Alerts</h3>
+        <p style="color:var(--slate);font-size:14.5px;line-height:1.7">Subscribe to get a free AI Prompt Starter Pack (50 prompts) and be the first to know when new products and discounts drop.</p>
+      </div>
+      <div>
+        <div class="news-form">
+          <input type="email" id="newsEmail" placeholder="Enter your email address"/>
+          <button class="btn btn-g" onclick="subscribeNews()">Subscribe →</button>
+        </div>
+        <p id="newsMsg" style="font-size:12.5px;color:var(--green);margin-top:10px;display:none">✓ You're subscribed! Check your email for your free download.</p>
+        <p style="font-size:11.5px;color:var(--slate);margin-top:8px">No spam. Unsubscribe anytime. Your email is never shared.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="s cta-ban">
+  <div class="c">
+    <h2>Need a Custom Solution?</h2>
+    <p>Can't find exactly what you need? We create custom templates, toolkits, training materials, and business documents tailored to your specific requirements.</p>
+    <div class="cta-acts">
+      <a href="ruffneck-entertainment.html#contact" class="btn btn-p">Request Custom Work →</a>
+      <a href="ruffneck-entertainment.html#services" class="btn btn-s">View All Services</a>
+    </div>
+  </div>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div class="modal-overlay" id="checkoutModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 style="font-size:18px;font-weight:700">Complete Your Order</h3>
+      <button class="modal-close" onclick="closeCheckout()">✕</button>
+    </div>
+    <div class="modal-body" id="checkoutBody">
+      <div id="checkoutForm">
+        <div style="background:rgba(0,240,255,.05);border:1px solid var(--border);border-radius:6px;padding:14px;margin-bottom:18px" id="orderSummary"></div>
+        <h4 style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--slate);letter-spacing:1px;text-transform:uppercase;font-family:var(--font-m)">Your Details</h4>
+        <div class="f-g"><label>Full Name</label><input type="text" id="oName" placeholder="Your full name"/></div>
+        <div class="f-g"><label>Email Address</label><input type="email" id="oEmail" placeholder="Download link sent here"/></div>
+        <div class="f-g"><label>Country</label><input type="text" id="oCountry" placeholder="Your country"/></div>
+        <h4 style="font-size:14px;font-weight:700;margin:16px 0 12px;color:var(--slate);letter-spacing:1px;text-transform:uppercase;font-family:var(--font-m)">Payment Method</h4>
+        <div class="pay-opts">
+          <div class="pay-opt selected" onclick="selectPay(this,'paystack')"><div class="pay-radio"></div><div><div class="pay-label">Paystack — Card / Bank / USSD</div><div class="pay-sub">Nigerian cards, bank transfer, USSD — secure & instant</div></div></div>
+          <div class="pay-opt" onclick="selectPay(this,'flutterwave')"><div class="pay-radio"></div><div><div class="pay-label">Flutterwave — International</div><div class="pay-sub">International cards, PayPal, mobile money</div></div></div>
+        </div>
+        <button class="btn btn-g" style="width:100%;justify-content:center;padding:14px;font-size:15px;margin-top:8px" onclick="processPayment()">🔒 Pay Securely →</button>
+        <p style="text-align:center;font-size:11px;color:var(--slate);margin-top:8px">256-bit SSL encryption · Instant download after payment</p>
+      </div>
+      <div class="order-success" id="orderSuccess">
+        <span class="ok-icon">✅</span>
+        <h3>Order Successful!</h3>
+        <p>Thank you for your purchase. Your download link has been sent to your email address.<br/><br/>
+        Check your inbox (and spam folder) within the next 5 minutes.<br/><br/>
+        Questions? Email <strong>hello@ruffneckentertainment.com</strong></p>
+        <button class="btn btn-s" style="margin-top:20px" onclick="closeCheckout()">Continue Shopping</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="c">
+    <div style="display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:24px;margin-bottom:28px;padding-bottom:24px;border-bottom:1px solid var(--border)">
+      <div>
+        <b style="font-size:14px;letter-spacing:2px;color:#fff;text-transform:uppercase">RUFFNECK</b>
+        <span style="color:var(--cyan-mid);font-size:9px;font-family:var(--font-m);letter-spacing:3px;text-transform:uppercase;display:block;margin-top:2px">Digital Store</span>
+        <p style="color:var(--slate);font-size:13px;margin-top:10px;max-width:260px;line-height:1.65">Premium digital products for business growth — AI, operations, marketing, and career resources.</p>
+      </div>
+      <div style="display:flex;gap:48px;flex-wrap:wrap">
+        <div><div style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;margin-bottom:14px">Products</div>
+          <div style="display:flex;flex-direction:column;gap:8px"><a href="#" style="color:var(--slate);text-decoration:none;font-size:13.5px">AI & Automation</a><a href="#" style="color:var(--slate);text-decoration:none;font-size:13.5px">Business Tools</a><a href="#" style="color:var(--slate);text-decoration:none;font-size:13.5px">Operations</a><a href="#" style="color:var(--slate);text-decoration:none;font-size:13.5px">Career & CV</a><a href="#" style="color:var(--slate);text-decoration:none;font-size:13.5px">Marketing</a></div>
+        </div>
+        <div><div style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;color:#fff;text-transform:uppercase;margin-bottom:14px">Company</div>
+          <div style="display:flex;flex-direction:column;gap:8px"><a href="ruffneck-entertainment.html" style="color:var(--slate);text-decoration:none;font-size:13.5px">Main Website</a><a href="blog.html" style="color:var(--slate);text-decoration:none;font-size:13.5px">Blog</a><a href="ruffneck-entertainment.html#contact" style="color:var(--slate);text-decoration:none;font-size:13.5px">Contact</a><a href="ruffneck-entertainment.html#services" style="color:var(--slate);text-decoration:none;font-size:13.5px">Services</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p>© 2025 RuffNeck Entertainment. All rights reserved. | CAC Reg No. 3770977</p>
+      <div style="display:flex;gap:8px"><span class="ft-reg">CAC · 3770977</span><span class="ft-reg">SMEDAN · 2025</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// CART STATE
+let cart = [];
+
+function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open')}
+
+function toggleCart(e){
+  if(e)e.preventDefault();
+  document.getElementById('cartSide').classList.toggle('open');
+}
+
+function addToCart(product){
+  const existing = cart.find(i=>i.id===product.id);
+  if(existing){alert('This product is already in your cart.');return;}
+  cart.push(product);
+  updateCart();
+  document.getElementById('cartSide').classList.add('open');
+  // Visual feedback
+  const btn = event.target;
+  const orig = btn.textContent;
+  btn.textContent = '✓ Added!';
+  btn.style.background = 'linear-gradient(135deg,#00C48C,#00A876)';
+  setTimeout(()=>{btn.textContent=orig;btn.style.background='';},1800);
+}
+
+function removeFromCart(id){
+  cart = cart.filter(i=>i.id!==id);
+  updateCart();
+}
+
+function updateCart(){
+  const count = cart.length;
+  document.getElementById('cartCount').textContent = count;
+  const container = document.getElementById('cartItems');
+  const foot = document.getElementById('cartFoot');
+  if(count===0){
+    container.innerHTML='<div class="cart-empty"><span class="cart-empty-icon">🛒</span><p>Your cart is empty.<br/>Add products to get started.</p></div>';
+    foot.style.display='none';
+    return;
+  }
+  foot.style.display='block';
+  const total = cart.reduce((s,i)=>s+i.price,0);
+  document.getElementById('cartTotal').textContent = '₦'+total.toLocaleString();
+  container.innerHTML = cart.map(i=>`
+    <div class="cart-item">
+      <div class="ci-emoji">${i.emoji}</div>
+      <div class="ci-info">
+        <div class="ci-name">${i.name}</div>
+        <div class="ci-price">₦${i.price.toLocaleString()}</div>
+      </div>
+      <button class="ci-remove" onclick="removeFromCart(${i.id})">✕</button>
+    </div>
+  `).join('');
+}
+
+function checkout(){
+  if(cart.length===0){alert('Your cart is empty.');return;}
+  const total = cart.reduce((s,i)=>s+i.price,0);
+  const summary = `<div style="font-family:var(--font-m);font-size:9.5px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-bottom:10px">Order Summary</div>`+
+    cart.map(i=>`<div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px"><span>${i.emoji} ${i.name}</span><span style="color:var(--gold)">₦${i.price.toLocaleString()}</span></div>`).join('')+
+    `<div style="display:flex;justify-content:space-between;font-size:15px;font-weight:700;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)"><span>Total</span><span style="color:var(--gold)">₦${total.toLocaleString()}</span></div>`;
+  document.getElementById('orderSummary').innerHTML = summary;
+  document.getElementById('checkoutModal').classList.add('open');
+  document.getElementById('cartSide').classList.remove('open');
+}
+
+function closeCheckout(){
+  document.getElementById('checkoutModal').classList.remove('open');
+  document.getElementById('checkoutForm').style.display='block';
+  document.getElementById('orderSuccess').style.display='none';
+}
+
+let selectedPay = 'paystack';
+function selectPay(el,method){
+  document.querySelectorAll('.pay-opt').forEach(o=>o.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPay = method;
+}
+
+function processPayment(){
+  const name = document.getElementById('oName').value.trim();
+  const email = document.getElementById('oEmail').value.trim();
+  if(!name||!email){alert('Please enter your name and email address.');return;}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){alert('Please enter a valid email.');return;}
+  // TODO: Integrate with Paystack or Flutterwave payment SDK
+  // PaystackPop.setup({key:'pk_live_YOUR_KEY',email,amount:total*100,...})
+  document.getElementById('checkoutForm').style.display='none';
+  document.getElementById('orderSuccess').style.display='block';
+  cart=[];updateCart();
+}
+
+// PRODUCT FILTER
+function filterProd(cat,btn){
+  document.querySelectorAll('.f-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prod-card').forEach(c=>{
+    if(cat==='all'||c.dataset.cat===cat){c.style.display='';setTimeout(()=>{c.style.opacity='1';c.style.transform=''},50);}
+    else{c.style.opacity='0';c.style.transform='scale(0.95)';setTimeout(()=>c.style.display='none',250);}
+  });
+}
+
+// FAQ
+function toggleFaq(el){
+  const item=el.parentElement;
+  item.classList.toggle('open');
+}
+
+// NEWSLETTER
+function subscribeNews(){
+  const e=document.getElementById('newsEmail').value.trim();
+  if(!e||!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){alert('Please enter a valid email.');return;}
+  document.getElementById('newsMsg').style.display='block';
+  document.getElementById('newsEmail').value='';
+}
+
+// SCROLL FX
+const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:0.1});
+document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+
+// CLOSE CART ON OUTSIDE CLICK
+document.addEventListener('click',e=>{
+  const cart=document.getElementById('cartSide');
+  const modal=document.getElementById('checkoutModal');
+  if(modal.classList.contains('open')&&e.target===modal)closeCheckout();
+});
+</script>
+</body>
+</html>
