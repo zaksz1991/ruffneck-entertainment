@@ -3,413 +3,487 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RuffNeck Entertainment | Digital Operations · AI Solutions · Business Growth</title>
 <meta name="description" content="RuffNeck Entertainment — AI Solutions, Digital Marketing, Virtual Assistance & Business Operations. Empowering businesses globally through technology and operational excellence."/>
-<meta name="keywords" content="virtual assistant services, AI consulting Nigeria, digital marketing agency Africa, business operations support, AI literacy training, website development, data management services, operations support services, customer support outsourcing, administrative support"/>
+<meta name="keywords" content="virtual assistant services, AI consulting Nigeria, digital marketing agency Africa, business operations support, AI literacy training, website development, data management services"/>
 <meta property="og:title" content="RuffNeck Entertainment | Digital Operations, AI Solutions & Business Growth"/>
 <meta property="og:description" content="Empowering Businesses Through AI, Operations & Digital Innovation. Serving clients worldwide from Nigeria."/>
 <meta property="og:type" content="website"/>
-<title>RuffNeck Entertainment | Digital Operations · AI Solutions · Business Growth</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
+/* ============================================================
+   TOKENS
+   ============================================================ */
 :root {
-  --midnight:#010408;--navy-deep:#040C1A;--navy:#0B1E3A;
-  --cyan:#00F0FF;--cyan-mid:#00B4D8;--cobalt:#0055AA;
-  --gold:#FFC107;--gold-light:#FFE57F;--gold-dark:#FF8F00;
-  --purple:#7B2FFF;--purple-lt:#B24BFF;--slate:#6A8EB2;
-  --white:#FFFFFF;--off-white:#E8F4F8;
-  --card-bg:rgba(10,26,48,0.72);--border:rgba(0,240,255,0.14);
-  --font-d:'Space Grotesk',sans-serif;--font-m:'Space Mono',monospace;
+  --navy:    #0B1E3A;
+  --midnight:#040C1A;
+  --cyan:    #00B4D8;
+  --cyan-lt: #00F0FF;
+  --gold:    #FFC107;
+  --purple:  #7B2FFF;
+  --white:   #FFFFFF;
+  --bg-light:   #F5F7FA;
+  --bg-white:   #FFFFFF;
+  --bg-card:    #FFFFFF;
+  --text-dark:  #0B1E3A;
+  --text-body:  #374151;
+  --text-muted: #6B7280;
+  --border:     #E5E7EB;
+  --shadow:     0 2px 16px rgba(11,30,58,0.08);
+  --shadow-md:  0 4px 32px rgba(11,30,58,0.12);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono:    'Space Mono', monospace;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--midnight);color:var(--white);font-family:var(--font-d);font-size:16px;line-height:1.65;overflow-x:hidden}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--navy-deep)}::-webkit-scrollbar-thumb{background:var(--cyan);border-radius:3px}
-body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(0,240,255,0.028) 1px,transparent 1px),linear-gradient(90deg,rgba(0,240,255,0.028) 1px,transparent 1px);background-size:64px 64px;pointer-events:none;z-index:0}
-.s{position:relative;z-index:1}
-.c{max-width:1200px;margin:0 auto;padding:0 24px}
-.pad{padding:96px 0}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-display); color: var(--text-body); background: var(--bg-light); line-height: 1.65; -webkit-font-smoothing: antialiased; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:14px 0;background:rgba(1,4,8,0.88);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);transition:background .3s}
-.nav-i{display:flex;align-items:center;justify-content:space-between;max-width:1200px;margin:0 auto;padding:0 24px}
-.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
-.nl-svg{width:42px;height:42px}
-.nl-txt{display:flex;flex-direction:column;line-height:1.1}
-.nl-txt b{font-size:14px;font-weight:700;letter-spacing:2.5px;color:#fff;text-transform:uppercase}
-.nl-txt span{font-size:8.5px;font-family:var(--font-m);letter-spacing:3px;color:var(--cyan-mid);text-transform:uppercase}
-.nav-links{display:flex;align-items:center;gap:28px;list-style:none}
-.nav-links a{color:var(--slate);text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--cyan)}
-.nav-cta{background:linear-gradient(135deg,var(--cyan),var(--cobalt));color:var(--midnight)!important;padding:8px 18px;border-radius:4px;font-weight:700!important}
-.hbg{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px}
-.hbg span{width:22px;height:2px;background:var(--cyan);border-radius:2px;transition:all .3s;display:block}
-.mob-menu{display:none;position:fixed;inset:0;background:rgba(1,4,8,.97);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:28px}
-.mob-menu.open{display:flex}
-.mob-menu a{color:#fff;text-decoration:none;font-size:22px;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
-.mob-menu a:hover{color:var(--cyan)}
-.mob-close{position:absolute;top:22px;right:22px;font-size:26px;cursor:pointer;color:var(--slate);background:none;border:none;color:var(--slate)}
+/* ============================================================
+   UTILITY
+   ============================================================ */
+.container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; }
+.section-alt { background: var(--bg-white); }
+.section-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 12px; }
+.section-title { font-size: clamp(28px, 4vw, 42px); font-weight: 700; color: var(--text-dark); line-height: 1.2; margin-bottom: 16px; }
+.section-sub { font-size: 17px; color: var(--text-muted); max-width: 600px; line-height: 1.7; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; border-radius: var(--radius-sm); font-family: var(--font-display); font-weight: 600; font-size: 15px; transition: all 0.2s ease; }
+.btn-primary { background: var(--cyan); color: var(--navy); }
+.btn-primary:hover { background: var(--cyan-lt); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(0,180,216,0.35); }
+.btn-outline { border: 2px solid rgba(255,255,255,0.3); color: var(--white); }
+.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+.btn-outline-dark { border: 2px solid var(--border); color: var(--text-dark); }
+.btn-outline-dark:hover { border-color: var(--cyan); color: var(--cyan); }
+.btn-gold { background: var(--gold); color: var(--navy); }
+.btn-gold:hover { background: #FFE57F; transform: translateY(-1px); }
+.fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.fade-up.visible { opacity: 1; transform: translateY(0); }
 
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;overflow:hidden}
-.hero-orb{position:absolute;border-radius:50%;pointer-events:none}
-.orb1{width:700px;height:700px;background:radial-gradient(circle,rgba(0,240,255,.055) 0%,transparent 70%);top:-150px;right:-200px}
-.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(123,47,255,.065) 0%,transparent 70%);bottom:-100px;left:-150px}
-.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(255,193,7,.04) 0%,transparent 70%);top:40%;left:40%}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center;width:100%}
-.h-eye{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-m);font-size:10.5px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:20px;padding:5px 13px;border:1px solid rgba(0,240,255,.28);border-radius:2px;background:rgba(0,240,255,.04)}
-.h-eye::before{content:'';width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.75)}}
-.h-title{font-size:clamp(34px,4.8vw,62px);font-weight:700;line-height:1.07;letter-spacing:-1px;margin-bottom:22px}
-.h-title .gc{color:var(--cyan);display:block}
-.h-title .gg{background:linear-gradient(90deg,var(--gold),var(--gold-light),var(--gold-dark));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block}
-.h-desc{color:var(--slate);font-size:16.5px;line-height:1.78;margin-bottom:36px;max-width:500px}
-.h-acts{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:44px}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:13px 26px;font-weight:700;font-size:13.5px;letter-spacing:.4px;border-radius:4px;text-decoration:none;transition:all .25s;cursor:pointer;border:none;font-family:var(--font-d)}
-.btn-p{background:linear-gradient(135deg,var(--cyan),var(--cobalt));color:var(--midnight)}
-.btn-p:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,240,255,.28)}
-.btn-s{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.22)}
-.btn-s:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,240,255,.05)}
-.btn-g{background:linear-gradient(135deg,var(--gold-dark),var(--gold));color:var(--midnight)}
-.btn-g:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(255,193,7,.28)}
-.h-stats{display:flex;gap:28px;padding-top:22px;border-top:1px solid var(--border);flex-wrap:wrap}
-.st-n{font-size:26px;font-weight:700;background:linear-gradient(90deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;display:block;line-height:1}
-.st-l{font-size:10px;color:var(--slate);letter-spacing:1.2px;text-transform:uppercase;font-family:var(--font-m);margin-top:3px}
-.hero-vis{display:flex;justify-content:center;align-items:center;position:relative}
-.logo-wrap{position:relative;width:340px;height:340px}
-.logo-wrap img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 44px rgba(0,240,255,.22));animation:float 6s ease-in-out infinite}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
-.ring{position:absolute;border-radius:50%;border:1px solid rgba(0,240,255,.09);top:50%;left:50%}
-.r1{width:400px;height:400px;transform:translate(-50%,-50%);animation:spin 22s linear infinite}
-.r2{width:460px;height:460px;transform:translate(-50%,-50%);animation:spin 34s linear infinite reverse;border-color:rgba(123,47,255,.07)}
-.r3{width:520px;height:520px;transform:translate(-50%,-50%);animation:spin 48s linear infinite;border-color:rgba(255,193,7,.04)}
-@keyframes spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(4,12,26,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,180,216,0.15); transition: box-shadow 0.3s; }
+.nav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.4); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.nav-logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; color: var(--white); }
+.nav-logo-mark { width: 38px; height: 38px; background: linear-gradient(135deg, #00F0FF, #0055AA); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 13px; font-weight: 700; color: var(--white); letter-spacing: -1px; }
+.nav-logo span { color: var(--cyan); }
+.nav-links { display: flex; align-items: center; gap: 28px; }
+.nav-links a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.7); transition: color 0.2s; }
+.nav-links a:hover { color: var(--cyan); }
+.nav-cta { background: var(--cyan); color: var(--navy) !important; padding: 9px 20px; border-radius: var(--radius-sm); font-weight: 700 !important; }
+.nav-cta:hover { background: var(--cyan-lt) !important; color: var(--navy) !important; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; }
+.nav-mobile { display: none; position: fixed; top: 68px; left: 0; right: 0; background: rgba(4,12,26,0.98); backdrop-filter: blur(12px); padding: 24px; border-bottom: 1px solid rgba(0,180,216,0.15); flex-direction: column; gap: 20px; z-index: 999; }
+.nav-mobile.open { display: flex; }
+.nav-mobile a { font-size: 16px; font-weight: 500; color: rgba(255,255,255,0.8); padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.07); }
+.nav-mobile a:hover { color: var(--cyan); }
 
-/* TICKER */
-.ticker{background:rgba(0,240,255,.035);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:13px 0;overflow:hidden}
-.t-inner{display:flex;animation:tick 35s linear infinite;white-space:nowrap}
-.t-inner:hover{animation-play-state:paused}
-@keyframes tick{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.t-item{display:inline-flex;align-items:center;gap:10px;padding:0 28px;font-family:var(--font-m);font-size:10.5px;letter-spacing:2px;color:var(--slate);text-transform:uppercase}
-.t-dot{width:4px;height:4px;background:var(--gold);border-radius:50%;flex-shrink:0}
+/* ============================================================
+   HERO — DARK
+   ============================================================ */
+.hero { background: radial-gradient(ellipse at 30% 50%, #0B1E3A 0%, #040C1A 60%, #010408 100%); min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 70% 40%, rgba(0,240,255,0.06) 0%, transparent 55%), radial-gradient(circle at 15% 80%, rgba(123,47,255,0.07) 0%, transparent 45%); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.hero-eyebrow { display: flex; align-items: center; gap: 10px; margin-bottom: 24px; }
+.hero-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } }
+.hero-eyebrow span { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--cyan); font-weight: 700; }
+.hero h1 { font-size: clamp(34px, 5vw, 58px); font-weight: 700; color: var(--white); line-height: 1.12; margin-bottom: 22px; letter-spacing: -0.5px; }
+.hero h1 em { font-style: normal; background: linear-gradient(90deg, var(--cyan-lt), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 17px; color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 36px; max-width: 520px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+.hero-stats { display: flex; gap: 32px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 32px; }
+.hero-stat-num { font-size: 26px; font-weight: 700; color: var(--white); font-family: var(--font-mono); }
+.hero-stat-num span { color: var(--cyan); }
+.hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.45); letter-spacing: 0.5px; margin-top: 2px; }
+.hero-visual { display: flex; justify-content: center; align-items: center; }
+.hero-logo-wrap { position: relative; width: 340px; height: 340px; display: flex; align-items: center; justify-content: center; }
+.orbit-ring { position: absolute; border-radius: 50%; border: 1px solid rgba(0,180,216,0.2); animation: spin 20s linear infinite; }
+.orbit-ring:nth-child(1) { width: 300px; height: 300px; animation-duration: 18s; }
+.orbit-ring:nth-child(2) { width: 340px; height: 340px; animation-direction: reverse; animation-duration: 28s; border-color: rgba(255,193,7,0.15); }
+.orbit-dot { position: absolute; width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); top: -4px; left: 50%; transform: translateX(-50%); box-shadow: 0 0 12px var(--cyan); }
+.orbit-dot-gold { background: var(--gold); box-shadow: 0 0 12px var(--gold); top: auto; bottom: -4px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.hero-logo-wrap svg { width: 240px; height: 240px; animation: float 6s ease-in-out infinite; filter: drop-shadow(0 0 32px rgba(0,180,216,0.25)); }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-/* SECTION HEADERS */
-.sh-l{font-family:var(--font-m);font-size:10.5px;letter-spacing:4px;color:var(--cyan);text-transform:uppercase;margin-bottom:10px;display:block}
-.sh-t{font-size:clamp(26px,3.8vw,42px);font-weight:700;line-height:1.15;letter-spacing:-.5px;margin-bottom:14px}
-.sh-t span{background:linear-gradient(90deg,var(--cyan),var(--cobalt));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sh-t .gspan{background:linear-gradient(90deg,var(--gold),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sh-sub{color:var(--slate);font-size:15.5px;max-width:560px;line-height:1.72}
-.sh-c{text-align:center}.sh-c .sh-sub{margin:0 auto}
-.gbar{width:44px;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:2px;margin:14px 0 36px}
-.gbar-c{margin:14px auto 36px}
+/* ============================================================
+   TICKER
+   ============================================================ */
+.ticker { background: var(--navy); border-top: 1px solid rgba(0,180,216,0.2); border-bottom: 1px solid rgba(0,180,216,0.2); padding: 14px 0; overflow: hidden; }
+.ticker-track { display: flex; animation: ticker 32s linear infinite; width: max-content; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+.ticker-item { white-space: nowrap; padding: 0 40px; font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; color: rgba(255,255,255,0.5); text-transform: uppercase; display: flex; align-items: center; gap: 16px; }
+.ticker-item::after { content: '◆'; color: var(--cyan); font-size: 8px; }
 
-/* CARDS */
-.card{background:var(--card-bg);border:1px solid var(--border);border-radius:8px;transition:all .28s;position:relative;overflow:hidden}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--cyan),var(--purple));transform:scaleX(0);transform-origin:left;transition:transform .28s}
-.card:hover{border-color:rgba(0,240,255,.32);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.3)}
-.card:hover::before{transform:scaleX(1)}
+/* ============================================================
+   SERVICES
+   ============================================================ */
+.services-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 40px; }
+.tab-btn { padding: 9px 20px; border-radius: 100px; font-size: 13px; font-weight: 600; border: 1.5px solid var(--border); color: var(--text-muted); background: var(--bg-white); transition: all 0.2s; }
+.tab-btn.active, .tab-btn:hover { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.service-card { background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 32px 28px; transition: all 0.25s ease; position: relative; overflow: hidden; }
+.service-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), var(--purple)); opacity: 0; transition: opacity 0.25s; }
+.service-card:hover { border-color: var(--cyan); box-shadow: var(--shadow-md); transform: translateY(-3px); }
+.service-card:hover::before { opacity: 1; }
+.service-icon { font-size: 32px; margin-bottom: 16px; }
+.service-card h3 { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 10px; }
+.service-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 18px; }
+.service-list { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+.service-list li { font-size: 13px; color: var(--text-body); display: flex; align-items: flex-start; gap: 8px; }
+.service-list li::before { content: '→'; color: var(--cyan); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.service-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.service-tag { font-family: var(--font-mono); font-size: 10px; padding: 3px 10px; border-radius: 100px; background: var(--bg-light); color: var(--text-muted); letter-spacing: 0.5px; }
+.service-year { position: absolute; top: 16px; right: 16px; font-family: var(--font-mono); font-size: 10px; color: var(--cyan); background: rgba(0,180,216,0.08); border: 1px solid rgba(0,180,216,0.2); padding: 3px 9px; border-radius: 100px; letter-spacing: 0.5px; }
 
-/* SERVICES */
-.svc-bg{background:linear-gradient(180deg,var(--midnight) 0%,var(--navy-deep) 50%,var(--midnight) 100%)}
-.svc-tabs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:48px}
-.svc-tab{padding:8px 18px;border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;background:transparent;color:var(--slate);font-family:var(--font-d);transition:all .2s}
-.svc-tab:hover,.svc-tab.active{background:rgba(0,240,255,.08);border-color:var(--cyan);color:var(--cyan)}
-.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:18px}
-.svc-card{padding:28px}
-.svc-icon{width:48px;height:48px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:18px}
-.ic{background:rgba(0,240,255,.09)}
-.ig{background:rgba(255,193,7,.09)}
-.ip{background:rgba(123,47,255,.09)}
-.ib{background:rgba(0,85,170,.13)}
-.ir{background:rgba(0,180,216,.1)}
-.svc-title{font-size:16.5px;font-weight:600;margin-bottom:9px}
-.svc-desc{color:var(--slate);font-size:13.5px;line-height:1.7;margin-bottom:14px}
-.tags{display:flex;flex-wrap:wrap;gap:5px}
-.tag{font-family:var(--font-m);font-size:9.5px;letter-spacing:.8px;padding:3px 7px;border-radius:2px;border:1px solid rgba(0,240,255,.18);color:var(--cyan-mid);text-transform:uppercase}
-.svc-list{list-style:none;display:flex;flex-direction:column;gap:7px;margin-top:12px}
-.svc-list li{font-size:13px;color:var(--off-white);display:flex;align-items:flex-start;gap:7px}
-.svc-list li::before{content:'→';color:var(--cyan);font-size:11px;margin-top:2px;flex-shrink:0}
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.about-mission-vision { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 32px; }
+.mv-card { background: var(--bg-light); border-radius: var(--radius); padding: 24px 20px; border-left: 3px solid var(--cyan); }
+.mv-card h4 { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
+.mv-card p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+.about-checklist { display: flex; flex-direction: column; gap: 14px; }
+.check-item { display: flex; align-items: flex-start; gap: 12px; }
+.check-icon { width: 22px; height: 22px; border-radius: 50%; background: rgba(0,180,216,0.12); display: flex; align-items: center; justify-content: center; font-size: 11px; flex-shrink: 0; margin-top: 1px; color: var(--cyan); }
+.check-item strong { font-size: 14px; color: var(--text-dark); }
+.check-item span { font-size: 13px; color: var(--text-muted); display: block; margin-top: 2px; }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.value-card { background: var(--bg-white); border: 1.5px solid var(--border); border-radius: var(--radius-sm); padding: 20px 16px; text-align: center; transition: border-color 0.2s; }
+.value-card:hover { border-color: var(--cyan); }
+.value-card .icon { font-size: 24px; margin-bottom: 8px; }
+.value-card p { font-size: 13px; font-weight: 600; color: var(--text-dark); }
 
-/* ABOUT / MISSION */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
-.mv-cards{display:flex;flex-direction:column;gap:16px;margin-top:32px}
-.mv-card{padding:22px 24px;border-left:3px solid var(--cyan)}
-.mv-card.gold{border-color:var(--gold)}
-.mv-card.purple{border-color:var(--purple)}
-.mv-label{font-family:var(--font-m);font-size:9.5px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
-.mv-card.gold .mv-label{color:var(--gold)}
-.mv-card.purple .mv-label{color:var(--purple-lt)}
-.mv-text{font-size:14px;color:var(--off-white);line-height:1.7}
-.values-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}
-.val-item{display:flex;align-items:center;gap:10px;padding:12px 14px;background:var(--card-bg);border:1px solid var(--border);border-radius:6px;font-size:13px;font-weight:500}
-.val-icon{font-size:16px}
-.why-list{list-style:none;display:flex;flex-direction:column;gap:20px;margin-top:28px}
-.why-i{display:flex;gap:14px;align-items:flex-start}
-.why-chk{width:34px;height:34px;flex-shrink:0;border-radius:6px;background:rgba(0,240,255,.07);border:1px solid rgba(0,240,255,.2);display:flex;align-items:center;justify-content:center;color:var(--cyan);font-size:13px;margin-top:2px}
-.why-t strong{display:block;font-size:14.5px;font-weight:600;margin-bottom:3px}
-.why-t p{color:var(--slate);font-size:13.5px;line-height:1.6}
+/* ============================================================
+   FOUNDER
+   ============================================================ */
+.founder-section { background: var(--navy); color: var(--white); padding: 96px 0; }
+.founder-grid { display: grid; grid-template-columns: 280px 1fr; gap: 64px; align-items: start; }
+.founder-avatar { background: linear-gradient(135deg, rgba(0,180,216,0.15), rgba(123,47,255,0.15)); border: 2px solid rgba(0,180,216,0.3); border-radius: var(--radius); padding: 40px 32px; text-align: center; }
+.avatar-initials { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 700; color: var(--white); margin: 0 auto 20px; font-family: var(--font-mono); }
+.founder-avatar h3 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 6px; }
+.founder-avatar .title { font-size: 12px; color: var(--cyan); font-family: var(--font-mono); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 20px; }
+.founder-badges { display: flex; flex-direction: column; gap: 8px; margin-top: 20px; }
+.f-badge { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-sm); padding: 8px 12px; font-size: 12px; color: rgba(255,255,255,0.75); }
+.f-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; }
+.founder-content h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 700; color: var(--white); margin-bottom: 12px; line-height: 1.2; }
+.founder-content .intro { font-size: 17px; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 24px; }
+.founder-bio-blocks { display: flex; flex-direction: column; gap: 20px; }
+.bio-block { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: var(--radius-sm); padding: 20px 24px; border-left: 3px solid var(--cyan); }
+.bio-block h4 { font-size: 13px; font-weight: 700; color: var(--cyan); font-family: var(--font-mono); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+.bio-block p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.7; }
+.founder-expertise { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.exp-tag { font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; background: rgba(0,180,216,0.12); border: 1px solid rgba(0,180,216,0.25); color: var(--cyan); }
 
-/* INDUSTRIES */
-.ind-bg{background:var(--navy-deep)}
-.ind-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:48px}
-.ind-card{padding:20px 16px;text-align:center;border-radius:8px}
-.ind-icon{font-size:28px;display:block;margin-bottom:10px}
-.ind-name{font-size:13px;font-weight:600;margin-bottom:4px}
-.ind-desc{font-size:11.5px;color:var(--slate);line-height:1.5}
+/* ============================================================
+   INDUSTRIES
+   ============================================================ */
+.industries-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.industry-card { background: var(--bg-white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 24px 16px; text-align: center; transition: all 0.2s; }
+.industry-card:hover { border-color: var(--cyan); box-shadow: var(--shadow); transform: translateY(-2px); }
+.industry-card .icon { font-size: 28px; margin-bottom: 10px; }
+.industry-card h4 { font-size: 13px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+.industry-card p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
 
-/* PORTFOLIO */
-.port-bg{background:linear-gradient(180deg,var(--midnight) 0%,var(--navy-deep) 100%)}
-.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
-.port-card{border-radius:8px;overflow:hidden}
-.port-thumb{height:170px;display:flex;align-items:center;justify-content:center;font-size:44px;position:relative}
-.pt-c{background:linear-gradient(135deg,rgba(0,240,255,.13),rgba(0,85,170,.12))}
-.pt-g{background:linear-gradient(135deg,rgba(255,193,7,.13),rgba(255,143,0,.09))}
-.pt-p{background:linear-gradient(135deg,rgba(123,47,255,.13),rgba(178,75,255,.09))}
-.port-info{padding:18px 20px}
-.port-cat{font-family:var(--font-m);font-size:9.5px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-bottom:5px}
-.port-name{font-size:15.5px;font-weight:600;margin-bottom:7px}
-.port-desc{color:var(--slate);font-size:13px;line-height:1.65}
+/* ============================================================
+   PORTFOLIO
+   ============================================================ */
+.portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.portfolio-card { background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.25s; }
+.portfolio-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: var(--cyan); }
+.portfolio-thumb { height: 140px; display: flex; align-items: center; justify-content: center; font-size: 40px; background: linear-gradient(135deg, var(--bg-light), #E8ECF0); }
+.portfolio-body { padding: 24px 20px; }
+.portfolio-cat { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
+.portfolio-body h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+.portfolio-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-/* PROCESS */
-.proc-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px;position:relative}
-.proc-steps::before{content:'';position:absolute;top:27px;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),var(--purple),transparent);opacity:.2}
-.proc-step{text-align:center}
-.p-num{width:54px;height:54px;border-radius:50%;background:var(--navy-deep);border:2px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-family:var(--font-m);font-size:15px;font-weight:700;color:var(--cyan);transition:all .28s}
-.proc-step:hover .p-num{background:rgba(0,240,255,.09);border-color:var(--cyan);box-shadow:0 0 18px rgba(0,240,255,.18)}
-.p-title{font-size:14.5px;font-weight:600;margin-bottom:7px}
-.p-desc{color:var(--slate);font-size:13px;line-height:1.65}
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; position: relative; }
+.process-steps::before { content: ''; position: absolute; top: 36px; left: 10%; right: 10%; height: 1px; background: linear-gradient(90deg, transparent, var(--border), var(--border), transparent); }
+.process-step { text-align: center; padding: 0 12px; position: relative; }
+.step-num { width: 72px; height: 72px; border-radius: 50%; background: var(--bg-white); border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--navy); margin: 0 auto 20px; position: relative; z-index: 1; transition: all 0.2s; }
+.process-step:hover .step-num { border-color: var(--cyan); color: var(--cyan); box-shadow: 0 0 0 4px rgba(0,180,216,0.1); }
+.process-step h3 { font-size: 16px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; }
+.process-step p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-/* TESTIMONIALS */
-.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
-.test-card{padding:28px}
-.q-mark{font-size:60px;line-height:1;color:var(--cyan);opacity:.13;font-family:Georgia,serif;margin-bottom:-14px;display:block}
-.test-txt{color:var(--off-white);font-size:13.5px;line-height:1.8;margin-bottom:22px;font-style:italic}
-.test-auth{display:flex;align-items:center;gap:11px}
-.t-av{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:var(--midnight);flex-shrink:0}
-.t-name{font-size:13.5px;font-weight:600}
-.t-role{font-size:11.5px;color:var(--slate)}
-.stars{color:var(--gold);font-size:11px;letter-spacing:2px;margin-bottom:3px}
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.testimonial-card { background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 28px 24px; transition: box-shadow 0.2s; }
+.testimonial-card:hover { box-shadow: var(--shadow-md); }
+.stars { color: var(--gold); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+.testimonial-card blockquote { font-size: 15px; color: var(--text-body); line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.t-author { display: flex; align-items: center; gap: 12px; }
+.t-avatar { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--purple)); display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: var(--white); flex-shrink: 0; }
+.t-name { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+.t-role { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
 
-/* PRICING */
-.price-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:52px}
-.p-card{padding:32px 26px}
-.p-card.feat{border-color:rgba(0,240,255,.38);background:rgba(0,20,50,.8)}
-.p-card.feat::after{content:'MOST POPULAR';position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--cyan),var(--cobalt));color:var(--midnight);font-size:9.5px;font-weight:700;letter-spacing:2px;padding:4px 14px;border-radius:0 0 6px 6px;font-family:var(--font-m)}
-.p-tier{font-family:var(--font-m);font-size:10.5px;letter-spacing:3px;color:var(--cyan);text-transform:uppercase;margin-bottom:14px}
-.p-amt{font-size:48px;font-weight:700;color:#fff;line-height:1}
-.p-cur{font-size:17px;color:var(--slate);vertical-align:top;line-height:2.2}
-.p-per{color:var(--slate);font-size:12.5px;margin-bottom:8px}
-.p-desc{color:var(--slate);font-size:13.5px;margin-bottom:24px;line-height:1.65}
-.p-feats{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
-.p-feats li{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--off-white)}
-.p-feats li::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0;margin-top:1px}
-.p-feats li.off{color:var(--slate)}
-.p-feats li.off::before{content:'—';color:var(--slate)}
+/* ============================================================
+   PRICING
+   ============================================================ */
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+.pricing-card { background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 36px 28px; position: relative; transition: all 0.25s; }
+.pricing-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.pricing-card.featured { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,180,216,0.1), var(--shadow-md); }
+.pricing-popular { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--cyan); color: var(--navy); font-size: 11px; font-weight: 700; padding: 4px 16px; border-radius: 100px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+.pricing-tier { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); margin-bottom: 8px; }
+.pricing-price { font-size: 38px; font-weight: 700; color: var(--text-dark); line-height: 1; margin-bottom: 4px; font-family: var(--font-mono); }
+.pricing-period { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
+.pricing-desc { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; line-height: 1.6; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+.pricing-features { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+.pricing-feature { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--text-body); }
+.pricing-feature::before { content: '✓'; color: var(--cyan); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+.pricing-year { font-family: var(--font-mono); font-size: 10px; color: var(--gold); background: rgba(255,193,7,0.08); border: 1px solid rgba(255,193,7,0.2); padding: 3px 9px; border-radius: 100px; display: inline-block; margin-bottom: 16px; }
 
-/* PARTNERSHIPS */
-.part-bg{background:var(--navy-deep)}
-.part-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:48px}
-.part-card{padding:22px;text-align:center}
-.part-icon{font-size:32px;margin-bottom:12px;display:block}
-.part-type{font-size:14px;font-weight:600;margin-bottom:5px}
-.part-sub{font-size:12.5px;color:var(--slate);line-height:1.5}
+/* ============================================================
+   PARTNERSHIPS
+   ============================================================ */
+.partners-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.partner-card { background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 28px 24px; transition: all 0.2s; }
+.partner-card:hover { border-color: var(--cyan); box-shadow: var(--shadow); }
+.partner-card .icon { font-size: 28px; margin-bottom: 12px; }
+.partner-card h4 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+.partner-card p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-/* BLOG */
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:52px}
-.blog-card{border-radius:8px;overflow:hidden;text-decoration:none;color:inherit;display:block}
-.blog-img{height:150px;display:flex;align-items:center;justify-content:center;font-size:40px}
-.bi-c{background:linear-gradient(135deg,rgba(0,240,255,.12),rgba(0,85,170,.1))}
-.bi-g{background:linear-gradient(135deg,rgba(255,193,7,.12),rgba(255,143,0,.08))}
-.bi-p{background:linear-gradient(135deg,rgba(123,47,255,.12),rgba(178,75,255,.08))}
-.blog-body{padding:18px}
-.blog-cat{font-family:var(--font-m);font-size:9.5px;letter-spacing:2px;color:var(--cyan);text-transform:uppercase;margin-bottom:5px}
-.blog-title{font-size:15px;font-weight:600;margin-bottom:7px;line-height:1.4}
-.blog-snip{color:var(--slate);font-size:12.5px;line-height:1.65}
-.blog-card:hover .blog-title{color:var(--cyan)}
+/* ============================================================
+   AI ASSISTANT
+   ============================================================ */
+.ai-assistant-section { background: linear-gradient(135deg, var(--navy), #0a1628); padding: 96px 0; color: var(--white); }
+.ai-assistant-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.ai-chat-preview { background: rgba(255,255,255,0.04); border: 1px solid rgba(0,180,216,0.2); border-radius: var(--radius); overflow: hidden; }
+.ai-chat-header { background: rgba(0,180,216,0.1); border-bottom: 1px solid rgba(0,180,216,0.2); padding: 14px 20px; display: flex; align-items: center; gap: 10px; }
+.ai-status-dot { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; animation: pulse 2s infinite; }
+.ai-chat-header span { font-size: 13px; font-weight: 600; color: var(--cyan); font-family: var(--font-mono); }
+.ai-chat-body { padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.chat-bubble { max-width: 85%; padding: 12px 16px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
+.chat-bubble.bot { background: rgba(0,180,216,0.1); border: 1px solid rgba(0,180,216,0.2); color: rgba(255,255,255,0.85); border-radius: 4px 12px 12px 12px; align-self: flex-start; }
+.chat-bubble.user { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.8); border-radius: 12px 4px 12px 12px; align-self: flex-end; }
+.ai-content h2 { font-size: clamp(26px, 3.5vw, 36px); font-weight: 700; color: var(--white); margin-bottom: 16px; line-height: 1.2; }
+.ai-content p { font-size: 16px; color: rgba(255,255,255,0.65); line-height: 1.75; margin-bottom: 28px; }
+.ai-feature-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.ai-feature { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: rgba(255,255,255,0.7); }
+.ai-feature-icon { width: 28px; height: 28px; border-radius: 6px; background: rgba(0,180,216,0.15); border: 1px solid rgba(0,180,216,0.25); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
 
-/* CONTACT */
-.cont-bg{background:var(--navy-deep)}
-.cont-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:72px;align-items:start}
-.cont-info{display:flex;flex-direction:column;gap:22px;margin-top:32px}
-.ci-item{display:flex;gap:14px;align-items:flex-start}
-.ci-icon{width:42px;height:42px;flex-shrink:0;border-radius:8px;background:rgba(0,240,255,.07);border:1px solid rgba(0,240,255,.18);display:flex;align-items:center;justify-content:center;font-size:17px}
-.ci-d strong{display:block;font-size:13.5px;font-weight:600;margin-bottom:2px}
-.ci-d span{color:var(--slate);font-size:13.5px}
-.ci-d a{color:var(--cyan-mid);text-decoration:none;font-size:13.5px}
-.ci-d a:hover{color:var(--cyan)}
-.cont-form{display:flex;flex-direction:column;gap:14px}
-.f-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.f-g{display:flex;flex-direction:column;gap:5px}
-.f-g label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--slate);font-family:var(--font-m)}
-.f-g input,.f-g select,.f-g textarea{background:rgba(0,240,255,.035);border:1px solid var(--border);border-radius:4px;padding:11px 14px;color:#fff;font-family:var(--font-d);font-size:14px;transition:border-color .2s;outline:none;width:100%}
-.f-g input:focus,.f-g select:focus,.f-g textarea:focus{border-color:var(--cyan);background:rgba(0,240,255,.055)}
-.f-g select option{background:var(--navy-deep)}
-.f-g textarea{resize:vertical;min-height:110px}
-.f-success{display:none;padding:14px;background:rgba(0,240,255,.07);border:1px solid rgba(0,240,255,.28);border-radius:4px;color:var(--cyan);font-size:13.5px;text-align:center}
-.cal-strip{background:rgba(255,193,7,.06);border:1px solid rgba(255,193,7,.18);border-radius:6px;padding:16px 20px;display:flex;align-items:center;gap:14px;margin-bottom:6px}
-.cal-icon{font-size:24px}
-.cal-txt strong{display:block;font-size:13.5px;font-weight:600;margin-bottom:2px}
-.cal-txt span{font-size:12.5px;color:var(--slate)}
+/* ============================================================
+   BLOG
+   ============================================================ */
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.blog-card { background: var(--bg-card); border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.25s; }
+.blog-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: var(--cyan); }
+.blog-thumb { height: 120px; display: flex; align-items: center; justify-content: center; font-size: 36px; background: linear-gradient(135deg, var(--bg-light), #E8ECF0); }
+.blog-body { padding: 20px; }
+.blog-cat { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--cyan); margin-bottom: 6px; }
+.blog-date { font-family: var(--font-mono); font-size: 10px; color: var(--text-muted); margin-bottom: 10px; }
+.blog-body h3 { font-size: 15px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; line-height: 1.4; }
+.blog-body p { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
 
-/* CTA BANNER */
-.cta-ban{padding:80px 0;background:linear-gradient(135deg,rgba(0,240,255,.055),rgba(123,47,255,.055));border-top:1px solid var(--border);border-bottom:1px solid var(--border);text-align:center}
-.cta-ban h2{font-size:clamp(26px,3.8vw,42px);font-weight:700;margin-bottom:14px;letter-spacing:-.5px}
-.cta-ban p{color:var(--slate);font-size:15.5px;margin-bottom:36px;max-width:560px;margin-left:auto;margin-right:auto}
-.cta-acts{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}
+/* ============================================================
+   CREDENTIALS
+   ============================================================ */
+.credentials-strip { background: var(--bg-light); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 20px 0; }
+.cred-inner { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.cred-item { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--text-muted); }
+.cred-icon { width: 32px; height: 32px; border-radius: 6px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 14px; }
+.cred-item strong { color: var(--text-dark); font-size: 13px; }
 
-/* PARTNERS STRIP */
-.reg-strip{padding:52px 0;border-top:1px solid var(--border);text-align:center}
-.reg-lbl{font-family:var(--font-m);font-size:10px;letter-spacing:4px;color:var(--slate);text-transform:uppercase;margin-bottom:28px}
-.reg-row{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap}
-.reg-badge{padding:9px 18px;border:1px solid rgba(255,193,7,.22);border-radius:4px;font-family:var(--font-m);font-size:10.5px;letter-spacing:1.5px;color:var(--gold-dark);text-transform:uppercase;transition:all .2s}
-.reg-badge:hover{border-color:rgba(255,193,7,.5);background:rgba(255,193,7,.05)}
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 64px; }
+.contact-info h2 { font-size: clamp(26px, 3.5vw, 38px); font-weight: 700; color: var(--text-dark); margin-bottom: 16px; line-height: 1.2; }
+.contact-info p { font-size: 16px; color: var(--text-muted); line-height: 1.75; margin-bottom: 32px; }
+.contact-details { display: flex; flex-direction: column; gap: 16px; margin-bottom: 32px; }
+.contact-detail { display: flex; align-items: center; gap: 14px; font-size: 14px; color: var(--text-body); }
+.contact-detail-icon { width: 42px; height: 42px; border-radius: var(--radius-sm); background: rgba(0,180,216,0.08); border: 1px solid rgba(0,180,216,0.2); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.contact-detail a { color: var(--text-body); transition: color 0.2s; }
+.contact-detail a:hover { color: var(--cyan); }
+.contact-socials { display: flex; gap: 10px; flex-wrap: wrap; }
+.social-btn { display: flex; align-items: center; gap: 8px; padding: 9px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; font-weight: 600; color: var(--text-body); background: var(--bg-white); transition: all 0.2s; }
+.social-btn:hover { border-color: var(--cyan); color: var(--cyan); }
+.contact-form { background: var(--bg-white); border: 1.5px solid var(--border); border-radius: var(--radius); padding: 40px 36px; box-shadow: var(--shadow); }
+.contact-form h3 { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 6px; }
+.form-sub { font-size: 14px; color: var(--text-muted); margin-bottom: 28px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-group { margin-bottom: 20px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: var(--text-dark); margin-bottom: 7px; }
+.form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1.5px solid var(--border); border-radius: var(--radius-sm); font-family: var(--font-display); font-size: 14px; color: var(--text-dark); background: var(--bg-white); outline: none; transition: border-color 0.2s; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(0,180,216,0.1); }
+.form-group textarea { resize: vertical; min-height: 110px; }
+.form-submit { width: 100%; padding: 15px; font-size: 15px; }
+.form-note { font-size: 12px; color: var(--text-muted); text-align: center; margin-top: 12px; }
 
-/* FOOTER */
-footer{background:var(--midnight);padding:56px 0 22px;border-top:1px solid var(--border)}
-.ft-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
-.ft-brand p{color:var(--slate);font-size:13px;line-height:1.7;max-width:250px;margin-top:14px}
-.ft-soc{display:flex;gap:9px;margin-top:18px;flex-wrap:wrap}
-.soc-btn{width:35px;height:35px;border-radius:6px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--slate);text-decoration:none;font-size:13px;transition:all .2s;font-weight:700}
-.soc-btn:hover{border-color:var(--cyan);color:var(--cyan);background:rgba(0,240,255,.07)}
-.ft-col h4{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#fff;margin-bottom:18px;font-family:var(--font-m)}
-.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
-.ft-col ul a{color:var(--slate);text-decoration:none;font-size:13.5px;transition:color .2s}
-.ft-col ul a:hover{color:var(--cyan)}
-.ft-bot{border-top:1px solid var(--border);padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
-.ft-bot p{color:var(--slate);font-size:11.5px;font-family:var(--font-m)}
-.ft-regs{display:flex;gap:10px;flex-wrap:wrap}
-.ft-reg{font-family:var(--font-m);font-size:9.5px;letter-spacing:1px;color:var(--gold-dark);padding:3px 9px;border:1px solid rgba(255,193,7,.18);border-radius:2px}
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer { background: var(--midnight); color: var(--white); padding: 72px 0 0; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 56px; }
+.footer-brand p { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.75; margin: 16px 0 24px; max-width: 260px; }
+.footer-cred { display: flex; flex-direction: column; gap: 6px; }
+.footer-cred span { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.35); letter-spacing: 0.5px; }
+.footer-col h4 { font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 20px; letter-spacing: 0.5px; }
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a { font-size: 13px; color: rgba(255,255,255,0.5); transition: color 0.2s; }
+.footer-col ul li a:hover { color: var(--cyan); }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); padding: 24px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.footer-bottom p { font-size: 13px; color: rgba(255,255,255,0.35); }
+.footer-bottom-links { display: flex; gap: 24px; }
+.footer-bottom-links a { font-size: 12px; color: rgba(255,255,255,0.35); transition: color 0.2s; }
+.footer-bottom-links a:hover { color: var(--cyan); }
 
-/* SCROLL FX */
-.fu{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
-.fu.v{opacity:1;transform:translateY(0)}
-.fd1{transition-delay:.1s}.fd2{transition-delay:.2s}.fd3{transition-delay:.3s}.fd4{transition-delay:.4s}
-
-/* RESPONSIVE */
-@media(max-width:960px){
-  .hero-grid{grid-template-columns:1fr;text-align:center}
-  .hero-vis{display:none}
-  .h-desc{max-width:100%}
-  .h-acts{justify-content:center}
-  .h-stats{justify-content:center}
-  .about-grid{grid-template-columns:1fr}
-  .port-grid{grid-template-columns:1fr 1fr}
-  .proc-steps{grid-template-columns:1fr 1fr}
-  .proc-steps::before{display:none}
-  .test-grid{grid-template-columns:1fr}
-  .price-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
-  .cont-grid{grid-template-columns:1fr}
-  .ft-grid{grid-template-columns:1fr 1fr}
-  .nav-links{display:none}
-  .hbg{display:flex}
-  .f-row{grid-template-columns:1fr}
-  .blog-grid{grid-template-columns:1fr 1fr}
-  .ind-grid{grid-template-columns:repeat(auto-fit,minmax(130px,1fr))}
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .industries-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
 }
-@media(max-width:600px){
-  .port-grid,.blog-grid,.proc-steps{grid-template-columns:1fr}
-  .ft-grid{grid-template-columns:1fr}
-  .values-grid{grid-template-columns:1fr}
-  .part-grid{grid-template-columns:1fr 1fr}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .hero-grid { grid-template-columns: 1fr; text-align: center; }
+  .hero-actions { justify-content: center; }
+  .hero-stats { justify-content: center; }
+  .hero-sub { margin: 0 auto 36px; }
+  .hero-visual { display: none; }
+  .services-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .process-steps::before { display: none; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .partners-grid { grid-template-columns: 1fr; }
+  .industries-grid { grid-template-columns: repeat(2, 1fr); }
+  .blog-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .founder-grid { grid-template-columns: 1fr; }
+  .ai-assistant-inner { grid-template-columns: 1fr; }
+  .about-mission-vision { grid-template-columns: 1fr; }
+  .values-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-row { grid-template-columns: 1fr; }
+  .cred-inner { gap: 24px; }
+  .section { padding: 64px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav id="topnav">
-  <div class="nav-i">
-    <a href="#home" class="nav-logo">
-      <svg class="nl-svg" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="nb" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#0B1E3A"/><stop offset="100%" stop-color="#010408"/></radialGradient>
-          <linearGradient id="nr" x1="0%" y1="0%" x2="100%" y2="110%"><stop offset="0%" stop-color="#00F0FF"/><stop offset="100%" stop-color="#0055AA"/></linearGradient>
-        </defs>
-        <rect width="1024" height="1024" fill="url(#nb)"/>
-        <polygon points="512,100 838,288 838,664 512,852 186,664 186,288" fill="none" stroke="#00F0FF" stroke-width="3" opacity="0.9"/>
-        <text x="512" y="540" font-family="Impact" font-size="310" font-weight="900" fill="url(#nr)" text-anchor="middle">RN</text>
-      </svg>
-      <div class="nl-txt"><b>RuffNeck</b><span>Entertainment</span></div>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#industries">Industries</a></li>
-      <li><a href="#portfolio">Portfolio</a></li>
-      <li><a href="#partnerships">Partners</a></li>
-      <li><a href="#blog">Resources</a></li>
-      <li><a href="#contact" class="nav-cta">Get Started</a></li>
-    </ul>
-    <button class="hbg" onclick="toggleMenu()" aria-label="Menu"><span></span><span></span><span></span></button>
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">
+        <div class="nav-logo-mark">RN</div>
+        <div><strong>RuffNeck</strong><span>Entertainment</span></div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#founder">Founder</a></li>
+        <li><a href="#industries">Industries</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="#partnerships">Partners</a></li>
+        <li><a href="#blog">Resources</a></li>
+        <li><a href="#contact" class="nav-cta">Get Started</a></li>
+      </ul>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#founder">Founder</a>
+    <a href="#industries">Industries</a>
+    <a href="#portfolio">Portfolio</a>
+    <a href="#partnerships">Partners</a>
+    <a href="#blog">Resources</a>
+    <a href="#contact">Get Started →</a>
   </div>
 </nav>
-<div class="mob-menu" id="mobMenu">
-  <button class="mob-close" onclick="toggleMenu()">✕</button>
-  <a href="#services" onclick="toggleMenu()">Services</a>
-  <a href="#about" onclick="toggleMenu()">About</a>
-  <a href="#industries" onclick="toggleMenu()">Industries</a>
-  <a href="#portfolio" onclick="toggleMenu()">Portfolio</a>
-  <a href="#partnerships" onclick="toggleMenu()">Partners</a>
-  <a href="#blog" onclick="toggleMenu()">Resources</a>
-  <a href="#contact" onclick="toggleMenu()">Contact</a>
-</div>
 
-<!-- HERO -->
-<section class="s hero" id="home">
-  <div class="hero-orb orb1"></div>
-  <div class="hero-orb orb2"></div>
-  <div class="hero-orb orb3"></div>
-  <div class="c">
+<!-- HERO — DARK -->
+<section class="hero" id="home">
+  <div class="container">
     <div class="hero-grid">
       <div>
-        <div class="h-eye" id="eyebrow">Nigeria · Africa · Global</div>
-        <h1 class="h-title">
-          <span>Scale Your Business</span>
-          <span class="gc">with AI-Powered</span>
-          <span class="gg">Operations & Digital Solutions</span>
-        </h1>
-        <p class="h-desc">RuffNeck Entertainment helps businesses, startups, organizations, and entrepreneurs optimize operations, strengthen digital presence, and accelerate growth through innovative technology and professional support services.</p>
-        <div class="h-acts">
-          <a href="#contact" class="btn btn-p">Book a Consultation →</a>
-          <a href="#services" class="btn btn-s">Explore Services</a>
-          <a href="#partnerships" class="btn btn-g">Partner With Us</a>
+        <div class="hero-eyebrow">
+          <div class="hero-dot"></div>
+          <span>Nigeria · Africa · Global · Est. 2022</span>
         </div>
-        <div class="h-stats">
-          <div><span class="st-n">5+</span><span class="st-l">Years Experience</span></div>
-          <div><span class="st-n">12+</span><span class="st-l">Service Lines</span></div>
-          <div><span class="st-n">Global</span><span class="st-l">Remote Delivery</span></div>
-          <div><span class="st-n">CAC</span><span class="st-l">Registered · 2022</span></div>
+        <h1>Scale Your Business with <em>AI-Powered</em> Operations &amp; Digital Solutions</h1>
+        <p class="hero-sub">RuffNeck Entertainment helps businesses, startups, organizations, and entrepreneurs optimize operations, strengthen digital presence, and accelerate growth through innovative technology and professional support services.</p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Book a Consultation →</a>
+          <a href="#services" class="btn btn-outline">Explore Services</a>
+          <a href="#partnerships" class="btn btn-outline">Partner With Us</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">5<span>+</span></div>
+            <div class="hero-stat-label">Years Experience</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">12<span>+</span></div>
+            <div class="hero-stat-label">Service Lines</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">2026</div>
+            <div class="hero-stat-label">Active &amp; Growing</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">CAC</div>
+            <div class="hero-stat-label">Registered · 2022</div>
+          </div>
         </div>
       </div>
-      <div class="hero-vis">
-        <div class="logo-wrap">
-          <div class="ring r1"></div>
-          <div class="ring r2"></div>
-          <div class="ring r3"></div>
-          <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;filter:drop-shadow(0 0 44px rgba(0,240,255,.22));animation:float 6s ease-in-out infinite">
+      <div class="hero-visual">
+        <div class="hero-logo-wrap">
+          <div class="orbit-ring"><div class="orbit-dot"></div></div>
+          <div class="orbit-ring"><div class="orbit-dot orbit-dot-gold"></div></div>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
             <defs>
-              <radialGradient id="hbg" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#0B1E3A"/><stop offset="70%" stop-color="#040C1A"/><stop offset="100%" stop-color="#010408"/></radialGradient>
-              <linearGradient id="hrn" x1="0%" y1="0%" x2="100%" y2="110%"><stop offset="0%" stop-color="#00F0FF"/><stop offset="45%" stop-color="#00B4D8"/><stop offset="100%" stop-color="#0055AA"/></linearGradient>
-              <linearGradient id="hgg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFC107"/><stop offset="50%" stop-color="#FFE57F"/><stop offset="100%" stop-color="#FF8F00"/></linearGradient>
-              <linearGradient id="hhe" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00F0FF"/><stop offset="40%" stop-color="#0077FF"/><stop offset="100%" stop-color="#7B2FFF"/></linearGradient>
-              <filter id="hcg"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-              <filter id="hdg"><feGaussianBlur stdDeviation="22" in="SourceGraphic" result="bb"/><feGaussianBlur stdDeviation="7" in="SourceGraphic" result="sb"/><feMerge><feMergeNode in="bb"/><feMergeNode in="sb"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <radialGradient id="bgG" cx="50%" cy="45%" r="60%"><stop offset="0%" stop-color="#0B1E3A"/><stop offset="70%" stop-color="#040C1A"/><stop offset="100%" stop-color="#010408"/></radialGradient>
+              <linearGradient id="hF" x1="30%" y1="0%" x2="70%" y2="100%"><stop offset="0%" stop-color="#0A1A30"/><stop offset="100%" stop-color="#030A16"/></linearGradient>
+              <linearGradient id="rG" x1="0%" y1="0%" x2="100%" y2="110%"><stop offset="0%" stop-color="#00F0FF"/><stop offset="45%" stop-color="#00B4D8"/><stop offset="100%" stop-color="#0055AA"/></linearGradient>
+              <linearGradient id="gG" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#FFC107"/><stop offset="50%" stop-color="#FFE57F"/><stop offset="100%" stop-color="#FF8F00"/></linearGradient>
+              <linearGradient id="hE" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00F0FF"/><stop offset="40%" stop-color="#0077FF"/><stop offset="100%" stop-color="#7B2FFF"/></linearGradient>
+              <filter id="cG" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="10" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="dG" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="22" in="SourceGraphic" result="b1"/><feGaussianBlur stdDeviation="7" in="SourceGraphic" result="b2"/><feMerge><feMergeNode in="b1"/><feMergeNode in="b2"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="eG" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+              <filter id="goG" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
             </defs>
-            <rect width="1024" height="1024" fill="url(#hbg)"/>
-            <circle cx="90" cy="110" r="1.2" fill="#00F0FF" opacity="0.35"/><circle cx="740" cy="55" r="1.2" fill="white" opacity="0.3"/><circle cx="920" cy="140" r="1" fill="#00F0FF" opacity="0.25"/><circle cx="55" cy="720" r="1" fill="#00F0FF" opacity="0.3"/><circle cx="880" cy="930" r="1.2" fill="white" opacity="0.25"/>
-            <polygon points="512,88 850,280 850,672 512,864 174,672 174,280" fill="none" stroke="#00F0FF" stroke-width="18" opacity="0.07"/>
-            <polygon points="512,100 838,288 838,664 512,852 186,664 186,288" fill="url(#hgg)" fill-opacity="0.04"/>
-            <polygon points="512,100 838,288 838,664 512,852 186,664 186,288" fill="none" stroke="url(#hhe)" stroke-width="3" opacity="0.9" filter="url(#hcg)"/>
-            <polygon points="512,128 816,305 816,647 512,824 208,647 208,305" fill="none" stroke="#00F0FF" stroke-width="0.7" opacity="0.18"/>
-            <circle cx="512" cy="100" r="10" fill="#00F0FF" opacity="0.9" filter="url(#hcg)"/><circle cx="512" cy="100" r="4.5" fill="white" opacity="0.95"/>
-            <circle cx="838" cy="288" r="9" fill="#FFC107" opacity="0.85"/><circle cx="838" cy="288" r="3.5" fill="white" opacity="0.95"/>
-            <circle cx="838" cy="664" r="9" fill="#FFC107" opacity="0.85"/><circle cx="838" cy="664" r="3.5" fill="white" opacity="0.95"/>
-            <circle cx="512" cy="852" r="10" fill="#00F0FF" opacity="0.9" filter="url(#hcg)"/><circle cx="512" cy="852" r="4.5" fill="white" opacity="0.95"/>
-            <circle cx="186" cy="664" r="9" fill="#FFC107" opacity="0.85"/><circle cx="186" cy="664" r="3.5" fill="white" opacity="0.95"/>
-            <circle cx="186" cy="288" r="9" fill="#FFC107" opacity="0.85"/><circle cx="186" cy="288" r="3.5" fill="white" opacity="0.95"/>
-            <text x="512" y="530" font-family="Impact,'Arial Black',Arial,sans-serif" font-size="310" font-weight="900" fill="#00F0FF" text-anchor="middle" opacity="0.12" filter="url(#hdg)">RN</text>
-            <text x="512" y="530" font-family="Impact,'Arial Black',Arial,sans-serif" font-size="310" font-weight="900" fill="url(#hrn)" text-anchor="middle" filter="url(#hcg)">RN</text>
-            <rect x="355" y="556" width="314" height="3.5" fill="url(#hgg)" rx="1.75" opacity="0.9"/>
+            <rect width="1024" height="1024" fill="url(#bgG)"/>
+            <polygon points="512,88 850,280 850,672 512,864 174,672 174,280" fill="none" stroke="#00F0FF" stroke-width="18" opacity="0.07" filter="url(#eG)"/>
+            <polygon points="512,100 838,288 838,664 512,852 186,664 186,288" fill="url(#hF)"/>
+            <polygon points="512,100 838,288 838,664 512,852 186,664 186,288" fill="none" stroke="url(#hE)" stroke-width="3" opacity="0.9" filter="url(#cG)"/>
+            <text x="512" y="530" font-family="Impact,'Arial Black',Arial,sans-serif" font-size="310" font-weight="900" fill="#00F0FF" text-anchor="middle" opacity="0.12" filter="url(#dG)">RN</text>
+            <text x="512" y="530" font-family="Impact,'Arial Black',Arial,sans-serif" font-size="310" font-weight="900" fill="url(#rG)" text-anchor="middle" filter="url(#cG)">RN</text>
+            <rect x="355" y="556" width="314" height="3.5" fill="url(#gG)" rx="1.75" opacity="0.9"/>
+            <circle cx="355" cy="557" r="5.5" fill="#FFC107" opacity="0.95" filter="url(#goG)"/>
+            <circle cx="512" cy="557" r="4" fill="white" opacity="0.8"/>
+            <circle cx="669" cy="557" r="5.5" fill="#FFC107" opacity="0.95" filter="url(#goG)"/>
             <text x="512" y="638" font-family="Impact,'Arial Black',Arial,sans-serif" font-size="70" font-weight="900" fill="white" text-anchor="middle" letter-spacing="11">RUFFNECK</text>
             <text x="512" y="690" font-family="'Courier New',Courier,monospace" font-size="28" font-weight="400" fill="#00B4D8" text-anchor="middle" letter-spacing="13">ENTERTAINMENT</text>
             <text x="512" y="742" font-family="'Courier New',Courier,monospace" font-size="19" font-weight="400" fill="#6A8EB2" text-anchor="middle" letter-spacing="5">AI &amp; TECH SERVICES</text>
@@ -421,692 +495,702 @@ footer{background:var(--midnight);padding:56px 0 22px;border-top:1px solid var(-
 </section>
 
 <!-- TICKER -->
-<div class="s ticker">
-  <div class="t-inner">
-    <span class="t-item"><span class="t-dot"></span>AI Solutions & Automation</span>
-    <span class="t-item"><span class="t-dot"></span>Digital Marketing</span>
-    <span class="t-item"><span class="t-dot"></span>Virtual Assistance</span>
-    <span class="t-item"><span class="t-dot"></span>Website Development</span>
-    <span class="t-item"><span class="t-dot"></span>Data Management</span>
-    <span class="t-item"><span class="t-dot"></span>Business Operations</span>
-    <span class="t-item"><span class="t-dot"></span>Brand & Graphic Design</span>
-    <span class="t-item"><span class="t-dot"></span>AI Literacy Training</span>
-    <span class="t-item"><span class="t-dot"></span>Customer Support</span>
-    <span class="t-item"><span class="t-dot"></span>Logistics & Warehousing</span>
-    <span class="t-item"><span class="t-dot"></span>Career & CV Services</span>
-    <span class="t-item"><span class="t-dot"></span>Community Development</span>
-    <span class="t-item"><span class="t-dot"></span>AI Solutions & Automation</span>
-    <span class="t-item"><span class="t-dot"></span>Digital Marketing</span>
-    <span class="t-item"><span class="t-dot"></span>Virtual Assistance</span>
-    <span class="t-item"><span class="t-dot"></span>Website Development</span>
-    <span class="t-item"><span class="t-dot"></span>Data Management</span>
-    <span class="t-item"><span class="t-dot"></span>Business Operations</span>
-    <span class="t-item"><span class="t-dot"></span>Brand & Graphic Design</span>
-    <span class="t-item"><span class="t-dot"></span>AI Literacy Training</span>
-    <span class="t-item"><span class="t-dot"></span>Customer Support</span>
-    <span class="t-item"><span class="t-dot"></span>Logistics & Warehousing</span>
-    <span class="t-item"><span class="t-dot"></span>Career & CV Services</span>
-    <span class="t-item"><span class="t-dot"></span>Community Development</span>
+<div class="ticker">
+  <div class="ticker-track">
+    <div class="ticker-item">AI Solutions &amp; Automation</div><div class="ticker-item">Digital Marketing</div><div class="ticker-item">Virtual Assistance</div><div class="ticker-item">Website Development</div><div class="ticker-item">Data Management</div><div class="ticker-item">Business Operations</div><div class="ticker-item">Brand &amp; Graphic Design</div><div class="ticker-item">AI Literacy Training</div><div class="ticker-item">Customer Support</div><div class="ticker-item">Logistics &amp; Warehousing</div><div class="ticker-item">Career &amp; CV Services</div><div class="ticker-item">Community Development</div>
+    <div class="ticker-item">AI Solutions &amp; Automation</div><div class="ticker-item">Digital Marketing</div><div class="ticker-item">Virtual Assistance</div><div class="ticker-item">Website Development</div><div class="ticker-item">Data Management</div><div class="ticker-item">Business Operations</div><div class="ticker-item">Brand &amp; Graphic Design</div><div class="ticker-item">AI Literacy Training</div><div class="ticker-item">Customer Support</div><div class="ticker-item">Logistics &amp; Warehousing</div><div class="ticker-item">Career &amp; CV Services</div><div class="ticker-item">Community Development</div>
   </div>
 </div>
 
 <!-- SERVICES -->
-<section class="s pad svc-bg" id="services">
-  <div class="c">
-    <div class="sh-c fu">
-      <span class="sh-l">What We Deliver</span>
-      <h2 class="sh-t">Comprehensive <span>Digital & AI Solutions</span></h2>
-      <div class="gbar gbar-c"></div>
-      <p class="sh-sub">From AI integration to brand-building — end-to-end services that drive measurable outcomes for businesses ready to scale globally.</p>
+<section class="section" id="services">
+  <div class="container">
+    <div class="fade-up">
+      <div class="section-label">What We Deliver · 2026</div>
+      <h2 class="section-title">Comprehensive Digital &amp; AI Solutions</h2>
+      <p class="section-sub">From AI integration to brand-building — end-to-end services that drive measurable outcomes for businesses ready to scale globally in 2026 and beyond.</p>
     </div>
-    <div class="svc-tabs fu" style="margin-top:40px">
-      <button class="svc-tab active" onclick="filterSvc('all',this)">All Services</button>
-      <button class="svc-tab" onclick="filterSvc('ai',this)">AI & Tech</button>
-      <button class="svc-tab" onclick="filterSvc('marketing',this)">Marketing</button>
-      <button class="svc-tab" onclick="filterSvc('operations',this)">Operations</button>
-      <button class="svc-tab" onclick="filterSvc('admin',this)">Admin & VA</button>
-      <button class="svc-tab" onclick="filterSvc('design',this)">Design</button>
+    <div class="services-tabs fade-up" style="margin-top:36px;">
+      <button class="tab-btn active" data-filter="all">All Services</button>
+      <button class="tab-btn" data-filter="ai">AI &amp; Tech</button>
+      <button class="tab-btn" data-filter="marketing">Marketing</button>
+      <button class="tab-btn" data-filter="operations">Operations</button>
+      <button class="tab-btn" data-filter="admin">Admin &amp; VA</button>
+      <button class="tab-btn" data-filter="design">Design</button>
     </div>
-    <div class="svc-grid" id="svcGrid">
+    <div class="services-grid">
 
-      <div class="card svc-card fu fd1" data-cat="ai">
-        <div class="svc-icon ic">🤖</div>
-        <h3 class="svc-title">AI Solutions & Training</h3>
-        <p class="svc-desc">AI literacy programs, workflow automation, prompt engineering, and AI productivity systems that transform how your team operates.</p>
-        <ul class="svc-list">
-          <li>AI Literacy & Fluency Training</li>
+      <div class="service-card fade-up" data-category="ai">
+        <div class="service-year">2026</div>
+        <div class="service-icon">🤖</div>
+        <h3>AI Solutions &amp; Training</h3>
+        <p>AI literacy programs, workflow automation, prompt engineering, and AI productivity systems that transform how your team operates in 2026.</p>
+        <ul class="service-list">
+          <li>AI Literacy &amp; Fluency Training</li>
           <li>Workflow Automation Setup</li>
           <li>Prompt Engineering</li>
           <li>AI Content Development</li>
           <li>Business Process Optimization</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">ChatGPT</span><span class="tag">Automation</span><span class="tag">Training</span></div>
+        <div class="service-tags"><span class="service-tag">ChatGPT</span><span class="service-tag">Automation</span><span class="service-tag">Training</span></div>
       </div>
 
-      <div class="card svc-card fu fd2" data-cat="marketing">
-        <div class="svc-icon ig">📣</div>
-        <h3 class="svc-title">Digital Marketing Solutions</h3>
-        <p class="svc-desc">Strategy-led campaigns that grow your brand visibility, generate qualified leads, and convert audiences into loyal customers.</p>
-        <ul class="svc-list">
+      <div class="service-card fade-up" data-category="marketing">
+        <div class="service-year">2026</div>
+        <div class="service-icon">📣</div>
+        <h3>Digital Marketing Solutions</h3>
+        <p>Strategy-led campaigns that grow your brand visibility, generate qualified leads, and convert audiences into loyal customers in 2026.</p>
+        <ul class="service-list">
           <li>Social Media Management</li>
           <li>SEO Optimization</li>
           <li>Email Marketing Campaigns</li>
           <li>Lead Generation Systems</li>
-          <li>Online Reputation Management</li>
           <li>Content Marketing Strategy</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">SEO</span><span class="tag">Social</span><span class="tag">Email</span></div>
+        <div class="service-tags"><span class="service-tag">SEO</span><span class="service-tag">Social</span><span class="service-tag">Email</span></div>
       </div>
 
-      <div class="card svc-card fu fd3" data-cat="admin">
-        <div class="svc-icon ip">💼</div>
-        <h3 class="svc-title">Virtual Assistance</h3>
-        <p class="svc-desc">Professional remote administrative support that frees your time and keeps your operations running smoothly.</p>
-        <ul class="svc-list">
-          <li>Calendar & Email Management</li>
-          <li>Data Entry & Document Processing</li>
+      <div class="service-card fade-up" data-category="admin">
+        <div class="service-year">2026</div>
+        <div class="service-icon">💼</div>
+        <h3>Virtual Assistance</h3>
+        <p>Professional remote administrative support that frees your time and keeps your operations running smoothly around the clock in 2026.</p>
+        <ul class="service-list">
+          <li>Calendar &amp; Email Management</li>
+          <li>Data Entry &amp; Document Processing</li>
           <li>CRM Management</li>
-          <li>Research & Reporting</li>
+          <li>Research &amp; Reporting</li>
           <li>Executive Assistance</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">Remote</span><span class="tag">Admin</span><span class="tag">CRM</span></div>
+        <div class="service-tags"><span class="service-tag">Remote</span><span class="service-tag">Admin</span><span class="service-tag">CRM</span></div>
       </div>
 
-      <div class="card svc-card fu fd1" data-cat="ai">
-        <div class="svc-icon ib">🌐</div>
-        <h3 class="svc-title">IT & Digital Services</h3>
-        <p class="svc-desc">Professional web development, Microsoft Office solutions, database management, and cloud collaboration setup for modern organizations.</p>
-        <ul class="svc-list">
-          <li>Website & Blog Development</li>
+      <div class="service-card fade-up" data-category="ai">
+        <div class="service-year">2026</div>
+        <div class="service-icon">🌐</div>
+        <h3>IT &amp; Digital Services</h3>
+        <p>Professional web development, Microsoft Office solutions, database management, and cloud collaboration setup for modern 2026 organizations.</p>
+        <ul class="service-list">
+          <li>Website &amp; Blog Development</li>
           <li>Microsoft Office Solutions</li>
           <li>Database Management</li>
-          <li>Data Analysis & Dashboards</li>
+          <li>Data Analysis &amp; Dashboards</li>
           <li>Cloud Collaboration Setup</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">WordPress</span><span class="tag">Excel</span><span class="tag">Cloud</span></div>
+        <div class="service-tags"><span class="service-tag">WordPress</span><span class="service-tag">Excel</span><span class="service-tag">Cloud</span></div>
       </div>
 
-      <div class="card svc-card fu fd2" data-cat="design">
-        <div class="svc-icon ir">🎨</div>
-        <h3 class="svc-title">Design & Branding</h3>
-        <p class="svc-desc">Brand identity, graphic design, and visual assets that communicate professionalism and authority across every touchpoint.</p>
-        <ul class="svc-list">
-          <li>Logo & Brand Identity Design</li>
-          <li>Flyer & Marketing Materials</li>
+      <div class="service-card fade-up" data-category="design">
+        <div class="service-year">2026</div>
+        <div class="service-icon">🎨</div>
+        <h3>Design &amp; Branding</h3>
+        <p>Brand identity, graphic design, and visual assets that communicate professionalism and authority across every touchpoint in 2026.</p>
+        <ul class="service-list">
+          <li>Logo &amp; Brand Identity Design</li>
+          <li>Flyer &amp; Marketing Materials</li>
           <li>Corporate Presentations</li>
           <li>Social Media Graphics</li>
           <li>Business Profile Design</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">Logo</span><span class="tag">Identity</span><span class="tag">Graphics</span></div>
+        <div class="service-tags"><span class="service-tag">Logo</span><span class="service-tag">Identity</span><span class="service-tag">Graphics</span></div>
       </div>
 
-      <div class="card svc-card fu fd3" data-cat="admin">
-        <div class="svc-icon ic">📞</div>
-        <h3 class="svc-title">Customer Support Services</h3>
-        <p class="svc-desc">Professional customer-facing support systems that enhance satisfaction, build loyalty, and protect your brand reputation.</p>
-        <ul class="svc-list">
+      <div class="service-card fade-up" data-category="admin">
+        <div class="service-year">2026</div>
+        <div class="service-icon">📞</div>
+        <h3>Customer Support Services</h3>
+        <p>Professional customer-facing support systems that enhance satisfaction, build loyalty, and protect your brand reputation.</p>
+        <ul class="service-list">
           <li>Live Chat Support</li>
           <li>Email Support Operations</li>
-          <li>CRM Support & Setup</li>
+          <li>CRM Support &amp; Setup</li>
           <li>Client Relationship Management</li>
           <li>Customer Service Operations</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">Live Chat</span><span class="tag">CRM</span><span class="tag">Support</span></div>
+        <div class="service-tags"><span class="service-tag">Live Chat</span><span class="service-tag">CRM</span><span class="service-tag">Support</span></div>
       </div>
 
-      <div class="card svc-card fu fd1" data-cat="operations">
-        <div class="svc-icon ig">⚙️</div>
-        <h3 class="svc-title">Operations & Logistics Support</h3>
-        <p class="svc-desc">Scalable operational systems, SOPs, and logistics coordination built on real-world warehouse and supply chain expertise.</p>
-        <ul class="svc-list">
+      <div class="service-card fade-up" data-category="operations">
+        <div class="service-year">2026</div>
+        <div class="service-icon">⚙️</div>
+        <h3>Operations &amp; Logistics Support</h3>
+        <p>Scalable operational systems, SOPs, and logistics coordination built on real-world warehouse and supply chain expertise.</p>
+        <ul class="service-list">
           <li>Warehouse Management</li>
           <li>Inventory Tracking Systems</li>
           <li>Logistics Coordination</li>
-          <li>Process Improvement & SOPs</li>
+          <li>Process Improvement &amp; SOPs</li>
           <li>Compliance Monitoring</li>
-          <li>Data Reporting Frameworks</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">SOPs</span><span class="tag">Logistics</span><span class="tag">Compliance</span></div>
+        <div class="service-tags"><span class="service-tag">SOPs</span><span class="service-tag">Logistics</span><span class="service-tag">Compliance</span></div>
       </div>
 
-      <div class="card svc-card fu fd2" data-cat="operations">
-        <div class="svc-icon ip">📊</div>
-        <h3 class="svc-title">Data Management & Analysis</h3>
-        <p class="svc-desc">Structured data systems, reporting dashboards, and business intelligence tools that turn raw data into actionable insights.</p>
-        <ul class="svc-list">
-          <li>Data Entry & Structuring</li>
-          <li>Reporting Frameworks & KPIs</li>
+      <div class="service-card fade-up" data-category="operations">
+        <div class="service-year">2026</div>
+        <div class="service-icon">📊</div>
+        <h3>Data Management &amp; Analysis</h3>
+        <p>Structured data systems, reporting dashboards, and business intelligence tools that turn raw data into actionable 2026 insights.</p>
+        <ul class="service-list">
+          <li>Data Entry &amp; Structuring</li>
+          <li>Reporting Frameworks &amp; KPIs</li>
           <li>Microsoft Excel Analytics</li>
           <li>Business Intelligence Dashboards</li>
-          <li>Operational Accuracy & Compliance</li>
+          <li>Operational Accuracy &amp; Compliance</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">Excel</span><span class="tag">Reports</span><span class="tag">BI</span></div>
+        <div class="service-tags"><span class="service-tag">Excel</span><span class="service-tag">Reports</span><span class="service-tag">BI</span></div>
       </div>
 
-      <div class="card svc-card fu fd3" data-cat="admin">
-        <div class="svc-icon ib">👤</div>
-        <h3 class="svc-title">Career & Professional Services</h3>
-        <p class="svc-desc">ATS-optimized CVs, LinkedIn optimization, and professional profile development that positions you for global opportunities.</p>
-        <ul class="svc-list">
-          <li>CV Writing & Optimization</li>
+      <div class="service-card fade-up" data-category="admin">
+        <div class="service-year">2026</div>
+        <div class="service-icon">👤</div>
+        <h3>Career &amp; Professional Services</h3>
+        <p>ATS-optimized CVs, LinkedIn optimization, and professional profile development that positions you for global opportunities in 2026.</p>
+        <ul class="service-list">
+          <li>CV Writing &amp; Optimization</li>
           <li>Cover Letter Development</li>
           <li>LinkedIn Profile Optimization</li>
           <li>Professional Branding</li>
           <li>Interview Preparation</li>
         </ul>
-        <div class="tags" style="margin-top:14px"><span class="tag">CV/Resume</span><span class="tag">LinkedIn</span><span class="tag">ATS</span></div>
+        <div class="service-tags"><span class="service-tag">CV/Resume</span><span class="service-tag">LinkedIn</span><span class="service-tag">ATS</span></div>
       </div>
 
     </div>
   </div>
 </section>
 
-<!-- ABOUT / MISSION / VISION / VALUES -->
-<section class="s pad" id="about">
-  <div class="c">
+<!-- ABOUT -->
+<section class="section section-alt" id="about">
+  <div class="container">
     <div class="about-grid">
-      <div class="fu">
-        <span class="sh-l">Our Company</span>
-        <h2 class="sh-t">Built on <span>Operations.</span><br/>Driven by <span>AI.</span></h2>
-        <div class="gbar"></div>
-        <p class="sh-sub">RuffNeck Entertainment is a multidisciplinary digital services and operations support company providing businesses, entrepreneurs, organizations, and communities with innovative solutions in digital marketing, AI implementation, administrative support, and workforce development.</p>
-        <p class="sh-sub" style="margin-top:14px">With expertise spanning logistics operations, warehouse management, data administration, content development, and AI-powered productivity systems, we help clients improve efficiency, strengthen digital visibility, and achieve sustainable growth.</p>
-        <div class="mv-cards">
-          <div class="card mv-card ic">
-            <div class="mv-label">Mission</div>
-            <div class="mv-text">To empower businesses and communities through technology, operational excellence, and digital innovation.</div>
+      <div class="fade-up">
+        <div class="section-label">Our Company · 2026</div>
+        <h2 class="section-title">Built on Operations. Driven by AI.</h2>
+        <p class="section-sub" style="margin-bottom:32px;">RuffNeck Entertainment is a CAC-registered, SMEDAN-certified multidisciplinary digital services company providing businesses, entrepreneurs, organizations, and communities with innovative solutions in digital marketing, AI implementation, administrative support, and workforce development.</p>
+        <div class="about-mission-vision">
+          <div class="mv-card">
+            <h4>Mission</h4>
+            <p>To empower businesses and communities through technology, operational excellence, and digital innovation.</p>
           </div>
-          <div class="card mv-card gold">
-            <div class="mv-label" style="color:var(--gold)">Vision</div>
-            <div class="mv-text">To become a globally recognized partner for AI-powered business solutions, operational support, and digital transformation.</div>
+          <div class="mv-card">
+            <h4>Vision</h4>
+            <p>To become a globally recognized partner for AI-powered business solutions, operational support, and digital transformation.</p>
+          </div>
+        </div>
+        <div class="about-checklist">
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Experienced Leadership</strong><span>IT &amp; Operations Administration Specialist with 5+ years in logistics, warehouse, digital systems, and AI-powered business support.</span></div>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <div><strong>AI-Enhanced Solutions</strong><span>Certified human expertise combined with modern AI technologies for greater efficiency, accuracy, and productivity in 2026.</span></div>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <div><strong>Global Service Delivery</strong><span>Remote-ready with the systems, tools, and professional standards to serve clients across Africa, Europe, North America, and beyond.</span></div>
+          </div>
+          <div class="check-item">
+            <div class="check-icon">✓</div>
+            <div><strong>CAC &amp; SMEDAN Registered</strong><span>Fully compliant, professionally registered and trusted — Reg No. 3770977 under CAMA 2020 and SMEDAN certified.</span></div>
           </div>
         </div>
       </div>
-      <div class="fu fd2">
-        <span class="sh-l">Core Values</span>
-        <h3 class="sh-t" style="font-size:28px">What Drives <span>Everything We Do</span></h3>
-        <div class="gbar"></div>
+      <div class="fade-up">
+        <div class="section-label" style="margin-bottom:20px;">Core Values</div>
+        <h3 style="font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:20px;">What Drives Everything We Do</h3>
         <div class="values-grid">
-          <div class="card val-item"><span class="val-icon">💡</span>Innovation</div>
-          <div class="card val-item"><span class="val-icon">⭐</span>Excellence</div>
-          <div class="card val-item"><span class="val-icon">🤝</span>Integrity</div>
-          <div class="card val-item"><span class="val-icon">🔗</span>Collaboration</div>
-          <div class="card val-item"><span class="val-icon">📚</span>Continuous Learning</div>
-          <div class="card val-item"><span class="val-icon">🌍</span>Community Impact</div>
+          <div class="value-card"><div class="icon">💡</div><p>Innovation</p></div>
+          <div class="value-card"><div class="icon">⭐</div><p>Excellence</p></div>
+          <div class="value-card"><div class="icon">🤝</div><p>Integrity</p></div>
+          <div class="value-card"><div class="icon">🔗</div><p>Collaboration</p></div>
+          <div class="value-card"><div class="icon">📚</div><p>Continuous Learning</p></div>
+          <div class="value-card"><div class="icon">🌍</div><p>Community Impact</p></div>
         </div>
-        <h3 class="sh-t" style="font-size:24px;margin-top:36px">Why Choose <span>RuffNeck</span></h3>
-        <ul class="why-list">
-          <li class="why-i">
-            <div class="why-chk">✓</div>
-            <div class="why-t"><strong>Experienced Leadership</strong><p>IT & Operations Administration Specialist with 5+ years in logistics, warehouse, digital systems, and AI-powered business support.</p></div>
-          </li>
-          <li class="why-i">
-            <div class="why-chk">✓</div>
-            <div class="why-t"><strong>AI-Enhanced Solutions</strong><p>Combining certified human expertise with modern AI technologies for greater efficiency, accuracy, and productivity.</p></div>
-          </li>
-          <li class="why-i">
-            <div class="why-chk">✓</div>
-            <div class="why-t"><strong>Global Service Delivery</strong><p>Remote-ready with the systems, tools, and professional standards to serve clients across Africa, Europe, North America, and beyond.</p></div>
-          </li>
-          <li class="why-i">
-            <div class="why-chk">✓</div>
-            <div class="why-t"><strong>CAC & SMEDAN Registered</strong><p>Fully compliant, professionally registered, and trusted — Reg No. 3770977 under CAMA 2020 and SMEDAN certified 2025.</p></div>
-          </li>
-        </ul>
+        <div style="margin-top:32px;background:linear-gradient(135deg,rgba(0,180,216,0.06),rgba(123,47,255,0.06));border:1.5px solid var(--border);border-radius:var(--radius);padding:24px 20px;">
+          <div class="section-label" style="margin-bottom:8px;">About the Founder</div>
+          <p style="font-size:14px;color:var(--text-body);line-height:1.7;margin-bottom:12px;">Hassan Zakariya is an IT and Operations Administration Specialist with 5+ years of experience across logistics, warehouse management, AI implementation, and digital business development — the driving force behind RuffNeck Entertainment.</p>
+          <a href="#founder" class="btn btn-outline-dark" style="font-size:13px;padding:9px 18px;">Meet the Founder →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section class="founder-section" id="founder">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:56px;" class="fade-up">
+      <div class="section-label">Leadership</div>
+      <h2 style="font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--white);line-height:1.2;">Meet the Founder</h2>
+    </div>
+    <div class="founder-grid fade-up">
+      <div>
+        <div class="founder-avatar">
+          <div class="avatar-initials">HZ</div>
+          <h3>Hassan Zakariya</h3>
+          <div class="title">Founder &amp; CEO</div>
+          <div class="founder-badges">
+            <div class="f-badge"><div class="dot"></div>IT &amp; Operations Specialist</div>
+            <div class="f-badge"><div class="dot"></div>AI Fluency Certified</div>
+            <div class="f-badge"><div class="dot"></div>Warehouse &amp; Logistics Expert</div>
+            <div class="f-badge"><div class="dot"></div>Digital Business Developer</div>
+            <div class="f-badge"><div class="dot"></div>5+ Years Experience</div>
+          </div>
+        </div>
+      </div>
+      <div class="founder-content">
+        <div class="section-label">Hassan Zakariya · Kano, Nigeria · 2026</div>
+        <h2>IT &amp; Operations Administration Specialist Driving Global Digital Impact</h2>
+        <p class="intro">As the founder of RuffNeck Entertainment, Hassan brings a unique combination of hands-on operational expertise and forward-thinking AI adoption — building a company that bridges the gap between traditional business operations and the digital economy.</p>
+        <div class="founder-bio-blocks">
+          <div class="bio-block">
+            <h4>Professional Background</h4>
+            <p>Hassan Zakariya is an IT and Operations Administration Specialist with 5+ years of experience optimizing logistics, warehouse, and administrative systems while driving data management, operational efficiency, and compliance. As an Operations Support Supervisor and Warehouse/Store/Inventory Officer, he has overseen cross-functional teams, streamlined workflows, tracked inventory, and ensured accurate record-keeping across weighbridge and transportation operations.</p>
+          </div>
+          <div class="bio-block">
+            <h4>Digital &amp; AI Expertise</h4>
+            <p>Hassan provides virtual administrative support and content creation services, leveraging AI tools, Microsoft Office, and digital workflow systems to enhance productivity, reporting, and communication. Certified in AI Fluency, he applies AI-powered solutions for content development, administrative process automation, and structured information management — skills that now underpin every RuffNeck service offering.</p>
+          </div>
+          <div class="bio-block">
+            <h4>Core Focus &amp; Mission</h4>
+            <p>Operational excellence, compliance enforcement, warehouse and logistics efficiency, digital productivity, and high-quality content creation that supports organizational objectives. Through RuffNeck Entertainment, Hassan is committed to making enterprise-grade digital and AI solutions accessible to businesses across Africa and beyond.</p>
+          </div>
+        </div>
+        <div class="founder-expertise">
+          <span class="exp-tag">IT Operations</span>
+          <span class="exp-tag">Warehouse Management</span>
+          <span class="exp-tag">AI Implementation</span>
+          <span class="exp-tag">Logistics Coordination</span>
+          <span class="exp-tag">Data Management</span>
+          <span class="exp-tag">Content Creation</span>
+          <span class="exp-tag">Digital Marketing</span>
+          <span class="exp-tag">Administrative Support</span>
+          <span class="exp-tag">Process Optimization</span>
+          <span class="exp-tag">Virtual Assistance</span>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- INDUSTRIES -->
-<section class="s pad ind-bg" id="industries">
-  <div class="c">
-    <div class="sh-c fu">
-      <span class="sh-l">Who We Serve</span>
-      <h2 class="sh-t">Industries & <span>Organizations We Work With</span></h2>
-      <div class="gbar gbar-c"></div>
-      <p class="sh-sub">Our solutions adapt across sectors — from early-stage startups to established enterprises, NGOs, and government programs.</p>
+<section class="section" id="industries">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Who We Serve · 2026</div>
+      <h2 class="section-title">Industries &amp; Organizations We Work With</h2>
+      <p class="section-sub" style="margin:0 auto;">Our solutions adapt across sectors — from early-stage startups to established enterprises, NGOs, and government programs.</p>
     </div>
-    <div class="ind-grid">
-      <div class="card ind-card fu fd1"><span class="ind-icon">🚀</span><div class="ind-name">Startups</div><div class="ind-desc">Launch and scale with AI-powered operations from day one</div></div>
-      <div class="card ind-card fu fd2"><span class="ind-icon">🏢</span><div class="ind-name">Small Businesses</div><div class="ind-desc">Compete at scale with enterprise-grade digital systems</div></div>
-      <div class="card ind-card fu fd3"><span class="ind-icon">🛒</span><div class="ind-name">E-Commerce</div><div class="ind-desc">Marketing, data, and customer support that drives conversions</div></div>
-      <div class="card ind-card fu fd1"><span class="ind-icon">🌐</span><div class="ind-name">NGOs</div><div class="ind-desc">Operational efficiency and digital visibility for greater impact</div></div>
-      <div class="card ind-card fu fd2"><span class="ind-icon">🚛</span><div class="ind-name">Logistics Companies</div><div class="ind-desc">Warehouse systems, data reporting, and compliance frameworks</div></div>
-      <div class="card ind-card fu fd3"><span class="ind-icon">🎓</span><div class="ind-name">Educational Institutions</div><div class="ind-desc">AI literacy, digital marketing, and administrative support</div></div>
-      <div class="card ind-card fu fd1"><span class="ind-icon">🏛️</span><div class="ind-name">Government Projects</div><div class="ind-desc">Data management, reporting, and administrative systems</div></div>
-      <div class="card ind-card fu fd2"><span class="ind-icon">🏦</span><div class="ind-name">Corporate Organizations</div><div class="ind-desc">Full digital transformation and operational consulting</div></div>
-      <div class="card ind-card fu fd3"><span class="ind-icon">👤</span><div class="ind-name">Entrepreneurs</div><div class="ind-desc">Personal branding, CVs, digital presence, and business setup</div></div>
-      <div class="card ind-card fu fd1"><span class="ind-icon">🤝</span><div class="ind-name">Community Programs</div><div class="ind-desc">Youth training, AI literacy, and digital skills development</div></div>
+    <div class="industries-grid fade-up">
+      <div class="industry-card"><div class="icon">🚀</div><h4>Startups</h4><p>Launch and scale with AI-powered operations from day one</p></div>
+      <div class="industry-card"><div class="icon">🏢</div><h4>Small Businesses</h4><p>Compete at scale with enterprise-grade digital systems</p></div>
+      <div class="industry-card"><div class="icon">🛒</div><h4>E-Commerce</h4><p>Marketing, data, and customer support that drives conversions</p></div>
+      <div class="industry-card"><div class="icon">🌐</div><h4>NGOs</h4><p>Operational efficiency and digital visibility for greater impact</p></div>
+      <div class="industry-card"><div class="icon">🚛</div><h4>Logistics</h4><p>Warehouse systems, data reporting, and compliance frameworks</p></div>
+      <div class="industry-card"><div class="icon">🎓</div><h4>Education</h4><p>AI literacy, digital marketing, and administrative support</p></div>
+      <div class="industry-card"><div class="icon">🏛️</div><h4>Government</h4><p>Data management, reporting, and administrative systems</p></div>
+      <div class="industry-card"><div class="icon">🏦</div><h4>Corporates</h4><p>Full digital transformation and operational consulting</p></div>
+      <div class="industry-card"><div class="icon">👤</div><h4>Entrepreneurs</h4><p>Personal branding, CVs, digital presence, and business setup</p></div>
+      <div class="industry-card"><div class="icon">🤝</div><h4>Communities</h4><p>Youth training, AI literacy, and digital skills development</p></div>
     </div>
   </div>
 </section>
 
 <!-- PORTFOLIO -->
-<section class="s pad port-bg" id="portfolio">
-  <div class="c">
-    <div class="sh-c fu">
-      <span class="sh-l">Our Work</span>
-      <h2 class="sh-t">Featured <span>Projects & Capabilities</span></h2>
-      <div class="gbar gbar-c"></div>
-      <p class="sh-sub">A cross-section of deliverables spanning AI, digital marketing, operations, and design — built to demonstrate quality and range.</p>
+<section class="section section-alt" id="portfolio">
+  <div class="container">
+    <div class="fade-up" style="margin-bottom:48px;">
+      <div class="section-label">Our Work · 2026</div>
+      <h2 class="section-title">Featured Projects &amp; Capabilities</h2>
+      <p class="section-sub">A cross-section of deliverables spanning AI, digital marketing, operations, and design — built to demonstrate quality and range.</p>
     </div>
-    <div class="port-grid">
-      <div class="card port-card fu fd1"><div class="port-thumb pt-c">🤖</div><div class="port-info"><div class="port-cat">AI Implementation</div><h3 class="port-name">AI Workflow Integration</h3><p class="port-desc">Custom AI-powered workflow systems that replace manual processes — cutting turnaround time and boosting team output for SMEs.</p></div></div>
-      <div class="card port-card fu fd2"><div class="port-thumb pt-g">📱</div><div class="port-info"><div class="port-cat">Digital Marketing</div><h3 class="port-name">Social Media Growth Campaigns</h3><p class="port-desc">End-to-end social strategy and content programs driving consistent engagement and measurable follower growth across platforms.</p></div></div>
-      <div class="card port-card fu fd3"><div class="port-thumb pt-p">🌐</div><div class="port-info"><div class="port-cat">Web Development</div><h3 class="port-name">Professional Business Websites</h3><p class="port-desc">SEO-optimized websites designed for businesses ready to compete globally and generate leads around the clock.</p></div></div>
-      <div class="card port-card fu fd1"><div class="port-thumb pt-g">📊</div><div class="port-info"><div class="port-cat">Data & Operations</div><h3 class="port-name">Operational Reporting Systems</h3><p class="port-desc">Structured data entry systems, compliance dashboards, and KPI reporting frameworks for logistics and warehouse environments.</p></div></div>
-      <div class="card port-card fu fd2"><div class="port-thumb pt-c">🎨</div><div class="port-info"><div class="port-cat">Branding & Design</div><h3 class="port-name">Brand Identity Packages</h3><p class="port-desc">Logo design, color systems, and brand guidelines that give organizations a professional, consistent, and memorable visual identity.</p></div></div>
-      <div class="card port-card fu fd3"><div class="port-thumb pt-p">🌍</div><div class="port-info"><div class="port-cat">Community Development</div><h3 class="port-name">AI & Digital Skills Programs</h3><p class="port-desc">Youth training workshops on AI tools, digital marketing, and computer literacy — building tomorrow's workforce today.</p></div></div>
+    <div class="portfolio-grid fade-up">
+      <div class="portfolio-card"><div class="portfolio-thumb">🤖</div><div class="portfolio-body"><div class="portfolio-cat">AI Implementation</div><h3>AI Workflow Integration</h3><p>Custom AI-powered workflow systems that replace manual processes — cutting turnaround time and boosting team output for SMEs.</p></div></div>
+      <div class="portfolio-card"><div class="portfolio-thumb">📱</div><div class="portfolio-body"><div class="portfolio-cat">Digital Marketing</div><h3>Social Media Growth Campaigns</h3><p>End-to-end social strategy and content programs driving consistent engagement and measurable follower growth across platforms.</p></div></div>
+      <div class="portfolio-card"><div class="portfolio-thumb">🌐</div><div class="portfolio-body"><div class="portfolio-cat">Web Development</div><h3>Professional Business Websites</h3><p>SEO-optimized websites designed for businesses ready to compete globally and generate leads around the clock in 2026.</p></div></div>
+      <div class="portfolio-card"><div class="portfolio-thumb">📊</div><div class="portfolio-body"><div class="portfolio-cat">Data &amp; Operations</div><h3>Operational Reporting Systems</h3><p>Structured data entry systems, compliance dashboards, and KPI reporting frameworks for logistics and warehouse environments.</p></div></div>
+      <div class="portfolio-card"><div class="portfolio-thumb">🎨</div><div class="portfolio-body"><div class="portfolio-cat">Branding &amp; Design</div><h3>Brand Identity Packages</h3><p>Logo design, color systems, and brand guidelines that give organizations a professional, consistent, and memorable visual identity.</p></div></div>
+      <div class="portfolio-card"><div class="portfolio-thumb">🌍</div><div class="portfolio-body"><div class="portfolio-cat">Community Development</div><h3>AI &amp; Digital Skills Programs</h3><p>Youth training workshops on AI tools, digital marketing, and computer literacy — building tomorrow's workforce today.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- PROCESS -->
-<section class="s pad" id="process">
-  <div class="c">
-    <div class="sh-c fu">
-      <span class="sh-l">How We Work</span>
-      <h2 class="sh-t">A Clear Process. <span>Measurable Results.</span></h2>
-      <div class="gbar gbar-c"></div>
+<section class="section" id="process">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:60px;">
+      <div class="section-label">How We Work</div>
+      <h2 class="section-title">A Clear Process. Measurable Results.</h2>
     </div>
-    <div class="proc-steps">
-      <div class="proc-step fu fd1"><div class="p-num">01</div><h3 class="p-title">Discovery Call</h3><p class="p-desc">We learn your goals, challenges, and current systems — then map out exactly what's needed and what success looks like for your business.</p></div>
-      <div class="proc-step fu fd2"><div class="p-num">02</div><h3 class="p-title">Strategy & Proposal</h3><p class="p-desc">A clear scope of work, timeline, deliverables, and investment — built specifically for your business, not a generic off-the-shelf solution.</p></div>
-      <div class="proc-step fu fd3"><div class="p-num">03</div><h3 class="p-title">Execution</h3><p class="p-desc">Professional delivery with regular progress updates. Every task completed to international standards, on time, with clear communication throughout.</p></div>
-      <div class="proc-step fu fd4"><div class="p-num">04</div><h3 class="p-title">Review & Scale</h3><p class="p-desc">We measure outcomes against agreed KPIs, refine based on results, and build on what works to drive continued growth and operational efficiency.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- PARTNERSHIPS -->
-<section class="s pad part-bg" id="partnerships">
-  <div class="c">
-    <div class="sh-c fu">
-      <span class="sh-l">Collaborate</span>
-      <h2 class="sh-t">Let's Build <span>Strategic Partnerships</span></h2>
-      <div class="gbar gbar-c"></div>
-      <p class="sh-sub">RuffNeck Entertainment actively collaborates with organizations that share our commitment to innovation, growth, and community impact. We welcome joint ventures, referral partnerships, and strategic alliances.</p>
-    </div>
-    <div class="part-grid">
-      <div class="card part-card fu fd1"><span class="part-icon">🚀</span><div class="part-type">Businesses & Startups</div><div class="part-sub">Joint projects, service integrations, and growth co-ventures</div></div>
-      <div class="card part-card fu fd2"><span class="part-icon">🌐</span><div class="part-type">NGOs & Non-Profits</div><div class="part-sub">Digital transformation and capacity-building partnerships</div></div>
-      <div class="card part-card fu fd3"><span class="part-icon">🎓</span><div class="part-type">Educational Institutions</div><div class="part-sub">AI literacy programs and digital skills curriculum partnerships</div></div>
-      <div class="card part-card fu fd1"><span class="part-icon">💻</span><div class="part-type">Technology Companies</div><div class="part-sub">Reseller agreements, API integrations, and co-development</div></div>
-      <div class="card part-card fu fd2"><span class="part-icon">🏛️</span><div class="part-type">Government Programs</div><div class="part-sub">Public sector digitization, youth empowerment initiatives</div></div>
-      <div class="card part-card fu fd3"><span class="part-icon">🤝</span><div class="part-type">Remote-First Companies</div><div class="part-sub">Outsourced VA, operations, and digital marketing support</div></div>
-    </div>
-    <div style="text-align:center;margin-top:44px" class="fu">
-      <a href="#contact" class="btn btn-g">Propose a Partnership →</a>
+    <div class="process-steps fade-up">
+      <div class="process-step"><div class="step-num">01</div><h3>Discovery Call</h3><p>We learn your goals, challenges, and current systems — then map out exactly what's needed and what success looks like for your business.</p></div>
+      <div class="process-step"><div class="step-num">02</div><h3>Strategy &amp; Proposal</h3><p>A clear scope of work, timeline, deliverables, and investment — built specifically for your business, not a generic off-the-shelf solution.</p></div>
+      <div class="process-step"><div class="step-num">03</div><h3>Execution</h3><p>Professional delivery with regular progress updates. Every task completed to international standards, on time, with clear communication throughout.</p></div>
+      <div class="process-step"><div class="step-num">04</div><h3>Review &amp; Scale</h3><p>We measure outcomes against agreed KPIs, refine based on results, and build on what works to drive continued growth and efficiency.</p></div>
     </div>
   </div>
 </section>
 
 <!-- TESTIMONIALS -->
-<section class="s pad" id="testimonials">
-  <div class="c">
-    <div class="sh-c fu">
-      <span class="sh-l">Client Feedback</span>
-      <h2 class="sh-t">Results That <span>Speak for Themselves</span></h2>
-      <div class="gbar gbar-c"></div>
+<section class="section section-alt" id="testimonials">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Client Feedback</div>
+      <h2 class="section-title">Results That Speak for Themselves</h2>
     </div>
-    <div class="test-grid">
-      <div class="card test-card fu fd1">
-        <span class="q-mark">"</span>
-        <p class="test-txt">RuffNeck helped us set up an AI-assisted workflow that cut our reporting time in half. The training was practical — our team actually uses what they learned every single day.</p>
-        <div class="test-auth"><div class="t-av">AM</div><div><div class="stars">★★★★★</div><div class="t-name">Aisha Mohammed</div><div class="t-role">Operations Manager, Kano SME</div></div></div>
-      </div>
-      <div class="card test-card fu fd2">
-        <span class="q-mark">"</span>
-        <p class="test-txt">Our social media went from zero to consistent daily content within two weeks. They handled strategy, design, and captions — and real engagement followed. Outstanding service.</p>
-        <div class="test-auth"><div class="t-av">EB</div><div><div class="stars">★★★★★</div><div class="t-name">Emmanuel Bello</div><div class="t-role">Founder, E-Commerce Brand</div></div></div>
-      </div>
-      <div class="card test-card fu fd3">
-        <span class="q-mark">"</span>
-        <p class="test-txt">The website is clean, fast, and professional. We had inbound inquiries through it within the first month. The process was smooth, communication was excellent, and delivery was on time.</p>
-        <div class="test-auth"><div class="t-av">FK</div><div><div class="stars">★★★★★</div><div class="t-name">Fatima Kabir</div><div class="t-role">CEO, Business Consulting Firm</div></div></div>
-      </div>
+    <div class="testimonials-grid fade-up">
+      <div class="testimonial-card"><div class="stars">★★★★★</div><blockquote>"RuffNeck helped us set up an AI-assisted workflow that cut our reporting time in half. The training was practical — our team actually uses what they learned every single day."</blockquote><div class="t-author"><div class="t-avatar">AM</div><div><div class="t-name">Aisha Mohammed</div><div class="t-role">Operations Manager, Kano SME</div></div></div></div>
+      <div class="testimonial-card"><div class="stars">★★★★★</div><blockquote>"Our social media went from zero to consistent daily content within two weeks. They handled strategy, design, and captions — and real engagement followed. Outstanding service."</blockquote><div class="t-author"><div class="t-avatar">EB</div><div><div class="t-name">Emmanuel Bello</div><div class="t-role">Founder, E-Commerce Brand</div></div></div></div>
+      <div class="testimonial-card"><div class="stars">★★★★★</div><blockquote>"The website is clean, fast, and professional. We had inbound inquiries through it within the first month. The process was smooth, communication was excellent, and delivery was on time."</blockquote><div class="t-author"><div class="t-avatar">FK</div><div><div class="t-name">Fatima Kabir</div><div class="t-role">CEO, Business Consulting Firm</div></div></div></div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section class="s pad" id="pricing" style="background:var(--navy-deep)">
-  <div class="c">
-    <div class="sh-c fu">
-      <span class="sh-l">Investment</span>
-      <h2 class="sh-t">Transparent <span>Pricing Tiers</span></h2>
-      <div class="gbar gbar-c"></div>
-      <p class="sh-sub">Flexible packages for startups, growing businesses, and enterprises. Custom quotes available for large-scale or international engagements.</p>
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Investment · 2026 Rates</div>
+      <h2 class="section-title">Transparent Pricing Tiers</h2>
+      <p class="section-sub" style="margin:0 auto;">Flexible packages for startups, growing businesses, and enterprises. Custom quotes available for large-scale or international engagements.</p>
     </div>
-    <div class="price-grid">
-      <div class="card p-card fu fd1">
-        <div class="p-tier">Starter</div>
-        <div><span class="p-cur">₦</span><span class="p-amt">30K</span></div>
-        <div class="p-per">/ month or per project</div>
-        <p class="p-desc">For freelancers and small businesses needing focused digital support to get started professionally.</p>
-        <ul class="p-feats">
-          <li>Social media management (2 platforms)</li>
-          <li>Basic graphic design (up to 8 assets)</li>
-          <li>CV / cover letter creation</li>
-          <li>Email & calendar management</li>
-          <li class="off">Website development</li>
-          <li class="off">AI workflow setup</li>
-          <li class="off">Team training program</li>
-        </ul>
-        <a href="#contact" class="btn btn-s" style="display:block;text-align:center;width:100%">Get Started</a>
+    <div class="pricing-grid fade-up">
+      <div class="pricing-card">
+        <div class="pricing-year">2026 Rates</div>
+        <div class="pricing-tier">Starter</div>
+        <div class="pricing-price">₦30K</div>
+        <div class="pricing-period">/ month or per project</div>
+        <div class="pricing-desc">For freelancers and small businesses needing focused digital support to get started professionally in 2026.</div>
+        <div class="pricing-features">
+          <div class="pricing-feature">Social media management (2 platforms)</div>
+          <div class="pricing-feature">Basic graphic design (up to 8 assets)</div>
+          <div class="pricing-feature">CV / cover letter creation</div>
+          <div class="pricing-feature">Email &amp; calendar management</div>
+          <div class="pricing-feature">Website development</div>
+          <div class="pricing-feature">AI workflow setup</div>
+        </div>
+        <a href="#contact" class="btn btn-outline-dark" style="width:100%;justify-content:center;">Get Started</a>
       </div>
-      <div class="card p-card feat fu fd2">
-        <div class="p-tier">Growth</div>
-        <div><span class="p-cur">₦</span><span class="p-amt">75K</span></div>
-        <div class="p-per">/ month</div>
-        <p class="p-desc">For growing businesses needing consistent digital execution, operations support, and AI integration.</p>
-        <ul class="p-feats">
-          <li>Full social media management (4 platforms)</li>
-          <li>Content creation & scheduling</li>
-          <li>Website development (up to 5 pages)</li>
-          <li>Data entry & monthly reporting</li>
-          <li>Virtual assistant support (20 hrs/mo)</li>
-          <li>AI tools introduction training</li>
-          <li class="off">Custom AI workflow automation</li>
-        </ul>
-        <a href="#contact" class="btn btn-p" style="display:block;text-align:center;width:100%">Get Started</a>
+      <div class="pricing-card featured">
+        <div class="pricing-popular">Most Popular</div>
+        <div class="pricing-year">2026 Rates</div>
+        <div class="pricing-tier">Growth</div>
+        <div class="pricing-price">₦75K</div>
+        <div class="pricing-period">/ month</div>
+        <div class="pricing-desc">For growing businesses needing consistent digital execution, operations support, and AI integration in 2026.</div>
+        <div class="pricing-features">
+          <div class="pricing-feature">Full social media management (4 platforms)</div>
+          <div class="pricing-feature">Content creation &amp; scheduling</div>
+          <div class="pricing-feature">Website development (up to 5 pages)</div>
+          <div class="pricing-feature">Data entry &amp; monthly reporting</div>
+          <div class="pricing-feature">Virtual assistant support (20 hrs/mo)</div>
+          <div class="pricing-feature">AI tools introduction training</div>
+          <div class="pricing-feature">Custom AI workflow automation</div>
+        </div>
+        <a href="#contact" class="btn btn-primary" style="width:100%;justify-content:center;">Get Started</a>
       </div>
-      <div class="card p-card fu fd3">
-        <div class="p-tier">Enterprise</div>
-        <div><span class="p-amt" style="font-size:36px">Custom</span></div>
-        <div class="p-per">tailored to your scope</div>
-        <p class="p-desc">For organizations needing full digital transformation, AI integration, and dedicated operational consulting.</p>
-        <ul class="p-feats">
-          <li>Full-service digital marketing</li>
-          <li>Custom AI workflow automation</li>
-          <li>Multi-page website + maintenance</li>
-          <li>Operations consulting & SOP development</li>
-          <li>AI literacy training program (team)</li>
-          <li>Dedicated virtual assistant</li>
-          <li>Monthly strategy & KPI sessions</li>
-        </ul>
-        <a href="#contact" class="btn btn-s" style="display:block;text-align:center;width:100%">Request a Quote</a>
+      <div class="pricing-card">
+        <div class="pricing-year">2026 Rates</div>
+        <div class="pricing-tier">Enterprise</div>
+        <div class="pricing-price" style="font-size:28px;">Custom</div>
+        <div class="pricing-period">tailored to your scope</div>
+        <div class="pricing-desc">For organizations needing full digital transformation, AI integration, and dedicated operational support in 2026.</div>
+        <div class="pricing-features">
+          <div class="pricing-feature">Full-service digital marketing suite</div>
+          <div class="pricing-feature">Dedicated virtual assistant (full-time)</div>
+          <div class="pricing-feature">Custom AI systems &amp; automation</div>
+          <div class="pricing-feature">Operational consulting &amp; SOPs</div>
+          <div class="pricing-feature">Data systems &amp; BI dashboards</div>
+          <div class="pricing-feature">Priority support &amp; delivery</div>
+          <div class="pricing-feature">Monthly strategy &amp; performance reviews</div>
+        </div>
+        <a href="#contact" class="btn btn-gold" style="width:100%;justify-content:center;">Request a Quote</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BLOG / RESOURCES -->
-<section class="s pad" id="blog">
-  <div class="c">
-    <div class="sh-c fu">
-      <span class="sh-l">Blog & Resources</span>
-      <h2 class="sh-t">Insights to <span>Grow Your Business</span></h2>
-      <div class="gbar gbar-c"></div>
-      <p class="sh-sub">Practical guides, strategies, and updates on AI, digital marketing, operations, and business productivity — written to be immediately actionable.</p>
+<!-- PARTNERSHIPS -->
+<section class="section section-alt" id="partnerships">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Collaborate · 2026</div>
+      <h2 class="section-title">Let's Build Strategic Partnerships</h2>
+      <p class="section-sub" style="margin:0 auto;">RuffNeck Entertainment actively collaborates with organizations that share our commitment to innovation, growth, and community impact.</p>
     </div>
-    <div class="blog-grid">
-      <a href="#blog" class="card blog-card fu fd1"><div class="blog-img bi-c">🤖</div><div class="blog-body"><div class="blog-cat">AI for Business</div><h3 class="blog-title">5 AI Tools Every Small Business Should Use in 2026</h3><p class="blog-snip">Practical AI tools that reduce workload, increase output, and give your business a competitive edge — no coding required.</p></div></a>
-      <a href="#blog" class="card blog-card fu fd2"><div class="blog-img bi-g">📈</div><div class="blog-body"><div class="blog-cat">Digital Marketing</div><h3 class="blog-title">How to Build a Social Media Presence from Zero</h3><p class="blog-snip">A step-by-step system for establishing brand authority on social media platforms without a massive budget.</p></div></a>
-      <a href="#blog" class="card blog-card fu fd3"><div class="blog-img bi-p">⚙️</div><div class="blog-body"><div class="blog-cat">Productivity Systems</div><h3 class="blog-title">The SOP Framework That Scales Any Business</h3><p class="blog-snip">How to document your processes, train your team, and create repeatable systems that don't depend on one person.</p></div></a>
-      <a href="#blog" class="card blog-card fu fd1"><div class="blog-img bi-g">💼</div><div class="blog-body"><div class="blog-cat">Remote Work Solutions</div><h3 class="blog-title">How to Hire and Manage a Remote Virtual Assistant</h3><p class="blog-snip">The complete playbook for onboarding, managing, and maximizing the output of a remote VA for your business.</p></div></a>
-      <a href="#blog" class="card blog-card fu fd2"><div class="blog-img bi-c">🌍</div><div class="blog-body"><div class="blog-cat">Operations Management</div><h3 class="blog-title">Warehouse & Logistics Best Practices for African SMEs</h3><p class="blog-snip">Operational strategies from real-world logistics experience that improve inventory accuracy and reduce waste.</p></div></a>
-      <a href="#blog" class="card blog-card fu fd3"><div class="blog-img bi-p">🎯</div><div class="blog-body"><div class="blog-cat">Career Development</div><h3 class="blog-title">How to Build a LinkedIn Profile That Attracts Global Opportunities</h3><p class="blog-snip">A proven framework for optimizing your LinkedIn presence to get noticed by recruiters and clients worldwide.</p></div></a>
+    <div class="partners-grid fade-up">
+      <div class="partner-card"><div class="icon">🚀</div><h4>Businesses &amp; Startups</h4><p>Joint projects, service integrations, and growth co-ventures</p></div>
+      <div class="partner-card"><div class="icon">🌐</div><h4>NGOs &amp; Non-Profits</h4><p>Digital transformation and capacity-building partnerships</p></div>
+      <div class="partner-card"><div class="icon">🎓</div><h4>Educational Institutions</h4><p>AI literacy programs and digital skills curriculum partnerships</p></div>
+      <div class="partner-card"><div class="icon">💻</div><h4>Technology Companies</h4><p>Reseller agreements, API integrations, and co-development</p></div>
+      <div class="partner-card"><div class="icon">🏛️</div><h4>Government Programs</h4><p>Public sector digitization, youth empowerment initiatives</p></div>
+      <div class="partner-card"><div class="icon">🤝</div><h4>Remote-First Companies</h4><p>Outsourced VA, operations, and digital marketing support</p></div>
+    </div>
+    <div style="text-align:center;margin-top:40px;" class="fade-up">
+      <a href="#contact" class="btn btn-primary">Propose a Partnership →</a>
     </div>
   </div>
 </section>
 
-<!-- REG STRIP -->
-<div class="s reg-strip">
-  <div class="c">
-    <div class="reg-lbl">Registered · Certified · Trusted</div>
-    <div class="reg-row">
-      <div class="reg-badge">🏛 CAC Nigeria · No. 3770977</div>
-      <div class="reg-badge">📋 SMEDAN · SUID-3120-4678-0386-7922</div>
-      <div class="reg-badge">🤖 AI Fluency Certified</div>
-      <div class="reg-badge">🌍 Remote-Ready · Global Clients</div>
-      <div class="reg-badge">📅 Est. 2022 · Kano, Nigeria</div>
+<!-- AI ASSISTANT -->
+<section class="ai-assistant-section" id="ai-assistant">
+  <div class="container">
+    <div class="ai-assistant-inner fade-up">
+      <div class="ai-chat-preview">
+        <div class="ai-chat-header">
+          <div class="ai-status-dot"></div>
+          <span>RuffNeck AI Assistant · Online · 2026</span>
+        </div>
+        <div class="ai-chat-body">
+          <div class="chat-bubble bot">Welcome to RuffNeck AI Assistant — your intelligent digital partner for research, content, branding, AI business, and technology. State your request clearly.</div>
+          <div class="chat-bubble user">How can AI help my business operations in 2026?</div>
+          <div class="chat-bubble bot">In 2026, AI can automate your reporting, handle customer queries, generate content, and optimize workflows — cutting costs and saving hours every week. Let's map out exactly which tools fit your business.</div>
+        </div>
+      </div>
+      <div class="ai-content">
+        <div class="section-label">AI-Powered Tool · 2026</div>
+        <h2>Meet the RuffNeck AI Assistant</h2>
+        <p>Your intelligent digital partner for research, content creation, branding strategy, AI business consulting, and technology guidance — available on the Pi Testnet Ecosystem.</p>
+        <div class="ai-feature-list">
+          <div class="ai-feature"><div class="ai-feature-icon">🔍</div>AI-powered research and market insights</div>
+          <div class="ai-feature"><div class="ai-feature-icon">✍️</div>Content generation and brand messaging</div>
+          <div class="ai-feature"><div class="ai-feature-icon">🤖</div>Business process automation guidance</div>
+          <div class="ai-feature"><div class="ai-feature-icon">📊</div>Digital tool selection and implementation</div>
+        </div>
+        <a href="https://lnkd.in/epda3wBW" target="_blank" rel="noopener" class="btn btn-primary">Try RuffNeck AI Assistant (@iamzaksz) →</a>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<!-- CTA BANNER -->
-<div class="s cta-ban">
-  <div class="c">
-    <h2>Ready to Transform Your Business<br/>with AI & Digital Solutions?</h2>
-    <p>Book a free discovery call. No pressure — just a direct conversation about your goals and how RuffNeck Entertainment can help you reach them.</p>
-    <div class="cta-acts">
-      <a href="#contact" class="btn btn-p">Book a Free Call →</a>
-      <a href="#partnerships" class="btn btn-g">Explore Partnerships</a>
-      <a href="#services" class="btn btn-s">View All Services</a>
+<!-- BLOG -->
+<section class="section" id="blog">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Resources · 2026</div>
+      <h2 class="section-title">Insights &amp; Guides for 2026</h2>
+      <p class="section-sub" style="margin:0 auto;">Practical AI, operations, and digital growth content from the RuffNeck team — updated regularly through 2026.</p>
+    </div>
+    <div class="blog-grid fade-up">
+      <div class="blog-card"><div class="blog-thumb">🤖</div><div class="blog-body"><div class="blog-cat">AI &amp; Automation</div><div class="blog-date">2026</div><h3>Top 10 AI Tools Every Nigerian SME Should Use in 2026</h3><p>From ChatGPT to automation platforms — practical AI tools your business can adopt immediately to cut costs and scale faster.</p></div></div>
+      <div class="blog-card"><div class="blog-thumb">📊</div><div class="blog-body"><div class="blog-cat">Operations</div><div class="blog-date">2026</div><h3>How to Build a Data Reporting System for Your Warehouse in 2026</h3><p>Step-by-step guide to setting up KPI dashboards and compliance reporting without expensive enterprise software.</p></div></div>
+      <div class="blog-card"><div class="blog-thumb">🌍</div><div class="blog-body"><div class="blog-cat">Digital Marketing</div><div class="blog-date">2026</div><h3>Growing Your African Business Brand Globally in 2026</h3><p>Strategies for Nigerian and African businesses to attract international clients, build credibility, and compete globally.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CREDENTIALS -->
+<div class="credentials-strip">
+  <div class="container">
+    <div class="cred-inner">
+      <div class="cred-item"><div class="cred-icon">🏛️</div><div><strong>CAC Registered</strong><br/>Reg No. 3770977 · CAMA 2020</div></div>
+      <div class="cred-item"><div class="cred-icon">🏅</div><div><strong>SMEDAN Certified</strong><br/>SUID-3120-4678-0386-7922</div></div>
+      <div class="cred-item"><div class="cred-icon">📍</div><div><strong>Headquarters</strong><br/>Phase 3 Sharada Estate, Gwale, Kano</div></div>
+      <div class="cred-item"><div class="cred-icon">🌐</div><div><strong>Global Delivery</strong><br/>Africa · Europe · North America</div></div>
+      <div class="cred-item"><div class="cred-icon">📅</div><div><strong>Est. 2022 · Active 2026</strong><br/>4 Years of Verified Operations</div></div>
     </div>
   </div>
 </div>
 
 <!-- CONTACT -->
-<section class="s pad cont-bg" id="contact">
-  <div class="c">
-    <div class="cont-grid">
-      <div class="fu">
-        <span class="sh-l">Get In Touch</span>
-        <h2 class="sh-t">Let's Build<br/><span>Something Together</span></h2>
-        <div class="gbar"></div>
-        <p class="sh-sub">Whether you need a one-off project or a long-term digital partner, we respond within 24 hours. International inquiries welcome.</p>
-        <div class="cont-info">
-          <div class="ci-item"><div class="ci-icon">📧</div><div class="ci-d"><strong>Email</strong><a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a></div></div>
-          <div class="ci-item"><div class="ci-icon">📍</div><div class="ci-d"><strong>Location</strong><span>Kano State, Nigeria</span></div></div>
-          <div class="ci-item"><div class="ci-icon">🌐</div><div class="ci-d"><strong>Service Reach</strong><span>Nigeria · Africa · Global Remote Delivery</span></div></div>
-          <div class="ci-item"><div class="ci-icon">🕒</div><div class="ci-d"><strong>Response Time</strong><span>Within 24 hours on business days</span></div></div>
-          <div class="ci-item"><div class="ci-icon">💬</div><div class="ci-d"><strong>WhatsApp / Phone</strong><span>+234 803 380 7856 (Update with your number)</span></div></div>
-        </div>
-        <div style="margin-top:28px">
-          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:3px;color:var(--slate);text-transform:uppercase;margin-bottom:14px">Connect With Us</div>
-          <div class="ft-soc">
-            <a href="#" class="soc-btn" title="LinkedIn">in</a>
-            <a href="#" class="soc-btn" title="X / Twitter">𝕏</a>
-            <a href="#" class="soc-btn" title="Instagram">▲</a>
-            <a href="#" class="soc-btn" title="Facebook">f</a>
-            <a href="#" class="soc-btn" title="TikTok">♪</a>
-            <a href="#" class="soc-btn" title="YouTube">▶</a>
+<section class="section section-alt" id="contact">
+  <div class="container">
+    <div class="contact-grid fade-up">
+      <div class="contact-info">
+        <div class="section-label">Get In Touch · 2026</div>
+        <h2>Ready to Scale Your Business?</h2>
+        <p>Book a free consultation, request a quote, or discuss a partnership. We respond to all enquiries within 24 hours.</p>
+        <div class="contact-details">
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📧</div>
+            <div><strong style="display:block;font-size:13px;color:var(--text-dark);margin-bottom:2px;">Email</strong><a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a></div>
           </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📱</div>
+            <div><strong style="display:block;font-size:13px;color:var(--text-dark);margin-bottom:2px;">WhatsApp</strong><a href="https://wa.me/2348033807856" target="_blank">+234 803 380 7856</a></div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">📍</div>
+            <div><strong style="display:block;font-size:13px;color:var(--text-dark);margin-bottom:2px;">Location</strong>Phase 3 Sharada Estate, Gwale, Kano State, Nigeria</div>
+          </div>
+          <div class="contact-detail">
+            <div class="contact-detail-icon">⏰</div>
+            <div><strong style="display:block;font-size:13px;color:var(--text-dark);margin-bottom:2px;">Response Time</strong>Within 24 hours · Mon – Sat</div>
+          </div>
+        </div>
+        <div class="contact-socials">
+          <a href="https://linkedin.com/in/iamzaksz" target="_blank" class="social-btn">💼 LinkedIn</a>
+          <a href="https://twitter.com/iamzaksz" target="_blank" class="social-btn">𝕏 Twitter/X</a>
+          <a href="https://wa.me/2348033807856" target="_blank" class="social-btn">💬 WhatsApp</a>
+          <a href="mailto:ruffneckhassan@gmail.com" class="social-btn">📧 Email</a>
         </div>
       </div>
-      <div class="fu fd2">
-        <div class="cal-strip card">
-          <div class="cal-icon">📅</div>
-          <div class="cal-txt">
-            <strong>Prefer to schedule a call directly?</strong>
-            <span>Add your Calendly link here for instant booking — no back-and-forth needed.</span>
+      <div>
+        <form class="contact-form" action="https://formspree.io/f/xgojvjrb" method="POST">
+          <h3>Send a Message</h3>
+          <p class="form-sub">Fill in your details and we'll get back to you within 24 hours.</p>
+          <div class="form-row">
+            <div class="form-group"><label for="fname">First Name *</label><input type="text" id="fname" name="first_name" placeholder="Hassan" required/></div>
+            <div class="form-group"><label for="lname">Last Name *</label><input type="text" id="lname" name="last_name" placeholder="Zakariya" required/></div>
           </div>
-        </div>
-        <div class="cont-form">
-          <div class="f-row">
-            <div class="f-g"><label>Full Name *</label><input type="text" id="fn" placeholder="Your full name"/></div>
-            <div class="f-g"><label>Email Address *</label><input type="email" id="fe" placeholder="your@email.com"/></div>
-          </div>
-          <div class="f-row">
-            <div class="f-g"><label>Organization</label><input type="text" id="fo" placeholder="Company / Organization"/></div>
-            <div class="f-g"><label>Country</label><input type="text" id="fc" placeholder="Your country"/></div>
-          </div>
-          <div class="f-g"><label>Service Needed *</label>
-            <select id="fs">
-              <option value="">— Select a service —</option>
-              <option>AI Solutions & Literacy Training</option>
-              <option>Digital Marketing & Social Media</option>
+          <div class="form-group"><label for="email">Email Address *</label><input type="email" id="email" name="email" placeholder="your@email.com" required/></div>
+          <div class="form-group"><label for="phone">Phone / WhatsApp</label><input type="tel" id="phone" name="phone" placeholder="+234 000 000 0000"/></div>
+          <div class="form-group">
+            <label for="service">Service of Interest</label>
+            <select id="service" name="service">
+              <option value="">Select a service...</option>
+              <option>AI Solutions &amp; Training</option>
+              <option>Digital Marketing</option>
               <option>Virtual Assistance</option>
-              <option>Website Development</option>
-              <option>Design & Branding</option>
-              <option>Data Management & Analysis</option>
-              <option>Business Operations Consulting</option>
+              <option>IT &amp; Digital Services</option>
+              <option>Design &amp; Branding</option>
+              <option>Operations &amp; Logistics Support</option>
+              <option>Data Management &amp; Analysis</option>
               <option>Customer Support Services</option>
-              <option>Logistics & Warehouse Support</option>
-              <option>CV / Profile Optimization</option>
-              <option>Partnership / Collaboration</option>
-              <option>Multiple Services / Full Retainer</option>
+              <option>Career &amp; Professional Services</option>
+              <option>Strategic Partnership</option>
+              <option>Other / Multiple Services</option>
             </select>
           </div>
-          <div class="f-row">
-            <div class="f-g"><label>Budget Range</label>
-              <select id="fb">
-                <option value="">— Select range —</option>
-                <option>Under ₦30,000</option>
-                <option>₦30,000 – ₦75,000</option>
-                <option>₦75,000 – ₦200,000</option>
-                <option>₦200,000+</option>
-                <option>USD / International Pricing</option>
-                <option>Open to Discussion</option>
-              </select>
-            </div>
-            <div class="f-g"><label>Timeline</label>
-              <select id="ft">
-                <option value="">— How soon? —</option>
-                <option>Immediately / ASAP</option>
-                <option>Within 1–2 weeks</option>
-                <option>Within 1 month</option>
-                <option>1–3 months</option>
-                <option>Planning ahead (3+ months)</option>
-              </select>
-            </div>
+          <div class="form-group">
+            <label for="budget">Budget Range</label>
+            <select id="budget" name="budget">
+              <option value="">Select budget range...</option>
+              <option>Starter — ₦30K/month</option>
+              <option>Growth — ₦75K/month</option>
+              <option>Enterprise — Custom Quote</option>
+              <option>One-time Project</option>
+            </select>
           </div>
-          <div class="f-g"><label>Project Details *</label><textarea id="fm" placeholder="Tell us about your project, goals, timeline, and any specific requirements or questions..."></textarea></div>
-          <button class="btn btn-p" style="width:100%;justify-content:center;font-size:14px" onclick="submitForm()">Send Message →</button>
-          <div class="f-success" id="fSuccess">✓ Message received! We'll respond within 24 hours. Thank you for reaching out to RuffNeck Entertainment.</div>
-        </div>
+          <div class="form-group"><label for="message">Message *</label><textarea id="message" name="message" placeholder="Tell us about your project, goals, and timeline..." required></textarea></div>
+          <button type="submit" class="btn btn-primary form-submit">Send Message →</button>
+          <p class="form-note">🔒 Your information is secure. We never share your data with third parties.</p>
+        </form>
       </div>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="c">
-    <div class="ft-grid">
-      <div class="ft-brand">
-        <div><b style="font-size:16px;letter-spacing:2.5px;color:#fff;text-transform:uppercase">RUFFNECK</b><br/><span style="color:var(--cyan-mid);font-size:9.5px;font-family:var(--font-m);letter-spacing:3.5px;text-transform:uppercase">ENTERTAINMENT</span></div>
-        <p>Digital Operations, AI Solutions & Business Growth Services. Empowering businesses from Nigeria to the world.</p>
-        <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:var(--slate);text-transform:uppercase;margin-top:14px;margin-bottom:8px">Follow Us</div>
-        <div class="ft-soc">
-          <a href="#" class="soc-btn" title="LinkedIn">in</a>
-          <a href="#" class="soc-btn" title="X">𝕏</a>
-          <a href="#" class="soc-btn" title="Instagram">▲</a>
-          <a href="#" class="soc-btn" title="Facebook">f</a>
-          <a href="#" class="soc-btn" title="TikTok">♪</a>
-          <a href="#" class="soc-btn" title="YouTube">▶</a>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <div class="nav-logo-mark">RN</div>
+          <div><strong>RuffNeck</strong><span style="color:var(--cyan);">Entertainment</span></div>
+        </div>
+        <p>Empowering businesses and communities through AI, operations excellence, and digital innovation. Serving clients globally from Kano, Nigeria.</p>
+        <div class="footer-cred">
+          <span>CAC Reg No. 3770977 · CAMA 2020</span>
+          <span>SMEDAN SUID-3120-4678-0386-7922</span>
+          <span>Phase 3 Sharada Estate, Gwale, Kano State</span>
         </div>
       </div>
-      <div class="ft-col">
+      <div class="footer-col">
         <h4>Services</h4>
         <ul>
-          <li><a href="#services">AI Solutions & Training</a></li>
+          <li><a href="#services">AI Solutions &amp; Training</a></li>
           <li><a href="#services">Digital Marketing</a></li>
           <li><a href="#services">Virtual Assistance</a></li>
-          <li><a href="#services">Website Development</a></li>
-          <li><a href="#services">Design & Branding</a></li>
+          <li><a href="#services">IT &amp; Digital Services</a></li>
+          <li><a href="#services">Design &amp; Branding</a></li>
+          <li><a href="#services">Operations Support</a></li>
           <li><a href="#services">Data Management</a></li>
-          <li><a href="#services">Operations Consulting</a></li>
           <li><a href="#services">Career Services</a></li>
         </ul>
       </div>
-      <div class="ft-col">
+      <div class="footer-col">
         <h4>Company</h4>
         <ul>
           <li><a href="#about">About Us</a></li>
-          <li><a href="#about">Mission & Vision</a></li>
-          <li><a href="#industries">Industries We Serve</a></li>
+          <li><a href="#founder">Meet the Founder</a></li>
           <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#process">Our Process</a></li>
+          <li><a href="#industries">Industries</a></li>
           <li><a href="#partnerships">Partnerships</a></li>
-          <li><a href="#blog">Blog & Resources</a></li>
+          <li><a href="#blog">Resources</a></li>
           <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
-      <div class="ft-col">
-        <h4>Contact</h4>
+      <div class="footer-col">
+        <h4>Connect</h4>
         <ul>
-          <li><a href="mailto:ruffneckhassan@gmail.com">Email Us</a></li>
-          <li><a href="#contact">Book a Free Call</a></li>
-          <li><a href="#contact">Get a Quote</a></li>
-          <li><a href="#partnerships">Partnership Inquiry</a></li>
-          <li><a href="#contact">Request a Proposal</a></li>
+          <li><a href="mailto:ruffneckhassan@gmail.com">📧 Email Us</a></li>
+          <li><a href="https://wa.me/2348033807856" target="_blank">💬 WhatsApp</a></li>
+          <li><a href="https://linkedin.com/in/iamzaksz" target="_blank">💼 LinkedIn</a></li>
+          <li><a href="https://twitter.com/iamzaksz" target="_blank">𝕏 Twitter/X</a></li>
+          <li><a href="#ai-assistant">🤖 AI Assistant</a></li>
         </ul>
-        <div style="margin-top:22px;padding:14px;border:1px solid rgba(255,193,7,.18);border-radius:6px">
-          <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:var(--gold-dark);text-transform:uppercase;margin-bottom:6px">Global Reach</div>
-          <div style="font-size:12.5px;color:var(--slate);line-height:1.6">Nigeria · Africa · Europe · North America · Remote Worldwide</div>
-        </div>
       </div>
     </div>
-    <div class="ft-bot">
-      <p>© 2026 RuffNeck Entertainment. All rights reserved. | Kano, Nigeria | Serving Clients Worldwide</p>
-      <div class="ft-regs">
-        <span class="ft-reg">CAC · 3770977</span>
-        <span class="ft-reg">SMEDAN · 2025</span>
-        <span class="ft-reg">AI Certified</span>
+    <div class="footer-bottom">
+      <p>© 2026 RuffNeck Entertainment. All rights reserved. CAC Reg No. 3770977.</p>
+      <div class="footer-bottom-links">
+        <a href="#contact">Privacy Policy</a>
+        <a href="#contact">Terms of Service</a>
+        <a href="#contact">Cookie Policy</a>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
-// MOBILE MENU
-function toggleMenu(){document.getElementById('mobMenu').classList.toggle('open')}
+// Nav scroll
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); });
 
-// SCROLL ANIMATIONS
-const obs=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('v')})},{threshold:0.1});
-document.querySelectorAll('.fu').forEach(el=>obs.observe(el));
+// Mobile menu
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => { mobileMenu.classList.toggle('open'); });
+mobileMenu.querySelectorAll('a').forEach(link => { link.addEventListener('click', () => mobileMenu.classList.remove('open')); });
 
-// NAV SCROLL
-window.addEventListener('scroll',()=>{
-  document.getElementById('topnav').style.background=window.scrollY>50?'rgba(1,4,8,.97)':'rgba(1,4,8,.88)';
+// Fade-up on scroll
+const fadeEls = document.querySelectorAll('.fade-up');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+fadeEls.forEach(el => observer.observe(el));
+
+// Services tab filter
+const tabBtns = document.querySelectorAll('.tab-btn');
+const serviceCards = document.querySelectorAll('.service-card');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    tabBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    serviceCards.forEach(card => {
+      const show = filter === 'all' || card.dataset.category === filter;
+      card.style.display = show ? '' : 'none';
+    });
+  });
 });
 
-// SMOOTH SCROLL
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
+// Form submit
+const form = document.querySelector('.contact-form');
+if (form) {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const t=document.getElementById(a.getAttribute('href').slice(1));
-    if(t)t.scrollIntoView({behavior:'smooth',block:'start'});
+    const btn = form.querySelector('.form-submit');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    try {
+      const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+      if (res.ok) {
+        btn.textContent = '✓ Message Sent!';
+        btn.style.background = '#22c55e';
+        btn.style.color = '#fff';
+        form.reset();
+        setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background = ''; btn.style.color = ''; btn.disabled = false; }, 4000);
+      } else {
+        btn.textContent = 'Error — Try Again';
+        btn.disabled = false;
+      }
+    } catch { btn.textContent = 'Error — Try Again'; btn.disabled = false; }
   });
-});
-
-// SERVICE FILTER
-function filterSvc(cat,btn){
-  document.querySelectorAll('.svc-tab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.querySelectorAll('.svc-card').forEach(c=>{
-    if(cat==='all'||c.dataset.cat===cat){
-      c.style.display='';
-      setTimeout(()=>{c.style.opacity='1';c.style.transform=''},50);
-    } else {
-      c.style.opacity='0';
-      c.style.transform='scale(0.95)';
-      setTimeout(()=>c.style.display='none',250);
-    }
-  });
-}
-
-// EYEBROW ROTATE
-const eyebrow=document.getElementById('eyebrow');
-const labels=['Nigeria · Africa · Global','AI · Digital · Operations','Trusted · Registered · Proven','Remote-Ready · Worldwide'];
-let ei=0;
-setInterval(()=>{
-  ei=(ei+1)%labels.length;
-  eyebrow.style.opacity='0';
-  setTimeout(()=>{eyebrow.childNodes[eyebrow.childNodes.length-1].textContent=labels[ei];eyebrow.style.opacity='1';},300);
-},3000);
-eyebrow.style.transition='opacity .3s';
-
-const response = await fetch('https://formspree.io/f/xgojvjrb', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ name: n, email: e, service: sv, message: m })
-});
-function submitForm(){
-  const n=document.getElementById('fn').value.trim();
-  const e=document.getElementById('fe').value.trim();
-  const sv=document.getElementById('fs').value;
-  const m=document.getElementById('fm').value.trim();
-  if(!n||!e||!sv||!m){alert('Please fill in Name, Email, Service Needed, and Project Details.');return;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){alert('Please enter a valid email address.');return;}
-  document.getElementById('fSuccess').style.display='block';
-  const btn=document.querySelector('.cont-form .btn');
-  btn.disabled=true;btn.textContent='Message Sent ✓';btn.style.opacity='.7';
-  // TODO: Connect to Formspree, EmailJS, or your backend
 }
 </script>
 </body>
