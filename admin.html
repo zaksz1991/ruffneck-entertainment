@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RuffNeck Admin — Backend Dashboard</title>
+<meta name="robots" content="noindex, nofollow"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0B1E3A;--midnight:#040C1A;--cyan:#00B4D8;--cyan-lt:#00F0FF;
+  --gold:#FFC107;--purple:#7B2FFF;--white:#FFFFFF;
+  --success:#10B981;--warning:#F59E0B;--danger:#EF4444;
+  --bg:#F0F4F8;--card:#FFFFFF;--border:#E2E8F0;
+  --text:#1E293B;--muted:#64748B;--light:#F8FAFC;
+  --font:'Space Grotesk',sans-serif;--mono:'Space Mono',monospace;
+  --radius:10px;--shadow:0 2px 12px rgba(11,30,58,0.08);--shadow-lg:0 8px 32px rgba(11,30,58,0.14);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--midnight);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:var(--font);border:none}
+input,textarea,select{font-family:var(--font)}
+ul{list-style:none}
+
+/* ── LOGIN SCREEN ── */
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 30% 50%,#0B1E3A 0%,#040C1A 70%,#010408 100%);padding:20px}
+.login-box{background:rgba(255,255,255,0.03);border:1px solid rgba(0,180,216,0.2);border-radius:16px;padding:48px 40px;width:100%;max-width:420px;backdrop-filter:blur(12px)}
+.login-logo{text-align:center;margin-bottom:32px}
+.login-logo-mark{width:56px;height:56px;background:linear-gradient(135deg,#00F0FF,#0055AA);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:16px;font-weight:700;color:#fff;margin-bottom:12px}
+.login-logo h1{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
+.login-logo p{font-size:13px;color:rgba(255,255,255,0.4);font-family:var(--mono);letter-spacing:1px}
+.login-label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:8px;display:block}
+.login-input{width:100%;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;padding:13px 16px;font-size:15px;color:#fff;outline:none;transition:border-color 0.2s;margin-bottom:16px}
+.login-input:focus{border-color:var(--cyan)}
+.login-input::placeholder{color:rgba(255,255,255,0.25)}
+.login-btn{width:100%;background:linear-gradient(135deg,var(--cyan),#0077CC);color:#fff;border:none;border-radius:8px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:4px}
+.login-btn:hover{opacity:0.9;transform:translateY(-1px)}
+.login-error{color:#ff6b6b;font-size:13px;text-align:center;margin-top:12px;display:none}
+.login-hint{text-align:center;font-size:12px;color:rgba(255,255,255,0.25);margin-top:20px;font-family:var(--mono)}
+
+/* ── ADMIN SHELL ── */
+.admin-shell{display:none;min-height:100vh;background:var(--bg)}
+.admin-shell.visible{display:flex;flex-direction:column}
+
+/* TOP BAR */
+.topbar{background:var(--midnight);border-bottom:1px solid rgba(0,180,216,0.15);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-mark{width:32px;height:32px;background:linear-gradient(135deg,#00F0FF,#0055AA);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff}
+.topbar-name{font-size:15px;font-weight:700;color:#fff}
+.topbar-name span{color:var(--cyan)}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.topbar-date{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.35)}
+.topbar-site{font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);padding:6px 14px;border:1px solid rgba(255,255,255,0.12);border-radius:6px;transition:all 0.2s}
+.topbar-site:hover{border-color:var(--cyan);color:var(--cyan)}
+.topbar-logout{font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);padding:6px 14px;cursor:pointer;transition:color 0.2s}
+.topbar-logout:hover{color:#ff6b6b}
+
+/* SIDEBAR */
+.admin-body{display:flex;flex:1}
+.sidebar{width:220px;background:var(--white);border-right:1px solid var(--border);flex-shrink:0;padding:20px 0}
+.sidebar-section{padding:0 12px;margin-bottom:6px}
+.sidebar-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:8px 12px;margin-bottom:4px}
+.sidebar-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);background:none;border:none;cursor:pointer;transition:all 0.15s;text-align:left}
+.sidebar-btn:hover{background:var(--light);color:var(--text)}
+.sidebar-btn.active{background:rgba(0,180,216,0.08);color:var(--navy);border:1px solid rgba(0,180,216,0.15)}
+.sidebar-btn .sb-icon{font-size:16px;flex-shrink:0}
+.sidebar-divider{height:1px;background:var(--border);margin:12px 12px}
+
+/* MAIN CONTENT */
+.admin-main{flex:1;padding:28px;overflow-y:auto}
+.page{display:none}.page.active{display:block}
+.page-header{margin-bottom:24px}
+.page-header h2{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.page-header p{font-size:14px;color:var(--muted)}
+
+/* STATS GRID */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:8px}
+.stat-icon{font-size:24px}
+.stat-val{font-size:28px;font-weight:700;color:var(--navy);font-family:var(--mono)}
+.stat-label{font-size:12px;color:var(--muted);font-weight:500}
+.stat-trend{font-size:11px;font-weight:600;color:var(--success)}
+
+/* CARD */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+.card-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.card-title-actions{margin-left:auto;display:flex;gap:8px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;font-family:var(--font)}
+.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:#0a2a4a}
+.btn-cyan{background:var(--cyan);color:var(--navy)}.btn-cyan:hover{background:var(--cyan-lt)}
+.btn-gold{background:var(--gold);color:var(--navy)}.btn-gold:hover{background:#FFE57F}
+.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#dc2626}
+.btn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border)}.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-sm{padding:6px 13px;font-size:12px}
+.btn-xs{padding:4px 10px;font-size:11px;border-radius:5px}
+
+/* FORM */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.form-full{grid-column:1/-1}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-label{font-size:12px;font-weight:600;color:var(--navy)}
+.form-label span{color:var(--danger)}
+.form-input,.form-select,.form-textarea{border:1.5px solid var(--border);border-radius:7px;padding:10px 13px;font-size:13px;color:var(--text);outline:none;transition:border-color 0.2s;width:100%}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--cyan)}
+.form-textarea{resize:vertical;min-height:90px;line-height:1.6}
+.form-hint{font-size:11px;color:var(--muted)}
+.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+
+/* TIER PRICING */
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tier-box{border:1.5px solid var(--border);border-radius:8px;padding:14px}
+.tier-box-label{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.tier-box.beginner{border-color:rgba(0,180,216,0.3);background:rgba(0,180,216,0.03)}
+.tier-box.intermediate{border-color:rgba(123,47,255,0.3);background:rgba(123,47,255,0.03)}
+.tier-box.advanced{border-color:rgba(255,193,7,0.3);background:rgba(255,193,7,0.03)}
+
+/* PRODUCTS TABLE */
+.products-table{width:100%;border-collapse:collapse}
+.products-table th{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);padding:10px 12px;border-bottom:2px solid var(--border);text-align:left;white-space:nowrap}
+.products-table td{padding:12px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text);vertical-align:middle}
+.products-table tr:last-child td{border-bottom:none}
+.products-table tr:hover td{background:var(--light)}
+.prod-thumb{width:36px;height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--light);border:1px solid var(--border)}
+.prod-name{font-weight:600;color:var(--navy)}
+.prod-cat{font-size:11px;color:var(--muted);margin-top:2px}
+.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;font-family:var(--mono)}
+.badge-active{background:rgba(16,185,129,0.1);color:var(--success);border:1px solid rgba(16,185,129,0.2)}
+.badge-draft{background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2)}
+.badge-cat{background:rgba(0,180,216,0.08);color:var(--cyan);border:1px solid rgba(0,180,216,0.15)}
+
+/* BLOG MANAGER */
+.blog-list{display:flex;flex-direction:column;gap:12px}
+.blog-item{background:var(--light);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;align-items:center;gap:14px}
+.blog-item-icon{font-size:24px}
+.blog-item-info{flex:1}
+.blog-item-title{font-size:14px;font-weight:600;color:var(--navy)}
+.blog-item-meta{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:3px}
+.blog-item-actions{display:flex;gap:6px}
+
+/* MESSAGES TABLE */
+.messages-list{display:flex;flex-direction:column;gap:10px}
+.msg-item{background:var(--light);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;gap:14px;align-items:flex-start}
+.msg-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
+.msg-body{flex:1}
+.msg-name{font-size:14px;font-weight:600;color:var(--navy)}
+.msg-email{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.msg-text{font-size:13px;color:var(--text);margin-top:6px;line-height:1.6}
+.msg-service{display:inline-block;font-size:10px;font-weight:700;background:rgba(0,180,216,0.08);color:var(--cyan);border:1px solid rgba(0,180,216,0.15);padding:2px 8px;border-radius:100px;margin-top:6px;font-family:var(--mono)}
+.msg-actions{display:flex;gap:6px;flex-shrink:0}
+
+/* SETTINGS */
+.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.settings-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
+.settings-section h3{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+
+/* TOAST */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast{background:var(--navy);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-lg);animation:slideIn 0.25s ease;min-width:220px}
+.toast.success{border-left:3px solid var(--success)}
+.toast.error{border-left:3px solid var(--danger)}
+.toast.info{border-left:3px solid var(--cyan)}
+@keyframes slideIn{from{transform:translateX(60px);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* IMAGE UPLOAD */
+.img-upload-zone{border:2px dashed var(--border);border-radius:8px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
+.img-upload-zone:hover{border-color:var(--cyan);background:rgba(0,180,216,0.03)}
+.img-upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.img-upload-zone p{font-size:13px;color:var(--muted);margin-top:6px}
+.img-preview{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--border);display:none}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border-radius:var(--radius);max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+.modal-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-head h3{font-size:16px;font-weight:700;color:var(--navy)}
+.modal-close{font-size:20px;color:var(--muted);cursor:pointer;background:none;border:none;line-height:1}
+.modal-close:hover{color:var(--danger)}
+.modal-body{padding:24px}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .sidebar{width:56px;overflow:hidden}.sidebar-btn span:not(.sb-icon){display:none}.sidebar-label{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .form-grid,.form-grid-3,.tier-grid,.settings-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){.stats-grid{grid-template-columns:1fr}.admin-main{padding:16px}}
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN SCREEN ── -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-mark">RN</div>
+      <h1>Admin Dashboard</h1>
+      <p>RUFFNECK ENTERTAINMENT · 2026</p>
+    </div>
+    <label class="login-label" for="adminPass">Admin Password</label>
+    <input class="login-input" type="password" id="adminPass" placeholder="Enter password…" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="login-btn" onclick="doLogin()">Sign In →</button>
+    <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
+    <p class="login-hint">Authorised personnel only · RuffNeck Entertainment © 2026</p>
+  </div>
+</div>
+
+<!-- ── ADMIN SHELL ── -->
+<div class="admin-shell" id="adminShell">
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-mark">RN</div>
+      <div class="topbar-name">RuffNeck <span>Admin</span></div>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-date" id="topbarDate"></span>
+      <a href="/" target="_blank" class="topbar-site">↗ View Site</a>
+      <span class="topbar-logout" onclick="doLogout()">Sign Out</span>
+    </div>
+  </div>
+
+  <div class="admin-body">
+
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Main</div>
+        <button class="sidebar-btn active" onclick="showPage('dashboard',this)"><span class="sb-icon">📊</span><span>Dashboard</span></button>
+        <button class="sidebar-btn" onclick="showPage('products',this)"><span class="sb-icon">🛒</span><span>Products</span></button>
+        <button class="sidebar-btn" onclick="showPage('add-product',this)"><span class="sb-icon">➕</span><span>Add Product</span></button>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Content</div>
+        <button class="sidebar-btn" onclick="showPage('blog',this)"><span class="sb-icon">📝</span><span>Blog Posts</span></button>
+        <button class="sidebar-btn" onclick="showPage('messages',this)"><span class="sb-icon">💬</span><span>Messages</span></button>
+      </div>
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Config</div>
+        <button class="sidebar-btn" onclick="showPage('settings',this)"><span class="sb-icon">⚙️</span><span>Settings</span></button>
+      </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="admin-main">
+
+      <!-- DASHBOARD -->
+      <div class="page active" id="page-dashboard">
+        <div class="page-header">
+          <h2>Dashboard</h2>
+          <p>Overview of RuffNeck Entertainment — 2026</p>
+        </div>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-icon">📦</div><div class="stat-val" id="statProducts">0</div><div class="stat-label">Total Products</div><div class="stat-trend">↑ Live in store</div></div>
+          <div class="stat-card"><div class="stat-icon">📝</div><div class="stat-val">12</div><div class="stat-label">Blog Articles</div><div class="stat-trend">↑ Published 2026</div></div>
+          <div class="stat-card"><div class="stat-icon">💬</div><div class="stat-val" id="statMessages">0</div><div class="stat-label">Contact Messages</div><div class="stat-trend">Check Formspree</div></div>
+          <div class="stat-card"><div class="stat-icon">🌐</div><div class="stat-val">Live</div><div class="stat-label">Site Status</div><div class="stat-trend">↑ Vercel deployed</div></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+          <div class="card">
+            <div class="card-title">⚡ Quick Actions</div>
+            <div style="display:flex;flex-direction:column;gap:10px">
+              <button class="btn btn-cyan" onclick="showPage('add-product',document.querySelector('.sidebar-btn:nth-child(3)'))">➕ Add New Product</button>
+              <a href="/store" target="_blank" class="btn btn-ghost">🛒 View Store</a>
+              <a href="/blog" target="_blank" class="btn btn-ghost">📝 View Blog</a>
+              <a href="mailto:ruffneckhassan@gmail.com" class="btn btn-ghost">📧 Open Email</a>
+              <a href="https://formspree.io" target="_blank" class="btn btn-ghost">📋 Check Formspree</a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">🔗 Business Credentials</div>
+            <div style="display:flex;flex-direction:column;gap:12px;font-size:13px">
+              <div><strong style="color:var(--navy);display:block;margin-bottom:2px;">CAC Reg No.</strong><span style="font-family:var(--mono);color:var(--muted)">3770977</span></div>
+              <div><strong style="color:var(--navy);display:block;margin-bottom:2px;">SMEDAN SUID</strong><span style="font-family:var(--mono);color:var(--muted)">SUID-3120-4678-0386-7922</span></div>
+              <div><strong style="color:var(--navy);display:block;margin-bottom:2px;">Formspree Endpoint</strong><span style="font-family:var(--mono);color:var(--muted)">xgojvjrb</span></div>
+              <div><strong style="color:var(--navy);display:block;margin-bottom:2px;">Live Site</strong><a href="https://ruffneck-entertainment.vercel.app" target="_blank" style="color:var(--cyan);font-family:var(--mono);font-size:11px">ruffneck-entertainment.vercel.app</a></div>
+              <div><strong style="color:var(--navy);display:block;margin-bottom:2px;">Contact Email</strong><a href="mailto:ruffneckhassan@gmail.com" style="color:var(--cyan);font-family:var(--mono);font-size:11px">ruffneckhassan@gmail.com</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">📋 Recent Products <div class="card-title-actions"><button class="btn btn-sm btn-cyan" onclick="showPage('products',document.querySelectorAll('.sidebar-btn')[1])">View All</button></div></div>
+          <div id="dashRecentProducts"><p style="font-size:13px;color:var(--muted);padding:8px 0;">No products added yet. <button onclick="showPage('add-product',document.querySelectorAll('.sidebar-btn')[2])" style="color:var(--cyan);background:none;border:none;cursor:pointer;font-family:var(--font);font-size:13px;font-weight:600;">Add your first product →</button></p></div>
+        </div>
+      </div>
+
+      <!-- PRODUCTS LIST -->
+      <div class="page" id="page-products">
+        <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between">
+          <div><h2>Products</h2><p>All digital products in the RuffNeck Store</p></div>
+          <button class="btn btn-cyan" onclick="showPage('add-product',document.querySelectorAll('.sidebar-btn')[2])">➕ Add Product</button>
+        </div>
+        <div class="card">
+          <div id="productsTableWrap">
+            <p style="font-size:13px;color:var(--muted);padding:16px 0;text-align:center;">No products yet. <button onclick="showPage('add-product',document.querySelectorAll('.sidebar-btn')[2])" style="color:var(--cyan);background:none;border:none;cursor:pointer;font-family:var(--font);font-size:13px;font-weight:600;">Add your first product →</button></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD PRODUCT -->
+      <div class="page" id="page-add-product">
+        <div class="page-header">
+          <h2 id="addProductTitle">Add New Product</h2>
+          <p>Fill in all fields. Products appear in the live store immediately after saving.</p>
+        </div>
+        <div class="card">
+          <div class="form-grid">
+            <div class="form-group form-full">
+              <label class="form-label">Product Name <span>*</span></label>
+              <input class="form-input" id="pName" placeholder="e.g. AI Data Annotator Career Guide — Beginner"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Category <span>*</span></label>
+              <select class="form-select" id="pCategory">
+                <option value="">Select category…</option>
+                <option>AI Career Guide</option>
+                <option>Prompt Pack</option>
+                <option>Resume Template</option>
+                <option>Content Calendar</option>
+                <option>Design Asset Bundle</option>
+                <option>Ebook</option>
+                <option>Business Toolkit</option>
+                <option>SOP Template</option>
+                <option>Content Service Pack</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Emoji Icon</label>
+              <input class="form-input" id="pEmoji" placeholder="e.g. 📘" maxlength="4"/>
+              <span class="form-hint">One emoji for the product thumbnail</span>
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">Short Description <span>*</span></label>
+              <input class="form-input" id="pDesc" placeholder="One-line description shown on store card"/>
+            </div>
+            <div class="form-group form-full">
+              <label class="form-label">Full Description / What's Inside</label>
+              <textarea class="form-textarea" id="pFull" rows="5" placeholder="Detailed description. List what's included, how many pages/prompts/templates, who it's for, what they'll achieve."></textarea>
+            </div>
+          </div>
+
+          <!-- TIERED PRICING -->
+          <div style="margin:20px 0 0">
+            <div class="form-label" style="margin-bottom:12px">Pricing Tiers <span style="color:var(--danger)">*</span> <span style="font-weight:400;color:var(--muted);font-size:11px">— Leave a tier blank to disable it</span></div>
+            <div class="tier-grid">
+              <div class="tier-box beginner">
+                <div class="tier-box-label">🟢 Beginner</div>
+                <div class="form-group">
+                  <label class="form-label">Price (₦)</label>
+                  <input class="form-input" id="pPriceBeg" type="number" placeholder="3500"/>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                  <label class="form-label">Tier Label</label>
+                  <input class="form-input" id="pLabelBeg" placeholder="Beginner Guide"/>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                  <label class="form-label">PDF Download URL</label>
+                  <input class="form-input" id="pPdfBeg" placeholder="https://drive.google.com/…"/>
+                  <span class="form-hint">Google Drive / Dropbox — set to "Anyone with link"</span>
+                </div>
+              </div>
+              <div class="tier-box intermediate">
+                <div class="tier-box-label">🔵 Intermediate</div>
+                <div class="form-group">
+                  <label class="form-label">Price (₦)</label>
+                  <input class="form-input" id="pPriceMid" type="number" placeholder="6500"/>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                  <label class="form-label">Tier Label</label>
+                  <input class="form-input" id="pLabelMid" placeholder="Intermediate Guide"/>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                  <label class="form-label">PDF Download URL</label>
+                  <input class="form-input" id="pPdfMid" placeholder="https://drive.google.com/…"/>
+                </div>
+              </div>
+              <div class="tier-box advanced">
+                <div class="tier-box-label">⭐ Advanced</div>
+                <div class="form-group">
+                  <label class="form-label">Price (₦)</label>
+                  <input class="form-input" id="pPriceAdv" type="number" placeholder="12000"/>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                  <label class="form-label">Tier Label</label>
+                  <input class="form-input" id="pLabelAdv" placeholder="Advanced Guide"/>
+                </div>
+                <div class="form-group" style="margin-top:10px">
+                  <label class="form-label">PDF Download URL</label>
+                  <input class="form-input" id="pPdfAdv" placeholder="https://drive.google.com/…"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IMAGE UPLOAD -->
+          <div style="margin-top:20px">
+            <label class="form-label" style="margin-bottom:10px;display:block">Product Image (optional)</label>
+            <div class="img-upload-zone" id="uploadZone">
+              <input type="file" accept="image/*" id="pImageFile" onchange="previewImage(this)"/>
+              <div id="uploadPrompt">
+                <div style="font-size:28px">🖼️</div>
+                <p>Click to upload an image, or drag and drop<br/><span style="font-size:11px">PNG, JPG, WebP — max 2MB</span></p>
+              </div>
+              <img class="img-preview" id="imgPreview" alt="Preview"/>
+            </div>
+          </div>
+
+          <!-- STATUS -->
+          <div class="form-group" style="margin-top:16px;max-width:200px">
+            <label class="form-label">Status</label>
+            <select class="form-select" id="pStatus">
+              <option value="active">Active — Visible in store</option>
+              <option value="draft">Draft — Hidden from store</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button class="btn btn-ghost" onclick="clearProductForm()">Clear Form</button>
+            <button class="btn btn-cyan" onclick="saveProduct()">💾 Save Product</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOG MANAGER -->
+      <div class="page" id="page-blog">
+        <div class="page-header">
+          <h2>Blog Posts</h2>
+          <p>Manage the 12 articles published in blog.html — 2026</p>
+        </div>
+        <div class="card">
+          <div class="card-title">📝 Published Articles</div>
+          <div class="blog-list" id="blogList"></div>
+        </div>
+        <div class="card" style="margin-top:20px">
+          <div class="card-title">➕ Add New Article (Coming Soon)</div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.7">To add new blog articles currently, open <strong>blog.html</strong> in your code editor and add a new article object inside the <code style="background:var(--light);padding:2px 6px;border-radius:4px;font-family:var(--mono)">articles</code> JavaScript object, following the existing format.<br/><br/>A full rich-text blog editor is planned for a future update.</p>
+        </div>
+      </div>
+
+      <!-- MESSAGES -->
+      <div class="page" id="page-messages">
+        <div class="page-header">
+          <h2>Contact Messages</h2>
+          <p>Messages submitted via the contact form (Formspree: xgojvjrb)</p>
+        </div>
+        <div class="card">
+          <div class="card-title">📬 Message Inbox
+            <div class="card-title-actions">
+              <a href="https://formspree.io/forms/xgojvjrb/submissions" target="_blank" class="btn btn-sm btn-ghost">Open Formspree ↗</a>
+            </div>
+          </div>
+          <div style="background:rgba(0,180,216,0.06);border:1px solid rgba(0,180,216,0.15);border-radius:8px;padding:16px 20px;font-size:13px;color:var(--text);line-height:1.7;margin-bottom:16px">
+            <strong>📌 Note:</strong> Contact form submissions are processed by Formspree and delivered to <a href="mailto:ruffneckhassan@gmail.com" style="color:var(--cyan)">ruffneckhassan@gmail.com</a>. Visit <a href="https://formspree.io/forms/xgojvjrb/submissions" target="_blank" style="color:var(--cyan)">Formspree dashboard</a> to view all submissions, export data, and manage spam filters.
+          </div>
+          <div class="messages-list" id="msgList">
+            <div class="msg-item">
+              <div class="msg-avatar">S</div>
+              <div class="msg-body">
+                <div class="msg-name">Sample Message</div>
+                <div class="msg-email">sample@email.com</div>
+                <div class="msg-text">This is a sample contact message to show how entries will appear. Real messages arrive via Formspree at ruffneckhassan@gmail.com.</div>
+                <div class="msg-service">Digital Marketing</div>
+              </div>
+              <div class="msg-actions">
+                <a href="mailto:sample@email.com" class="btn btn-xs btn-cyan">Reply</a>
+                <button class="btn btn-xs btn-ghost">Archive</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SETTINGS -->
+      <div class="page" id="page-settings">
+        <div class="page-header">
+          <h2>Settings</h2>
+          <p>Site configuration and credentials — update here for reference</p>
+        </div>
+        <div class="settings-grid">
+          <div class="settings-section">
+            <h3>💳 Payment</h3>
+            <div class="form-group" style="margin-bottom:14px">
+              <label class="form-label">Paystack Public Key</label>
+              <input class="form-input" id="setPaystack" placeholder="pk_live_xxxxxxxxxxxx"/>
+              <span class="form-hint">Replace pk_test_ key in store.html with your live key from paystack.com/dashboard</span>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Flutterwave Public Key</label>
+              <input class="form-input" id="setFlutterwave" placeholder="FLWPUBK-xxxxxxxxxxxx"/>
+            </div>
+          </div>
+          <div class="settings-section">
+            <h3>📧 Contact & Forms</h3>
+            <div class="form-group" style="margin-bottom:14px">
+              <label class="form-label">Contact Email</label>
+              <input class="form-input" id="setEmail" value="ruffneckhassan@gmail.com"/>
+            </div>
+            <div class="form-group" style="margin-bottom:14px">
+              <label class="form-label">WhatsApp Number</label>
+              <input class="form-input" id="setWA" value="+234 803 380 7856"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Formspree Endpoint</label>
+              <input class="form-input" id="setFormspree" value="xgojvjrb" readonly/>
+              <span class="form-hint">Fixed endpoint — change in contact form HTML if needed</span>
+            </div>
+          </div>
+          <div class="settings-section">
+            <h3>🌐 Social Links</h3>
+            <div class="form-group" style="margin-bottom:10px"><label class="form-label">Instagram</label><input class="form-input" value="https://instagram.com/iamzaksz"/></div>
+            <div class="form-group" style="margin-bottom:10px"><label class="form-label">TikTok</label><input class="form-input" value="https://tiktok.com/@iamzaksz"/></div>
+            <div class="form-group" style="margin-bottom:10px"><label class="form-label">Twitter / X</label><input class="form-input" value="https://twitter.com/iamzaksz"/></div>
+            <div class="form-group" style="margin-bottom:10px"><label class="form-label">LinkedIn</label><input class="form-input" value="https://linkedin.com/in/hassanzakariya"/></div>
+            <div class="form-group" style="margin-bottom:10px"><label class="form-label">Telegram Channel</label><input class="form-input" value="https://t.me/RuffNeckEntertainment"/></div>
+            <div class="form-group"><label class="form-label">WhatsApp Community</label><input class="form-input" value="https://chat.whatsapp.com/HZaNYh85ZrYEO2062zkEmi"/></div>
+          </div>
+          <div class="settings-section">
+            <h3>🔑 Admin Access</h3>
+            <div class="form-group" style="margin-bottom:14px">
+              <label class="form-label">Current Password</label>
+              <input class="form-input" type="password" placeholder="Enter current password"/>
+            </div>
+            <div class="form-group" style="margin-bottom:14px">
+              <label class="form-label">New Password</label>
+              <input class="form-input" type="password" id="newPass" placeholder="Min 8 characters"/>
+            </div>
+            <div class="form-group" style="margin-bottom:16px">
+              <label class="form-label">Confirm New Password</label>
+              <input class="form-input" type="password" id="confirmPass" placeholder="Repeat new password"/>
+            </div>
+            <button class="btn btn-primary" onclick="changePassword()">Update Password</button>
+            <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border)">
+              <div class="form-label" style="margin-bottom:8px">Danger Zone</div>
+              <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑️ Clear All Product Data</button>
+              <p style="font-size:11px;color:var(--muted);margin-top:6px">This deletes all products from local storage. Cannot be undone.</p>
+            </div>
+          </div>
+        </div>
+        <div style="text-align:right;margin-top:8px">
+          <button class="btn btn-cyan" onclick="showToast('Settings reference updated','success')">Save Settings</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- EDIT PRODUCT MODAL -->
+<div class="modal-overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3>Edit Product</h3>
+      <button class="modal-close" onclick="closeEditModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="editId"/>
+      <div class="form-group" style="margin-bottom:14px">
+        <label class="form-label">Product Name</label>
+        <input class="form-input" id="editName"/>
+      </div>
+      <div class="form-grid" style="margin-bottom:14px">
+        <div class="form-group"><label class="form-label">Category</label><input class="form-input" id="editCat"/></div>
+        <div class="form-group"><label class="form-label">Emoji</label><input class="form-input" id="editEmoji" maxlength="4"/></div>
+      </div>
+      <div class="form-group" style="margin-bottom:14px">
+        <label class="form-label">Description</label>
+        <input class="form-input" id="editDesc"/>
+      </div>
+      <div class="form-group" style="margin-bottom:14px">
+        <label class="form-label">Status</label>
+        <select class="form-select" id="editStatus">
+          <option value="active">Active</option>
+          <option value="draft">Draft</option>
+        </select>
+      </div>
+      <div class="tier-grid" style="margin-bottom:14px">
+        <div class="tier-box beginner">
+          <div class="tier-box-label">🟢 Beginner Price (₦)</div>
+          <input class="form-input" id="editPriceBeg" type="number"/>
+          <div class="tier-box-label" style="margin-top:8px">PDF URL</div>
+          <input class="form-input" id="editPdfBeg" placeholder="Drive link…"/>
+        </div>
+        <div class="tier-box intermediate">
+          <div class="tier-box-label">🔵 Intermediate Price (₦)</div>
+          <input class="form-input" id="editPriceMid" type="number"/>
+          <div class="tier-box-label" style="margin-top:8px">PDF URL</div>
+          <input class="form-input" id="editPdfMid" placeholder="Drive link…"/>
+        </div>
+        <div class="tier-box advanced">
+          <div class="tier-box-label">⭐ Advanced Price (₦)</div>
+          <input class="form-input" id="editPriceAdv" type="number"/>
+          <div class="tier-box-label" style="margin-top:8px">PDF URL</div>
+          <input class="form-input" id="editPdfAdv" placeholder="Drive link…"/>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button class="btn btn-ghost" onclick="closeEditModal()">Cancel</button>
+        <button class="btn btn-cyan" onclick="saveEdit()">💾 Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<script>
+// ── AUTH ──
+const ADMIN_PASS_KEY = 'rn_admin_pass';
+const DEFAULT_PASS = 'ruffneck2026admin';
+
+function getPass(){ return localStorage.getItem(ADMIN_PASS_KEY) || DEFAULT_PASS; }
+
+function doLogin(){
+  const val = document.getElementById('adminPass').value;
+  if(val === getPass()){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminShell').classList.add('visible');
+    initAdmin();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+    document.getElementById('adminPass').value = '';
+    document.getElementById('adminPass').focus();
+  }
+}
+
+function doLogout(){
+  document.getElementById('adminShell').classList.remove('visible');
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('adminPass').value = '';
+  document.getElementById('loginError').style.display = 'none';
+}
+
+function changePassword(){
+  const np = document.getElementById('newPass').value;
+  const cp = document.getElementById('confirmPass').value;
+  if(np.length < 8){ showToast('Password must be at least 8 characters','error'); return; }
+  if(np !== cp){ showToast('Passwords do not match','error'); return; }
+  localStorage.setItem(ADMIN_PASS_KEY, np);
+  showToast('Password updated successfully','success');
+  document.getElementById('newPass').value='';
+  document.getElementById('confirmPass').value='';
+}
+
+// ── NAVIGATION ──
+function showPage(id, btn){
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-'+id).classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id==='products') renderProductsTable();
+  if(id==='dashboard') renderDashboard();
+  if(id==='blog') renderBlogList();
+  if(id==='add-product'){ document.getElementById('addProductTitle').textContent='Add New Product'; clearProductForm(); }
+}
+
+// ── DATE ──
+function initAdmin(){
+  const d = new Date();
+  document.getElementById('topbarDate').textContent = d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
+  renderDashboard();
+  renderProductsTable();
+  renderBlogList();
+  updateStats();
+}
+
+// ── STORAGE ──
+const PRODUCTS_KEY = 'rn_products';
+function getProducts(){ try{ return JSON.parse(localStorage.getItem(PRODUCTS_KEY)||'[]'); }catch(e){ return []; } }
+function saveProducts(arr){ localStorage.setItem(PRODUCTS_KEY, JSON.stringify(arr)); }
+
+// ── PRODUCTS CRUD ──
+function saveProduct(){
+  const name = document.getElementById('pName').value.trim();
+  const cat  = document.getElementById('pCategory').value;
+  const desc = document.getElementById('pDesc').value.trim();
+  if(!name||!cat||!desc){ showToast('Please fill in name, category and description','error'); return; }
+  const priceBeg = document.getElementById('pPriceBeg').value;
+  const priceMid = document.getElementById('pPriceMid').value;
+  const priceAdv = document.getElementById('pPriceAdv').value;
+  if(!priceBeg && !priceMid && !priceAdv){ showToast('Please add at least one price tier','error'); return; }
+
+  const imgFile = document.getElementById('pImageFile').files[0];
+  if(imgFile && imgFile.size > 2*1024*1024){ showToast('Image must be under 2MB','error'); return; }
+
+  const readImg = (cb) => {
+    if(!imgFile){ cb(null); return; }
+    const r = new FileReader();
+    r.onload = e => cb(e.target.result);
+    r.readAsDataURL(imgFile);
+  };
+
+  readImg(imgData => {
+    const products = getProducts();
+    const product = {
+      id: Date.now().toString(),
+      name, cat,
+      emoji: document.getElementById('pEmoji').value || '📦',
+      desc,
+      fullDesc: document.getElementById('pFull').value.trim(),
+      tiers:{
+        beginner: priceBeg ? { price: parseInt(priceBeg), label: document.getElementById('pLabelBeg').value||'Beginner', pdf: document.getElementById('pPdfBeg').value } : null,
+        intermediate: priceMid ? { price: parseInt(priceMid), label: document.getElementById('pLabelMid').value||'Intermediate', pdf: document.getElementById('pPdfMid').value } : null,
+        advanced: priceAdv ? { price: parseInt(priceAdv), label: document.getElementById('pLabelAdv').value||'Advanced', pdf: document.getElementById('pPdfAdv').value } : null,
+      },
+      image: imgData || null,
+      status: document.getElementById('pStatus').value,
+      created: new Date().toLocaleDateString('en-GB')
+    };
+    products.push(product);
+    saveProducts(products);
+    showToast(`"${name}" saved to store!`,'success');
+    clearProductForm();
+    updateStats();
+  });
+}
+
+function clearProductForm(){
+  ['pName','pDesc','pFull','pEmoji','pPriceBeg','pLabelBeg','pPdfBeg','pPriceMid','pLabelMid','pPdfMid','pPriceAdv','pLabelAdv','pPdfAdv'].forEach(id=>{
+    const el=document.getElementById(id); if(el) el.value='';
+  });
+  document.getElementById('pCategory').value='';
+  document.getElementById('pStatus').value='active';
+  document.getElementById('pImageFile').value='';
+  document.getElementById('imgPreview').style.display='none';
+  document.getElementById('uploadPrompt').style.display='block';
+}
+
+function deleteProduct(id){
+  if(!confirm('Delete this product? This cannot be undone.')) return;
+  const products = getProducts().filter(p => p.id !== id);
+  saveProducts(products);
+  renderProductsTable();
+  renderDashboard();
+  updateStats();
+  showToast('Product deleted','info');
+}
+
+function editProduct(id){
+  const p = getProducts().find(p=>p.id===id);
+  if(!p) return;
+  document.getElementById('editId').value = id;
+  document.getElementById('editName').value = p.name;
+  document.getElementById('editCat').value = p.cat;
+  document.getElementById('editEmoji').value = p.emoji;
+  document.getElementById('editDesc').value = p.desc;
+  document.getElementById('editStatus').value = p.status;
+  document.getElementById('editPriceBeg').value = p.tiers?.beginner?.price||'';
+  document.getElementById('editPdfBeg').value = p.tiers?.beginner?.pdf||'';
+  document.getElementById('editPriceMid').value = p.tiers?.intermediate?.price||'';
+  document.getElementById('editPdfMid').value = p.tiers?.intermediate?.pdf||'';
+  document.getElementById('editPriceAdv').value = p.tiers?.advanced?.price||'';
+  document.getElementById('editPdfAdv').value = p.tiers?.advanced?.pdf||'';
+  document.getElementById('editModal').classList.add('open');
+}
+
+function saveEdit(){
+  const id = document.getElementById('editId').value;
+  const products = getProducts();
+  const idx = products.findIndex(p=>p.id===id);
+  if(idx<0) return;
+  products[idx] = {
+    ...products[idx],
+    name: document.getElementById('editName').value,
+    cat: document.getElementById('editCat').value,
+    emoji: document.getElementById('editEmoji').value,
+    desc: document.getElementById('editDesc').value,
+    status: document.getElementById('editStatus').value,
+    tiers:{
+      beginner: document.getElementById('editPriceBeg').value ? {price:parseInt(document.getElementById('editPriceBeg').value),label:'Beginner',pdf:document.getElementById('editPdfBeg').value} : null,
+      intermediate: document.getElementById('editPriceMid').value ? {price:parseInt(document.getElementById('editPriceMid').value),label:'Intermediate',pdf:document.getElementById('editPdfMid').value} : null,
+      advanced: document.getElementById('editPriceAdv').value ? {price:parseInt(document.getElementById('editPriceAdv').value),label:'Advanced',pdf:document.getElementById('editPdfAdv').value} : null,
+    }
+  };
+  saveProducts(products);
+  closeEditModal();
+  renderProductsTable();
+  renderDashboard();
+  showToast('Product updated','success');
+}
+
+function closeEditModal(){
+  document.getElementById('editModal').classList.remove('open');
+}
+
+function toggleStatus(id){
+  const products = getProducts();
+  const idx = products.findIndex(p=>p.id===id);
+  if(idx<0) return;
+  products[idx].status = products[idx].status==='active' ? 'draft' : 'active';
+  saveProducts(products);
+  renderProductsTable();
+  showToast(`Product ${products[idx].status==='active'?'published':'unpublished'}`,'info');
+}
+
+function clearAllData(){
+  if(!confirm('Delete ALL products from local storage? This cannot be undone.')) return;
+  localStorage.removeItem(PRODUCTS_KEY);
+  renderProductsTable();
+  renderDashboard();
+  updateStats();
+  showToast('All product data cleared','error');
+}
+
+// ── RENDER ──
+function fmt(n){ return '₦'+Number(n).toLocaleString('en-NG'); }
+
+function renderProductsTable(){
+  const products = getProducts();
+  const wrap = document.getElementById('productsTableWrap');
+  if(!products.length){
+    wrap.innerHTML='<p style="font-size:13px;color:var(--muted);padding:16px 0;text-align:center;">No products yet. <button onclick="showPage(\'add-product\',document.querySelectorAll(\'.sidebar-btn\')[2])" style="color:var(--cyan);background:none;border:none;cursor:pointer;font-family:var(--font);font-size:13px;font-weight:600;">Add your first product →</button></p>';
+    return;
+  }
+  wrap.innerHTML=`<table class="products-table">
+    <thead><tr><th>Product</th><th>Category</th><th>Beginner</th><th>Intermediate</th><th>Advanced</th><th>Status</th><th>Actions</th></tr></thead>
+    <tbody>${products.map(p=>`<tr>
+      <td><div style="display:flex;align-items:center;gap:10px"><div class="prod-thumb">${p.emoji||'📦'}</div><div><div class="prod-name">${p.name}</div><div class="prod-cat">${p.created||'2026'}</div></div></div></td>
+      <td><span class="badge badge-cat">${p.cat||'—'}</span></td>
+      <td style="font-family:var(--mono);font-size:12px">${p.tiers?.beginner?.price ? fmt(p.tiers.beginner.price) : '—'}</td>
+      <td style="font-family:var(--mono);font-size:12px">${p.tiers?.intermediate?.price ? fmt(p.tiers.intermediate.price) : '—'}</td>
+      <td style="font-family:var(--mono);font-size:12px">${p.tiers?.advanced?.price ? fmt(p.tiers.advanced.price) : '—'}</td>
+      <td><span class="badge ${p.status==='active'?'badge-active':'badge-draft'}">${p.status}</span></td>
+      <td><div style="display:flex;gap:5px">
+        <button class="btn btn-xs btn-ghost" onclick="editProduct('${p.id}')">Edit</button>
+        <button class="btn btn-xs btn-ghost" onclick="toggleStatus('${p.id}')">${p.status==='active'?'Unpublish':'Publish'}</button>
+        <button class="btn btn-xs btn-danger" onclick="deleteProduct('${p.id}')">Delete</button>
+      </div></td>
+    </tr>`).join('')}</tbody>
+  </table>`;
+}
+
+function renderDashboard(){
+  const products = getProducts().slice(-4).reverse();
+  const wrap = document.getElementById('dashRecentProducts');
+  if(!products.length){
+    wrap.innerHTML='<p style="font-size:13px;color:var(--muted);padding:8px 0;">No products added yet. <button onclick="showPage(\'add-product\',document.querySelectorAll(\'.sidebar-btn\')[2])" style="color:var(--cyan);background:none;border:none;cursor:pointer;font-family:var(--font);font-size:13px;font-weight:600;">Add your first product →</button></p>';
+    return;
+  }
+  wrap.innerHTML=`<table class="products-table">
+    <thead><tr><th>Product</th><th>Category</th><th>Min Price</th><th>Status</th></tr></thead>
+    <tbody>${products.map(p=>{
+      const prices=[p.tiers?.beginner?.price,p.tiers?.intermediate?.price,p.tiers?.advanced?.price].filter(Boolean);
+      const min=prices.length?Math.min(...prices):null;
+      return`<tr>
+        <td><div style="display:flex;align-items:center;gap:8px"><div class="prod-thumb">${p.emoji||'📦'}</div><div class="prod-name">${p.name}</div></div></td>
+        <td><span class="badge badge-cat">${p.cat||'—'}</span></td>
+        <td style="font-family:var(--mono);font-size:12px">${min?fmt(min)+'+':'—'}</td>
+        <td><span class="badge ${p.status==='active'?'badge-active':'badge-draft'}">${p.status}</span></td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+}
+
+function updateStats(){
+  const count = getProducts().length;
+  const el = document.getElementById('statProducts');
+  if(el) el.textContent = count;
+}
+
+const blogArticles=[
+  {emoji:'🤖',title:'Top 12 AI Career Roles You Can Start in 2026 — No Coding Required',cat:'AI & Automation'},
+  {emoji:'🛠️',title:'Top 10 AI Tools Every Nigerian SME Should Use in 2026',cat:'AI & Automation'},
+  {emoji:'🏷️',title:'How to Become an AI Data Annotator in 2026 — Full Beginner Guide',cat:'AI Career'},
+  {emoji:'📊',title:'How to Build a Warehouse Data Reporting System in 2026',cat:'Operations'},
+  {emoji:'🌍',title:'Growing Your African Business Brand Globally in 2026',cat:'Digital Marketing'},
+  {emoji:'✍️',title:'How to Become an AI Technical Content Writer in 2026',cat:'AI Career'},
+  {emoji:'🛡️',title:'AI Ethics in Business: What Every Nigerian Entrepreneur Should Know',cat:'AI Ethics'},
+  {emoji:'⚡',title:'Prompt Engineering for Business: The 2026 Practical Guide',cat:'Content & Prompts'},
+  {emoji:'🧠',title:'Do You Need a Business Consultant? 5 Signs the Answer Is Yes',cat:'Business Growth'},
+  {emoji:'🌐',title:'Remote AI Internships in 2026: How to Apply and What to Expect',cat:'AI Career'},
+  {emoji:'📱',title:'AI-Powered Content Creation: Instagram, Video Scripts, Carousels & More',cat:'AI & Content'},
+  {emoji:'💰',title:'Top Profitable Digital Products to Sell in 2026',cat:'Business Growth'},
+];
+
+function renderBlogList(){
+  const list = document.getElementById('blogList');
+  list.innerHTML = blogArticles.map((a,i)=>`
+    <div class="blog-item">
+      <div class="blog-item-icon">${a.emoji}</div>
+      <div class="blog-item-info">
+        <div class="blog-item-title">${a.title}</div>
+        <div class="blog-item-meta">${a.cat} · June 2026 · Published</div>
+      </div>
+      <div class="blog-item-actions">
+        <a href="/blog" target="_blank" class="btn btn-xs btn-ghost">View ↗</a>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── IMAGE PREVIEW ──
+function previewImage(input){
+  const file = input.files[0];
+  if(!file) return;
+  if(file.size > 2*1024*1024){ showToast('Image must be under 2MB','error'); input.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('imgPreview');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    document.getElementById('uploadPrompt').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── TOAST ──
+function showToast(msg, type='info'){
+  const container = document.getElementById('toastContainer');
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  const icons = {success:'✅',error:'❌',info:'ℹ️'};
+  t.innerHTML = `<span>${icons[type]||'ℹ️'}</span>${msg}`;
+  container.appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transition='opacity 0.4s'; setTimeout(()=>t.remove(),400); }, 3200);
+}
+
+// ── CLOSE MODAL ON OVERLAY CLICK ──
+document.getElementById('editModal').addEventListener('click', function(e){ if(e.target===this) closeEditModal(); });
+</script>
+</body>
+</html>
