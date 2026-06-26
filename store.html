@@ -217,6 +217,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   .search-box input{width:100%}
   .cart-sidebar{max-width:100%}
 }
+.product-tiers-preview{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 12px}
+.tier-pill{font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;font-family:var(--font-mono);white-space:nowrap}
+.tier-beg{background:rgba(16,185,129,0.1);color:#10B981;border:1px solid rgba(16,185,129,0.25)}
+.tier-mid{background:rgba(0,180,216,0.1);color:var(--cyan);border:1px solid rgba(0,180,216,0.25)}
+.tier-adv{background:rgba(255,193,7,0.1);color:var(--gold);border:1px solid rgba(255,193,7,0.25)}
+.modal-tier-what{margin-top:16px}
+.modal-tier-what h4{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-dark);margin-bottom:10px;font-family:var(--font-mono)}
+.modal-tier-includes{display:flex;flex-direction:column;gap:7px;max-height:200px;overflow-y:auto;padding-right:4px}
+.modal-tier-includes li{font-size:13px;color:var(--text-body);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.modal-tier-includes li::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0;margin-top:1px}
 </style>
 </head>
 <body>
@@ -280,775 +290,307 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
     <!-- AI CAREER GUIDES -->
     <div class="section-heading">
       <h2>🤖 AI Career Guides — Step-by-Step PDF Guides</h2>
-      <p>Complete practical guides to becoming a professional in high-demand AI roles. Tiered by experience level. Instant PDF delivery after payment.</p>
+      <p>Complete practical guides to becoming a professional in high-demand AI roles. Tiered by experience level — each tier has different content, depth, and value. Instant PDF delivery after payment.</p>
     </div>
     <div class="products-grid" id="productsGrid">
 
-      <!-- AI Data Annotator -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Data Annotator Guide">
+      <div class="product-card" data-cat="ai-career" data-name="AI Data Annotator Guide" data-id="p001">
         <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#0a2a4a);">
-          <span class="emoji-fallback">🏷️</span>
-          <span class="product-new">2026</span>
+          <span class="emoji-fallback">🏷️</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
-          <h3>How to Become an AI Data Annotator</h3>
-          <p>Step-by-step guide covering tools, platforms, techniques, and how to land your first paying annotation role in 2026.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>What data annotation is and why it matters for AI</li>
-              <li>Types of annotation: image, text, audio, video</li>
-              <li>Top platforms: Scale AI, Appen, Remotasks, Labelbox</li>
-              <li>Tools & software walkthrough (Label Studio, CVAT)</li>
-              <li>How to pass annotation tests &amp; get hired</li>
-              <li>Pricing your services &amp; earning potential in 2026</li>
-              <li>Building your annotator portfolio</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="6500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="10000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          <h3 class="product-name">AI Data Annotator Guide</h3>
+          <p class="product-desc">Complete guide to becoming a professional data annotator. Platforms, tools, techniques, and income strategies.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
+            <span class="tier-pill tier-mid">Intermediate ₦6,500</span>
+            <span class="tier-pill tier-adv">Advanced ₦10,000</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Data Annotator Guide','ai-career','🏷️',
-              [{level:\'Beginner\',price:3500,desc:\'Foundation guide — what annotation is, top platforms, how to pass tests and get your first job\'},
-               {level:\'Intermediate\',price:6500,desc:\'Advanced techniques, quality scoring, handling edge cases, working with multiple clients simultaneously\'},
-               {level:\'Advanced\',price:10000,desc:\'Team leadership, building annotation pipelines, quality assurance systems, pricing for enterprise clients\'}],
-              [\'What data annotation is and why it matters\',\'Types: image, text, audio, video annotation\',\'Top platforms: Scale AI, Appen, Remotasks\',\'Tools walkthrough: Label Studio, CVAT\',\'How to pass annotation tests\',\'Earning potential in 2026\',\'Building your annotator portfolio\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p001')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- AI Data Evaluator -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Data Evaluator Guide">
+      <div class="product-card" data-cat="ai-career" data-name="AI Data Evaluator Guide" data-id="p002">
         <div class="product-img" style="background:linear-gradient(135deg,#1a0B3A,#2a0a4a);">
-          <span class="emoji-fallback">⚖️</span>
-          <span class="product-new">2026</span>
+          <span class="emoji-fallback">⭐</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
-          <h3>How to Become an AI Data Evaluator</h3>
-          <p>Complete guide to evaluating AI outputs — rating responses, assessing quality, working with RLHF pipelines and earning remote income.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>Understanding RLHF and why evaluators are essential</li>
-              <li>Rating frameworks: helpfulness, accuracy, safety</li>
-              <li>Platforms: Outlier, Scale RLHF, Toloka, Surge AI</li>
-              <li>Writing effective evaluation rationales</li>
-              <li>Avoiding common evaluator mistakes</li>
-              <li>How to qualify for higher-paying evaluation tasks</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="6500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="10000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          <h3 class="product-name">AI Model Evaluator Guide</h3>
+          <p class="product-desc">Learn RLHF evaluation — rate AI responses, improve models, and earn consistently on Outlier, Surge AI & more.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
+            <span class="tier-pill tier-mid">Intermediate ₦6,500</span>
+            <span class="tier-pill tier-adv">Advanced ₦10,000</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Data Evaluator Guide','ai-career','⚖️',
-              [{level:\'Beginner\',price:3500,desc:\'Introduction to AI evaluation, RLHF basics, first platforms and how to qualify\'},
-               {level:\'Intermediate\',price:6500,desc:\'Advanced rating rubrics, writing strong rationales, handling ambiguous prompts\'},
-               {level:\'Advanced\',price:10000,desc:\'Leading evaluation teams, building quality frameworks, consulting for AI labs\'}],
-              [\'Understanding RLHF and evaluator role\',\'Rating frameworks: helpfulness, accuracy, safety\',\'Top platforms: Outlier, Scale RLHF, Toloka\',\'Writing evaluation rationales\',\'Qualifying for higher-paying tasks\',\'2026 income benchmarks\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p002')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- AI Ethics Reviewer -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Ethics Reviewer Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#0a2a1a,#0a3a20);">
-          <span class="emoji-fallback">🛡️</span>
-          <span class="product-new">2026</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">AI Career Guide</div>
-          <h3>How to Become an AI Ethics Reviewer</h3>
-          <p>Navigate the emerging field of AI ethics — bias detection, content safety, fairness auditing, and becoming a responsible AI professional in 2026.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>Core AI ethics principles: fairness, transparency, accountability</li>
-              <li>How to identify bias in AI outputs</li>
-              <li>Content safety review frameworks</li>
-              <li>AI ethics certifications and career paths</li>
-              <li>Tools for ethical AI auditing</li>
-              <li>Working with AI policy teams &amp; NGOs</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="4000" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="7500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="12000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Ethics Reviewer Guide','ai-career','🛡️',
-              [{level:\'Beginner\',price:4000,desc:\'Core principles, bias basics, how to break into AI ethics roles\'},
-               {level:\'Intermediate\',price:7500,desc:\'Formal auditing methods, content safety frameworks, working with AI teams\'},
-               {level:\'Advanced\',price:12000,desc:\'Policy writing, AI governance consulting, building ethics review systems for organizations\'}],
-              [\'Core AI ethics: fairness, transparency, accountability\',\'Bias detection in AI outputs\',\'Content safety review frameworks\',\'AI ethics certifications guide\',\'Auditing tools walkthrough\',\'Career paths: NGOs, tech companies, policy\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Train AI Models -->
-      <div class="product-card" data-cat="ai-career" data-name="Train AI Models Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#1a1a0B,#2a2a0a);">
-          <span class="emoji-fallback">🧠</span>
-          <span class="product-new">2026</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">AI Career Guide</div>
-          <h3>How to Contribute to Training AI Models</h3>
-          <p>From data collection to feedback loops — your complete guide to contributing to AI model training as a non-developer in 2026.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>How AI models are trained (plain English)</li>
-              <li>Types of training data you can contribute</li>
-              <li>Platforms: Hivemind, DataAnnotation.tech, Prolific</li>
-              <li>Writing high-quality training prompts &amp; responses</li>
-              <li>Earning from AI model feedback programs</li>
-              <li>Building a contributor reputation</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="6000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="9500" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('Train AI Models Guide','ai-career','🧠',
-              [{level:\'Beginner\',price:3500,desc:\'How AI training works, platforms to join, your first training tasks\'},
-               {level:\'Intermediate\',price:6000,desc:\'Writing high-quality prompts, preference selection, earning optimization\'},
-               {level:\'Advanced\',price:9500,desc:\'Specialized domain contribution (medicine, law, coding), scaling income, team coordination\'}],
-              [\'How AI models are trained (plain English)\',\'Types of training contributions\',\'Top platforms: Hivemind, DataAnnotation, Prolific\',\'Writing high-quality training prompts\',\'Earning from feedback programs\',\'Building contributor reputation\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Tutor -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Tutor Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#1a3a5a);">
-          <span class="emoji-fallback">🎓</span>
-          <span class="product-new">2026</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">AI Career Guide</div>
-          <h3>How to Become a Paid AI Tutor in 2026</h3>
-          <p>Turn your AI knowledge into income — teaching businesses, professionals, and students the practical skills they need to use AI effectively.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>What AI tutors teach and who hires them</li>
-              <li>Structuring beginner-to-advanced AI curricula</li>
-              <li>Platforms: Preply, Teachable, Udemy, LinkedIn Learning</li>
-              <li>Pricing your AI tutoring sessions (NGN &amp; USD)</li>
-              <li>Marketing yourself as an AI educator</li>
-              <li>Creating passive income from AI courses</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="4000" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="7000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="11000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Tutor Guide','ai-career','🎓',
-              [{level:\'Beginner\',price:4000,desc:\'What to teach, finding your first students, structuring a simple curriculum\'},
-               {level:\'Intermediate\',price:7000,desc:\'Corporate training packages, pricing strategy, building group programs\'},
-               {level:\'Advanced\',price:11000,desc:\'Scaling with online courses, licensing curriculum, partnering with institutions\'}],
-              [\'What AI tutors teach and who pays for it\',\'Curriculum structure: beginner to advanced\',\'Platforms for tutoring and course sales\',\'Pricing in NGN and USD\',\'Marketing as an AI educator\',\'Passive income from recorded courses\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Content Writing -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Content Writing Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#1a0a2a,#2a0a3a);">
-          <span class="emoji-fallback">✍️</span>
-          <span class="product-new">2026</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">AI Career Guide</div>
-          <h3>How to Become an AI Content Writer in 2026</h3>
-          <p>From technical articles to AI-assisted blogs — your complete career guide to breaking into and scaling in the AI content writing industry.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>Types of AI content writing roles</li>
-              <li>Tools: ChatGPT, Claude, Jasper, Grammarly, Surfer SEO</li>
-              <li>Writing AI technical content (based on real GAOTek experience)</li>
-              <li>Finding clients on Upwork, Fiverr, LinkedIn</li>
-              <li>Building a portfolio with no experience</li>
-              <li>Pricing your services (NGN &amp; USD rates)</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="6500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="10000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Content Writing Guide','ai-career','✍️',
-              [{level:\'Beginner\',price:3500,desc:\'What AI content writing is, tools to use, landing your first client or internship\'},
-               {level:\'Intermediate\',price:6500,desc:\'Scaling clients, SEO writing with AI, technical content frameworks\'},
-               {level:\'Advanced\',price:10000,desc:\'Running a content agency, managing AI writers, enterprise client acquisition\'}],
-              [\'Types of AI content writing roles in 2026\',\'Essential tools: ChatGPT, Claude, Surfer SEO\',\'Writing technical AI content (real examples)\',\'Finding clients on Upwork, Fiverr, LinkedIn\',\'Portfolio building from scratch\',\'Pricing guide: NGN and USD rates\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Copywriting -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Copywriting Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#0a1a2a,#0a2a3a);">
-          <span class="emoji-fallback">📢</span>
-          <span class="product-new">2026</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">AI Career Guide</div>
-          <h3>How to Become an AI Copywriter in 2026</h3>
-          <p>Master persuasion with AI — ads, landing pages, email sequences, and sales copy that converts. A career guide for the modern copywriter.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>AI copywriting vs traditional copywriting</li>
-              <li>Top AI copy tools: Copy.ai, Writesonic, ChatGPT</li>
-              <li>Frameworks: AIDA, PAS, BAB with AI prompts</li>
-              <li>Ad copy, email sequences, landing pages — templates included</li>
-              <li>Finding copywriting clients globally in 2026</li>
-              <li>Rates, packages, and upselling strategies</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="4000" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="7000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="11000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Copywriting Guide','ai-career','📢',
-              [{level:\'Beginner\',price:4000,desc:\'Copy fundamentals, AI tools intro, writing your first ad and landing page\'},
-               {level:\'Intermediate\',price:7000,desc:\'Email funnels, A/B testing copy, retainer client strategies\'},
-               {level:\'Advanced\',price:11000,desc:\'Agency model, conversion rate optimization, high-ticket copywriting packages\'}],
-              [\'AI vs traditional copywriting in 2026\',\'Top tools: Copy.ai, Writesonic, ChatGPT\',\'AIDA, PAS, BAB frameworks with AI prompts\',\'Included templates: ads, emails, landing pages\',\'Finding global copywriting clients\',\'Rates, packages, upsell strategies\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Graphic Design -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Graphic Design Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#1a0B1a,#2a0a2a);">
-          <span class="emoji-fallback">🎨</span>
-          <span class="product-new">2026</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">AI Career Guide</div>
-          <h3>How to Become an AI Graphic Designer in 2026</h3>
-          <p>Use Midjourney, DALL-E, Adobe Firefly, and Canva AI to create stunning designs faster — and build a profitable design career or business.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>AI design tools comparison: Midjourney vs Firefly vs DALL-E</li>
-              <li>Prompting for consistent brand visuals</li>
-              <li>Creating logos, social graphics, presentations with AI</li>
-              <li>Selling AI-generated design assets on marketplaces</li>
-              <li>Client acquisition for AI design services</li>
-              <li>Copyright and ethical use of AI-generated art</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="4000" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="7500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="12000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Graphic Design Guide','ai-career','🎨',
-              [{level:\'Beginner\',price:4000,desc:\'AI design tools intro, first designs, Canva AI and basic Midjourney prompting\'},
-               {level:\'Intermediate\',price:7500,desc:\'Brand identity design with AI, client projects, selling on Creative Market\'},
-               {level:\'Advanced\',price:12000,desc:\'Full design agency with AI, asset marketplace, licensing AI-generated works\'}],
-              [\'AI tools comparison: Midjourney, Firefly, DALL-E\',\'Prompting for consistent brand visuals\',\'Logos, social graphics, presentations with AI\',\'Selling on Creative Market, Envato, Gumroad\',\'Client acquisition strategies\',\'Copyright and ethical AI art use\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Research Assistant -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Research Assistant Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#0a2a2a,#0a3a3a);">
-          <span class="emoji-fallback">🔍</span>
-          <span class="product-new">2026</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">AI Career Guide</div>
-          <h3>How to Work as an AI Research Assistant in 2026</h3>
-          <p>Leverage AI tools to conduct faster, deeper research for academics, businesses, journalists, and consultants worldwide — and get paid remotely.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>What AI research assistants do and who hires them</li>
-              <li>AI research tools: Perplexity, Consensus, Elicit, Scopus</li>
-              <li>Research report templates and formatting</li>
-              <li>Academic vs business vs market research</li>
-              <li>Finding research assistant clients globally</li>
-              <li>Pricing and deliverable structures</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="6000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="9500" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Research Assistant Guide','ai-career','🔍',
-              [{level:\'Beginner\',price:3500,desc:\'What the role involves, top AI research tools, landing first remote assignments\'},
-               {level:\'Intermediate\',price:6000,desc:\'Structured research reports, academic databases, recurring client packages\'},
-               {level:\'Advanced\',price:9500,desc:\'Market intelligence consulting, research team management, enterprise research contracts\'}],
-              [\'What AI research assistants do\',\'AI research tools: Perplexity, Consensus, Elicit\',\'Research report templates included\',\'Academic vs business vs market research\',\'Finding global clients remotely\',\'Pricing and deliverable structures\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- AI Video Creation -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Video Creation Guide">
+      <div class="product-card" data-cat="ai-career" data-name="AI Ethics Reviewer Guide" data-id="p003">
         <div class="product-img" style="background:linear-gradient(135deg,#1a0a0a,#2a1a0a);">
-          <span class="emoji-fallback">🎬</span>
-          <span class="product-new">2026</span>
+          <span class="emoji-fallback">🛡️</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
-          <h3>How to Create &amp; Sell AI Videos in 2026</h3>
-          <p>From faceless YouTube channels to client video production — master AI video tools and build a video creation income stream from scratch.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>Best AI video tools: Runway, Sora, HeyGen, InVideo</li>
-              <li>Faceless video production plan (full workflow)</li>
-              <li>Video prompt engineering for quality output</li>
-              <li>B-Roll idea generation &amp; script prompts</li>
-              <li>Subtitle enhancement &amp; transcription workflow</li>
-              <li>Retention optimizer techniques for social video</li>
-              <li>Storytelling editor framework for compelling content</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="4500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="8000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="13000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          <h3 class="product-name">AI Ethics Reviewer Guide</h3>
+          <p class="product-desc">Review AI outputs for bias, harmful content, and fairness — the fastest-growing AI role in 2026.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Beginner ₦4,000</span>
+            <span class="tier-pill tier-mid">Intermediate ₦7,500</span>
+            <span class="tier-pill tier-adv">Advanced ₦12,000</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Video Creation Guide','ai-career','🎬',
-              [{level:\'Beginner\',price:4500,desc:\'AI video tools intro, first faceless video production, basic scripting\'},
-               {level:\'Intermediate\',price:8000,desc:\'Full production workflow, client projects, retention optimization\'},
-               {level:\'Advanced\',price:13000,desc:\'Video agency model, prompt engineering mastery, scaling to $1k+/month\'}],
-              [\'Best AI video tools: Runway, Sora, HeyGen, InVideo\',\'Faceless video production plan\',\'Video prompt engineering\',\'B-Roll script prompts included\',\'Subtitle enhancement workflow\',\'Retention optimizer techniques\',\'Storytelling editor framework\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦4,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p003')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- AI Outputs Reviewer -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Outputs Reviewer Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#0a1a0a,#0a2a1a);">
-          <span class="emoji-fallback">📋</span>
-          <span class="product-new">2026</span>
+      <div class="product-card" data-cat="ai-career" data-name="AI Content Writer Guide" data-id="p004">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a1a2a,#1a2a3a);">
+          <span class="emoji-fallback">✍️</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
-          <h3>How to Become an AI Outputs Reviewer in 2026</h3>
-          <p>Review and rate AI-generated content for quality, accuracy, and safety — one of the most in-demand remote AI jobs of 2026.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>What AI outputs reviewers do vs evaluators</li>
-              <li>Quality assessment frameworks for text, code, images</li>
-              <li>Platforms: Remotasks, Surge AI, Scale AI, Appen</li>
-              <li>Writing clear, useful review feedback</li>
-              <li>Passing reviewer qualification tests</li>
-              <li>Scaling income across multiple platforms</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="6000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="9500" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          <h3 class="product-name">AI Technical Content Writer Guide</h3>
+          <p class="product-desc">Break into AI content writing — from first article to full-time income. Written by a working AI content writer at GAOTek Inc.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
+            <span class="tier-pill tier-mid">Intermediate ₦7,000</span>
+            <span class="tier-pill tier-adv">Advanced ₦12,000</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Outputs Reviewer Guide','ai-career','📋',
-              [{level:\'Beginner\',price:3500,desc:\'Role overview, passing qualification tests, first review tasks\'},
-               {level:\'Intermediate\',price:6000,desc:\'Advanced quality frameworks, multi-platform income, efficiency optimization\'},
-               {level:\'Advanced\',price:9500,desc:\'Review team lead, quality assurance consulting, building review SOPs\'}],
-              [\'AI outputs reviewer vs evaluator roles\',\'Quality assessment frameworks\',\'Platforms: Remotasks, Surge AI, Scale AI\',\'Writing clear review feedback\',\'Passing qualification tests\',\'Scaling income across platforms\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p004')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- AI Courses Guide -->
-      <div class="product-card" data-cat="ai-career" data-name="AI Courses Creation Guide">
-        <div class="product-img" style="background:linear-gradient(135deg,#0B1a3A,#1a2a5a);">
-          <span class="emoji-fallback">📚</span>
-          <span class="product-new">2026</span>
+      <div class="product-card" data-cat="ai-career" data-name="AI Tutor Guide" data-id="p005">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a2a1a,#1a3a2a);">
+          <span class="emoji-fallback">🎓</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
-          <h3>How to Create &amp; Sell AI Courses in 2026</h3>
-          <p>Turn your AI skills into a scalable income stream — design, record, and sell AI courses to businesses, individuals, and institutions worldwide.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>Choosing your AI course topic and audience</li>
-              <li>Curriculum design: beginner to advanced structure</li>
-              <li>Platforms: Udemy, Teachable, Gumroad, LinkedIn Learning</li>
-              <li>Recording &amp; editing with free/affordable tools</li>
-              <li>Pricing, launching, and marketing your course</li>
-              <li>Corporate training vs individual learner strategies</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="4500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
-            <span class="level-tab" data-price="8000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
-            <span class="level-tab" data-price="13000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          <h3 class="product-name">AI Tutor & Literacy Trainer Guide</h3>
+          <p class="product-desc">Build a teaching career around AI — workshops, online courses, community programs, and institutional partnerships.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
+            <span class="tier-pill tier-mid">Intermediate ₦6,500</span>
+            <span class="tier-pill tier-adv">Advanced ₦10,000</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI Courses Creation Guide','ai-career','📚',
-              [{level:\'Beginner\',price:4500,desc:\'Choosing your topic, free recording tools, launching your first mini-course\'},
-               {level:\'Intermediate\',price:8000,desc:\'Full curriculum design, platform optimization, first ₦100k+ from courses\'},
-               {level:\'Advanced\',price:13000,desc:\'Multi-course brand, corporate licensing, passive income scaling system\'}],
-              [\'Choosing your AI course topic\',\'Curriculum design framework\',\'Platforms: Udemy, Teachable, Gumroad\',\'Recording with free tools\',\'Pricing and marketing strategy\',\'Corporate vs individual learner approach\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p005')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- PROMPT ENGINEERING PACK -->
-      <div class="product-card" data-cat="prompts" data-name="Ultimate Prompt Engineering Pack">
-        <div class="product-img" style="background:linear-gradient(135deg,#1a0B3A,#2a0a5a);">
-          <span class="emoji-fallback">⚡</span>
-          <span class="product-new">BESTSELLER</span>
+      <div class="product-card" data-cat="ai-career" data-name="AI Graphic Designer Guide" data-id="p006">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0a2a,#2a0a3a);">
+          <span class="emoji-fallback">🎨</span><span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3 class="product-name">AI Graphic Designer Guide</h3>
+          <p class="product-desc">Use Midjourney, Canva AI, Adobe Firefly to create and sell professional designs at scale — without a design degree.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
+            <span class="tier-pill tier-mid">Intermediate ₦6,500</span>
+            <span class="tier-pill tier-adv">Advanced ₦10,000</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p006')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end AI career grid -->
+
+    <!-- PROMPT PACKS -->
+    <div class="section-heading">
+      <h2>⚡ Prompt Engineering Packs</h2>
+      <p>Tested, ready-to-use AI prompts for business, content, video, marketing, and research. Copy, paste, get results.</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card" data-cat="prompts" data-name="Ultimate Prompt Pack 2026" data-id="p007">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a0a2a,#1a0a3a);">
+          <span class="emoji-fallback">⚡</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
           <div class="product-cat">Prompt Pack</div>
-          <h3>Ultimate Prompt Engineering Pack 2026</h3>
-          <p>200+ tested prompts for content creation, business operations, marketing, research, design, video production, and AI career tasks.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>AI video prompt generator (ultimate production prompts)</li>
-              <li>Advanced video polish prompt pack</li>
-              <li>B-Roll idea generation prompts</li>
-              <li>Instagram caption &amp; social media prompts</li>
-              <li>Email newsletter prompt sequences</li>
-              <li>Business strategy &amp; operations prompts</li>
-              <li>Retention optimizer prompts for video/content</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="5000" data-level="Starter (50 prompts)" onclick="selectLevel(this, event)">Starter</span>
-            <span class="level-tab" data-price="9000" data-level="Pro (150 prompts)" onclick="selectLevel(this, event)">Pro</span>
-            <span class="level-tab" data-price="15000" data-level="Ultimate (200+ prompts)" onclick="selectLevel(this, event)">Ultimate</span>
+          <h3 class="product-name">Ultimate Business Prompt Pack 2026</h3>
+          <p class="product-desc">200+ tested prompts for video scripts, content creation, B-Roll generation, copywriting, research, and business operations.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Essential 50 — ₦3,500</span>
+            <span class="tier-pill tier-mid">Pro 100 — ₦6,000</span>
+            <span class="tier-pill tier-adv">Full 200+ — ₦9,000</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦5,000</div>
-            <button class="btn btn-gold btn-sm" onclick="openModal('Ultimate Prompt Engineering Pack 2026','prompts','⚡',
-              [{level:\'Starter — 50 Prompts\',price:5000,desc:\'Core prompts for content, marketing, and basic business tasks. Perfect for beginners\'},
-               {level:\'Pro — 150 Prompts\',price:9000,desc:\'Full content creation suite: video, social, email, research, copywriting prompts\'},
-               {level:\'Ultimate — 200+ Prompts\',price:15000,desc:\'Complete library including video production, storytelling, AI career, business strategy, and advanced workflows\'}],
-              [\'AI video production prompt pack\',\'Advanced video polish prompts\',\'B-Roll idea generation\',\'Instagram &amp; social media captions\',\'Email newsletter sequences\',\'Business strategy prompts\',\'Retention optimizer prompts\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p007')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- ATS RESUME TEMPLATE -->
-      <div class="product-card" data-cat="templates" data-name="ATS Resume Template Pack">
-        <div class="product-img" style="background:linear-gradient(135deg,#0a2a0a,#1a3a1a);">
-          <span class="emoji-fallback">📄</span>
-          <span class="product-new">2026</span>
+      <div class="product-card" data-cat="prompts" data-name="Video Content Prompt Pack" data-id="p008">
+        <div class="product-img" style="background:linear-gradient(135deg,#2a0a0a,#3a1a0a);">
+          <span class="emoji-fallback">🎬</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
-          <div class="product-cat">Template Pack</div>
-          <h3>ATS-Certified Resume &amp; Cover Letter Templates 2026</h3>
-          <p>Professionally designed, ATS-optimized resume and cover letter templates for AI roles, tech jobs, and remote positions worldwide.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>5 ATS-certified resume templates (Word + PDF)</li>
-              <li>3 cover letter templates with fill-in prompts</li>
-              <li>AI job roles template (annotator, evaluator, writer)</li>
-              <li>Remote job &amp; freelance platform profile templates</li>
-              <li>Keyword optimization guide for 2026 job market</li>
-              <li>LinkedIn profile optimization checklist</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="4000" data-level="Basic (2 templates)" onclick="selectLevel(this, event)">Basic</span>
-            <span class="level-tab" data-price="7000" data-level="Standard (5 templates)" onclick="selectLevel(this, event)">Standard</span>
-            <span class="level-tab" data-price="11000" data-level="Full Pack (8 + guide)" onclick="selectLevel(this, event)">Full Pack</span>
+          <div class="product-cat">Prompt Pack</div>
+          <h3 class="product-name">Video Content Prompt Pack</h3>
+          <p class="product-desc">TikTok, Reels, YouTube Shorts — hooks, scripts, B-Roll ideas, retention optimizers, and storytelling frameworks.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Starter — ₦2,500</span>
+            <span class="tier-pill tier-mid">Creator — ₦5,000</span>
+            <span class="tier-pill tier-adv">Pro — ₦8,000</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('ATS Resume &amp; Cover Letter Templates 2026','templates','📄',
-              [{level:\'Basic — 2 Templates\',price:4000,desc:\'2 ATS resume templates and 1 cover letter template for general use\'},
-               {level:\'Standard — 5 Templates\',price:7000,desc:\'5 resume templates including AI-specific roles + 3 cover letters + LinkedIn checklist\'},
-               {level:\'Full Pack — 8 + Guide\',price:11000,desc:\'Complete pack: 8 templates, cover letters, keyword guide, LinkedIn optimization, remote job profile templates\'}],
-              [\'ATS-certified resume templates (Word + PDF)\',\'Cover letter templates with fill-in prompts\',\'AI job roles specific templates\',\'Remote/freelance platform profile templates\',\'Keyword optimization guide 2026\',\'LinkedIn profile optimization checklist\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦2,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p008')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- BRANDING KIT -->
-      <div class="product-card" data-cat="design" data-name="AI-Generated Brand Identity Kit">
-        <div class="product-img" style="background:linear-gradient(135deg,#1a0a1a,#2a1a2a);">
-          <span class="emoji-fallback">🖼️</span>
-          <span class="product-new">AI-GENERATED</span>
+    </div><!-- end prompts grid -->
+
+    <!-- TEMPLATES -->
+    <div class="section-heading">
+      <h2>📄 CV, Resume & Career Templates</h2>
+      <p>ATS-optimized, professionally designed templates for AI roles, tech jobs, and remote careers in 2026.</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card" data-cat="templates" data-name="AI Career CV Template Pack" data-id="p009">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a1a0a,#1a2a1a);">
+          <span class="emoji-fallback">📄</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
-          <div class="product-cat">Design Asset</div>
-          <h3>AI-Generated Brand Identity Kit 2026</h3>
-          <p>Professionally designed AI-generated brand assets — logos, color palettes, social media templates, and business card designs ready to customize.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>3 AI-generated logo concept variations (PNG + SVG)</li>
-              <li>Brand color palette + typography guide (PDF)</li>
-              <li>10 social media post templates (Canva-editable)</li>
-              <li>Business card design (front + back)</li>
-              <li>Email signature template</li>
-              <li>Letterhead design template</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="8000" data-level="Starter Brand" onclick="selectLevel(this, event)">Starter</span>
-            <span class="level-tab" data-price="15000" data-level="Growth Brand" onclick="selectLevel(this, event)">Growth</span>
-            <span class="level-tab" data-price="25000" data-level="Full Brand System" onclick="selectLevel(this, event)">Full System</span>
+          <div class="product-cat">Template</div>
+          <h3 class="product-name">AI Career CV & Resume Template Pack</h3>
+          <p class="product-desc">ATS-optimized CV templates for AI roles — Data Annotator, Content Writer, Ethics Reviewer, and more. Stand out in 2026.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Single Role — ₦2,000</span>
+            <span class="tier-pill tier-mid">3 Roles — ₦4,500</span>
+            <span class="tier-pill tier-adv">All 8 Roles — ₦7,500</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦8,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('AI-Generated Brand Identity Kit 2026','design','🖼️',
-              [{level:\'Starter Brand\',price:8000,desc:\'Logo concepts, color palette, and 5 social media templates for new businesses\'},
-               {level:\'Growth Brand\',price:15000,desc:\'Full social media pack (20 templates), business card, email signature, letterhead\'},
-               {level:\'Full Brand System\',price:25000,desc:\'Complete brand identity: logos, all templates, brand guide PDF, icon set, and custom color system\'}],
-              [\'3 AI-generated logo variations (PNG + SVG)\',\'Brand color palette + typography guide\',\'Social media post templates (Canva-editable)\',\'Business card design front + back\',\'Email signature template\',\'Letterhead design template\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦2,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p009')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- PRESENTATION TEMPLATES -->
-      <div class="product-card" data-cat="design" data-name="Professional Presentation Template Pack">
-        <div class="product-img" style="background:linear-gradient(135deg,#0a1a3a,#1a2a4a);">
-          <span class="emoji-fallback">📊</span>
-          <span class="product-new">2026</span>
+      <div class="product-card" data-cat="templates" data-name="Content Calendar Template Pack" data-id="p010">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a2a2a,#1a3a3a);">
+          <span class="emoji-fallback">📅</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
-          <div class="product-cat">Design Asset</div>
-          <h3>Professional Presentation &amp; Pitch Deck Templates 2026</h3>
-          <p>Stunning AI-designed presentation templates for business pitches, client proposals, reports, and team updates — PowerPoint &amp; Google Slides.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>5 full presentation templates (20+ slides each)</li>
-              <li>Business pitch deck template</li>
-              <li>Client proposal deck</li>
-              <li>Company profile template</li>
-              <li>Compatible: PowerPoint, Google Slides, Canva</li>
-              <li>Editable fonts, colors, charts, icons included</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="5000" data-level="Single Template" onclick="selectLevel(this, event)">Single</span>
-            <span class="level-tab" data-price="9000" data-level="3 Templates" onclick="selectLevel(this, event)">3 Pack</span>
-            <span class="level-tab" data-price="15000" data-level="Full Bundle (5)" onclick="selectLevel(this, event)">Full Bundle</span>
+          <div class="product-cat">Template</div>
+          <h3 class="product-name">Content Calendar Template Pack</h3>
+          <p class="product-desc">30, 60, and 90-day content planning templates for social media, blogs, and email — pre-filled with niche-specific ideas.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">30-Day — ₦2,500</span>
+            <span class="tier-pill tier-mid">60-Day — ₦4,500</span>
+            <span class="tier-pill tier-adv">90-Day — ₦6,500</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦5,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('Presentation &amp; Pitch Deck Templates 2026','design','📊',
-              [{level:\'Single Template\',price:5000,desc:\'1 premium presentation template of your choice (PowerPoint + Google Slides)\'},
-               {level:\'3 Template Pack\',price:9000,desc:\'3 premium templates: choose from pitch deck, client proposal, or company profile\'},
-               {level:\'Full Bundle — 5 Templates\',price:15000,desc:\'Complete set: pitch deck, client proposal, company profile, report template, team update deck\'}],
-              [\'5 full presentation templates (20+ slides each)\',\'Business pitch deck template\',\'Client proposal deck\',\'Company profile template\',\'PowerPoint + Google Slides + Canva compatible\',\'Editable fonts, colors, charts, icons\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦2,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p010')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- SOCIAL MEDIA TEMPLATE PACK -->
-      <div class="product-card" data-cat="design" data-name="Social Media Template Pack">
+    </div><!-- end templates grid -->
+
+    <!-- DESIGN ASSETS -->
+    <div class="section-heading">
+      <h2>🎨 Design Asset Bundles</h2>
+      <p>Canva-ready social media packs, brand kits, and visual assets — built for African businesses in 2026.</p>
+    </div>
+    <div class="products-grid">
+
+      <div class="product-card" data-cat="design" data-name="Social Media Design Bundle" data-id="p011">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0a1a,#2a0a2a);">
+          <span class="emoji-fallback">🎨</span><span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Design Asset Bundle</div>
+          <h3 class="product-name">Social Media Design Bundle 2026</h3>
+          <p class="product-desc">Professional Canva-ready templates for Instagram, LinkedIn, TikTok, and Facebook. Editable colors, fonts, and layouts.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">10 Templates — ₦3,000</span>
+            <span class="tier-pill tier-mid">25 Templates — ₦6,000</span>
+            <span class="tier-pill tier-adv">50 Templates — ₦10,000</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span>₦3,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p011')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end design grid -->
+
+    <!-- EBOOKS & BUSINESS -->
+    <div class="section-heading">
+      <h2>📖 Ebooks & Business Growth Guides</h2>
+      <p>Strategic frameworks, market insights, and actionable playbooks for African entrepreneurs and digital professionals in 2026.</p>
+    </div>
+    <div class="products-grid" id="productsGrid">
+
+      <div class="product-card" data-cat="business" data-name="Digital Business Strategy Ebook" data-id="p012">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a1a2a,#1a2a4a);">
+          <span class="emoji-fallback">📖</span><span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Ebook</div>
+          <h3 class="product-name">Digital Business Strategy Ebook 2026</h3>
+          <p class="product-desc">The complete playbook for building, marketing, and scaling a digital business in Nigeria and Africa — using AI tools in 2026.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Starter — ₦4,500</span>
+            <span class="tier-pill tier-mid">Growth — ₦8,000</span>
+            <span class="tier-pill tier-adv">Enterprise — ₦14,000</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span>₦4,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p012')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="business" data-name="SOP Template Bundle" data-id="p013">
         <div class="product-img" style="background:linear-gradient(135deg,#1a1a0a,#2a2a1a);">
-          <span class="emoji-fallback">📱</span>
-          <span class="product-new">2026</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Design Asset</div>
-          <h3>Social Media &amp; Thumbnail Template Pack 2026</h3>
-          <p>100+ AI-designed social media templates — Instagram posts, carousels, YouTube thumbnails, TikTok covers, and LinkedIn banners. Canva-editable.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>30 Instagram post templates (square + portrait)</li>
-              <li>15 Instagram carousel templates (5-slide sets)</li>
-              <li>20 YouTube thumbnail templates</li>
-              <li>15 TikTok cover + caption templates</li>
-              <li>10 LinkedIn post + banner templates</li>
-              <li>10 Twitter/X post templates</li>
-              <li>All Canva-editable with brand color swap</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="5000" data-level="Platform Pack (30)" onclick="selectLevel(this, event)">Platform</span>
-            <span class="level-tab" data-price="9000" data-level="Multi-Platform (60)" onclick="selectLevel(this, event)">Multi</span>
-            <span class="level-tab" data-price="14000" data-level="Full Library (100+)" onclick="selectLevel(this, event)">Full Library</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦5,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('Social Media &amp; Thumbnail Template Pack 2026','design','📱',
-              [{level:\'Platform Pack — 30 Templates\',price:5000,desc:\'30 templates for one platform of your choice (Instagram, YouTube, or TikTok)\'},
-               {level:\'Multi-Platform — 60 Templates\',price:9000,desc:\'60 templates across Instagram, YouTube, and LinkedIn — fully Canva-editable\'},
-               {level:\'Full Library — 100+ Templates\',price:14000,desc:\'Complete library: all 100+ templates across every platform including TikTok, Twitter/X, and carousel sets\'}],
-              [\'Instagram post templates (square + portrait)\',\'Instagram carousel templates\',\'YouTube thumbnail templates\',\'TikTok cover templates\',\'LinkedIn post + banner templates\',\'Twitter/X post templates\',\'All Canva-editable with brand swap\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- BUSINESS CHECKLIST BUNDLE -->
-      <div class="product-card" data-cat="business" data-name="Business Checklist & Notion Template Bundle">
-        <div class="product-img" style="background:linear-gradient(135deg,#0a2a1a,#1a3a2a);">
-          <span class="emoji-fallback">✅</span>
-          <span class="product-new">2026</span>
+          <span class="emoji-fallback">📋</span><span class="product-new">2026</span>
         </div>
         <div class="product-body">
           <div class="product-cat">Business Toolkit</div>
-          <h3>Business Checklist &amp; Notion Template Bundle 2026</h3>
-          <p>Proven business checklists, Notion workspace templates, and operational frameworks for entrepreneurs and SMEs scaling in 2026.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>Business launch checklist (CAC registration to first client)</li>
-              <li>Social media management Notion template</li>
-              <li>Client onboarding &amp; project management system</li>
-              <li>Weekly productivity &amp; KPI tracker (Notion)</li>
-              <li>Content calendar (3-month template)</li>
-              <li>Business SOP writing guide + template</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="4500" data-level="Starter Kit" onclick="selectLevel(this, event)">Starter</span>
-            <span class="level-tab" data-price="8000" data-level="Operations Pack" onclick="selectLevel(this, event)">Operations</span>
-            <span class="level-tab" data-price="13000" data-level="Full Business OS" onclick="selectLevel(this, event)">Full OS</span>
+          <h3 class="product-name">Business SOP Template Bundle</h3>
+          <p class="product-desc">Standard Operating Procedure templates for 10 core business processes — customer service, onboarding, social media, invoicing, and more.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">5 SOPs — ₦3,000</span>
+            <span class="tier-pill tier-mid">10 SOPs — ₦5,500</span>
+            <span class="tier-pill tier-adv">Full Pack + AI Writing Guide — ₦9,000</span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,500</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('Business Checklist &amp; Notion Template Bundle 2026','business','✅',
-              [{level:\'Starter Kit\',price:4500,desc:\'Business launch checklist + content calendar + social media Notion template\'},
-               {level:\'Operations Pack\',price:8000,desc:\'Full Notion workspace: client management, KPI tracker, project system, content calendar\'},
-               {level:\'Full Business OS\',price:13000,desc:\'Complete business operating system: all templates + SOP guide + content strategy framework + KPI dashboard\'}],
-              [\'Business launch checklist\',\'Social media management Notion template\',\'Client onboarding system\',\'Weekly KPI tracker (Notion)\',\'3-month content calendar\',\'SOP writing guide + template\']
-            )">View &amp; Buy</button>
+            <div class="product-price"><span class="currency">From</span>₦3,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p013')">View &amp; Buy</button>
           </div>
         </div>
       </div>
 
-      <!-- AI CONTENT SERVICE PACK -->
-      <div class="product-card" data-cat="content" data-name="AI-Powered Content Service Pack">
-        <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#1a2a4a);">
-          <span class="emoji-fallback">🚀</span>
-          <span class="product-new">SERVICE</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Content Service</div>
-          <h3>AI-Powered Content Service Pack 2026</h3>
-          <p>Done-for-you AI content creation: Instagram captions, short-form video scripts, carousel posts, blog articles, and email newsletters — delivered fast.</p>
-          <div class="product-includes">
-            <h5>What's Delivered</h5>
-            <ul>
-              <li>30 Instagram captions (niche-specific, ready to post)</li>
-              <li>10 short-form video scripts (60–90 seconds)</li>
-              <li>5 carousel post scripts (5-slide each)</li>
-              <li>4 blog article outlines + intro paragraphs</li>
-              <li>4 email newsletter templates (fully written)</li>
-              <li>Delivered within 5–7 business days</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="15000" data-level="Starter Month" onclick="selectLevel(this, event)">Starter</span>
-            <span class="level-tab" data-price="25000" data-level="Growth Month" onclick="selectLevel(this, event)">Growth</span>
-            <span class="level-tab" data-price="45000" data-level="Full Month Package" onclick="selectLevel(this, event)">Full Package</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦15,000</div>
-            <button class="btn btn-gold btn-sm" onclick="openModal('AI-Powered Content Service Pack 2026','content','🚀',
-              [{level:\'Starter Month\',price:15000,desc:\'15 captions + 5 video scripts + 2 carousel posts. Perfect for getting started with consistent content\'},
-               {level:\'Growth Month\',price:25000,desc:\'30 captions + 8 video scripts + 4 carousel posts + 2 blog outlines + 2 email newsletters\'},
-               {level:\'Full Month Package\',price:45000,desc:\'Full content system: 30 captions + 10 video scripts + 5 carousels + 4 blogs + 4 emails + content strategy session\'}],
-              [\'Instagram captions (niche-specific)\',\'Short-form video scripts (60-90 sec)\',\'Carousel post scripts (5-slides)\',\'Blog article outlines + intros\',\'Email newsletter templates (written)\',\'Delivered within 5-7 business days\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- DIGITAL PRODUCT STRATEGY EBOOK -->
-      <div class="product-card" data-cat="business" data-name="Digital Product Strategy Ebook 2026">
-        <div class="product-img" style="background:linear-gradient(135deg,#1a0a0a,#3a1a0a);">
-          <span class="emoji-fallback">💰</span>
-          <span class="product-new">EBOOK</span>
-        </div>
-        <div class="product-body">
-          <div class="product-cat">Ebook · Business Strategy</div>
-          <h3>Profitable Digital Products in 2026 — The Complete Strategist Guide</h3>
-          <p>Act as a digital product strategist. Create me the fully equipped practical guide to profitable digital product ideas in 2026, which one has the best potential, and how to structure the product step by step.</p>
-          <div class="product-includes">
-            <h5>What's Inside</h5>
-            <ul>
-              <li>Top 20 digital product ideas with revenue potential ranked</li>
-              <li>Step-by-step product creation framework</li>
-              <li>Pricing strategies: NGN, USD, tiered models</li>
-              <li>Platform selection: Gumroad, Selar, Paystack, Shopify</li>
-              <li>Marketing your digital product with $0 budget</li>
-              <li>Case studies from African digital product creators</li>
-              <li>AI tools to create products 10x faster</li>
-            </ul>
-          </div>
-          <div class="level-tabs">
-            <span class="level-tab active" data-price="6000" data-level="Standard Ebook" onclick="selectLevel(this, event)">Standard</span>
-            <span class="level-tab" data-price="12000" data-level="Ebook + Templates" onclick="selectLevel(this, event)">With Templates</span>
-            <span class="level-tab" data-price="20000" data-level="Full Strategy Pack" onclick="selectLevel(this, event)">Full Pack</span>
-          </div>
-          <div class="product-footer">
-            <div class="product-price"><span class="currency">NGN / Starting from</span>₦6,000</div>
-            <button class="btn btn-gold btn-sm" onclick="openModal('Profitable Digital Products in 2026 — Complete Strategist Guide','business','💰',
-              [{level:\'Standard Ebook\',price:6000,desc:\'Full ebook PDF: 20 product ideas, strategy frameworks, pricing guide, and platform selection\'},
-               {level:\'Ebook + Templates\',price:12000,desc:\'Ebook + 3 Notion templates for product planning, launch checklist, and sales tracking\'},
-               {level:\'Full Strategy Pack\',price:20000,desc:\'Ebook + templates + 1-hour consultation session + personalized product recommendation\'}],
-              [\'Top 20 digital product ideas ranked\',\'Step-by-step product creation framework\',\'Pricing strategies: NGN and USD\',\'Platform selection guide\',\'₦0 marketing strategy\',\'African creator case studies\',\'AI tools to create products faster\']
-            )">View &amp; Buy</button>
-          </div>
-        </div>
-      </div>
-
+    </div><!-- end products grid -->
     </div><!-- end products grid -->
 
     <!-- ADMIN-ADDED PRODUCTS -->
@@ -1288,34 +830,630 @@ function selectLevel(el, e) {
 // ============================================================
 // MODAL
 // ============================================================
-function openModal(name, cat, emoji, levels, includes) {
-  document.getElementById('modalCat').textContent = cat.replace(/-/g,' ').toUpperCase();
-  document.getElementById('modalTitle').textContent = name;
+// ============================================================
+// PRODUCT DATA — All products with full tier details
+// ============================================================
+const PRODUCTS = {
+  p001: {
+    name: 'AI Data Annotator Guide', cat: 'AI Career Guide', emoji: '🏷️',
+    tiers: [
+      {
+        level: '🟢 Beginner', price: 3500, label: 'Foundation Guide',
+        desc: 'Perfect if you\'ve never done annotation before. Get started on your first paid project within 2 weeks.',
+        includes: [
+          'What data annotation is and why it matters',
+          'Types: image, text, audio, video annotation',
+          'Top platforms: Scale AI, Appen, Remotasks, Toloka',
+          'Step-by-step registration and onboarding on each platform',
+          'How to pass annotation qualification tests',
+          'Your first ₦40,000 month — realistic income plan',
+          'Building your annotator profile and portfolio'
+        ]
+      },
+      {
+        level: '🔵 Intermediate', price: 6500, label: 'Growth Guide',
+        desc: 'For annotators already earning but want to double or triple their income. Advanced techniques and multi-platform strategy.',
+        includes: [
+          'Everything in Beginner Guide',
+          'Advanced annotation techniques by data type',
+          'Quality scoring systems — how to maintain 90%+ accuracy',
+          'Handling edge cases and ambiguous labeling tasks',
+          'Working with multiple clients simultaneously',
+          'Label Studio & CVAT advanced tool usage',
+          'Moving from per-task to project-based contracts',
+          'Building a ₦150,000/month annotation income'
+        ]
+      },
+      {
+        level: '⭐ Advanced', price: 10000, label: 'Expert & Leadership Guide',
+        desc: 'For experienced annotators ready to build a team, run a micro-agency, or move into AI pipeline management.',
+        includes: [
+          'Everything in Beginner + Intermediate Guides',
+          'Building and managing an annotation team',
+          'Creating annotation pipelines and quality assurance systems',
+          'Pricing for enterprise annotation clients',
+          'Writing annotation guidelines for AI companies',
+          'Transitioning to full-time AI data operations',
+          'Scaling to $1,000+/month USD equivalent income',
+          'Legal and tax basics for freelance annotators in Nigeria'
+        ]
+      }
+    ]
+  },
+  p002: {
+    name: 'AI Model Evaluator Guide', cat: 'AI Career Guide', emoji: '⭐',
+    tiers: [
+      {
+        level: '🟢 Beginner', price: 3500, label: 'RLHF Starter Guide',
+        desc: 'Learn what RLHF is and start getting paid to improve AI models like ChatGPT and Claude.',
+        includes: [
+          'What RLHF is and why AI companies pay for it',
+          'Platforms: Outlier, Surge AI, DataAnnotation.tech, Scale AI Tasker',
+          'How to pass evaluator qualification tests',
+          'Rating AI responses — the exact criteria used',
+          'Writing better AI responses from scratch',
+          'Your first evaluation project walkthrough',
+          'Income expectations: ₦80,000–₦120,000/month'
+        ]
+      },
+      {
+        level: '🔵 Intermediate', price: 6500, label: 'Pro Evaluator Guide',
+        desc: 'Deepen your evaluation skills and qualify for higher-paying specialist projects.',
+        includes: [
+          'Everything in Beginner Guide',
+          'Domain-specific evaluation: coding, math, science, writing',
+          'Calibration techniques — aligning with team scoring standards',
+          'Handling controversial and sensitive response evaluation',
+          'Getting promoted to reviewer and senior evaluator roles',
+          'Building a ₦180,000–₦200,000/month evaluation income',
+          'Stacking multiple evaluation platforms'
+        ]
+      },
+      {
+        level: '⭐ Advanced', price: 10000, label: 'Specialist & Team Lead Guide',
+        desc: 'Become a specialist evaluator or lead evaluator — the highest-paid tier in AI evaluation work.',
+        includes: [
+          'Everything in Beginner + Intermediate Guides',
+          'Medical, legal, and technical domain evaluation',
+          'Leading evaluation teams and calibration sessions',
+          'Writing evaluation rubrics and guidelines for AI companies',
+          'Consulting for AI companies on evaluation frameworks',
+          'Scaling to $500–$1,500/month USD equivalent',
+          'Building a reputation as a specialist AI evaluator'
+        ]
+      }
+    ]
+  },
+  p003: {
+    name: 'AI Ethics Reviewer Guide', cat: 'AI Career Guide', emoji: '🛡️',
+    tiers: [
+      {
+        level: '🟢 Beginner', price: 4000, label: 'Ethics Foundations Guide',
+        desc: 'Understand AI ethics principles and start reviewing AI outputs for bias and harmful content.',
+        includes: [
+          'Core AI ethics principles: fairness, transparency, accountability',
+          'Types of AI bias and how to identify them',
+          'Harmful content categories and detection methods',
+          'Free certification pathway: LinkedIn Learning AI Ethics course',
+          'Platforms that hire ethics reviewers in 2026',
+          'Your first ethics review project guide',
+          'Income potential: ₦60,000–₦100,000/month starting'
+        ]
+      },
+      {
+        level: '🔵 Intermediate', price: 7500, label: 'Practitioner Guide',
+        desc: 'Apply ethics review skills professionally — bias auditing, content policy work, and AI safety review.',
+        includes: [
+          'Everything in Beginner Guide',
+          'Bias auditing frameworks for image, text, and decision AI',
+          'Content policy development and moderation systems',
+          'EU AI Act and NITDA AI regulation overview (2026)',
+          'Writing ethics review reports for AI companies',
+          'Red-teaming AI systems for vulnerabilities',
+          'Specialist tracks: healthcare AI, financial AI, legal AI ethics'
+        ]
+      },
+      {
+        level: '⭐ Advanced', price: 12000, label: 'Expert & Consultant Guide',
+        desc: 'Position yourself as an AI ethics expert or consultant — the highest-value track in this field.',
+        includes: [
+          'Everything in Beginner + Intermediate Guides',
+          'AI ethics consulting frameworks and client proposals',
+          'Regulatory compliance advisory for Nigerian and international businesses',
+          'Building an AI ethics practice or consultancy',
+          'Publishing and thought leadership in AI ethics',
+          'Academic and NGO partnership opportunities',
+          'Income potential: $200–$500/hour consulting rates'
+        ]
+      }
+    ]
+  },
+  p004: {
+    name: 'AI Technical Content Writer Guide', cat: 'AI Career Guide', emoji: '✍️',
+    tiers: [
+      {
+        level: '🟢 Beginner', price: 3500, label: 'First Article to First Client',
+        desc: 'Written by Hassan Zakariya — an active AI content writer at GAOTek Inc. in 2026. Start earning from your first article.',
+        includes: [
+          'What AI technical content writing actually involves',
+          'Skills you need — and skills you already have',
+          'Building a 3-article portfolio from scratch',
+          'Where to find your first AI writing client',
+          'How to pitch to AI companies (email templates included)',
+          'Pricing your first articles: ₦5,000–₦20,000 per piece',
+          'Tools: ChatGPT, Claude, Grammarly, Surfer SEO basics'
+        ]
+      },
+      {
+        level: '🔵 Intermediate', price: 7000, label: 'Freelance Income Builder',
+        desc: 'Move from occasional gigs to consistent monthly income from AI content writing.',
+        includes: [
+          'Everything in Beginner Guide',
+          'Upwork and Fiverr profile optimization for AI writers',
+          'Long-form AI article writing framework',
+          'Writing AI product descriptions, documentation, and training data',
+          'Rate card: ₦15,000–₦80,000 per article depending on niche',
+          'Building retainer relationships with 2–3 regular clients',
+          'Managing multiple writing projects without burnout'
+        ]
+      },
+      {
+        level: '⭐ Advanced', price: 12000, label: 'Expert Writer & Content Director',
+        desc: 'Command premium rates, build a writing agency, or become a content director for AI companies.',
+        includes: [
+          'Everything in Beginner + Intermediate Guides',
+          'Specialist niches: medical AI, legal AI, finance AI content',
+          'Commanding $100–$500 per article rates internationally',
+          'Building and managing a team of AI content writers',
+          'Content strategy and editorial direction for AI companies',
+          'Ghostwriting, white-labeling, and agency model',
+          'LinkedIn thought leadership to attract inbound clients'
+        ]
+      }
+    ]
+  },
+  p005: {
+    name: 'AI Tutor & Literacy Trainer Guide', cat: 'AI Career Guide', emoji: '🎓',
+    tiers: [
+      {
+        level: '🟢 Beginner', price: 3500, label: 'Start Teaching AI',
+        desc: 'Run your first AI workshop or training session — even if you\'ve only been using AI tools for a few months.',
+        includes: [
+          'How to structure a beginner AI workshop',
+          'Teaching AI tools: ChatGPT, Claude, Canva AI, Copilot',
+          'Community training venues and target audiences',
+          'Partnering with RuffNeck Entertainment and African AI Network (AAN)',
+          'Charging for workshops: ₦5,000–₦20,000 per session',
+          'Free teaching resources and slide templates',
+          'Your first 5 workshop participants — where to find them'
+        ]
+      },
+      {
+        level: '🔵 Intermediate', price: 6500, label: 'Professional Trainer',
+        desc: 'Build a sustainable AI training business with corporate clients, schools, and NGO partnerships.',
+        includes: [
+          'Everything in Beginner Guide',
+          'Designing multi-session AI literacy curriculum',
+          'Corporate AI training proposals and pricing',
+          'Schools and universities partnership approach',
+          'Online AI courses: Udemy, Teachable, or your own platform',
+          'Group training systems: facilitating 20–100 participants',
+          'Building a ₦150,000–₦300,000/month training income'
+        ]
+      },
+      {
+        level: '⭐ Advanced', price: 10000, label: 'AI Training Business Owner',
+        desc: 'Scale from trainer to training business — government contracts, international delivery, and licensing.',
+        includes: [
+          'Everything in Beginner + Intermediate Guides',
+          'Government and institutional AI training contracts',
+          'Building an AI literacy certification program',
+          'Licensing your curriculum to other trainers',
+          'International delivery: diaspora, global NGOs, remote programs',
+          'Sponsorship and grant funding for community programs',
+          'Building a recognized AI education brand'
+        ]
+      }
+    ]
+  },
+  p006: {
+    name: 'AI Graphic Designer Guide', cat: 'AI Career Guide', emoji: '🎨',
+    tiers: [
+      {
+        level: '🟢 Beginner', price: 3500, label: 'AI Design Starter',
+        desc: 'Create professional designs with AI tools — no art school, no expensive software.',
+        includes: [
+          'Canva AI: Magic Design, text-to-image, background removal',
+          'Adobe Firefly: AI image generation and generative fill',
+          'Midjourney basics: prompting for consistent brand visuals',
+          'Your first 5 client-ready design packages',
+          'Pricing: ₦5,000–₦25,000 per design project',
+          'Finding first clients: WhatsApp, Instagram, Fiverr',
+          'Building your AI design portfolio in 7 days'
+        ]
+      },
+      {
+        level: '🔵 Intermediate', price: 6500, label: 'AI Design Professional',
+        desc: 'Command higher rates and serve bigger clients with advanced AI design workflows.',
+        includes: [
+          'Everything in Beginner Guide',
+          'Advanced Midjourney: style consistency, character references',
+          'DALL-E 3 integration in ChatGPT for client work',
+          'Brand identity design with AI tools',
+          'Social media content package production at scale',
+          'Selling on Creative Market and Gumroad passively',
+          'Building ₦150,000–₦250,000/month design income'
+        ]
+      },
+      {
+        level: '⭐ Advanced', price: 10000, label: 'AI Design Agency',
+        desc: 'Build an AI-powered design agency — automated workflows, passive income, and enterprise clients.',
+        includes: [
+          'Everything in Beginner + Intermediate Guides',
+          'Running an AI-first design agency with minimal team',
+          'Automating design production with AI workflows',
+          'Enterprise and international client design contracts',
+          'Passive income: design asset libraries and template stores',
+          'Building and training junior AI designers',
+          'Scaling beyond ₦500,000/month in design revenue'
+        ]
+      }
+    ]
+  },
+  p007: {
+    name: 'Ultimate Business Prompt Pack 2026', cat: 'Prompt Pack', emoji: '⚡',
+    tiers: [
+      {
+        level: '🟢 Essential Pack (50 Prompts)', price: 3500, label: 'Essential 50',
+        desc: 'The 50 most useful business prompts — covering content, marketing, email, and research.',
+        includes: [
+          '10 social media caption prompts (Instagram, LinkedIn, TikTok)',
+          '10 email marketing prompts (subject lines, body, sequences)',
+          '10 business writing prompts (proposals, reports, SOPs)',
+          '10 research and analysis prompts',
+          '10 customer service and response prompts',
+          'Usage guide and customization tips',
+          'Compatible with ChatGPT, Claude, Gemini'
+        ]
+      },
+      {
+        level: '🔵 Pro Pack (100 Prompts)', price: 6000, label: 'Pro 100',
+        desc: '100 prompts covering everything in Essential plus video scripts, B-Roll, storytelling, and branding.',
+        includes: [
+          'Everything in Essential 50',
+          '15 video script prompts (hooks, structure, CTAs)',
+          '10 B-Roll generation prompts',
+          '10 storytelling and narrative prompts',
+          '10 brand voice and tone prompts',
+          '5 retention optimizer prompts',
+          'Advanced customization frameworks',
+          'Platform-specific versions (TikTok vs LinkedIn vs YouTube)'
+        ]
+      },
+      {
+        level: '⭐ Full Pack (200+ Prompts)', price: 9000, label: 'Complete 200+',
+        desc: 'The complete 2026 prompt library — every prompt category you need to run a digital business with AI.',
+        includes: [
+          'Everything in Essential 50 + Pro 100',
+          '30 AI career and freelancing prompts',
+          '20 business strategy and planning prompts',
+          '15 data analysis and reporting prompts',
+          '15 product and offer creation prompts',
+          '10 negotiation and sales prompts',
+          '5 legal and compliance prompt frameworks',
+          'Quarterly update access for 2026',
+          'Bonus: Prompt chaining guide for complex tasks'
+        ]
+      }
+    ]
+  },
+  p008: {
+    name: 'Video Content Prompt Pack', cat: 'Prompt Pack', emoji: '🎬',
+    tiers: [
+      {
+        level: '🟢 Starter (20 Prompts)', price: 2500, label: 'Video Starter',
+        desc: 'Essential video prompts for creators just starting with AI-assisted video production.',
+        includes: [
+          '5 hook generation prompts for short-form video',
+          '5 video script structure prompts',
+          '5 B-Roll idea generation prompts',
+          '5 caption and caption optimization prompts',
+          'Platform guide: TikTok vs Reels vs Shorts differences',
+          'Example outputs for each prompt'
+        ]
+      },
+      {
+        level: '🔵 Creator (50 Prompts)', price: 5000, label: 'Video Creator',
+        desc: 'Full video content workflow — from idea to published, AI-assisted at every step.',
+        includes: [
+          'Everything in Starter',
+          '10 long-form YouTube script prompts',
+          '10 retention optimizer prompts',
+          '5 thumbnail concept prompts',
+          '5 title and description SEO prompts',
+          '5 comment and community prompts',
+          'Storytelling frameworks: problem-solution, before-after, journey'
+        ]
+      },
+      {
+        level: '⭐ Pro (100+ Prompts)', price: 8000, label: 'Video Pro',
+        desc: 'Professional video production prompt system — faceless channels, client work, and monetization.',
+        includes: [
+          'Everything in Starter + Creator',
+          '20 faceless YouTube channel prompts',
+          '15 brand video and client production prompts',
+          '10 podcast episode planning prompts',
+          '10 live stream planning prompts',
+          '5 video series and playlist strategy prompts',
+          'Monetization prompt pack: sponsorship, affiliate, product',
+          'AI video tool guide: Runway, HeyGen, InVideo integration'
+        ]
+      }
+    ]
+  },
+  p009: {
+    name: 'AI Career CV & Resume Template Pack', cat: 'Template', emoji: '📄',
+    tiers: [
+      {
+        level: '🟢 Single Role', price: 2000, label: '1 Role Template',
+        desc: 'One professionally designed, ATS-optimized CV template for the AI role of your choice.',
+        includes: [
+          'Choose 1 role: Annotator, Evaluator, Content Writer, Ethics Reviewer, Tutor, Graphic Designer, Video Creator, or Research Assistant',
+          'ATS-optimized format (passes automated screening)',
+          'Pre-filled with role-relevant keywords for 2026',
+          'Canva editable version included',
+          'Word document version included',
+          'Instructions for personalizing in 30 minutes'
+        ]
+      },
+      {
+        level: '🔵 3 Role Bundle', price: 4500, label: '3 Role Templates',
+        desc: 'Three CV templates for three different AI roles — ideal for career switchers exploring options.',
+        includes: [
+          'Choose any 3 roles from the full list',
+          'All templates ATS-optimized for 2026',
+          'Canva + Word versions for all 3',
+          'Role-specific keyword lists',
+          'Cover letter template (generic + role-specific versions)',
+          'LinkedIn profile optimization checklist'
+        ]
+      },
+      {
+        level: '⭐ All 8 Roles Pack', price: 7500, label: 'Complete 8-Role Pack',
+        desc: 'Every AI career CV template in one pack — for trainers, freelancers, and career coaches.',
+        includes: [
+          'All 8 AI role CV templates',
+          'Canva + Word versions for all 8',
+          'Role-specific keyword libraries',
+          'Full cover letter pack (8 templates)',
+          'LinkedIn profile templates for all 8 roles',
+          'Interview preparation question list per role',
+          'License to use for client coaching (with attribution)'
+        ]
+      }
+    ]
+  },
+  p010: {
+    name: 'Content Calendar Template Pack', cat: 'Template', emoji: '📅',
+    tiers: [
+      {
+        level: '🟢 30-Day Calendar', price: 2500, label: '30-Day Plan',
+        desc: 'A complete 30-day content calendar pre-filled with post ideas, themes, and publishing slots.',
+        includes: [
+          'Pre-filled 30-day social media content plan',
+          'Daily post topics for Instagram, LinkedIn, TikTok, and X',
+          'Weekly theme structure (educational, promotional, community, personal)',
+          'Canva and Google Sheets versions',
+          'Caption writing framework for each post type',
+          '5 bonus caption templates included'
+        ]
+      },
+      {
+        level: '🔵 60-Day Calendar', price: 4500, label: '60-Day Plan',
+        desc: 'Two months of planned content — with content batching system and repurposing strategy.',
+        includes: [
+          'Everything in 30-Day Calendar',
+          '60-day extended content calendar',
+          'Content batching system (create a week in one day)',
+          'Repurposing framework: turn 1 post into 5 formats',
+          'Email newsletter calendar aligned with social calendar',
+          'Analytics tracking template (engagement, reach, growth)',
+          'Monthly content review checklist'
+        ]
+      },
+      {
+        level: '⭐ 90-Day Calendar', price: 6500, label: '90-Day Full Strategy',
+        desc: 'Full quarter content strategy — campaigns, launches, promotions, and seasonal content all planned.',
+        includes: [
+          'Everything in 30-Day + 60-Day Calendars',
+          '90-day strategic content calendar',
+          'Campaign and product launch content sequences',
+          'Seasonal and trending topic integration guide',
+          'Blog post calendar aligned with social content',
+          'Paid ads content calendar (Meta, Google basics)',
+          'Quarter-end content performance review template',
+          'Content strategy guide for next quarter planning'
+        ]
+      }
+    ]
+  },
+  p011: {
+    name: 'Social Media Design Bundle 2026', cat: 'Design Asset Bundle', emoji: '🎨',
+    tiers: [
+      {
+        level: '🟢 10 Templates', price: 3000, label: 'Starter Bundle',
+        desc: '10 professionally designed, editable Canva templates for your most important social media posts.',
+        includes: [
+          '3 Instagram feed post templates',
+          '2 Instagram story templates',
+          '2 LinkedIn post templates',
+          '2 TikTok cover/thumbnail templates',
+          '1 Facebook post template',
+          'All templates editable in free Canva account',
+          'Color and font customization guide'
+        ]
+      },
+      {
+        level: '🔵 25 Templates', price: 6000, label: 'Growth Bundle',
+        desc: '25 templates covering all major content types — quotes, carousels, announcements, promotions.',
+        includes: [
+          'Everything in Starter Bundle',
+          '5 carousel post templates (multi-slide)',
+          '3 promotional/sale announcement templates',
+          '3 testimonial and social proof templates',
+          '2 event and webinar announcement templates',
+          '2 infographic templates',
+          'Brand color palette customization guide',
+          'Template usage strategy guide'
+        ]
+      },
+      {
+        level: '⭐ 50 Templates', price: 10000, label: 'Pro Bundle',
+        desc: 'Complete design system — 50 templates covering every content format your business needs in 2026.',
+        includes: [
+          'Everything in Starter + Growth Bundles',
+          '10 video thumbnail templates',
+          '5 email header templates',
+          '5 WhatsApp Business broadcast templates',
+          '3 logo concept templates',
+          '2 business card templates',
+          'Complete brand identity kit (colors, fonts, icons)',
+          'Commercial use license for client work',
+          'Quarterly new template additions (2026)'
+        ]
+      }
+    ]
+  },
+  p012: {
+    name: 'Digital Business Strategy Ebook 2026', cat: 'Ebook', emoji: '📖',
+    tiers: [
+      {
+        level: '🟢 Starter Edition', price: 4500, label: 'Starter Ebook',
+        desc: 'Essential digital business strategies for entrepreneurs just starting their online journey in Nigeria.',
+        includes: [
+          'Chapter 1: Building your digital foundation (website, social, email)',
+          'Chapter 2: AI tools every Nigerian SME needs in 2026',
+          'Chapter 3: Finding your first 10 online clients',
+          'Chapter 4: Pricing your services for Nigerian and international clients',
+          'Chapter 5: Setting up online payments (Paystack, Flutterwave)',
+          'Bonus: 20 business prompt templates',
+          '80+ pages, fully illustrated'
+        ]
+      },
+      {
+        level: '🔵 Growth Edition', price: 8000, label: 'Growth Ebook',
+        desc: 'Scale from freelancer to established digital business — systems, automation, and team building.',
+        includes: [
+          'Everything in Starter Edition',
+          'Chapter 6: Building automated marketing funnels',
+          'Chapter 7: Content marketing that attracts international clients',
+          'Chapter 8: Building and selling digital products',
+          'Chapter 9: AI workflow automation for small teams',
+          'Chapter 10: Financial management for digital businesses',
+          'Bonus: Business plan template + pitch deck framework',
+          '150+ pages with case studies and worksheets'
+        ]
+      },
+      {
+        level: '⭐ Enterprise Edition', price: 14000, label: 'Enterprise Ebook',
+        desc: 'The complete digital business playbook — from startup to internationally recognized brand.',
+        includes: [
+          'Everything in Starter + Growth Editions',
+          'Chapter 11: International expansion strategy',
+          'Chapter 12: Partnership and sponsorship acquisition',
+          'Chapter 13: Building a digital product empire',
+          'Chapter 14: AI implementation for enterprise operations',
+          'Chapter 15: Brand building for African global businesses',
+          'Bonus: Legal and compliance guide for Nigerian digital businesses',
+          'Bonus: 12-month business growth roadmap template',
+          '200+ pages — the most comprehensive Nigerian digital business guide of 2026'
+        ]
+      }
+    ]
+  },
+  p013: {
+    name: 'Business SOP Template Bundle', cat: 'Business Toolkit', emoji: '📋',
+    tiers: [
+      {
+        level: '🟢 5 SOPs', price: 3000, label: 'Essential 5 SOPs',
+        desc: 'The 5 most critical SOPs every small business needs to run consistently and professionally.',
+        includes: [
+          'SOP 1: Customer inquiry and response (email + WhatsApp)',
+          'SOP 2: Social media content posting and scheduling',
+          'SOP 3: Invoice creation and payment follow-up',
+          'SOP 4: New client onboarding',
+          'SOP 5: Weekly business review and reporting',
+          'All SOPs in Word + Google Docs format',
+          'How to customize each SOP for your business'
+        ]
+      },
+      {
+        level: '🔵 10 SOPs', price: 5500, label: 'Complete 10 SOP Pack',
+        desc: '10 SOPs covering every core business process — enough to systemize a small digital agency completely.',
+        includes: [
+          'Everything in Essential 5',
+          'SOP 6: Product or service delivery workflow',
+          'SOP 7: Complaint and refund handling',
+          'SOP 8: Team task assignment and follow-up',
+          'SOP 9: Monthly financial reconciliation',
+          'SOP 10: Content creation and approval workflow',
+          'SOP implementation guide',
+          'Staff training guide template'
+        ]
+      },
+      {
+        level: '⭐ Full Pack + AI Writing Guide', price: 9000, label: 'Full SOP System',
+        desc: 'Complete SOP system plus a guide to writing new SOPs with AI — build unlimited SOPs for any process.',
+        includes: [
+          'Everything in Essential 5 + Complete 10',
+          'AI SOP Writing Guide: 20 proven prompts to generate any SOP',
+          'SOP quality checklist and review framework',
+          'SOP storage and version control system (Notion template)',
+          'KPI tracking template for each SOP',
+          'Compliance documentation guide for Nigerian businesses',
+          'SOPs for warehouse/logistics operations (bonus track)',
+          'Lifetime access to updated versions in 2026'
+        ]
+      }
+    ]
+  }
+};
 
+
+function openModal(productId) {
+  const p = PRODUCTS[productId];
+  if (!p) { console.error('Product not found:', productId); return; }
+  document.getElementById('modalCat').textContent = p.cat.toUpperCase();
+  document.getElementById('modalTitle').textContent = p.name;
   const incEl = document.getElementById('modalIncludes');
-  incEl.innerHTML = includes.map(i => `<li>${i}</li>`).join('');
-
+  if (incEl) incEl.innerHTML = '';
   const levelsEl = document.getElementById('modalLevels');
-  levelsEl.innerHTML = levels.map((l,i) => `
-    <div class="modal-level${i===0?' selected':''}" onclick="selectModalLevel(this, '${l.level}', ${l.price})">
+  levelsEl.innerHTML = p.tiers.map((t, i) => `
+    <div class="modal-level${i===0?' selected':''}" onclick="selectModalLevel(this,${i},'${productId}')">
       <div class="modal-level-header">
-        <span class="modal-level-name">${l.level}</span>
-        <span class="modal-level-price">₦${l.price.toLocaleString()}</span>
+        <span class="modal-level-name">${t.level}</span>
+        <span class="modal-level-price">\u20a6${t.price.toLocaleString()}</span>
       </div>
-      <div class="modal-level-desc">${l.desc}</div>
+      <div class="modal-level-desc">${t.desc}</div>
+      <div class="modal-tier-what">
+        <h4>What's included:</h4>
+        <ul class="modal-tier-includes">${t.includes.map(inc=>`<li>${inc}</li>`).join('')}</ul>
+      </div>
     </div>
   `).join('');
-
-  selectedModalLevel = {level: levels[0].level, price: levels[0].price};
-  currentModal = {name, cat, emoji, levels, includes};
+  selectedModalLevel = { level: p.tiers[0].level, price: p.tiers[0].price };
+  currentModal = { name: p.name, cat: p.cat, emoji: p.emoji, tiers: p.tiers };
   document.getElementById('productModal').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function selectModalLevel(el, level, price) {
+function selectModalLevel(el, tierIdx, productId) {
   document.querySelectorAll('.modal-level').forEach(m => m.classList.remove('selected'));
   el.classList.add('selected');
-  selectedModalLevel = {level, price};
+  const p = PRODUCTS[productId];
+  if (p && p.tiers[tierIdx]) {
+    selectedModalLevel = { level: p.tiers[tierIdx].level, price: p.tiers[tierIdx].price };
+  }
 }
 
 function closeModal() {
@@ -1334,8 +1472,7 @@ function addToCartFromModal() {
     level: selectedModalLevel.level,
     price: selectedModalLevel.price,
     emoji: currentModal.emoji,
-    imgSrc: currentModal.imgSrc || null,
-    pdfUrl: currentModal.pdfUrl || null
+    pdfUrl: null
   });
   closeModal();
   toggleCart(true);

@@ -397,9 +397,51 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .chat-typing span:nth-child(2){animation-delay:0.2s}
 .chat-typing span:nth-child(3){animation-delay:0.4s}
 @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
-/* ── RESPONSIVE NEW SECTIONS ── */
-@media(max-width:1024px){.ai-careers-grid{grid-template-columns:repeat(2,1fr)}.skills-program-grid{grid-template-columns:1fr}}
-@media(max-width:768px){.ai-careers-grid{grid-template-columns:1fr}.skills-impact{grid-template-columns:repeat(2,1fr)}.internship-grid{grid-template-columns:1fr}.webinar-topics{grid-template-columns:1fr}.chatbot-panel{width:calc(100vw - 40px)}.chatbot-bubble{bottom:16px;right:16px}}
+/* ── HOMEPAGE STORE MODAL ── */
+.sp-buy-btn{margin-top:14px;width:100%;justify-content:center;font-size:12px;padding:9px 16px}
+.sp-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:8000;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)}
+.sp-modal-overlay.open{display:flex}
+.sp-modal{background:var(--bg-white);border-radius:var(--radius);max-width:580px;width:100%;max-height:88vh;overflow-y:auto;position:relative;box-shadow:0 24px 64px rgba(0,0,0,0.25)}
+.sp-modal-close{position:absolute;top:14px;right:16px;font-size:20px;background:none;border:none;color:var(--text-muted);cursor:pointer;line-height:1;z-index:1}.sp-modal-close:hover{color:var(--text-dark)}
+.sp-modal-head{background:linear-gradient(135deg,var(--navy),#0a2040);padding:28px 28px 20px;color:var(--white)}
+.sp-modal-cat{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:8px}
+.sp-modal-head h3{font-size:20px;font-weight:700;color:var(--white);line-height:1.3}
+.sp-modal-body{padding:20px 24px}
+.sp-level{border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px;margin-bottom:12px;cursor:pointer;transition:all 0.2s}
+.sp-level:hover,.sp-level.selected{border-color:var(--cyan);background:rgba(0,180,216,0.04)}
+.sp-level.selected{border-width:2px}
+.sp-level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.sp-level-name{font-size:14px;font-weight:700;color:var(--text-dark)}
+.sp-level-price{font-size:16px;font-weight:700;color:var(--cyan);font-family:var(--font-mono)}
+.sp-level-desc{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:10px}
+.sp-level-includes{display:flex;flex-direction:column;gap:5px;max-height:160px;overflow-y:auto;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.sp-level-includes li{font-size:11px;color:var(--text-body);padding-left:16px;position:relative;line-height:1.5;list-style:none}
+.sp-level-includes li::before{content:'✓';color:var(--cyan);font-weight:700;position:absolute;left:0}
+.sp-modal-footer{padding:16px 24px;border-top:1px solid var(--border);background:var(--bg-light);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.sp-selected-summary{font-size:13px;color:var(--text-dark);font-weight:600}
+.sp-selected-summary span{color:var(--cyan);font-family:var(--font-mono)}
+.sp-input{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:11px 14px;font-family:var(--font-display);font-size:13px;color:var(--text-dark);outline:none;margin-bottom:10px;transition:border-color 0.2s}
+.sp-input:focus{border-color:var(--cyan)}
+.sp-order-summary{background:rgba(0,180,216,0.05);border:1px solid rgba(0,180,216,0.15);border-radius:var(--radius-sm);padding:14px 16px;font-size:13px}
+.sp-order-row{display:flex;justify-content:space-between;margin-bottom:6px;color:var(--text-body)}
+.sp-order-total{display:flex;justify-content:space-between;font-weight:700;font-size:15px;color:var(--text-dark);margin-top:8px;padding-top:8px;border-top:1px solid rgba(0,180,216,0.2)}
+</style>
+.store-preview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.store-preview-card{background:var(--bg-white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.2s;display:flex;flex-direction:column}
+.store-preview-card:hover{border-color:var(--cyan);box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.store-preview-icon{height:100px;display:flex;align-items:center;justify-content:center;font-size:40px}
+.store-preview-body{padding:18px;flex:1;display:flex;flex-direction:column}
+.store-preview-cat{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.store-preview-body h3{font-size:14px;font-weight:700;color:var(--text-dark);margin-bottom:6px;line-height:1.35}
+.store-preview-body p{font-size:12px;color:var(--text-muted);line-height:1.6;margin-bottom:12px;flex:1}
+.store-preview-tiers{display:flex;flex-wrap:wrap;gap:4px}
+.spt{font-size:9px;font-weight:600;padding:2px 8px;border-radius:100px;font-family:var(--font-mono);white-space:nowrap}
+.spt-beg{background:rgba(16,185,129,0.08);color:#10B981;border:1px solid rgba(16,185,129,0.2)}
+.spt-mid{background:rgba(0,180,216,0.08);color:var(--cyan);border:1px solid rgba(0,180,216,0.2)}
+.spt-adv{background:rgba(255,193,7,0.08);color:var(--gold);border:1px solid rgba(255,193,7,0.2)}
+.store-preview-cta-card{background:linear-gradient(135deg,var(--navy),#0a2040);border-color:rgba(0,180,216,0.2);text-align:center;padding:32px 24px;align-items:center;justify-content:center}
+@media(max-width:1024px){.store-preview-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){.store-preview-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -1360,6 +1402,124 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   </div>
 </section>
 
+<!-- STORE PREVIEW -->
+<section class="section" id="store-preview">
+  <div class="container">
+    <div class="fade-up" style="text-align:center;margin-bottom:48px;">
+      <div class="section-label">Digital Store · 2026</div>
+      <h2 class="section-title">RuffNeck Digital Products</h2>
+      <p class="section-sub" style="margin:0 auto;">Instant-download PDF guides, prompt packs, templates, and ebooks — everything you need to launch your AI career or grow your digital business in 2026.</p>
+    </div>
+    <div class="store-preview-grid fade-up">
+      <div class="store-preview-card">
+        <div class="store-preview-icon" style="background:linear-gradient(135deg,#0B1E3A,#0a2a4a)">🏷️</div>
+        <div class="store-preview-body">
+          <div class="store-preview-cat">AI Career Guide</div>
+          <h3>AI Data Annotator Guide</h3>
+          <p>Complete path from beginner to professional annotator — platforms, tools, income plan.</p>
+          <div class="store-preview-tiers">
+            <span class="spt spt-beg">Beginner ₦3,500</span>
+            <span class="spt spt-mid">Intermediate ₦6,500</span>
+            <span class="spt spt-adv">Advanced ₦10,000</span>
+          </div>
+          <button class="btn btn-primary btn-sm sp-buy-btn" onclick="spOpenModal('p001')">View &amp; Buy →</button>
+        </div>
+      </div>
+      <div class="store-preview-card">
+        <div class="store-preview-icon" style="background:linear-gradient(135deg,#0a0a2a,#1a0a3a)">⚡</div>
+        <div class="store-preview-body">
+          <div class="store-preview-cat">Prompt Pack</div>
+          <h3>Ultimate Business Prompt Pack</h3>
+          <p>200+ tested AI prompts for content, video, marketing, research, and operations.</p>
+          <div class="store-preview-tiers">
+            <span class="spt spt-beg">Essential 50 — ₦3,500</span>
+            <span class="spt spt-mid">Pro 100 — ₦6,000</span>
+            <span class="spt spt-adv">Full 200+ — ₦9,000</span>
+          </div>
+          <button class="btn btn-primary btn-sm sp-buy-btn" onclick="spOpenModal('p007')">View &amp; Buy →</button>
+        </div>
+      </div>
+      <div class="store-preview-card">
+        <div class="store-preview-icon" style="background:linear-gradient(135deg,#0a1a2a,#1a2a4a)">📖</div>
+        <div class="store-preview-body">
+          <div class="store-preview-cat">Ebook</div>
+          <h3>Digital Business Strategy Ebook 2026</h3>
+          <p>Complete playbook for building, marketing, and scaling a digital business in Nigeria with AI.</p>
+          <div class="store-preview-tiers">
+            <span class="spt spt-beg">Starter ₦4,500</span>
+            <span class="spt spt-mid">Growth ₦8,000</span>
+            <span class="spt spt-adv">Enterprise ₦14,000</span>
+          </div>
+          <button class="btn btn-primary btn-sm sp-buy-btn" onclick="spOpenModal('p012')">View &amp; Buy →</button>
+        </div>
+      </div>
+      <div class="store-preview-card">
+        <div class="store-preview-icon" style="background:linear-gradient(135deg,#1a1a0a,#2a2a1a)">📋</div>
+        <div class="store-preview-body">
+          <div class="store-preview-cat">Business Toolkit</div>
+          <h3>Business SOP Template Bundle</h3>
+          <p>Standard Operating Procedure templates for 10 core business processes — ready to use today.</p>
+          <div class="store-preview-tiers">
+            <span class="spt spt-beg">5 SOPs ₦3,000</span>
+            <span class="spt spt-mid">10 SOPs ₦5,500</span>
+            <span class="spt spt-adv">Full Pack ₦9,000</span>
+          </div>
+          <button class="btn btn-primary btn-sm sp-buy-btn" onclick="spOpenModal('p013')">View &amp; Buy →</button>
+        </div>
+      </div>
+      <div class="store-preview-card">
+        <div class="store-preview-icon" style="background:linear-gradient(135deg,#0a2a2a,#1a3a3a)">📅</div>
+        <div class="store-preview-body">
+          <div class="store-preview-cat">Template</div>
+          <h3>Content Calendar Template Pack</h3>
+          <p>30, 60, and 90-day content planning templates — pre-filled with niche-specific ideas for 2026.</p>
+          <div class="store-preview-tiers">
+            <span class="spt spt-beg">30-Day ₦2,500</span>
+            <span class="spt spt-mid">60-Day ₦4,500</span>
+            <span class="spt spt-adv">90-Day ₦6,500</span>
+          </div>
+          <button class="btn btn-primary btn-sm sp-buy-btn" onclick="spOpenModal('p010')">View &amp; Buy →</button>
+        </div>
+      </div>
+      <div class="store-preview-card store-preview-cta-card">
+        <div style="font-size:48px;margin-bottom:16px">🛒</div>
+        <h3 style="color:var(--white);margin-bottom:10px">13+ Digital Products</h3>
+        <p style="color:rgba(255,255,255,0.65);font-size:14px;margin-bottom:24px;line-height:1.7">AI Career Guides · Prompt Packs · CV Templates · Design Assets · Ebooks · SOP Bundles · Content Calendars</p>
+        <a href="/store" class="btn btn-primary" style="width:100%;justify-content:center;">Browse Full Store →</a>
+        <p style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:12px">Instant PDF delivery · Paystack secured · 2026</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── HOMEPAGE PRODUCT MODAL ── -->
+<div class="sp-modal-overlay" id="spModalOverlay" onclick="spCloseModalOutside(event)">
+  <div class="sp-modal">
+    <button class="sp-modal-close" onclick="spCloseModal()">✕</button>
+    <div class="sp-modal-head">
+      <div class="sp-modal-cat" id="spModalCat"></div>
+      <h3 id="spModalTitle"></h3>
+    </div>
+    <div class="sp-modal-body">
+      <div id="spModalLevels"></div>
+      <div class="sp-modal-checkout" id="spCheckoutForm" style="display:none">
+        <div style="border-top:1px solid var(--border);margin:20px 0 16px;padding-top:16px;">
+          <div style="font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:12px;">Your Details</div>
+          <input class="sp-input" type="text" id="spBuyerName" placeholder="Full Name *"/>
+          <input class="sp-input" type="email" id="spBuyerEmail" placeholder="Email Address * (PDF delivered here)"/>
+        </div>
+        <div class="sp-order-summary" id="spOrderSummary"></div>
+        <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:16px;padding:14px;" onclick="spInitiatePayment()">🔒 Pay with Paystack →</button>
+        <p style="font-size:11px;color:var(--text-muted);text-align:center;margin-top:10px;">Instant PDF delivery to your email · Secured by Paystack · 2026</p>
+      </div>
+    </div>
+    <div class="sp-modal-footer">
+      <div class="sp-selected-summary" id="spSelectedSummary"></div>
+      <button class="btn btn-primary" id="spAddToOrderBtn" onclick="spShowCheckout()" style="min-width:160px">Proceed to Pay →</button>
+    </div>
+  </div>
+</div>
+
 <!-- BLOG / RESOURCES -->
 <section class="section" id="blog">
   <div class="container">
@@ -1627,7 +1787,142 @@ if(form){
   });
 }
 </script>
-<!-- ── CHATBOT WIDGET ── -->
+<!-- ── HOMEPAGE STORE JS ── -->
+<script>
+// ── PRODUCTS DATA ──
+const SP_PRODUCTS = {
+  p001:{name:'AI Data Annotator Guide',cat:'AI Career Guide',emoji:'🏷️',tiers:[{level:'🟢 Beginner',price:3500,desc:'Get started on your first paid annotation project within 2 weeks.',includes:['What data annotation is and why it matters','Types: image, text, audio, video annotation','Top platforms: Scale AI, Appen, Remotasks, Toloka','How to pass annotation qualification tests','Your first ₦40,000 month — realistic income plan','Building your annotator profile and portfolio']},{level:'🔵 Intermediate',price:6500,desc:'Double or triple your income with advanced techniques and multi-platform strategy.',includes:['Everything in Beginner Guide','Advanced annotation techniques by data type','Quality scoring — how to maintain 90%+ accuracy','Working with multiple clients simultaneously','Moving from per-task to project-based contracts','Building a ₦150,000/month annotation income']},{level:'⭐ Advanced',price:10000,desc:'Build a team, run a micro-agency, or move into AI pipeline management.',includes:['Everything in Beginner + Intermediate Guides','Building and managing an annotation team','Creating annotation pipelines and QA systems','Pricing for enterprise annotation clients','Scaling to $1,000+/month USD equivalent income']}]},
+  p007:{name:'Ultimate Business Prompt Pack 2026',cat:'Prompt Pack',emoji:'⚡',tiers:[{level:'🟢 Essential 50 Prompts',price:3500,desc:'The 50 most useful business prompts for content, marketing, email, and research.',includes:['10 social media caption prompts','10 email marketing prompts','10 business writing prompts','10 research and analysis prompts','10 customer service prompts','Compatible with ChatGPT, Claude, Gemini']},{level:'🔵 Pro 100 Prompts',price:6000,desc:'100 prompts including video scripts, B-Roll, storytelling, and branding.',includes:['Everything in Essential 50','15 video script prompts (hooks, structure, CTAs)','10 B-Roll generation prompts','10 storytelling and narrative prompts','10 brand voice and tone prompts','Platform-specific versions (TikTok vs LinkedIn vs YouTube)']},{level:'⭐ Complete 200+ Prompts',price:9000,desc:'The complete 2026 prompt library for running a digital business with AI.',includes:['Everything in Essential 50 + Pro 100','30 AI career and freelancing prompts','20 business strategy and planning prompts','15 data analysis and reporting prompts','Quarterly update access for 2026','Bonus: Prompt chaining guide for complex tasks']}]},
+  p010:{name:'Content Calendar Template Pack',cat:'Template',emoji:'📅',tiers:[{level:'🟢 30-Day Calendar',price:2500,desc:'Complete 30-day content calendar pre-filled with post ideas and publishing slots.',includes:['Pre-filled 30-day social media content plan','Daily post topics for Instagram, LinkedIn, TikTok, and X','Weekly theme structure','Canva and Google Sheets versions','Caption writing framework for each post type','5 bonus caption templates']},{level:'🔵 60-Day Calendar',price:4500,desc:'Two months of planned content with batching system and repurposing strategy.',includes:['Everything in 30-Day Calendar','60-day extended content calendar','Content batching system (create a week in one day)','Repurposing framework: turn 1 post into 5 formats','Email newsletter calendar aligned with social','Analytics tracking template']},{level:'⭐ 90-Day Full Strategy',price:6500,desc:'Full quarter content strategy — campaigns, launches, promotions all planned.',includes:['Everything in 30-Day + 60-Day Calendars','90-day strategic content calendar','Campaign and product launch content sequences','Seasonal and trending topic integration guide','Blog post calendar aligned with social content','Quarter-end content performance review template']}]},
+  p012:{name:'Digital Business Strategy Ebook 2026',cat:'Ebook',emoji:'📖',tiers:[{level:'🟢 Starter Edition',price:4500,desc:'Essential digital business strategies for entrepreneurs just starting in Nigeria.',includes:['Chapter 1: Building your digital foundation','Chapter 2: AI tools every Nigerian SME needs in 2026','Chapter 3: Finding your first 10 online clients','Chapter 4: Pricing for Nigerian and international clients','Chapter 5: Setting up online payments (Paystack, Flutterwave)','Bonus: 20 business prompt templates — 80+ pages']},{level:'🔵 Growth Edition',price:8000,desc:'Scale from freelancer to established digital business — systems, automation, team building.',includes:['Everything in Starter Edition','Chapter 6: Building automated marketing funnels','Chapter 7: Content marketing for international clients','Chapter 8: Building and selling digital products','Chapter 9: AI workflow automation for small teams','Bonus: Business plan template + pitch deck — 150+ pages']},{level:'⭐ Enterprise Edition',price:14000,desc:'Complete digital business playbook — from startup to internationally recognized brand.',includes:['Everything in Starter + Growth Editions','Chapter 11: International expansion strategy','Chapter 12: Partnership and sponsorship acquisition','Chapter 13: Building a digital product empire','Chapter 14: AI implementation for enterprise operations','Chapter 15: Brand building for African global businesses','200+ pages — most comprehensive Nigerian digital business guide 2026']}]},
+  p013:{name:'Business SOP Template Bundle',cat:'Business Toolkit',emoji:'📋',tiers:[{level:'🟢 Essential 5 SOPs',price:3000,desc:'The 5 most critical SOPs every small business needs to run professionally.',includes:['SOP 1: Customer inquiry and response','SOP 2: Social media content posting','SOP 3: Invoice creation and payment follow-up','SOP 4: New client onboarding','SOP 5: Weekly business review and reporting','Word + Google Docs format for all SOPs']},{level:'🔵 Complete 10 SOPs',price:5500,desc:'10 SOPs — enough to systemize a small digital agency completely.',includes:['Everything in Essential 5','SOP 6: Product or service delivery workflow','SOP 7: Complaint and refund handling','SOP 8: Team task assignment and follow-up','SOP 9: Monthly financial reconciliation','SOP 10: Content creation and approval workflow']},{level:'⭐ Full Pack + AI Writing Guide',price:9000,desc:'Complete SOP system plus AI guide to write unlimited SOPs for any process.',includes:['Everything in Essential 5 + Complete 10','AI SOP Writing Guide: 20 proven prompts','SOP quality checklist and review framework','Notion template for SOP storage and version control','KPI tracking template for each SOP','Compliance documentation guide for Nigerian businesses']}]}
+};
+
+// ── STATE ──
+let spCurrentProduct = null;
+let spSelectedTier = null;
+
+// ── OPEN MODAL ──
+function spOpenModal(productId) {
+  const p = SP_PRODUCTS[productId];
+  if (!p) return;
+  spCurrentProduct = p;
+  spSelectedTier = { ...p.tiers[0] };
+
+  document.getElementById('spModalCat').textContent = p.cat.toUpperCase();
+  document.getElementById('spModalTitle').textContent = p.name;
+  document.getElementById('spCheckoutForm').style.display = 'none';
+  document.getElementById('spAddToOrderBtn').style.display = 'flex';
+
+  const levelsEl = document.getElementById('spModalLevels');
+  levelsEl.innerHTML = p.tiers.map((t, i) => `
+    <div class="sp-level${i===0?' selected':''}" onclick="spSelectTier(this,${i})">
+      <div class="sp-level-header">
+        <span class="sp-level-name">${t.level}</span>
+        <span class="sp-level-price">₦${t.price.toLocaleString()}</span>
+      </div>
+      <div class="sp-level-desc">${t.desc}</div>
+      <ul class="sp-level-includes">${t.includes.map(inc=>`<li>${inc}</li>`).join('')}</ul>
+    </div>
+  `).join('');
+
+  spUpdateSummary();
+  document.getElementById('spModalOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function spSelectTier(el, idx) {
+  document.querySelectorAll('.sp-level').forEach(l => l.classList.remove('selected'));
+  el.classList.add('selected');
+  spSelectedTier = { ...spCurrentProduct.tiers[idx] };
+  spUpdateSummary();
+  document.getElementById('spCheckoutForm').style.display = 'none';
+  document.getElementById('spAddToOrderBtn').style.display = 'flex';
+}
+
+function spUpdateSummary() {
+  if (!spSelectedTier) return;
+  document.getElementById('spSelectedSummary').innerHTML =
+    `Selected: <span>${spSelectedTier.level}</span> — <span>₦${spSelectedTier.price.toLocaleString()}</span>`;
+}
+
+function spShowCheckout() {
+  if (!spCurrentProduct || !spSelectedTier) return;
+  document.getElementById('spCheckoutForm').style.display = 'block';
+  document.getElementById('spAddToOrderBtn').style.display = 'none';
+  document.getElementById('spOrderSummary').innerHTML = `
+    <div class="sp-order-row"><span>${spCurrentProduct.name}</span><span></span></div>
+    <div class="sp-order-row"><span>Tier: ${spSelectedTier.level}</span><span></span></div>
+    <div class="sp-order-total"><span>Total</span><span>₦${spSelectedTier.price.toLocaleString()}</span></div>
+  `;
+  document.getElementById('spBuyerName').value = '';
+  document.getElementById('spBuyerEmail').value = '';
+}
+
+function spCloseModal() {
+  document.getElementById('spModalOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  spCurrentProduct = null;
+  spSelectedTier = null;
+}
+
+function spCloseModalOutside(e) {
+  if (e.target === document.getElementById('spModalOverlay')) spCloseModal();
+}
+
+// ── PAYSTACK PAYMENT ──
+function spInitiatePayment() {
+  const name = document.getElementById('spBuyerName').value.trim();
+  const email = document.getElementById('spBuyerEmail').value.trim();
+  if (!name) { alert('Please enter your full name.'); return; }
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+  if (!spCurrentProduct || !spSelectedTier) return;
+
+  const handler = PaystackPop.setup({
+    key: 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', // ← Replace with your live Paystack key
+    email: email,
+    amount: spSelectedTier.price * 100,
+    currency: 'NGN',
+    ref: 'RN_' + Date.now(),
+    metadata: {
+      custom_fields: [
+        { display_name: 'Customer Name', variable_name: 'customer_name', value: name },
+        { display_name: 'Product', variable_name: 'product', value: spCurrentProduct.name },
+        { display_name: 'Tier', variable_name: 'tier', value: spSelectedTier.level }
+      ]
+    },
+    callback: function(response) {
+      spCloseModal();
+      spShowSuccessModal(name, email, spCurrentProduct, spSelectedTier);
+    },
+    onClose: function() {
+      console.log('Payment window closed');
+    }
+  });
+  handler.openIframe();
+}
+
+// ── SUCCESS MODAL ──
+function spShowSuccessModal(name, email, product, tier) {
+  const el = document.createElement('div');
+  el.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px)';
+  el.innerHTML = `
+    <div style="background:#fff;border-radius:16px;max-width:480px;width:100%;padding:40px 32px;text-align:center;box-shadow:0 24px 64px rgba(0,0,0,0.25)">
+      <div style="font-size:56px;margin-bottom:16px">🎉</div>
+      <h3 style="font-size:22px;font-weight:700;color:#0B1E3A;margin-bottom:8px">Payment Successful!</h3>
+      <p style="font-size:14px;color:#6B7280;margin-bottom:20px;line-height:1.7">Thank you, <strong>${name}</strong>! Your <strong>${product.name} — ${tier.level}</strong> PDF will be delivered to <strong>${email}</strong> within minutes.</p>
+      <div style="background:rgba(0,180,216,0.06);border:1px solid rgba(0,180,216,0.2);border-radius:10px;padding:16px;font-size:13px;color:#374151;margin-bottom:24px;line-height:1.7">
+        📧 Check your inbox (and spam folder) for your download link.<br/>
+        💬 Need help? WhatsApp: <a href="https://wa.me/2348033807856" style="color:#00B4D8;font-weight:600">+234 803 380 7856</a>
+      </div>
+      <button onclick="this.closest('div[style]').remove()" style="background:#0B1E3A;color:#fff;border:none;border-radius:8px;padding:12px 28px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit">Close</button>
+    </div>
+  `;
+  document.body.appendChild(el);
+}
+</script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+
 <div class="chatbot-bubble" id="chatbotBubble">
   <div class="chatbot-panel" id="chatbotPanel">
     <div class="chatbot-head">
