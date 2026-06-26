@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RuffNeck Store | Digital Products, AI Guides & Templates — 2026</title>
+<meta name="description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<style>
+:root{
+  --navy:#0B1E3A;--midnight:#040C1A;--cyan:#00B4D8;--cyan-lt:#00F0FF;
+  --gold:#FFC107;--purple:#7B2FFF;--white:#FFFFFF;
+  --bg-light:#F5F7FA;--bg-white:#FFFFFF;
+  --text-dark:#0B1E3A;--text-body:#374151;--text-muted:#6B7280;
+  --border:#E5E7EB;--shadow:0 2px 16px rgba(11,30,58,0.08);
+  --shadow-md:0 4px 32px rgba(11,30,58,0.12);
+  --radius:12px;--radius-sm:8px;
+  --font-display:'Space Grotesk',sans-serif;--font-mono:'Space Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-display);color:var(--text-body);background:var(--bg-light);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:var(--radius-sm);font-family:var(--font-display);font-weight:600;font-size:14px;transition:all 0.2s;cursor:pointer}
+.btn-primary{background:var(--cyan);color:var(--navy);border:none}.btn-primary:hover{background:var(--cyan-lt);transform:translateY(-1px)}
+.btn-gold{background:var(--gold);color:var(--navy);border:none}.btn-gold:hover{background:#FFE57F}
+.btn-outline{border:2px solid var(--border);color:var(--text-dark);background:var(--white)}.btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
+.btn-sm{padding:7px 16px;font-size:13px}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:11px;font-weight:600;font-family:var(--font-mono);letter-spacing:0.5px}
+.badge-cyan{background:rgba(0,180,216,0.1);color:var(--cyan);border:1px solid rgba(0,180,216,0.25)}
+.badge-gold{background:rgba(255,193,7,0.1);color:#B45309;border:1px solid rgba(255,193,7,0.3)}
+.badge-purple{background:rgba(123,47,255,0.1);color:var(--purple);border:1px solid rgba(123,47,255,0.25)}
+.badge-green{background:rgba(34,197,94,0.1);color:#15803D;border:1px solid rgba(34,197,94,0.25)}
+
+/* NAV */
+.nav{background:rgba(4,12,26,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,180,216,0.15);padding:0 24px;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:var(--white)}
+.nav-logo-mark{width:36px;height:36px;background:linear-gradient(135deg,#00F0FF,#0055AA);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--white)}
+.nav-logo span{color:var(--cyan)}
+.nav-right{display:flex;align-items:center;gap:16px}
+.nav-home-btn{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.7);font-size:13px;font-weight:500;padding:7px 14px;border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);transition:all 0.2s}
+.nav-home-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.cart-btn{display:flex;align-items:center;gap:8px;background:var(--cyan);color:var(--navy);padding:8px 16px;border-radius:var(--radius-sm);font-weight:700;font-size:13px;cursor:pointer;border:none;position:relative;transition:all 0.2s}
+.cart-btn:hover{background:var(--cyan-lt)}
+.cart-count{background:var(--gold);color:var(--navy);border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700}
+
+/* HERO */
+.store-hero{background:radial-gradient(ellipse at 30% 50%,#0B1E3A 0%,#040C1A 70%,#010408 100%);padding:64px 0 48px;color:var(--white);text-align:center}
+.store-hero h1{font-size:clamp(28px,4vw,48px);font-weight:700;margin-bottom:14px}
+.store-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan-lt),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.store-hero p{font-size:16px;color:rgba(255,255,255,0.6);max-width:580px;margin:0 auto 28px;line-height:1.7}
+.hero-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero-tag{font-family:var(--font-mono);font-size:11px;padding:5px 14px;border-radius:100px;border:1px solid rgba(0,180,216,0.3);color:var(--cyan);letter-spacing:1px}
+
+/* FILTERS */
+.store-filters{background:var(--white);border-bottom:1px solid var(--border);padding:16px 0;position:sticky;top:64px;z-index:90}
+.filters-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.filter-btn{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;border:1.5px solid var(--border);color:var(--text-muted);background:var(--white);transition:all 0.2s;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.search-box{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--bg-light);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px}
+.search-box input{border:none;background:none;font-family:var(--font-display);font-size:13px;color:var(--text-dark);outline:none;width:180px}
+
+/* PRODUCTS GRID */
+.store-main{padding:48px 0 80px}
+.section-heading{margin-bottom:32px}
+.section-heading h2{font-size:24px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.section-heading p{font-size:14px;color:var(--text-muted)}
+.products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:64px}
+
+/* PRODUCT CARD */
+.product-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all 0.25s;display:flex;flex-direction:column}
+.product-card:hover{border-color:var(--cyan);box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.product-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden}
+.product-img img{width:100%;height:100%;object-fit:cover}
+.product-img .emoji-fallback{font-size:48px}
+.product-level-badge{position:absolute;top:10px;left:10px}
+.product-new{position:absolute;top:10px;right:10px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;font-family:var(--font-mono);letter-spacing:0.5px}
+.product-body{padding:20px;display:flex;flex-direction:column;flex:1}
+.product-cat{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.product-body h3{font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:8px;line-height:1.4}
+.product-body p{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px;flex:1}
+.product-includes{margin-bottom:14px}
+.product-includes h5{font-size:11px;font-weight:700;color:var(--text-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-family:var(--font-mono)}
+.product-includes ul{display:flex;flex-direction:column;gap:4px}
+.product-includes ul li{font-size:12px;color:var(--text-body);display:flex;align-items:flex-start;gap:6px}
+.product-includes ul li::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0}
+.product-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border);margin-top:auto}
+.product-price{font-family:var(--font-mono);font-weight:700;color:var(--text-dark);font-size:18px}
+.product-price .currency{font-size:12px;color:var(--text-muted);display:block;margin-bottom:2px}
+
+/* LEVEL TABS on cards */
+.level-tabs{display:flex;gap:4px;margin-bottom:12px}
+.level-tab{padding:4px 10px;border-radius:100px;font-size:11px;font-weight:600;border:1px solid var(--border);color:var(--text-muted);cursor:pointer;transition:all 0.15s;font-family:var(--font-mono)}
+.level-tab.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+
+/* CART SIDEBAR */
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:200;backdrop-filter:blur(4px)}
+.cart-overlay.open{display:block}
+.cart-sidebar{position:fixed;top:0;right:-480px;width:100%;max-width:460px;height:100vh;background:var(--white);z-index:201;display:flex;flex-direction:column;transition:right 0.35s ease;box-shadow:-8px 0 40px rgba(0,0,0,0.15)}
+.cart-sidebar.open{right:0}
+.cart-header{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);background:var(--navy)}
+.cart-header h3{font-size:18px;font-weight:700;color:var(--white)}
+.cart-close{color:rgba(255,255,255,0.7);font-size:24px;cursor:pointer;line-height:1;padding:4px}.cart-close:hover{color:var(--white)}
+.cart-items{flex:1;overflow-y:auto;padding:20px 24px;display:flex;flex-direction:column;gap:16px}
+.cart-empty{text-align:center;padding:48px 24px;color:var(--text-muted)}
+.cart-empty .icon{font-size:48px;margin-bottom:12px}
+.cart-item{display:flex;gap:14px;padding:16px;background:var(--bg-light);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.cart-item-icon{width:52px;height:52px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;background:linear-gradient(135deg,rgba(0,180,216,0.1),rgba(123,47,255,0.1));flex-shrink:0;overflow:hidden}
+.cart-item-icon img{width:100%;height:100%;object-fit:cover;border-radius:8px}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:13px;font-weight:700;color:var(--text-dark);margin-bottom:3px;line-height:1.4}
+.cart-item-level{font-size:11px;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:6px}
+.cart-item-controls{display:flex;align-items:center;gap:10px}
+.qty-btn{width:26px;height:26px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;background:var(--white);transition:all 0.15s;color:var(--text-dark)}
+.qty-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.qty-display{font-size:13px;font-weight:700;color:var(--text-dark);min-width:20px;text-align:center}
+.cart-item-price{font-family:var(--font-mono);font-weight:700;font-size:15px;color:var(--text-dark)}
+.cart-item-remove{color:var(--text-muted);font-size:18px;cursor:pointer;padding:2px;line-height:1;flex-shrink:0}.cart-item-remove:hover{color:#ef4444}
+.cart-footer{padding:20px 24px;border-top:1px solid var(--border)}
+.cart-summary{margin-bottom:16px}
+.cart-row{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--text-muted);margin-bottom:8px}
+.cart-row.total{font-size:18px;font-weight:700;color:var(--text-dark);border-top:1px solid var(--border);padding-top:12px;margin-top:4px}
+.checkout-form{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.checkout-input{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-display);font-size:13px;color:var(--text-dark);outline:none;transition:border-color 0.2s}
+.checkout-input:focus{border-color:var(--cyan)}
+.pay-btn{width:100%;padding:15px;font-size:15px;font-weight:700;justify-content:center}
+.cart-note{font-size:11px;color:var(--text-muted);text-align:center;margin-top:8px;line-height:1.5}
+
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:300;backdrop-filter:blur(4px);align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:var(--radius);max-width:560px;width:90%;max-height:90vh;overflow-y:auto;position:relative}
+.modal-header{padding:24px 28px 0}
+.modal-header h3{font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
+.modal-header .modal-cat{font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.modal-body{padding:20px 28px 28px}
+.modal-close{position:absolute;top:16px;right:16px;font-size:22px;color:var(--text-muted);cursor:pointer;line-height:1}.modal-close:hover{color:var(--text-dark)}
+.modal-includes{margin-bottom:20px}
+.modal-includes h4{font-size:13px;font-weight:700;color:var(--text-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;font-family:var(--font-mono)}
+.modal-includes ul{display:flex;flex-direction:column;gap:6px}
+.modal-includes ul li{font-size:13px;color:var(--text-body);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.modal-includes ul li::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0;margin-top:1px}
+.modal-levels{display:flex;flex-direction:column;gap:12px;margin-bottom:20px}
+.modal-level{background:var(--bg-light);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:16px;cursor:pointer;transition:all 0.2s}
+.modal-level:hover,.modal-level.selected{border-color:var(--cyan);background:rgba(0,180,216,0.05)}
+.modal-level-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.modal-level-name{font-weight:700;font-size:14px;color:var(--text-dark)}
+.modal-level-price{font-family:var(--font-mono);font-weight:700;font-size:16px;color:var(--cyan)}
+.modal-level-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+.modal-add-btn{width:100%;padding:14px;font-size:15px;justify-content:center}
+.modal-delivery{background:rgba(0,180,216,0.05);border:1px solid rgba(0,180,216,0.2);border-radius:var(--radius-sm);padding:14px;margin-top:16px;font-size:12px;color:var(--text-muted);line-height:1.6}
+.modal-delivery strong{color:var(--text-dark)}
+
+/* SUCCESS MODAL */
+.success-modal{text-align:center;padding:48px 32px}
+.success-icon{font-size:64px;margin-bottom:16px}
+.success-modal h3{font-size:22px;font-weight:700;color:var(--text-dark);margin-bottom:10px}
+.success-modal p{font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:24px}
+
+/* ADMIN PANEL */
+.admin-panel{background:var(--navy);color:var(--white);padding:64px 0}
+.admin-inner{max-width:800px;margin:0 auto}
+.admin-login{background:rgba(255,255,255,0.05);border:1px solid rgba(0,180,216,0.2);border-radius:var(--radius);padding:40px;text-align:center}
+.admin-login h2{font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px}
+.admin-login p{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:28px}
+.admin-form{display:none}
+.admin-form.visible{display:block}
+.admin-section{background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.15);border-radius:var(--radius);padding:32px;margin-bottom:24px}
+.admin-section h3{font-size:18px;font-weight:700;color:var(--white);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.admin-field{margin-bottom:16px}
+.admin-field label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-family:var(--font-mono)}
+.admin-field input,.admin-field select,.admin-field textarea{width:100%;padding:11px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);font-family:var(--font-display);font-size:13px;color:var(--white);outline:none;transition:border-color 0.2s}
+.admin-field input:focus,.admin-field select:focus,.admin-field textarea:focus{border-color:var(--cyan)}
+.admin-field select option{background:var(--navy);color:var(--white)}
+.admin-field textarea{resize:vertical;min-height:80px}
+.admin-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.admin-products-list{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+.admin-product-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.admin-product-item-info{flex:1;min-width:0}
+.admin-product-item-name{font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px}
+.admin-product-item-meta{font-size:11px;color:rgba(255,255,255,0.4);font-family:var(--font-mono)}
+.admin-del-btn{color:#ef4444;font-size:18px;cursor:pointer;flex-shrink:0;padding:4px}
+
+/* INTERNSHIP BANNER */
+.internship-banner{background:linear-gradient(135deg,#0B1E3A,#0a1628);border-top:1px solid rgba(0,180,216,0.2);border-bottom:1px solid rgba(0,180,216,0.2);padding:64px 0;color:var(--white)}
+.internship-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.internship-content h2{font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.2}
+.internship-content .tag{font-family:var(--font-mono);font-size:11px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:block}
+.internship-content p{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:20px}
+.internship-cards{display:flex;flex-direction:column;gap:14px}
+.int-card{background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.2);border-radius:var(--radius-sm);padding:18px 20px;border-left:3px solid var(--cyan)}
+.int-card h4{font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.int-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--navy);color:var(--white);padding:12px 24px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;z-index:500;transition:transform 0.3s ease;border:1px solid rgba(0,180,216,0.3);white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* FOOTER */
+.store-footer{background:var(--midnight);padding:32px 0;text-align:center;border-top:1px solid rgba(255,255,255,0.07)}
+.store-footer p{font-size:13px;color:rgba(255,255,255,0.35)}
+.store-footer a{color:var(--cyan)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.products-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  .products-grid{grid-template-columns:1fr}
+  .internship-grid{grid-template-columns:1fr}
+  .admin-row{grid-template-columns:1fr}
+  .filters-inner{flex-direction:column;align-items:flex-start}
+  .search-box{margin-left:0;width:100%}
+  .search-box input{width:100%}
+  .cart-sidebar{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-mark">RN</div>
+      <div><strong>RuffNeck</strong><span>Store</span></div>
+    </a>
+    <div class="nav-right">
+      <a href="/" class="nav-home-btn">← Back to Homepage</a>
+      <button class="cart-btn" onclick="toggleCart()">
+        🛒 Cart <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="store-hero">
+  <div class="container">
+    <div style="margin-bottom:14px;">
+      <span class="badge badge-cyan">Digital Products · Instant PDF Delivery · 2026</span>
+    </div>
+    <h1>RuffNeck <em>Digital Store</em></h1>
+    <p>AI career guides, prompt packs, resume templates, design assets, business toolkits — created once, instantly delivered. Everything you need to build skills, launch faster, and grow in 2026.</p>
+    <div class="hero-tags">
+      <span class="hero-tag">📄 Instant PDF Delivery</span>
+      <span class="hero-tag">🔒 Secure Paystack Checkout</span>
+      <span class="hero-tag">🌍 Worldwide Access</span>
+      <span class="hero-tag">✅ 2026 Updated Content</span>
+    </div>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="store-filters">
+  <div class="container">
+    <div class="filters-inner">
+      <button class="filter-btn active" data-cat="all">All Products</button>
+      <button class="filter-btn" data-cat="ai-career">AI Career Guides</button>
+      <button class="filter-btn" data-cat="prompts">Prompt Packs</button>
+      <button class="filter-btn" data-cat="templates">Templates</button>
+      <button class="filter-btn" data-cat="design">Design Assets</button>
+      <button class="filter-btn" data-cat="business">Business Toolkits</button>
+      <button class="filter-btn" data-cat="content">Content Services</button>
+      <div class="search-box">
+        <span>🔍</span>
+        <input type="text" id="searchInput" placeholder="Search products..." oninput="filterProducts()"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN STORE -->
+<div class="store-main">
+  <div class="container">
+
+    <!-- AI CAREER GUIDES -->
+    <div class="section-heading">
+      <h2>🤖 AI Career Guides — Step-by-Step PDF Guides</h2>
+      <p>Complete practical guides to becoming a professional in high-demand AI roles. Tiered by experience level. Instant PDF delivery after payment.</p>
+    </div>
+    <div class="products-grid" id="productsGrid">
+
+      <!-- AI Data Annotator -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Data Annotator Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#0a2a4a);">
+          <span class="emoji-fallback">🏷️</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Become an AI Data Annotator</h3>
+          <p>Step-by-step guide covering tools, platforms, techniques, and how to land your first paying annotation role in 2026.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>What data annotation is and why it matters for AI</li>
+              <li>Types of annotation: image, text, audio, video</li>
+              <li>Top platforms: Scale AI, Appen, Remotasks, Labelbox</li>
+              <li>Tools & software walkthrough (Label Studio, CVAT)</li>
+              <li>How to pass annotation tests &amp; get hired</li>
+              <li>Pricing your services &amp; earning potential in 2026</li>
+              <li>Building your annotator portfolio</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="6500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="10000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Data Annotator Guide','ai-career','🏷️',
+              [{level:\'Beginner\',price:3500,desc:\'Foundation guide — what annotation is, top platforms, how to pass tests and get your first job\'},
+               {level:\'Intermediate\',price:6500,desc:\'Advanced techniques, quality scoring, handling edge cases, working with multiple clients simultaneously\'},
+               {level:\'Advanced\',price:10000,desc:\'Team leadership, building annotation pipelines, quality assurance systems, pricing for enterprise clients\'}],
+              [\'What data annotation is and why it matters\',\'Types: image, text, audio, video annotation\',\'Top platforms: Scale AI, Appen, Remotasks\',\'Tools walkthrough: Label Studio, CVAT\',\'How to pass annotation tests\',\'Earning potential in 2026\',\'Building your annotator portfolio\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Data Evaluator -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Data Evaluator Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0B3A,#2a0a4a);">
+          <span class="emoji-fallback">⚖️</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Become an AI Data Evaluator</h3>
+          <p>Complete guide to evaluating AI outputs — rating responses, assessing quality, working with RLHF pipelines and earning remote income.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>Understanding RLHF and why evaluators are essential</li>
+              <li>Rating frameworks: helpfulness, accuracy, safety</li>
+              <li>Platforms: Outlier, Scale RLHF, Toloka, Surge AI</li>
+              <li>Writing effective evaluation rationales</li>
+              <li>Avoiding common evaluator mistakes</li>
+              <li>How to qualify for higher-paying evaluation tasks</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="6500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="10000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Data Evaluator Guide','ai-career','⚖️',
+              [{level:\'Beginner\',price:3500,desc:\'Introduction to AI evaluation, RLHF basics, first platforms and how to qualify\'},
+               {level:\'Intermediate\',price:6500,desc:\'Advanced rating rubrics, writing strong rationales, handling ambiguous prompts\'},
+               {level:\'Advanced\',price:10000,desc:\'Leading evaluation teams, building quality frameworks, consulting for AI labs\'}],
+              [\'Understanding RLHF and evaluator role\',\'Rating frameworks: helpfulness, accuracy, safety\',\'Top platforms: Outlier, Scale RLHF, Toloka\',\'Writing evaluation rationales\',\'Qualifying for higher-paying tasks\',\'2026 income benchmarks\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Ethics Reviewer -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Ethics Reviewer Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a2a1a,#0a3a20);">
+          <span class="emoji-fallback">🛡️</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Become an AI Ethics Reviewer</h3>
+          <p>Navigate the emerging field of AI ethics — bias detection, content safety, fairness auditing, and becoming a responsible AI professional in 2026.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>Core AI ethics principles: fairness, transparency, accountability</li>
+              <li>How to identify bias in AI outputs</li>
+              <li>Content safety review frameworks</li>
+              <li>AI ethics certifications and career paths</li>
+              <li>Tools for ethical AI auditing</li>
+              <li>Working with AI policy teams &amp; NGOs</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="4000" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="7500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="12000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Ethics Reviewer Guide','ai-career','🛡️',
+              [{level:\'Beginner\',price:4000,desc:\'Core principles, bias basics, how to break into AI ethics roles\'},
+               {level:\'Intermediate\',price:7500,desc:\'Formal auditing methods, content safety frameworks, working with AI teams\'},
+               {level:\'Advanced\',price:12000,desc:\'Policy writing, AI governance consulting, building ethics review systems for organizations\'}],
+              [\'Core AI ethics: fairness, transparency, accountability\',\'Bias detection in AI outputs\',\'Content safety review frameworks\',\'AI ethics certifications guide\',\'Auditing tools walkthrough\',\'Career paths: NGOs, tech companies, policy\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Train AI Models -->
+      <div class="product-card" data-cat="ai-career" data-name="Train AI Models Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a1a0B,#2a2a0a);">
+          <span class="emoji-fallback">🧠</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Contribute to Training AI Models</h3>
+          <p>From data collection to feedback loops — your complete guide to contributing to AI model training as a non-developer in 2026.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>How AI models are trained (plain English)</li>
+              <li>Types of training data you can contribute</li>
+              <li>Platforms: Hivemind, DataAnnotation.tech, Prolific</li>
+              <li>Writing high-quality training prompts &amp; responses</li>
+              <li>Earning from AI model feedback programs</li>
+              <li>Building a contributor reputation</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="6000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="9500" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('Train AI Models Guide','ai-career','🧠',
+              [{level:\'Beginner\',price:3500,desc:\'How AI training works, platforms to join, your first training tasks\'},
+               {level:\'Intermediate\',price:6000,desc:\'Writing high-quality prompts, preference selection, earning optimization\'},
+               {level:\'Advanced\',price:9500,desc:\'Specialized domain contribution (medicine, law, coding), scaling income, team coordination\'}],
+              [\'How AI models are trained (plain English)\',\'Types of training contributions\',\'Top platforms: Hivemind, DataAnnotation, Prolific\',\'Writing high-quality training prompts\',\'Earning from feedback programs\',\'Building contributor reputation\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Tutor -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Tutor Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#1a3a5a);">
+          <span class="emoji-fallback">🎓</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Become a Paid AI Tutor in 2026</h3>
+          <p>Turn your AI knowledge into income — teaching businesses, professionals, and students the practical skills they need to use AI effectively.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>What AI tutors teach and who hires them</li>
+              <li>Structuring beginner-to-advanced AI curricula</li>
+              <li>Platforms: Preply, Teachable, Udemy, LinkedIn Learning</li>
+              <li>Pricing your AI tutoring sessions (NGN &amp; USD)</li>
+              <li>Marketing yourself as an AI educator</li>
+              <li>Creating passive income from AI courses</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="4000" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="7000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="11000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Tutor Guide','ai-career','🎓',
+              [{level:\'Beginner\',price:4000,desc:\'What to teach, finding your first students, structuring a simple curriculum\'},
+               {level:\'Intermediate\',price:7000,desc:\'Corporate training packages, pricing strategy, building group programs\'},
+               {level:\'Advanced\',price:11000,desc:\'Scaling with online courses, licensing curriculum, partnering with institutions\'}],
+              [\'What AI tutors teach and who pays for it\',\'Curriculum structure: beginner to advanced\',\'Platforms for tutoring and course sales\',\'Pricing in NGN and USD\',\'Marketing as an AI educator\',\'Passive income from recorded courses\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Content Writing -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Content Writing Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0a2a,#2a0a3a);">
+          <span class="emoji-fallback">✍️</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Become an AI Content Writer in 2026</h3>
+          <p>From technical articles to AI-assisted blogs — your complete career guide to breaking into and scaling in the AI content writing industry.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>Types of AI content writing roles</li>
+              <li>Tools: ChatGPT, Claude, Jasper, Grammarly, Surfer SEO</li>
+              <li>Writing AI technical content (based on real GAOTek experience)</li>
+              <li>Finding clients on Upwork, Fiverr, LinkedIn</li>
+              <li>Building a portfolio with no experience</li>
+              <li>Pricing your services (NGN &amp; USD rates)</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="6500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="10000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Content Writing Guide','ai-career','✍️',
+              [{level:\'Beginner\',price:3500,desc:\'What AI content writing is, tools to use, landing your first client or internship\'},
+               {level:\'Intermediate\',price:6500,desc:\'Scaling clients, SEO writing with AI, technical content frameworks\'},
+               {level:\'Advanced\',price:10000,desc:\'Running a content agency, managing AI writers, enterprise client acquisition\'}],
+              [\'Types of AI content writing roles in 2026\',\'Essential tools: ChatGPT, Claude, Surfer SEO\',\'Writing technical AI content (real examples)\',\'Finding clients on Upwork, Fiverr, LinkedIn\',\'Portfolio building from scratch\',\'Pricing guide: NGN and USD rates\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Copywriting -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Copywriting Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a1a2a,#0a2a3a);">
+          <span class="emoji-fallback">📢</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Become an AI Copywriter in 2026</h3>
+          <p>Master persuasion with AI — ads, landing pages, email sequences, and sales copy that converts. A career guide for the modern copywriter.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>AI copywriting vs traditional copywriting</li>
+              <li>Top AI copy tools: Copy.ai, Writesonic, ChatGPT</li>
+              <li>Frameworks: AIDA, PAS, BAB with AI prompts</li>
+              <li>Ad copy, email sequences, landing pages — templates included</li>
+              <li>Finding copywriting clients globally in 2026</li>
+              <li>Rates, packages, and upselling strategies</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="4000" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="7000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="11000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Copywriting Guide','ai-career','📢',
+              [{level:\'Beginner\',price:4000,desc:\'Copy fundamentals, AI tools intro, writing your first ad and landing page\'},
+               {level:\'Intermediate\',price:7000,desc:\'Email funnels, A/B testing copy, retainer client strategies\'},
+               {level:\'Advanced\',price:11000,desc:\'Agency model, conversion rate optimization, high-ticket copywriting packages\'}],
+              [\'AI vs traditional copywriting in 2026\',\'Top tools: Copy.ai, Writesonic, ChatGPT\',\'AIDA, PAS, BAB frameworks with AI prompts\',\'Included templates: ads, emails, landing pages\',\'Finding global copywriting clients\',\'Rates, packages, upsell strategies\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Graphic Design -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Graphic Design Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0B1a,#2a0a2a);">
+          <span class="emoji-fallback">🎨</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Become an AI Graphic Designer in 2026</h3>
+          <p>Use Midjourney, DALL-E, Adobe Firefly, and Canva AI to create stunning designs faster — and build a profitable design career or business.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>AI design tools comparison: Midjourney vs Firefly vs DALL-E</li>
+              <li>Prompting for consistent brand visuals</li>
+              <li>Creating logos, social graphics, presentations with AI</li>
+              <li>Selling AI-generated design assets on marketplaces</li>
+              <li>Client acquisition for AI design services</li>
+              <li>Copyright and ethical use of AI-generated art</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="4000" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="7500" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="12000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Graphic Design Guide','ai-career','🎨',
+              [{level:\'Beginner\',price:4000,desc:\'AI design tools intro, first designs, Canva AI and basic Midjourney prompting\'},
+               {level:\'Intermediate\',price:7500,desc:\'Brand identity design with AI, client projects, selling on Creative Market\'},
+               {level:\'Advanced\',price:12000,desc:\'Full design agency with AI, asset marketplace, licensing AI-generated works\'}],
+              [\'AI tools comparison: Midjourney, Firefly, DALL-E\',\'Prompting for consistent brand visuals\',\'Logos, social graphics, presentations with AI\',\'Selling on Creative Market, Envato, Gumroad\',\'Client acquisition strategies\',\'Copyright and ethical AI art use\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Research Assistant -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Research Assistant Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a2a2a,#0a3a3a);">
+          <span class="emoji-fallback">🔍</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Work as an AI Research Assistant in 2026</h3>
+          <p>Leverage AI tools to conduct faster, deeper research for academics, businesses, journalists, and consultants worldwide — and get paid remotely.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>What AI research assistants do and who hires them</li>
+              <li>AI research tools: Perplexity, Consensus, Elicit, Scopus</li>
+              <li>Research report templates and formatting</li>
+              <li>Academic vs business vs market research</li>
+              <li>Finding research assistant clients globally</li>
+              <li>Pricing and deliverable structures</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="6000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="9500" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Research Assistant Guide','ai-career','🔍',
+              [{level:\'Beginner\',price:3500,desc:\'What the role involves, top AI research tools, landing first remote assignments\'},
+               {level:\'Intermediate\',price:6000,desc:\'Structured research reports, academic databases, recurring client packages\'},
+               {level:\'Advanced\',price:9500,desc:\'Market intelligence consulting, research team management, enterprise research contracts\'}],
+              [\'What AI research assistants do\',\'AI research tools: Perplexity, Consensus, Elicit\',\'Research report templates included\',\'Academic vs business vs market research\',\'Finding global clients remotely\',\'Pricing and deliverable structures\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Video Creation -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Video Creation Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0a0a,#2a1a0a);">
+          <span class="emoji-fallback">🎬</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Create &amp; Sell AI Videos in 2026</h3>
+          <p>From faceless YouTube channels to client video production — master AI video tools and build a video creation income stream from scratch.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>Best AI video tools: Runway, Sora, HeyGen, InVideo</li>
+              <li>Faceless video production plan (full workflow)</li>
+              <li>Video prompt engineering for quality output</li>
+              <li>B-Roll idea generation &amp; script prompts</li>
+              <li>Subtitle enhancement &amp; transcription workflow</li>
+              <li>Retention optimizer techniques for social video</li>
+              <li>Storytelling editor framework for compelling content</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="4500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="8000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="13000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Video Creation Guide','ai-career','🎬',
+              [{level:\'Beginner\',price:4500,desc:\'AI video tools intro, first faceless video production, basic scripting\'},
+               {level:\'Intermediate\',price:8000,desc:\'Full production workflow, client projects, retention optimization\'},
+               {level:\'Advanced\',price:13000,desc:\'Video agency model, prompt engineering mastery, scaling to $1k+/month\'}],
+              [\'Best AI video tools: Runway, Sora, HeyGen, InVideo\',\'Faceless video production plan\',\'Video prompt engineering\',\'B-Roll script prompts included\',\'Subtitle enhancement workflow\',\'Retention optimizer techniques\',\'Storytelling editor framework\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Outputs Reviewer -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Outputs Reviewer Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a1a0a,#0a2a1a);">
+          <span class="emoji-fallback">📋</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Become an AI Outputs Reviewer in 2026</h3>
+          <p>Review and rate AI-generated content for quality, accuracy, and safety — one of the most in-demand remote AI jobs of 2026.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>What AI outputs reviewers do vs evaluators</li>
+              <li>Quality assessment frameworks for text, code, images</li>
+              <li>Platforms: Remotasks, Surge AI, Scale AI, Appen</li>
+              <li>Writing clear, useful review feedback</li>
+              <li>Passing reviewer qualification tests</li>
+              <li>Scaling income across multiple platforms</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="3500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="6000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="9500" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦3,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Outputs Reviewer Guide','ai-career','📋',
+              [{level:\'Beginner\',price:3500,desc:\'Role overview, passing qualification tests, first review tasks\'},
+               {level:\'Intermediate\',price:6000,desc:\'Advanced quality frameworks, multi-platform income, efficiency optimization\'},
+               {level:\'Advanced\',price:9500,desc:\'Review team lead, quality assurance consulting, building review SOPs\'}],
+              [\'AI outputs reviewer vs evaluator roles\',\'Quality assessment frameworks\',\'Platforms: Remotasks, Surge AI, Scale AI\',\'Writing clear review feedback\',\'Passing qualification tests\',\'Scaling income across platforms\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI Courses Guide -->
+      <div class="product-card" data-cat="ai-career" data-name="AI Courses Creation Guide">
+        <div class="product-img" style="background:linear-gradient(135deg,#0B1a3A,#1a2a5a);">
+          <span class="emoji-fallback">📚</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">AI Career Guide</div>
+          <h3>How to Create &amp; Sell AI Courses in 2026</h3>
+          <p>Turn your AI skills into a scalable income stream — design, record, and sell AI courses to businesses, individuals, and institutions worldwide.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>Choosing your AI course topic and audience</li>
+              <li>Curriculum design: beginner to advanced structure</li>
+              <li>Platforms: Udemy, Teachable, Gumroad, LinkedIn Learning</li>
+              <li>Recording &amp; editing with free/affordable tools</li>
+              <li>Pricing, launching, and marketing your course</li>
+              <li>Corporate training vs individual learner strategies</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="4500" data-level="Beginner" onclick="selectLevel(this, event)">Beginner</span>
+            <span class="level-tab" data-price="8000" data-level="Intermediate" onclick="selectLevel(this, event)">Intermediate</span>
+            <span class="level-tab" data-price="13000" data-level="Advanced" onclick="selectLevel(this, event)">Advanced</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI Courses Creation Guide','ai-career','📚',
+              [{level:\'Beginner\',price:4500,desc:\'Choosing your topic, free recording tools, launching your first mini-course\'},
+               {level:\'Intermediate\',price:8000,desc:\'Full curriculum design, platform optimization, first ₦100k+ from courses\'},
+               {level:\'Advanced\',price:13000,desc:\'Multi-course brand, corporate licensing, passive income scaling system\'}],
+              [\'Choosing your AI course topic\',\'Curriculum design framework\',\'Platforms: Udemy, Teachable, Gumroad\',\'Recording with free tools\',\'Pricing and marketing strategy\',\'Corporate vs individual learner approach\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PROMPT ENGINEERING PACK -->
+      <div class="product-card" data-cat="prompts" data-name="Ultimate Prompt Engineering Pack">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0B3A,#2a0a5a);">
+          <span class="emoji-fallback">⚡</span>
+          <span class="product-new">BESTSELLER</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Prompt Pack</div>
+          <h3>Ultimate Prompt Engineering Pack 2026</h3>
+          <p>200+ tested prompts for content creation, business operations, marketing, research, design, video production, and AI career tasks.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>AI video prompt generator (ultimate production prompts)</li>
+              <li>Advanced video polish prompt pack</li>
+              <li>B-Roll idea generation prompts</li>
+              <li>Instagram caption &amp; social media prompts</li>
+              <li>Email newsletter prompt sequences</li>
+              <li>Business strategy &amp; operations prompts</li>
+              <li>Retention optimizer prompts for video/content</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="5000" data-level="Starter (50 prompts)" onclick="selectLevel(this, event)">Starter</span>
+            <span class="level-tab" data-price="9000" data-level="Pro (150 prompts)" onclick="selectLevel(this, event)">Pro</span>
+            <span class="level-tab" data-price="15000" data-level="Ultimate (200+ prompts)" onclick="selectLevel(this, event)">Ultimate</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦5,000</div>
+            <button class="btn btn-gold btn-sm" onclick="openModal('Ultimate Prompt Engineering Pack 2026','prompts','⚡',
+              [{level:\'Starter — 50 Prompts\',price:5000,desc:\'Core prompts for content, marketing, and basic business tasks. Perfect for beginners\'},
+               {level:\'Pro — 150 Prompts\',price:9000,desc:\'Full content creation suite: video, social, email, research, copywriting prompts\'},
+               {level:\'Ultimate — 200+ Prompts\',price:15000,desc:\'Complete library including video production, storytelling, AI career, business strategy, and advanced workflows\'}],
+              [\'AI video production prompt pack\',\'Advanced video polish prompts\',\'B-Roll idea generation\',\'Instagram &amp; social media captions\',\'Email newsletter sequences\',\'Business strategy prompts\',\'Retention optimizer prompts\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ATS RESUME TEMPLATE -->
+      <div class="product-card" data-cat="templates" data-name="ATS Resume Template Pack">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a2a0a,#1a3a1a);">
+          <span class="emoji-fallback">📄</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Template Pack</div>
+          <h3>ATS-Certified Resume &amp; Cover Letter Templates 2026</h3>
+          <p>Professionally designed, ATS-optimized resume and cover letter templates for AI roles, tech jobs, and remote positions worldwide.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>5 ATS-certified resume templates (Word + PDF)</li>
+              <li>3 cover letter templates with fill-in prompts</li>
+              <li>AI job roles template (annotator, evaluator, writer)</li>
+              <li>Remote job &amp; freelance platform profile templates</li>
+              <li>Keyword optimization guide for 2026 job market</li>
+              <li>LinkedIn profile optimization checklist</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="4000" data-level="Basic (2 templates)" onclick="selectLevel(this, event)">Basic</span>
+            <span class="level-tab" data-price="7000" data-level="Standard (5 templates)" onclick="selectLevel(this, event)">Standard</span>
+            <span class="level-tab" data-price="11000" data-level="Full Pack (8 + guide)" onclick="selectLevel(this, event)">Full Pack</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('ATS Resume &amp; Cover Letter Templates 2026','templates','📄',
+              [{level:\'Basic — 2 Templates\',price:4000,desc:\'2 ATS resume templates and 1 cover letter template for general use\'},
+               {level:\'Standard — 5 Templates\',price:7000,desc:\'5 resume templates including AI-specific roles + 3 cover letters + LinkedIn checklist\'},
+               {level:\'Full Pack — 8 + Guide\',price:11000,desc:\'Complete pack: 8 templates, cover letters, keyword guide, LinkedIn optimization, remote job profile templates\'}],
+              [\'ATS-certified resume templates (Word + PDF)\',\'Cover letter templates with fill-in prompts\',\'AI job roles specific templates\',\'Remote/freelance platform profile templates\',\'Keyword optimization guide 2026\',\'LinkedIn profile optimization checklist\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BRANDING KIT -->
+      <div class="product-card" data-cat="design" data-name="AI-Generated Brand Identity Kit">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0a1a,#2a1a2a);">
+          <span class="emoji-fallback">🖼️</span>
+          <span class="product-new">AI-GENERATED</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Design Asset</div>
+          <h3>AI-Generated Brand Identity Kit 2026</h3>
+          <p>Professionally designed AI-generated brand assets — logos, color palettes, social media templates, and business card designs ready to customize.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>3 AI-generated logo concept variations (PNG + SVG)</li>
+              <li>Brand color palette + typography guide (PDF)</li>
+              <li>10 social media post templates (Canva-editable)</li>
+              <li>Business card design (front + back)</li>
+              <li>Email signature template</li>
+              <li>Letterhead design template</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="8000" data-level="Starter Brand" onclick="selectLevel(this, event)">Starter</span>
+            <span class="level-tab" data-price="15000" data-level="Growth Brand" onclick="selectLevel(this, event)">Growth</span>
+            <span class="level-tab" data-price="25000" data-level="Full Brand System" onclick="selectLevel(this, event)">Full System</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦8,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('AI-Generated Brand Identity Kit 2026','design','🖼️',
+              [{level:\'Starter Brand\',price:8000,desc:\'Logo concepts, color palette, and 5 social media templates for new businesses\'},
+               {level:\'Growth Brand\',price:15000,desc:\'Full social media pack (20 templates), business card, email signature, letterhead\'},
+               {level:\'Full Brand System\',price:25000,desc:\'Complete brand identity: logos, all templates, brand guide PDF, icon set, and custom color system\'}],
+              [\'3 AI-generated logo variations (PNG + SVG)\',\'Brand color palette + typography guide\',\'Social media post templates (Canva-editable)\',\'Business card design front + back\',\'Email signature template\',\'Letterhead design template\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PRESENTATION TEMPLATES -->
+      <div class="product-card" data-cat="design" data-name="Professional Presentation Template Pack">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a1a3a,#1a2a4a);">
+          <span class="emoji-fallback">📊</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Design Asset</div>
+          <h3>Professional Presentation &amp; Pitch Deck Templates 2026</h3>
+          <p>Stunning AI-designed presentation templates for business pitches, client proposals, reports, and team updates — PowerPoint &amp; Google Slides.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>5 full presentation templates (20+ slides each)</li>
+              <li>Business pitch deck template</li>
+              <li>Client proposal deck</li>
+              <li>Company profile template</li>
+              <li>Compatible: PowerPoint, Google Slides, Canva</li>
+              <li>Editable fonts, colors, charts, icons included</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="5000" data-level="Single Template" onclick="selectLevel(this, event)">Single</span>
+            <span class="level-tab" data-price="9000" data-level="3 Templates" onclick="selectLevel(this, event)">3 Pack</span>
+            <span class="level-tab" data-price="15000" data-level="Full Bundle (5)" onclick="selectLevel(this, event)">Full Bundle</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦5,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('Presentation &amp; Pitch Deck Templates 2026','design','📊',
+              [{level:\'Single Template\',price:5000,desc:\'1 premium presentation template of your choice (PowerPoint + Google Slides)\'},
+               {level:\'3 Template Pack\',price:9000,desc:\'3 premium templates: choose from pitch deck, client proposal, or company profile\'},
+               {level:\'Full Bundle — 5 Templates\',price:15000,desc:\'Complete set: pitch deck, client proposal, company profile, report template, team update deck\'}],
+              [\'5 full presentation templates (20+ slides each)\',\'Business pitch deck template\',\'Client proposal deck\',\'Company profile template\',\'PowerPoint + Google Slides + Canva compatible\',\'Editable fonts, colors, charts, icons\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL MEDIA TEMPLATE PACK -->
+      <div class="product-card" data-cat="design" data-name="Social Media Template Pack">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a1a0a,#2a2a1a);">
+          <span class="emoji-fallback">📱</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Design Asset</div>
+          <h3>Social Media &amp; Thumbnail Template Pack 2026</h3>
+          <p>100+ AI-designed social media templates — Instagram posts, carousels, YouTube thumbnails, TikTok covers, and LinkedIn banners. Canva-editable.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>30 Instagram post templates (square + portrait)</li>
+              <li>15 Instagram carousel templates (5-slide sets)</li>
+              <li>20 YouTube thumbnail templates</li>
+              <li>15 TikTok cover + caption templates</li>
+              <li>10 LinkedIn post + banner templates</li>
+              <li>10 Twitter/X post templates</li>
+              <li>All Canva-editable with brand color swap</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="5000" data-level="Platform Pack (30)" onclick="selectLevel(this, event)">Platform</span>
+            <span class="level-tab" data-price="9000" data-level="Multi-Platform (60)" onclick="selectLevel(this, event)">Multi</span>
+            <span class="level-tab" data-price="14000" data-level="Full Library (100+)" onclick="selectLevel(this, event)">Full Library</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦5,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('Social Media &amp; Thumbnail Template Pack 2026','design','📱',
+              [{level:\'Platform Pack — 30 Templates\',price:5000,desc:\'30 templates for one platform of your choice (Instagram, YouTube, or TikTok)\'},
+               {level:\'Multi-Platform — 60 Templates\',price:9000,desc:\'60 templates across Instagram, YouTube, and LinkedIn — fully Canva-editable\'},
+               {level:\'Full Library — 100+ Templates\',price:14000,desc:\'Complete library: all 100+ templates across every platform including TikTok, Twitter/X, and carousel sets\'}],
+              [\'Instagram post templates (square + portrait)\',\'Instagram carousel templates\',\'YouTube thumbnail templates\',\'TikTok cover templates\',\'LinkedIn post + banner templates\',\'Twitter/X post templates\',\'All Canva-editable with brand swap\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUSINESS CHECKLIST BUNDLE -->
+      <div class="product-card" data-cat="business" data-name="Business Checklist & Notion Template Bundle">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a2a1a,#1a3a2a);">
+          <span class="emoji-fallback">✅</span>
+          <span class="product-new">2026</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Business Toolkit</div>
+          <h3>Business Checklist &amp; Notion Template Bundle 2026</h3>
+          <p>Proven business checklists, Notion workspace templates, and operational frameworks for entrepreneurs and SMEs scaling in 2026.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>Business launch checklist (CAC registration to first client)</li>
+              <li>Social media management Notion template</li>
+              <li>Client onboarding &amp; project management system</li>
+              <li>Weekly productivity &amp; KPI tracker (Notion)</li>
+              <li>Content calendar (3-month template)</li>
+              <li>Business SOP writing guide + template</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="4500" data-level="Starter Kit" onclick="selectLevel(this, event)">Starter</span>
+            <span class="level-tab" data-price="8000" data-level="Operations Pack" onclick="selectLevel(this, event)">Operations</span>
+            <span class="level-tab" data-price="13000" data-level="Full Business OS" onclick="selectLevel(this, event)">Full OS</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦4,500</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('Business Checklist &amp; Notion Template Bundle 2026','business','✅',
+              [{level:\'Starter Kit\',price:4500,desc:\'Business launch checklist + content calendar + social media Notion template\'},
+               {level:\'Operations Pack\',price:8000,desc:\'Full Notion workspace: client management, KPI tracker, project system, content calendar\'},
+               {level:\'Full Business OS\',price:13000,desc:\'Complete business operating system: all templates + SOP guide + content strategy framework + KPI dashboard\'}],
+              [\'Business launch checklist\',\'Social media management Notion template\',\'Client onboarding system\',\'Weekly KPI tracker (Notion)\',\'3-month content calendar\',\'SOP writing guide + template\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI CONTENT SERVICE PACK -->
+      <div class="product-card" data-cat="content" data-name="AI-Powered Content Service Pack">
+        <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#1a2a4a);">
+          <span class="emoji-fallback">🚀</span>
+          <span class="product-new">SERVICE</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Content Service</div>
+          <h3>AI-Powered Content Service Pack 2026</h3>
+          <p>Done-for-you AI content creation: Instagram captions, short-form video scripts, carousel posts, blog articles, and email newsletters — delivered fast.</p>
+          <div class="product-includes">
+            <h5>What's Delivered</h5>
+            <ul>
+              <li>30 Instagram captions (niche-specific, ready to post)</li>
+              <li>10 short-form video scripts (60–90 seconds)</li>
+              <li>5 carousel post scripts (5-slide each)</li>
+              <li>4 blog article outlines + intro paragraphs</li>
+              <li>4 email newsletter templates (fully written)</li>
+              <li>Delivered within 5–7 business days</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="15000" data-level="Starter Month" onclick="selectLevel(this, event)">Starter</span>
+            <span class="level-tab" data-price="25000" data-level="Growth Month" onclick="selectLevel(this, event)">Growth</span>
+            <span class="level-tab" data-price="45000" data-level="Full Month Package" onclick="selectLevel(this, event)">Full Package</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦15,000</div>
+            <button class="btn btn-gold btn-sm" onclick="openModal('AI-Powered Content Service Pack 2026','content','🚀',
+              [{level:\'Starter Month\',price:15000,desc:\'15 captions + 5 video scripts + 2 carousel posts. Perfect for getting started with consistent content\'},
+               {level:\'Growth Month\',price:25000,desc:\'30 captions + 8 video scripts + 4 carousel posts + 2 blog outlines + 2 email newsletters\'},
+               {level:\'Full Month Package\',price:45000,desc:\'Full content system: 30 captions + 10 video scripts + 5 carousels + 4 blogs + 4 emails + content strategy session\'}],
+              [\'Instagram captions (niche-specific)\',\'Short-form video scripts (60-90 sec)\',\'Carousel post scripts (5-slides)\',\'Blog article outlines + intros\',\'Email newsletter templates (written)\',\'Delivered within 5-7 business days\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIGITAL PRODUCT STRATEGY EBOOK -->
+      <div class="product-card" data-cat="business" data-name="Digital Product Strategy Ebook 2026">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a0a0a,#3a1a0a);">
+          <span class="emoji-fallback">💰</span>
+          <span class="product-new">EBOOK</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Ebook · Business Strategy</div>
+          <h3>Profitable Digital Products in 2026 — The Complete Strategist Guide</h3>
+          <p>Act as a digital product strategist. Create me the fully equipped practical guide to profitable digital product ideas in 2026, which one has the best potential, and how to structure the product step by step.</p>
+          <div class="product-includes">
+            <h5>What's Inside</h5>
+            <ul>
+              <li>Top 20 digital product ideas with revenue potential ranked</li>
+              <li>Step-by-step product creation framework</li>
+              <li>Pricing strategies: NGN, USD, tiered models</li>
+              <li>Platform selection: Gumroad, Selar, Paystack, Shopify</li>
+              <li>Marketing your digital product with $0 budget</li>
+              <li>Case studies from African digital product creators</li>
+              <li>AI tools to create products 10x faster</li>
+            </ul>
+          </div>
+          <div class="level-tabs">
+            <span class="level-tab active" data-price="6000" data-level="Standard Ebook" onclick="selectLevel(this, event)">Standard</span>
+            <span class="level-tab" data-price="12000" data-level="Ebook + Templates" onclick="selectLevel(this, event)">With Templates</span>
+            <span class="level-tab" data-price="20000" data-level="Full Strategy Pack" onclick="selectLevel(this, event)">Full Pack</span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">NGN / Starting from</span>₦6,000</div>
+            <button class="btn btn-gold btn-sm" onclick="openModal('Profitable Digital Products in 2026 — Complete Strategist Guide','business','💰',
+              [{level:\'Standard Ebook\',price:6000,desc:\'Full ebook PDF: 20 product ideas, strategy frameworks, pricing guide, and platform selection\'},
+               {level:\'Ebook + Templates\',price:12000,desc:\'Ebook + 3 Notion templates for product planning, launch checklist, and sales tracking\'},
+               {level:\'Full Strategy Pack\',price:20000,desc:\'Ebook + templates + 1-hour consultation session + personalized product recommendation\'}],
+              [\'Top 20 digital product ideas ranked\',\'Step-by-step product creation framework\',\'Pricing strategies: NGN and USD\',\'Platform selection guide\',\'₦0 marketing strategy\',\'African creator case studies\',\'AI tools to create products faster\']
+            )">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end products grid -->
+
+    <!-- ADMIN-ADDED PRODUCTS -->
+    <div id="customProductsSection" style="display:none;">
+      <div class="section-heading">
+        <h2>🆕 Latest Products</h2>
+        <p>Newly added products from RuffNeck Entertainment.</p>
+      </div>
+      <div class="products-grid" id="customProductsGrid"></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- INTERNSHIP BANNER -->
+<div class="internship-banner">
+  <div class="container">
+    <div class="internship-grid">
+      <div class="internship-content">
+        <span class="tag">Remote Programs · 2026</span>
+        <h2>Remote AI Internship &amp; Volunteer Programs</h2>
+        <p>We run remote internship programs for dedicated individuals who want to gain hands-on AI skills — and we also accept remote volunteers who want to contribute, learn, and grow with our team.</p>
+        <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:28px;">If you're ready to build your portfolio, sharpen your skills, and work with a team that values growth and innovation — <strong style="color:var(--cyan);">this is your chance.</strong></p>
+        <a href="mailto:ruffneckhassan@gmail.com?subject=Remote Internship / Volunteer Application — 2026" class="btn btn-primary">Apply Now → ruffneckhassan@gmail.com</a>
+      </div>
+      <div>
+        <div class="internship-cards">
+          <div class="int-card">
+            <h4>🎓 Remote AI Internship</h4>
+            <p>Hands-on AI projects, real deliverables, mentorship from Hassan Zakariya, and a verified experience certificate. Open to students and career switchers globally.</p>
+          </div>
+          <div class="int-card">
+            <h4>🤝 Remote Volunteer Program</h4>
+            <p>Contribute your skills to community AI literacy programs, content creation, operations, and design projects. Build your portfolio while making a real impact.</p>
+          </div>
+          <div class="int-card">
+            <h4>📋 Who Can Apply</h4>
+            <p>Anyone with motivation and a stable internet connection. No experience required for beginner tracks. Intermediate and advanced tracks available for those with existing skills.</p>
+          </div>
+          <div class="int-card">
+            <h4>🌍 Fully Remote · 2026</h4>
+            <p>Open to applicants from Nigeria, Africa, and internationally. Work on your schedule. Gain skills in AI, content, operations, design, or digital marketing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+  <div class="container">
+    <div class="admin-inner">
+      <div class="admin-login">
+        <h2>🔐 Store Admin Panel</h2>
+        <p>Add, manage, and remove products from your store. Password protected.</p>
+        <div style="display:flex;gap:10px;justify-content:center;max-width:320px;margin:0 auto;">
+          <input type="password" id="adminPwInput" class="checkout-input" placeholder="Enter admin password" style="flex:1"/>
+          <button class="btn btn-primary" onclick="adminLogin()">Login</button>
+        </div>
+        <p id="adminErr" style="color:#ef4444;font-size:12px;margin-top:8px;display:none;">Incorrect password. Try again.</p>
+
+        <div class="admin-form" id="adminForm">
+          <div class="admin-section" style="margin-top:28px;">
+            <h3>➕ Add New Product</h3>
+            <div class="admin-row">
+              <div class="admin-field"><label>Product Name *</label><input type="text" id="p_name" placeholder="e.g. AI Career Guide 2026"/></div>
+              <div class="admin-field"><label>Category *</label>
+                <select id="p_cat">
+                  <option value="ai-career">AI Career Guide</option>
+                  <option value="prompts">Prompt Pack</option>
+                  <option value="templates">Template</option>
+                  <option value="design">Design Asset</option>
+                  <option value="business">Business Toolkit</option>
+                  <option value="content">Content Service</option>
+                </select>
+              </div>
+            </div>
+            <div class="admin-field"><label>Short Description *</label><textarea id="p_desc" placeholder="Brief description of the product (2-3 sentences)"></textarea></div>
+            <div class="admin-field"><label>What's Inside (one item per line)</label><textarea id="p_includes" placeholder="Complete step-by-step guide&#10;Tools and platform recommendations&#10;Templates included"></textarea></div>
+            <div class="admin-row">
+              <div class="admin-field"><label>Beginner Price (₦)</label><input type="number" id="p_price1" placeholder="3500"/></div>
+              <div class="admin-field"><label>Intermediate Price (₦)</label><input type="number" id="p_price2" placeholder="6500"/></div>
+            </div>
+            <div class="admin-row">
+              <div class="admin-field"><label>Advanced Price (₦)</label><input type="number" id="p_price3" placeholder="10000"/></div>
+              <div class="admin-field"><label>Emoji Icon</label><input type="text" id="p_emoji" placeholder="📄" maxlength="4"/></div>
+            </div>
+            <div class="admin-field"><label>Product Image (optional)</label>
+              <input type="file" id="p_image" accept="image/*" style="color:rgba(255,255,255,0.7)"/>
+              <p style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:4px;">Upload a product image. If none, emoji will be used.</p>
+            </div>
+            <div class="admin-field"><label>PDF Download URL (Google Drive / Dropbox shared link)</label><input type="url" id="p_pdf" placeholder="https://drive.google.com/file/d/xxx/view?usp=sharing"/></div>
+            <button class="btn btn-primary" onclick="addProduct()" style="margin-top:8px;">Add Product to Store</button>
+          </div>
+
+          <div class="admin-section">
+            <h3>📦 Your Added Products</h3>
+            <div class="admin-products-list" id="adminProductsList">
+              <p style="color:rgba(255,255,255,0.4);font-size:13px;">No custom products added yet.</p>
+            </div>
+          </div>
+
+          <div class="admin-section">
+            <h3>💡 How to Add PDF Files</h3>
+            <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7;display:flex;flex-direction:column;gap:10px;">
+              <p>1. Create your PDF guide (Canva, Word, Google Docs)</p>
+              <p>2. Upload to <strong style="color:var(--cyan);">Google Drive</strong> or <strong style="color:var(--cyan);">Dropbox</strong></p>
+              <p>3. Set sharing to <strong style="color:var(--gold);">"Anyone with the link can view"</strong></p>
+              <p>4. Copy the share link and paste it into the "PDF Download URL" field above</p>
+              <p>5. After purchase, buyers receive the link automatically via the confirmation screen</p>
+              <p style="color:rgba(255,255,255,0.4);font-size:12px;">💡 Tip: For better control, use Gumroad.com or Selar.co to host PDF products — they handle delivery, receipts, and re-downloads automatically.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>🛒 Your Cart</h3>
+    <span class="cart-close" onclick="toggleCart()">×</span>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <div class="cart-empty"><div class="icon">🛍️</div><p>Your cart is empty.<br/>Browse products and add items.</p></div>
+  </div>
+  <div class="cart-footer" id="cartFooter" style="display:none;">
+    <div class="cart-summary">
+      <div class="cart-row"><span>Subtotal</span><span id="cartSubtotal">₦0</span></div>
+      <div class="cart-row"><span>Items</span><span id="cartItemCount">0</span></div>
+      <div class="cart-row total"><span>Total</span><span id="cartTotal">₦0</span></div>
+    </div>
+    <div class="checkout-form">
+      <input class="checkout-input" type="text" id="buyerName" placeholder="Full Name *" required/>
+      <input class="checkout-input" type="email" id="buyerEmail" placeholder="Email Address * (for product delivery)" required/>
+    </div>
+    <button class="btn btn-gold pay-btn" onclick="initiatePayment()">🔒 Pay with Paystack</button>
+    <p class="cart-note">✅ Instant PDF download link sent to your email after payment.<br/>🔒 Secured by Paystack · 2026</p>
+  </div>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div class="modal-overlay" id="productModal" onclick="closeModalOutside(event)">
+  <div class="modal" id="modalContent">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <div class="modal-header">
+      <div class="modal-cat" id="modalCat"></div>
+      <h3 id="modalTitle"></h3>
+    </div>
+    <div class="modal-body">
+      <div class="modal-includes">
+        <h4>What's Inside</h4>
+        <ul id="modalIncludes"></ul>
+      </div>
+      <h4 style="font-size:13px;font-weight:700;color:var(--text-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-family:var(--font-mono);">Choose Your Level</h4>
+      <div class="modal-levels" id="modalLevels"></div>
+      <button class="btn btn-primary modal-add-btn" id="modalAddBtn" onclick="addToCartFromModal()">Add to Cart</button>
+      <div class="modal-delivery">
+        <strong>📥 Delivery:</strong> After successful payment, your PDF download link is instantly displayed on screen and sent to your email. No waiting — access your guide immediately.<br/><br/>
+        <strong>🌍 Access:</strong> Worldwide · PDF format · Works on all devices · No expiry
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="modal-overlay" id="successModal">
+  <div class="modal">
+    <div class="success-modal">
+      <div class="success-icon">🎉</div>
+      <h3>Payment Successful!</h3>
+      <p>Thank you for your purchase. Your PDF download link(s) have been sent to your email and are available below.</p>
+      <div id="downloadLinks" style="display:flex;flex-direction:column;gap:10px;margin-bottom:20px;"></div>
+      <button class="btn btn-outline" onclick="closeSuccessModal()" style="margin-right:10px;">Continue Shopping</button>
+      <a href="/" class="btn btn-primary">← Back to Homepage</a>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<div class="store-footer">
+  <div class="container">
+    <p>© 2026 <a href="/">RuffNeck Entertainment</a> · CAC Reg No. 3770977 · <a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a> · <a href="https://wa.me/2348033807856" target="_blank">WhatsApp</a></p>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// STATE
+// ============================================================
+let cart = [];
+let currentModal = null;
+let selectedModalLevel = null;
+
+// ============================================================
+// STORAGE (Persistent products)
+// ============================================================
+async function saveProducts(products) {
+  try { await window.storage.set('store-products', JSON.stringify(products)); } catch(e) {}
+}
+async function loadProducts() {
+  try {
+    const r = await window.storage.get('store-products');
+    return r ? JSON.parse(r.value) : [];
+  } catch(e) { return []; }
+}
+
+// ============================================================
+// TOAST
+// ============================================================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ============================================================
+// LEVEL TABS (on cards)
+// ============================================================
+function selectLevel(el, e) {
+  e.stopPropagation();
+  const tabs = el.parentElement.querySelectorAll('.level-tab');
+  tabs.forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const priceEl = el.closest('.product-body').querySelector('.product-price');
+  priceEl.innerHTML = `<span class="currency">NGN · ${el.dataset.level}</span>₦${parseInt(el.dataset.price).toLocaleString()}`;
+}
+
+// ============================================================
+// MODAL
+// ============================================================
+function openModal(name, cat, emoji, levels, includes) {
+  document.getElementById('modalCat').textContent = cat.replace(/-/g,' ').toUpperCase();
+  document.getElementById('modalTitle').textContent = name;
+
+  const incEl = document.getElementById('modalIncludes');
+  incEl.innerHTML = includes.map(i => `<li>${i}</li>`).join('');
+
+  const levelsEl = document.getElementById('modalLevels');
+  levelsEl.innerHTML = levels.map((l,i) => `
+    <div class="modal-level${i===0?' selected':''}" onclick="selectModalLevel(this, '${l.level}', ${l.price})">
+      <div class="modal-level-header">
+        <span class="modal-level-name">${l.level}</span>
+        <span class="modal-level-price">₦${l.price.toLocaleString()}</span>
+      </div>
+      <div class="modal-level-desc">${l.desc}</div>
+    </div>
+  `).join('');
+
+  selectedModalLevel = {level: levels[0].level, price: levels[0].price};
+  currentModal = {name, cat, emoji, levels, includes};
+  document.getElementById('productModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function selectModalLevel(el, level, price) {
+  document.querySelectorAll('.modal-level').forEach(m => m.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedModalLevel = {level, price};
+}
+
+function closeModal() {
+  document.getElementById('productModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) {
+  if (e.target === document.getElementById('productModal')) closeModal();
+}
+
+function addToCartFromModal() {
+  if (!currentModal || !selectedModalLevel) return;
+  addToCart({
+    name: currentModal.name,
+    level: selectedModalLevel.level,
+    price: selectedModalLevel.price,
+    emoji: currentModal.emoji,
+    imgSrc: currentModal.imgSrc || null,
+    pdfUrl: currentModal.pdfUrl || null
+  });
+  closeModal();
+  toggleCart(true);
+}
+
+// ============================================================
+// CART
+// ============================================================
+function addToCart(item) {
+  const existing = cart.find(c => c.name === item.name && c.level === item.level);
+  if (existing) {
+    existing.qty = (existing.qty || 1) + 1;
+  } else {
+    cart.push({...item, qty: 1, id: Date.now()});
+  }
+  renderCart();
+  showToast(`✅ ${item.name} (${item.level}) added to cart`);
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(c => c.id !== id);
+  renderCart();
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(c => c.id === id);
+  if (!item) return;
+  item.qty = Math.max(1, (item.qty || 1) + delta);
+  renderCart();
+}
+
+function renderCart() {
+  const itemsEl = document.getElementById('cartItems');
+  const footerEl = document.getElementById('cartFooter');
+  const countEl = document.getElementById('cartCount');
+
+  const totalItems = cart.reduce((s, c) => s + (c.qty||1), 0);
+  countEl.textContent = totalItems;
+
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<div class="cart-empty"><div class="icon">🛍️</div><p>Your cart is empty.<br/>Browse products and add items.</p></div>';
+    footerEl.style.display = 'none';
+    return;
+  }
+
+  footerEl.style.display = 'block';
+  itemsEl.innerHTML = cart.map(item => `
+    <div class="cart-item">
+      <div class="cart-item-icon">${item.imgSrc ? `<img src="${item.imgSrc}" alt=""/>` : item.emoji}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-level">${item.level}</div>
+        <div class="cart-item-controls">
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+          <span class="qty-display">${item.qty||1}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
+          <span class="cart-item-price">₦${((item.price)*(item.qty||1)).toLocaleString()}</span>
+        </div>
+      </div>
+      <span class="cart-item-remove" onclick="removeFromCart(${item.id})">×</span>
+    </div>
+  `).join('');
+
+  const subtotal = cart.reduce((s,c) => s + c.price*(c.qty||1), 0);
+  document.getElementById('cartSubtotal').textContent = `₦${subtotal.toLocaleString()}`;
+  document.getElementById('cartTotal').textContent = `₦${subtotal.toLocaleString()}`;
+  document.getElementById('cartItemCount').textContent = totalItems + ' item(s)';
+}
+
+function toggleCart(open) {
+  const sidebar = document.getElementById('cartSidebar');
+  const overlay = document.getElementById('cartOverlay');
+  const isOpen = sidebar.classList.contains('open');
+  if (open === true || !isOpen) {
+    sidebar.classList.add('open');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  } else {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+// ============================================================
+// PAYMENT — PAYSTACK
+// ============================================================
+function initiatePayment() {
+  const name = document.getElementById('buyerName').value.trim();
+  const email = document.getElementById('buyerEmail').value.trim();
+  if (!name) { showToast('Please enter your full name'); return; }
+  if (!email || !email.includes('@')) { showToast('Please enter a valid email address'); return; }
+  if (cart.length === 0) { showToast('Your cart is empty'); return; }
+
+  const total = cart.reduce((s,c) => s + c.price*(c.qty||1), 0);
+
+  // Replace with your actual Paystack public key
+  const PAYSTACK_KEY = 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+
+  if (PAYSTACK_KEY.includes('xxxx')) {
+    // Demo mode — simulate success
+    simulatePaymentSuccess(name, email);
+    return;
+  }
+
+  const handler = PaystackPop.setup({
+    key: PAYSTACK_KEY,
+    email: email,
+    amount: total * 100, // Paystack uses kobo
+    currency: 'NGN',
+    ref: 'RN_' + Date.now(),
+    metadata: {
+      custom_fields: [
+        {display_name: 'Customer Name', variable_name: 'customer_name', value: name},
+        {display_name: 'Items', variable_name: 'items', value: cart.map(c=>`${c.name} (${c.level}) x${c.qty||1}`).join(', ')}
+      ]
+    },
+    callback: function(response) {
+      handlePaymentSuccess(name, email, response.reference);
+    },
+    onClose: function() {
+      showToast('Payment cancelled. Your cart is saved.');
+    }
+  });
+  handler.openIframe();
+}
+
+function simulatePaymentSuccess(name, email) {
+  handlePaymentSuccess(name, email, 'DEMO_' + Date.now());
+}
+
+function handlePaymentSuccess(name, email, ref) {
+  const links = cart.map(item => ({
+    name: item.name,
+    level: item.level,
+    url: item.pdfUrl || 'https://ruffneck-entertainment.vercel.app/store'
+  }));
+
+  const linksEl = document.getElementById('downloadLinks');
+  linksEl.innerHTML = links.map(l => `
+    <a href="${l.url}" target="_blank" class="btn btn-primary btn-sm" style="justify-content:center;">
+      📥 Download: ${l.name} (${l.level})
+    </a>
+  `).join('');
+
+  cart = [];
+  renderCart();
+  toggleCart(false);
+  document.getElementById('successModal').classList.add('open');
+}
+
+function closeSuccessModal() {
+  document.getElementById('successModal').classList.remove('open');
+}
+
+// ============================================================
+// FILTER & SEARCH
+// ============================================================
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterProducts();
+  });
+});
+
+function filterProducts() {
+  const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.product-card').forEach(card => {
+    const catMatch = activeCat === 'all' || card.dataset.cat === activeCat;
+    const nameMatch = card.dataset.name?.toLowerCase().includes(search) || !search;
+    card.style.display = (catMatch && nameMatch) ? '' : 'none';
+  });
+}
+
+// ============================================================
+// ADMIN PANEL
+// ============================================================
+const ADMIN_PASSWORD = 'ruffneck2026admin';
+
+function adminLogin() {
+  const pw = document.getElementById('adminPwInput').value;
+  if (pw === ADMIN_PASSWORD) {
+    document.getElementById('adminForm').classList.add('visible');
+    document.getElementById('adminErr').style.display = 'none';
+    loadAdminProducts();
+  } else {
+    document.getElementById('adminErr').style.display = 'block';
+  }
+}
+
+async function addProduct() {
+  const name = document.getElementById('p_name').value.trim();
+  const cat = document.getElementById('p_cat').value;
+  const desc = document.getElementById('p_desc').value.trim();
+  const includes = document.getElementById('p_includes').value.trim().split('\n').filter(l=>l.trim());
+  const price1 = parseInt(document.getElementById('p_price1').value) || 5000;
+  const price2 = parseInt(document.getElementById('p_price2').value) || 9000;
+  const price3 = parseInt(document.getElementById('p_price3').value) || 15000;
+  const emoji = document.getElementById('p_emoji').value || '📄';
+  const pdfUrl = document.getElementById('p_pdf').value.trim();
+
+  if (!name || !desc) { showToast('Product name and description required'); return; }
+
+  const imageFile = document.getElementById('p_image').files[0];
+  let imgSrc = null;
+
+  if (imageFile) {
+    imgSrc = await new Promise(res => {
+      const reader = new FileReader();
+      reader.onload = e => res(e.target.result);
+      reader.readAsDataURL(imageFile);
+    });
+  }
+
+  const product = { id: Date.now(), name, cat, desc, includes, emoji, imgSrc, pdfUrl,
+    levels: [
+      {level:'Beginner', price:price1, desc:'Beginner level — foundation concepts and getting started'},
+      {level:'Intermediate', price:price2, desc:'Intermediate level — deeper skills and practical application'},
+      {level:'Advanced', price:price3, desc:'Advanced level — mastery, scaling, and professional execution'}
+    ]
+  };
+
+  const products = await loadProducts();
+  products.push(product);
+  await saveProducts(products);
+  renderCustomProducts(products);
+  loadAdminProducts();
+  showToast('✅ Product added to store!');
+
+  // Clear form
+  ['p_name','p_desc','p_includes','p_price1','p_price2','p_price3','p_emoji','p_pdf'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('p_image').value = '';
+}
+
+async function deleteProduct(id) {
+  const products = await loadProducts();
+  const updated = products.filter(p => p.id !== id);
+  await saveProducts(updated);
+  renderCustomProducts(updated);
+  loadAdminProducts();
+  showToast('Product removed');
+}
+
+async function loadAdminProducts() {
+  const products = await loadProducts();
+  const listEl = document.getElementById('adminProductsList');
+  if (products.length === 0) {
+    listEl.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px;">No custom products added yet.</p>';
+    return;
+  }
+  listEl.innerHTML = products.map(p => `
+    <div class="admin-product-item">
+      <div class="admin-product-item-info">
+        <div class="admin-product-item-name">${p.emoji} ${p.name}</div>
+        <div class="admin-product-item-meta">${p.cat} · ₦${p.levels[0].price.toLocaleString()} – ₦${p.levels[2].price.toLocaleString()}</div>
+      </div>
+      <span class="admin-del-btn" onclick="deleteProduct(${p.id})">🗑</span>
+    </div>
+  `).join('');
+}
+
+function renderCustomProducts(products) {
+  const section = document.getElementById('customProductsSection');
+  const grid = document.getElementById('customProductsGrid');
+  if (products.length === 0) { section.style.display = 'none'; return; }
+  section.style.display = 'block';
+  grid.innerHTML = products.map(p => `
+    <div class="product-card" data-cat="${p.cat}" data-name="${p.name}">
+      <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#040C1A);">
+        ${p.imgSrc ? `<img src="${p.imgSrc}" alt="${p.name}"/>` : `<span class="emoji-fallback">${p.emoji}</span>`}
+        <span class="product-new">NEW</span>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.cat.replace(/-/g,' ').toUpperCase()}</div>
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        ${p.includes.length ? `<div class="product-includes"><h5>What's Inside</h5><ul>${p.includes.map(i=>`<li>${i}</li>`).join('')}</ul></div>` : ''}
+        <div class="product-footer">
+          <div class="product-price"><span class="currency">NGN / Starting from</span>₦${p.levels[0].price.toLocaleString()}</div>
+          <button class="btn btn-primary btn-sm" onclick='openModal(${JSON.stringify(p.name)},${JSON.stringify(p.cat)},${JSON.stringify(p.emoji)},${JSON.stringify(p.levels)},${JSON.stringify(p.includes)},${JSON.stringify(p.imgSrc)},${JSON.stringify(p.pdfUrl)})'>View &amp; Buy</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// Override openModal to accept imgSrc and pdfUrl
+const _origOpenModal = openModal;
+window.openModal = function(name, cat, emoji, levels, includes, imgSrc, pdfUrl) {
+  _origOpenModal(name, cat, emoji, levels, includes);
+  if (currentModal) { currentModal.imgSrc = imgSrc||null; currentModal.pdfUrl = pdfUrl||null; }
+};
+
+// Load custom products on page load
+(async () => {
+  const products = await loadProducts();
+  renderCustomProducts(products);
+})();
+</script>
+</body>
+</html>

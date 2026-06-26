@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RuffNeck Blog | AI, Operations & Digital Growth Insights — 2026</title>
+<meta name="description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#0B1E3A;--midnight:#040C1A;--cyan:#00B4D8;--cyan-lt:#00F0FF;
+  --gold:#FFC107;--purple:#7B2FFF;--white:#FFFFFF;
+  --bg-light:#F5F7FA;--bg-white:#FFFFFF;
+  --text-dark:#0B1E3A;--text-body:#374151;--text-muted:#6B7280;
+  --border:#E5E7EB;--shadow:0 2px 16px rgba(11,30,58,0.08);
+  --shadow-md:0 4px 32px rgba(11,30,58,0.12);
+  --radius:12px;--radius-sm:8px;
+  --font-display:'Space Grotesk',sans-serif;--font-mono:'Space Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-display);color:var(--text-body);background:var(--bg-light);-webkit-font-smoothing:antialiased}
+a{text-decoration:none;color:inherit}ul{list-style:none}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+.container{max-width:1180px;margin:0 auto;padding:0 24px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 24px;border-radius:var(--radius-sm);font-family:var(--font-display);font-weight:600;font-size:14px;transition:all 0.2s;cursor:pointer;border:none}
+.btn-primary{background:var(--cyan);color:var(--navy)}.btn-primary:hover{background:var(--cyan-lt);transform:translateY(-1px)}
+.btn-outline{border:2px solid var(--border)!important;color:var(--text-dark);background:var(--white)}.btn-outline:hover{border-color:var(--cyan)!important;color:var(--cyan)}
+.btn-sm{padding:8px 18px;font-size:13px}
+
+/* NAV */
+.nav{background:rgba(4,12,26,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,180,216,0.15);padding:0;position:sticky;top:0;z-index:100}
+.nav-inner{max-width:1180px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;color:var(--white)}
+.nav-logo-mark{width:36px;height:36px;background:linear-gradient(135deg,#00F0FF,#0055AA);border-radius:8px;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--white)}
+.nav-logo span{color:var(--cyan)}
+.nav-right{display:flex;align-items:center;gap:12px}
+.nav-home-btn{display:flex;align-items:center;gap:6px;color:rgba(255,255,255,0.7);font-size:13px;font-weight:600;padding:8px 16px;border:1.5px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);transition:all 0.2s}
+.nav-home-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.nav-store-btn{display:flex;align-items:center;gap:6px;background:var(--gold);color:var(--navy);font-size:13px;font-weight:700;padding:8px 16px;border-radius:var(--radius-sm);transition:all 0.2s}
+.nav-store-btn:hover{background:#FFE57F}
+
+/* HERO */
+.blog-hero{background:radial-gradient(ellipse at 30% 50%,#0B1E3A 0%,#040C1A 70%,#010408 100%);padding:64px 0 48px;color:var(--white);text-align:center}
+.blog-hero .label{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
+.blog-hero h1{font-size:clamp(28px,4vw,46px);font-weight:700;margin-bottom:14px;line-height:1.2}
+.blog-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan-lt),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.blog-hero p{font-size:16px;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto;line-height:1.7}
+
+/* FILTERS */
+.blog-filters{background:var(--white);border-bottom:1px solid var(--border);padding:16px 0;position:sticky;top:64px;z-index:90}
+.filters-inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.filter-btn{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;border:1.5px solid var(--border);color:var(--text-muted);background:var(--white);transition:all 0.2s;cursor:pointer}
+.filter-btn.active,.filter-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
+.blog-search{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--bg-light);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px}
+.blog-search input{border:none;background:none;font-family:var(--font-display);font-size:13px;color:var(--text-dark);outline:none;width:180px}
+
+/* FEATURED */
+.featured-section{padding:56px 0 0}
+.featured-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;cursor:pointer;transition:all 0.25s;margin-bottom:56px}
+.featured-card:hover{border-color:var(--cyan);box-shadow:var(--shadow-md)}
+.featured-thumb{height:100%;min-height:280px;display:flex;align-items:center;justify-content:center;font-size:72px;background:linear-gradient(135deg,#0B1E3A,#040C1A)}
+.featured-body{padding:36px 32px;display:flex;flex-direction:column;justify-content:center}
+.featured-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.featured-label::before{content:'FEATURED';background:var(--cyan);color:var(--navy);padding:2px 8px;border-radius:100px;font-size:9px;font-weight:700}
+.featured-body h2{font-size:clamp(20px,2.5vw,28px);font-weight:700;color:var(--text-dark);margin-bottom:12px;line-height:1.3}
+.featured-body p{font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:20px}
+.featured-meta{display:flex;align-items:center;gap:16px;font-size:12px;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:20px}
+.read-time{background:var(--bg-light);padding:3px 10px;border-radius:100px}
+
+/* BLOG GRID */
+.blog-main{padding:0 0 80px}
+.grid-heading{font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:10px}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+.blog-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all 0.25s;display:flex;flex-direction:column}
+.blog-card:hover{border-color:var(--cyan);box-shadow:var(--shadow-md);transform:translateY(-3px)}
+.blog-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:44px;position:relative}
+.blog-thumb-ai{background:linear-gradient(135deg,#0B1E3A,#0a2a4a)}
+.blog-thumb-ops{background:linear-gradient(135deg,#0a2a1a,#1a3a2a)}
+.blog-thumb-marketing{background:linear-gradient(135deg,#1a0a2a,#2a0a3a)}
+.blog-thumb-career{background:linear-gradient(135deg,#1a1a0a,#2a2a1a)}
+.blog-thumb-ethics{background:linear-gradient(135deg,#1a0a0a,#2a1a0a)}
+.blog-thumb-consult{background:linear-gradient(135deg,#0a1a2a,#1a2a3a)}
+.blog-thumb-content{background:linear-gradient(135deg,#0a0a2a,#1a0a3a)}
+.blog-thumb-intern{background:linear-gradient(135deg,#0a2a2a,#1a3a3a)}
+.card-cat-badge{position:absolute;bottom:10px;left:10px;font-family:var(--font-mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;background:rgba(0,0,0,0.5);color:var(--cyan);padding:3px 8px;border-radius:100px;backdrop-filter:blur(4px)}
+.card-new{position:absolute;top:10px;right:10px;background:var(--gold);color:var(--navy);font-size:9px;font-weight:700;padding:2px 8px;border-radius:100px;font-family:var(--font-mono)}
+.blog-card-body{padding:18px;flex:1;display:flex;flex-direction:column}
+.card-meta{display:flex;align-items:center;gap:10px;font-size:11px;color:var(--text-muted);font-family:var(--font-mono);margin-bottom:8px}
+.card-dot{width:3px;height:3px;border-radius:50%;background:var(--text-muted)}
+.blog-card-body h3{font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:8px;line-height:1.4;flex:1}
+.blog-card-body p{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px}
+.card-footer{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:12px;border-top:1px solid var(--border)}
+.card-author{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:6px}
+.author-dot{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--white)}
+.read-link{font-size:12px;font-weight:700;color:var(--cyan);display:flex;align-items:center;gap:4px}
+.read-link:hover{color:var(--cyan-lt)}
+
+/* ARTICLE MODAL */
+.article-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;backdrop-filter:blur(6px);align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto}
+.article-overlay.open{display:flex}
+.article-modal{background:var(--white);border-radius:var(--radius);max-width:760px;width:100%;margin:auto;overflow:hidden}
+.article-modal-header{background:radial-gradient(ellipse at 20% 50%,#0B1E3A 0%,#040C1A 100%);padding:40px 40px 32px;color:var(--white);position:relative}
+.article-back-btn{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.6);font-size:13px;font-weight:600;cursor:pointer;margin-bottom:20px;padding:7px 14px;border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);transition:all 0.2s;background:none}
+.article-back-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+.article-home-btn{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,0.6);font-size:13px;font-weight:600;cursor:pointer;margin-bottom:20px;margin-left:10px;padding:7px 14px;border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);transition:all 0.2s;background:none}
+.article-home-btn:hover{border-color:var(--gold);color:var(--gold)}
+.article-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:12px}
+.article-modal-header h2{font-size:clamp(20px,3vw,28px);font-weight:700;color:var(--white);line-height:1.3;margin-bottom:12px}
+.article-meta{display:flex;align-items:center;gap:12px;font-size:12px;color:rgba(255,255,255,0.5);font-family:var(--font-mono)}
+.article-body{padding:36px 40px}
+.article-body h3{font-size:18px;font-weight:700;color:var(--text-dark);margin:28px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--border)}
+.article-body h3:first-child{margin-top:0}
+.article-body p{font-size:15px;color:var(--text-body);line-height:1.8;margin-bottom:16px}
+.article-body ul{margin:0 0 16px 0;display:flex;flex-direction:column;gap:8px}
+.article-body ul li{font-size:14px;color:var(--text-body);line-height:1.65;padding-left:20px;position:relative}
+.article-body ul li::before{content:'→';color:var(--cyan);font-weight:700;position:absolute;left:0}
+.article-body .highlight{background:rgba(0,180,216,0.08);border-left:3px solid var(--cyan);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:16px 20px;margin:20px 0;font-size:14px;color:var(--text-dark);line-height:1.7}
+.article-body .cta-box{background:linear-gradient(135deg,rgba(0,180,216,0.08),rgba(123,47,255,0.08));border:1.5px solid rgba(0,180,216,0.2);border-radius:var(--radius);padding:24px;margin:28px 0;text-align:center}
+.article-body .cta-box h4{font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:8px}
+.article-body .cta-box p{font-size:14px;color:var(--text-muted);margin-bottom:16px}
+.article-footer{padding:24px 40px;border-top:1px solid var(--border);background:var(--bg-light);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.article-tags{display:flex;flex-wrap:wrap;gap:6px}
+.article-tag{font-family:var(--font-mono);font-size:10px;padding:3px 10px;border-radius:100px;background:rgba(0,180,216,0.08);color:var(--cyan);border:1px solid rgba(0,180,216,0.2)}
+.article-nav-btns{display:flex;gap:10px}
+
+/* NEWSLETTER */
+.newsletter{background:var(--navy);padding:64px 0;text-align:center;color:var(--white)}
+.newsletter h2{font-size:28px;font-weight:700;margin-bottom:10px}
+.newsletter p{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.7}
+.newsletter-form{display:flex;gap:12px;max-width:440px;margin:0 auto;flex-wrap:wrap;justify-content:center}
+.newsletter-form input{flex:1;min-width:220px;padding:13px 18px;border-radius:var(--radius-sm);border:none;font-family:var(--font-display);font-size:14px;color:var(--text-dark);outline:none}
+
+/* FOOTER */
+.blog-footer{background:var(--midnight);padding:32px 0;text-align:center;border-top:1px solid rgba(255,255,255,0.07)}
+.blog-footer p{font-size:13px;color:rgba(255,255,255,0.35)}
+.blog-footer a{color:var(--cyan)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.blog-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:768px){
+  .blog-grid{grid-template-columns:1fr}
+  .featured-card{grid-template-columns:1fr}
+  .featured-thumb{min-height:180px}
+  .featured-body{padding:24px}
+  .filters-inner{flex-direction:column;align-items:flex-start}
+  .blog-search{margin-left:0;width:100%}
+  .blog-search input{width:100%}
+  .article-modal-header,.article-body,.article-footer{padding:24px}
+  .article-overlay{padding:12px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <div class="nav-logo-mark">RN</div>
+      <div><strong>RuffNeck</strong><span>Blog</span></div>
+    </a>
+    <div class="nav-right">
+      <a href="/" class="nav-home-btn">← Homepage</a>
+      <a href="/store" class="nav-store-btn">🛒 Store</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="blog-hero">
+  <div class="container">
+    <div class="label">Resources · Insights · Guides · 2026</div>
+    <h1>RuffNeck <em>Knowledge Hub</em></h1>
+    <p>Practical AI, operations, digital marketing, career development, and business growth insights from RuffNeck Entertainment.</p>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="blog-filters">
+  <div class="container">
+    <div class="filters-inner">
+      <button class="filter-btn active" data-cat="all">All Articles</button>
+      <button class="filter-btn" data-cat="ai">AI & Automation</button>
+      <button class="filter-btn" data-cat="career">AI Careers</button>
+      <button class="filter-btn" data-cat="operations">Operations</button>
+      <button class="filter-btn" data-cat="marketing">Digital Marketing</button>
+      <button class="filter-btn" data-cat="ethics">AI Ethics</button>
+      <button class="filter-btn" data-cat="content">Content & Prompts</button>
+      <button class="filter-btn" data-cat="business">Business Growth</button>
+      <div class="blog-search">
+        <span>🔍</span>
+        <input type="text" id="searchInput" placeholder="Search articles..." oninput="filterBlog()"/>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEATURED -->
+<div class="featured-section">
+  <div class="container">
+    <div class="featured-card" onclick="openArticle('featured')">
+      <div class="featured-thumb">🤖</div>
+      <div class="featured-body">
+        <div class="featured-label">AI & Automation · 2026</div>
+        <h2>Top 12 AI Career Roles You Can Start in 2026 — No Coding Required</h2>
+        <p>AI Data Annotator, Evaluator, Ethics Reviewer, Content Writer, Tutor, Research Assistant — the complete breakdown of every AI role you can step into today, with realistic income expectations and step-by-step entry paths.</p>
+        <div class="featured-meta">
+          <span>RuffNeck Entertainment</span>
+          <span class="card-dot"></span>
+          <span>June 2026</span>
+          <span class="card-dot"></span>
+          <span class="read-time">12 min read</span>
+        </div>
+        <button class="btn btn-primary btn-sm">Read Full Article →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BLOG GRID -->
+<div class="blog-main">
+  <div class="container">
+
+    <h2 class="grid-heading">📰 All Articles · 2026</h2>
+    <div class="blog-grid" id="blogGrid">
+
+      <div class="blog-card" data-cat="ai" data-title="Top 10 AI Tools Every Nigerian SME Should Use in 2026" onclick="openArticle('ai-tools')">
+        <div class="blog-thumb blog-thumb-ai"><span>🛠️</span><span class="card-cat-badge">AI & Automation</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>8 min</span></div>
+          <h3>Top 10 AI Tools Every Nigerian SME Should Use in 2026</h3>
+          <p>From ChatGPT to automation platforms — practical AI tools your business can adopt right now to cut costs and scale faster.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="career" data-title="How to Become an AI Data Annotator in 2026" onclick="openArticle('annotator')">
+        <div class="blog-thumb blog-thumb-ai"><span>🏷️</span><span class="card-cat-badge">AI Career</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>7 min</span></div>
+          <h3>How to Become an AI Data Annotator in 2026 — Full Beginner Guide</h3>
+          <p>Platforms, tools, qualification tips, and realistic earning expectations for starting your AI annotation career from Nigeria.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="operations" data-title="How to Build a Warehouse Reporting System in 2026" onclick="openArticle('warehouse')">
+        <div class="blog-thumb blog-thumb-ops"><span>📊</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>9 min</span></div>
+          <h3>How to Build a Warehouse Data Reporting System in 2026</h3>
+          <p>Step-by-step guide to KPI dashboards and compliance reporting without expensive enterprise software — based on real experience.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="marketing" data-title="Growing Your African Business Brand Globally in 2026" onclick="openArticle('global-brand')">
+        <div class="blog-thumb blog-thumb-marketing"><span>🌍</span><span class="card-cat-badge">Digital Marketing</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>8 min</span></div>
+          <h3>Growing Your African Business Brand Globally in 2026</h3>
+          <p>Strategies for Nigerian and African businesses to attract international clients, build credibility, and compete on the world stage.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="career" data-title="How to Become an AI Technical Content Writer in 2026" onclick="openArticle('ai-writer')">
+        <div class="blog-thumb blog-thumb-content"><span>✍️</span><span class="card-cat-badge">AI Career</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>7 min</span></div>
+          <h3>How to Become an AI Technical Content Writer in 2026</h3>
+          <p>The career path, skills, tools, and platforms to break into AI content writing — written from firsthand experience at GAOTek Inc.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="ethics" data-title="AI Ethics in Business: What Every Nigerian Entrepreneur Should Know" onclick="openArticle('ai-ethics')">
+        <div class="blog-thumb blog-thumb-ethics"><span>🛡️</span><span class="card-cat-badge">AI Ethics</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>6 min</span></div>
+          <h3>AI Ethics in Business: What Every Nigerian Entrepreneur Should Know in 2026</h3>
+          <p>Bias detection, data privacy, content safety, and responsible AI use — before it becomes a compliance requirement.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="content" data-title="Prompt Engineering for Business: The 2026 Practical Guide" onclick="openArticle('prompts')">
+        <div class="blog-thumb blog-thumb-content"><span>⚡</span><span class="card-cat-badge">Prompts</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>10 min</span></div>
+          <h3>Prompt Engineering for Business: The 2026 Practical Guide</h3>
+          <p>Video prompts, content prompts, B-Roll generation, storytelling frameworks, retention optimization — all the prompt techniques that actually work.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="business" data-title="Do You Need a Business Consultant? 5 Signs the Answer Is Yes" onclick="openArticle('consultant')">
+        <div class="blog-thumb blog-thumb-consult"><span>🧠</span><span class="card-cat-badge">Business Growth</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>5 min</span></div>
+          <h3>Do You Need a Business Consultant? 5 Signs the Answer Is Yes in 2026</h3>
+          <p>How to know when to bring in expert strategic support — and what to expect from a consultation engagement.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="career" data-title="Remote AI Internships in 2026: How to Apply and What to Expect" onclick="openArticle('internship')">
+        <div class="blog-thumb blog-thumb-intern"><span>🌐</span><span class="card-cat-badge">AI Career</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>6 min</span></div>
+          <h3>Remote AI Internships in 2026: How to Apply and What to Expect</h3>
+          <p>Everything you need to know about landing a remote AI internship in 2026 — including RuffNeck Entertainment's own program.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="ai" data-title="AI-Powered Content Creation: Instagram, Video, Email & More" onclick="openArticle('ai-content')">
+        <div class="blog-thumb blog-thumb-content"><span>📱</span><span class="card-cat-badge">AI & Content</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>8 min</span></div>
+          <h3>AI-Powered Content Creation in 2026: Instagram Captions, Video Scripts, Carousels & More</h3>
+          <p>How businesses use AI to deliver consistent, high-quality content across every channel — faster and at a fraction of the cost.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="business" data-title="Profitable Digital Products to Sell in 2026" onclick="openArticle('digital-products')">
+        <div class="blog-thumb blog-thumb-marketing"><span>💰</span><span class="card-cat-badge">Business Growth</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>9 min</span></div>
+          <h3>Top Profitable Digital Products to Sell in 2026 — The Complete Strategy Guide</h3>
+          <p>Notion templates, ebooks, prompt packs, content calendars, PDF guides — which ones have the best potential and how to create them.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" data-cat="operations" data-title="How to Write SOPs for Your Business in 2026" onclick="openArticle('sops')">
+        <div class="blog-thumb blog-thumb-ops"><span>📋</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
+        <div class="blog-card-body">
+          <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>7 min</span></div>
+          <h3>How to Write SOPs for Your Business in 2026 — A Practical Guide</h3>
+          <p>Standard Operating Procedures are the backbone of scalable businesses. Here's how to write them clearly, quickly, and effectively.</p>
+          <div class="card-footer">
+            <div class="card-author"><div class="author-dot">RN</div>RuffNeck Entertainment</div>
+            <span class="read-link">Read →</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end blog-grid -->
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="newsletter">
+  <div class="container">
+    <h2>📬 Get New Articles in Your Inbox</h2>
+    <p>Join readers across Africa and beyond who get practical AI and business insights from RuffNeck Entertainment every week in 2026.</p>
+    <div class="newsletter-form">
+      <input type="email" id="nlEmail" placeholder="Your email address" style="flex:1;min-width:220px;padding:13px 18px;border-radius:var(--radius-sm);border:none;font-family:var(--font-display);font-size:14px;color:var(--text-dark);outline:none;"/>
+      <button class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe Free</button>
+    </div>
+    <p id="nlMsg" style="font-size:13px;color:var(--cyan);margin-top:12px;display:none;">✅ You're subscribed! Expect insights in your inbox soon.</p>
+  </div>
+</div>
+
+<!-- BLOG FOOTER -->
+<div class="blog-footer">
+  <div class="container">
+    <p>© 2026 <a href="/">RuffNeck Entertainment</a> · CAC Reg No. 3770977 · <a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a> · <a href="/store">Visit Store</a></p>
+  </div>
+</div>
+
+<!-- ARTICLE MODAL -->
+<div class="article-overlay" id="articleOverlay">
+  <div class="article-modal" id="articleModal">
+    <div class="article-modal-header">
+      <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:4px;">
+        <button class="article-back-btn" onclick="closeArticle()">← Back to Blog</button>
+        <a href="/" class="article-home-btn">🏠 Homepage</a>
+      </div>
+      <div class="article-label" id="articleLabel"></div>
+      <h2 id="articleTitle"></h2>
+      <div class="article-meta" id="articleMeta"></div>
+    </div>
+    <div class="article-body" id="articleBody"></div>
+    <div class="article-footer">
+      <div class="article-tags" id="articleTags"></div>
+      <div class="article-nav-btns">
+        <button class="btn btn-outline btn-sm" onclick="closeArticle()">← All Articles</button>
+        <a href="/" class="btn btn-primary btn-sm">🏠 Homepage</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ============================================================
+// ARTICLES CONTENT
+// ============================================================
+const articles = {
+
+  'featured': {
+    label: 'AI & Automation · Featured · 2026',
+    title: 'Top 12 AI Career Roles You Can Start in 2026 — No Coding Required',
+    meta: 'Hassan Zakariya · June 2026 · 12 min read',
+    tags: ['AI Careers','No-Code AI','2026','Remote Work','Nigeria'],
+    body: `
+      <h3>Introduction</h3>
+      <p>The AI industry is exploding — and you don't need to be a software developer to benefit. In 2026, the most in-demand AI roles are not about writing code. They're about human judgment, quality assessment, content creation, ethics review, and training support. Here are 12 roles you can start today.</p>
+      <div class="highlight">💡 All 12 roles listed here are accessible remotely from Nigeria and across Africa — with income potential in both NGN and USD.</div>
+      <h3>1. AI Data Annotator</h3>
+      <p>Annotators label data — images, text, audio, video — so that AI models can learn from it. You click, draw boxes, tag objects, or classify sentences. Platforms like Scale AI, Appen, and Remotasks pay per task or per hour. Beginners can earn ₦50,000–₦150,000/month working part-time.</p>
+      <h3>2. AI Data Evaluator</h3>
+      <p>Evaluators rate AI-generated responses for quality, accuracy, and helpfulness. This is called RLHF — Reinforcement Learning from Human Feedback. Platforms like Outlier and Surge AI pay evaluators to improve models like ChatGPT and Claude. Income: ₦80,000–₦200,000/month.</p>
+      <h3>3. AI Ethics Reviewer</h3>
+      <p>Ethics reviewers check AI outputs for bias, harmful content, and fairness issues. This role is growing fast as governments and companies introduce AI regulations. Certifications in AI Ethics (available free on LinkedIn Learning) strengthen your profile significantly in 2026.</p>
+      <h3>4. AI Model Trainer (Contributor)</h3>
+      <p>You write prompts, preferred responses, and feedback that directly trains AI models. Platforms like DataAnnotation.tech and Prolific pay for this. No coding needed — you need good writing skills, critical thinking, and domain knowledge in your specialty area.</p>
+      <h3>5. AI Tutor</h3>
+      <p>Teaching others how to use AI tools is one of the fastest-growing opportunities of 2026. Businesses, schools, and individuals need practical AI education. You can tutor one-on-one, run workshops, create online courses, or partner with organizations like the African AI Network (AAN).</p>
+      <h3>6. AI Technical Content Writer</h3>
+      <p>AI companies need writers who understand AI and can explain it clearly. Roles include writing explainer articles, product descriptions, training dataset text, and technical documentation. Hassan Zakariya currently works in this role at GAOTek Inc. Platforms: Upwork, Fiverr, direct applications.</p>
+      <h3>7. AI Copywriter</h3>
+      <p>Combining persuasion with AI tools — writing ads, email sequences, landing pages, and sales copy with the help of AI. AI-assisted copywriters deliver faster and command higher rates. Tools: Copy.ai, Claude, ChatGPT, Writesonic.</p>
+      <h3>8. AI Graphic Designer</h3>
+      <p>Using Midjourney, Adobe Firefly, DALL-E, and Canva AI to create professional designs at scale. You can sell design assets on Creative Market, serve clients through Fiverr, or offer social media content packages — all powered by AI that would have taken a designer team to produce before 2024.</p>
+      <h3>9. AI Research Assistant</h3>
+      <p>Leverage Perplexity, Consensus, and Elicit to conduct deep research for academics, businesses, journalists, and consultants worldwide. Remote-friendly, well-paying, and growing as AI tools make research 10x faster and more thorough than traditional methods.</p>
+      <h3>10. AI Video Creator</h3>
+      <p>Tools like Runway, HeyGen, InVideo, and Sora (when available) allow creators to produce professional-quality video content without cameras or editing software. Faceless YouTube channels, client promotional videos, and social content are all viable income streams in 2026.</p>
+      <h3>11. AI Outputs Reviewer</h3>
+      <p>Different from evaluators — reviewers check the final quality of AI-generated text, images, and code before it goes to clients or users. High attention to detail, strong language skills, and an eye for errors are the main requirements.</p>
+      <h3>12. AI Course Creator</h3>
+      <p>If you've mastered any of the above roles, turning that knowledge into a course is one of the most scalable income streams of 2026. Platforms include Udemy, Teachable, and Gumroad. A single AI course can generate passive income for years.</p>
+      <div class="highlight">🎯 Which one should you start with? If you're a complete beginner — AI Data Annotator. If you write well — AI Content Writer. If you're creative — AI Graphic Designer. If you love teaching — AI Tutor. Pick one and go deep.</div>
+      <div class="cta-box">
+        <h4>Get the Full Step-by-Step Guide</h4>
+        <p>Each role has a dedicated PDF guide available in the RuffNeck Store — with beginner, intermediate, and advanced tracks, tools, platforms, income benchmarks, and portfolio-building steps.</p>
+        <a href="/store" class="btn btn-primary">Browse AI Career Guides →</a>
+      </div>
+    `
+  },
+
+  'ai-tools': {
+    label: 'AI & Automation · 2026',
+    title: 'Top 10 AI Tools Every Nigerian SME Should Use in 2026',
+    meta: 'Hassan Zakariya · June 2026 · 8 min read',
+    tags: ['AI Tools','SME','Nigeria','Productivity','2026'],
+    body: `
+      <h3>Why AI Tools Matter for Nigerian SMEs in 2026</h3>
+      <p>The playing field has changed. Small businesses in Nigeria can now access the same AI capabilities as Fortune 500 companies — and most of these tools are free or low-cost. The ones that adopt early will outcompete those that don't.</p>
+      <h3>1. ChatGPT (OpenAI)</h3>
+      <p>Still the most versatile AI tool in 2026. Use it for drafting emails, writing proposals, generating social media content, summarizing documents, answering customer questions, and building basic chatbots. Free tier available. GPT-4o is the standard for business use.</p>
+      <h3>2. Claude (Anthropic)</h3>
+      <p>Excellent for long-form writing, document analysis, and nuanced reasoning. Claude handles complex business documents, contracts, and research tasks with impressive depth. Increasingly preferred over ChatGPT for professional writing tasks in 2026.</p>
+      <h3>3. Canva AI</h3>
+      <p>Canva's AI features in 2026 include Magic Design, text-to-image, background removal, and AI-generated presentations. Every SME with a social media presence needs Canva. Free plan is generous enough for most small business needs.</p>
+      <h3>4. Microsoft Copilot (M365)</h3>
+      <p>If your business uses Word, Excel, or Outlook — Copilot is a game-changer. Summarize email threads, generate Excel formulas, draft PowerPoint presentations from bullet points, and write Word documents with AI assistance.</p>
+      <h3>5. Notion AI</h3>
+      <p>Combine your business wiki, project management, and AI writing assistant in one tool. Notion AI can summarize meeting notes, generate action items, write SOPs, and organize business documentation automatically.</p>
+      <h3>6. Zapier (Automation)</h3>
+      <p>Connect your apps and automate repetitive tasks without code. When a new lead fills a form → automatically send a welcome email → create a CRM entry → notify your team on WhatsApp. Zapier handles hundreds of these workflows.</p>
+      <h3>7. Grammarly AI</h3>
+      <p>Beyond grammar — Grammarly now rewrites for tone, clarity, and persuasion. Essential for any business that communicates professionally with clients, partners, or investors via email or documents.</div>
+      <h3>8. Perplexity AI</h3>
+      <p>AI-powered search with cited sources. Use it for market research, competitor analysis, industry news, and fact-checking — without the hallucination risk of older AI tools. The go-to research tool for SMEs in 2026.</p>
+      <h3>9. ElevenLabs / HeyGen (Video & Voice)</h3>
+      <p>Create professional video content with AI-generated voices and avatars. Nigerian businesses use these to produce product demos, explainer videos, and social content without a video production team or studio budget.</p>
+      <h3>10. Paystack + AI Automation Stack</h3>
+      <p>Paystack remains the leading payment platform for Nigerian businesses. Paired with Zapier and a CRM, you can automate your entire sales cycle — from payment to receipt to product delivery to follow-up email — with zero manual work.</p>
+      <div class="cta-box">
+        <h4>Need Help Implementing These Tools?</h4>
+        <p>RuffNeck Entertainment offers AI workflow setup and team training sessions. Book a free consultation to discuss your business needs.</p>
+        <a href="/#contact" class="btn btn-primary">Book Free Consultation →</a>
+      </div>
+    `
+  },
+
+  'annotator': {
+    label: 'AI Career · 2026',
+    title: 'How to Become an AI Data Annotator in 2026 — Full Beginner Guide',
+    meta: 'Hassan Zakariya · June 2026 · 7 min read',
+    tags: ['AI Data Annotator','AI Career','Remote Work','2026','Nigeria'],
+    body: `
+      <h3>What is AI Data Annotation?</h3>
+      <p>AI models learn from labeled data. Before a self-driving car can recognize a pedestrian, millions of images were labeled by humans — drawing boxes around people and tagging them. That's data annotation. In 2026, the demand for annotators covers text, images, audio, and video across every industry.</p>
+      <h3>Types of Annotation Work</h3>
+      <p>Image annotation: bounding boxes, polygon segmentation, keypoints, image classification. Text annotation: sentiment labeling, named entity recognition, intent classification, question-answer pairs. Audio annotation: transcription, speaker identification, emotion labeling. Video annotation: object tracking, action recognition, scene classification.</p>
+      <h3>Top Platforms to Get Started in 2026</h3>
+      <p><strong>Scale AI</strong> — one of the highest-paying platforms. Competitive qualification process. Pay per task or per hour in USD. <strong>Appen</strong> — large platform with consistent work volumes. Good for beginners. Pays monthly via PayPal. <strong>Remotasks</strong> — very beginner-friendly, has built-in training. Pays weekly. <strong>Toloka by Yandex</strong> — accessible to Nigerian annotators, good for text tasks. <strong>DataAnnotation.tech</strong> — focused on training LLMs like ChatGPT. Pays above-average rates for quality annotators.</p>
+      <div class="highlight">💡 Start with Remotasks (their training modules are excellent) while simultaneously applying to Appen for backup income.</div>
+      <h3>How to Pass Annotation Tests</h3>
+      <p>Read the guidelines document fully — most failures happen because annotators skip this. Do the practice tasks before attempting qualifications. When in doubt on a task, choose the most conservative/safe label. Quality matters more than speed — accuracy rates below 85% get you removed from projects. Review your rejections to understand what went wrong.</p>
+      <h3>Tools You Need</h3>
+      <p>A stable internet connection is the most important requirement. For image annotation: Label Studio (free, open-source), CVAT (cloud-based, free). For text tasks: most platforms have built-in tools. For transcription: oTranscribe (free). Hardware: any laptop with Chrome browser works.</p>
+      <h3>Income Expectations in 2026</h3>
+      <p>Beginner annotators: ₦40,000–₦80,000/month working 2–3 hours/day. Intermediate (6+ months experience): ₦100,000–₦200,000/month. Advanced/specialized annotators: $500–$2,000/month USD equivalent. Specialized domains (medical, legal, coding) pay significantly more.</p>
+      <div class="cta-box">
+        <h4>Get the Complete AI Data Annotator Guide</h4>
+        <p>Step-by-step PDF with platform walkthroughs, qualification strategies, income scaling plans, and portfolio-building advice — at beginner, intermediate, and advanced levels.</p>
+        <a href="/store" class="btn btn-primary">Get the Guide — From ₦3,500 →</a>
+      </div>
+    `
+  },
+
+  'warehouse': {
+    label: 'Operations · 2026',
+    title: 'How to Build a Warehouse Data Reporting System in 2026',
+    meta: 'Hassan Zakariya · June 2026 · 9 min read',
+    tags: ['Warehouse','Operations','Data Reporting','KPIs','2026'],
+    body: `
+      <h3>Why Warehouse Reporting Matters</h3>
+      <p>Most warehouse operations in Nigeria run on paper records, WhatsApp messages, and memory. This creates compliance gaps, stock discrepancies, and management blind spots. A proper reporting system — even a simple Excel-based one — transforms operational visibility and protects against losses.</p>
+      <div class="highlight">📌 Based on 3.5 years of direct experience in warehouse and weighbridge operations at Ilera Agro Processing Nig Ltd, Kano (2022–2026).</div>
+      <h3>Step 1 — Identify What You Need to Track</h3>
+      <p>Daily stock movement: inbound quantities, outbound quantities, stock balance. Weighbridge records: vehicle weights, load weights, discrepancies. Supplier and customer records: who delivered what, when, at what weight. Damage and loss records: wastage tracking and variance reporting. Monthly management summary: totals, trends, anomalies.</p>
+      <h3>Step 2 — Choose Your Platform</h3>
+      <p>For small warehouses (under 1,000 SKUs): Microsoft Excel with structured templates is sufficient and free. For medium warehouses: Google Sheets with shared access and automatic sync across devices. For larger operations: consider Zoho Inventory (affordable), TradeGecko, or a custom Excel dashboard with Power Query.</p>
+      <h3>Step 3 — Build Your Master Stock Register</h3>
+      <p>Your core Excel sheet should have: Date, Item Name, Item Code, Opening Balance, Received (Inbound), Issued (Outbound), Closing Balance, Unit, Supplier/Customer, Batch Number, Verified By. Use SUMIF formulas to automatically calculate daily closing balances. Add conditional formatting to flag negative balances or unusual variances.</p>
+      <h3>Step 4 — Create Your KPI Dashboard</h3>
+      <p>Stock Accuracy Rate: (physical count / system count) × 100. Target: above 98%. Order Fulfillment Rate: orders filled on time / total orders. Inventory Turnover: cost of goods sold / average inventory. Shrinkage Rate: (expected inventory − actual) / expected × 100. These four KPIs give management everything they need in a single page.</p>
+      <h3>Step 5 — Implement Daily, Weekly & Monthly Reporting</h3>
+      <p>Daily: stock movement summary emailed to manager by 5pm. Weekly: variance report highlighting any items more than 2% off expected balance. Monthly: full inventory count reconciliation, supplier performance summary, damage/loss analysis, and management dashboard. Consistency matters more than complexity.</p>
+      <h3>Step 6 — Compliance Documentation</h3>
+      <p>Every transaction needs: date, quantity, unit, authorizing signature, and document reference number. Keep physical copies for 3 years minimum. For weighbridge operations specifically — record tare weight, gross weight, net weight, and vehicle registration for every movement. This protects against both internal and external fraud.</p>
+      <div class="cta-box">
+        <h4>Need a Custom Reporting System?</h4>
+        <p>RuffNeck Entertainment builds Excel-based and cloud-based data reporting systems for warehouses and logistics companies. Free consultation available.</p>
+        <a href="/#contact" class="btn btn-primary">Book Free Consultation →</a>
+      </div>
+    `
+  },
+
+  'global-brand': {
+    label: 'Digital Marketing · 2026',
+    title: 'Growing Your African Business Brand Globally in 2026',
+    meta: 'Hassan Zakariya · June 2026 · 8 min read',
+    tags: ['Global Marketing','African Business','Brand Building','LinkedIn','2026'],
+    body: `
+      <h3>The Opportunity for African Businesses in 2026</h3>
+      <p>More international companies than ever are actively looking for African talent, African partners, and African vendors in 2026. Remote work normalization, growing interest in emerging markets, and the proven quality of Nigerian professionals have opened doors that were closed five years ago. The question is not whether the opportunity exists — it's whether your online presence is ready to capture it.</p>
+      <h3>Step 1 — Build a Professional Web Presence</h3>
+      <p>Your website is your global storefront. It must load fast, look professional on mobile, clearly state what you do and who you serve, and have working contact forms. A site like ruffneck-entertainment.vercel.app is a strong example — clean, fast, CAC credentials visible, and services clearly organized. International clients will Google you before they contact you.</p>
+      <h3>Step 2 — LinkedIn is Your International Sales Channel</h3>
+      <p>LinkedIn is the single most important platform for B2B and professional services outreach in 2026. Optimize your profile: professional headline, clear About section, work history with measurable outcomes, certifications visible, and regular content posting. Connect with potential clients in target markets — UK, US, Canada, UAE — and engage with their content before pitching.</p>
+      <h3>Step 3 — Register on Global Freelance Platforms</h3>
+      <p>Upwork, Fiverr, Toptal, and PeoplePerHour give you instant access to international clients with purchasing intent. The barrier is getting your first 3–5 reviews. Strategy: lower your initial rate slightly, over-deliver, request reviews immediately, then raise rates once you have social proof. Nigerian freelancers consistently rate among the most reliable on these platforms in 2026.</p>
+      <h3>Step 4 — Leverage Your African Advantage</h3>
+      <p>Don't hide your location — leverage it. Deep operational knowledge of African markets, logistics, and business environments is genuinely valuable to international companies expanding into Africa. Your time zone overlap with Europe is actually an advantage for UK and EU clients. Your pricing advantage over Western equivalents makes you competitive. Lead with these strengths.</p>
+      <h3>Step 5 — Content Marketing for Global Reach</h3>
+      <p>Write articles, post LinkedIn content, and share insights that demonstrate your expertise to an international audience. Articles about AI in Africa, Nigerian business operations, logistics challenges in West Africa, or comparative AI tool reviews — these attract global readers who are your potential clients. Consistency beats virality. Post weekly, not monthly.</p>
+      <h3>Step 6 — Register Your Business and Show Credentials</h3>
+      <p>International clients need to know you're legitimate. Display your CAC registration number, SMEDAN certification, and any professional certifications prominently on your website and proposals. RuffNeck Entertainment's CAC Reg No. 3770977 and SMEDAN SUID-3120-4678-0386-7922 are shown on every page — this builds trust with international clients immediately.</p>
+      <div class="cta-box">
+        <h4>Let RuffNeck Help You Go Global</h4>
+        <p>We help Nigerian and African businesses build the digital presence, messaging, and systems needed to attract and serve international clients in 2026.</p>
+        <a href="/#contact" class="btn btn-primary">Book a Strategy Session →</a>
+      </div>
+    `
+  },
+
+  'ai-writer': {
+    label: 'AI Career · 2026',
+    title: 'How to Become an AI Technical Content Writer in 2026',
+    meta: 'Hassan Zakariya · June 2026 · 7 min read',
+    tags: ['AI Writing','Content Writer','GAOTek','Career','2026'],
+    body: `
+      <h3>What is AI Technical Content Writing?</h3>
+      <p>AI technical content writers explain AI concepts, tools, products, and research in clear, structured, accurate language. Companies need this because AI is complex and their audiences — buyers, users, developers, and non-technical stakeholders — need accessible explanations. The demand exploded in 2024–2026 as AI companies scaled their content operations globally.</p>
+      <div class="highlight">📌 Hassan Zakariya currently works as an AI Technical Content Writer at GAOTek Inc. (2026–Present). This article reflects real firsthand experience in the role.</div>
+      <h3>What AI Technical Content Writers Produce</h3>
+      <p>Explainer articles and blog posts about AI tools and concepts. Product descriptions for AI software and hardware. Training dataset text — prompts, responses, instructions. Technical documentation and user guides. AI ethics and policy content. LinkedIn and social content for AI companies. Newsletter content and educational email sequences.</p>
+      <h3>Skills You Actually Need</h3>
+      <p>Strong writing clarity — the ability to explain complex ideas simply without dumbing them down. Basic AI literacy — you don't need to code, but you must understand what LLMs, machine learning, data annotation, and AI ethics mean. Research ability — finding and synthesizing credible sources quickly. Structured thinking — organizing information logically for different reader levels. Tool proficiency — ChatGPT, Claude, Grammarly, Surfer SEO, and Google Docs are standard.</p>
+      <h3>How to Build a Portfolio from Scratch</h3>
+      <p>Write 3–5 sample articles about AI topics you genuinely understand. Use Medium or a free WordPress blog to publish them publicly. Apply for internships — GAOTek Inc. and similar companies regularly take applications. Join platforms like Contra, Toptal, or Upwork and apply for AI writing gigs. LinkedIn is essential — publish AI explanations there and tag relevant companies.</p>
+      <h3>Where to Find AI Writing Work in 2026</h3>
+      <p>Direct applications to AI companies (look for "Technical Content Writer" or "AI Content Writer" roles). Upwork and Fiverr for freelance gigs. LinkedIn job board — filter for "remote" and "AI content". GAOTek Inc., Scale AI, DataAnnotation.tech all hire writers. African AI Network (AAN) community for local Nigerian opportunities.</p>
+      <h3>Income Potential</h3>
+      <p>Internship level: ₦50,000–₦100,000/month or unpaid with strong experience building. Junior freelance: $10–$25 per article (USD). Mid-level: $50–$150 per article. Senior/specialist (medical AI, legal AI, finance AI): $200–$500+ per article. Retainer clients provide most stable income — aim for 2–3 regular clients billing ₦150,000–₦300,000 each monthly.</p>
+      <div class="cta-box">
+        <h4>Get the Complete AI Content Writing Career Guide</h4>
+        <p>Step-by-step PDF with portfolio templates, client scripts, rate cards, and platform-specific application strategies — at beginner, intermediate, and advanced levels.</p>
+        <a href="/store" class="btn btn-primary">Get the Guide — From ₦3,500 →</a>
+      </div>
+    `
+  },
+
+  'ai-ethics': {
+    label: 'AI Ethics · 2026',
+    title: 'AI Ethics in Business: What Every Nigerian Entrepreneur Should Know in 2026',
+    meta: 'Hassan Zakariya · June 2026 · 6 min read',
+    tags: ['AI Ethics','Responsible AI','Business','Nigeria','2026'],
+    body: `
+      <h3>Why AI Ethics Matters for Your Business in 2026</h3>
+      <p>AI ethics is no longer just a philosophical debate — it's becoming a legal and reputational issue for businesses. The EU's AI Act is now in effect. Nigeria is developing its own AI regulatory framework. And internationally, clients and investors increasingly ask about AI governance before signing contracts. Knowing the basics protects your business and differentiates you from competitors who aren't thinking about this yet.</p>
+      <h3>Core Principles Every Business Should Know</h3>
+      <p><strong>Fairness:</strong> AI systems should not discriminate based on gender, ethnicity, religion, or location. When you use AI to screen CVs, generate content targeting specific demographics, or make pricing decisions — check for bias. <strong>Transparency:</strong> Be clear with customers when AI is involved in a decision that affects them. Don't pretend AI-generated content is original human work when it isn't. <strong>Accountability:</strong> Someone in your business must be responsible for how AI tools are used. Don't let AI make unchecked decisions on customer-facing matters. <strong>Privacy:</strong> Don't feed customer data into AI tools without understanding their data retention policies. Most business-grade AI tools offer data privacy modes.</p>
+      <h3>Common Ethical Mistakes Nigerian Businesses Make</h3>
+      <p>Copying AI-generated content verbatim without review — leading to factual errors and misinformation. Using AI to generate fake reviews or testimonials — this is fraud. Feeding confidential client data into free AI tools that store and train on your input. Using AI images of real people without permission. Claiming AI-assisted work as 100% original when pitching to clients who care about this.</p>
+      <h3>Bias in AI — What to Watch For</h3>
+      <p>If you use AI for hiring, customer scoring, or content targeting — test it for bias explicitly. Ask your AI tool to describe a "business professional" and see what it generates. Ask it to generate images of "a Nigerian entrepreneur" and check the diversity. If the outputs consistently favor certain demographics, your AI tool has bias that could expose you to discrimination claims from clients or employees.</p>
+      <h3>Practical Steps to Ethical AI Use in Your Business in 2026</h3>
+      <p>Create a simple AI use policy for your team — what tools are approved, what data can be input, what outputs must be reviewed. Always have a human review AI-generated content before it goes to clients. Disclose AI use in creative work when contractually required. Keep customer data out of free AI tools. Stay informed about Nigeria's evolving AI regulations through NITDA updates.</p>
+      <div class="highlight">🎓 Hassan Zakariya holds certifications in Ethics in the Age of Generative AI (LinkedIn Learning, 2026) and applies these principles across all RuffNeck Entertainment services.</div>
+      <div class="cta-box">
+        <h4>AI Ethics Reviewer Career Guide Available</h4>
+        <p>Want to turn this knowledge into a career? Get the complete AI Ethics Reviewer guide with certification roadmap, platforms, and income paths.</p>
+        <a href="/store" class="btn btn-primary">Get the Guide — From ₦4,000 →</a>
+      </div>
+    `
+  },
+
+  'prompts': {
+    label: 'Content & Prompts · 2026',
+    title: 'Prompt Engineering for Business: The 2026 Practical Guide',
+    meta: 'Hassan Zakariya · June 2026 · 10 min read',
+    tags: ['Prompt Engineering','AI Tools','Video Prompts','Content','2026'],
+    body: `
+      <h3>What is Prompt Engineering?</h3>
+      <p>Prompt engineering is the skill of writing instructions to AI that get you the output you actually want. In 2026, it's one of the most valuable — and underrated — business skills. A poor prompt gives you generic garbage. A great prompt gives you publish-ready content, client-ready reports, or production-ready video scripts.</p>
+      <h3>The Formula for a Great Business Prompt</h3>
+      <p>Every strong prompt has four parts: <strong>Role</strong> (who the AI should act as), <strong>Context</strong> (what situation or business this is for), <strong>Task</strong> (what exactly you want), and <strong>Format</strong> (how you want the output structured). Example: "Act as a digital marketing expert for a Nigerian SME in the logistics sector. Write a LinkedIn post announcing our new warehouse management service. Use a professional but approachable tone, include a call to action, and keep it under 200 words with line breaks for readability."</p>
+      <h3>Video Production Prompt Engineering</h3>
+      <p><strong>Ultimate Video Production Prompt:</strong> "Act as a professional video scriptwriter. Write a [length] video script for [platform] about [topic]. The audience is [describe audience]. Use a hook in the first 3 seconds, build tension through the middle, and end with a strong call to action. Include suggested B-Roll shots in brackets after relevant lines. Format as: Hook / Main Content / CTA."</p>
+      <p><strong>Advanced Video Polish Prompt:</strong> "Review this video script: [paste script]. Improve it for retention — shorten sentences, add pattern interrupts every 30 seconds, strengthen the hook, and make the CTA more specific. Return the improved version with a brief note on each major change."</p>
+      <h3>B-Roll Generation Prompt</h3>
+      <p>"I'm producing a video about [topic] for [audience] on [platform]. List 15 specific B-Roll shot ideas that would make this video more visually engaging. For each shot, specify: what's being shown, the camera angle, and why it supports the message at that point in the script."</p>
+      <h3>Retention Optimizer Prompt</h3>
+      <p>"Analyze this [video script / article / social post]: [paste content]. Score it 1–10 for retention potential. Identify the 3 highest drop-off risk points and explain why viewers/readers might leave at each. Then rewrite those 3 sections to be more engaging, using pattern interrupts, questions, or surprising statements."</p>
+      <h3>Storytelling Editor Prompt</h3>
+      <p>"Transform this information into a compelling story: [paste facts/data/content]. Use the structure: (1) Open with a relatable problem, (2) Introduce a turning point, (3) Show the transformation/solution, (4) Close with the lesson or call to action. Target audience: [describe]. Platform: [social/blog/video/email]."</p>
+      <h3>Instagram Caption Prompt Pack</h3>
+      <p>"Write 5 Instagram captions for a [business type] business. The post is about [topic]. Audience: [describe]. Brand tone: [professional/casual/inspiring/educational]. Each caption should be different in structure — one with a question hook, one with a bold statement, one with a story opener, one with a list, one short and punchy. Include 10 relevant hashtags at the end."</p>
+      <div class="cta-box">
+        <h4>Get 200+ Tested Prompts</h4>
+        <p>The Ultimate Prompt Engineering Pack 2026 — 200+ prompts for video, content, business, research, copywriting, and more. Available in the RuffNeck Store.</p>
+        <a href="/store" class="btn btn-primary">Get the Prompt Pack →</a>
+      </div>
+    `
+  },
+
+  'consultant': {
+    label: 'Business Growth · 2026',
+    title: 'Do You Need a Business Consultant? 5 Signs the Answer Is Yes',
+    meta: 'Hassan Zakariya · June 2026 · 5 min read',
+    tags: ['Consultation','Business Strategy','SME','Growth','2026'],
+    body: `
+      <h3>Most Business Owners Wait Too Long</h3>
+      <p>By the time most entrepreneurs consider hiring a consultant, they've already lost months — sometimes years — going in circles on problems that an experienced outside perspective could resolve quickly. Here are 5 clear signs it's time.</p>
+      <h3>Sign 1: Your Revenue Has Plateaued for 3+ Months</h3>
+      <p>Revenue plateaus are almost never random. They're caused by specific bottlenecks — usually in marketing, pricing, operations, or offer clarity. If you've been trying the same approaches and the numbers aren't moving, you need a different perspective. A consultant's job is to find the hidden bottleneck quickly.</p>
+      <h3>Sign 2: You're Overwhelmed by Operations</h3>
+      <p>If you're spending more than 50% of your time on daily operational tasks instead of growing the business, your systems are broken. Good operations consulting means building systems and SOPs that let the business run without your constant input — not just telling you to "delegate more."</p>
+      <h3>Sign 3: You Know You Should Be Using AI But Don't Know Where to Start</h3>
+      <p>In 2026, the businesses not using AI are falling behind. But with hundreds of tools available, knowing which ones to adopt — and in what order — requires strategic thinking. An AI adoption consultation session can save you months of trial and error and significant wasted spend on tools that don't fit your workflow.</p>
+      <h3>Sign 4: You're Launching Something New</h3>
+      <p>New product, new market, new brand, new revenue stream — the most expensive mistakes are made in the first 90 days of a new initiative. A strategy session before launch costs a fraction of what correcting a bad launch costs. Use the expertise to get it right from the start.</p>
+      <h3>Sign 5: You're Not Sure Why Things Aren't Working</h3>
+      <p>This is the most important sign. If you can't clearly articulate why your marketing isn't converting, why your team isn't aligned, or why your operations feel chaotic — you need an outside diagnosis. Consultants are trained to ask the questions you're too close to the problem to ask yourself.</p>
+      <div class="highlight">💡 RuffNeck Entertainment's first consultation session is free — a 30-minute discovery call to understand your situation and identify the highest-priority areas to address.</div>
+      <div class="cta-box">
+        <h4>Book Your Free Consultation</h4>
+        <p>30-minute discovery call. No obligation. Come with your biggest business challenge and leave with clarity on the next step.</p>
+        <a href="/#contact" class="btn btn-primary">Book Free Consultation →</a>
+      </div>
+    `
+  },
+
+  'internship': {
+    label: 'AI Career · Remote Programs · 2026',
+    title: 'Remote AI Internships in 2026: How to Apply and What to Expect',
+    meta: 'Hassan Zakariya · June 2026 · 6 min read',
+    tags: ['Internship','Remote Work','AI Career','Volunteer','2026'],
+    body: `
+      <h3>Why Remote AI Internships Are the Best Career Move of 2026</h3>
+      <p>The traditional internship — commuting to an office, making tea, filing papers — is being replaced by something far more valuable. Remote AI internships give you real deliverables, real skills, a real portfolio, and often real income — from anywhere in the world. For Nigerian graduates and career switchers, this is the most direct path into the global digital economy.</p>
+      <h3>Types of Remote AI Internship Available</h3>
+      <p><strong>AI Content Writing Internships:</strong> Companies like GAOTek Inc. hire remote AI technical content writers globally. You write, they review, you improve — building both skills and a portfolio fast. <strong>AI Data Annotation Internships:</strong> Platforms like Remotasks offer onboarding programs that effectively function as paid internships. <strong>AI Research Assistant Programs:</strong> Academic institutions and AI companies hire remote research assistants to use AI tools to support research projects. <strong>AI Literacy Teaching:</strong> Organizations like the African AI Network (AAN) place Teaching Assistants in volunteer and paid roles in communities across Nigeria.</p>
+      <h3>What to Expect from a Remote AI Internship</h3>
+      <p>Real deliverables: articles written, data labeled, research conducted, content created. Feedback cycles: you produce work, get reviewed, improve. This is where real learning happens. Portfolio building: every deliverable is evidence of capability for future clients or employers. Certification: reputable programs provide certificates of completion that carry weight on LinkedIn and CVs.</p>
+      <h3>RuffNeck Entertainment's Remote Programs — 2026</h3>
+      <p>We run two remote programs for dedicated individuals:<br/><br/><strong>Remote AI Internship:</strong> Hands-on project experience in AI content, digital marketing, operations, design, or data management. Real deliverables. Mentorship from Hassan Zakariya (AI Fluency Certified, active AI Technical Content Writer). Verified experience certificate upon completion.<br/><br/><strong>Remote Volunteer Program:</strong> Contribute skills to community AI literacy programs, content production, and operational projects. Build your portfolio while making an impact. Open to applicants from Nigeria and internationally.</p>
+      <div class="highlight">🎯 If you're ready to build your portfolio, sharpen your skills, and work with a team that values growth and innovation — this is your chance.</div>
+      <h3>How to Apply</h3>
+      <p>Send an email to ruffneckhassan@gmail.com with subject line: "Remote Internship Application 2026" or "Volunteer Program Application 2026". Include: your name, location, skills, what track you're interested in (content, design, operations, AI, marketing), and 2–3 sentences on why you want to join. Applications are reviewed weekly.</p>
+      <div class="cta-box">
+        <h4>Apply for a Remote Internship or Volunteer Spot</h4>
+        <p>Email us directly to apply. We accept applications year-round in 2026. Beginner tracks available — no prior experience required.</p>
+        <a href="mailto:ruffneckhassan@gmail.com?subject=Remote Internship Application 2026" class="btn btn-primary">Apply Now →</a>
+      </div>
+    `
+  },
+
+  'ai-content': {
+    label: 'AI & Content · 2026',
+    title: 'AI-Powered Content Creation in 2026: Instagram, Video Scripts, Carousels & More',
+    meta: 'Hassan Zakariya · June 2026 · 8 min read',
+    tags: ['AI Content','Instagram','Video Scripts','Email','Carousels','2026'],
+    body: `
+      <h3>Why Businesses Need AI Content in 2026</h3>
+      <p>Content is the fuel of every modern business — but producing it consistently is exhausting and expensive. AI changes this equation. Businesses that use AI for content creation in 2026 produce 3–5× more content, at lower cost, with faster turnaround — and they're winning the attention battle against competitors who are still doing everything manually.</p>
+      <h3>Instagram Captions with AI</h3>
+      <p>AI can generate 30 Instagram captions in the time it takes to manually write 3. The key is good prompting — giving the AI your brand voice, the specific post content, the target audience, and the desired emotional response. RuffNeck Entertainment produces niche-specific captions that are ready to post — not generic AI drivel that sounds robotic. The difference is the human review layer that refines AI output into brand-appropriate content.</p>
+      <h3>Short-Form Video Scripts</h3>
+      <p>TikTok, Instagram Reels, YouTube Shorts — all demand consistent video output. A 60-90 second script that hooks in 3 seconds, delivers value in 45 seconds, and closes with a CTA can be AI-generated and human-refined in under 10 minutes. We write video scripts that are platform-optimized — what works on TikTok is not the same structure as what works on LinkedIn video.</p>
+      <h3>Carousel Posts</h3>
+      <p>Carousel posts are the highest-engagement format on Instagram and LinkedIn in 2026. Each slide needs a clear purpose — hook slide, problem slide, solution slides, CTA slide. AI helps structure the logic and write the copy. Human review ensures it's visually mappable and emotionally compelling. We produce 5-slide carousel scripts that are ready to hand to any designer or build in Canva.</p>
+      <h3>Blog Writing with AI</h3>
+      <p>AI-assisted blog writing is not copy-pasting ChatGPT output. It's using AI to draft structure and fill content, then adding original insight, real examples, and brand voice. The result: articles that rank, read well, and demonstrate genuine expertise. RuffNeck produces SEO-optimized blog outlines and full articles for businesses across industries.</p>
+      <h3>Email Newsletters</h3>
+      <p>Email remains the highest ROI marketing channel in 2026. AI helps write subject lines (critical for open rates), email body copy, CTAs, and sequences. We produce four fully-written email newsletters per month as part of our AI Content Service Pack — each tailored to your audience, offer, and brand voice.</p>
+      <div class="cta-box">
+        <h4>Get Your Content Done for You</h4>
+        <p>RuffNeck Entertainment's AI-Powered Content Service Pack delivers captions, video scripts, carousels, blogs, and emails — all in one monthly package. Starting from ₦15,000.</p>
+        <a href="/store" class="btn btn-primary">View Content Service Pack →</a>
+      </div>
+    `
+  },
+
+  'digital-products': {
+    label: 'Business Growth · 2026',
+    title: 'Top Profitable Digital Products to Sell in 2026 — The Complete Strategy Guide',
+    meta: 'Hassan Zakariya · June 2026 · 9 min read',
+    tags: ['Digital Products','Passive Income','Ebook','Notion Templates','2026'],
+    body: `
+      <h3>Why Digital Products Are the Best Business Model of 2026</h3>
+      <p>Create once. Sell forever. No inventory. No shipping. No physical overhead. In 2026, digital products — PDFs, templates, courses, prompt packs, ebooks, and design assets — are the most accessible and scalable income stream available to African entrepreneurs. The barrier to entry has never been lower.</p>
+      <h3>The 10 Best Digital Product Categories in 2026 (Ranked by Potential)</h3>
+      <p><strong>1. AI Career Guides (PDF)</strong> — Highest demand in 2026. Everyone wants to know how to get into AI roles. Tiered pricing (beginner/intermediate/advanced) maximizes revenue per product. RuffNeck's store sells these starting at ₦3,500.<br/><br/><strong>2. Prompt Packs</strong> — Bundles of tested AI prompts for specific use cases. Low effort to create, high perceived value. Great for niches: marketing, video, legal, medical, education.<br/><br/><strong>3. Notion Templates</strong> — Productivity systems, business operating systems, content calendars, project trackers. Sell on Gumroad or Notion's marketplace. A great template can sell for years.<br/><br/><strong>4. Design Asset Bundles</strong> — Canva templates, social media packs, logo kits, presentation templates. Created once with AI design tools, sold repeatedly.<br/><br/><strong>5. Ebooks</strong> — Practical guides, how-to content, and strategy frameworks. The ebook market is not dead — it just requires genuine expertise and clear value propositions.<br/><br/><strong>6. Content Calendars</strong> — Pre-built 30/60/90-day content calendars for specific niches. Businesses and creators pay for structure they don't have time to build themselves.<br/><br/><strong>7. Business Checklists &amp; SOPs</strong> — Templates for business processes, compliance checklists, onboarding systems. B2B buyers pay premium prices for operational tools.<br/><br/><strong>8. CV and Cover Letter Templates</strong> — ATS-optimized, role-specific templates. Evergreen demand in 2026 as job markets remain competitive.<br/><br/><strong>9. AI Courses (Video)</strong> — Highest price point. Requires the most production effort but generates the highest per-unit revenue.<br/><br/><strong>10. Research Reports</strong> — Paid market research on specific industries, niches, or topics. Businesses pay ₦30,000–₦150,000 for quality industry reports.</p>
+      <h3>Step-by-Step: Creating Your First Digital Product</h3>
+      <p>Step 1 — Choose a specific topic you have genuine knowledge about. Not "AI" — "How to become an AI data annotator in Nigeria." Specific beats generic every time. Step 2 — Outline your content in 5–10 main sections. Use ChatGPT to stress-test your outline: "What am I missing? What questions would a beginner have?" Step 3 — Write the content. Mix your personal experience with researched information. AI can help with first drafts — but your real experience is what makes it valuable. Step 4 — Design in Canva. Use a professional template. Add your brand colors, logo, and a clear cover page. Step 5 — Export as PDF. Step 6 — List on Gumroad (global) or Selar.co (Nigeria-focused). Set your price. Write a compelling product description.</p>
+      <h3>Where to Sell in Nigeria and Globally</h3>
+      <p><strong>Selar.co</strong> — Best for Nigerian market, accepts Paystack, built for African creators. <strong>Gumroad</strong> — Best for global reach, accepts Stripe and PayPal. <strong>Your own website</strong> — Using Paystack (Nigeria) or Stripe (international). <strong>Flutterwave Store</strong> — Good for pan-African distribution.</p>
+      <div class="cta-box">
+        <h4>Get the Complete Digital Product Strategy Guide</h4>
+        <p>The full ebook with 20 product ideas ranked, creation frameworks, pricing strategies, and platform selection — available in the RuffNeck Store.</p>
+        <a href="/store" class="btn btn-primary">Get the Ebook — From ₦6,000 →</a>
+      </div>
+    `
+  },
+
+  'sops': {
+    label: 'Operations · 2026',
+    title: 'How to Write SOPs for Your Business in 2026 — A Practical Guide',
+    meta: 'Hassan Zakariya · June 2026 · 7 min read',
+    tags: ['SOPs','Operations','Process Documentation','Business Systems','2026'],
+    body: `
+      <h3>What is an SOP and Why Every Business Needs One in 2026</h3>
+      <p>A Standard Operating Procedure (SOP) is a documented, step-by-step guide for how a specific task should be done. Without SOPs, every team member does things differently, quality is inconsistent, and you become the bottleneck — because only you know how things "should" be done. SOPs are the foundation of a scalable business.</p>
+      <h3>The 5 Components of a Great SOP</h3>
+      <p><strong>1. Title and Purpose</strong> — What this SOP covers and why it exists. <strong>2. Scope</strong> — Who this applies to and when it's used. <strong>3. Step-by-Step Instructions</strong> — Numbered, clear, with no assumed knowledge. <strong>4. Quality Checkpoints</strong> — How to verify each step was done correctly. <strong>5. Responsible Party</strong> — Who is accountable for each step.</p>
+      <h3>SOP Writing Process — Step by Step</h3>
+      <p>Step 1: List all the repeatable processes in your business. Email responses, social media posting, client onboarding, invoice processing, stock counting — anything done more than once needs an SOP. Step 2: Pick your highest-priority process (the one with the most errors or the most time wasted). Step 3: Do the process yourself once while writing down every single step — including decisions and exceptions. Step 4: Have someone else follow your written SOP without your help and note where they get confused. Step 5: Revise based on their feedback. Step 6: Store in a shared location (Google Drive, Notion, or physical binder).</p>
+      <h3>Using AI to Write SOPs Faster in 2026</h3>
+      <p>Prompt: "Act as a business operations consultant. I'll describe a business process and you'll write a clear, numbered SOP for it. The business is [describe yours]. The process is [describe the task]. Write it as if explaining to a new team member with no prior experience." AI can generate a first draft SOP in seconds — then you review, add business-specific details, and finalize. This reduces SOP writing time from 2 hours to 20 minutes.</p>
+      <h3>SOP Templates to Build First</h3>
+      <p>Customer inquiry response SOP. Social media content posting SOP. Client onboarding SOP. Invoice creation and follow-up SOP. Product/service delivery SOP. Complaint handling SOP. Weekly reporting SOP. Stock counting and reconciliation SOP (for operations businesses).</p>
+      <h3>Common SOP Mistakes to Avoid</h3>
+      <p>Too vague — "respond to client" is not an SOP. "Open email, read client message, identify their core question, write response within 2 hours using this template, cc [manager name], save to [folder]" is an SOP. Too long — if an SOP takes more than 15 minutes to read, break it into sub-SOPs. Not updated — SOPs must be reviewed quarterly and updated when processes change. Not followed — the best SOP in the world is worthless if your team ignores it. Include compliance in their KPIs.</p>
+      <div class="cta-box">
+        <h4>Need Help Building Your Business Systems?</h4>
+        <p>RuffNeck Entertainment offers operations consulting and SOP writing services for businesses that want to scale without chaos. Free discovery call available.</p>
+        <a href="/#contact" class="btn btn-primary">Book Free Consultation →</a>
+      </div>
+    `
+  }
+};
+
+// ============================================================
+// OPEN / CLOSE ARTICLE
+// ============================================================
+function openArticle(id) {
+  const article = articles[id];
+  if (!article) return;
+
+  document.getElementById('articleLabel').textContent = article.label;
+  document.getElementById('articleTitle').textContent = article.title;
+  document.getElementById('articleMeta').textContent = article.meta;
+  document.getElementById('articleBody').innerHTML = article.body;
+  document.getElementById('articleTags').innerHTML = article.tags.map(t => `<span class="article-tag">${t}</span>`).join('');
+
+  const overlay = document.getElementById('articleOverlay');
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeArticle() {
+  document.getElementById('articleOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Close on overlay click (outside modal)
+document.getElementById('articleOverlay').addEventListener('click', function(e) {
+  if (e.target === this) closeArticle();
+});
+
+// ============================================================
+// FILTER & SEARCH
+// ============================================================
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    filterBlog();
+  });
+});
+
+function filterBlog() {
+  const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  document.querySelectorAll('.blog-card').forEach(card => {
+    const catMatch = activeCat === 'all' || card.dataset.cat === activeCat;
+    const titleMatch = card.dataset.title?.toLowerCase().includes(search) || !search;
+    card.style.display = (catMatch && titleMatch) ? '' : 'none';
+  });
+}
+
+// ============================================================
+// NEWSLETTER
+// ============================================================
+function subscribeNewsletter() {
+  const email = document.getElementById('nlEmail').value.trim();
+  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+  document.getElementById('nlMsg').style.display = 'block';
+  document.getElementById('nlEmail').value = '';
+}
+</script>
+</body>
+</html>
