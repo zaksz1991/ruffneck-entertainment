@@ -3,5 +3,7 @@
     { "source": "/store", "destination": "/store.html" },
     { "source": "/blog", "destination": "/blog.html" },
     { "source": "/admin", "destination": "/admin.html" }
-  ]
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false
 }

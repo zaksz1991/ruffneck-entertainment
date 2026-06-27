@@ -7,7 +7,23 @@
 <meta name="description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="https://js.paystack.co/v1/inline.js">
+// Search input enhancements
+(function(){
+  const si = document.getElementById('searchInput');
+  if(si){
+    si.addEventListener('keydown', function(e){ if(e.key==='Enter') filterProducts(); });
+  }
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      filterProducts();
+    });
+  });
+})();
+</script>
 <style>
 :root{
   --navy:#0B1E3A;--midnight:#040C1A;--cyan:#00B4D8;--cyan-lt:#00F0FF;
@@ -79,9 +95,9 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .product-img img{width:100%;height:100%;object-fit:cover}
 .product-img .emoji-fallback{font-size:48px}
 .product-level-badge{position:absolute;top:10px;left:10px}
-.product-new{position:absolute;top:10px;right:10px;background:var(--gold);color:var(--navy);font-size:10px;font-weight:700;padding:3px 8px;border-radius:100px;font-family:var(--font-mono);letter-spacing:0.5px}
+.product-new{position:absolute;top:10px;right:10px;background:var(--gold);color:var(--navy);font-size:12px;font-weight:700;padding:3px 8px;border-radius:100px;font-family:var(--font-mono);letter-spacing:0.5px}
 .product-body{padding:20px;display:flex;flex-direction:column;flex:1}
-.product-cat{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.product-cat{font-family:var(--font-mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
 .product-body h3{font-size:15px;font-weight:700;color:var(--text-dark);margin-bottom:8px;line-height:1.4}
 .product-body p{font-size:13px;color:var(--text-muted);line-height:1.6;margin-bottom:14px;flex:1}
 .product-includes{margin-bottom:14px}
@@ -137,7 +153,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .modal{background:var(--white);border-radius:var(--radius);max-width:560px;width:90%;max-height:90vh;overflow-y:auto;position:relative}
 .modal-header{padding:24px 28px 0}
 .modal-header h3{font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:6px}
-.modal-header .modal-cat{font-family:var(--font-mono);font-size:10px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
+.modal-header .modal-cat{font-family:var(--font-mono);font-size:12px;color:var(--cyan);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px}
 .modal-body{padding:20px 28px 28px}
 .modal-close{position:absolute;top:16px;right:16px;font-size:22px;color:var(--text-muted);cursor:pointer;line-height:1}.modal-close:hover{color:var(--text-dark)}
 .modal-includes{margin-bottom:20px}
@@ -218,7 +234,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   .cart-sidebar{max-width:100%}
 }
 .product-tiers-preview{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 12px}
-.tier-pill{font-size:10px;font-weight:600;padding:3px 9px;border-radius:100px;font-family:var(--font-mono);white-space:nowrap}
+.tier-pill{font-size:12px;font-weight:600;padding:3px 9px;border-radius:100px;font-family:var(--font-mono);white-space:nowrap}
 .tier-beg{background:rgba(16,185,129,0.1);color:#10B981;border:1px solid rgba(16,185,129,0.25)}
 .tier-mid{background:rgba(0,180,216,0.1);color:var(--cyan);border:1px solid rgba(0,180,216,0.25)}
 .tier-adv{background:rgba(255,193,7,0.1);color:var(--gold);border:1px solid rgba(255,193,7,0.25)}
@@ -450,7 +466,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
         <div class="product-body">
           <div class="product-cat">Prompt Pack</div>
           <h3 class="product-name">Video Content Prompt Pack</h3>
-          <p class="product-desc">TikTok, Reels, YouTube Shorts — hooks, scripts, B-Roll ideas, retention optimizers, and storytelling frameworks.</p>
+          <p class="product-desc">YouTube, Reels, YouTube Shorts — hooks, scripts, B-Roll ideas, retention optimizers, and storytelling frameworks.</p>
           <div class="product-tiers-preview">
             <span class="tier-pill tier-beg">Starter — ₦2,500</span>
             <span class="tier-pill tier-mid">Creator — ₦5,000</span>
@@ -528,7 +544,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
         <div class="product-body">
           <div class="product-cat">Design Asset Bundle</div>
           <h3 class="product-name">Social Media Design Bundle 2026</h3>
-          <p class="product-desc">Professional Canva-ready templates for Instagram, LinkedIn, TikTok, and Facebook. Editable colors, fonts, and layouts.</p>
+          <p class="product-desc">Professional Canva-ready templates for Instagram, LinkedIn, YouTube, and Facebook. Editable colors, fonts, and layouts.</p>
           <div class="product-tiers-preview">
             <span class="tier-pill tier-beg">10 Templates — ₦3,000</span>
             <span class="tier-pill tier-mid">25 Templates — ₦6,000</span>
@@ -1107,7 +1123,7 @@ const PRODUCTS = {
         level: '🟢 Essential Pack (50 Prompts)', price: 3500, label: 'Essential 50',
         desc: 'The 50 most useful business prompts — covering content, marketing, email, and research.',
         includes: [
-          '10 social media caption prompts (Instagram, LinkedIn, TikTok)',
+          '10 social media caption prompts (Instagram, LinkedIn, YouTube)',
           '10 email marketing prompts (subject lines, body, sequences)',
           '10 business writing prompts (proposals, reports, SOPs)',
           '10 research and analysis prompts',
@@ -1127,7 +1143,7 @@ const PRODUCTS = {
           '10 brand voice and tone prompts',
           '5 retention optimizer prompts',
           'Advanced customization frameworks',
-          'Platform-specific versions (TikTok vs LinkedIn vs YouTube)'
+          'Platform-specific versions (YouTube vs LinkedIn vs YouTube)'
         ]
       },
       {
@@ -1158,7 +1174,7 @@ const PRODUCTS = {
           '5 video script structure prompts',
           '5 B-Roll idea generation prompts',
           '5 caption and caption optimization prompts',
-          'Platform guide: TikTok vs Reels vs Shorts differences',
+          'Platform guide: YouTube vs Reels vs Shorts differences',
           'Example outputs for each prompt'
         ]
       },
@@ -1241,7 +1257,7 @@ const PRODUCTS = {
         desc: 'A complete 30-day content calendar pre-filled with post ideas, themes, and publishing slots.',
         includes: [
           'Pre-filled 30-day social media content plan',
-          'Daily post topics for Instagram, LinkedIn, TikTok, and X',
+          'Daily post topics for Instagram, LinkedIn, YouTube, and X',
           'Weekly theme structure (educational, promotional, community, personal)',
           'Canva and Google Sheets versions',
           'Caption writing framework for each post type',
@@ -1287,7 +1303,7 @@ const PRODUCTS = {
           '3 Instagram feed post templates',
           '2 Instagram story templates',
           '2 LinkedIn post templates',
-          '2 TikTok cover/thumbnail templates',
+          '2 YouTube cover/thumbnail templates',
           '1 Facebook post template',
           'All templates editable in free Canva account',
           'Color and font customization guide'
@@ -1641,11 +1657,18 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
 
 function filterProducts() {
   const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
-  const search = document.getElementById('searchInput').value.toLowerCase();
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
   document.querySelectorAll('.product-card').forEach(card => {
     const catMatch = activeCat === 'all' || card.dataset.cat === activeCat;
-    const nameMatch = card.dataset.name?.toLowerCase().includes(search) || !search;
-    card.style.display = (catMatch && nameMatch) ? '' : 'none';
+    if (!search) { card.style.display = catMatch ? '' : 'none'; return; }
+    const searchable = [
+      card.dataset.name || '',
+      card.dataset.cat || '',
+      card.querySelector('.product-name')?.textContent || '',
+      card.querySelector('.product-desc')?.textContent || '',
+      card.querySelector('.product-cat')?.textContent || ''
+    ].join(' ').toLowerCase();
+    card.style.display = (catMatch && searchable.includes(search)) ? '' : 'none';
   });
 }
 
@@ -1742,7 +1765,7 @@ function renderCustomProducts(products) {
   if (products.length === 0) { section.style.display = 'none'; return; }
   section.style.display = 'block';
   grid.innerHTML = products.map(p => `
-    <div class="product-card" data-cat="${p.cat}" data-name="${p.name}">
+    <div class="product-card" data-cat="${p.cat.toLowerCase().replace(/\s+/g,'-')}" data-name="${p.name}">
       <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#040C1A);">
         ${p.imgSrc ? `<img src="${p.imgSrc}" alt="${p.name}"/>` : `<span class="emoji-fallback">${p.emoji}</span>`}
         <span class="product-new">NEW</span>

@@ -545,7 +545,7 @@ const articles = {
       <div class="cta-box">
         <h4>Need Help Implementing These Tools?</h4>
         <p>RuffNeck Entertainment offers AI workflow setup and team training sessions. Book a free consultation to discuss your business needs.</p>
-        <a href="/#contact" class="btn btn-primary">Book Free Consultation →</a>
+        <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book Free Consultation →</a>
       </div>
     `
   },
@@ -601,7 +601,7 @@ const articles = {
       <div class="cta-box">
         <h4>Need a Custom Reporting System?</h4>
         <p>RuffNeck Entertainment builds Excel-based and cloud-based data reporting systems for warehouses and logistics companies. Free consultation available.</p>
-        <a href="/#contact" class="btn btn-primary">Book Free Consultation →</a>
+        <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book Free Consultation →</a>
       </div>
     `
   },
@@ -629,7 +629,7 @@ const articles = {
       <div class="cta-box">
         <h4>Let RuffNeck Help You Go Global</h4>
         <p>We help Nigerian and African businesses build the digital presence, messaging, and systems needed to attract and serve international clients in 2026.</p>
-        <a href="/#contact" class="btn btn-primary">Book a Strategy Session →</a>
+        <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Strategy Session →</a>
       </div>
     `
   },
@@ -737,7 +737,7 @@ const articles = {
       <div class="cta-box">
         <h4>Book Your Free Consultation</h4>
         <p>30-minute discovery call. No obligation. Come with your biggest business challenge and leave with clarity on the next step.</p>
-        <a href="/#contact" class="btn btn-primary">Book Free Consultation →</a>
+        <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book Free Consultation →</a>
       </div>
     `
   },
@@ -778,7 +778,7 @@ const articles = {
       <h3>Instagram Captions with AI</h3>
       <p>AI can generate 30 Instagram captions in the time it takes to manually write 3. The key is good prompting — giving the AI your brand voice, the specific post content, the target audience, and the desired emotional response. RuffNeck Entertainment produces niche-specific captions that are ready to post — not generic AI drivel that sounds robotic. The difference is the human review layer that refines AI output into brand-appropriate content.</p>
       <h3>Short-Form Video Scripts</h3>
-      <p>TikTok, Instagram Reels, YouTube Shorts — all demand consistent video output. A 60-90 second script that hooks in 3 seconds, delivers value in 45 seconds, and closes with a CTA can be AI-generated and human-refined in under 10 minutes. We write video scripts that are platform-optimized — what works on TikTok is not the same structure as what works on LinkedIn video.</p>
+      <p>YouTube, Instagram Reels, YouTube Shorts — all demand consistent video output. A 60-90 second script that hooks in 3 seconds, delivers value in 45 seconds, and closes with a CTA can be AI-generated and human-refined in under 10 minutes. We write video scripts that are platform-optimized — what works on YouTube is not the same structure as what works on LinkedIn video.</p>
       <h3>Carousel Posts</h3>
       <p>Carousel posts are the highest-engagement format on Instagram and LinkedIn in 2026. Each slide needs a clear purpose — hook slide, problem slide, solution slides, CTA slide. AI helps structure the logic and write the copy. Human review ensures it's visually mappable and emotionally compelling. We produce 5-slide carousel scripts that are ready to hand to any designer or build in Canva.</p>
       <h3>Blog Writing with AI</h3>
@@ -836,7 +836,7 @@ const articles = {
       <div class="cta-box">
         <h4>Need Help Building Your Business Systems?</h4>
         <p>RuffNeck Entertainment offers operations consulting and SOP writing services for businesses that want to scale without chaos. Free discovery call available.</p>
-        <a href="/#contact" class="btn btn-primary">Book Free Consultation →</a>
+        <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book Free Consultation →</a>
       </div>
     `
   }
@@ -882,13 +882,26 @@ document.querySelectorAll('.filter-btn').forEach(btn => {
   });
 });
 
+// Also make search button trigger on Enter key
+const si = document.getElementById('searchInput');
+if(si){
+  si.addEventListener('keydown', function(e){ if(e.key==='Enter') filterBlog(); });
+  si.addEventListener('input', filterBlog);
+}
+
 function filterBlog() {
   const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
-  const search = document.getElementById('searchInput').value.toLowerCase();
+  const search = document.getElementById('searchInput').value.trim().toLowerCase();
   document.querySelectorAll('.blog-card').forEach(card => {
     const catMatch = activeCat === 'all' || card.dataset.cat === activeCat;
-    const titleMatch = card.dataset.title?.toLowerCase().includes(search) || !search;
-    card.style.display = (catMatch && titleMatch) ? '' : 'none';
+    if (!search) { card.style.display = catMatch ? '' : 'none'; return; }
+    const searchable = [
+      card.dataset.title || '',
+      card.dataset.cat || '',
+      card.querySelector('h3')?.textContent || '',
+      card.querySelector('p')?.textContent || ''
+    ].join(' ').toLowerCase();
+    card.style.display = (catMatch && searchable.includes(search)) ? '' : 'none';
   });
 }
 
