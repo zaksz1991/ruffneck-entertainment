@@ -443,9 +443,6 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 @media(max-width:1024px){.store-preview-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){.store-preview-grid{grid-template-columns:1fr}}
 
-@media(max-width:768px){
-  .founder-grid-compact{grid-template-columns:1fr!important}
-}
 
 /* ── TYPOGRAPHY & READABILITY FIXES ── */
 p,li{line-height:1.7}
@@ -463,6 +460,139 @@ p,li{line-height:1.7}
 .webinar-topic{font-size:13px!important}
 .impact-label{font-size:13px!important}
 .nav-links li a{font-size:14px;white-space:nowrap}
+
+  body{padding-bottom:0}
+}
+
+
+/* ================================================
+   COMPREHENSIVE MOBILE RESPONSIVE CSS — 2026
+   ================================================ */
+@media(max-width:768px){
+  html{scroll-padding-top:64px}
+  body{padding-bottom:90px}
+  .container{padding:0 16px}
+  .section{padding:48px 0}
+  .section-title{font-size:clamp(22px,6vw,32px)!important}
+  .section-sub{font-size:14px!important}
+  .btn{font-size:13px;padding:10px 18px}
+  /* NAV */
+  .nav-links{display:none!important}
+  .nav-hamburger{display:flex!important}
+  .nav-inner{padding:0 16px}
+  /* HERO */
+  .hero-grid{grid-template-columns:1fr!important;gap:32px}
+  .hero-visual{display:none}
+  .hero h1{font-size:clamp(26px,7vw,40px)!important;line-height:1.2}
+  .hero-actions,.hero-btns{flex-direction:column!important;align-items:stretch!important;gap:10px}
+  .hero-actions .btn,.hero-btns .btn{width:100%;justify-content:center}
+  .hero-stats{flex-wrap:wrap;gap:16px}
+  .hero-eyebrow{flex-wrap:wrap;gap:6px}
+  /* SERVICES */
+  .services-tabs{flex-wrap:wrap;gap:6px;justify-content:center}
+  .services-grid{grid-template-columns:1fr!important;gap:14px}
+  .service-tags{flex-wrap:wrap;gap:4px}
+  /* ABOUT */
+  .about-grid{grid-template-columns:1fr!important;gap:24px}
+  .about-mission-vision{grid-template-columns:1fr!important;gap:12px}
+  .values-grid{grid-template-columns:1fr 1fr!important;gap:12px}
+  /* FOUNDER */
+  .founder-grid-compact{grid-template-columns:1fr!important;gap:24px}
+  /* INDUSTRIES */
+  .industries-grid{grid-template-columns:repeat(2,1fr)!important;gap:10px}
+  /* PORTFOLIO */
+  .portfolio-grid{grid-template-columns:1fr!important;gap:16px}
+  /* PROCESS */
+  .process-steps{grid-template-columns:1fr!important;gap:16px}
+  /* TESTIMONIALS */
+  .testimonials-grid{grid-template-columns:1fr!important;gap:16px}
+  /* PRICING */
+  .pricing-grid{grid-template-columns:1fr!important;gap:16px}
+  /* PARTNERS */
+  .partners-grid{grid-template-columns:repeat(2,1fr)!important;gap:12px}
+  /* AI ASSISTANT */
+  .ai-assistant-inner{grid-template-columns:1fr!important;gap:24px}
+  /* AI CAREERS */
+  .ai-careers-grid{grid-template-columns:1fr!important;gap:12px}
+  .career-header{padding:14px}
+  .career-body{padding:12px 14px 14px}
+  /* SKILLS PROGRAM */
+  .skills-program-grid{grid-template-columns:1fr!important;gap:16px}
+  .skills-pillar{padding:22px 18px}
+  .skills-impact{grid-template-columns:repeat(2,1fr)!important;gap:12px;padding:20px 16px!important}
+  .impact-num{font-size:28px!important}
+  .impact-label{font-size:12px!important}
+  /* INTERNSHIP & VOLUNTEER */
+  .internship-grid{grid-template-columns:1fr!important;gap:16px}
+  .internship-card{padding:22px 18px!important}
+  .internship-card h3{font-size:17px}
+  .intern-tracks{flex-wrap:wrap;gap:6px}
+  .track-tag{font-size:11px;padding:3px 10px}
+  .intern-benefits{gap:7px}
+  .intern-benefits li{font-size:12px!important}
+  .intern-note{padding:16px;font-size:13px}
+  /* AI LITERACY WEBINAR */
+  .webinar-section{padding:48px 0}
+  .webinar-inner{padding:0 4px}
+  .webinar-title{font-size:clamp(22px,6vw,32px)!important;line-height:1.25}
+  .webinar-sub{font-size:14px!important;margin-bottom:24px}
+  .webinar-badge{font-size:10px;padding:5px 14px}
+  .webinar-topics{grid-template-columns:1fr!important;gap:8px;margin-bottom:28px}
+  .webinar-topic{padding:12px 14px;font-size:13px!important;text-align:left}
+  .wt-icon{font-size:18px;flex-shrink:0}
+  .webinar-notify{flex-direction:column!important;align-items:stretch!important;gap:10px;max-width:100%}
+  .webinar-input{min-width:unset!important;width:100%!important;font-size:14px}
+  .webinar-community{margin-top:24px;padding-top:20px}
+  .community-links{flex-direction:column!important;align-items:center!important;gap:10px}
+  .community-btn{width:100%!important;max-width:280px!important;justify-content:center!important}
+  /* STORE CTA BANNER */
+  .store-cta-flex{flex-direction:column!important;text-align:center!important;gap:20px}
+  .store-cta-flex .btn{width:100%!important;justify-content:center!important}
+  /* BLOG */
+  .blog-grid{grid-template-columns:1fr!important;gap:14px}
+  .featured-card{grid-template-columns:1fr!important}
+  .featured-thumb{min-height:160px}
+  .featured-body{padding:20px}
+  /* CONTACT */
+  .contact-grid{grid-template-columns:1fr!important;gap:24px}
+  .contact-social{flex-wrap:wrap;gap:8px}
+  .social-btn{font-size:12px;padding:7px 14px}
+  .form-row{grid-template-columns:1fr!important}
+  /* FOOTER */
+  .footer-grid{grid-template-columns:1fr 1fr!important;gap:20px}
+  .footer-brand{grid-column:1/-1}
+  /* CHATBOT — repositioned above button on mobile */
+  .chatbot-bubble{bottom:16px!important;right:12px!important;gap:8px!important}
+  .chatbot-toggle{width:48px!important;height:48px!important;font-size:20px!important}
+  .chatbot-panel{position:fixed!important;width:calc(100vw - 24px)!important;max-width:100%!important;bottom:72px!important;right:12px!important;left:12px!important;max-height:72vh!important;border-radius:12px!important}
+}
+/* TABLET */
+@media(min-width:769px) and (max-width:1024px){
+  .ai-careers-grid{grid-template-columns:repeat(2,1fr)!important}
+  .skills-program-grid{grid-template-columns:1fr 1fr!important}
+  .internship-grid{grid-template-columns:1fr 1fr}
+  .webinar-topics{grid-template-columns:repeat(2,1fr)!important}
+  .blog-grid{grid-template-columns:repeat(2,1fr)!important}
+  .services-grid{grid-template-columns:repeat(2,1fr)!important}
+  .pricing-grid{grid-template-columns:repeat(2,1fr)!important}
+  .footer-grid{grid-template-columns:repeat(2,1fr)!important}
+  .contact-grid{grid-template-columns:1fr 1fr}
+}
+/* SMALL MOBILE */
+@media(max-width:480px){
+  .section-title{font-size:clamp(20px,6vw,28px)!important}
+  .hero h1{font-size:clamp(22px,7vw,34px)!important}
+  .values-grid{grid-template-columns:1fr!important}
+  .footer-grid{grid-template-columns:1fr!important;gap:20px}
+  .skills-impact{grid-template-columns:repeat(2,1fr)!important;padding:16px!important}
+  .impact-num{font-size:24px!important}
+  .webinar-title{font-size:22px!important}
+  .chatbot-panel{max-height:65vh!important;bottom:68px!important}
+  .internship-card{padding:16px!important}
+  .career-header{gap:8px;padding:12px}
+  .career-icon{font-size:22px}
+}
+
 </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
@@ -1431,7 +1561,7 @@ p,li{line-height:1.7}
 <!-- STORE CTA BANNER -->
 <section style="background:linear-gradient(135deg,var(--navy) 0%,#0a2040 100%);padding:56px 0;border-top:1px solid rgba(0,180,216,0.1);border-bottom:1px solid rgba(0,180,216,0.1);" id="store-preview">
   <div class="container">
-    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;" class="fade-up">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px;" class="store-cta-flex" class="fade-up">
       <div>
         <div style="font-family:var(--font-mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">Digital Store · 2026</div>
         <h2 style="font-size:clamp(22px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.25;">13+ Digital Products — Instant Download</h2>
@@ -1549,6 +1679,8 @@ p,li{line-height:1.7}
           <a href="https://instagram.com/ruffneckentertainment" target="_blank" class="social-btn">📸 Instagram</a>
           <a href="https://youtube.com/@RuffNeckEntertainment" target="_blank" class="social-btn">▶️ YouTube</a>
           <a href="https://x.com/RuffNeckEnterta" target="_blank" class="social-btn">𝕏 Twitter/X</a>
+          <a href="https://facebook.com/RuffNeckEntertainment" target="_blank" class="social-btn">📘 Facebook</a>
+          <a href="https://tiktok.com/@ruffneckentertainment" target="_blank" class="social-btn">🎵 TikTok</a>
           <a href="https://wa.me/2348033807856" target="_blank" class="social-btn">💬 WhatsApp</a>
           <a href="mailto:ruffneckhassan@gmail.com" class="social-btn">📧 Email</a>
         </div>
@@ -1649,8 +1781,10 @@ p,li{line-height:1.7}
           <li><a href="https://chat.whatsapp.com/HZaNYh85ZrYEO2062zkEmi" target="_blank">👥 WhatsApp Community</a></li>
           <li><a href="https://t.me/RuffNeckEntertainment" target="_blank">✈️ Telegram Channel</a></li>
           <li><a href="https://linkedin.com/company/ruffneck-entertainment" target="_blank">💼 LinkedIn</a></li>
+          <li><a href="https://facebook.com/RuffNeckEntertainment" target="_blank">📘 Facebook</a></li>
           <li><a href="https://instagram.com/ruffneckentertainment" target="_blank">📸 Instagram</a></li>
           <li><a href="https://youtube.com/@RuffNeckEntertainment" target="_blank">▶️ YouTube</a></li>
+          <li><a href="https://tiktok.com/@ruffneckentertainment" target="_blank">🎵 TikTok</a></li>
           <li><a href="https://x.com/RuffNeckEnterta" target="_blank">𝕏 Twitter/X</a></li>
           <li><a href="#ai-assistant">🤖 AI Assistant</a></li>
         </ul>
