@@ -72,14 +72,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .hero-stat-num span{color:var(--cyan)}
 .hero-stat-label{font-size:12px;color:rgba(255,255,255,0.45);letter-spacing:0.5px;margin-top:2px}
 .hero-visual{display:flex;justify-content:center;align-items:center}
-.hero-logo-wrap{position:relative;width:340px;height:340px;display:flex;align-items:center;justify-content:center}
+.hero-logo-wrap{position:relative;width:280px;height:280px;display:flex;align-items:center;justify-content:center;max-width:100%}
 .orbit-ring{position:absolute;border-radius:50%;border:1px solid rgba(0,180,216,0.2);animation:spin 20s linear infinite}
-.orbit-ring:nth-child(1){width:300px;height:300px;animation-duration:18s}
-.orbit-ring:nth-child(2){width:340px;height:340px;animation-direction:reverse;animation-duration:28s;border-color:rgba(255,193,7,0.15)}
+.orbit-ring:nth-child(1){width:260px;height:260px;animation-duration:18s}
+.orbit-ring:nth-child(2){width:290px;height:290px;animation-direction:reverse;animation-duration:28s;border-color:rgba(255,193,7,0.15)}
 .orbit-dot{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--cyan);top:-4px;left:50%;transform:translateX(-50%);box-shadow:0 0 12px var(--cyan)}
 .orbit-dot-gold{background:var(--gold);box-shadow:0 0 12px var(--gold);top:auto;bottom:-4px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.hero-logo-wrap svg{width:240px;height:240px;animation:float 6s ease-in-out infinite;filter:drop-shadow(0 0 32px rgba(0,180,216,0.25))}
+.hero-logo-wrap svg{width:200px;height:200px;animation:float 6s ease-in-out infinite;filter:drop-shadow(0 0 32px rgba(0,180,216,0.25));max-width:100%}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
 /* TICKER */
@@ -359,7 +359,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .chatbot-bubble{position:fixed;bottom:28px;right:28px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:12px}
 .chatbot-toggle{width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 24px rgba(0,180,216,0.4);transition:all 0.2s}
 .chatbot-toggle:hover{transform:scale(1.08);box-shadow:0 6px 32px rgba(0,180,216,0.55)}
-.chatbot-panel{width:340px;background:var(--white);border-radius:16px;box-shadow:0 8px 48px rgba(11,30,58,0.18);border:1.5px solid var(--border);display:none;flex-direction:column;overflow:hidden;max-height:520px}
+.chatbot-panel{width:340px;background:var(--white);border-radius:16px;box-shadow:0 8px 48px rgba(11,30,58,0.18);border:1.5px solid var(--border);display:none;flex-direction:column;overflow:hidden;max-height:520px;position:relative}
 .chatbot-panel.open{display:flex}
 .chatbot-head{background:linear-gradient(135deg,var(--navy),#0a2040);padding:16px 18px;display:flex;align-items:center;gap:12px;flex-shrink:0}
 .chatbot-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
@@ -466,14 +466,14 @@ p,li{line-height:1.7}
 
 
 /* ── POLICY MODAL ── */
-.policy-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:9000;align-items:flex-start;justify-content:center;padding:24px;overflow-y:auto;backdrop-filter:blur(6px)}
+.policy-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.75);z-index:9000;align-items:center;justify-content:center;padding:16px;overflow-y:auto;backdrop-filter:blur(4px)}
 .policy-overlay.open{display:flex}
-.policy-modal{background:var(--white);border-radius:var(--radius);max-width:720px;width:100%;margin:auto;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.25)}
-.policy-modal-head{background:linear-gradient(135deg,var(--navy),#0a2040);padding:28px 32px 20px;color:var(--white);display:flex;align-items:center;justify-content:space-between}
+.policy-modal{background:var(--white);border-radius:var(--radius);max-width:660px;width:calc(100% - 24px);margin:auto;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.3)}
+.policy-modal-head{background:linear-gradient(135deg,var(--navy),#0a2040);padding:20px 24px;color:var(--white);display:flex;align-items:center;justify-content:space-between}
 .policy-modal-head h2{font-size:20px;font-weight:700;color:var(--white)}
 .policy-modal-close{background:none;border:none;color:rgba(255,255,255,0.6);font-size:22px;cursor:pointer;padding:4px;line-height:1}
 .policy-modal-close:hover{color:var(--white)}
-.policy-modal-body{padding:32px;max-height:70vh;overflow-y:auto}
+.policy-modal-body{padding:24px 28px;max-height:60vh;overflow-y:auto}
 .policy-modal-body h3{font-size:16px;font-weight:700;color:var(--navy);margin:24px 0 10px;padding-bottom:8px;border-bottom:1.5px solid var(--border)}
 .policy-modal-body h3:first-child{margin-top:0}
 .policy-modal-body p{font-size:14px;color:var(--text-body);line-height:1.75;margin-bottom:12px}
@@ -528,12 +528,41 @@ p,li{line-height:1.7}
 /* ── MOBILE (≤768px) ── */
 @media(max-width:768px){
 
-  /* NAV — hamburger shows, desktop links hide */
+  /* NAV */
   .nav-links{display:none}
   .nav-hamburger{display:flex}
   .nav-drop-menu{display:none!important}
   .nav-caret{display:none}
   .nav-inner{height:60px}
+
+  /* HERO — hide animated logo on mobile, show text only */
+  .hero-grid{grid-template-columns:1fr!important;gap:32px}
+  .hero-visual{display:none!important}
+  .hero-logo-wrap{display:none!important}
+
+  /* POLICY MODAL — full mobile */
+  .policy-modal{width:calc(100vw - 16px);border-radius:10px}
+  .policy-modal-head{padding:16px 18px}
+  .policy-modal-head h2{font-size:16px}
+  .policy-modal-body{padding:16px 18px;max-height:65vh}
+  .policy-modal-body h3{font-size:14px;margin:18px 0 8px}
+  .policy-modal-body p,.policy-modal-body ul li{font-size:13px}
+  .policy-modal-footer{padding:12px 18px;font-size:11px}
+
+  /* CHATBOT — full width, positioned above button */
+  .chatbot-bubble{bottom:12px;right:10px;gap:6px;z-index:9999}
+  .chatbot-toggle{width:46px;height:46px;font-size:20px}
+  .chatbot-panel{
+    position:fixed!important;
+    width:calc(100vw - 20px)!important;
+    max-width:none!important;
+    left:10px!important;
+    right:10px!important;
+    bottom:64px!important;
+    top:auto!important;
+    max-height:65vh!important;
+    border-radius:12px;
+  }
 
   /* BODY — room for fixed chatbot bubble */
   html{scroll-padding-top:64px}
@@ -1276,23 +1305,55 @@ p,li{line-height:1.7}
           </div>
         </div>
 
-        <!-- NASBA / PMI / LinkedIn -->
+        <!-- NASBA -->
         <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.15);border-radius:12px;padding:18px;">
-          <div style="font-size:11px;font-weight:700;color:var(--cyan);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">NASBA · PMI · LINKEDIN</div>
-          <div style="display:flex;flex-direction:column;gap:8px;">
-            <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:8px 12px;">
-              <div style="font-size:12px;color:var(--white);font-weight:500;margin-bottom:3px;">National Association of State Boards of Accountancy (NASBA)</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.5);">Certified · Add link when available</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:8px 12px;">
-              <div style="font-size:12px;color:var(--white);font-weight:500;margin-bottom:3px;">Project Management Institute (PMI)®</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.5);">Certified · Add link when available</div>
-            </div>
-            <div style="background:rgba(255,255,255,0.05);border-radius:6px;padding:8px 12px;">
-              <div style="font-size:12px;color:var(--white);font-weight:500;margin-bottom:3px;">LinkedIn Learning Certifications</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.5);">Ethics in Generative AI · AI Fluency · Multiple courses</div>
-            </div>
-          </div>
+          <div style="font-size:11px;font-weight:700;color:var(--cyan);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">NASBA</div>
+          <a href="https://www.linkedin.com/learning/certificates/96d2432a689e3429c116b6b0b5c964c796b0f3658e7bad9f95a442642bf48485" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">NASBA Certificate 1</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">Via LinkedIn Learning ↗</span>
+            </a>
+          <a href="https://www.linkedin.com/learning/certificates/18479581d617d49d3522be91f9b4ccd772a12f5905bc92286408d20955696806" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">NASBA Certificate 2</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">Via LinkedIn Learning ↗</span>
+            </a>
+        </div>
+
+        <!-- PMI -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.15);border-radius:12px;padding:18px;">
+          <div style="font-size:11px;font-weight:700;color:var(--cyan);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">PMI® · MICROSOFT</div>
+          <a href="https://www.linkedin.com/learning/certificates/b230ddf400a4f005420bacee49fe61e324ce0ea5604407fa4167d4f41098b961" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">Project Management Institute (PMI)®</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">Via LinkedIn Learning ↗</span>
+            </a>
+          <a href="https://www.linkedin.com/learning/certificates/735425bb42037a148c328a489e61c58353190cb87b80fd358f82ba3774fbd429" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">Microsoft Certificate</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">Via LinkedIn Learning ↗</span>
+            </a>
+        </div>
+
+        <!-- LINKEDIN LEARNING -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.15);border-radius:12px;padding:18px;grid-column:span 1;">
+          <div style="font-size:11px;font-weight:700;color:var(--cyan);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">LINKEDIN LEARNING</div>
+          <a href="https://www.linkedin.com/learning/certificates/36d7a2fbdb4ac2d5f488c98a1b5bbe0cb92db6d8d4f2be89e0c4b53c81ce67d3" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">LinkedIn Learning Certificate 1</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">2026 ↗</span>
+            </a>
+          <a href="https://www.linkedin.com/learning/certificates/3ef3e43c977a5667c275c6569195ddce723441da029f5422c9e4a67c7bd7a36e" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">LinkedIn Learning Certificate 2</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">2026 ↗</span>
+            </a>
+          <a href="https://www.linkedin.com/learning/certificates/4c184173df7aa0fb7cf9b0aca4b73b65a3d6ae0204852b36371c900ff83d8ad2" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">LinkedIn Learning Certificate 3</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">2026 ↗</span>
+            </a>
+          <a href="https://www.linkedin.com/learning/certificates/3e0f30e00d653543505050a29c1719dee900ad41bec0a16a60fbc7a495c7e62f" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">LinkedIn Learning Certificate 4</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">2026 ↗</span>
+            </a>
+          <a href="https://www.linkedin.com/learning/certificates/3dbe7767e0d35ad0d1ea129787193f0d0de7cde88c0f354b736ee851c52edf43" target="_blank" rel="noopener" style="display:flex;align-items:center;justify-content:space-between;background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;text-decoration:none;margin-bottom:6px;transition:all 0.2s;">
+              <span style="font-size:12px;color:var(--white);font-weight:500;">LinkedIn Learning Certificate 5</span>
+              <span style="font-size:10px;color:var(--cyan);font-family:var(--font-mono);white-space:nowrap;margin-left:8px;">2026 ↗</span>
+            </a>
         </div>
 
         <!-- 3MTT Programme -->
