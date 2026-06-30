@@ -18,7 +18,8 @@
   --radius:10px;--shadow:0 2px 12px rgba(11,30,58,0.08);--shadow-lg:0 8px 32px rgba(11,30,58,0.14);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--midnight);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font);background:var(--midnight);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%}
+html{overflow-x:hidden;max-width:100%}
 a{text-decoration:none;color:inherit}
 button{cursor:pointer;font-family:var(--font);border:none}
 input,textarea,select{font-family:var(--font)}
@@ -929,5 +930,37 @@ function showToast(msg, type='info'){
 // ── CLOSE MODAL ON OVERLAY CLICK ──
 document.getElementById('editModal').addEventListener('click', function(e){ if(e.target===this) closeEditModal(); });
 </script>
+
+<script>
+// ── BULLETPROOF HORIZONTAL OVERFLOW GUARD ──
+(function(){
+  function clampOverflow(){
+    document.documentElement.style.overflowX = 'hidden';
+    document.body.style.overflowX = 'hidden';
+    document.body.style.maxWidth = '100vw';
+    document.documentElement.style.maxWidth = '100vw';
+    
+    // Find and fix any element wider than viewport
+    const vw = window.innerWidth;
+    document.querySelectorAll('body *').forEach(function(el){
+      const rect = el.getBoundingClientRect();
+      if (rect.right > vw + 2 || rect.left < -2) {
+        const style = window.getComputedStyle(el);
+        if (style.position === 'fixed' || style.position === 'absolute') return; // skip intentional overlays
+        el.style.maxWidth = '100%';
+        el.style.boxSizing = 'border-box';
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', clampOverflow);
+  } else {
+    clampOverflow();
+  }
+  window.addEventListener('resize', clampOverflow);
+  window.addEventListener('load', clampOverflow);
+})();
+</script>
+
 </body>
 </html>
