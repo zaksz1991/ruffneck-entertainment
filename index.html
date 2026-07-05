@@ -432,20 +432,20 @@ p,li{line-height:1.7}
 
 
 /* ── POLICY MODAL ── */
-.policy-overlay{display:none !important;position:fixed;inset:0;width:100vw;height:100vh;background:rgba(0,0,0,0.75);z-index:9000;align-items:center;justify-content:center;padding:16px;overflow-y:auto;backdrop-filter:blur(4px)}
-.policy-overlay.open{display:flex !important}
 
-.policy-modal{background:var(--white);border-radius:var(--radius);max-width:660px;width:calc(100% - 24px);margin:auto;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,0.3)}
-.policy-modal-head{background:linear-gradient(135deg,var(--navy),#0a2040);padding:20px 24px;color:var(--white);display:flex;align-items:center}
+
+
+
+
 .policy-modal-head h2{font-size:20px;font-weight:700;color:var(--white)}
-.policy-modal-body{padding:24px 28px;max-height:60vh;overflow-y:auto}
-.policy-modal-body h3{font-size:16px;font-weight:700;color:var(--navy);margin:24px 0 10px;padding-bottom:8px;border-bottom:1.5px solid var(--border)}
-.policy-modal-body h3:first-child{margin-top:0}
-.policy-modal-body p{font-size:14px;color:var(--text-body);line-height:1.75;margin-bottom:12px}
-.policy-modal-body ul{display:flex;flex-direction:column;gap:6px;margin-bottom:14px;padding-left:0}
-.policy-modal-body ul li{font-size:14px;color:var(--text-body);padding-left:18px;position:relative;line-height:1.65;list-style:none}
+
+
+
+
+
+
 .policy-modal-body ul li::before{content:'→';color:var(--cyan);font-weight:700;position:absolute;left:0}
-.policy-modal-footer{padding:16px 32px;border-top:1px solid var(--border);background:var(--bg-light);text-align:center;font-size:12px;color:var(--text-muted)}
+
 
 /* ── NAV DROPDOWNS ── */
 .nav-dropdown{position:relative}
@@ -505,13 +505,13 @@ p,li{line-height:1.7}
   .hero-grid{grid-template-columns:1fr!important;gap:32px}
   
   /* POLICY MODAL — full mobile */
-  .policy-modal{width:calc(100vw - 16px);border-radius:10px}
-  .policy-modal-head{padding:16px 18px}
+  
+  
   .policy-modal-head h2{font-size:16px}
-  .policy-modal-body{padding:16px 18px;max-height:65vh}
-  .policy-modal-body h3{font-size:14px;margin:18px 0 8px}
-  .policy-modal-body p,.policy-modal-body ul li{font-size:13px}
-  .policy-modal-footer{padding:12px 18px;font-size:11px}
+  
+  
+  .policy-modal-body p,
+  
 
     position:fixed!important;
     width:calc(100vw - 20px)!important;
@@ -644,9 +644,9 @@ p,li{line-height:1.7}
   .footer-bottom-links{flex-wrap:wrap;justify-content:center;gap:12px}
 
   /* MODAL */
-  .policy-modal{margin:12px}
-  .policy-modal-head{padding:20px}
-  .policy-modal-body{padding:20px;max-height:60vh}
+  
+  
+  
 }
 
 /* ── SMALL MOBILE (≤480px) ── */
@@ -725,6 +725,130 @@ p,li{line-height:1.7}
     max-height:min(70vh, calc(100vh - 100px));
   }
 }
+
+/* ══ POLICY MODAL — CLEAN BUILD ══ */
+.policy-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.72);
+  z-index:99999;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  box-sizing:border-box;
+  overflow-y:auto;
+}
+.policy-overlay.open{
+  display:flex;
+}
+.policy-modal{
+  background:#ffffff;
+  border-radius:12px;
+  width:100%;
+  max-width:660px;
+  max-height:85vh;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  box-shadow:0 24px 64px rgba(0,0,0,0.35);
+  position:relative;
+}
+.policy-modal-head{
+  background:linear-gradient(135deg,#0B1E3A,#0a2040);
+  padding:20px 56px 20px 24px;
+  display:flex;
+  align-items:center;
+  flex-shrink:0;
+  position:relative;
+}
+.policy-modal-head h2{
+  font-size:18px;
+  font-weight:700;
+  color:#ffffff;
+  margin:0;
+}
+.policy-modal-x{
+  position:absolute;
+  top:12px;
+  right:14px;
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.15);
+  border:none;
+  color:#ffffff;
+  font-size:18px;
+  line-height:1;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:background 0.2s;
+}
+.policy-modal-x:hover{background:rgba(255,255,255,0.3)}
+.policy-modal-body{
+  padding:24px 28px;
+  overflow-y:auto;
+  flex:1;
+  min-height:0;
+}
+.policy-modal-body h3{
+  font-size:15px;
+  font-weight:700;
+  color:#0B1E3A;
+  margin:22px 0 10px;
+  padding-bottom:7px;
+  border-bottom:1.5px solid #E5E7EB;
+}
+.policy-modal-body h3:first-child{margin-top:0}
+.policy-modal-body p{
+  font-size:14px;
+  color:#374151;
+  line-height:1.75;
+  margin-bottom:12px;
+}
+.policy-modal-body ul{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  margin-bottom:14px;
+  padding:0;
+  list-style:none;
+}
+.policy-modal-body ul li{
+  font-size:13px;
+  color:#374151;
+  padding-left:18px;
+  position:relative;
+  line-height:1.65;
+}
+.policy-modal-body ul li::before{
+  content:'→';
+  color:#00B4D8;
+  font-weight:700;
+  position:absolute;
+  left:0;
+}
+.policy-modal-footer{
+  padding:14px 24px;
+  border-top:1px solid #E5E7EB;
+  background:#F9FAFB;
+  font-size:12px;
+  color:#6B7280;
+  flex-shrink:0;
+  text-align:center;
+  line-height:1.6;
+}
+@media(max-width:600px){
+  .policy-modal{max-height:90vh;border-radius:10px}
+  .policy-modal-body{padding:16px 18px}
+  .policy-modal-head{padding:16px 52px 16px 18px}
+  .policy-modal-head h2{font-size:16px}
+}
+
 </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
@@ -2124,12 +2248,11 @@ p,li{line-height:1.7}
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 RuffNeck Entertainment. All rights reserved. CAC Reg No. 3770977.</p>
-      <div class="footer-bottom-links">
-        <a href="#" onclick="openPolicy('privacy');return false;">Privacy Policy</a>
-        <a href="#" onclick="openPolicy('terms');return false;">Terms of Service</a>
-        <a href="#" onclick="openPolicy('cookie');return false;">Cookie Policy</a>
-      </div>
+      <p>© 2026 RuffNeck Entertainment. All rights reserved. CAC Reg No. 3770977. &nbsp;·&nbsp;
+        <a href="#" onclick="openPolicy('privacy');return false;" style="color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;">Privacy Policy</a> &nbsp;·&nbsp;
+        <a href="#" onclick="openPolicy('terms');return false;" style="color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;">Terms of Service</a> &nbsp;·&nbsp;
+        <a href="#" onclick="openPolicy('cookie');return false;" style="color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;">Cookie Policy</a>
+      </p>
     </div>
   </div>
 </footer>
@@ -2185,16 +2308,16 @@ if(form){
 }
 </script>
 
-<!-- ── POLICY MODALS ── -->
-<div class="policy-overlay" id="policyOverlay" onclick="if(event.target===this)closePolicy()">
+<!-- POLICY MODAL -->
+<div class="policy-overlay" id="policyOverlay" onclick="if(event.target===this)closePolicyModal()">
   <div class="policy-modal">
     <div class="policy-modal-head">
       <h2 id="policyTitle">Policy</h2>
+      <button class="policy-modal-x" id="policyCloseBtn" type="button" onclick="closePolicyModal()">&#10005;</button>
     </div>
     <div class="policy-modal-body" id="policyBody"></div>
     <div class="policy-modal-footer">
-      RuffNeck Entertainment · CAC Reg No. 3770977 · ruffneckhassan@gmail.com · Last updated: June 2026<br/>
-      <span style="opacity:0.7;font-size:11px;">Tap outside this box to close</span>
+      RuffNeck Entertainment &nbsp;·&nbsp; CAC Reg No. 3770977 &nbsp;·&nbsp; ruffneckhassan@gmail.com &nbsp;·&nbsp; June 2026
     </div>
   </div>
 </div>
@@ -2203,19 +2326,18 @@ if(form){
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-<script>AOS.init({duration:700,once:true,offset:60});
-// ── POLICY MODALS ──
-const POLICIES = {
+<script>
+// ══ POLICY MODAL — CLEAN JS ══
+const POLICY_DATA = {
   privacy: {
-    title: '🔒 Privacy Policy',
+    title: 'Privacy Policy',
     content: `
       <h3>1. Introduction</h3>
-      <p>RuffNeck Entertainment ("we", "our", "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your data when you visit ruffneck-entertainment.vercel.app or use our services.</p>
+      <p>RuffNeck Entertainment ("we", "our", "us") is committed to protecting your personal information. This Privacy Policy explains how we collect, use, and safeguard your data when you visit our website or use our services.</p>
       <h3>2. Information We Collect</h3>
-      <p>We may collect the following types of information:</p>
       <ul>
         <li><strong>Personal Information:</strong> Name, email address, phone number, and payment details when you make a purchase or contact us</li>
-        <li><strong>Usage Data:</strong> Pages visited, time on site, browser type, and device information (collected automatically)</li>
+        <li><strong>Usage Data:</strong> Pages visited, time on site, browser type, and device information</li>
         <li><strong>Communication Data:</strong> Messages you send via our contact form (processed by Formspree)</li>
         <li><strong>Transaction Data:</strong> Purchase history and payment records (processed securely by Paystack)</li>
       </ul>
@@ -2227,135 +2349,123 @@ const POLICIES = {
         <li>To improve our website, services, and user experience</li>
         <li>To comply with legal obligations under Nigerian law (NDPR 2019)</li>
       </ul>
-      <h3>4. Data Sharing & Third Parties</h3>
-      <p>We do not sell your personal data. We may share data with trusted third-party service providers:</p>
-      <ul>
-        <li><strong>Paystack</strong> — Payment processing (PCI-DSS compliant)</li>
-        <li><strong>Formspree</strong> — Contact form submissions</li>
-        <li><strong>Vercel</strong> — Website hosting</li>
-        <li><strong>Calendly</strong> — Booking and scheduling</li>
-      </ul>
+      <h3>4. Data Sharing &amp; Third Parties</h3>
+      <p>We do not sell your personal data. We share data only with trusted service providers: Paystack (payments), Formspree (contact forms), Vercel (hosting), and Calendly (scheduling).</p>
       <h3>5. Data Security</h3>
-      <p>We implement appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction. Payment data is processed entirely by Paystack and never stored on our servers.</p>
+      <p>We implement appropriate technical and organisational measures to protect your personal information. Payment data is processed entirely by Paystack and never stored on our servers.</p>
       <h3>6. Your Rights (NDPR 2019)</h3>
       <ul>
         <li>Right to access your personal data we hold</li>
         <li>Right to correct inaccurate personal data</li>
         <li>Right to request deletion of your personal data</li>
         <li>Right to withdraw consent at any time</li>
-        <li>Right to lodge a complaint with NITDA</li>
       </ul>
-      <h3>7. Data Retention</h3>
-      <p>We retain personal data only as long as necessary for the purposes outlined in this policy, or as required by Nigerian law. Transaction records are retained for 7 years for tax and compliance purposes.</p>
-      <h3>8. Contact Us</h3>
-      <p>For any privacy-related enquiries or to exercise your rights, contact us at: <strong>ruffneckhassan@gmail.com</strong> or WhatsApp: <strong>+234 803 380 7856</strong>.</p>
+      <h3>7. Contact Us</h3>
+      <p>For privacy-related enquiries: <strong>ruffneckhassan@gmail.com</strong> or WhatsApp: <strong>+234 803 380 7856</strong></p>
     `
   },
   terms: {
-    title: '📋 Terms of Service',
+    title: 'Terms of Service',
     content: `
       <h3>1. Acceptance of Terms</h3>
-      <p>By accessing or using the RuffNeck Entertainment website (ruffneck-entertainment.vercel.app) or purchasing any of our digital products or services, you agree to be bound by these Terms of Service. If you do not agree, please do not use our services.</p>
+      <p>By accessing or using RuffNeck Entertainment's website or purchasing our products and services, you agree to these Terms. If you do not agree, please do not use our services.</p>
       <h3>2. About RuffNeck Entertainment</h3>
-      <p>RuffNeck Entertainment is a registered Nigerian business (CAC Reg No. 3770977, SMEDAN SUID-3120-4678-0386-7922) providing digital services, AI solutions, and digital products. Principal place of business: Phase 3 Sharada Estate, Gwale, Kano State, Nigeria.</p>
+      <p>RuffNeck Entertainment is a registered Nigerian business (CAC Reg No. 3770977, SMEDAN SUID-3120-4678-0386-7922) providing digital services, AI solutions, and digital products from Kano, Nigeria.</p>
       <h3>3. Digital Products — Purchase Terms</h3>
       <ul>
         <li>All digital products are delivered as PDF files to the email address provided at checkout</li>
         <li>Delivery is typically instant to 24 hours after confirmed payment</li>
         <li>Products are for personal or business use only — resale or redistribution is prohibited</li>
-        <li>Due to the digital nature of our products, all sales are final unless the product is defective or was not delivered</li>
-        <li>If you do not receive your product within 24 hours, contact us at ruffneckhassan@gmail.com</li>
+        <li>All sales are final unless the product is defective or was not delivered</li>
       </ul>
       <h3>4. Payments</h3>
-      <p>All payments are processed securely by Paystack in Nigerian Naira (NGN). By completing a purchase, you confirm that you are authorised to use the payment method provided. RuffNeck Entertainment does not store payment card details.</p>
+      <p>All payments are processed securely by Paystack in Nigerian Naira (NGN). RuffNeck Entertainment does not store payment card details.</p>
       <h3>5. Refund Policy</h3>
       <ul>
-        <li>Refunds are available if the digital product was not delivered after 48 hours</li>
-        <li>Refunds are available if the product delivered is materially different from what was described</li>
-        <li>No refunds are issued for change of mind after a product has been successfully delivered</li>
-        <li>Refund requests must be submitted within 7 days of purchase to ruffneckhassan@gmail.com</li>
+        <li>Refunds available if the product was not delivered within 48 hours</li>
+        <li>Refunds available if the product delivered differs materially from what was described</li>
+        <li>No refunds for change of mind after successful delivery</li>
+        <li>Refund requests must be submitted within 7 days of purchase</li>
       </ul>
-      <h3>6. Service Engagements</h3>
-      <p>For consultancy, marketing, design, and other service engagements, specific terms are agreed upon in writing before work commences. These Terms of Service apply in addition to any individual service agreement.</p>
-      <h3>7. Intellectual Property</h3>
-      <p>All content on this website — including text, graphics, logos, and digital products — is owned by or licensed to RuffNeck Entertainment. You may not reproduce, distribute, or create derivative works without explicit written permission.</p>
-      <h3>8. Limitation of Liability</h3>
-      <p>RuffNeck Entertainment shall not be liable for any indirect, incidental, or consequential damages arising from the use of our website or services. Our total liability shall not exceed the amount paid for the specific product or service in question.</p>
-      <h3>9. Governing Law</h3>
-      <p>These Terms are governed by the laws of the Federal Republic of Nigeria. Any disputes shall be resolved under Nigerian jurisdiction.</p>
-      <h3>10. Changes to Terms</h3>
-      <p>We reserve the right to update these Terms at any time. Continued use of our website after changes constitutes acceptance of the new Terms. Last updated: June 2026.</p>
+      <h3>6. Intellectual Property</h3>
+      <p>All content on this website — including text, graphics, logos, and digital products — is owned by or licensed to RuffNeck Entertainment. You may not reproduce or distribute without written permission.</p>
+      <h3>7. Governing Law</h3>
+      <p>These Terms are governed by the laws of the Federal Republic of Nigeria. Any disputes shall be resolved under Nigerian jurisdiction. Last updated: June 2026.</p>
     `
   },
   cookie: {
-    title: '🍪 Cookie Policy',
+    title: 'Cookie Policy',
     content: `
       <h3>1. What Are Cookies?</h3>
-      <p>Cookies are small text files placed on your device when you visit a website. They help websites remember your preferences, analyse traffic, and improve user experience. This policy explains how RuffNeck Entertainment uses cookies on ruffneck-entertainment.vercel.app.</p>
+      <p>Cookies are small text files placed on your device when you visit a website. They help websites remember your preferences and analyse traffic.</p>
       <h3>2. Types of Cookies We Use</h3>
       <ul>
-        <li><strong>Strictly Necessary Cookies:</strong> Required for the website to function. These include session cookies that keep you logged into our admin panel and remember your cart contents. Cannot be disabled.</li>
-        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website — which pages are most popular, how long visitors stay, and where they come from. We use anonymised data only.</li>
-        <li><strong>Preference Cookies:</strong> Remember choices you make (such as language or display preferences) to provide a more personalised experience.</li>
-        <li><strong>Third-Party Cookies:</strong> Set by our service providers including Paystack (payment processing), Formspree (contact forms), and Calendly (booking system). These are governed by their respective privacy policies.</li>
+        <li><strong>Strictly Necessary:</strong> Required for the website to function — session cookies for the admin panel and cart. Cannot be disabled.</li>
+        <li><strong>Analytics:</strong> Help us understand how visitors interact with our site using anonymised data.</li>
+        <li><strong>Third-Party:</strong> Set by Paystack, Formspree, and Calendly. Governed by their own privacy policies.</li>
       </ul>
-      <h3>3. How We Use Cookies</h3>
+      <h3>3. Local Storage</h3>
+      <p>Our website uses browser local storage to save admin settings, product data, and cart items during your session. This data stays on your device only.</p>
+      <h3>4. Managing Cookies</h3>
+      <p>You can control cookies through your browser settings. Note that disabling cookies may affect website functionality.</p>
+      <h3>5. Third-Party Policies</h3>
       <ul>
-        <li>To maintain your session and cart during store visits</li>
-        <li>To remember admin login status (admin.html only)</li>
-        <li>To analyse website traffic and improve performance</li>
-        <li>To enable third-party integrations (Paystack, Calendly, Formspree)</li>
+        <li>Paystack: paystack.com/privacy</li>
+        <li>Formspree: formspree.io/legal/privacy-policy</li>
+        <li>Calendly: calendly.com/privacy</li>
       </ul>
-      <h3>4. Local Storage</h3>
-      <p>Our website also uses browser local storage (not cookies) to save your admin panel settings, product data added via the admin dashboard, and cart items during your session. This data is stored only on your device and is not transmitted to our servers.</p>
-      <h3>5. Managing Cookies</h3>
-      <p>You can control cookies through your browser settings. Most browsers allow you to:</p>
-      <ul>
-        <li>View and delete existing cookies</li>
-        <li>Block cookies from specific websites</li>
-        <li>Block all cookies (note: this may affect website functionality)</li>
-        <li>Set preferences for specific types of cookies</li>
-      </ul>
-      <h3>6. Third-Party Cookie Policies</h3>
-      <ul>
-        <li><strong>Paystack:</strong> paystack.com/privacy</li>
-        <li><strong>Formspree:</strong> formspree.io/legal/privacy-policy</li>
-        <li><strong>Calendly:</strong> calendly.com/privacy</li>
-      </ul>
-      <h3>7. Updates to This Policy</h3>
-      <p>We may update this Cookie Policy as our website evolves or regulations change. We encourage you to review this page periodically. Last updated: June 2026.</p>
-      <h3>8. Contact</h3>
-      <p>Questions about our cookie use? Contact us at <strong>ruffneckhassan@gmail.com</strong>.</p>
+      <h3>6. Contact</h3>
+      <p>Questions? Email <strong>ruffneckhassan@gmail.com</strong></p>
     `
   }
 };
 
 function openPolicy(type) {
-  const policy = POLICIES[type];
+  var policy = POLICY_DATA[type];
   if (!policy) return;
   document.getElementById('policyTitle').textContent = policy.title;
   document.getElementById('policyBody').innerHTML = policy.content;
-  document.getElementById('policyOverlay').classList.add('open');
+  var overlay = document.getElementById('policyOverlay');
+  overlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
-function closePolicy() {
-  const overlay = document.getElementById('policyOverlay');
-  if (overlay) overlay.classList.remove('open');
+function closePolicyModal() {
+  var overlay = document.getElementById('policyOverlay');
+  if (overlay) {
+    overlay.classList.remove('open');
+  }
   document.body.style.overflow = '';
 }
 
-// Force-hide policy modal on page load (safety net)
-document.addEventListener('DOMContentLoaded', function(){
-  const overlay = document.getElementById('policyOverlay');
+// Ensure hidden on load + wire close button
+document.addEventListener('DOMContentLoaded', function() {
+  var overlay = document.getElementById('policyOverlay');
   if (overlay) overlay.classList.remove('open');
+  var closeBtn = document.getElementById('policyCloseBtn');
+  if (closeBtn) closeBtn.addEventListener('click', closePolicyModal);
 });
 
 // Close on Escape key
-document.addEventListener('keydown', function(e){
-  if (e.key === 'Escape') closePolicy();
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closePolicyModal();
 });
 
+// ── WEBINAR NOTIFY ──
+function notifyWebinar() {
+  var emailInput = document.getElementById('webinarEmail');
+  var msgEl = document.getElementById('webinarMsg');
+  if (!emailInput || !msgEl) return;
+  var email = emailInput.value.trim();
+  if (!email || !email.includes('@') || !email.includes('.')) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  msgEl.style.display = 'block';
+  msgEl.textContent = '✅ You\'re on the list! We\'ll notify you when dates are confirmed.';
+  emailInput.value = '';
+  setTimeout(function() { msgEl.style.display = 'none'; }, 6000);
+}
 </script>
 <!-- ── RUFFNECK CHATBOT (mobile-safe) ── -->
 <div class="rn-chat-bubble" id="rnChatBubble">
@@ -2476,6 +2586,9 @@ function rnQuickAsk(topic){
   window.addEventListener('resize', clampOverflow);
   window.addEventListener('load', clampOverflow);
 })();
+
+// ── WEBINAR NOTIFY ──
+
 </script>
 
 </body>
