@@ -2516,7 +2516,10 @@ const RN_BOT_RESPONSES = {
   services:{keys:['service','what do you do','offer','help','solution'],reply:`RuffNeck Entertainment offers:<br><br>• 🤖 AI Solutions & Training<br>• 📣 Digital Marketing<br>• 🖥️ Website Development<br>• 🎨 Design & Branding<br>• 📊 Data Management<br>• 🤝 Virtual Assistance<br>• 💼 Business Consultation`},
   store:{keys:['store','buy','product','guide','ebook','prompt','price'],reply:`Visit our <a href="/store">Digital Store</a> for AI Career Guides, Prompt Packs, Templates, and Ebooks — all instant PDF delivery.<br><br><a href="/store">Browse Store →</a>`},
   careers:{keys:['career','job','ai role','annotator','evaluator','income'],reply:`Top AI roles for 2026:<br><br>• 🏷️ AI Data Annotator<br>• ⭐ AI Model Evaluator<br>• ✍️ AI Content Writer<br>• 🛡️ AI Ethics Reviewer<br><br>Get full guides in our <a href="/store">store</a>.`},
-  contact:{keys:['contact','email','whatsapp','phone','book','consult'],reply:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Book a free consultation</a>`}
+  webinar:{keys:['webinar','training','workshop','learn ai','ai literacy'],reply:`🔔 <strong>AI Literacy Webinar Series — Coming Soon 2026</strong><br><br>Free webinars covering:<br>• What is AI &amp; its subsets<br>• Prompt Engineering<br>• AI Capabilities &amp; Limitations<br>• Responsible &amp; Ethical AI Use<br><br><a href="#webinar">Register for early access →</a>`},
+  internship:{keys:['internship','intern','volunteer','apply','mentorship'],reply:`🌐 <strong>Remote Internship &amp; Volunteer Program</strong><br><br>Real deliverables, mentorship, and a verified experience certificate. Open to all skill levels — no experience required for beginner tracks.<br><br><a href="#internship">Learn more &amp; apply →</a>`},
+  skills:{keys:['skills acquisition','women','youth program','skills program'],reply:`🌍 <strong>Self-Business Skills Acquisition Program</strong><br><br>Empowering women and youth with digital skills and AI knowledge — plus partnership opportunities for sponsors.<br><br><a href="#skills">Learn more →</a>`},
+  contact:{keys:['contact','whatsapp','phone number','reach you','get in touch'],reply:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Book a free consultation</a>`}
 };
 
 function rnGetReply(input){
@@ -2524,7 +2527,7 @@ function rnGetReply(input){
   for (const [key, data] of Object.entries(RN_BOT_RESPONSES)) {
     if (data.keys.some(k => lower.includes(k))) return data.reply;
   }
-  return `Not sure about that one. Try asking about <strong>services</strong>, <strong>store</strong>, <strong>AI careers</strong>, or <strong>contact</strong> info — or reach us directly at <a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a>.`;
+  return `Not sure about that one. Try asking about <strong>services</strong>, <strong>store</strong>, <strong>AI careers</strong>, <strong>webinar</strong>, <strong>internship</strong>, or <strong>contact</strong> info.`;
 }
 
 function rnAppendMsg(text, type){

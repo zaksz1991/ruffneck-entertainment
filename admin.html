@@ -191,6 +191,25 @@ ul{list-style:none}
   .form-grid,.form-grid-3,.tier-grid,.settings-grid{grid-template-columns:1fr}
 }
 @media(max-width:600px){.stats-grid{grid-template-columns:1fr}.admin-main{padding:16px}}
+
+/* ── BLOG EDITOR ── */
+.editor-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:8px;background:var(--light);border:1.5px solid var(--border);border-bottom:none;border-radius:var(--radius) var(--radius) 0 0}
+.editor-btn{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text);transition:all 0.15s;font-family:var(--font)}
+.editor-btn:hover{background:var(--navy);color:var(--white)}
+.editor-btn.sep{width:1px;background:var(--border);padding:0;margin:0 4px;cursor:default}
+#blogEditor{width:100%;min-height:280px;border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:16px;font-family:var(--font);font-size:14px;line-height:1.7;color:var(--text);outline:none;resize:vertical}
+#blogEditor:focus{border-color:var(--cyan)}
+.blog-preview-item{background:var(--light);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.blog-preview-item .blog-item-title{font-size:14px;font-weight:600;color:var(--navy);flex:1}
+.blog-preview-item .blog-item-meta{font-size:11px;color:var(--muted);font-family:var(--mono)}
+.blog-saved-badge{font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(16,185,129,0.1);color:var(--success);border:1px solid rgba(16,185,129,0.2);font-family:var(--mono);font-weight:700}
+.blog-draft-badge{font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2);font-family:var(--mono);font-weight:700}
+
+@media(max-width:900px){
+  #page-add-blog>div[style*="grid-template-columns:2fr"]{grid-template-columns:1fr!important}
+}
+
+@keyframes shakeError{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
 </style>
 </head>
 <body>
@@ -241,6 +260,7 @@ ul{list-style:none}
       <div class="sidebar-section">
         <div class="sidebar-label">Content</div>
         <button class="sidebar-btn" onclick="showPage('blog',this)"><span class="sb-icon">📝</span><span>Blog Posts</span></button>
+        <button class="sidebar-btn" onclick="showPage('add-blog',this)"><span class="sb-icon">✍️</span><span>Add Blog Post</span></button>
         <button class="sidebar-btn" onclick="showPage('messages',this)"><span class="sb-icon">💬</span><span>Messages</span></button>
       </div>
       <div class="sidebar-divider"></div>
@@ -261,7 +281,7 @@ ul{list-style:none}
         </div>
         <div class="stats-grid">
           <div class="stat-card"><div class="stat-icon">📦</div><div class="stat-val" id="statProducts">0</div><div class="stat-label">Total Products</div><div class="stat-trend">↑ Live in store</div></div>
-          <div class="stat-card"><div class="stat-icon">📝</div><div class="stat-val">12</div><div class="stat-label">Blog Articles</div><div class="stat-trend">↑ Published 2026</div></div>
+          <div class="stat-card"><div class="stat-icon">📝</div><div class="stat-val" id="statBlogPosts">12</div><div class="stat-label">Blog Articles</div><div class="stat-trend">↑ Published 2026</div></div>
           <div class="stat-card"><div class="stat-icon">💬</div><div class="stat-val" id="statMessages">0</div><div class="stat-label">Contact Messages</div><div class="stat-trend">Check Formspree</div></div>
           <div class="stat-card"><div class="stat-icon">🌐</div><div class="stat-val">Live</div><div class="stat-label">Site Status</div><div class="stat-trend">↑ Vercel deployed</div></div>
         </div>
@@ -435,17 +455,21 @@ ul{list-style:none}
 
       <!-- BLOG MANAGER -->
       <div class="page" id="page-blog">
-        <div class="page-header">
-          <h2>Blog Posts</h2>
-          <p>Manage the 12 articles published in blog.html — 2026</p>
+        <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div>
+            <h2>Blog Posts</h2>
+            <p>Manage all published and draft articles for the RuffNeck Knowledge Hub.</p>
+          </div>
+          <button class="btn btn-cyan" onclick="showPage('add-blog',document.querySelector('[onclick*=\'add-blog\']'))">✍️ Add New Post</button>
         </div>
         <div class="card">
-          <div class="card-title">📝 Published Articles</div>
-          <div class="blog-list" id="blogList"></div>
-        </div>
-        <div class="card" style="margin-top:20px">
-          <div class="card-title">➕ Add New Article (Coming Soon)</div>
-          <p style="font-size:13px;color:var(--muted);line-height:1.7">To add new blog articles currently, open <strong>blog.html</strong> in your code editor and add a new article object inside the <code style="background:var(--light);padding:2px 6px;border-radius:4px;font-family:var(--mono)">articles</code> JavaScript object, following the existing format.<br/><br/>A full rich-text blog editor is planned for a future update.</p>
+          <div class="card-title">
+            📝 All Articles
+            <div class="card-title-actions">
+              <span id="blogCountBadge" style="font-size:12px;color:var(--muted);font-weight:400;"></span>
+            </div>
+          </div>
+          <div id="blogList"></div>
         </div>
       </div>
 
@@ -553,7 +577,134 @@ ul{list-style:none}
         </div>
       </div>
 
-    </main>
+    
+      <!-- ADD BLOG POST PAGE -->
+      <div class="page" id="page-add-blog">
+        <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+          <div>
+            <h2 id="blogEditorTitle">Add New Blog Post</h2>
+            <p>Write and publish articles to the RuffNeck Knowledge Hub.</p>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="btn btn-ghost" onclick="clearBlogForm()">Clear</button>
+            <button class="btn btn-ghost" onclick="saveBlogPost('draft')">💾 Save Draft</button>
+            <button class="btn btn-cyan" onclick="saveBlogPost('published')">🚀 Publish</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:2fr 1fr;gap:20px;align-items:start;">
+          <!-- LEFT: Editor -->
+          <div>
+            <div class="card" style="padding:0;overflow:hidden;">
+              <div style="padding:20px 24px;border-bottom:1px solid var(--border);">
+                <div class="form-group" style="margin-bottom:14px;">
+                  <label class="form-label">Post Title <span style="color:var(--danger)">*</span></label>
+                  <input class="form-input" id="blogTitle" placeholder="Enter a compelling title…" style="font-size:16px;font-weight:600;"/>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+                  <div class="form-group">
+                    <label class="form-label">Category <span style="color:var(--danger)">*</span></label>
+                    <select class="form-select" id="blogCat">
+                      <option value="">Select category…</option>
+                      <option value="ai-automation">AI &amp; Automation</option>
+                      <option value="ai-career">AI Career</option>
+                      <option value="operations">Operations</option>
+                      <option value="digital-marketing">Digital Marketing</option>
+                      <option value="ai-ethics">AI Ethics</option>
+                      <option value="content-prompts">Content &amp; Prompts</option>
+                      <option value="business-growth">Business Growth</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-label">Emoji Icon</label>
+                    <input class="form-input" id="blogEmoji" placeholder="e.g. 🤖" maxlength="4"/>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Short Description (shown on card)</label>
+                  <input class="form-input" id="blogDesc" placeholder="One-line summary visible on the blog grid…"/>
+                </div>
+              </div>
+
+              <!-- Toolbar -->
+              <div style="padding:16px 24px;border-bottom:1px solid var(--border);">
+                <label class="form-label" style="display:block;margin-bottom:10px;">Article Content <span style="color:var(--danger)">*</span></label>
+                <div class="editor-toolbar" id="editorToolbar">
+                  <button class="editor-btn" onclick="edCmd('bold')" title="Bold"><b>B</b></button>
+                  <button class="editor-btn" onclick="edCmd('italic')" title="Italic"><i>I</i></button>
+                  <button class="editor-btn" onclick="edCmd('underline')" title="Underline"><u>U</u></button>
+                  <div class="editor-btn sep"></div>
+                  <button class="editor-btn" onclick="edCmd('formatBlock','H2')" title="Heading 2">H2</button>
+                  <button class="editor-btn" onclick="edCmd('formatBlock','H3')" title="Heading 3">H3</button>
+                  <button class="editor-btn" onclick="edCmd('formatBlock','P')" title="Paragraph">¶</button>
+                  <div class="editor-btn sep"></div>
+                  <button class="editor-btn" onclick="edCmd('insertUnorderedList')" title="Bullet list">• List</button>
+                  <button class="editor-btn" onclick="edCmd('insertOrderedList')" title="Numbered list">1. List</button>
+                  <div class="editor-btn sep"></div>
+                  <button class="editor-btn" onclick="edInsertLink()" title="Insert link">🔗 Link</button>
+                  <button class="editor-btn" onclick="edCmd('removeFormat')" title="Clear formatting">✕ Format</button>
+                  <div class="editor-btn sep"></div>
+                  <button class="editor-btn" onclick="edCmd('justifyLeft')" title="Align left">⬅</button>
+                  <button class="editor-btn" onclick="edCmd('justifyCenter')" title="Center">⬛</button>
+                  <button class="editor-btn" onclick="edCmd('justifyRight')" title="Align right">➡</button>
+                </div>
+                <div id="blogEditor" contenteditable="true" spellcheck="true"
+                     style="width:100%;min-height:320px;border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:16px;font-family:inherit;font-size:14px;line-height:1.75;color:var(--text);outline:none;resize:vertical;overflow-y:auto;"
+                     data-placeholder="Start writing your article here…"></div>
+                <p style="font-size:11px;color:var(--muted);margin-top:6px;padding:0 2px;">Supports bold, italic, headings, lists, and links. Content saves as HTML.</p>
+              </div>
+
+              <!-- Tags & Meta -->
+              <div style="padding:20px 24px;">
+                <div class="form-group">
+                  <label class="form-label">Tags (comma-separated)</label>
+                  <input class="form-input" id="blogTags" placeholder="e.g. AI, Nigeria, Career, 2026"/>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT: Settings panel -->
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <div class="card">
+              <div class="card-title">📋 Post Settings</div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label class="form-label">Status</label>
+                <select class="form-select" id="blogStatus">
+                  <option value="draft">Draft — Hidden from blog</option>
+                  <option value="published">Published — Visible on blog</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom:12px;">
+                <label class="form-label">Author</label>
+                <input class="form-input" id="blogAuthor" value="RuffNeck Entertainment"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Reading Time (mins)</label>
+                <input class="form-input" type="number" id="blogReadTime" value="5" min="1" max="60"/>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">📊 Word Count</div>
+              <div id="wordCountDisplay" style="font-size:28px;font-weight:700;color:var(--navy);font-family:var(--mono);">0</div>
+              <div style="font-size:12px;color:var(--muted);margin-top:4px;">words written</div>
+            </div>
+
+            <div class="card">
+              <div class="card-title">💡 Tips</div>
+              <div style="font-size:12px;color:var(--muted);line-height:1.7;">
+                • Aim for <strong>800–1,500 words</strong> for SEO<br/>
+                • Use <strong>H2 headings</strong> every 2–3 paragraphs<br/>
+                • Include a <strong>clear call-to-action</strong> at the end<br/>
+                • Add relevant <strong>tags</strong> for filtering<br/>
+                • Set <strong>reading time</strong> to match your word count
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</main>
   </div>
 </div>
 
@@ -664,10 +815,27 @@ function showPage(id, btn){
   if(id==='dashboard') renderDashboard();
   if(id==='blog') renderBlogList();
   if(id==='add-product'){ document.getElementById('addProductTitle').textContent='Add New Product'; clearProductForm(); }
+  if(id==='add-blog') clearBlogForm();
 }
 
 // ── DATE ──
+function checkStorageAvailable(){
+  try {
+    localStorage.setItem('__rn_test__', '1');
+    localStorage.removeItem('__rn_test__');
+    return true;
+  } catch(e) {
+    return false;
+  }
+}
+
 function initAdmin(){
+  if(!checkStorageAvailable()){
+    showToast('⚠️ Your browser is blocking local storage. Please open this page via your live website URL (not as a local file) for saving to work.','error');
+  }
+  if(location.protocol === 'file:'){
+    showToast('⚠️ You are viewing this as a local file. Product saving requires the live website — please visit your Vercel URL instead.','error');
+  }
   const d = new Date();
   document.getElementById('topbarDate').textContent = d.toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short',year:'numeric'});
   renderDashboard();
@@ -682,15 +850,34 @@ function getProducts(){ try{ return JSON.parse(localStorage.getItem(PRODUCTS_KEY
 function saveProducts(arr){ localStorage.setItem(PRODUCTS_KEY, JSON.stringify(arr)); }
 
 // ── PRODUCTS CRUD ──
+function highlightMissing(id){
+  const el = document.getElementById(id);
+  if(el){
+    el.style.borderColor = 'var(--danger)';
+    el.style.animation = 'shakeError 0.3s';
+    setTimeout(()=>{ el.style.borderColor=''; el.style.animation=''; }, 1500);
+  }
+}
+
 function saveProduct(){
   const name = document.getElementById('pName').value.trim();
   const cat  = document.getElementById('pCategory').value;
   const desc = document.getElementById('pDesc').value.trim();
-  if(!name||!cat||!desc){ showToast('Please fill in name, category and description','error'); return; }
+  if(!name||!cat||!desc){
+    if(!name) highlightMissing('pName');
+    if(!cat) highlightMissing('pCategory');
+    if(!desc) highlightMissing('pDesc');
+    showToast('Please fill in the highlighted required fields','error');
+    return;
+  }
   const priceBeg = document.getElementById('pPriceBeg').value;
   const priceMid = document.getElementById('pPriceMid').value;
   const priceAdv = document.getElementById('pPriceAdv').value;
-  if(!priceBeg && !priceMid && !priceAdv){ showToast('Please add at least one price tier','error'); return; }
+  if(!priceBeg && !priceMid && !priceAdv){
+    highlightMissing('pPriceBeg'); highlightMissing('pPriceMid'); highlightMissing('pPriceAdv');
+    showToast('Please add at least one price tier (Beginner, Intermediate, or Advanced)','error');
+    return;
+  }
 
   const imgFile = document.getElementById('pImageFile').files[0];
   if(imgFile && imgFile.size > 2*1024*1024){ showToast('Image must be under 2MB','error'); return; }
@@ -721,9 +908,21 @@ function saveProduct(){
     };
     products.push(product);
     saveProducts(products);
-    showToast(`"${name}" saved to store!`,'success');
+    // Verify it actually saved
+    const verify = getProducts();
+    if(verify.length === 0){
+      showToast('⚠️ Save failed — browser may be blocking localStorage. Try a different browser.','error');
+      return;
+    }
+    showToast('"' + name + '" saved successfully! ' + verify.length + ' product(s) total.','success');
     clearProductForm();
     updateStats();
+    renderProductsTable();
+    renderDashboard();
+    // Navigate to products list using ID selector (not index)
+    setTimeout(function(){
+      showPage('products', null);
+    }, 600);
   });
 }
 
@@ -770,25 +969,50 @@ function saveEdit(){
   const id = document.getElementById('editId').value;
   const products = getProducts();
   const idx = products.findIndex(p=>p.id===id);
-  if(idx<0) return;
+  if(idx<0){ showToast('⚠️ Could not find this product to update — it may have been deleted.','error'); closeEditModal(); return; }
+
+  const editName = document.getElementById('editName').value.trim();
+  const editCat  = document.getElementById('editCat').value.trim();
+  const editDesc = document.getElementById('editDesc').value.trim();
+  if(!editName){ highlightMissing('editName'); showToast('Product name cannot be empty','error'); return; }
+  if(!editCat){ highlightMissing('editCat'); showToast('Category cannot be empty','error'); return; }
+  if(!editDesc){ highlightMissing('editDesc'); showToast('Description cannot be empty','error'); return; }
+
+  const editPriceBeg = document.getElementById('editPriceBeg').value;
+  const editPriceMid = document.getElementById('editPriceMid').value;
+  const editPriceAdv = document.getElementById('editPriceAdv').value;
+  if(!editPriceBeg && !editPriceMid && !editPriceAdv){
+    highlightMissing('editPriceBeg'); highlightMissing('editPriceMid'); highlightMissing('editPriceAdv');
+    showToast('At least one price tier is required','error');
+    return;
+  }
+
   products[idx] = {
     ...products[idx],
-    name: document.getElementById('editName').value,
-    cat: document.getElementById('editCat').value,
+    name: editName,
+    cat: editCat,
     emoji: document.getElementById('editEmoji').value,
-    desc: document.getElementById('editDesc').value,
+    desc: editDesc,
     status: document.getElementById('editStatus').value,
     tiers:{
-      beginner: document.getElementById('editPriceBeg').value ? {price:parseInt(document.getElementById('editPriceBeg').value),label:'Beginner',pdf:document.getElementById('editPdfBeg').value} : null,
-      intermediate: document.getElementById('editPriceMid').value ? {price:parseInt(document.getElementById('editPriceMid').value),label:'Intermediate',pdf:document.getElementById('editPdfMid').value} : null,
-      advanced: document.getElementById('editPriceAdv').value ? {price:parseInt(document.getElementById('editPriceAdv').value),label:'Advanced',pdf:document.getElementById('editPdfAdv').value} : null,
+      beginner: editPriceBeg ? {price:parseInt(editPriceBeg),label:'Beginner',pdf:document.getElementById('editPdfBeg').value} : null,
+      intermediate: editPriceMid ? {price:parseInt(editPriceMid),label:'Intermediate',pdf:document.getElementById('editPdfMid').value} : null,
+      advanced: editPriceAdv ? {price:parseInt(editPriceAdv),label:'Advanced',pdf:document.getElementById('editPdfAdv').value} : null,
     }
   };
   saveProducts(products);
+
+  // Verify the update actually persisted
+  const verify = getProducts().find(p=>p.id===id);
+  if(!verify || verify.name !== editName){
+    showToast('⚠️ Update may not have saved — please check your browser storage settings.','error');
+    return;
+  }
+
   closeEditModal();
   renderProductsTable();
   renderDashboard();
-  showToast('Product updated','success');
+  showToast('"' + editName + '" updated successfully','success');
 }
 
 function closeEditModal(){
@@ -885,36 +1109,7 @@ const blogArticles=[
   {emoji:'💰',title:'Top Profitable Digital Products to Sell in 2026',cat:'Business Growth'},
 ];
 
-function renderBlogList(){
-  const list = document.getElementById('blogList');
-  list.innerHTML = blogArticles.map((a,i)=>`
-    <div class="blog-item">
-      <div class="blog-item-icon">${a.emoji}</div>
-      <div class="blog-item-info">
-        <div class="blog-item-title">${a.title}</div>
-        <div class="blog-item-meta">${a.cat} · June 2026 · Published</div>
-      </div>
-      <div class="blog-item-actions">
-        <a href="/blog" target="_blank" class="btn btn-xs btn-ghost">View ↗</a>
-      </div>
-    </div>
-  `).join('');
-}
 
-// ── IMAGE PREVIEW ──
-function previewImage(input){
-  const file = input.files[0];
-  if(!file) return;
-  if(file.size > 2*1024*1024){ showToast('Image must be under 2MB','error'); input.value=''; return; }
-  const reader = new FileReader();
-  reader.onload = e => {
-    const img = document.getElementById('imgPreview');
-    img.src = e.target.result;
-    img.style.display = 'block';
-    document.getElementById('uploadPrompt').style.display = 'none';
-  };
-  reader.readAsDataURL(file);
-}
 
 // ── TOAST ──
 function showToast(msg, type='info'){
@@ -960,6 +1155,250 @@ document.getElementById('editModal').addEventListener('click', function(e){ if(e
   window.addEventListener('resize', clampOverflow);
   window.addEventListener('load', clampOverflow);
 })();
+
+// ══════════════════════════════════════════════
+// BLOG EDITOR JS
+// ══════════════════════════════════════════════
+const BLOG_KEY = 'rn_blog_posts';
+let editingBlogId = null;
+
+function getBlogPosts(){ try{ return JSON.parse(localStorage.getItem(BLOG_KEY)||'[]'); }catch(e){ return []; } }
+function saveBlogPosts(arr){ localStorage.setItem(BLOG_KEY, JSON.stringify(arr)); }
+
+// ── EDITOR COMMANDS ──
+function edCmd(cmd, val){
+  document.getElementById('blogEditor').focus();
+  document.execCommand(cmd, false, val || null);
+  updateWordCount();
+}
+
+function edInsertLink(){
+  const url = prompt('Enter URL (e.g. https://example.com):');
+  if(url){
+    const text = window.getSelection().toString() || url;
+    document.execCommand('createLink', false, url);
+  }
+}
+
+function updateWordCount(){
+  const editor = document.getElementById('blogEditor');
+  if(!editor) return;
+  const text = editor.innerText || editor.textContent || '';
+  const words = text.trim().split(/\s+/).filter(w=>w.length>0).length;
+  const el = document.getElementById('wordCountDisplay');
+  if(el) el.textContent = words;
+  // Auto-estimate reading time
+  const rt = document.getElementById('blogReadTime');
+  if(rt) rt.value = Math.max(1, Math.ceil(words/200));
+}
+
+// ── SAVE BLOG POST ──
+function saveBlogPost(statusOverride){
+  const title  = document.getElementById('blogTitle').value.trim();
+  const cat    = document.getElementById('blogCat').value;
+  const desc   = document.getElementById('blogDesc').value.trim();
+  const editor = document.getElementById('blogEditor');
+  const body   = editor ? editor.innerHTML.trim() : '';
+
+  if(!title){ highlightMissing('blogTitle'); showToast('Please enter a post title','error'); return; }
+  if(!cat)  { highlightMissing('blogCat'); showToast('Please select a category','error'); return; }
+  if(!body || body === '<br>'){ showToast('Please write some content in the article body','error'); return; }
+
+  const status = statusOverride || document.getElementById('blogStatus').value;
+  const posts  = getBlogPosts();
+
+  const post = {
+    id:       editingBlogId || Date.now().toString(),
+    title,
+    cat,
+    emoji:    document.getElementById('blogEmoji').value || '📝',
+    desc:     desc || title.substring(0,100),
+    body,
+    tags:     document.getElementById('blogTags').value.split(',').map(t=>t.trim()).filter(Boolean),
+    author:   document.getElementById('blogAuthor').value || 'RuffNeck Entertainment',
+    readTime: document.getElementById('blogReadTime').value || '5',
+    status,
+    created:  editingBlogId ? (posts.find(p=>p.id===editingBlogId)||{}).created || new Date().toLocaleDateString('en-GB') : new Date().toLocaleDateString('en-GB'),
+    updated:  new Date().toLocaleDateString('en-GB'),
+  };
+
+  const wasEditing = !!editingBlogId;
+  if(editingBlogId){
+    const idx = posts.findIndex(p=>p.id===editingBlogId);
+    if(idx>=0) posts[idx] = post; else posts.push(post);
+  } else {
+    posts.unshift(post); // newest first
+  }
+
+  saveBlogPosts(posts);
+
+  // Verify it actually persisted
+  const verify = getBlogPosts().find(p=>p.id===post.id);
+  if(!verify){
+    showToast('⚠️ Save failed — your browser may be blocking local storage. Try viewing this page via your live website URL.','error');
+    return;
+  }
+
+  const label = status === 'published' ? 'Published' : 'Saved as draft';
+  showToast(`"${title}" ${wasEditing?'updated and ':''}${label.toLowerCase()} successfully!`, 'success');
+  editingBlogId = null;
+  clearBlogForm();
+  renderBlogList();
+
+  // Go to blog list
+  setTimeout(function(){
+    showPage('blog', null);
+  }, 700);
+}
+
+// ── EDIT BLOG POST ──
+function editBlogPost(id){
+  const post = getBlogPosts().find(p=>p.id===id);
+  if(!post) return;
+  editingBlogId = id;
+  document.getElementById('blogEditorTitle').textContent = 'Edit Blog Post';
+  document.getElementById('blogTitle').value = post.title || '';
+  document.getElementById('blogCat').value   = post.cat || '';
+  document.getElementById('blogEmoji').value = post.emoji || '';
+  document.getElementById('blogDesc').value  = post.desc || '';
+  document.getElementById('blogTags').value  = (post.tags||[]).join(', ');
+  document.getElementById('blogAuthor').value= post.author || 'RuffNeck Entertainment';
+  document.getElementById('blogReadTime').value = post.readTime || '5';
+  document.getElementById('blogStatus').value = post.status || 'draft';
+  const editor = document.getElementById('blogEditor');
+  if(editor) editor.innerHTML = post.body || '';
+  updateWordCount();
+  showPage('add-blog', null);
+}
+
+// ── DELETE BLOG POST ──
+function deleteBlogPost(id){
+  if(!confirm('Delete this blog post? This cannot be undone.')) return;
+  const posts = getBlogPosts().filter(p=>p.id!==id);
+  saveBlogPosts(posts);
+  renderBlogList();
+  showToast('Blog post deleted','info');
+}
+
+// ── TOGGLE BLOG STATUS ──
+function toggleBlogStatus(id){
+  const posts = getBlogPosts();
+  const idx = posts.findIndex(p=>p.id===id);
+  if(idx<0) return;
+  posts[idx].status = posts[idx].status==='published' ? 'draft' : 'published';
+  saveBlogPosts(posts);
+  renderBlogList();
+  showToast('Status updated','info');
+}
+
+// ── CLEAR BLOG FORM ──
+function clearBlogForm(){
+  editingBlogId = null;
+  document.getElementById('blogEditorTitle').textContent = 'Add New Blog Post';
+  ['blogTitle','blogCat','blogDesc','blogEmoji','blogTags'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.value = id==='blogCat' ? '' : '';
+  });
+  document.getElementById('blogAuthor').value = 'RuffNeck Entertainment';
+  document.getElementById('blogReadTime').value = '5';
+  document.getElementById('blogStatus').value = 'draft';
+  const editor = document.getElementById('blogEditor');
+  if(editor) editor.innerHTML = '';
+  updateWordCount();
+}
+
+// ── RENDER BLOG LIST ── (override existing function)
+function renderBlogList(){
+  const list = document.getElementById('blogList');
+  if(!list) return;
+
+  // Admin-created posts from localStorage
+  const savedPosts = getBlogPosts();
+
+  // Static published articles (hardcoded from blog.html)
+  const staticArticles = [
+    {id:'static-1', emoji:'🤖', title:'Top 12 AI Career Roles You Can Start in 2026', cat:'AI & Automation', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-2', emoji:'🛠️', title:'Top 10 AI Tools Every Nigerian SME Should Use in 2026', cat:'AI & Automation', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-3', emoji:'🏷️', title:'How to Become an AI Data Annotator in 2026', cat:'AI Career', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-4', emoji:'📊', title:'How to Build a Warehouse Data Reporting System in 2026', cat:'Operations', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-5', emoji:'🌍', title:'Growing Your African Business Brand Globally in 2026', cat:'Digital Marketing', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-6', emoji:'✍️', title:'How to Become an AI Technical Content Writer in 2026', cat:'AI Career', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-7', emoji:'🛡️', title:'AI Ethics in Business: What Every Nigerian Entrepreneur Should Know', cat:'AI Ethics', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-8', emoji:'⚡', title:'Prompt Engineering for Business: The 2026 Practical Guide', cat:'Content & Prompts', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-9', emoji:'🧠', title:'Do You Need a Business Consultant? 5 Signs the Answer Is Yes', cat:'Business Growth', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-10', emoji:'🌐', title:'Remote AI Internships in 2026: How to Apply and What to Expect', cat:'AI Career', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-11', emoji:'📱', title:'AI-Powered Content Creation: Instagram, Video Scripts, Carousels & More', cat:'AI & Content', status:'published', created:'Jun 2026', isStatic:true},
+    {id:'static-12', emoji:'💰', title:'Top Profitable Digital Products to Sell in 2026', cat:'Business Growth', status:'published', created:'Jun 2026', isStatic:true},
+  ];
+
+  const allPosts = [...savedPosts, ...staticArticles];
+
+  if(allPosts.length === 0){
+    list.innerHTML = '<p style="color:var(--muted);font-size:13px;padding:16px 0;">No blog posts yet. Click "Add Blog Post" to create your first post.</p>';
+    return;
+  }
+
+  // Update count badge
+  const badge = document.getElementById('blogCountBadge');
+  if(badge) badge.textContent = allPosts.length + ' article(s)';
+  list.innerHTML = allPosts.map(p => `
+    <div class="blog-preview-item">
+      <div style="font-size:22px;flex-shrink:0;">${p.emoji||'📝'}</div>
+      <div class="blog-item-info" style="flex:1;min-width:0;">
+        <div class="blog-item-title" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${p.title}</div>
+        <div class="blog-item-meta">${p.cat||''} · ${p.created||''} · <span class="${p.status==='published'?'blog-saved-badge':'blog-draft-badge'}">${p.status||'draft'}</span></div>
+      </div>
+      <div style="display:flex;gap:6px;flex-shrink:0;">
+        ${!p.isStatic ? `
+          <button class="btn btn-xs btn-ghost" onclick="editBlogPost('${p.id}')">Edit</button>
+          <button class="btn btn-xs btn-ghost" onclick="toggleBlogStatus('${p.id}')">${p.status==='published'?'Unpublish':'Publish'}</button>
+          <button class="btn btn-xs btn-danger" onclick="deleteBlogPost('${p.id}')">Delete</button>
+        ` : `<span style="font-size:11px;color:var(--muted);padding:4px 8px;background:var(--light);border-radius:4px;border:1px solid var(--border);">Hardcoded</span>`}
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── SHOW PAGE — extend to handle add-blog ──
+const _origShowPage = showPage;
+showPage = function(id, btn){
+  _origShowPage(id, btn);
+  if(id==='add-blog'){
+    document.getElementById('blogEditorTitle').textContent = editingBlogId ? 'Edit Blog Post' : 'Add New Blog Post';
+    const editor = document.getElementById('blogEditor');
+    if(editor){
+      editor.addEventListener('input', updateWordCount);
+      updateWordCount();
+    }
+  }
+};
+
+// Word count on input
+document.addEventListener('DOMContentLoaded', function(){
+  const editor = document.getElementById('blogEditor');
+  if(editor){
+    editor.addEventListener('input', updateWordCount);
+    // Placeholder behavior
+    editor.addEventListener('focus', function(){
+      if(editor.innerHTML === editor.getAttribute('data-placeholder')){
+        editor.innerHTML = '';
+      }
+    });
+  }
+  // Re-render blog list with saved posts
+  renderBlogList();
+  updateStats();
+});
+
+// Update stats to include blog posts
+const _origUpdateStats = updateStats;
+updateStats = function(){
+  _origUpdateStats();
+  const blogCount = getBlogPosts().length + 12; // 12 static
+  const el = document.getElementById('statBlogPosts');
+  if(el) el.textContent = blogCount;
+};
+
 </script>
 
 </body>
