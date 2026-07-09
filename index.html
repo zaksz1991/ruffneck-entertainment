@@ -2512,6 +2512,25 @@ function rnToggleChat(){
   }
 }
 
+function rnCloseChat(){
+  const panel = document.getElementById('rnChatPanel');
+  if (panel) panel.classList.remove('open');
+}
+
+// Close the chat panel automatically when a reply link is clicked,
+// so the section it navigates to isn't hidden behind the chat panel.
+document.addEventListener('DOMContentLoaded', function(){
+  const msgBox = document.getElementById('rnChatMessages');
+  if (msgBox) {
+    msgBox.addEventListener('click', function(e){
+      const link = e.target.closest('a');
+      if (link) {
+        rnCloseChat();
+      }
+    });
+  }
+});
+
 const RN_BOT_RESPONSES = {
   services:{keys:['service','what do you do','offer','help','solution'],reply:`RuffNeck Entertainment offers:<br><br>• 🤖 AI Solutions & Training<br>• 📣 Digital Marketing<br>• 🖥️ Website Development<br>• 🎨 Design & Branding<br>• 📊 Data Management<br>• 🤝 Virtual Assistance<br>• 💼 Business Consultation`},
   store:{keys:['store','buy','product','guide','ebook','prompt','price'],reply:`Visit our <a href="/store">Digital Store</a> for AI Career Guides, Prompt Packs, Templates, and Ebooks — all instant PDF delivery.<br><br><a href="/store">Browse Store →</a>`},
