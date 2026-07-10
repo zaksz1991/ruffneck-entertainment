@@ -26,13 +26,13 @@
 <meta name="twitter:description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
 <meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 
-<!-- Google Analytics (GA4) — replace G-XXXXXXXXXX with your real Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<!-- Google Analytics (GA4) — replace G-XF92RSFBHX with your real Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XF92RSFBHX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-XF92RSFBHX');
 </script>
 />
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -303,9 +303,17 @@ p,li{line-height:1.7}
 @media(max-width:600px){
   .comment-form .btn{align-self:stretch;justify-content:center}
 }
+
+/* ── ACCESSIBILITY ── */
+.skip-link{position:absolute;top:-48px;left:8px;background:var(--navy);color:var(--white);padding:12px 20px;border-radius:8px;z-index:100000;font-size:14px;font-weight:600;text-decoration:none;transition:top 0.2s}
+.skip-link:focus{top:8px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2.5px solid var(--cyan);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
 </style>
 </head>
 <body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- NAV -->
 <nav class="nav">
@@ -321,6 +329,7 @@ p,li{line-height:1.7}
   </div>
 </nav>
 
+<main id="main-content">
 <!-- HERO -->
 <div class="blog-hero">
   <div class="container">
@@ -553,6 +562,8 @@ p,li{line-height:1.7}
 </div>
 
 <!-- BLOG FOOTER -->
+</main>
+
 <div class="blog-footer">
   <div class="container">
     <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px;">
@@ -1146,7 +1157,7 @@ function subscribeNewsletter() {
         <div class="rn-chat-name">RuffNeck Assistant</div>
         <div class="rn-chat-status">Online now</div>
       </div>
-      <button class="rn-chat-close" onclick="rnToggleChat()">✕</button>
+      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat">✕</button>
     </div>
     <div class="rn-chat-messages" id="rnChatMessages">
       <div class="rn-msg bot">👋 Hi! I'm here to help with <strong>services</strong>, <strong>products</strong>, <strong>AI careers</strong>, and more. What can I help with today?</div>

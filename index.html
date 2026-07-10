@@ -26,13 +26,13 @@
 <meta name="twitter:description" content="RuffNeck Entertainment — AI Solutions, Digital Marketing, Virtual Assistance & Business Operations. Empowering businesses globally through technology and operational excellence."/>
 <meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 
-<!-- Google Analytics (GA4) — replace G-XXXXXXXXXX with your real Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<!-- Google Analytics (GA4) — replace G-XF92RSFBHX with your real Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XF92RSFBHX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-XF92RSFBHX');
 </script>
 />
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -879,10 +879,26 @@ p,li{line-height:1.7}
   .policy-modal-head h2{font-size:16px}
 }
 
+
+/* ── ACCESSIBILITY ── */
+.skip-link{
+  position:absolute;top:-48px;left:8px;background:var(--navy);color:var(--white);
+  padding:12px 20px;border-radius:8px;z-index:100000;font-size:14px;font-weight:600;
+  text-decoration:none;transition:top 0.2s;
+}
+.skip-link:focus{top:8px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{
+  outline:2.5px solid var(--cyan);outline-offset:2px;
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
+}
 </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
 <body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
@@ -984,6 +1000,7 @@ p,li{line-height:1.7}
   </div>
 </nav>
 
+<main id="main-content">
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="container">
@@ -2238,6 +2255,8 @@ p,li{line-height:1.7}
 </section>
 
 <!-- FOOTER -->
+</main>
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -2359,7 +2378,7 @@ if(form){
   <div class="policy-modal">
     <div class="policy-modal-head">
       <h2 id="policyTitle">Policy</h2>
-      <button class="policy-modal-x" id="policyCloseBtn" type="button" onclick="closePolicyModal()">&#10005;</button>
+      <button class="policy-modal-x" id="policyCloseBtn" type="button" onclick="closePolicyModal()" aria-label="Close dialog">&#10005;</button>
     </div>
     <div class="policy-modal-body" id="policyBody"></div>
     <div class="policy-modal-footer">
@@ -2524,7 +2543,7 @@ function notifyWebinar() {
         <div class="rn-chat-name">RuffNeck Assistant</div>
         <div class="rn-chat-status">Online now</div>
       </div>
-      <button class="rn-chat-close" onclick="rnToggleChat()">✕</button>
+      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat">✕</button>
     </div>
     <div class="rn-chat-messages" id="rnChatMessages">
       <div class="rn-msg bot">👋 Hi! I'm here to help with <strong>services</strong>, <strong>products</strong>, <strong>AI careers</strong>, and more. What can I help with today?</div>
@@ -2537,7 +2556,7 @@ function notifyWebinar() {
     </div>
     <div class="rn-chat-input-row">
       <input class="rn-chat-input" id="rnChatInput" type="text" placeholder="Type a message…" onkeydown="if(event.key==='Enter')rnSendChat()"/>
-      <button class="rn-chat-send" onclick="rnSendChat()">
+      <button class="rn-chat-send" onclick="rnSendChat()" aria-label="Send message">
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
     </div>

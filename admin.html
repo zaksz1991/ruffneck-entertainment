@@ -210,6 +210,10 @@ ul{list-style:none}
 }
 
 @keyframes shakeError{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+
+/* ── ACCESSIBILITY ── */
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2.5px solid var(--cyan);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
 </style>
 </head>
 <body>
@@ -715,7 +719,7 @@ ul{list-style:none}
   <div class="modal">
     <div class="modal-head">
       <h3>Edit Product</h3>
-      <button class="modal-close" onclick="closeEditModal()">✕</button>
+      <button class="modal-close" onclick="closeEditModal()" aria-label="Close edit dialog">✕</button>
     </div>
     <div class="modal-body">
       <input type="hidden" id="editId"/>

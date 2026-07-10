@@ -26,13 +26,13 @@
 <meta name="twitter:description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
 <meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 
-<!-- Google Analytics (GA4) — replace G-XXXXXXXXXX with your real Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<!-- Google Analytics (GA4) — replace G-XF92RSFBHX with your real Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XF92RSFBHX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-XXXXXXXXXX');
+  gtag('config', 'G-XF92RSFBHX');
 </script>
 />
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -344,9 +344,24 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
     max-height:min(70vh, calc(100vh - 100px));
   }
 }
+
+/* ── CURRENCY TOGGLE ── */
+.currency-toggle{display:flex;border:1.5px solid var(--border);border-radius:100px;overflow:hidden;flex-shrink:0}
+.curr-btn{padding:9px 16px;font-size:12px;font-weight:700;font-family:var(--font-mono);border:none;background:var(--white);color:var(--text-muted);cursor:pointer;transition:all 0.2s}
+.curr-btn.active{background:var(--navy);color:var(--white)}
+.curr-btn:hover:not(.active){background:var(--bg-light)}
+@media(max-width:640px){.currency-toggle{width:100%;justify-content:center}.curr-btn{flex:1}}
+
+/* ── ACCESSIBILITY ── */
+.skip-link{position:absolute;top:-48px;left:8px;background:var(--navy);color:var(--white);padding:12px 20px;border-radius:8px;z-index:100000;font-size:14px;font-weight:600;text-decoration:none;transition:top 0.2s}
+.skip-link:focus{top:8px}
+a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2.5px solid var(--cyan);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
 </style>
 </head>
 <body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <!-- NAV -->
 <nav class="nav">
@@ -364,6 +379,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   </div>
 </nav>
 
+<main id="main-content">
 <!-- HERO -->
 <div class="store-hero">
   <div class="container">
@@ -397,6 +413,10 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Search products..." oninput="filterProducts()"/>
       </div>
+      <div class="currency-toggle" role="group" aria-label="Currency selector">
+        <button class="curr-btn active" id="currBtnNGN" onclick="setCurrency('NGN')" aria-pressed="true">₦ NGN</button>
+        <button class="curr-btn" id="currBtnUSD" onclick="setCurrency('USD')" aria-pressed="false">$ USD</button>
+      </div>
     </div>
   </div>
 </div>
@@ -421,12 +441,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">AI Data Annotator Guide</h3>
           <p class="product-desc">Complete guide to becoming a professional data annotator. Platforms, tools, techniques, and income strategies.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
-            <span class="tier-pill tier-mid">Intermediate ₦6,500</span>
-            <span class="tier-pill tier-adv">Advanced ₦10,000</span>
+            <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="3500">₦3,500</span></span>
+            <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="6500">₦6,500</span></span>
+            <span class="tier-pill tier-adv">Advanced <span class="price-val" data-ngn="10000">₦10,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p001')">View &amp; Buy</button>
           </div>
         </div>
@@ -441,12 +461,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">AI Model Evaluator Guide</h3>
           <p class="product-desc">Learn RLHF evaluation — rate AI responses, improve models, and earn consistently on Outlier, Surge AI & more.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
-            <span class="tier-pill tier-mid">Intermediate ₦6,500</span>
-            <span class="tier-pill tier-adv">Advanced ₦10,000</span>
+            <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="3500">₦3,500</span></span>
+            <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="6500">₦6,500</span></span>
+            <span class="tier-pill tier-adv">Advanced <span class="price-val" data-ngn="10000">₦10,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p002')">View &amp; Buy</button>
           </div>
         </div>
@@ -461,12 +481,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">AI Ethics Reviewer Guide</h3>
           <p class="product-desc">Review AI outputs for bias, harmful content, and fairness — the fastest-growing AI role in 2026.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Beginner ₦4,000</span>
-            <span class="tier-pill tier-mid">Intermediate ₦7,500</span>
-            <span class="tier-pill tier-adv">Advanced ₦12,000</span>
+            <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="4000">₦4,000</span></span>
+            <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="7500">₦7,500</span></span>
+            <span class="tier-pill tier-adv">Advanced <span class="price-val" data-ngn="12000">₦12,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦4,000</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="4000">₦4,000</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p003')">View &amp; Buy</button>
           </div>
         </div>
@@ -481,12 +501,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">AI Technical Content Writer Guide</h3>
           <p class="product-desc">Break into AI content writing — from first article to full-time income. Written by a working AI content writer at GAOTek Inc.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
-            <span class="tier-pill tier-mid">Intermediate ₦7,000</span>
-            <span class="tier-pill tier-adv">Advanced ₦12,000</span>
+            <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="3500">₦3,500</span></span>
+            <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="7000">₦7,000</span></span>
+            <span class="tier-pill tier-adv">Advanced <span class="price-val" data-ngn="12000">₦12,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p004')">View &amp; Buy</button>
           </div>
         </div>
@@ -501,12 +521,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">AI Tutor & Literacy Trainer Guide</h3>
           <p class="product-desc">Build a teaching career around AI — workshops, online courses, community programs, and institutional partnerships.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
-            <span class="tier-pill tier-mid">Intermediate ₦6,500</span>
-            <span class="tier-pill tier-adv">Advanced ₦10,000</span>
+            <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="3500">₦3,500</span></span>
+            <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="6500">₦6,500</span></span>
+            <span class="tier-pill tier-adv">Advanced <span class="price-val" data-ngn="10000">₦10,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p005')">View &amp; Buy</button>
           </div>
         </div>
@@ -521,12 +541,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">AI Graphic Designer Guide</h3>
           <p class="product-desc">Use Midjourney, Canva AI, Adobe Firefly to create and sell professional designs at scale — without a design degree.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Beginner ₦3,500</span>
-            <span class="tier-pill tier-mid">Intermediate ₦6,500</span>
-            <span class="tier-pill tier-adv">Advanced ₦10,000</span>
+            <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="3500">₦3,500</span></span>
+            <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="6500">₦6,500</span></span>
+            <span class="tier-pill tier-adv">Advanced <span class="price-val" data-ngn="10000">₦10,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p006')">View &amp; Buy</button>
           </div>
         </div>
@@ -550,12 +570,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">Ultimate Business Prompt Pack 2026</h3>
           <p class="product-desc">200+ tested prompts for video scripts, content creation, B-Roll generation, copywriting, research, and business operations.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Essential 50 — ₦3,500</span>
-            <span class="tier-pill tier-mid">Pro 100 — ₦6,000</span>
-            <span class="tier-pill tier-adv">Full 200+ — ₦9,000</span>
+            <span class="tier-pill tier-beg">Essential 50 — <span class="price-val" data-ngn="3500">₦3,500</span></span>
+            <span class="tier-pill tier-mid">Pro 100 — <span class="price-val" data-ngn="6000">₦6,000</span></span>
+            <span class="tier-pill tier-adv">Full 200+ — <span class="price-val" data-ngn="9000">₦9,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦3,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p007')">View &amp; Buy</button>
           </div>
         </div>
@@ -570,12 +590,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">Video Content Prompt Pack</h3>
           <p class="product-desc">TikTok, Reels, YouTube Shorts — hooks, scripts, B-Roll ideas, retention optimizers, and storytelling frameworks.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Starter — ₦2,500</span>
-            <span class="tier-pill tier-mid">Creator — ₦5,000</span>
-            <span class="tier-pill tier-adv">Pro — ₦8,000</span>
+            <span class="tier-pill tier-beg">Starter — <span class="price-val" data-ngn="2500">₦2,500</span></span>
+            <span class="tier-pill tier-mid">Creator — <span class="price-val" data-ngn="5000">₦5,000</span></span>
+            <span class="tier-pill tier-adv">Pro — <span class="price-val" data-ngn="8000">₦8,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦2,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="2500">₦2,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p008')">View &amp; Buy</button>
           </div>
         </div>
@@ -599,12 +619,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">AI Career CV & Resume Template Pack</h3>
           <p class="product-desc">ATS-optimized CV templates for AI roles — Data Annotator, Content Writer, Ethics Reviewer, and more. Stand out in 2026.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Single Role — ₦2,000</span>
-            <span class="tier-pill tier-mid">3 Roles — ₦4,500</span>
-            <span class="tier-pill tier-adv">All 8 Roles — ₦7,500</span>
+            <span class="tier-pill tier-beg">Single Role — <span class="price-val" data-ngn="2000">₦2,000</span></span>
+            <span class="tier-pill tier-mid">3 Roles — <span class="price-val" data-ngn="4500">₦4,500</span></span>
+            <span class="tier-pill tier-adv">All 8 Roles — <span class="price-val" data-ngn="7500">₦7,500</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦2,000</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="2000">₦2,000</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p009')">View &amp; Buy</button>
           </div>
         </div>
@@ -619,12 +639,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">Content Calendar Template Pack</h3>
           <p class="product-desc">30, 60, and 90-day content planning templates for social media, blogs, and email — pre-filled with niche-specific ideas.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">30-Day — ₦2,500</span>
-            <span class="tier-pill tier-mid">60-Day — ₦4,500</span>
-            <span class="tier-pill tier-adv">90-Day — ₦6,500</span>
+            <span class="tier-pill tier-beg">30-Day — <span class="price-val" data-ngn="2500">₦2,500</span></span>
+            <span class="tier-pill tier-mid">60-Day — <span class="price-val" data-ngn="4500">₦4,500</span></span>
+            <span class="tier-pill tier-adv">90-Day — <span class="price-val" data-ngn="6500">₦6,500</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦2,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="2500">₦2,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p010')">View &amp; Buy</button>
           </div>
         </div>
@@ -648,12 +668,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">Social Media Design Bundle 2026</h3>
           <p class="product-desc">Professional Canva-ready templates for Instagram, LinkedIn, TikTok, and Facebook. Editable colors, fonts, and layouts.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">10 Templates — ₦3,000</span>
-            <span class="tier-pill tier-mid">25 Templates — ₦6,000</span>
-            <span class="tier-pill tier-adv">50 Templates — ₦10,000</span>
+            <span class="tier-pill tier-beg">10 Templates — <span class="price-val" data-ngn="3000">₦3,000</span></span>
+            <span class="tier-pill tier-mid">25 Templates — <span class="price-val" data-ngn="6000">₦6,000</span></span>
+            <span class="tier-pill tier-adv">50 Templates — <span class="price-val" data-ngn="10000">₦10,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦3,000</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3000">₦3,000</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p011')">View &amp; Buy</button>
           </div>
         </div>
@@ -677,12 +697,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">Digital Business Strategy Ebook 2026</h3>
           <p class="product-desc">The complete playbook for building, marketing, and scaling a digital business in Nigeria and Africa — using AI tools in 2026.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">Starter — ₦4,500</span>
-            <span class="tier-pill tier-mid">Growth — ₦8,000</span>
-            <span class="tier-pill tier-adv">Enterprise — ₦14,000</span>
+            <span class="tier-pill tier-beg">Starter — <span class="price-val" data-ngn="4500">₦4,500</span></span>
+            <span class="tier-pill tier-mid">Growth — <span class="price-val" data-ngn="8000">₦8,000</span></span>
+            <span class="tier-pill tier-adv">Enterprise — <span class="price-val" data-ngn="14000">₦14,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦4,500</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="4500">₦4,500</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p012')">View &amp; Buy</button>
           </div>
         </div>
@@ -697,12 +717,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
           <h3 class="product-name">Business SOP Template Bundle</h3>
           <p class="product-desc">Standard Operating Procedure templates for 10 core business processes — customer service, onboarding, social media, invoicing, and more.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">5 SOPs — ₦3,000</span>
-            <span class="tier-pill tier-mid">10 SOPs — ₦5,500</span>
-            <span class="tier-pill tier-adv">Full Pack + AI Writing Guide — ₦9,000</span>
+            <span class="tier-pill tier-beg">5 SOPs — <span class="price-val" data-ngn="3000">₦3,000</span></span>
+            <span class="tier-pill tier-mid">10 SOPs — <span class="price-val" data-ngn="5500">₦5,500</span></span>
+            <span class="tier-pill tier-adv">Full Pack + AI Writing Guide — <span class="price-val" data-ngn="9000">₦9,000</span></span>
           </div>
           <div class="product-footer">
-            <div class="product-price"><span class="currency">From</span>₦3,000</div>
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3000">₦3,000</span></div>
             <button class="btn btn-primary btn-sm" onclick="openModal('p013')">View &amp; Buy</button>
           </div>
         </div>
@@ -834,7 +854,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 <div class="cart-sidebar" id="cartSidebar">
   <div class="cart-header">
     <h3>🛒 Your Cart</h3>
-    <span class="cart-close" onclick="toggleCart()">×</span>
+    <button type="button" class="cart-close" onclick="toggleCart()" aria-label="Close cart">×</button>
   </div>
   <div class="cart-items" id="cartItems">
     <div class="cart-empty"><div class="icon">🛍️</div><p>Your cart is empty.<br/>Browse products and add items.</p></div>
@@ -850,14 +870,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
       <input class="checkout-input" type="email" id="buyerEmail" placeholder="Email Address * (for product delivery)" required/>
     </div>
     <button class="btn btn-gold pay-btn" onclick="initiatePayment()">🔒 Pay with Flutterwave</button>
-    <p class="cart-note">✅ Instant PDF download link sent to your email after payment.<br/>🔒 Secured by Flutterwave · 2026</p>
+    <p class="cart-note">✅ Instant PDF download link sent to your email after payment.<br/>🔒 Secured by Flutterwave · 2026<br/><span style="opacity:0.7">💱 USD prices are approximate — all payments are processed in NGN.</span></p>
   </div>
 </div>
 
 <!-- PRODUCT MODAL -->
 <div class="modal-overlay" id="productModal" onclick="closeModalOutside(event)">
   <div class="modal" id="modalContent">
-    <span class="modal-close" onclick="closeModal()">×</span>
+    <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close product details">×</button>
     <div class="modal-header">
       <div class="modal-cat" id="modalCat"></div>
       <h3 id="modalTitle"></h3>
@@ -896,6 +916,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 <div class="toast" id="toast"></div>
 
 <!-- FOOTER -->
+</main>
+
 <div class="store-footer">
   <div class="container">
 
@@ -1559,7 +1581,7 @@ function openModal(productId) {
     <div class="modal-level${i===0?' selected':''}" onclick="selectModalLevel(this,${i},'${productId}')">
       <div class="modal-level-header">
         <span class="modal-level-name">${t.level}</span>
-        <span class="modal-level-price">\u20a6${t.price.toLocaleString()}</span>
+        <span class="modal-level-price">${formatPrice(t.price)}</span>
       </div>
       <div class="modal-level-desc">${t.desc}</div>
       <div class="modal-tier-what">
@@ -1653,10 +1675,10 @@ function renderCart() {
         <div class="cart-item-name">${item.name}</div>
         <div class="cart-item-level">${item.level}</div>
         <div class="cart-item-controls">
-          <button class="qty-btn" onclick="changeQty(${item.id},-1)">−</button>
+          <button class="qty-btn" onclick="changeQty(${item.id},-1)" aria-label="Decrease quantity">−</button>
           <span class="qty-display">${item.qty||1}</span>
-          <button class="qty-btn" onclick="changeQty(${item.id},1)">+</button>
-          <span class="cart-item-price">₦${((item.price)*(item.qty||1)).toLocaleString()}</span>
+          <button class="qty-btn" onclick="changeQty(${item.id},1)" aria-label="Increase quantity">+</button>
+          <span class="cart-item-price">${formatPrice(item.price*(item.qty||1))}</span>
         </div>
       </div>
       <span class="cart-item-remove" onclick="removeFromCart(${item.id})">×</span>
@@ -1664,8 +1686,8 @@ function renderCart() {
   `).join('');
 
   const subtotal = cart.reduce((s,c) => s + c.price*(c.qty||1), 0);
-  document.getElementById('cartSubtotal').textContent = `₦${subtotal.toLocaleString()}`;
-  document.getElementById('cartTotal').textContent = `₦${subtotal.toLocaleString()}`;
+  document.getElementById('cartSubtotal').textContent = formatPrice(subtotal);
+  document.getElementById('cartTotal').textContent = formatPrice(subtotal);
   document.getElementById('cartItemCount').textContent = totalItems + ' item(s)';
 }
 
@@ -1697,7 +1719,7 @@ function initiatePayment() {
   const total = cart.reduce((s,c) => s + c.price*(c.qty||1), 0);
 
   // Replace with your actual Flutterwave public key from dashboard.flutterwave.com
-  const FLW_PUBLIC_KEY = 'FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-X';
+  const FLW_PUBLIC_KEY = 'FLWPUBK-a7c7c21e3c8f82914ddd8cfec761df9c-X';
 
   if (FLW_PUBLIC_KEY.includes('xxxx')) {
     // Demo mode — simulate success
@@ -1927,7 +1949,7 @@ window.openModal = function(name, cat, emoji, levels, includes, imgSrc, pdfUrl) 
         <div class="rn-chat-name">RuffNeck Assistant</div>
         <div class="rn-chat-status">Online now</div>
       </div>
-      <button class="rn-chat-close" onclick="rnToggleChat()">✕</button>
+      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat">✕</button>
     </div>
     <div class="rn-chat-messages" id="rnChatMessages">
       <div class="rn-msg bot">👋 Hi! I'm here to help with <strong>services</strong>, <strong>products</strong>, <strong>AI careers</strong>, and more. What can I help with today?</div>
@@ -2035,6 +2057,64 @@ function rnQuickAsk(topic){
   window.addEventListener('resize', clampOverflow);
   window.addEventListener('load', clampOverflow);
 })();
+
+// ── CURRENCY TOGGLE (display only — payments always process in NGN) ──
+const USD_RATE = 1375; // approx NGN per 1 USD, July 2026 — update periodically
+let currentCurrency = 'NGN';
+try { currentCurrency = localStorage.getItem('rn_store_currency') || 'NGN'; } catch(e){}
+
+function formatPrice(ngnAmount){
+  if (currentCurrency === 'USD') {
+    const usd = ngnAmount / USD_RATE;
+    return '≈$' + usd.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  return '₦' + Math.round(ngnAmount).toLocaleString();
+}
+
+function updateAllPriceDisplays(){
+  document.querySelectorAll('.price-val[data-ngn]').forEach(function(el){
+    const ngn = parseFloat(el.getAttribute('data-ngn'));
+    if (!isNaN(ngn)) el.textContent = formatPrice(ngn);
+  });
+}
+
+function setCurrency(curr){
+  currentCurrency = curr;
+  try { localStorage.setItem('rn_store_currency', curr); } catch(e){}
+
+  document.getElementById('currBtnNGN').classList.toggle('active', curr === 'NGN');
+  document.getElementById('currBtnNGN').setAttribute('aria-pressed', curr === 'NGN');
+  document.getElementById('currBtnUSD').classList.toggle('active', curr === 'USD');
+  document.getElementById('currBtnUSD').setAttribute('aria-pressed', curr === 'USD');
+
+  updateAllPriceDisplays();
+  renderCart();
+
+  // If a product modal is currently open, refresh its tier prices too
+  if (typeof currentModal !== 'undefined' && currentModal) {
+    const levelsEl = document.getElementById('modalLevels');
+    if (levelsEl) {
+      const selectedEl = levelsEl.querySelector('.modal-level.selected');
+      const selectedIdx = selectedEl ? Array.from(levelsEl.children).indexOf(selectedEl) : 0;
+      // Re-render by finding the product id from the currently selected tier data
+      levelsEl.querySelectorAll('.modal-level-price').forEach(function(priceEl, i){
+        if (currentModal.tiers && currentModal.tiers[i]) {
+          priceEl.textContent = formatPrice(currentModal.tiers[i].price);
+        }
+      });
+    }
+  }
+}
+
+// Apply saved currency preference on load
+document.addEventListener('DOMContentLoaded', function(){
+  if (currentCurrency === 'USD') {
+    setCurrency('USD');
+  } else {
+    updateAllPriceDisplays();
+  }
+});
+
 </script>
 
 </body>
