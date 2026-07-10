@@ -4,7 +4,37 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RuffNeck Blog | AI, Operations & Digital Growth Insights — 2026</title>
-<meta name="description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
+<meta name="description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+
+<!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://ruffneck-entertainment.vercel.app/blog"/>
+<meta property="og:title" content="RuffNeck Blog | AI, Operations & Digital Growth Insights — 2026"/>
+<meta property="og:description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
+<meta property="og:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="RuffNeck Entertainment"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:url" content="https://ruffneck-entertainment.vercel.app/blog"/>
+<meta name="twitter:title" content="RuffNeck Blog | AI, Operations & Digital Growth Insights — 2026"/>
+<meta name="twitter:description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
+<meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
+
+<!-- Google Analytics (GA4) — replace G-XXXXXXXXXX with your real Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
@@ -250,6 +280,28 @@ p,li{line-height:1.7}
     max-width:calc(100vw - 28px);
     max-height:min(70vh, calc(100vh - 100px));
   }
+}
+
+/* ── COMMENTS SECTION ── */
+.comments-section{border-top:1.5px solid var(--border);margin-top:24px;padding-top:24px}
+.comments-heading{font-size:16px;font-weight:700;color:var(--text-dark);margin-bottom:16px}
+.comment-form{background:var(--bg-light);border:1.5px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:20px;display:flex;flex-direction:column;gap:10px}
+.comment-input,.comment-textarea{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:10px 13px;font-family:var(--font-display);font-size:14px;color:var(--text-dark);outline:none;transition:border-color 0.2s;box-sizing:border-box}
+.comment-input:focus,.comment-textarea:focus{border-color:var(--cyan)}
+.comment-textarea{resize:vertical;min-height:70px;line-height:1.6}
+.comment-form .btn{align-self:flex-end}
+.comments-list{display:flex;flex-direction:column;gap:12px}
+.comment-item{background:var(--bg-light);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.comment-item-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.comment-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--white);flex-shrink:0}
+.comment-name{font-size:13px;font-weight:700;color:var(--text-dark)}
+.comment-date{font-size:11px;color:var(--text-muted);font-family:var(--font-mono)}
+.comment-text{font-size:14px;color:var(--text-body);line-height:1.65;margin-left:42px}
+.comment-empty{font-size:13px;color:var(--text-muted);text-align:center;padding:20px 0}
+.comment-delete{background:none;border:none;color:var(--text-muted);font-size:12px;cursor:pointer;margin-left:auto;padding:2px 6px}
+.comment-delete:hover{color:#EF4444}
+@media(max-width:600px){
+  .comment-form .btn{align-self:stretch;justify-content:center}
 }
 </style>
 </head>
@@ -530,6 +582,18 @@ p,li{line-height:1.7}
     <div class="article-body" id="articleBody"></div>
     <div class="article-footer">
       <div class="article-tags" id="articleTags"></div>
+
+      <!-- COMMENTS SECTION -->
+      <div class="comments-section">
+        <h3 class="comments-heading">💬 Comments (<span id="commentCount">0</span>)</h3>
+        <div class="comment-form">
+          <input type="text" id="commentName" class="comment-input" placeholder="Your name"/>
+          <textarea id="commentText" class="comment-textarea" placeholder="Share your thoughts…" rows="3"></textarea>
+          <button class="btn btn-primary btn-sm" onclick="postComment()">Post Comment →</button>
+        </div>
+        <div class="comments-list" id="commentsList"></div>
+      </div>
+
       <div class="article-nav-btns">
         <button class="btn btn-outline btn-sm" onclick="closeArticle()">← All Articles</button>
         <a href="/" class="btn btn-primary btn-sm">🏠 Homepage</a>
@@ -917,6 +981,8 @@ const articles = {
 // ============================================================
 // OPEN / CLOSE ARTICLE
 // ============================================================
+let currentArticleId = null;
+
 function openArticle(id) {
   const article = articles[id];
   if (!article) return;
@@ -927,10 +993,92 @@ function openArticle(id) {
   document.getElementById('articleBody').innerHTML = article.body;
   document.getElementById('articleTags').innerHTML = article.tags.map(t => `<span class="article-tag">${t}</span>`).join('');
 
+  currentArticleId = id;
+  renderComments(id);
+
   const overlay = document.getElementById('articleOverlay');
   overlay.classList.add('open');
   overlay.scrollTop = 0;
   document.body.style.overflow = 'hidden';
+}
+
+// ── COMMENTS (stored per-article in localStorage) ──
+function getComments(articleId){
+  try {
+    const all = JSON.parse(localStorage.getItem('rn_blog_comments') || '{}');
+    return all[articleId] || [];
+  } catch(e) { return []; }
+}
+
+function saveComments(articleId, list){
+  try {
+    const all = JSON.parse(localStorage.getItem('rn_blog_comments') || '{}');
+    all[articleId] = list;
+    localStorage.setItem('rn_blog_comments', JSON.stringify(all));
+  } catch(e) { /* storage unavailable — comment won't persist */ }
+}
+
+function renderComments(articleId){
+  const comments = getComments(articleId);
+  document.getElementById('commentCount').textContent = comments.length;
+  const list = document.getElementById('commentsList');
+
+  if (comments.length === 0) {
+    list.innerHTML = '<div class="comment-empty">No comments yet — be the first to share your thoughts!</div>';
+    return;
+  }
+
+  list.innerHTML = comments.map((c, i) => `
+    <div class="comment-item">
+      <div class="comment-item-head">
+        <div class="comment-avatar">${(c.name||'?').charAt(0).toUpperCase()}</div>
+        <div>
+          <div class="comment-name">${escapeHtml(c.name)}</div>
+          <div class="comment-date">${c.date}</div>
+        </div>
+        <button class="comment-delete" onclick="deleteComment(${i})" title="Delete your comment">🗑️</button>
+      </div>
+      <div class="comment-text">${escapeHtml(c.text)}</div>
+    </div>
+  `).join('');
+}
+
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+
+function postComment(){
+  const nameInput = document.getElementById('commentName');
+  const textInput = document.getElementById('commentText');
+  const name = nameInput.value.trim();
+  const text = textInput.value.trim();
+
+  if (!name) { nameInput.focus(); nameInput.style.borderColor = '#EF4444'; setTimeout(()=>nameInput.style.borderColor='', 1200); return; }
+  if (!text) { textInput.focus(); textInput.style.borderColor = '#EF4444'; setTimeout(()=>textInput.style.borderColor='', 1200); return; }
+  if (!currentArticleId) return;
+
+  const comments = getComments(currentArticleId);
+  comments.push({
+    name: name,
+    text: text,
+    date: new Date().toLocaleDateString('en-GB', { day:'numeric', month:'short', year:'numeric' })
+  });
+  saveComments(currentArticleId, comments);
+
+  nameInput.value = '';
+  textInput.value = '';
+  renderComments(currentArticleId);
+}
+
+function deleteComment(index){
+  if (!currentArticleId) return;
+  if (!confirm('Delete this comment?')) return;
+  const comments = getComments(currentArticleId);
+  comments.splice(index, 1);
+  saveComments(currentArticleId, comments);
+  renderComments(currentArticleId);
 }
 
 function closeArticle() {

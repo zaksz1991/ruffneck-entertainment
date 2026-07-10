@@ -4,10 +4,40 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>RuffNeck Store | Digital Products, AI Guides & Templates — 2026</title>
-<meta name="description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
+<meta name="description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+
+<!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://ruffneck-entertainment.vercel.app/store"/>
+<meta property="og:title" content="RuffNeck Store | Digital Products, AI Guides & Templates — 2026"/>
+<meta property="og:description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
+<meta property="og:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:site_name" content="RuffNeck Entertainment"/>
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:url" content="https://ruffneck-entertainment.vercel.app/store"/>
+<meta name="twitter:title" content="RuffNeck Store | Digital Products, AI Guides & Templates — 2026"/>
+<meta name="twitter:description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
+<meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
+
+<!-- Google Analytics (GA4) — replace G-XXXXXXXXXX with your real Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script src="https://js.paystack.co/v1/inline.js">
+<script src="https://checkout.flutterwave.com/v3.js">
 // Search input enhancements
 (function(){
   const si = document.getElementById('searchInput');
@@ -344,7 +374,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
     <p>AI career guides, prompt packs, resume templates, design assets, business toolkits — created once, instantly delivered. Everything you need to build skills, launch faster, and grow in 2026.</p>
     <div class="hero-tags">
       <span class="hero-tag">📄 Instant PDF Delivery</span>
-      <span class="hero-tag">🔒 Secure Paystack Checkout</span>
+      <span class="hero-tag">🔒 Secure Flutterwave Checkout</span>
       <span class="hero-tag">🌍 Worldwide Access</span>
       <span class="hero-tag">✅ 2026 Updated Content</span>
     </div>
@@ -361,6 +391,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
       <button class="filter-btn" data-cat="templates">Templates</button>
       <button class="filter-btn" data-cat="design">Design Assets</button>
       <button class="filter-btn" data-cat="business">Business Toolkits</button>
+      <button class="filter-btn" data-cat="practical-business-idea">Practical Business Ideas</button>
       <button class="filter-btn" data-cat="content">Content Services</button>
       <div class="search-box">
         <span>🔍</span>
@@ -818,8 +849,8 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
       <input class="checkout-input" type="text" id="buyerName" placeholder="Full Name *" required/>
       <input class="checkout-input" type="email" id="buyerEmail" placeholder="Email Address * (for product delivery)" required/>
     </div>
-    <button class="btn btn-gold pay-btn" onclick="initiatePayment()">🔒 Pay with Paystack</button>
-    <p class="cart-note">✅ Instant PDF download link sent to your email after payment.<br/>🔒 Secured by Paystack · 2026</p>
+    <button class="btn btn-gold pay-btn" onclick="initiatePayment()">🔒 Pay with Flutterwave</button>
+    <p class="cart-note">✅ Instant PDF download link sent to your email after payment.<br/>🔒 Secured by Flutterwave · 2026</p>
   </div>
 </div>
 
@@ -1654,7 +1685,7 @@ function toggleCart(open) {
 }
 
 // ============================================================
-// PAYMENT — PAYSTACK
+// PAYMENT — FLUTTERWAVE
 // ============================================================
 function initiatePayment() {
   const name = document.getElementById('buyerName').value.trim();
@@ -1665,35 +1696,43 @@ function initiatePayment() {
 
   const total = cart.reduce((s,c) => s + c.price*(c.qty||1), 0);
 
-  // Replace with your actual Paystack public key
-  const PAYSTACK_KEY = 'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+  // Replace with your actual Flutterwave public key from dashboard.flutterwave.com
+  const FLW_PUBLIC_KEY = 'FLWPUBK_TEST-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx-X';
 
-  if (PAYSTACK_KEY.includes('xxxx')) {
+  if (FLW_PUBLIC_KEY.includes('xxxx')) {
     // Demo mode — simulate success
     simulatePaymentSuccess(name, email);
     return;
   }
 
-  const handler = PaystackPop.setup({
-    key: PAYSTACK_KEY,
-    email: email,
-    amount: total * 100, // Paystack uses kobo
+  const txRef = 'RN_' + Date.now();
+
+  FlutterwaveCheckout({
+    public_key: FLW_PUBLIC_KEY,
+    tx_ref: txRef,
+    amount: total,
     currency: 'NGN',
-    ref: 'RN_' + Date.now(),
-    metadata: {
-      custom_fields: [
-        {display_name: 'Customer Name', variable_name: 'customer_name', value: name},
-        {display_name: 'Items', variable_name: 'items', value: cart.map(c=>`${c.name} (${c.level}) x${c.qty||1}`).join(', ')}
-      ]
+    payment_options: 'card, banktransfer, ussd',
+    customer: {
+      email: email,
+      name: name,
+    },
+    customizations: {
+      title: 'RuffNeck Entertainment',
+      description: cart.map(c=>`${c.name} (${c.level}) x${c.qty||1}`).join(', '),
+      logo: 'https://ruffneck-entertainment.vercel.app/favicon.ico',
     },
     callback: function(response) {
-      handlePaymentSuccess(name, email, response.reference);
+      if (response.status === 'successful' || response.status === 'completed') {
+        handlePaymentSuccess(name, email, response.transaction_id || txRef);
+      } else {
+        showToast('Payment was not completed. Please try again.');
+      }
     },
-    onClose: function() {
+    onclose: function() {
       showToast('Payment cancelled. Your cart is saved.');
     }
   });
-  handler.openIframe();
 }
 
 function simulatePaymentSuccess(name, email) {
