@@ -8,6 +8,9 @@
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
+<link rel="manifest" href="/manifest.json"/>
+<meta name="theme-color" content="#0B1E3A"/>
+
 
 <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
 <meta property="og:type" content="website"/>
@@ -34,12 +37,11 @@
   gtag('js', new Date());
   gtag('config', 'G-XF92RSFBHX');
 </script>
-/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <script src="https://checkout.flutterwave.com/v3.js">
-// Search input enhancements
-(function(){
+// Search input enhancements — runs after DOM is fully ready
+document.addEventListener('DOMContentLoaded', function(){
   const si = document.getElementById('searchInput');
   if(si){
     si.addEventListener('keydown', function(e){ if(e.key==='Enter') filterProducts(); });
@@ -52,7 +54,7 @@
       filterProducts();
     });
   });
-})();
+});
 </script>
 <style>
 :root{
@@ -208,40 +210,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .success-modal h3{font-size:22px;font-weight:700;color:var(--text-dark);margin-bottom:10px}
 .success-modal p{font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:24px}
 
-/* ADMIN PANEL */
-.admin-panel{background:var(--navy);color:var(--white);padding:64px 0}
-.admin-inner{max-width:800px;margin:0 auto}
-.admin-login{background:rgba(255,255,255,0.05);border:1px solid rgba(0,180,216,0.2);border-radius:var(--radius);padding:40px;text-align:center}
-.admin-login h2{font-size:22px;font-weight:700;color:var(--white);margin-bottom:8px}
-.admin-login p{font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:28px}
-.admin-form{display:none}
-.admin-form.visible{display:block}
-.admin-section{background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.15);border-radius:var(--radius);padding:32px;margin-bottom:24px}
-.admin-section h3{font-size:18px;font-weight:700;color:var(--white);margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.08)}
-.admin-field{margin-bottom:16px}
-.admin-field label{display:block;font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;font-family:var(--font-mono)}
-.admin-field input,.admin-field select,.admin-field textarea{width:100%;padding:11px 14px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);border-radius:var(--radius-sm);font-family:var(--font-display);font-size:13px;color:var(--white);outline:none;transition:border-color 0.2s}
-.admin-field input:focus,.admin-field select:focus,.admin-field textarea:focus{border-color:var(--cyan)}
-.admin-field select option{background:var(--navy);color:var(--white)}
-.admin-field textarea{resize:vertical;min-height:80px}
-.admin-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.admin-products-list{display:flex;flex-direction:column;gap:12px;margin-top:20px}
-.admin-product-item{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:var(--radius-sm);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.admin-product-item-info{flex:1;min-width:0}
-.admin-product-item-name{font-size:13px;font-weight:700;color:var(--white);margin-bottom:3px}
-.admin-product-item-meta{font-size:11px;color:rgba(255,255,255,0.4);font-family:var(--font-mono)}
-.admin-del-btn{color:#ef4444;font-size:18px;cursor:pointer;flex-shrink:0;padding:4px}
 
-/* INTERNSHIP BANNER */
-.internship-banner{background:linear-gradient(135deg,#0B1E3A,#0a1628);border-top:1px solid rgba(0,180,216,0.2);border-bottom:1px solid rgba(0,180,216,0.2);padding:64px 0;color:var(--white)}
-.internship-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.internship-content h2{font-size:clamp(24px,3vw,36px);font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.2}
-.internship-content .tag{font-family:var(--font-mono);font-size:11px;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:14px;display:block}
-.internship-content p{font-size:15px;color:rgba(255,255,255,0.65);line-height:1.75;margin-bottom:20px}
-.internship-cards{display:flex;flex-direction:column;gap:14px}
-.int-card{background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.2);border-radius:var(--radius-sm);padding:18px 20px;border-left:3px solid var(--cyan)}
-.int-card h4{font-size:14px;font-weight:700;color:var(--white);margin-bottom:6px;display:flex;align-items:center;gap:8px}
-.int-card p{font-size:13px;color:rgba(255,255,255,0.6);line-height:1.6}
 
 /* TOAST */
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--navy);color:var(--white);padding:12px 24px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;z-index:500;transition:transform 0.3s ease;border:1px solid rgba(0,180,216,0.3);white-space:nowrap}
@@ -357,6 +326,45 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .skip-link:focus{top:8px}
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2.5px solid var(--cyan);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
+
+/* ── NAV DROPDOWNS (matches index.html) ── */
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none;padding:0;margin:0;flex-direction:row}
+.nav-links li a{font-size:14px;white-space:nowrap}
+.nav-dropdown{position:relative}
+.nav-drop-trigger{display:flex;align-items:center;gap:4px;white-space:nowrap}
+.nav-caret{font-size:10px;transition:transform 0.2s;display:inline-block}
+.nav-dropdown:hover .nav-caret{transform:rotate(180deg)}
+.nav-drop-menu{
+  position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);
+  background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);
+  min-width:220px;padding:8px 0;box-shadow:0 8px 32px rgba(11,30,58,0.14);
+  opacity:0;visibility:hidden;transition:all 0.2s;z-index:1100;pointer-events:none;
+}
+.nav-dropdown:hover .nav-drop-menu{opacity:1;visibility:visible;pointer-events:auto}
+.nav-drop-menu a{
+  display:block;padding:10px 18px;font-size:13px;color:var(--text-dark);
+  font-weight:500;text-decoration:none;transition:all 0.15s;white-space:nowrap;
+}
+.nav-drop-menu a:hover{background:rgba(0,180,216,0.06);color:var(--cyan);padding-left:24px}
+.nav-drop-menu::before{
+  content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%);
+  width:10px;height:10px;background:var(--white);border-left:1.5px solid var(--border);
+  border-top:1.5px solid var(--border);transform:translateX(-50%) rotate(45deg);
+}
+.nav-cta{background:var(--cyan)!important;color:var(--navy)!important;padding:8px 18px;border-radius:var(--radius-sm);font-weight:700!important}
+.nav-hamburger{display:none;flex-direction:column;gap:5px;padding:8px;background:none;border:none;cursor:pointer}
+.nav-hamburger span{display:block;width:24px;height:2px;background:var(--navy);border-radius:2px}
+.nav-mobile{display:none;position:fixed;top:64px;left:0;right:0;background:rgba(255,255,255,0.98);backdrop-filter:blur(12px);padding:24px;border-bottom:1px solid var(--border);flex-direction:column;gap:16px;z-index:999;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+.nav-mobile.open{display:flex}
+.nav-mobile a{font-size:14px;font-weight:600;color:var(--text-dark);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--border)}
+.nav-mobile a:last-child{border-bottom:none}
+
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-hamburger{display:flex}
+  .nav-drop-menu{display:none!important}
+  .nav-caret{display:none}
+}
 </style>
 </head>
 <body>
@@ -370,12 +378,100 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
       <img src="data:image/png;base64,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" alt="RuffNeck Entertainment" style="height:40px;width:40px;object-fit:contain;border-radius:6px;">
       <div><strong>RuffNeck</strong><span>Store</span></div>
     </a>
+    <ul class="nav-links">
+
+        <!-- SERVICES DROPDOWN -->
+        <li class="nav-dropdown">
+          <a href="/#services" class="nav-drop-trigger">Services <span class="nav-caret">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="/#services">🤖 AI Solutions & Training</a>
+            <a href="/#services">📣 Digital Marketing</a>
+            <a href="/#services">🖥️ Website Development</a>
+            <a href="/#services">🎨 Design & Branding</a>
+            <a href="/#services">📊 Data Management</a>
+            <a href="/#services">🤝 Virtual Assistance</a>
+            <a href="/#services">💼 Business Consultation</a>
+          </div>
+        </li>
+
+        <!-- PRODUCTS DROPDOWN (links within this page) -->
+        <li class="nav-dropdown">
+          <a href="#cat-ai-career" class="nav-drop-trigger">Products <span class="nav-caret">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="#cat-ai-career">🏷️ AI Career Guides</a>
+            <a href="#cat-prompts">⚡ Prompt Packs</a>
+            <a href="#cat-templates">📄 CV & Resume Templates</a>
+            <a href="#cat-templates">📅 Content Calendars</a>
+            <a href="#cat-design">🎨 Design Asset Bundles</a>
+            <a href="#cat-ebooks">📖 Business Ebooks</a>
+            <a href="#cat-ebooks">📋 SOP Templates</a>
+          </div>
+        </li>
+
+        <!-- CAREERS DROPDOWN -->
+        <li class="nav-dropdown">
+          <a href="/#ai-careers" class="nav-drop-trigger">Careers <span class="nav-caret">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="/#ai-careers">🏷️ AI Data Annotator</a>
+            <a href="/#ai-careers">⭐ AI Model Evaluator</a>
+            <a href="/#ai-careers">✍️ AI Content Writer</a>
+            <a href="/#ai-careers">🛡️ AI Ethics Reviewer</a>
+            <a href="/#ai-careers">🎓 AI Tutor / Trainer</a>
+            <a href="/#ai-careers">🎨 AI Graphic Designer</a>
+            <a href="/#internship">🌐 Internship Program</a>
+          </div>
+        </li>
+
+        <!-- BLOG DROPDOWN -->
+        <li class="nav-dropdown">
+          <a href="/blog" class="nav-drop-trigger">Blog <span class="nav-caret">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="/blog">📰 All Articles</a>
+            <a href="/blog">🤖 AI & Automation</a>
+            <a href="/blog">💼 AI Careers</a>
+            <a href="/blog">📊 Operations</a>
+            <a href="/blog">📣 Digital Marketing</a>
+            <a href="/blog">🛡️ AI Ethics</a>
+            <a href="/blog">⚡ Prompts & Content</a>
+          </div>
+        </li>
+
+        <!-- ABOUT DROPDOWN -->
+        <li class="nav-dropdown">
+          <a href="/#about" class="nav-drop-trigger">About <span class="nav-caret">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="/#about">🏢 About RuffNeck</a>
+            <a href="/#founder">👤 Meet the Founder</a>
+            <a href="/#skills">🌍 Social Impact</a>
+            <a href="/#webinar">🔔 AI Webinar</a>
+            <a href="/#internship">🌐 Internship Program</a>
+          </div>
+        </li>
+
+        <!-- CONTACT -->
+        <li><a href="/#contact">Contact</a></li>
+
+        <li><a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="nav-cta">Get Started</a></li>
+      </ul>
     <div class="nav-right">
-      <a href="/" class="nav-home-btn">← <span class="nav-home-text">Back to Homepage</span></a>
       <button class="cart-btn" onclick="toggleCart()">
         🛒 Cart <span class="cart-count" id="cartCount">0</span>
       </button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
+  </div>
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="/#services">🤖 Services</a>
+    <a href="#cat-ai-career">🛒 Products</a>
+    <a href="/#ai-careers">💼 Careers</a>
+    <a href="/blog">📝 Blog</a>
+    <a href="/#about">🏢 About</a>
+    <a href="/#founder">👤 Founder</a>
+    <a href="/#skills">🌍 Programs</a>
+    <a href="/#webinar">🔔 Webinar</a>
+    <a href="/#contact">📧 Contact</a>
+    <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">📅 Get Started →</a>
+  </div>
   </div>
 </nav>
 
@@ -425,9 +521,18 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 <div class="store-main">
   <div class="container">
 
+    <!-- NEW ARRIVALS (admin-added products via /admin) -->
+    <div id="newArrivalsSection" style="display:none;">
+      <div class="section-heading">
+        <h2>🆕 New Arrivals</h2>
+        <p>Freshly added by RuffNeck Entertainment.</p>
+      </div>
+      <div class="products-grid" id="newArrivalsGrid"></div>
+    </div>
+
     <!-- AI CAREER GUIDES -->
     <div class="section-heading">
-      <h2>🤖 AI Career Guides — Step-by-Step PDF Guides</h2>
+      <h2 id="cat-ai-career">🤖 AI Career Guides — Step-by-Step PDF Guides</h2>
       <p>Complete practical guides to becoming a professional in high-demand AI roles. Tiered by experience level — each tier has different content, depth, and value. Instant PDF delivery after payment.</p>
     </div>
     <div class="products-grid" id="productsGrid">
@@ -556,7 +661,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
     <!-- PROMPT PACKS -->
     <div class="section-heading">
-      <h2>⚡ Prompt Engineering Packs</h2>
+      <h2 id="cat-prompts">⚡ Prompt Engineering Packs</h2>
       <p>Tested, ready-to-use AI prompts for business, content, video, marketing, and research. Copy, paste, get results.</p>
     </div>
     <div class="products-grid">
@@ -605,7 +710,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
     <!-- TEMPLATES -->
     <div class="section-heading">
-      <h2>📄 CV, Resume & Career Templates</h2>
+      <h2 id="cat-templates">📄 CV, Resume &amp; Career Templates</h2>
       <p>ATS-optimized, professionally designed templates for AI roles, tech jobs, and remote careers in 2026.</p>
     </div>
     <div class="products-grid">
@@ -654,7 +759,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
     <!-- DESIGN ASSETS -->
     <div class="section-heading">
-      <h2>🎨 Design Asset Bundles</h2>
+      <h2 id="cat-design">🎨 Design Asset Bundles</h2>
       <p>Canva-ready social media packs, brand kits, and visual assets — built for African businesses in 2026.</p>
     </div>
     <div class="products-grid">
@@ -683,7 +788,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
     <!-- EBOOKS & BUSINESS -->
     <div class="section-heading">
-      <h2>📖 Ebooks & Business Growth Guides</h2>
+      <h2 id="cat-ebooks">📖 Ebooks &amp; Business Growth Guides</h2>
       <p>Strategic frameworks, market insights, and actionable playbooks for African entrepreneurs and digital professionals in 2026.</p>
     </div>
     <div class="products-grid" id="productsGrid">
@@ -731,123 +836,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     </div><!-- end products grid -->
     </div><!-- end products grid -->
 
-    <!-- ADMIN-ADDED PRODUCTS -->
-    <div id="customProductsSection" style="display:none;">
-      <div class="section-heading">
-        <h2>🆕 Latest Products</h2>
-        <p>Newly added products from RuffNeck Entertainment.</p>
-      </div>
-      <div class="products-grid" id="customProductsGrid"></div>
-    </div>
+    
 
   </div>
 </div>
 
 <!-- INTERNSHIP BANNER -->
-<div class="internship-banner">
-  <div class="container">
-    <div class="internship-grid">
-      <div class="internship-content">
-        <span class="tag">Remote Programs · 2026</span>
-        <h2>Remote AI Internship &amp; Volunteer Programs</h2>
-        <p>We run remote internship programs for dedicated individuals who want to gain hands-on AI skills — and we also accept remote volunteers who want to contribute, learn, and grow with our team.</p>
-        <p style="color:rgba(255,255,255,0.5);font-size:14px;margin-bottom:28px;">If you're ready to build your portfolio, sharpen your skills, and work with a team that values growth and innovation — <strong style="color:var(--cyan);">this is your chance.</strong></p>
-        <a href="mailto:ruffneckhassan@gmail.com?subject=Remote Internship / Volunteer Application — 2026" class="btn btn-primary">Apply Now → ruffneckhassan@gmail.com</a>
-      </div>
-      <div>
-        <div class="internship-cards">
-          <div class="int-card">
-            <h4>🎓 Remote AI Internship</h4>
-            <p>Hands-on AI projects, real deliverables, mentorship from Hassan Zakariya, and a verified experience certificate. Open to students and career switchers globally.</p>
-          </div>
-          <div class="int-card">
-            <h4>🤝 Remote Volunteer Program</h4>
-            <p>Contribute your skills to community AI literacy programs, content creation, operations, and design projects. Build your portfolio while making a real impact.</p>
-          </div>
-          <div class="int-card">
-            <h4>📋 Who Can Apply</h4>
-            <p>Anyone with motivation and a stable internet connection. No experience required for beginner tracks. Intermediate and advanced tracks available for those with existing skills.</p>
-          </div>
-          <div class="int-card">
-            <h4>🌍 Fully Remote · 2026</h4>
-            <p>Open to applicants from Nigeria, Africa, and internationally. Work on your schedule. Gain skills in AI, content, operations, design, or digital marketing.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- ADMIN PANEL -->
-<div class="admin-panel" id="adminPanel">
-  <div class="container">
-    <div class="admin-inner">
-      <div class="admin-login">
-        <h2>🔐 Store Admin Panel</h2>
-        <p>Add, manage, and remove products from your store. Password protected.</p>
-        <div style="display:flex;gap:10px;justify-content:center;max-width:320px;margin:0 auto;">
-          <input type="password" id="adminPwInput" class="checkout-input" placeholder="Enter admin password" style="flex:1"/>
-          <button class="btn btn-primary" onclick="adminLogin()">Login</button>
-        </div>
-        <p id="adminErr" style="color:#ef4444;font-size:12px;margin-top:8px;display:none;">Incorrect password. Try again.</p>
 
-        <div class="admin-form" id="adminForm">
-          <div class="admin-section" style="margin-top:28px;">
-            <h3>➕ Add New Product</h3>
-            <div class="admin-row">
-              <div class="admin-field"><label>Product Name *</label><input type="text" id="p_name" placeholder="e.g. AI Career Guide 2026"/></div>
-              <div class="admin-field"><label>Category *</label>
-                <select id="p_cat">
-                  <option value="ai-career">AI Career Guide</option>
-                  <option value="prompts">Prompt Pack</option>
-                  <option value="templates">Template</option>
-                  <option value="design">Design Asset</option>
-                  <option value="business">Business Toolkit</option>
-                  <option value="content">Content Service</option>
-                </select>
-              </div>
-            </div>
-            <div class="admin-field"><label>Short Description *</label><textarea id="p_desc" placeholder="Brief description of the product (2-3 sentences)"></textarea></div>
-            <div class="admin-field"><label>What's Inside (one item per line)</label><textarea id="p_includes" placeholder="Complete step-by-step guide&#10;Tools and platform recommendations&#10;Templates included"></textarea></div>
-            <div class="admin-row">
-              <div class="admin-field"><label>Beginner Price (₦)</label><input type="number" id="p_price1" placeholder="3500"/></div>
-              <div class="admin-field"><label>Intermediate Price (₦)</label><input type="number" id="p_price2" placeholder="6500"/></div>
-            </div>
-            <div class="admin-row">
-              <div class="admin-field"><label>Advanced Price (₦)</label><input type="number" id="p_price3" placeholder="10000"/></div>
-              <div class="admin-field"><label>Emoji Icon</label><input type="text" id="p_emoji" placeholder="📄" maxlength="4"/></div>
-            </div>
-            <div class="admin-field"><label>Product Image (optional)</label>
-              <input type="file" id="p_image" accept="image/*" style="color:rgba(255,255,255,0.7)"/>
-              <p style="font-size:11px;color:rgba(255,255,255,0.35);margin-top:4px;">Upload a product image. If none, emoji will be used.</p>
-            </div>
-            <div class="admin-field"><label>PDF Download URL (Google Drive / Dropbox shared link)</label><input type="url" id="p_pdf" placeholder="https://drive.google.com/file/d/xxx/view?usp=sharing"/></div>
-            <button class="btn btn-primary" onclick="addProduct()" style="margin-top:8px;">Add Product to Store</button>
-          </div>
 
-          <div class="admin-section">
-            <h3>📦 Your Added Products</h3>
-            <div class="admin-products-list" id="adminProductsList">
-              <p style="color:rgba(255,255,255,0.4);font-size:13px;">No custom products added yet.</p>
-            </div>
-          </div>
-
-          <div class="admin-section">
-            <h3>💡 How to Add PDF Files</h3>
-            <div style="font-size:13px;color:rgba(255,255,255,0.6);line-height:1.7;display:flex;flex-direction:column;gap:10px;">
-              <p>1. Create your PDF guide (Canva, Word, Google Docs)</p>
-              <p>2. Upload to <strong style="color:var(--cyan);">Google Drive</strong> or <strong style="color:var(--cyan);">Dropbox</strong></p>
-              <p>3. Set sharing to <strong style="color:var(--gold);">"Anyone with the link can view"</strong></p>
-              <p>4. Copy the share link and paste it into the "PDF Download URL" field above</p>
-              <p>5. After purchase, buyers receive the link automatically via the confirmation screen</p>
-              <p style="color:rgba(255,255,255,0.4);font-size:12px;">💡 Tip: For better control, use Gumroad.com or Selar.co to host PDF products — they handle delivery, receipts, and re-downloads automatically.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 <!-- CART SIDEBAR -->
 <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
@@ -940,19 +937,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 let cart = [];
 let currentModal = null;
 let selectedModalLevel = null;
-
-// ============================================================
-// STORAGE (Persistent products)
-// ============================================================
-async function saveProducts(products) {
-  try { await window.storage.set('store-products', JSON.stringify(products)); } catch(e) {}
-}
-async function loadProducts() {
-  try {
-    const r = await window.storage.get('store-products');
-    return r ? JSON.parse(r.value) : [];
-  } catch(e) { return []; }
-}
 
 // ============================================================
 // TOAST
@@ -1568,6 +1552,87 @@ const PRODUCTS = {
   }
 };
 
+// ============================================================
+// ADMIN-ADDED PRODUCTS — loads products saved via /admin panel
+// (localStorage key 'rn_products') and merges them into the live store
+// ============================================================
+function rnLoadAdminProducts(){
+  let adminProducts = [];
+  try {
+    adminProducts = JSON.parse(localStorage.getItem('rn_products') || '[]');
+  } catch(e) { adminProducts = []; }
+
+  const activeProducts = adminProducts.filter(p => p.status === 'active');
+  if (activeProducts.length === 0) return;
+
+  const grid = document.getElementById('newArrivalsGrid');
+  const section = document.getElementById('newArrivalsSection');
+  if (!grid || !section) return;
+
+  activeProducts.forEach(p => {
+    // Convert admin's tier object into the PRODUCTS array format used by openModal()
+    const tiers = [];
+    if (p.tiers.beginner) tiers.push({
+      level: '🟢 ' + (p.tiers.beginner.label || 'Beginner'),
+      price: p.tiers.beginner.price,
+      desc: p.fullDesc || p.desc,
+      includes: p.fullDesc ? p.fullDesc.split('\n').filter(Boolean) : [p.desc],
+      pdf: p.tiers.beginner.pdf || ''
+    });
+    if (p.tiers.intermediate) tiers.push({
+      level: '🔵 ' + (p.tiers.intermediate.label || 'Intermediate'),
+      price: p.tiers.intermediate.price,
+      desc: p.fullDesc || p.desc,
+      includes: p.fullDesc ? p.fullDesc.split('\n').filter(Boolean) : [p.desc],
+      pdf: p.tiers.intermediate.pdf || ''
+    });
+    if (p.tiers.advanced) tiers.push({
+      level: '⭐ ' + (p.tiers.advanced.label || 'Advanced'),
+      price: p.tiers.advanced.price,
+      desc: p.fullDesc || p.desc,
+      includes: p.fullDesc ? p.fullDesc.split('\n').filter(Boolean) : [p.desc],
+      pdf: p.tiers.advanced.pdf || ''
+    });
+
+    // Register into PRODUCTS so openModal(id) works exactly like the built-in products
+    PRODUCTS[p.id] = { name: p.name, cat: p.cat, emoji: p.emoji || '📦', tiers: tiers };
+
+    const minPrice = Math.min(...tiers.map(t => t.price));
+    const catSlug = (p.cat || 'other').toLowerCase().replace(/\s+/g, '-');
+
+    const card = document.createElement('div');
+    card.className = 'product-card';
+    card.setAttribute('data-cat', catSlug);
+    card.setAttribute('data-name', p.name);
+    card.setAttribute('data-id', p.id);
+    card.innerHTML = `
+      <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#0a2a4a);${p.image ? `background-image:url('${p.image}');background-size:cover;background-position:center;` : ''}">
+        ${!p.image ? `<span class="emoji-fallback">${p.emoji || '📦'}</span>` : ''}<span class="product-new">New</span>
+      </div>
+      <div class="product-body">
+        <div class="product-cat">${p.cat}</div>
+        <h3 class="product-name">${p.name}</h3>
+        <p class="product-desc">${p.desc}</p>
+        <div class="product-tiers-preview">
+          ${tiers.map(t => `<span class="tier-pill ${t.level.includes('Beginner')?'tier-beg':t.level.includes('Intermediate')?'tier-mid':'tier-adv'}">${t.level.replace(/^[^\s]+\s/,'')} <span class="price-val" data-ngn="${t.price}">₦${t.price.toLocaleString()}</span></span>`).join('')}
+        </div>
+        <div class="product-footer">
+          <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="${minPrice}">₦${minPrice.toLocaleString()}</span></div>
+          <button class="btn btn-primary btn-sm" onclick="openModal('${p.id}')">View &amp; Buy</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+
+  section.style.display = 'block';
+
+  // Refresh currency display if USD mode is active
+  if (typeof updateAllPriceDisplays === 'function') updateAllPriceDisplays();
+}
+
+document.addEventListener('DOMContentLoaded', rnLoadAdminProducts);
+
 
 function openModal(productId) {
   const p = PRODUCTS[productId];
@@ -1761,12 +1826,39 @@ function simulatePaymentSuccess(name, email) {
   handlePaymentSuccess(name, email, 'DEMO_' + Date.now());
 }
 
+// Replace with your real Zapier "Catch Hook" URL once created
+const ZAPIER_WEBHOOK_URL = 'https://hooks.zapier.com/hooks/catch/27918453/4ukjopt/';
+
+function sendOrderToZapier(name, email, ref, items) {
+  if (ZAPIER_WEBHOOK_URL.includes('PLACEHOLDER')) return; // not configured yet — skip silently
+
+  items.forEach(item => {
+    fetch(ZAPIER_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors', // Zapier webhooks don't need CORS response reading
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customer_name: name,
+        customer_email: email,
+        transaction_ref: ref,
+        product_name: item.name,
+        tier: item.level,
+        pdf_url: item.pdfUrl || '',
+        order_date: new Date().toISOString()
+      })
+    }).catch(() => { /* fail silently — customer still sees on-page download links */ });
+  });
+}
+
 function handlePaymentSuccess(name, email, ref) {
   const links = cart.map(item => ({
     name: item.name,
     level: item.level,
     url: item.pdfUrl || 'https://ruffneck-entertainment.vercel.app/store'
   }));
+
+  // Send order details to Zapier so it can also email the PDF link automatically
+  sendOrderToZapier(name, email, ref, cart);
 
   const linksEl = document.getElementById('downloadLinks');
   linksEl.innerHTML = links.map(l => `
@@ -1814,129 +1906,6 @@ function filterProducts() {
 }
 
 // ============================================================
-// ADMIN PANEL
-// ============================================================
-const ADMIN_PASSWORD = 'ruffneck2026admin';
-
-function adminLogin() {
-  const pw = document.getElementById('adminPwInput').value;
-  if (pw === ADMIN_PASSWORD) {
-    document.getElementById('adminForm').classList.add('visible');
-    document.getElementById('adminErr').style.display = 'none';
-    loadAdminProducts();
-  } else {
-    document.getElementById('adminErr').style.display = 'block';
-  }
-}
-
-async function addProduct() {
-  const name = document.getElementById('p_name').value.trim();
-  const cat = document.getElementById('p_cat').value;
-  const desc = document.getElementById('p_desc').value.trim();
-  const includes = document.getElementById('p_includes').value.trim().split('\n').filter(l=>l.trim());
-  const price1 = parseInt(document.getElementById('p_price1').value) || 5000;
-  const price2 = parseInt(document.getElementById('p_price2').value) || 9000;
-  const price3 = parseInt(document.getElementById('p_price3').value) || 15000;
-  const emoji = document.getElementById('p_emoji').value || '📄';
-  const pdfUrl = document.getElementById('p_pdf').value.trim();
-
-  if (!name || !desc) { showToast('Product name and description required'); return; }
-
-  const imageFile = document.getElementById('p_image').files[0];
-  let imgSrc = null;
-
-  if (imageFile) {
-    imgSrc = await new Promise(res => {
-      const reader = new FileReader();
-      reader.onload = e => res(e.target.result);
-      reader.readAsDataURL(imageFile);
-    });
-  }
-
-  const product = { id: Date.now(), name, cat, desc, includes, emoji, imgSrc, pdfUrl,
-    levels: [
-      {level:'Beginner', price:price1, desc:'Beginner level — foundation concepts and getting started'},
-      {level:'Intermediate', price:price2, desc:'Intermediate level — deeper skills and practical application'},
-      {level:'Advanced', price:price3, desc:'Advanced level — mastery, scaling, and professional execution'}
-    ]
-  };
-
-  const products = await loadProducts();
-  products.push(product);
-  await saveProducts(products);
-  renderCustomProducts(products);
-  loadAdminProducts();
-  showToast('✅ Product added to store!');
-
-  // Clear form
-  ['p_name','p_desc','p_includes','p_price1','p_price2','p_price3','p_emoji','p_pdf'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('p_image').value = '';
-}
-
-async function deleteProduct(id) {
-  const products = await loadProducts();
-  const updated = products.filter(p => p.id !== id);
-  await saveProducts(updated);
-  renderCustomProducts(updated);
-  loadAdminProducts();
-  showToast('Product removed');
-}
-
-async function loadAdminProducts() {
-  const products = await loadProducts();
-  const listEl = document.getElementById('adminProductsList');
-  if (products.length === 0) {
-    listEl.innerHTML = '<p style="color:rgba(255,255,255,0.4);font-size:13px;">No custom products added yet.</p>';
-    return;
-  }
-  listEl.innerHTML = products.map(p => `
-    <div class="admin-product-item">
-      <div class="admin-product-item-info">
-        <div class="admin-product-item-name">${p.emoji} ${p.name}</div>
-        <div class="admin-product-item-meta">${p.cat} · ₦${p.levels[0].price.toLocaleString()} – ₦${p.levels[2].price.toLocaleString()}</div>
-      </div>
-      <span class="admin-del-btn" onclick="deleteProduct(${p.id})">🗑</span>
-    </div>
-  `).join('');
-}
-
-function renderCustomProducts(products) {
-  const section = document.getElementById('customProductsSection');
-  const grid = document.getElementById('customProductsGrid');
-  if (products.length === 0) { section.style.display = 'none'; return; }
-  section.style.display = 'block';
-  grid.innerHTML = products.map(p => `
-    <div class="product-card" data-cat="${p.cat.toLowerCase().replace(/\s+/g,'-')}" data-name="${p.name}">
-      <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#040C1A);">
-        ${p.imgSrc ? `<img src="${p.imgSrc}" alt="${p.name}"/>` : `<span class="emoji-fallback">${p.emoji}</span>`}
-        <span class="product-new">NEW</span>
-      </div>
-      <div class="product-body">
-        <div class="product-cat">${p.cat.replace(/-/g,' ').toUpperCase()}</div>
-        <h3>${p.name}</h3>
-        <p>${p.desc}</p>
-        ${p.includes.length ? `<div class="product-includes"><h5>What's Inside</h5><ul>${p.includes.map(i=>`<li>${i}</li>`).join('')}</ul></div>` : ''}
-        <div class="product-footer">
-          <div class="product-price"><span class="currency">NGN / Starting from</span>₦${p.levels[0].price.toLocaleString()}</div>
-          <button class="btn btn-primary btn-sm" onclick='openModal(${JSON.stringify(p.name)},${JSON.stringify(p.cat)},${JSON.stringify(p.emoji)},${JSON.stringify(p.levels)},${JSON.stringify(p.includes)},${JSON.stringify(p.imgSrc)},${JSON.stringify(p.pdfUrl)})'>View &amp; Buy</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-// Override openModal to accept imgSrc and pdfUrl
-const _origOpenModal = openModal;
-window.openModal = function(name, cat, emoji, levels, includes, imgSrc, pdfUrl) {
-  _origOpenModal(name, cat, emoji, levels, includes);
-  if (currentModal) { currentModal.imgSrc = imgSrc||null; currentModal.pdfUrl = pdfUrl||null; }
-};
-
-// Load custom products on page load
-(async () => {
-  const products = await loadProducts();
-  renderCustomProducts(products);
-})();
 </script>
 <!-- ── RUFFNECK CHATBOT (mobile-safe) ── -->
 <div class="rn-chat-bubble" id="rnChatBubble">
@@ -1952,7 +1921,7 @@ window.openModal = function(name, cat, emoji, levels, includes, imgSrc, pdfUrl) 
       <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat">✕</button>
     </div>
     <div class="rn-chat-messages" id="rnChatMessages">
-      <div class="rn-msg bot">👋 Hi! I'm here to help with <strong>services</strong>, <strong>products</strong>, <strong>AI careers</strong>, and more. What can I help with today?</div>
+      <div class="rn-msg bot">👋 Hi! I'm here to help with <strong>services</strong>, <strong>products</strong>, <strong>AI careers</strong>, and more. I understand Hausa, Yoruba, and Igbo too — feel free to ask in your language! What can I help with today?</div>
     </div>
     <div class="rn-chat-quick" id="rnQuickReplies">
       <button class="rn-quick-btn" onclick="rnQuickAsk('services')">Services</button>
@@ -1984,18 +1953,90 @@ function rnToggleChat(){
 }
 
 const RN_BOT_RESPONSES = {
-  services:{keys:['service','what do you do','offer','help','solution'],reply:`RuffNeck Entertainment offers:<br><br>• 🤖 AI Solutions & Training<br>• 📣 Digital Marketing<br>• 🖥️ Website Development<br>• 🎨 Design & Branding<br>• 📊 Data Management<br>• 🤝 Virtual Assistance<br>• 💼 Business Consultation`},
-  store:{keys:['store','buy','product','guide','ebook','prompt','price'],reply:`Visit our <a href="/store">Digital Store</a> for AI Career Guides, Prompt Packs, Templates, and Ebooks — all instant PDF delivery.<br><br><a href="/store">Browse Store →</a>`},
-  careers:{keys:['career','job','ai role','annotator','evaluator','income'],reply:`Top AI roles for 2026:<br><br>• 🏷️ AI Data Annotator<br>• ⭐ AI Model Evaluator<br>• ✍️ AI Content Writer<br>• 🛡️ AI Ethics Reviewer<br><br>Get full guides in our <a href="/store">store</a>.`},
-  contact:{keys:['contact','email','whatsapp','phone','book','consult'],reply:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Book a free consultation</a>`}
+  services:{
+    keys:['service','what do you do','offer','help','solution','sabis','aikin da kuke yi','isẹ','ohun ti e nse','ọrụ','ihe ị na-arụ'],
+    reply:`RuffNeck Entertainment offers:<br><br>• 🤖 AI Solutions & Training<br>• 📣 Digital Marketing<br>• 🖥️ Website Development<br>• 🎨 Design & Branding<br>• 📊 Data Management<br>• 🤝 Virtual Assistance<br>• 💼 Business Consultation`,
+    reply_ha:`RuffNeck Entertainment tana bayar da:<br><br>• 🤖 Hanyoyin AI da Horarwa<br>• 📣 Tallace-tallace na Dijital<br>• 🖥️ Gina Shafin Yanar Gizo<br>• 🎨 Zane da Alama<br>• 📊 Sarrafa Bayanai<br>• 🤝 Taimakon Kama-da-wane<br>• 💼 Shawarwarin Kasuwanci`,
+    reply_yo:`RuffNeck Entertainment nfunni ni:<br><br>• 🤖 Ìmọ̀ AI àti Ìdánilẹ́kọ̀ọ́<br>• 📣 Ìpolówó Dígítà<br>• 🖥️ Kíkọ́ Wẹ́ẹ̀bù<br>• 🎨 Àpẹẹrẹ àti Àmì<br>• 📊 Ìṣàkóso Dátà<br>• 🤝 Ìrànlọ́wọ́ Fọ́nrán<br>• 💼 Ìmọ̀ràn Òwò`,
+    reply_ig:`RuffNeck Entertainment na-enye:<br><br>• 🤖 Ngwa AI na Ọzụzụ<br>• 📣 Mgbasa Ozi Dijitalụ<br>• 🖥️ Ịrụ Weebụsaịtị<br>• 🎨 Ihe Ọmụma na Akara<br>• 📊 Njikwa Data<br>• 🤝 Enyemaka Dịgịtalụ<br>• 💼 Ndụmọdụ Azụmaahịa`
+  },
+  store:{
+    keys:['store','buy','product','guide','ebook','prompt','price','kudi','saya','sayarwa','ra','ìwé','owo','ra ọjà','ego','zụta'],
+    reply:`Visit our <a href="/store">Digital Store</a> for AI Career Guides, Prompt Packs, Templates, and Ebooks — all instant PDF delivery.<br><br><a href="/store">Browse Store →</a>`,
+    reply_ha:`Ziyarci <a href="/store">Shagon Dijital</a> namu don Jagororin Aiki na AI, Fakitin Tambaya, Samfura, da Littattafai — dukkansu ana turo su nan take.<br><br><a href="/store">Duba Shago →</a>`,
+    reply_yo:`Ṣàbẹ̀wò sí <a href="/store">Ilé Ìtajà Dígítà</a> wa fún Ìtọ́sọ́nà Iṣẹ́ AI, Àwọn Ìbéèrè, Àwòṣe, àti Ìwé — gbogbo rẹ̀ ni a ń fi jíjẹ́rànṣẹ́ tọ̀nítọ̀nì.<br><br><a href="/store">Wo Ilé Ìtajà →</a>`,
+    reply_ig:`Gaa na <a href="/store">Ụlọ Ahịa Dijitalụ</a> anyị maka Ntuziaka Ọrụ AI, Ngwugwu Prompt, Ihe atụ, na Akwụkwọ — niile na-eziga ozugbo.<br><br><a href="/store">Lelee Ụlọ Ahịa →</a>`
+  },
+  careers:{
+    keys:['career','job','ai role','annotator','evaluator','income','aiki','kudin shiga','ise','owo osu','ọrụ','ego olu'],
+    reply:`Top AI roles for 2026:<br><br>• 🏷️ AI Data Annotator<br>• ⭐ AI Model Evaluator<br>• ✍️ AI Content Writer<br>• 🛡️ AI Ethics Reviewer<br><br>Get full guides in our <a href="/store">store</a>.`,
+    reply_ha:`Manyan ayyukan AI na 2026:<br><br>• 🏷️ Mai Rubuta Bayanan AI<br>• ⭐ Mai Kimanta Tsarin AI<br>• ✍️ Mai Rubutun Abun Ciki na AI<br>• 🛡️ Mai Duba Da'a na AI<br><br>Sami cikakkun jagorori a <a href="/store">shago</a> namu.`,
+    reply_yo:`Àwọn iṣẹ́ AI tó ga jùlọ fún 2026:<br><br>• 🏷️ Olùkọ Dátà AI<br>• ⭐ Olùdíwọ̀n Àwòṣe AI<br>• ✍️ Onkọ̀wé Àkóónú AI<br>• 🛡️ Olùyẹ̀wò Ìwà Rere AI<br><br>Rí ìtọ́sọ́nà kíkún nínú <a href="/store">ilé ìtajà</a> wa.`,
+    reply_ig:`Ọrụ AI kacha mma na 2026:<br><br>• 🏷️ Onye Nchọpụta Data AI<br>• ⭐ Onye Nyocha Ihe Nlereanya AI<br>• ✍️ Onye Ode Akwụkwọ AI<br>• 🛡️ Onye Nyocha Omume AI<br><br>Nweta ntuziaka zuru ezu na <a href="/store">ụlọ ahịa</a> anyị.`
+  },
+  webinar:{
+    keys:['webinar','training','workshop','learn ai','ai literacy','koyarwa','ìdánilẹ́kọ̀ọ́','ọzụzụ'],
+    reply:`🔔 <strong>AI Literacy Webinar Series — Coming Soon 2026</strong><br><br>Free webinars covering:<br>• What is AI &amp; its subsets<br>• Prompt Engineering<br>• AI Capabilities &amp; Limitations<br>• Responsible &amp; Ethical AI Use<br><br><a href="#webinar">Register for early access →</a>`,
+    reply_ha:`🔔 <strong>Jerin Koyarwar AI — Zai Zo Ba Da Dadewa Ba a 2026</strong><br><br>Koyarwa kyauta akan:<br>• Menene AI da sassansa<br>• Fasahar Tambaya<br>• Iyawa da Iyakokin AI<br>• Amfani da AI cikin Nagarta<br><br><a href="#webinar">Yi rijista da wuri →</a>`,
+    reply_yo:`🔔 <strong>Ẹ̀ka Ìdánilẹ́kọ̀ọ́ AI — Ń Bọ̀ Láìpẹ́ ní 2026</strong><br><br>Àwọn ìdánilẹ́kọ̀ọ́ ọ̀fẹ́ lórí:<br>• Kí ni AI àti àwọn ẹ̀ka rẹ̀<br>• Ìmọ̀ Ìbéèrè<br>• Agbára àti Ààlà AI<br>• Lílo AI Lọ́nà Tó Yẹ<br><br><a href="#webinar">Forúkọsílẹ̀ ní kíákíá →</a>`,
+    reply_ig:`🔔 <strong>Usoro Mmụta AI — Na-abịa n'oge na 2026</strong><br><br>Mmụta n'efu gbasara:<br>• Gịnị bụ AI na ngalaba ya<br>• Nka Prompt<br>• Ikike na Oke AI<br>• Iji AI n'ụzọ ziri ezi<br><br><a href="#webinar">Debanye aha ozugbo →</a>`
+  },
+  internship:{
+    keys:['internship','intern','volunteer','apply','mentorship','horarwa','ìrànwọ́','ọzụzụ na-akwụghị ụgwọ'],
+    reply:`🌐 <strong>Remote Internship &amp; Volunteer Program</strong><br><br>Real deliverables, mentorship, and a verified experience certificate. Open to all skill levels — no experience required for beginner tracks.<br><br><a href="#internship">Learn more &amp; apply →</a>`,
+    reply_ha:`🌐 <strong>Shirin Horarwa da Sa-kai na Nesa</strong><br><br>Ainihin ayyuka, jagoranci, da takardar shaidar gogewa. A bude ga kowane matakin fasaha — babu bukatar gogewa don masu farawa.<br><br><a href="#internship">Koyi kara &amp; nema →</a>`,
+    reply_yo:`🌐 <strong>Ètò Ìdánilẹ́kọ̀ọ́ àti Ìrànwọ́ Láti Ọ̀nà Jíjìn</strong><br><br>Àwọn iṣẹ́ gidi, ìtọ́sọ́nà, àti ẹ̀rí ìrírí. Ó ṣí sílẹ̀ fún gbogbo ìpele — kò nílò ìrírí fún àwọn tuntun.<br><br><a href="#internship">Kọ́ sí i &amp; forúkọsílẹ̀ →</a>`,
+    reply_ig:`🌐 <strong>Mmemme Ọzụzụ na Ọrụ Afọ ofufo n'ebe dị anya</strong><br><br>Ezigbo ọrụ, nduzi, na akwụkwọ akaebe ahụmahụ. Emeghere maka ọkwa nka niile — ahụmahụ adịghị mkpa maka ndị mbido.<br><br><a href="#internship">Mụtakwuo &amp; tinye akwụkwọ →</a>`
+  },
+  skills:{
+    keys:['skills acquisition','women','youth program','skills program','mata','matasa','obinrin','odo','ụmụ nwaanyị','ndị na-eto eto'],
+    reply:`🌍 <strong>Self-Business Skills Acquisition Program</strong><br><br>Empowering women and youth with digital skills and AI knowledge — plus partnership opportunities for sponsors.<br><br><a href="#skills">Learn more →</a>`,
+    reply_ha:`🌍 <strong>Shirin Samun Fasahar Kasuwanci Kai</strong><br><br>Karfafa mata da matasa da fasahar dijital da ilimin AI — tare da damar hadin gwiwa ga masu daukar nauyi.<br><br><a href="#skills">Koyi kara →</a>`,
+    reply_yo:`🌍 <strong>Ètò Ìmọ̀ Òwò Ti Ara Ẹni</strong><br><br>Fífún àwọn obìnrin àti ọ̀dọ́ lágbára pẹ̀lú ìmọ̀ dígítà àti ìmọ̀ AI — pẹ̀lú àǹfààní ìṣọ̀kan fún àwọn onígbọ̀wọ́.<br><br><a href="#skills">Kọ́ sí i →</a>`,
+    reply_ig:`🌍 <strong>Mmemme Nnweta Nka Azụmaahịa Onwe Onye</strong><br><br>Inye ụmụ nwaanyị na ndị na-eto eto ike site na nka dijitalụ na ihe ọmụma AI — tinyere ohere mmekọrịta maka ndị nkwado.<br><br><a href="#skills">Mụtakwuo →</a>`
+  },
+  contact:{
+    keys:['contact','whatsapp','phone number','reach you','get in touch','tuntuɓe','kan si','ọ̀rọ̀','kpọtụrụ'],
+    reply:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Book a free consultation</a>`,
+    reply_ha:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Yi rijistar shawara kyauta</a>`,
+    reply_yo:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Ṣe ìpàdé ọ̀fẹ́</a>`,
+    reply_ig:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Debanye maka nkata efu</a>`
+  }
 };
+
+// Language greeting detection — determines which language to reply in
+const RN_LANG_HINTS = {
+  ha: ['sannu','yaya','ina kwana','ina yini','kudi','aiki','taimako','nagode','don allah'],
+  yo: ['bawo','pele','odaaro','odaaro','owo','ise','iranlowo','ese','jowo'],
+  ig: ['kedu','ndewo','biko','daalu','ego','oru','enyemaka','kedu ka']
+};
+
+function rnDetectLang(input){
+  const lower = input.toLowerCase();
+  for (const [lang, hints] of Object.entries(RN_LANG_HINTS)) {
+    if (hints.some(h => lower.includes(h))) return lang;
+  }
+  return 'en';
+}
 
 function rnGetReply(input){
   const lower = input.toLowerCase();
+  const lang = rnDetectLang(input);
+  const replyKey = lang === 'en' ? 'reply' : 'reply_' + lang;
+
   for (const [key, data] of Object.entries(RN_BOT_RESPONSES)) {
-    if (data.keys.some(k => lower.includes(k))) return data.reply;
+    if (data.keys.some(k => lower.includes(k))) {
+      return data[replyKey] || data.reply; // fall back to English if a translation is missing
+    }
   }
-  return `Not sure about that one. Try asking about <strong>services</strong>, <strong>store</strong>, <strong>AI careers</strong>, or <strong>contact</strong> info — or reach us directly at <a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a>.`;
+
+  const fallback = {
+    en: `Not sure about that one. Try asking about <strong>services</strong>, <strong>store</strong>, <strong>AI careers</strong>, <strong>webinar</strong>, <strong>internship</strong>, or <strong>contact</strong> info.`,
+    ha: `Ban tabbata ba akan wannan. Gwada tambaya game da <strong>ayyuka</strong>, <strong>shago</strong>, <strong>ayyukan AI</strong>, ko <strong>tuntuɓe</strong>.`,
+    yo: `Mi ò dájú nípa èyí. Gbìyànjú béèrè nípa <strong>iṣẹ́</strong>, <strong>ilé ìtajà</strong>, <strong>iṣẹ́ AI</strong>, tàbí <strong>bí a ṣe le kàn sí wa</strong>.`,
+    ig: `Amaghị m maka nke ahụ. Nwaa jụọ gbasara <strong>ọrụ</strong>, <strong>ụlọ ahịa</strong>, <strong>ọrụ AI</strong>, ma ọ bụ <strong>kpọtụrụ anyị</strong>.`
+  };
+  return fallback[lang] || fallback.en;
 }
 
 function rnAppendMsg(text, type){
@@ -2115,7 +2156,27 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 });
 
+
+// Mobile hamburger menu toggle
+document.addEventListener('DOMContentLoaded', function(){
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
+  }
+});
+
 </script>
 
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('/sw.js')
+      .then(function(reg){ console.log('RuffNeck SW registered:', reg.scope); })
+      .catch(function(err){ console.log('SW registration failed:', err); });
+  });
+}
+</script>
 </body>
 </html>
