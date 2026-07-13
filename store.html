@@ -10,6 +10,24 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
 <link rel="manifest" href="/manifest.json"/>
 <meta name="theme-color" content="#0B1E3A"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "OnlineStore",
+  "name": "RuffNeck Entertainment Store",
+  "url": "https://ruffneck-entertainment.vercel.app/store",
+  "description": "Digital products including AI career guides, prompt packs, templates, design assets, and business ebooks — instant PDF delivery.",
+  "parentOrganization": {
+    "@type": "Organization",
+    "name": "RuffNeck Entertainment",
+    "url": "https://ruffneck-entertainment.vercel.app/"
+  },
+  "priceRange": "₦2,000 - ₦14,000",
+  "paymentAccepted": "Flutterwave, Card, Bank Transfer, USSD",
+  "currenciesAccepted": "NGN"
+}
+</script>
+
 
 
 <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
@@ -1880,14 +1898,6 @@ function closeSuccessModal() {
 // ============================================================
 // FILTER & SEARCH
 // ============================================================
-document.querySelectorAll('.filter-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    filterProducts();
-  });
-});
-
 function filterProducts() {
   const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
   const search = document.getElementById('searchInput').value.trim().toLowerCase();
