@@ -57,7 +57,8 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script src="https://checkout.flutterwave.com/v3.js">
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script>
 // Search input enhancements — runs after DOM is fully ready
 document.addEventListener('DOMContentLoaded', function(){
   const si = document.getElementById('searchInput');
@@ -383,6 +384,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   .nav-drop-menu{display:none!important}
   .nav-caret{display:none}
 }
+
+.search-btn{background:var(--navy);color:var(--white);border:none;padding:9px 18px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-display);white-space:nowrap;transition:background 0.2s;margin-left:6px}
+.search-btn:hover{background:var(--cyan);color:var(--navy)}
+@media(max-width:640px){.search-btn{padding:9px 14px;font-size:12px}}
 </style>
 </head>
 <body>
@@ -526,6 +531,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
       <div class="search-box">
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Search products..." oninput="filterProducts()"/>
+        <button type="button" class="search-btn" onclick="filterProducts()" aria-label="Search">Search</button>
       </div>
       <div class="currency-toggle" role="group" aria-label="Currency selector">
         <button class="curr-btn active" id="currBtnNGN" onclick="setCurrency('NGN')" aria-pressed="true">₦ NGN</button>
@@ -2078,106 +2084,6 @@ function rnQuickAsk(topic){
 }
 </script>
 
-
-<script>
-// ── BULLETPROOF HORIZONTAL OVERFLOW GUARD ──
-(function(){
-  function clampOverflow(){
-    document.documentElement.style.overflowX = 'hidden';
-    document.body.style.overflowX = 'hidden';
-    document.body.style.maxWidth = '100vw';
-    document.documentElement.style.maxWidth = '100vw';
-    
-    // Find and fix any element wider than viewport
-    const vw = window.innerWidth;
-    document.querySelectorAll('body *').forEach(function(el){
-      const rect = el.getBoundingClientRect();
-      if (rect.right > vw + 2 || rect.left < -2) {
-        const style = window.getComputedStyle(el);
-        if (style.position === 'fixed' || style.position === 'absolute') return; // skip intentional overlays
-        el.style.maxWidth = '100%';
-        el.style.boxSizing = 'border-box';
-      }
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', clampOverflow);
-  } else {
-    clampOverflow();
-  }
-  window.addEventListener('resize', clampOverflow);
-  window.addEventListener('load', clampOverflow);
-})();
-
-// ── CURRENCY TOGGLE (display only — payments always process in NGN) ──
-const USD_RATE = 1375; // approx NGN per 1 USD, July 2026 — update periodically
-let currentCurrency = 'NGN';
-try { currentCurrency = localStorage.getItem('rn_store_currency') || 'NGN'; } catch(e){}
-
-function formatPrice(ngnAmount){
-  if (currentCurrency === 'USD') {
-    const usd = ngnAmount / USD_RATE;
-    return '≈$' + usd.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
-  }
-  return '₦' + Math.round(ngnAmount).toLocaleString();
-}
-
-function updateAllPriceDisplays(){
-  document.querySelectorAll('.price-val[data-ngn]').forEach(function(el){
-    const ngn = parseFloat(el.getAttribute('data-ngn'));
-    if (!isNaN(ngn)) el.textContent = formatPrice(ngn);
-  });
-}
-
-function setCurrency(curr){
-  currentCurrency = curr;
-  try { localStorage.setItem('rn_store_currency', curr); } catch(e){}
-
-  document.getElementById('currBtnNGN').classList.toggle('active', curr === 'NGN');
-  document.getElementById('currBtnNGN').setAttribute('aria-pressed', curr === 'NGN');
-  document.getElementById('currBtnUSD').classList.toggle('active', curr === 'USD');
-  document.getElementById('currBtnUSD').setAttribute('aria-pressed', curr === 'USD');
-
-  updateAllPriceDisplays();
-  renderCart();
-
-  // If a product modal is currently open, refresh its tier prices too
-  if (typeof currentModal !== 'undefined' && currentModal) {
-    const levelsEl = document.getElementById('modalLevels');
-    if (levelsEl) {
-      const selectedEl = levelsEl.querySelector('.modal-level.selected');
-      const selectedIdx = selectedEl ? Array.from(levelsEl.children).indexOf(selectedEl) : 0;
-      // Re-render by finding the product id from the currently selected tier data
-      levelsEl.querySelectorAll('.modal-level-price').forEach(function(priceEl, i){
-        if (currentModal.tiers && currentModal.tiers[i]) {
-          priceEl.textContent = formatPrice(currentModal.tiers[i].price);
-        }
-      });
-    }
-  }
-}
-
-// Apply saved currency preference on load
-document.addEventListener('DOMContentLoaded', function(){
-  if (currentCurrency === 'USD') {
-    setCurrency('USD');
-  } else {
-    updateAllPriceDisplays();
-  }
-});
-
-
-// Mobile hamburger menu toggle
-document.addEventListener('DOMContentLoaded', function(){
-  const hamburger = document.getElementById('hamburger');
-  const mobileMenu = document.getElementById('mobileMenu');
-  if (hamburger && mobileMenu) {
-    hamburger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
-    mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => mobileMenu.classList.remove('open')));
-  }
-});
-
-</script>
 
 <script>
 if ('serviceWorker' in navigator) {

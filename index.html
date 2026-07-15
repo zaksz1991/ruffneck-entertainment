@@ -30,6 +30,7 @@
     "streetAddress": "Phase 3 Sharada Estate, Gwale",
     "addressLocality": "Kano",
     "addressRegion": "Kano State",
+    "postalCode": "700234",
     "addressCountry": "NG"
   },
   "contactPoint": {
@@ -2794,40 +2795,6 @@ function rnQuickAsk(topic){
 }
 </script>
 
-
-<script>
-// ── BULLETPROOF HORIZONTAL OVERFLOW GUARD ──
-(function(){
-  function clampOverflow(){
-    document.documentElement.style.overflowX = 'hidden';
-    document.body.style.overflowX = 'hidden';
-    document.body.style.maxWidth = '100vw';
-    document.documentElement.style.maxWidth = '100vw';
-    
-    // Find and fix any element wider than viewport
-    const vw = window.innerWidth;
-    document.querySelectorAll('body *').forEach(function(el){
-      const rect = el.getBoundingClientRect();
-      if (rect.right > vw + 2 || rect.left < -2) {
-        const style = window.getComputedStyle(el);
-        if (style.position === 'fixed' || style.position === 'absolute') return; // skip intentional overlays
-        el.style.maxWidth = '100%';
-        el.style.boxSizing = 'border-box';
-      }
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', clampOverflow);
-  } else {
-    clampOverflow();
-  }
-  window.addEventListener('resize', clampOverflow);
-  window.addEventListener('load', clampOverflow);
-})();
-
-// ── WEBINAR NOTIFY ──
-
-</script>
 
 <script>
 if ('serviceWorker' in navigator) {
