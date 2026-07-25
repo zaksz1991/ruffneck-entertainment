@@ -214,6 +214,12 @@ ul{list-style:none}
 /* ── ACCESSIBILITY ── */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2.5px solid var(--cyan);outline-offset:2px}
 @media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
+
+@media(max-width:600px){
+  .img-upload-zone{padding:16px}
+  .img-upload-zone p{font-size:12px}
+  .img-preview{width:56px;height:56px}
+}
 </style>
 </head>
 <body>
@@ -378,7 +384,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
           <!-- TIERED PRICING -->
           <div style="margin:20px 0 0">
-            <div class="form-label" style="margin-bottom:12px">Pricing Tiers <span style="color:var(--danger)">*</span> <span style="font-weight:400;color:var(--muted);font-size:11px">— Leave a tier blank to disable it</span></div>
+            <div class="form-label" style="margin-bottom:12px">Pricing Tiers <span style="color:var(--danger)">*</span></div>
+            <div style="background:rgba(0,180,216,0.06);border:1px solid rgba(0,180,216,0.15);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:var(--text-dark);">
+              💡 You can select <strong>one, two, or all three tiers</strong> for this product. Fill in a price for each tier you want to include — leave any tier's price field empty to skip it.
+            </div>
             <div class="tier-grid">
               <div class="tier-box beginner">
                 <div class="tier-box-label">🟢 Beginner</div>
@@ -622,8 +631,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
                     </select>
                   </div>
                   <div class="form-group">
-                    <label class="form-label">Emoji Icon</label>
+                    <label class="form-label">Emoji Icon (fallback if no image)</label>
                     <input class="form-input" id="blogEmoji" placeholder="e.g. 🤖" maxlength="4"/>
+                  </div>
+                </div>
+                <div class="form-group" style="margin-top:16px;">
+                  <label class="form-label" style="margin-bottom:10px;display:block">Featured Image (optional)</label>
+                  <div class="img-upload-zone" id="blogUploadZone">
+                    <input type="file" accept="image/*" id="blogImageFile" onchange="previewBlogImage(this)"/>
+                    <div id="blogUploadPrompt">
+                      <div style="font-size:28px">🖼️</div>
+                      <p>Click to upload a featured image<br/><span style="font-size:11px">PNG, JPG, WebP — max 2MB</span></p>
+                    </div>
+                    <img class="img-preview" id="blogImgPreview" alt="Preview"/>
                   </div>
                 </div>
                 <div class="form-group">
@@ -889,6 +909,34 @@ function highlightMissing(id){
     el.style.animation = 'shakeError 0.3s';
     setTimeout(()=>{ el.style.borderColor=''; el.style.animation=''; }, 1500);
   }
+}
+
+function previewImage(input){
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 2*1024*1024){ showToast('Image must be under 2MB','error'); input.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('imgPreview');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    document.getElementById('uploadPrompt').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+
+function previewBlogImage(input){
+  const file = input.files[0];
+  if (!file) return;
+  if (file.size > 2*1024*1024){ showToast('Image must be under 2MB','error'); input.value=''; return; }
+  const reader = new FileReader();
+  reader.onload = e => {
+    const img = document.getElementById('blogImgPreview');
+    img.src = e.target.result;
+    img.style.display = 'block';
+    document.getElementById('blogUploadPrompt').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
 }
 
 function saveProduct(){
@@ -1239,11 +1287,15 @@ function saveBlogPost(statusOverride){
   const status = statusOverride || document.getElementById('blogStatus').value;
   const posts  = getBlogPosts();
 
+  const blogImgEl = document.getElementById('blogImgPreview');
+  const blogImageData = (blogImgEl && blogImgEl.style.display !== 'none') ? blogImgEl.src : null;
+
   const post = {
     id:       editingBlogId || Date.now().toString(),
     title,
     cat,
     emoji:    document.getElementById('blogEmoji').value || '📝',
+    image:    blogImageData,
     desc:     desc || title.substring(0,100),
     body,
     tags:     document.getElementById('blogTags').value.split(',').map(t=>t.trim()).filter(Boolean),
@@ -1333,6 +1385,12 @@ function clearBlogForm(){
   });
   document.getElementById('blogAuthor').value = 'RuffNeck Entertainment';
   document.getElementById('blogReadTime').value = '5';
+  const bImg = document.getElementById('blogImgPreview');
+  if (bImg) { bImg.style.display = 'none'; bImg.src = ''; }
+  const bPrompt = document.getElementById('blogUploadPrompt');
+  if (bPrompt) bPrompt.style.display = 'block';
+  const bFile = document.getElementById('blogImageFile');
+  if (bFile) bFile.value = '';
   document.getElementById('blogStatus').value = 'draft';
   const editor = document.getElementById('blogEditor');
   if(editor) editor.innerHTML = '';

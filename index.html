@@ -962,6 +962,26 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}
 }
+
+/* ── LEAD MAGNET ── */
+.lead-magnet-section{background:linear-gradient(135deg,var(--navy),#0a2040);padding:56px 0}
+.lead-magnet-inner{display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center;max-width:1000px;margin:0 auto}
+.lm-badge{display:inline-block;background:rgba(255,193,7,0.15);color:var(--gold);border:1px solid rgba(255,193,7,0.3);font-family:var(--font-mono);font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:6px 16px;border-radius:100px;margin-bottom:16px}
+.lead-magnet-text h2{font-size:clamp(22px,3vw,32px);font-weight:700;color:var(--white);margin-bottom:14px;line-height:1.3}
+.lead-magnet-text p{font-size:15px;color:rgba(255,255,255,0.7);line-height:1.7;margin-bottom:20px}
+.lm-checklist{display:flex;flex-direction:column;gap:8px}
+.lm-checklist li{font-size:14px;color:rgba(255,255,255,0.85)}
+.lead-magnet-form-wrap{background:var(--white);border-radius:16px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.lead-magnet-form-wrap label{display:block;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:6px;margin-top:14px}
+.lead-magnet-form-wrap label:first-child{margin-top:0}
+.lead-magnet-form-wrap input{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:11px 14px;font-family:var(--font-display);font-size:14px;color:var(--text-dark);outline:none;box-sizing:border-box}
+.lead-magnet-form-wrap input:focus{border-color:var(--cyan)}
+.lead-magnet-form-wrap button{margin-top:18px}
+.lm-privacy{font-size:11px;color:var(--text-muted);text-align:center;margin-top:10px}
+@media(max-width:768px){
+  .lead-magnet-inner{grid-template-columns:1fr;gap:28px}
+  .lead-magnet-section{padding:40px 0}
+}
 </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
 </head>
@@ -1090,6 +1110,35 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <div><div class="hero-stat-num">2026</div><div class="hero-stat-label">Active &amp; Growing</div></div>
           <div><div class="hero-stat-num">CAC</div><div class="hero-stat-label">Registered · 2022</div></div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEAD MAGNET -->
+<section class="lead-magnet-section" id="free-guide">
+  <div class="container">
+    <div class="lead-magnet-inner">
+      <div class="lead-magnet-text">
+        <div class="lm-badge">🎁 Free Download</div>
+        <h2>20 AI Prompts Every Nigerian Business Should Be Using</h2>
+        <p>Copy, paste, and adapt these prompts into ChatGPT, Claude, or any AI tool — for marketing, sales, operations, and career growth. No experience required.</p>
+        <ul class="lm-checklist">
+          <li>✅ Instant PDF delivery to your email</li>
+          <li>✅ 100% free, no credit card needed</li>
+          <li>✅ Written specifically for the Nigerian business context</li>
+        </ul>
+      </div>
+      <div class="lead-magnet-form-wrap">
+        <form id="leadMagnetForm" onsubmit="return submitLeadMagnet(event)">
+          <label for="lmName">Full Name</label>
+          <input type="text" id="lmName" placeholder="Your name" required/>
+          <label for="lmEmail">Email Address</label>
+          <input type="email" id="lmEmail" placeholder="you@email.com" required/>
+          <button type="submit" class="btn btn-primary" id="lmSubmitBtn" style="width:100%;justify-content:center;">Send Me the Free Guide →</button>
+          <p id="lmMsg" style="display:none;font-size:13px;margin-top:10px;text-align:center;"></p>
+          <p class="lm-privacy">We respect your privacy. Unsubscribe anytime.</p>
+        </form>
       </div>
     </div>
   </div>
@@ -2804,6 +2853,72 @@ if ('serviceWorker' in navigator) {
       .catch(function(err){ console.log('SW registration failed:', err); });
   });
 }
+
+// ── LEAD MAGNET SUBMISSION ──
+// Replace with your deployed Google Apps Script Web App URL (see RuffNeck_PDF_Delivery_Script.gs)
+const LEAD_MAGNET_WEBHOOK_URL = 'GAS_WEBHOOK_URL_PLACEHOLDER';
+
+function submitLeadMagnet(event){
+  event.preventDefault();
+  const name = document.getElementById('lmName').value.trim();
+  const email = document.getElementById('lmEmail').value.trim();
+  const msgEl = document.getElementById('lmMsg');
+  const btn = document.getElementById('lmSubmitBtn');
+
+  if (!name || !email || !email.includes('@')) {
+    msgEl.style.display = 'block';
+    msgEl.style.color = '#EF4444';
+    msgEl.textContent = 'Please enter your name and a valid email.';
+    return false;
+  }
+
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+
+  if (LEAD_MAGNET_WEBHOOK_URL.includes('PLACEHOLDER')) {
+    // Demo mode — webhook not yet configured
+    setTimeout(()=>{
+      msgEl.style.display = 'block';
+      msgEl.style.color = '#00B4D8';
+      msgEl.textContent = '✅ Got it! (Demo mode — connect your Google Apps Script webhook to send real emails.)';
+      btn.textContent = 'Send Me the Free Guide →';
+      btn.disabled = false;
+      document.getElementById('leadMagnetForm').reset();
+    }, 800);
+    return false;
+  }
+
+  fetch(LEAD_MAGNET_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      type: 'lead_magnet',
+      customer_name: name,
+      customer_email: email,
+      resource: '20 AI Prompts for Nigerian Businesses',
+      pdf_url: 'https://ruffneck-entertainment.vercel.app/20_AI_Prompts_RuffNeck.pdf',
+      date: new Date().toISOString()
+    })
+  })
+  .then(() => {
+    msgEl.style.display = 'block';
+    msgEl.style.color = '#00B4D8';
+    msgEl.textContent = '✅ Check your email! Your free guide is on its way.';
+    btn.textContent = 'Send Me the Free Guide →';
+    btn.disabled = false;
+    document.getElementById('leadMagnetForm').reset();
+  })
+  .catch(() => {
+    msgEl.style.display = 'block';
+    msgEl.style.color = '#EF4444';
+    msgEl.textContent = 'Something went wrong. Please try again or email us directly.';
+    btn.textContent = 'Send Me the Free Guide →';
+    btn.disabled = false;
+  });
+
+  return false;
+}
+
 </script>
 </body>
 </html>

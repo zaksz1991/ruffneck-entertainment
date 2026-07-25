@@ -332,6 +332,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .search-btn{background:var(--navy);color:var(--white);border:none;padding:9px 18px;border-radius:var(--radius-sm);font-size:13px;font-weight:700;cursor:pointer;font-family:var(--font-display);white-space:nowrap;transition:background 0.2s;margin-left:6px}
 .search-btn:hover{background:var(--cyan);color:var(--navy)}
 @media(max-width:640px){.search-btn{padding:9px 14px;font-size:12px}}
+
+.share-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:16px 0;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.share-label{font-size:12px;font-weight:700;color:var(--text-muted);margin-right:4px}
+.share-btn{font-size:12px;font-weight:600;padding:7px 14px;border-radius:100px;border:none;cursor:pointer;color:var(--white);font-family:var(--font-display)}
+.share-wa{background:#25D366}.share-wa:hover{background:#1dab52}
+.share-fb{background:#1877F2}.share-fb:hover{background:#145dc4}
+.share-tw{background:#000}.share-tw:hover{background:#333}
+.share-li{background:#0A66C2}.share-li:hover{background:#084d94}
+@media(max-width:480px){.share-row{gap:6px}.share-btn{font-size:11px;padding:6px 11px}}
 </style>
 </head>
 <body>
@@ -617,6 +626,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     <div class="article-body" id="articleBody"></div>
     <div class="article-footer">
       <div class="article-tags" id="articleTags"></div>
+
+      <div class="share-row">
+        <span class="share-label">Share this article:</span>
+        <button type="button" class="share-btn share-wa" onclick="shareArticle('whatsapp')" aria-label="Share on WhatsApp">WhatsApp</button>
+        <button type="button" class="share-btn share-fb" onclick="shareArticle('facebook')" aria-label="Share on Facebook">Facebook</button>
+        <button type="button" class="share-btn share-tw" onclick="shareArticle('twitter')" aria-label="Share on X">X</button>
+        <button type="button" class="share-btn share-li" onclick="shareArticle('linkedin')" aria-label="Share on LinkedIn">LinkedIn</button>
+      </div>
 
       <!-- COMMENTS SECTION -->
       <div class="comments-section">
@@ -1341,6 +1358,50 @@ if ('serviceWorker' in navigator) {
       .catch(function(err){ console.log('SW registration failed:', err); });
   });
 }
+
+// ── ADMIN-PUBLISHED BLOG POSTS ──
+function rnLoadAdminBlogPosts(){
+  let posts = [];
+  try { posts = JSON.parse(localStorage.getItem('rn_blog_posts') || '[]'); } catch(e){ posts = []; }
+  const published = posts.filter(p => p.status === 'published');
+  if (published.length === 0) return;
+
+  const grid = document.getElementById('blogGrid');
+  if (!grid) return;
+
+  published.forEach(p => {
+    articles[p.id] = {
+      label: p.cat, title: p.title, meta: (p.author||'RuffNeck Entertainment') + ' · ' + (p.created||'') + ' · ' + (p.readTime||'5') + ' min',
+      body: p.body, tags: p.tags || []
+    };
+    const card = document.createElement('div');
+    card.className = 'blog-card';
+    card.setAttribute('data-cat', (p.cat||'').toLowerCase().replace(/\s+/g,'-'));
+    card.setAttribute('data-title', p.title);
+    card.setAttribute('onclick', "openArticle('" + p.id + "')");
+    card.innerHTML = '<div class="blog-thumb blog-thumb-ai"' + (p.image?(' style="background-image:url(\''+p.image+'\');background-size:cover;"'):'') + '>' +
+      (!p.image?('<span>'+(p.emoji||'📝')+'</span>'):'') + '<span class="card-cat-badge">' + p.cat + '</span><span class="card-new">New</span></div>' +
+      '<div class="blog-card-body"><div class="card-meta"><span>' + (p.author||'RuffNeck Entertainment') + '</span><span class="card-dot"></span><span>' + (p.created||'') + '</span></div>' +
+      '<h3>' + p.title + '</h3><p>' + (p.desc||'') + '</p></div>';
+    grid.insertBefore(card, grid.firstChild);
+  });
+}
+document.addEventListener('DOMContentLoaded', rnLoadAdminBlogPosts);
+
+// ── SOCIAL SHARE ──
+function shareArticle(platform){
+  const title = document.getElementById('articleTitle').textContent;
+  const url = window.location.href.split('#')[0] + '/blog';
+  const text = encodeURIComponent(title);
+  const shareUrl = encodeURIComponent(url);
+  let link = '';
+  if (platform === 'whatsapp') link = 'https://wa.me/?text=' + text + '%20' + shareUrl;
+  if (platform === 'facebook') link = 'https://www.facebook.com/sharer/sharer.php?u=' + shareUrl;
+  if (platform === 'twitter') link = 'https://twitter.com/intent/tweet?text=' + text + '&url=' + shareUrl;
+  if (platform === 'linkedin') link = 'https://www.linkedin.com/sharing/share-offsite/?url=' + shareUrl;
+  window.open(link, '_blank', 'width=600,height=500');
+}
+
 </script>
 </body>
 </html>
