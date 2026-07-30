@@ -1658,6 +1658,53 @@ function rnLoadAdminProducts(){
 document.addEventListener('DOMContentLoaded', rnLoadAdminProducts);
 
 
+
+// ── CURRENCY TOGGLE (display only — payments always process in NGN) ──
+const USD_RATE = 1375; // approx NGN per 1 USD — update periodically
+let currentCurrency = 'NGN';
+try { currentCurrency = localStorage.getItem('rn_store_currency') || 'NGN'; } catch(e){}
+
+function formatPrice(ngnAmount){
+  if (currentCurrency === 'USD') {
+    const usd = ngnAmount / USD_RATE;
+    return '\u2248$' + usd.toLocaleString(undefined, {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+  return '\u20a6' + Math.round(ngnAmount).toLocaleString();
+}
+
+function updateAllPriceDisplays(){
+  document.querySelectorAll('.price-val[data-ngn]').forEach(function(el){
+    const ngn = parseFloat(el.getAttribute('data-ngn'));
+    if (!isNaN(ngn)) el.textContent = formatPrice(ngn);
+  });
+}
+
+function setCurrency(curr){
+  currentCurrency = curr;
+  try { localStorage.setItem('rn_store_currency', curr); } catch(e){}
+
+  const ngnBtn = document.getElementById('currBtnNGN');
+  const usdBtn = document.getElementById('currBtnUSD');
+  if (ngnBtn) { ngnBtn.classList.toggle('active', curr === 'NGN'); ngnBtn.setAttribute('aria-pressed', curr === 'NGN'); }
+  if (usdBtn) { usdBtn.classList.toggle('active', curr === 'USD'); usdBtn.setAttribute('aria-pressed', curr === 'USD'); }
+
+  updateAllPriceDisplays();
+  if (typeof renderCart === 'function') renderCart();
+
+  if (typeof currentModal !== 'undefined' && currentModal && currentModal.tiers) {
+    const levelsEl = document.getElementById('modalLevels');
+    if (levelsEl) {
+      levelsEl.querySelectorAll('.modal-level-price').forEach(function(priceEl, i){
+        if (currentModal.tiers[i]) priceEl.textContent = formatPrice(currentModal.tiers[i].price);
+      });
+    }
+  }
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  if (currentCurrency === 'USD') { setCurrency('USD'); } else { updateAllPriceDisplays(); }
+});
+
 function openModal(productId) {
   const p = PRODUCTS[productId];
   if (!p) { console.error('Product not found:', productId); return; }
