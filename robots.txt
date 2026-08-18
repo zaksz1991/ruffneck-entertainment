@@ -1,5 +1,9 @@
 User-agent: *
 Allow: /
-Disallow: /admin
 
+# Block admin
+Disallow: /admin
+Disallow: /admin.html
+
+# Sitemap
 Sitemap: https://ruffneck-entertainment.vercel.app/sitemap.xml
