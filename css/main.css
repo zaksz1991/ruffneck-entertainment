@@ -502,11 +502,7 @@ p,li{line-height:1.7}
   
   
   .policy-modal-head h2{font-size:16px}
-  
-  
-  .policy-modal-body p,
-  
-
+  .policy-modal{
     position:fixed!important;
     width:calc(100vw - 20px)!important;
     max-width:none!important;
@@ -516,7 +512,8 @@ p,li{line-height:1.7}
     top:auto!important;
     max-height:65vh!important;
     border-radius:12px;
-  
+  }
+
 
   /* ABOUT SECTION FIXES */
   .about-mission-vision{grid-template-columns:1fr!important;gap:14px}
@@ -553,20 +550,13 @@ p,li{line-height:1.7}
   .store-preview-grid{grid-template-columns:1fr!important}
 }
 
+
+@media (max-width: 768px) {
   html{scroll-padding-top:64px}
   
   .container{padding:0 16px}
   .section{padding:48px 0}
 
-    width:calc(100vw - 24px);
-    max-width:100%;
-    max-height:72vh;
-    position:fixed;
-    bottom:68px;
-    right:12px;
-    left:12px;
-    border-radius:12px;
-  }
 
   /* TYPOGRAPHY */
   .section-title{font-size:clamp(22px,6vw,32px)!important}
@@ -1424,7 +1414,7 @@ html {
   .rn-responsive-img{min-height:120px;max-height:180px}
   .rn-article-img{max-height:240px}
 }
-
+}
 
 /* CRITICAL FIX – sections must never appear blank */
 .fade-up,
@@ -1782,4 +1772,100 @@ body.nav-open {
   opacity: 0.8;
   font-size: 14px;
   line-height: 1.5;
+}
+
+
+/* =========================================================
+   MOBILE NAV — definitive fix (do not remove)
+   ========================================================= */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none !important;
+  }
+  .nav-hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 10003;
+    position: relative;
+  }
+  .nav-hamburger span {
+    display: block !important;
+    width: 22px;
+    height: 2px;
+    background: #ffffff !important;
+    border-radius: 2px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .nav-hamburger.is-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-hamburger.is-open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-hamburger.is-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  .nav-mobile {
+    display: none;
+    position: fixed !important;
+    top: 60px !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: rgba(4, 12, 26, 0.98) !important;
+    backdrop-filter: blur(12px);
+    padding: 16px 20px 28px !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    z-index: 10002 !important;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+    border-bottom: 1px solid rgba(0, 180, 216, 0.2);
+  }
+  .nav-mobile.open {
+    display: flex !important;
+  }
+  .nav-mobile a {
+    display: block !important;
+    padding: 14px 4px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    color: rgba(255, 255, 255, 0.9) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    text-decoration: none !important;
+  }
+  .nav-mobile a.mobile-cta {
+    margin-top: 12px;
+    text-align: center;
+    background: #00B4D8;
+    color: #0B1E3A !important;
+    font-weight: 700 !important;
+    border-radius: 10px;
+    border-bottom: none !important;
+    padding: 14px !important;
+  }
+  body.nav-open {
+    overflow: hidden !important;
+  }
+  .nav-drop-menu {
+    display: none !important;
+  }
+}
+
+
+/* UX polish layer */
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.nav-logo{display:flex;align-items:center;gap:10px;flex-shrink:0}
+@media (max-width: 768px) {
+  .hero-actions{display:flex;flex-direction:column;width:100%}
+  .hero-actions .btn{width:100%;justify-content:center;text-align:center}
+  .btn{min-height:48px}
+  .container{padding-left:16px;padding-right:16px}
 }
