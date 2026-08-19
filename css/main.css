@@ -1681,3 +1681,105 @@ body.nav-open {
     font-size: 12px !important;
   }
 }
+
+
+/* =====================================================
+   PHASE 1–4 COMMERCIAL HOMEPAGE
+   ===================================================== */
+.hero-secondary-link {
+  margin-top: 14px;
+  font-size: 14px;
+}
+.hero-secondary-link a {
+  color: rgba(255,255,255,0.55);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.hero-secondary-link a:hover { color: var(--cyan, #00C2FF); }
+
+.trust-link {
+  color: inherit !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(0,180,216,0.45);
+}
+.trust-link:hover { color: var(--cyan, #00C2FF) !important; }
+
+.hero-trust .trust-link { color: rgba(255,255,255,0.65) !important; }
+
+/* Services: hide beyond first 6 until expanded */
+#servicesGrid .service-card:nth-child(n+7) {
+  display: none;
+}
+#servicesGrid.is-expanded .service-card:nth-child(n+7) {
+  display: block;
+}
+.services-more-wrap {
+  text-align: center;
+  margin: 28px 0 8px;
+}
+#servicesGrid.is-expanded + .services-more-wrap,
+.services-more-wrap.is-hidden {
+  display: none;
+}
+
+/* When filter active, show matching even if beyond 6 */
+#servicesGrid.is-filtering .service-card {
+  /* filter JS controls display */
+}
+
+.section-teaser {
+  padding: 56px 0 !important;
+}
+.teaser-card {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 36px 28px;
+  background: #fff;
+  border: 1.5px solid var(--border, #E5E7EB);
+  border-radius: 16px;
+  box-shadow: 0 8px 28px rgba(11,30,58,0.06);
+}
+.section-alt .teaser-card {
+  background: #fff;
+}
+
+/* Mobile density */
+@media (max-width: 768px) {
+  .hero { padding: 100px 0 56px !important; }
+  .hero h1 { font-size: 1.75rem !important; line-height: 1.2 !important; }
+  .hero-sub { font-size: 15px !important; margin-bottom: 22px !important; }
+  .section { padding: 48px 0 !important; }
+  .section-teaser { padding: 40px 0 !important; }
+  .teaser-card { padding: 28px 20px; }
+  .services-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 8px;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 8px;
+  }
+  .tab-btn { flex: 0 0 auto; }
+}
+
+/* Store featured strip helper */
+.store-featured-banner {
+  background: linear-gradient(135deg, #0B1E3A, #0a2a4a);
+  color: #fff;
+  border-radius: 14px;
+  padding: 24px 28px;
+  margin-bottom: 28px;
+}
+.store-featured-banner h2 {
+  margin: 0 0 8px;
+  font-size: 1.35rem;
+  color: #fff;
+}
+.store-featured-banner p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 1.5;
+}

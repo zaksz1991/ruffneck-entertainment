@@ -1,8 +1,33 @@
 {
   "rewrites": [
-    { "source": "/store", "destination": "/store.html" },
-    { "source": "/blog", "destination": "/blog.html" },
-    { "source": "/admin", "destination": "/admin.html" }
+    {
+      "source": "/store",
+      "destination": "/store.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/services/ai",
+      "destination": "/services-ai.html"
+    },
+    {
+      "source": "/services/marketing",
+      "destination": "/services-marketing.html"
+    },
+    {
+      "source": "/services/virtual-assistance",
+      "destination": "/services-va.html"
+    },
+    {
+      "source": "/consulting",
+      "destination": "/consulting.html"
+    }
   ],
   "cleanUrls": true,
   "trailingSlash": false,
@@ -10,17 +35,35 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
       ]
     },
     {
       "source": "/20_AI_Prompts_RuffNeck.pdf",
       "headers": [
-        { "key": "Content-Disposition", "value": "inline; filename=\"20_AI_Prompts_RuffNeck.pdf\"" },
-        { "key": "Cache-Control", "value": "public, max-age=86400" }
+        {
+          "key": "Content-Disposition",
+          "value": "inline; filename=\"20_AI_Prompts_RuffNeck.pdf\""
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400"
+        }
       ]
     }
   ]
