@@ -23,7 +23,12 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .btn-outline{border:2px solid rgba(255,255,255,0.3);color:var(--white)}.btn-outline:hover{border-color:var(--cyan);color:var(--cyan)}
 .btn-outline-dark{border:2px solid var(--border);color:var(--text-dark)}.btn-outline-dark:hover{border-color:var(--cyan);color:var(--cyan)}
 .btn-gold{background:var(--gold);color:var(--navy)}.btn-gold:hover{background:#FFE57F;transform:translateY(-1px)}
-.fade-up{opacity:0;transform:translateY(28px);transition:opacity 0.55s ease,transform 0.55s ease}
+/* Visible by default so page is never blank if JS fails */
+.fade-up{opacity:1;transform:none;transition:opacity 0.55s ease,transform 0.55s ease}
+@media (prefers-reduced-motion: no-preference) {
+  html.js-ready .fade-up:not(.visible){opacity:0;transform:translateY(20px)}
+  html.js-ready .fade-up.visible{opacity:1;transform:translateY(0)}
+}
 .fade-up.visible{opacity:1;transform:translateY(0)}
 
 /* NAV */
@@ -1418,4 +1423,13 @@ html {
 @media(max-width:768px){
   .rn-responsive-img{min-height:120px;max-height:180px}
   .rn-article-img{max-height:240px}
+}
+
+
+/* CRITICAL FIX – sections must never appear blank */
+.fade-up,
+.fade-up:not(.visible),
+html.js-ready .fade-up:not(.visible) {
+  opacity: 1 !important;
+  transform: none !important;
 }

@@ -1921,6 +1921,30 @@ if ('serviceWorker' in navigator) {
 // ── LEAD MAGNET SUBMISSION ──
 // Replace with your deployed Google Apps Script Web App URL (see RuffNeck_PDF_Delivery_Script.gs)
 </script>
+  
+<script>
+(function(){
+  document.documentElement.classList.add('js-ready');
+  function reveal(){
+    document.querySelectorAll('.fade-up').forEach(function(el){
+      el.classList.add('visible');
+    });
+  }
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(function(el){ io.observe(el); });
+    // safety: reveal all after 2s in case observer misses
+    setTimeout(reveal, 2000);
+  } else {
+    reveal();
+  }
+})();
+</script>
+
   <script src="/js/forms.js"></script>
 </body>
 </html>
