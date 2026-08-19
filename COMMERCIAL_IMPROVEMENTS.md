@@ -101,3 +101,25 @@ https://drive.google.com/file/d/1EVLy1k4wD3NTasr3lTUyv1VWPFeeGeui/view
 5. Update the Apps Script webhook URL
 6. Test the free guide form end-to-end
 
+
+---
+
+## UI/UX Design Pass (19 Aug 2026)
+
+### Implemented
+- Stronger visual hierarchy and section spacing
+- Hero refinements (clearer CTAs, trust line)
+- Lead magnet form polish (better inputs, focus states, privacy line)
+- Services section clearer intro + card hover states
+- New **Trust Strip** (Years, Services, CAC, SMEDAN, Remote)
+- Testimonials card polish
+- Navigation backdrop and CTA polish
+- Mobile improvements (stacked CTAs, spacing, form layout)
+- Accessibility focus states
+- Smooth scroll
+
+### Files updated
+- `css/main.css` — full commercial polish layer added
+- `index.html` — trust strip + copy refinements
+- `js/lead-magnet.js` — thank-you UI with secondary CTA
+

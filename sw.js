@@ -3,7 +3,7 @@
 // Does NOT cache payment processing, form submissions, or chatbot responses —
 // those always require a live internet connection.
 
-const CACHE_NAME = 'ruffneck-cache-v1';
+const CACHE_NAME = 'ruffneck-v2026-08-19';
 
 // Core files to cache immediately on install so the site works offline
 // the very first time, even before a visitor has browsed around.

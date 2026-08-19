@@ -1,12 +1,11 @@
 /**
  * RuffNeck Entertainment – Lead Magnet Form Handler
- * Commercial-grade version with better UX and error handling
+ * Final commercial version
  */
 
 const LEAD_MAGNET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycby0mX6rqzDHVPy1deNqpHAnBC_f0QRL5f0jL5Bdwxfo4e4AFDO2flbCkV8fjIoT-1w/exec';
-// ⬆️ REPLACE the URL above with your NEW Google Apps Script Web App URL after deploying
-
 const PDF_URL = 'https://ruffneck-entertainment.vercel.app/20_AI_Prompts_RuffNeck.pdf';
+const CALENDLY_URL = 'https://calendly.com/hassanzakariyabiz/30min';
 
 function submitLeadMagnet(event) {
   event.preventDefault();
@@ -15,13 +14,16 @@ function submitLeadMagnet(event) {
   const emailInput = document.getElementById('lmEmail');
   const msgEl      = document.getElementById('lmMsg');
   const btn        = document.getElementById('lmSubmitBtn');
+  const form       = document.getElementById('leadMagnetForm');
 
   const name  = (nameInput?.value || '').trim();
   const email = (emailInput?.value || '').trim().toLowerCase();
 
-  // Reset message
-  msgEl.style.display = 'none';
-  msgEl.textContent = '';
+  // Reset
+  if (msgEl) {
+    msgEl.style.display = 'none';
+    msgEl.textContent = '';
+  }
 
   // Validation
   if (!name || name.length < 2) {
@@ -40,22 +42,11 @@ function submitLeadMagnet(event) {
   const originalText = btn.textContent;
   btn.textContent = 'Sending...';
   btn.disabled = true;
-  btn.style.opacity = '0.7';
+  btn.style.opacity = '0.75';
 
-  // Demo / placeholder check
-  if (!LEAD_MAGNET_WEBHOOK_URL || LEAD_MAGNET_WEBHOOK_URL.includes('PLACEHOLDER')) {
-    setTimeout(() => {
-      showMessage(msgEl, '✅ Got it! (Demo mode — update the webhook URL to send real emails.)', 'success');
-      resetButton(btn, originalText);
-      document.getElementById('leadMagnetForm')?.reset();
-    }, 700);
-    return false;
-  }
-
-  // Send to Google Apps Script
   fetch(LEAD_MAGNET_WEBHOOK_URL, {
     method: 'POST',
-    mode: 'no-cors', // Required for Apps Script from browser
+    mode: 'no-cors',
     headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify({
       type: 'lead_magnet',
@@ -68,12 +59,10 @@ function submitLeadMagnet(event) {
     })
   })
   .then(() => {
-    // Success UI
-    showMessage(msgEl, '✅ Check your email! Your free guide is on its way.', 'success');
-    resetButton(btn, originalText);
-    document.getElementById('leadMagnetForm')?.reset();
-
-    // Optional: track conversion
+    // Success – replace form with thank-you state
+    showSuccessState(form, name);
+    
+    // Analytics
     if (typeof gtag === 'function') {
       gtag('event', 'generate_lead', {
         event_category: 'Lead Magnet',
@@ -83,11 +72,41 @@ function submitLeadMagnet(event) {
   })
   .catch((err) => {
     console.error('Lead magnet error:', err);
-    showMessage(msgEl, 'Something went wrong. Please try again or WhatsApp us on +234 803 380 7856.', 'error');
+    showMessage(msgEl, 'Something went wrong. Please try again or WhatsApp +234 803 380 7856.', 'error');
     resetButton(btn, originalText);
   });
 
   return false;
+}
+
+function showSuccessState(form, name) {
+  if (!form) return;
+
+  form.innerHTML = `
+    <div style="text-align:center; padding: 8px 0;">
+      <div style="font-size: 36px; margin-bottom: 12px;">✅</div>
+      <h3 style="color: #0A0F1E; font-size: 18px; margin: 0 0 8px;">Thank you${name ? ', ' + name.split(' ')[0] : ''}!</h3>
+      <p style="color: #64748b; font-size: 14px; margin: 0 0 16px; line-height: 1.5;">
+        Your free guide is on its way to your email.<br>
+        Check your inbox (and spam folder just in case).
+      </p>
+      <a href="${PDF_URL}" target="_blank" rel="noopener"
+         style="display:inline-block; background:#00C2FF; color:#0A0F1E; 
+                font-weight:700; padding:12px 22px; border-radius:8px; 
+                text-decoration:none; font-size:14px; margin-bottom:12px;">
+        Download PDF Now →
+      </a>
+      <p style="color: #64748b; font-size: 13px; margin: 16px 0 8px;">
+        Want personalised AI support for your business?
+      </p>
+      <a href="${CALENDLY_URL}" target="_blank" rel="noopener"
+         style="display:inline-block; border:1.5px solid #00C2FF; color:#00C2FF; 
+                font-weight:600; padding:10px 18px; border-radius:8px; 
+                text-decoration:none; font-size:13px;">
+        Book a Free 30-min Call
+      </a>
+    </div>
+  `;
 }
 
 function showMessage(el, text, type) {
@@ -104,5 +123,4 @@ function resetButton(btn, text) {
   btn.style.opacity = '1';
 }
 
-// Expose globally for the onsubmit attribute
 window.submitLeadMagnet = submitLeadMagnet;
