@@ -69,7 +69,7 @@
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Digital Marketing" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Website Development" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Design & Branding" } },
-      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data Management & Analysis" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Data Management, Mining & Analysis" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Virtual Assistance" } },
       { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Business Consultation" } }
     ]
@@ -182,14 +182,33 @@
           <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Consultation</a>
           <a href="#free-guide" class="btn btn-outline">Download Free AI Prompts</a>
         </div>
-        <p class="hero-secondary-link"><a href="/store">View digital products →</a></p>
-
-        <div class="hero-trust">
-          <span class="hero-trust-item"><a href="https://search.cac.gov.ng/" target="_blank" rel="noopener" class="trust-link">CAC Registered</a></span>
-          <span class="hero-trust-dot">·</span>
-          <span class="hero-trust-item"><a href="https://smedan.gov.ng/" target="_blank" rel="noopener" class="trust-link">SMEDAN Certified</a></span>
-          <span class="hero-trust-dot">·</span>
-          <span class="hero-trust-item">5+ Years Experience</span>
+        <div class="hero-meta">
+          <a href="/store" class="hero-store-chip">
+            <span class="hero-store-icon">🛒</span>
+            <span>
+              <strong>Digital products</strong>
+              <small>Guides &amp; templates · Instant delivery</small>
+            </span>
+            <span class="hero-store-arrow">→</span>
+          </a>
+          <div class="hero-trust-cards" aria-label="Credentials">
+            <a class="hero-trust-card" href="https://search.cac.gov.ng/" target="_blank" rel="noopener">
+              <span class="htc-label">Registered</span>
+              <span class="htc-value">CAC 3770977</span>
+            </a>
+            <a class="hero-trust-card" href="https://smedan.gov.ng/" target="_blank" rel="noopener">
+              <span class="htc-label">Certified</span>
+              <span class="htc-value">SMEDAN</span>
+            </a>
+            <div class="hero-trust-card">
+              <span class="htc-label">Experience</span>
+              <span class="htc-value">5+ Years</span>
+            </div>
+            <div class="hero-trust-card">
+              <span class="htc-label">Delivery</span>
+              <span class="htc-value">Remote · Global</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -268,7 +287,7 @@
     <div class="fade-up">
       <div class="section-label">What We Deliver · 2026</div>
       <h2 class="section-title">Comprehensive Digital &amp; AI Solutions</h2>
-      <p class="section-sub">Practical AI, marketing, operations, and digital support for Nigerian businesses. Filter by category, then click any card for full details.</p>
+      <p class="section-sub">Filter a category to jump to those services — then open any card for deliverables, tools, and outcomes. Built for Nigerian businesses ready to scale.</p>
     </div>
     <div class="services-tabs fade-up" style="margin-top:36px;">
       <button class="tab-btn active" data-filter="all">All Services</button>
@@ -281,7 +300,7 @@
     </div>
     <div class="services-grid" id="servicesGrid">
 
-      <div class="service-card fade-up" data-category="ai">
+      <div class="service-card fade-up" data-category="ai" id="svc-ai">
         <div class="service-year">2026</div>
         <div class="service-icon">🤖</div>
         <h3>AI Solutions &amp; Training</h3>
@@ -289,7 +308,8 @@
         <div class="expand-hint">View details <span class="expand-chevron">⌄</span></div>
         <div class="service-popup">
           <ul class="service-list">
-            <li>AI Literacy &amp; Fluency Training for teams and individuals</li>
+            <li>AI Literacy &amp; Fluency Training for teams, individuals, and organizations</li>
+            <li>Online and on-site training delivery (travel available when required)</li>
             <li>Workflow Automation Setup using leading AI tools</li>
             <li>Prompt Engineering for content and business tasks</li>
             <li>AI Content Development and structured writing</li>
@@ -301,6 +321,7 @@
             <li>AI Outputs Reviewer &amp; Quality Assessment</li>
           </ul>
           <div class="service-tags"><span class="service-tag">ChatGPT</span><span class="service-tag">Automation</span><span class="service-tag">Training</span><span class="service-tag">LLMs</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
@@ -321,10 +342,11 @@
             <li>Technical AI Content Writing (internship-level to expert)</li>
           </ul>
           <div class="service-tags"><span class="service-tag">Copywriting</span><span class="service-tag">Video</span><span class="service-tag">Design</span><span class="service-tag">Research</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
-      <div class="service-card fade-up" data-category="marketing">
+      <div class="service-card fade-up" data-category="marketing" id="svc-marketing">
         <div class="service-year">2026</div>
         <div class="service-icon">📣</div>
         <h3>Digital Marketing Solutions</h3>
@@ -340,10 +362,11 @@
             <li>Brand Awareness Campaigns with measurable KPIs</li>
           </ul>
           <div class="service-tags"><span class="service-tag">SEO</span><span class="service-tag">Social</span><span class="service-tag">Email</span><span class="service-tag">Leads</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
-      <div class="service-card fade-up" data-category="admin">
+      <div class="service-card fade-up" data-category="admin" id="svc-admin">
         <div class="service-year">2026</div>
         <div class="service-icon">💼</div>
         <h3>Virtual Assistance</h3>
@@ -359,6 +382,7 @@
             <li>Remote Team Coordination &amp; task management</li>
           </ul>
           <div class="service-tags"><span class="service-tag">Remote</span><span class="service-tag">Admin</span><span class="service-tag">CRM</span><span class="service-tag">Executive</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
@@ -378,10 +402,11 @@
             <li>Digital Workflow Systems &amp; process documentation</li>
           </ul>
           <div class="service-tags"><span class="service-tag">WordPress</span><span class="service-tag">Excel</span><span class="service-tag">Cloud</span><span class="service-tag">M365</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
-      <div class="service-card fade-up" data-category="design">
+      <div class="service-card fade-up" data-category="design" id="svc-design">
         <div class="service-year">2026</div>
         <div class="service-icon">🎨</div>
         <h3>Design &amp; Branding</h3>
@@ -397,6 +422,7 @@
             <li>AI-enhanced graphic design using Canva, Midjourney &amp; tools</li>
           </ul>
           <div class="service-tags"><span class="service-tag">Logo</span><span class="service-tag">Identity</span><span class="service-tag">Canva</span><span class="service-tag">Graphics</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
@@ -416,10 +442,11 @@
             <li>Complaint resolution workflows &amp; escalation systems</li>
           </ul>
           <div class="service-tags"><span class="service-tag">CRM</span><span class="service-tag">Live Chat</span><span class="service-tag">Support</span><span class="service-tag">SOPs</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
-      <div class="service-card fade-up" data-category="operations">
+      <div class="service-card fade-up" data-category="operations" id="svc-operations">
         <div class="service-year">2026</div>
         <div class="service-icon">⚙️</div>
         <h3>Operations &amp; Logistics Support</h3>
@@ -436,25 +463,29 @@
             <li>Cross-functional team coordination &amp; supervision</li>
           </ul>
           <div class="service-tags"><span class="service-tag">SOPs</span><span class="service-tag">Logistics</span><span class="service-tag">Compliance</span><span class="service-tag">Warehouse</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
       <div class="service-card fade-up" data-category="operations">
         <div class="service-year">2026</div>
         <div class="service-icon">📊</div>
-        <h3>Data Management &amp; Analysis</h3>
-        <p class="service-intro">Structured data systems &amp; business intelligence that turn raw data into insights.</p>
+        <h3>Data Management, Mining &amp; Analysis</h3>
+        <p class="service-intro">Turn raw data into decisions — data mining, cleaning, analysis, and reporting for businesses and research teams.</p>
         <div class="expand-hint">View details <span class="expand-chevron">⌄</span></div>
         <div class="service-popup">
           <ul class="service-list">
+            <li>Data Mining — extract patterns, insights, and structured findings from datasets</li>
             <li>Data Entry, Cleaning &amp; Structuring for accuracy</li>
+            <li>SQL / relational data support and organised data workflows</li>
             <li>Reporting Frameworks — KPIs, dashboards &amp; scorecards</li>
             <li>Microsoft Excel Analytics — pivot tables, formulas &amp; charts</li>
             <li>Business Intelligence Dashboards using modern BI tools</li>
             <li>Operational Accuracy Audits &amp; compliance reporting</li>
             <li>AI-assisted data annotation, labelling &amp; evaluation</li>
           </ul>
-          <div class="service-tags"><span class="service-tag">Excel</span><span class="service-tag">BI</span><span class="service-tag">Reports</span><span class="service-tag">Analytics</span></div>
+          <div class="service-tags"><span class="service-tag">Data Mining</span><span class="service-tag">Excel</span><span class="service-tag">SQL</span><span class="service-tag">BI</span><span class="service-tag">Analytics</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
@@ -462,22 +493,24 @@
         <div class="service-year">2026</div>
         <div class="service-icon">👤</div>
         <h3>Career &amp; Professional Services</h3>
-        <p class="service-intro">Get noticed by recruiters — ATS-proof CVs and LinkedIn profiles for job seekers, employees, and career switchers.</p>
+        <p class="service-intro">CV, cover letter, and LinkedIn support that helps you apply with confidence — used by job seekers and professionals every week.</p>
         <div class="expand-hint">View details <span class="expand-chevron">⌄</span></div>
         <div class="service-popup">
           <ul class="service-list">
-            <li>CV Writing &amp; Optimization — ATS-compliant &amp; role-targeted</li>
-            <li>Cover Letter Development tailored to job descriptions</li>
+            <li>CV / Resume Writing &amp; Optimization — ATS-compliant &amp; role-targeted</li>
+            <li>Cover Letter Development tailored to job descriptions (multiple versions available)</li>
             <li>LinkedIn Profile Optimization for recruiter visibility</li>
             <li>Professional Personal Branding strategy</li>
             <li>Interview Preparation &amp; coaching</li>
             <li>Freelance Platform Setup — Upwork, Fiverr, Toptal profiles</li>
+            <li>Fast remote delivery via email / WhatsApp</li>
           </ul>
           <div class="service-tags"><span class="service-tag">CV/Resume</span><span class="service-tag">LinkedIn</span><span class="service-tag">ATS</span><span class="service-tag">Branding</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
-      <div class="service-card fade-up" data-category="consult">
+      <div class="service-card fade-up" data-category="consult" id="svc-consult">
         <div class="service-year">2026</div>
         <div class="service-icon">🧠</div>
         <h3>Business Consultation Services</h3>
@@ -494,23 +527,26 @@
             <li>Ongoing monthly retainer consulting packages available</li>
           </ul>
           <div class="service-tags"><span class="service-tag">Strategy</span><span class="service-tag">Advisory</span><span class="service-tag">Retainer</span><span class="service-tag">AI Roadmap</span></div>
+          <p class="service-outcome">Ideal for teams that want practical results, not theory.</p>
         </div>
       </div>
 
       <div class="service-card fade-up" data-category="ai">
         <div class="service-year">2026</div>
         <div class="service-icon">🎓</div>
-        <h3>AI Teaching &amp; Community Training</h3>
-        <p class="service-intro">AI literacy education &amp; community empowerment programs across Africa.</p>
+        <h3>AI &amp; Digital Training (Organizations)</h3>
+        <p class="service-intro">AI and digital transformation training for individuals, businesses, schools, and organizations — online or on-site.</p>
         <div class="expand-hint">View details <span class="expand-chevron">⌄</span></div>
         <div class="service-popup">
           <ul class="service-list">
-            <li>AI Literacy Teaching Assistant (volunteer &amp; paid roles)</li>
+            <li>Organization &amp; workplace AI / digital skills training</li>
+            <li>Delivery online or physical (on-site)</li>
+            <li>Based in Kano — available to travel (e.g. Lagos) for on-site sessions when required</li>
             <li>Youth AI &amp; Digital Skills Workshops</li>
-            <li>Workplace AI Adoption Training for organizations</li>
             <li>AI Ethics &amp; Responsible AI use sessions</li>
-            <li>Custom AI Courses — beginner to advanced</li>
-            <li>School &amp; University AI literacy partnerships</li>
+            <li>Custom courses — beginner to advanced</li>
+            <li>School &amp; university AI literacy partnerships</li>
+            <li>Team workshops tailored to your tools and goals</li>
           </ul>
           <div class="service-tags"><span class="service-tag">AI Literacy</span><span class="service-tag">Youth</span><span class="service-tag">Training</span><span class="service-tag">Community</span></div>
         </div>
@@ -528,7 +564,7 @@
         <a href="/consulting" style="color:var(--cyan);font-weight:600;">Consulting</a>
       </div>
     </div>
-    style="text-align:center;margin-top:40px;">
+    <div class="services-cta-wrap" style="text-align:center;margin-top:40px;">
       <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Free Consultation →</a>
     </div>
 </section>
@@ -1009,10 +1045,18 @@
 <section class="section section-teaser" id="internship">
   <div class="container">
     <div class="teaser-card fade-up">
-      <div class="section-label">Explore</div>
-      <h2 class="section-title" style="font-size:clamp(22px,3vw,30px);margin-bottom:10px;">Remote Internship & Volunteer</h2>
-      <p class="section-sub" style="margin-bottom:20px;">Opportunities to learn and contribute with RuffNeck on real digital and AI projects.</p>
-      <a href="#contact" class="btn btn-primary">Enquire about internships →</a>
+      <div class="section-label">Open applications</div>
+      <h2 class="section-title" style="font-size:clamp(22px,3vw,30px);margin-bottom:10px;">Remote Internship &amp; Volunteer Programme</h2>
+      <p class="section-sub" style="margin-bottom:14px;">Learn on real digital and AI work. Tracks include Data Management / AI &amp; Digital Skills, administration, content, customer support, and online operations.</p>
+      <ul class="check-list" style="text-align:left;max-width:520px;margin:0 auto 18px;color:var(--text-muted,#6B7280);font-size:14px;">
+        <li>Remote collaboration on practical deliverables</li>
+        <li>Data, AI, digital skills, and operations exposure</li>
+        <li>Apply with a short message or PDF to our email</li>
+      </ul>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;">
+        <a href="#contact" class="btn btn-primary">Apply / Enquire →</a>
+        <a href="mailto:ruffneckhassan@gmail.com?subject=Remote%20Internship%20Application%202026" class="btn btn-outline-dark">Email application</a>
+      </div>
     </div>
   </div>
 </section>
@@ -1209,7 +1253,10 @@
               <option value="AI Literacy Webinar">AI Literacy Webinar</option>
               <option value="Career & CV Services">Career &amp; CV Services</option>
               <option value="Other">Other</option>
-</select>
+
+<option value="Data Mining & Analysis">Data Mining &amp; Analysis</option>
+<option value="Organization AI/Digital Training">Organization AI / Digital Training</option>
+<option value="Remote Internship Application">Remote Internship Application</option></select>
           </div>
           <div class="form-group">
             <label for="budget">Budget Range</label>
@@ -1342,7 +1389,7 @@ const observer=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isInte
 document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 
 
-// Services: show first 6 + Show all + filters
+// Services: show first 6 + Show all + filters scroll to matching cards
 (function(){
   function initServicesUX(){
     var grid = document.getElementById('servicesGrid');
@@ -1350,43 +1397,71 @@ document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
     var wrap = document.getElementById('servicesMoreWrap');
     if(!grid) return;
 
+    function cards(){ return grid.querySelectorAll('.service-card'); }
+
     function applyDefaultVisibility(){
       if(grid.classList.contains('is-expanded') || grid.classList.contains('is-filtering')) return;
-      var cards = grid.querySelectorAll('.service-card');
-      cards.forEach(function(card, i){
+      cards().forEach(function(card, i){
         card.style.display = i < 6 ? '' : 'none';
       });
-      if(wrap) wrap.style.display = cards.length > 6 ? '' : 'none';
+      if(wrap) wrap.style.display = cards().length > 6 ? '' : 'none';
+    }
+
+    function scrollToGrid(){
+      var y = grid.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+
+    function openFirstVisible(){
+      var first = null;
+      cards().forEach(function(card){
+        if(card.style.display === 'none') return;
+        if(!first) first = card;
+        card.classList.remove('open');
+      });
+      if(first){
+        first.classList.add('open');
+        first.setAttribute('aria-expanded', 'true');
+        var hint = first.querySelector('.expand-hint');
+        if(hint){
+          if(!hint.dataset.label) hint.dataset.label = hint.innerHTML;
+          hint.innerHTML = 'Hide details <span class="expand-chevron">⌃</span>';
+        }
+      }
     }
 
     if(btn){
       btn.addEventListener('click', function(){
         grid.classList.add('is-expanded');
-        grid.querySelectorAll('.service-card').forEach(function(c){ c.style.display = ''; });
+        grid.classList.remove('is-filtering');
+        cards().forEach(function(c){ c.style.display = ''; });
         if(wrap) wrap.style.display = 'none';
+        scrollToGrid();
       });
     }
 
-    document.querySelectorAll('.tab-btn').forEach(function(tab){
+    document.querySelectorAll('.services-tabs .tab-btn').forEach(function(tab){
       tab.addEventListener('click', function(){
-        var filter = tab.dataset.filter;
-        document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+        var filter = tab.dataset.filter || 'all';
+        document.querySelectorAll('.services-tabs .tab-btn').forEach(function(b){ b.classList.remove('active'); });
         tab.classList.add('active');
+
         if(filter === 'all'){
           grid.classList.remove('is-filtering');
-          if(!grid.classList.contains('is-expanded')){
-            applyDefaultVisibility();
-          } else {
-            grid.querySelectorAll('.service-card').forEach(function(c){ c.style.display = ''; });
-          }
+          if(!grid.classList.contains('is-expanded')) applyDefaultVisibility();
+          else cards().forEach(function(c){ c.style.display = ''; });
+          if(wrap && !grid.classList.contains('is-expanded') && cards().length > 6) wrap.style.display = '';
         } else {
           grid.classList.add('is-filtering');
-          grid.querySelectorAll('.service-card').forEach(function(card){
+          grid.classList.add('is-expanded');
+          cards().forEach(function(card){
             var cat = card.getAttribute('data-category') || '';
             card.style.display = (cat === filter) ? '' : 'none';
           });
           if(wrap) wrap.style.display = 'none';
+          openFirstVisible();
         }
+        scrollToGrid();
       });
     });
 
