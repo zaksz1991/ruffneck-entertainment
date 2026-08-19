@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="canonical" href="https://ruffneck-entertainment.vercel.app/blog"/>
 <title>RuffNeck Blog | AI, Operations & Digital Growth Insights — 2026</title>
-<meta name="description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."
+<meta name="description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
@@ -343,6 +344,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .share-tw{background:#000}.share-tw:hover{background:#333}
 .share-li{background:#0A66C2}.share-li:hover{background:#084d94}
 @media(max-width:480px){.share-row{gap:6px}.share-btn{font-size:11px;padding:6px 11px}}
+
+/* RN responsive media */
+.rn-responsive-img{aspect-ratio:16/10;width:100%;min-height:140px;max-height:220px;background-size:cover!important;background-position:center!important}
+.rn-video-wrap{position:relative;width:100%;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:12px;margin:16px 0;background:#000}
+.rn-video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.rn-article-img{width:100%;height:auto;border-radius:12px;margin:0 0 20px;display:block;object-fit:cover;max-height:420px}
+.blog-card{transition:transform .22s ease,box-shadow .22s ease}
+.blog-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(11,30,58,.1)}
+@media(max-width:768px){.rn-responsive-img{min-height:120px;max-height:180px}.rn-article-img{max-height:240px}}
+
 </style>
 </head>
 <body>
@@ -1183,10 +1194,24 @@ function filterBlog() {
 // NEWSLETTER
 // ============================================================
 function subscribeNewsletter() {
-  const email = document.getElementById('nlEmail').value.trim();
-  if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
-  document.getElementById('nlMsg').style.display = 'block';
-  document.getElementById('nlEmail').value = '';
+  const emailInput = document.getElementById('nlEmail');
+  const msgEl = document.getElementById('nlMsg');
+  const email = (emailInput && emailInput.value || '').trim().toLowerCase();
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    alert('Please enter a valid email address.');
+    return;
+  }
+  if (msgEl) { msgEl.style.display = 'block'; msgEl.style.color = '#00B4D8'; msgEl.textContent = 'Subscribing...'; }
+  fetch('https://script.google.com/macros/s/AKfycby0mX6rqzDHVPy1deNqpHAnBC_f0QRL5f0jL5Bdwxfo4e4AFDO2flbCkV8fjIoT-1w/exec', {
+    method: 'POST', mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({ type: 'newsletter', email: email, date: new Date().toISOString(), source: window.location.href })
+  }).then(function () {
+    if (msgEl) msgEl.textContent = "\u2705 You're subscribed! Expect insights in your inbox soon.";
+    if (emailInput) emailInput.value = '';
+  }).catch(function () {
+    if (msgEl) { msgEl.style.color = '#EF4444'; msgEl.textContent = 'Something went wrong. WhatsApp +234 803 380 7856'; }
+  });
 }
 </script>
 <!-- ── RUFFNECK CHATBOT (mobile-safe) ── -->
@@ -1405,5 +1430,6 @@ function shareArticle(platform){
 }
 
 </script>
+  <script src="/js/cms.js" defer></script>
 </body>
 </html>

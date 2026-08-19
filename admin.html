@@ -220,6 +220,21 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
   .img-upload-zone p{font-size:12px}
   .img-preview{width:56px;height:56px}
 }
+
+/* === ADMIN UX POLISH 2026 === */
+.login-box{box-shadow:0 24px 64px rgba(0,0,0,.4)}
+.login-input:focus{border-color:#00B4D8;box-shadow:0 0 0 3px rgba(0,180,216,.15)}
+.login-btn{transition:transform .15s,opacity .15s}
+.login-btn:hover{transform:translateY(-1px)}
+.sidebar-btn{border-radius:10px;transition:background .15s,color .15s}
+.stats-grid .stat-card, .stat-card{border-radius:14px;transition:transform .2s,box-shadow .2s}
+.stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.admin-main{background:#f8fafc}
+@media(max-width:768px){
+  .sidebar{width:100%;border-right:none}
+  .stats-grid{grid-template-columns:1fr 1fr!important}
+}
+
 </style>
 </head>
 <body>
@@ -236,7 +251,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     <input class="login-input" type="password" id="adminPass" placeholder="Enter password…" onkeydown="if(event.key==='Enter')doLogin()"/>
     <button class="login-btn" onclick="doLogin()">Sign In →</button>
     <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
-    <p class="login-hint">Authorised personnel only · RuffNeck Entertainment © 2026</p>
+    <p class="login-hint">Authorised personnel only · Do not share this URL · © 2026</p>
   </div>
 </div>
 
@@ -430,7 +445,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
                   <label class="form-label">Tier Label</label>
                   <input class="form-input" id="pLabelAdv" placeholder="Advanced Guide"/>
                 </div>
-                <div class="form-group" style="margin-top:10px">
+                
+          <div class="form-group" style="margin-top:12px">
+            <label class="form-label">Image URL (recommended – free)</label>
+            <input class="form-input" type="url" id="pImageUrl" placeholder="https://… (Google Drive public link, ImgBB, etc.)"/>
+            <p style="font-size:11px;color:var(--muted);margin-top:6px">Upload free to Drive or <a href="https://imgbb.com" target="_blank" rel="noopener">imgbb.com</a>, then paste the direct image link. Works for all visitors.</p>
+          </div>
+          <div class="form-group" style="margin-top:12px">
+            <label class="form-label">Video URL (optional – YouTube)</label>
+            <input class="form-input" type="url" id="pVideoUrl" placeholder="https://youtube.com/watch?v=…"/>
+          </div>
+<div class="form-group" style="margin-top:10px">
                   <label class="form-label">PDF Download URL</label>
                   <input class="form-input" id="pPdfAdv" placeholder="https://drive.google.com/…"/>
                 </div>
@@ -442,7 +467,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <div style="margin-top:20px">
             <label class="form-label" style="margin-bottom:10px;display:block">Product Image (optional)</label>
             <div class="img-upload-zone" id="uploadZone">
-              <input type="file" accept="image/*" id="pImageFile" onchange="previewImage(this)"/>
+              <input type="file" accept="image/*" id="pImageFile" style="display:none" onchange="previewImage(this)"/>
               <div id="uploadPrompt">
                 <div style="font-size:28px">🖼️</div>
                 <p>Click to upload an image, or drag and drop<br/><span style="font-size:11px">PNG, JPG, WebP — max 2MB</span></p>
@@ -674,7 +699,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
                   <button class="editor-btn" onclick="edCmd('justifyCenter')" title="Center">⬛</button>
                   <button class="editor-btn" onclick="edCmd('justifyRight')" title="Align right">➡</button>
                 </div>
-                <div id="blogEditor" contenteditable="true" spellcheck="true"
+                
+          <div class="form-group">
+            <label class="form-label">Cover Image URL (free hosting)</label>
+            <input class="form-input" type="url" id="bImageUrl" placeholder="https://… direct image link"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">YouTube Video URL (optional)</label>
+            <input class="form-input" type="url" id="bVideoUrl" placeholder="https://youtube.com/watch?v=…"/>
+          </div>
+<div id="blogEditor" contenteditable="true" spellcheck="true"
                      style="width:100%;min-height:320px;border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:16px;font-family:inherit;font-size:14px;line-height:1.75;color:var(--text);outline:none;resize:vertical;overflow-y:auto;"
                      data-placeholder="Start writing your article here…"></div>
                 <p style="font-size:11px;color:var(--muted);margin-top:6px;padding:0 2px;">Supports bold, italic, headings, lists, and links. Content saves as HTML.</p>
@@ -939,6 +973,51 @@ function previewBlogImage(input){
   reader.readAsDataURL(file);
 }
 
+
+function rnCmsSaveProduct(product){
+  const payload = {
+    type: 'admin_product',
+    admin_key: (typeof getPass === 'function' ? getPass() : 'ruffneck2026admin'),
+    id: product.id,
+    name: product.name,
+    category: product.cat || product.category,
+    emoji: product.emoji,
+    desc: product.desc,
+    fullDesc: product.fullDesc,
+    priceBeg: product.tiers && product.tiers.beginner ? product.tiers.beginner.price : '',
+    labelBeg: product.tiers && product.tiers.beginner ? product.tiers.beginner.label : 'Beginner',
+    pdfBeg: product.tiers && product.tiers.beginner ? product.tiers.beginner.pdf : '',
+    priceMid: product.tiers && product.tiers.intermediate ? product.tiers.intermediate.price : '',
+    labelMid: product.tiers && product.tiers.intermediate ? product.tiers.intermediate.label : 'Intermediate',
+    pdfMid: product.tiers && product.tiers.intermediate ? product.tiers.intermediate.pdf : '',
+    priceAdv: product.tiers && product.tiers.advanced ? product.tiers.advanced.price : '',
+    labelAdv: product.tiers && product.tiers.advanced ? product.tiers.advanced.label : 'Advanced',
+    pdfAdv: product.tiers && product.tiers.advanced ? product.tiers.advanced.pdf : '',
+    imageUrl: product.imageUrl || product.image || '',
+    videoUrl: product.videoUrl || '',
+    status: product.status || 'active',
+    createdAt: product.created || product.createdAt || new Date().toISOString()
+  };
+  return fetch('https://script.google.com/macros/s/AKfycby0mX6rqzDHVPy1deNqpHAnBC_f0QRL5f0jL5Bdwxfo4e4AFDO2flbCkV8fjIoT-1w/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
+  });
+}
+function rnCmsSaveBlog(post){
+  const payload = Object.assign({
+    type: 'admin_blog',
+    admin_key: (typeof getPass === 'function' ? getPass() : 'ruffneck2026admin')
+  }, post);
+  return fetch('https://script.google.com/macros/s/AKfycby0mX6rqzDHVPy1deNqpHAnBC_f0QRL5f0jL5Bdwxfo4e4AFDO2flbCkV8fjIoT-1w/exec', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify(payload)
+  });
+}
+
 function saveProduct(){
   const name = document.getElementById('pName').value.trim();
   const cat  = document.getElementById('pCategory').value;
@@ -982,7 +1061,7 @@ function saveProduct(){
         intermediate: priceMid ? { price: parseInt(priceMid), label: document.getElementById('pLabelMid').value||'Intermediate', pdf: document.getElementById('pPdfMid').value } : null,
         advanced: priceAdv ? { price: parseInt(priceAdv), label: document.getElementById('pLabelAdv').value||'Advanced', pdf: document.getElementById('pPdfAdv').value } : null,
       },
-      image: imgData || null,
+      image: imgData, imageUrl: (document.getElementById('pImageUrl')&&document.getElementById('pImageUrl').value.trim()) || imgData || '', videoUrl: (document.getElementById('pVideoUrl')&&document.getElementById('pVideoUrl').value.trim()) || '' || null,
       status: document.getElementById('pStatus').value,
       created: new Date().toLocaleDateString('en-GB')
     };
@@ -1243,7 +1322,7 @@ const BLOG_KEY = 'rn_blog_posts';
 let editingBlogId = null;
 
 function getBlogPosts(){ try{ return JSON.parse(localStorage.getItem(BLOG_KEY)||'[]'); }catch(e){ return []; } }
-function saveBlogPosts(arr){ localStorage.setItem(BLOG_KEY, JSON.stringify(arr)); }
+function try{var __bp=getBlogPosts();var __last=__bp[__bp.length-1];if(__last)rnCmsSaveBlog({id:__last.id,title:__last.title,label:__last.label||__last.category,category:__last.category,meta:__last.meta,excerpt:__last.excerpt||__last.desc,body:__last.body||__last.content,imageUrl:(document.getElementById('bImageUrl')&&document.getElementById('bImageUrl').value)||__last.image||'',videoUrl:(document.getElementById('bVideoUrl')&&document.getElementById('bVideoUrl').value)||'',status:__last.status||'published',createdAt:__last.created||new Date().toISOString()});}catch(e){} saveBlogPosts(arr){ localStorage.setItem(BLOG_KEY, JSON.stringify(arr)); }
 
 // ── EDITOR COMMANDS ──
 function edCmd(cmd, val){
