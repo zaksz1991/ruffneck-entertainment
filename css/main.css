@@ -1968,3 +1968,648 @@ a.hero-trust-card:hover{
   }
   .tab-btn{flex:0 0 auto}
 }
+
+
+/* ========== NUCLEAR: hero chips + service accordion (must work) ========== */
+.hero-meta{
+  margin-top: 28px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 14px !important;
+  max-width: 580px !important;
+  width: 100% !important;
+}
+.hero-store-chip{
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+  padding: 14px 16px !important;
+  border-radius: 14px !important;
+  background: rgba(0, 180, 216, 0.12) !important;
+  border: 1.5px solid rgba(0, 180, 216, 0.35) !important;
+  text-decoration: none !important;
+  color: #fff !important;
+  box-sizing: border-box !important;
+}
+.hero-store-chip strong{ display:block !important; font-size:14px !important; color:#fff !important; }
+.hero-store-chip small{ display:block !important; font-size:12px !important; color:rgba(255,255,255,0.6) !important; margin-top:2px !important; }
+.hero-store-icon{ font-size:22px !important; }
+.hero-store-arrow{ margin-left:auto !important; color:#00C2FF !important; font-size:18px !important; font-weight:700 !important; }
+
+.hero-trust-cards{
+  display: grid !important;
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+.hero-trust-card{
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding: 12px 10px !important;
+  border-radius: 12px !important;
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-sizing: border-box !important;
+  text-decoration: none !important;
+  color: inherit !important;
+  cursor: default !important;
+}
+.htc-label{
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  color: rgba(255,255,255,0.5) !important;
+  font-weight: 600 !important;
+}
+.htc-value{
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: rgba(255,255,255,0.95) !important;
+}
+
+/* Service popup HIDDEN by default — only .open shows it */
+.service-card .service-popup{
+  display: none !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  overflow: visible !important;
+}
+.service-card.open .service-popup{
+  display: block !important;
+  margin-top: 16px !important;
+  padding-top: 16px !important;
+  border-top: 1px solid var(--border, #E5E7EB) !important;
+}
+.service-card{
+  cursor: pointer !important;
+}
+.service-card .expand-hint{
+  pointer-events: none !important;
+}
+
+@media (max-width: 768px){
+  .hero-trust-cards{ grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .hero-meta{ max-width: 100% !important; }
+}
+
+
+/* Service icons — commercial SVG tiles */
+.service-icon{
+  width: 48px !important;
+  height: 48px !important;
+  margin-bottom: 16px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  background: linear-gradient(135deg, rgba(0,180,216,0.14), rgba(123,47,255,0.10)) !important;
+  border: 1px solid rgba(0,180,216,0.22) !important;
+  font-size: 0 !important;
+  line-height: 0 !important;
+}
+.service-icon .svc-svg{
+  width: 24px;
+  height: 24px;
+  color: #00B4D8;
+  display: block;
+}
+.service-card:hover .service-icon{
+  border-color: rgba(0,180,216,0.45);
+  background: linear-gradient(135deg, rgba(0,180,216,0.2), rgba(123,47,255,0.14));
+}
+.service-card.open .service-icon{
+  border-color: rgba(0,180,216,0.5);
+}
+
+
+/* =========================================================
+   HOVER ANIMATIONS — commercial polish
+   ========================================================= */
+@media (prefers-reduced-motion: no-preference) {
+  .service-card,
+  .btn,
+  .hero-store-chip,
+  .hero-trust-card,
+  .tab-btn,
+  .teaser-card,
+  .price,
+  .quote,
+  .nav-cta,
+  .nav-links a {
+    transition:
+      transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.25s ease,
+      border-color 0.25s ease,
+      background 0.25s ease,
+      color 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  /* Service cards */
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(11, 30, 58, 0.14);
+    border-color: rgba(0, 180, 216, 0.45);
+  }
+  .service-card:hover .service-icon {
+    transform: scale(1.08);
+    box-shadow: 0 6px 16px rgba(0, 180, 216, 0.2);
+  }
+  .service-icon {
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease !important;
+  }
+  .service-card:hover .expand-hint {
+    letter-spacing: 0.02em;
+    opacity: 1;
+  }
+  .service-card.open {
+    transform: translateY(-2px);
+  }
+
+  /* Buttons */
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 180, 216, 0.25);
+  }
+  .btn-primary:hover,
+  a.btn-primary:hover {
+    filter: brightness(1.06);
+  }
+  .btn:active {
+    transform: translateY(0);
+  }
+
+  /* Hero store chip */
+  .hero-store-chip:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 28px rgba(0, 180, 216, 0.2);
+  }
+  .hero-store-chip:hover .hero-store-arrow {
+    transform: translateX(4px);
+  }
+  .hero-store-arrow {
+    transition: transform 0.25s ease;
+    display: inline-block;
+  }
+
+  /* Trust cards */
+  .hero-trust-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 180, 216, 0.4) !important;
+    background: rgba(0, 180, 216, 0.1) !important;
+  }
+
+  /* Category tabs */
+  .tab-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(0, 180, 216, 0.5);
+    color: var(--cyan, #00B4D8);
+  }
+
+  /* Nav */
+  .nav-links a:hover {
+    color: var(--cyan, #00B4D8);
+  }
+  .nav-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 180, 216, 0.3);
+  }
+  .nav-drop-menu a:hover {
+    padding-left: 22px;
+  }
+
+  /* Teaser / pricing / quotes */
+  .teaser-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 36px rgba(11, 30, 58, 0.1);
+  }
+  .price:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 14px 36px rgba(11, 30, 58, 0.12);
+  }
+  .quote:hover {
+    transform: translateY(-3px);
+    border-color: rgba(0, 180, 216, 0.3);
+  }
+
+  /* Icon subtle pulse on card hover */
+  .service-card:hover .svc-svg {
+    transform: scale(1.05);
+  }
+  .svc-svg {
+    transition: transform 0.25s ease;
+  }
+}
+
+/* Touch devices: avoid sticky hover */
+@media (hover: none) {
+  .service-card:hover,
+  .btn:hover,
+  .hero-store-chip:hover,
+  .price:hover {
+    transform: none;
+  }
+}
+
+
+/* =========================================================
+   KEYFRAMES — smoother motion
+   ========================================================= */
+@keyframes rn-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rn-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes rn-soft-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 180, 216, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(0, 180, 216, 0);
+  }
+}
+
+@keyframes rn-icon-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes rn-shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes rn-expand-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rn-arrow-nudge {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Hero entrance */
+  .hero-content {
+    animation: rn-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .hero-actions {
+    animation: rn-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+  }
+  .hero-meta {
+    animation: rn-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
+  }
+
+  /* Stagger service cards slightly when visible */
+  .services-grid .service-card {
+    animation: rn-fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .services-grid .service-card:nth-child(1) { animation-delay: 0.05s; }
+  .services-grid .service-card:nth-child(2) { animation-delay: 0.1s; }
+  .services-grid .service-card:nth-child(3) { animation-delay: 0.15s; }
+  .services-grid .service-card:nth-child(4) { animation-delay: 0.2s; }
+  .services-grid .service-card:nth-child(5) { animation-delay: 0.25s; }
+  .services-grid .service-card:nth-child(6) { animation-delay: 0.3s; }
+
+  /* Smoother expand open */
+  .service-card.open .service-popup {
+    animation: rn-expand-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  /* Icon idle float on open/hover card */
+  .service-card:hover .service-icon,
+  .service-card.open .service-icon {
+    animation: rn-icon-float 2.2s ease-in-out infinite;
+  }
+
+  /* Primary CTA soft pulse (subtle) */
+  .hero-actions .btn-primary {
+    animation: rn-soft-pulse 2.8s ease-in-out infinite;
+  }
+
+  /* Store chip arrow */
+  .hero-store-chip:hover .hero-store-arrow {
+    animation: rn-arrow-nudge 0.7s ease-in-out infinite;
+  }
+
+  /* Nav logo gentle pulse ring */
+  .nav-logo img {
+    animation: rn-soft-pulse 3s ease-in-out infinite;
+  }
+
+  /* Smoother transitions globally for interactive surfaces */
+  .service-card,
+  .btn,
+  .hero-store-chip,
+  .hero-trust-card,
+  .tab-btn,
+  .price,
+  .teaser-card,
+  .service-icon,
+  .svc-svg,
+  .expand-hint,
+  .hero-store-arrow {
+    transition:
+      transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.3s ease,
+      border-color 0.3s ease,
+      background 0.3s ease,
+      color 0.25s ease,
+      opacity 0.3s ease,
+      letter-spacing 0.25s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-content,
+  .hero-actions,
+  .hero-meta,
+  .services-grid .service-card,
+  .service-card.open .service-popup,
+  .hero-actions .btn-primary,
+  .nav-logo img {
+    animation: none !important;
+  }
+}
+
+
+/* =========================================================
+   SCROLL-DRIVEN ANIMATIONS (progressive enhancement)
+   Supported in modern Chromium / Safari 18+; others keep
+   static layout + existing keyframe entrance styles.
+   ========================================================= */
+
+/* Base state for scroll-reveal targets */
+.service-card,
+.teaser-card,
+.section-title,
+.lead-magnet-inner,
+.quote,
+.price,
+.workflow .step {
+  /* fallback already handled by earlier keyframes / visibility */
+}
+
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* Disable one-shot page-load stagger when scroll timelines work */
+    .services-grid .service-card {
+      animation-delay: 0s;
+    }
+
+    .rn-scroll-fade,
+    .service-card,
+    .teaser-card,
+    .quote,
+    .price,
+    .workflow .step,
+    .lead-magnet-section .lead-magnet-inner,
+    #services .section-title,
+    #why .section-title,
+    #process .section-title,
+    #about .section-title,
+    #testimonials .section-title,
+    #pricing .section-title,
+    #faq .section-title,
+    #contact .section-title {
+      animation-name: rn-scroll-reveal;
+      animation-duration: 1s;
+      animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 35%;
+    }
+
+    /* Slightly deeper travel for larger blocks */
+    .lead-magnet-section .lead-magnet-inner,
+    .teaser-card {
+      animation-range: entry 5% cover 40%;
+    }
+
+    /* Stagger service cards via range offsets */
+    .services-grid .service-card:nth-child(1) { animation-range: entry 0% cover 32%; }
+    .services-grid .service-card:nth-child(2) { animation-range: entry 4% cover 34%; }
+    .services-grid .service-card:nth-child(3) { animation-range: entry 8% cover 36%; }
+    .services-grid .service-card:nth-child(4) { animation-range: entry 12% cover 38%; }
+    .services-grid .service-card:nth-child(5) { animation-range: entry 6% cover 35%; }
+    .services-grid .service-card:nth-child(6) { animation-range: entry 10% cover 37%; }
+
+    /* Parallax-ish soft scale on hero panel if present */
+    .hero .panel,
+    .hero-meta {
+      animation-name: rn-scroll-soft;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+    }
+
+    /* Progress feel on section labels */
+    .section-label {
+      animation-name: rn-scroll-fade-only;
+      animation-duration: 1s;
+      animation-timing-function: ease-out;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 25%;
+    }
+  }
+}
+
+@keyframes rn-scroll-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes rn-scroll-soft {
+  from {
+    opacity: 0.55;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rn-scroll-fade-only {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-card,
+  .teaser-card,
+  .quote,
+  .price,
+  .workflow .step,
+  .lead-magnet-section .lead-magnet-inner,
+  .section-label,
+  .hero-meta,
+  .hero .panel {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* =========================================================
+   SERVICE & BLOCK IMAGES
+   ========================================================= */
+.service-media{
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 0 0 16px;
+  background: #0B1E3A;
+  border: 1px solid rgba(0,180,216,0.12);
+}
+.service-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-card:hover .service-media img{
+  transform: scale(1.05);
+}
+.service-card .service-icon{
+  margin-top: 0;
+}
+
+.lead-magnet-media{
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  aspect-ratio: 16 / 10;
+  background: #0B1E3A;
+}
+.lead-magnet-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lead-magnet-inner{
+  /* if grid, media sits with text */
+}
+@media (min-width: 900px){
+  .lead-magnet-inner:has(.lead-magnet-media){
+    /* keep existing grid if any */
+  }
+}
+
+.teaser-media{
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  margin: 0 0 18px;
+  background: #0B1E3A;
+}
+.teaser-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px){
+  .service-media{ aspect-ratio: 16 / 10; margin-bottom: 12px; }
+  .teaser-media{ aspect-ratio: 16 / 9; }
+}
+
+
+/* =========================================================
+   IMAGE PERFORMANCE
+   ========================================================= */
+.service-media,
+.lead-magnet-media,
+.teaser-media {
+  content-visibility: auto;
+  contain-intrinsic-size: 720px 405px;
+  background: linear-gradient(110deg, #0B1E3A 0%, #123050 45%, #0B1E3A 100%);
+  background-size: 200% 100%;
+}
+.service-media img,
+.lead-magnet-media img,
+.teaser-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* decode async already on img */
+}
+/* Reserve space — prevent CLS */
+.service-media { aspect-ratio: 16 / 9; }
+.lead-magnet-media { aspect-ratio: 16 / 10; }
+.teaser-media { aspect-ratio: 21 / 9; }
+
+/* Avoid animating images on low-end if reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .service-card:hover .service-media img {
+    transform: none;
+  }
+}
+
+/* IMAGE CDN — decoded images from weserv */
+.service-media img,
+.lead-magnet-media img,
+.teaser-media img {
+  background-color: #0B1E3A;
+}
+
+/* CDN failure placeholders */
+.service-media.img-fallback,
+.lead-magnet-media.img-fallback,
+.teaser-media.img-fallback {
+  background:
+    linear-gradient(135deg, rgba(0,180,216,0.15), rgba(123,47,255,0.12)),
+    #0B1E3A;
+  position: relative;
+}
+.service-media.img-fallback::after,
+.lead-magnet-media.img-fallback::after,
+.teaser-media.img-fallback::after {
+  content: "Image unavailable";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+}
