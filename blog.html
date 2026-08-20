@@ -1175,18 +1175,27 @@ if(si){
 }
 
 function filterBlog() {
-  const activeCat = document.querySelector('.filter-btn.active')?.dataset.cat || 'all';
-  const search = document.getElementById('searchInput').value.trim().toLowerCase();
-  document.querySelectorAll('.blog-card').forEach(card => {
-    const catMatch = activeCat === 'all' || card.dataset.cat === activeCat;
-    if (!search) { card.style.display = catMatch ? '' : 'none'; return; }
-    const searchable = [
-      card.dataset.title || '',
-      card.dataset.cat || '',
-      card.querySelector('h3')?.textContent || '',
-      card.querySelector('p')?.textContent || ''
+  var activeBtn = document.querySelector('.filter-btn.active');
+  var activeCat = (activeBtn && activeBtn.dataset.cat) ? activeBtn.dataset.cat : 'all';
+  var input = document.getElementById('searchInput');
+  var search = (input && input.value ? input.value : '').trim().toLowerCase();
+  var tokens = search ? search.split(/\s+/).filter(Boolean) : [];
+  document.querySelectorAll('.blog-card').forEach(function(card) {
+    var cat = card.getAttribute('data-cat') || '';
+    var catMatch = activeCat === 'all' || cat === activeCat;
+    if (!tokens.length) {
+      card.style.display = catMatch ? '' : 'none';
+      return;
+    }
+    var searchable = [
+      card.getAttribute('data-title') || '',
+      card.getAttribute('data-cat') || '',
+      (card.querySelector('h3') && card.querySelector('h3').textContent) || '',
+      (card.querySelector('p') && card.querySelector('p').textContent) || '',
+      card.textContent || ''
     ].join(' ').toLowerCase();
-    card.style.display = (catMatch && searchable.includes(search)) ? '' : 'none';
+    var match = tokens.every(function(t) { return searchable.indexOf(t) !== -1; });
+    card.style.display = (catMatch && match) ? '' : 'none';
   });
 }
 
