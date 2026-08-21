@@ -1,33 +1,23 @@
 {
+  "redirects": [
+    { "source": "/services-ai", "destination": "/services/ai", "permanent": false },
+    { "source": "/services-ai.html", "destination": "/services/ai", "permanent": false },
+    { "source": "/services-marketing", "destination": "/services/marketing", "permanent": false },
+    { "source": "/services-marketing.html", "destination": "/services/marketing", "permanent": false },
+    { "source": "/services-va", "destination": "/services/virtual-assistance", "permanent": false },
+    { "source": "/services-va.html", "destination": "/services/virtual-assistance", "permanent": false },
+    { "source": "/ai-solutions", "destination": "/services/ai", "permanent": false },
+    { "source": "/business-consultation", "destination": "/consulting", "permanent": false }
+  ],
   "rewrites": [
-    {
-      "source": "/store",
-      "destination": "/store.html"
-    },
-    {
-      "source": "/blog",
-      "destination": "/blog.html"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin.html"
-    },
-    {
-      "source": "/services/ai",
-      "destination": "/services-ai.html"
-    },
-    {
-      "source": "/services/marketing",
-      "destination": "/services-marketing.html"
-    },
-    {
-      "source": "/services/virtual-assistance",
-      "destination": "/services-va.html"
-    },
-    {
-      "source": "/consulting",
-      "destination": "/consulting.html"
-    }
+    { "source": "/store", "destination": "/store.html" },
+    { "source": "/blog", "destination": "/blog.html" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/consulting", "destination": "/consulting.html" },
+    { "source": "/services/ai", "destination": "/services-ai.html" },
+    { "source": "/services/marketing", "destination": "/services-marketing.html" },
+    { "source": "/services/virtual-assistance", "destination": "/services-va.html" },
+    { "source": "/services/va", "destination": "/services-va.html" }
   ],
   "cleanUrls": true,
   "trailingSlash": false,
@@ -35,35 +25,10 @@
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
-        }
-      ]
-    },
-    {
-      "source": "/20_AI_Prompts_RuffNeck.pdf",
-      "headers": [
-        {
-          "key": "Content-Disposition",
-          "value": "inline; filename=\"20_AI_Prompts_RuffNeck.pdf\""
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
       ]
     }
   ]

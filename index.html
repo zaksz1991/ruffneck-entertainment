@@ -397,6 +397,144 @@ body { top: 0 !important; }
 }
 </style>
 
+<style id="rn-dark-css">
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+html.rn-dark {
+  color-scheme: dark;
+}
+html.rn-dark body {
+  background: #0a0f1a !important;
+  color: #E5E7EB !important;
+}
+html.rn-dark .section,
+html.rn-dark .rn-results,
+html.rn-dark .rn-featured {
+  background: #0a0f1a !important;
+}
+html.rn-dark .section.alt,
+html.rn-dark [style*="background:#F8FAFC"],
+html.rn-dark [style*="background: #F8FAFC"] {
+  background: #0f1629 !important;
+}
+html.rn-dark .service-card,
+html.rn-dark .product-card,
+html.rn-dark .teaser-card,
+html.rn-dark .blog-card,
+html.rn-dark .svc-panel {
+  background: #121a2f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #E5E7EB !important;
+}
+html.rn-dark .service-card h3,
+html.rn-dark .product-name,
+html.rn-dark .section-title,
+html.rn-dark h1, html.rn-dark h2, html.rn-dark h3 {
+  color: #F9FAFB !important;
+}
+html.rn-dark .service-intro,
+html.rn-dark .product-desc,
+html.rn-dark .section-sub,
+html.rn-dark p {
+  color: #9CA3AF !important;
+}
+html.rn-dark .service-list,
+html.rn-dark .service-list li {
+  color: #D1D5DB !important;
+}
+html.rn-dark .nav:not(.nav-transparent) {
+  background: rgba(10, 15, 26, 0.92) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+html.rn-dark .btn-outline-dark {
+  background: #121a2f !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+html.rn-dark .btn-outline-dark:hover {
+  border-color: #00B4D8 !important;
+  color: #00B4D8 !important;
+  background: rgba(0,180,216,0.1) !important;
+}
+html.rn-dark input,
+html.rn-dark textarea,
+html.rn-dark select {
+  background: #0f1629 !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.rn-dark .filter-btn {
+  background: #121a2f !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.rn-dark .filter-btn.active,
+html.rn-dark .filter-btn:hover {
+  background: rgba(0,180,216,0.15) !important;
+  border-color: #00B4D8 !important;
+}
+html.rn-dark .footer {
+  background: #060a12 !important;
+}
+html.rn-dark .service-card.open {
+  border-color: rgba(0,180,216,0.45) !important;
+}
+html.rn-dark .expand-hint {
+  background: rgba(0,180,216,0.12) !important;
+}
+html.rn-dark .rn-theme-btn {
+  border-color: rgba(255,255,255,0.2);
+  color: #E5E7EB;
+}
+.rn-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.rn-theme-btn:hover {
+  border-color: #00B4D8;
+  background: rgba(0,180,216,0.15);
+  transform: translateY(-1px);
+}
+.rn-theme-btn:focus-visible {
+  outline: 2px solid #00B4D8;
+  outline-offset: 2px;
+}
+html.rn-dark .rn-theme-btn {
+  background: rgba(255,255,255,0.06);
+}
+/* light nav pages (store/blog) */
+.nav-light .rn-theme-btn,
+html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
+  border-color: rgba(11,30,58,0.12);
+  background: #fff;
+  color: #0B1E3A;
+}
+</style>
+
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('rn_theme');
+    if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('rn-dark');
+    }
+  } catch(e){}
+})();
+</script>
+
 </head>
 <body>
 
@@ -2627,6 +2765,46 @@ if ('serviceWorker' in navigator) {
       setTimeout(bindAll, 40);
     }
   });
+})();
+</script>
+
+
+<script id="rn-dark-mode-js">
+(function(){
+  var KEY = 'rn_theme';
+  function apply(theme){
+    var dark = theme === 'dark';
+    document.documentElement.classList.toggle('rn-dark', dark);
+    try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch(e){}
+    document.querySelectorAll('.rn-theme-btn').forEach(function(btn){
+      btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      btn.setAttribute('title', dark ? 'Light mode' : 'Dark mode');
+      btn.innerHTML = dark ? '☀️' : '🌙';
+    });
+  }
+  function current(){
+    try {
+      var s = localStorage.getItem(KEY);
+      if (s === 'dark' || s === 'light') return s;
+    } catch(e){}
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+    return 'light';
+  }
+  function toggle(){
+    apply(document.documentElement.classList.contains('rn-dark') ? 'light' : 'dark');
+  }
+  // Apply ASAP to reduce flash
+  apply(current());
+  document.addEventListener('DOMContentLoaded', function(){
+    apply(current());
+    document.querySelectorAll('.rn-theme-btn').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        toggle();
+      });
+    });
+  });
+  window.rnToggleTheme = toggle;
 })();
 </script>
 

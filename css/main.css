@@ -2806,3 +2806,251 @@ a.hero-trust-card:hover{
 .rn-svc-extra.rn-svc-hidden { display: none !important; }
 .rn-svc-toggle-wrap { margin: 8px 0 24px; }
 
+
+
+/* =========================================================
+   GLOBAL BUTTON & CONTROL UX — commercial modern
+   ========================================================= */
+.btn,
+button.btn,
+a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  border: 1.5px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
+}
+.btn-sm {
+  padding: 9px 14px;
+  font-size: 13px;
+  border-radius: 10px;
+}
+.btn-primary {
+  background: #00B4D8;
+  color: #0B1E3A !important;
+  border-color: #00B4D8;
+  box-shadow: 0 4px 14px rgba(0, 180, 216, 0.28);
+}
+.btn-primary:hover {
+  background: #22d3ee;
+  border-color: #22d3ee;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(0, 180, 216, 0.35);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+.btn-outline {
+  background: transparent;
+  color: #00B4D8;
+  border-color: rgba(0, 180, 216, 0.45);
+}
+.btn-outline:hover {
+  background: rgba(0, 180, 216, 0.1);
+  border-color: #00B4D8;
+}
+.btn-outline-dark {
+  background: #fff;
+  color: #0B1E3A;
+  border-color: rgba(11, 30, 58, 0.15);
+}
+.btn-outline-dark:hover {
+  border-color: #00B4D8;
+  color: #00B4D8;
+  background: #F0F9FF;
+}
+.btn:focus-visible {
+  outline: 2px solid #00B4D8;
+  outline-offset: 3px;
+}
+.filter-btn {
+  border-radius: 999px !important;
+  padding: 9px 16px !important;
+  border: 1.5px solid rgba(11, 30, 58, 0.1) !important;
+  background: #fff !important;
+  color: #0B1E3A !important;
+  font-weight: 600 !important;
+}
+.filter-btn:hover,
+.filter-btn.active {
+  border-color: #00B4D8 !important;
+  background: #ECFEFF !important;
+  color: #0B1E3A !important;
+}
+.nav-cta,
+a.nav-cta {
+  border-radius: 10px !important;
+  padding: 10px 16px !important;
+}
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+textarea,
+select {
+  border-radius: 12px !important;
+  border: 1.5px solid #E5E7EB !important;
+  padding: 12px 14px !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #00B4D8 !important;
+  box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.15) !important;
+  outline: none !important;
+}
+.section {
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+}
+.container {
+  padding-left: max(16px, 4vw);
+  padding-right: max(16px, 4vw);
+}
+.product-card,
+.service-card,
+.teaser-card,
+.blog-card {
+  border-radius: 16px !important;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+html.rn-dark {
+  color-scheme: dark;
+}
+html.rn-dark body {
+  background: #0a0f1a !important;
+  color: #E5E7EB !important;
+}
+html.rn-dark .section,
+html.rn-dark .rn-results,
+html.rn-dark .rn-featured {
+  background: #0a0f1a !important;
+}
+html.rn-dark .section.alt,
+html.rn-dark [style*="background:#F8FAFC"],
+html.rn-dark [style*="background: #F8FAFC"] {
+  background: #0f1629 !important;
+}
+html.rn-dark .service-card,
+html.rn-dark .product-card,
+html.rn-dark .teaser-card,
+html.rn-dark .blog-card,
+html.rn-dark .svc-panel {
+  background: #121a2f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #E5E7EB !important;
+}
+html.rn-dark .service-card h3,
+html.rn-dark .product-name,
+html.rn-dark .section-title,
+html.rn-dark h1, html.rn-dark h2, html.rn-dark h3 {
+  color: #F9FAFB !important;
+}
+html.rn-dark .service-intro,
+html.rn-dark .product-desc,
+html.rn-dark .section-sub,
+html.rn-dark p {
+  color: #9CA3AF !important;
+}
+html.rn-dark .service-list,
+html.rn-dark .service-list li {
+  color: #D1D5DB !important;
+}
+html.rn-dark .nav:not(.nav-transparent) {
+  background: rgba(10, 15, 26, 0.92) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+html.rn-dark .btn-outline-dark {
+  background: #121a2f !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+html.rn-dark .btn-outline-dark:hover {
+  border-color: #00B4D8 !important;
+  color: #00B4D8 !important;
+  background: rgba(0,180,216,0.1) !important;
+}
+html.rn-dark input,
+html.rn-dark textarea,
+html.rn-dark select {
+  background: #0f1629 !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.rn-dark .filter-btn {
+  background: #121a2f !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.rn-dark .filter-btn.active,
+html.rn-dark .filter-btn:hover {
+  background: rgba(0,180,216,0.15) !important;
+  border-color: #00B4D8 !important;
+}
+html.rn-dark .footer {
+  background: #060a12 !important;
+}
+html.rn-dark .service-card.open {
+  border-color: rgba(0,180,216,0.45) !important;
+}
+html.rn-dark .expand-hint {
+  background: rgba(0,180,216,0.12) !important;
+}
+html.rn-dark .rn-theme-btn {
+  border-color: rgba(255,255,255,0.2);
+  color: #E5E7EB;
+}
+.rn-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.rn-theme-btn:hover {
+  border-color: #00B4D8;
+  background: rgba(0,180,216,0.15);
+  transform: translateY(-1px);
+}
+.rn-theme-btn:focus-visible {
+  outline: 2px solid #00B4D8;
+  outline-offset: 2px;
+}
+html.rn-dark .rn-theme-btn {
+  background: rgba(255,255,255,0.06);
+}
+/* light nav pages (store/blog) */
+.nav-light .rn-theme-btn,
+html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
+  border-color: rgba(11,30,58,0.12);
+  background: #fff;
+  color: #0B1E3A;
+}

@@ -237,6 +237,209 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 
 </style>
 <style>.img-upload-zone{cursor:pointer}.img-upload-zone.drag-over{border-color:#00B4D8!important;background:rgba(0,180,216,.08)!important}</style>
+<style>
+/* Language switcher */
+.rn-lang {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  z-index: 100;
+}
+.rn-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.nav-light .rn-lang-btn, footer .rn-lang-btn {
+  border-color: rgba(11,30,58,0.12);
+  background: #fff;
+  color: #0B1E3A;
+}
+.rn-lang-btn:hover { border-color: #00B4D8; color: #00B4D8; }
+.rn-lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: #fff;
+  color: #0B1E3A;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(11,30,58,0.18);
+  border: 1px solid #E5E7EB;
+  padding: 6px;
+  z-index: 200;
+}
+.rn-lang.open .rn-lang-menu { display: block; }
+.rn-lang-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #0B1E3A;
+  font-family: inherit;
+}
+.rn-lang-menu button:hover { background: #F0F9FF; color: #00B4D8; }
+.rn-lang-menu button.active { background: #ECFEFF; font-weight: 700; }
+/* Hide Google's default banner/gadget chrome when possible */
+.goog-te-banner-frame, .goog-te-balloon-frame { display: none !important; }
+body { top: 0 !important; }
+#google_translate_element { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+.skiptranslate iframe { display: none !important; }
+</style>
+<style id="rn-dark-css">
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+html.rn-dark {
+  color-scheme: dark;
+}
+html.rn-dark body {
+  background: #0a0f1a !important;
+  color: #E5E7EB !important;
+}
+html.rn-dark .section,
+html.rn-dark .rn-results,
+html.rn-dark .rn-featured {
+  background: #0a0f1a !important;
+}
+html.rn-dark .section.alt,
+html.rn-dark [style*="background:#F8FAFC"],
+html.rn-dark [style*="background: #F8FAFC"] {
+  background: #0f1629 !important;
+}
+html.rn-dark .service-card,
+html.rn-dark .product-card,
+html.rn-dark .teaser-card,
+html.rn-dark .blog-card,
+html.rn-dark .svc-panel {
+  background: #121a2f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #E5E7EB !important;
+}
+html.rn-dark .service-card h3,
+html.rn-dark .product-name,
+html.rn-dark .section-title,
+html.rn-dark h1, html.rn-dark h2, html.rn-dark h3 {
+  color: #F9FAFB !important;
+}
+html.rn-dark .service-intro,
+html.rn-dark .product-desc,
+html.rn-dark .section-sub,
+html.rn-dark p {
+  color: #9CA3AF !important;
+}
+html.rn-dark .service-list,
+html.rn-dark .service-list li {
+  color: #D1D5DB !important;
+}
+html.rn-dark .nav:not(.nav-transparent) {
+  background: rgba(10, 15, 26, 0.92) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+html.rn-dark .btn-outline-dark {
+  background: #121a2f !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+html.rn-dark .btn-outline-dark:hover {
+  border-color: #00B4D8 !important;
+  color: #00B4D8 !important;
+  background: rgba(0,180,216,0.1) !important;
+}
+html.rn-dark input,
+html.rn-dark textarea,
+html.rn-dark select {
+  background: #0f1629 !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.rn-dark .filter-btn {
+  background: #121a2f !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.rn-dark .filter-btn.active,
+html.rn-dark .filter-btn:hover {
+  background: rgba(0,180,216,0.15) !important;
+  border-color: #00B4D8 !important;
+}
+html.rn-dark .footer {
+  background: #060a12 !important;
+}
+html.rn-dark .service-card.open {
+  border-color: rgba(0,180,216,0.45) !important;
+}
+html.rn-dark .expand-hint {
+  background: rgba(0,180,216,0.12) !important;
+}
+html.rn-dark .rn-theme-btn {
+  border-color: rgba(255,255,255,0.2);
+  color: #E5E7EB;
+}
+.rn-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.rn-theme-btn:hover {
+  border-color: #00B4D8;
+  background: rgba(0,180,216,0.15);
+  transform: translateY(-1px);
+}
+.rn-theme-btn:focus-visible {
+  outline: 2px solid #00B4D8;
+  outline-offset: 2px;
+}
+html.rn-dark .rn-theme-btn {
+  background: rgba(255,255,255,0.06);
+}
+/* light nav pages (store/blog) */
+.nav-light .rn-theme-btn,
+html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
+  border-color: rgba(11,30,58,0.12);
+  background: #fff;
+  color: #0B1E3A;
+}
+</style>
+
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('rn_theme');
+    if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('rn-dark');
+    }
+  } catch(e){}
+})();
+</script>
+
 </head>
 <body>
 
@@ -294,7 +497,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         <div class="sidebar-label">Config</div>
         <button class="sidebar-btn" onclick="showPage('settings',this)"><span class="sb-icon">⚙️</span><span>Settings</span></button>
       </div>
-    </nav>
+    
+<div class="rn-lang" id="rnLang">
+  <button type="button" class="rn-lang-btn" id="rnLangBtn" aria-haspopup="true" aria-expanded="false" title="Translate page">
+    <span aria-hidden="true">🌐</span> <span id="rnLangLabel">EN</span>
+  </button>
+  <div class="rn-lang-menu" role="menu" id="rnLangMenu">
+    <button type="button" data-lang="en" data-label="EN" class="active">English</button>
+    <button type="button" data-lang="ha" data-label="HA">Hausa</button>
+    <button type="button" data-lang="yo" data-label="YO">Yorùbá</button>
+    <button type="button" data-lang="ig" data-label="IG">Igbo</button>
+    <button type="button" data-lang="fr" data-label="FR">Français</button>
+    <button type="button" data-lang="es" data-label="ES">Español</button>
+    <button type="button" data-lang="ar" data-label="AR">العربية</button>
+  </div>
+</div>
+<div id="google_translate_element" aria-hidden="true"></div>
+</nav>
 
     <!-- MAIN -->
     <main class="admin-main">
@@ -1639,6 +1858,110 @@ updateStats = function(){
     bindZone('uploadZone', 'pImageFile');
     bindZone('blogUploadZone', 'blogImageFile');
   });
+})();
+</script>
+
+
+<script>
+(function(){
+  function loadGT(){
+    if (window.google && google.translate) return;
+    var s = document.createElement('script');
+    s.src = '//translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate';
+    document.head.appendChild(s);
+  }
+  window.rnInitGoogleTranslate = function(){
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,ha,yo,ig,fr,es,ar',
+      autoDisplay: false,
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  };
+  function setLang(lang, label){
+    document.querySelectorAll('#rnLangMenu button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+    var lab = document.getElementById('rnLangLabel');
+    if (lab) lab.textContent = label || lang.toUpperCase();
+    localStorage.setItem('rn_lang', lang);
+    localStorage.setItem('rn_lang_label', label || lang.toUpperCase());
+    if (lang === 'en') {
+      // clear translate cookie-ish by reloading without googtrans
+      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
+      if (location.href.indexOf('googtrans') >= 0) location.href = location.pathname + location.search + location.hash;
+      else location.reload();
+      return;
+    }
+    document.cookie = 'googtrans=/en/' + lang + ';path=/;';
+    document.cookie = 'googtrans=/en/' + lang + ';path=/;domain=.' + location.hostname;
+    location.reload();
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    loadGT();
+    var wrap = document.getElementById('rnLang');
+    var btn = document.getElementById('rnLangBtn');
+    var menu = document.getElementById('rnLangMenu');
+    if (!btn || !menu) return;
+    var saved = localStorage.getItem('rn_lang');
+    var savedL = localStorage.getItem('rn_lang_label');
+    if (saved && savedL) {
+      var lab = document.getElementById('rnLangLabel');
+      if (lab) lab.textContent = savedL;
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded', wrap.classList.contains('open'));
+    });
+    menu.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        setLang(b.getAttribute('data-lang'), b.getAttribute('data-label'));
+      });
+    });
+    document.addEventListener('click', function(){ wrap.classList.remove('open'); });
+  });
+})();
+</script>
+
+
+<script id="rn-dark-mode-js">
+(function(){
+  var KEY = 'rn_theme';
+  function apply(theme){
+    var dark = theme === 'dark';
+    document.documentElement.classList.toggle('rn-dark', dark);
+    try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch(e){}
+    document.querySelectorAll('.rn-theme-btn').forEach(function(btn){
+      btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      btn.setAttribute('title', dark ? 'Light mode' : 'Dark mode');
+      btn.innerHTML = dark ? '☀️' : '🌙';
+    });
+  }
+  function current(){
+    try {
+      var s = localStorage.getItem(KEY);
+      if (s === 'dark' || s === 'light') return s;
+    } catch(e){}
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+    return 'light';
+  }
+  function toggle(){
+    apply(document.documentElement.classList.contains('rn-dark') ? 'light' : 'dark');
+  }
+  // Apply ASAP to reduce flash
+  apply(current());
+  document.addEventListener('DOMContentLoaded', function(){
+    apply(current());
+    document.querySelectorAll('.rn-theme-btn').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        toggle();
+      });
+    });
+  });
+  window.rnToggleTheme = toggle;
 })();
 </script>
 

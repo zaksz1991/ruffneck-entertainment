@@ -3,26 +3,186 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>AI Solutions | RuffNeck Entertainment</title>
-<link rel="canonical" href="https://ruffneck-entertainment.vercel.app/ai-solutions"/>
-<meta name="description" content="Practical AI training, automation, and implementation for Nigerian businesses and teams."/>
+<title>AI Solutions & Training | RuffNeck Entertainment</title>
+<link rel="canonical" href="https://ruffneck-entertainment.vercel.app/services/ai"/>
+<meta name="description" content="Practical AI training, automation, and implementation for businesses and teams in Nigeria and beyond."/>
 <link rel="stylesheet" href="/css/main.css"/>
 <link rel="icon" href="/favicon-32x32.png"/>
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
 <meta name="theme-color" content="#0B1E3A"/>
+<style>
+  body { background:#F8FAFC; }
+  .svc-page-hero {
+    background: linear-gradient(160deg, #0B1E3A 0%, #123050 55%, #0a1628 100%);
+    color:#fff; padding: 110px 0 56px;
+  }
+  .svc-page-hero h1 { font-size:clamp(28px,4vw,40px); margin:10px 0 14px; line-height:1.2; }
+  .svc-page-hero p { color:rgba(255,255,255,.88); max-width:560px; margin:0 auto 24px; line-height:1.55; }
+  .svc-panel {
+    background:#fff; border-radius:16px; border:1px solid rgba(11,30,58,.08);
+    padding:28px 24px; box-shadow:0 8px 28px rgba(11,30,58,.06); margin-top:-28px; position:relative;
+  }
+  .svc-panel h2 { font-size:1.25rem; color:#0B1E3A; margin:0 0 12px; }
+  .svc-panel ul { margin:0; padding-left:1.2em; color:#374151; line-height:1.6; }
+  .svc-panel li { margin-bottom:8px; }
+  .svc-actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:28px; }
+</style>
+<style id="rn-dark-css">
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+html.rn-dark {
+  color-scheme: dark;
+}
+html.rn-dark body {
+  background: #0a0f1a !important;
+  color: #E5E7EB !important;
+}
+html.rn-dark .section,
+html.rn-dark .rn-results,
+html.rn-dark .rn-featured {
+  background: #0a0f1a !important;
+}
+html.rn-dark .section.alt,
+html.rn-dark [style*="background:#F8FAFC"],
+html.rn-dark [style*="background: #F8FAFC"] {
+  background: #0f1629 !important;
+}
+html.rn-dark .service-card,
+html.rn-dark .product-card,
+html.rn-dark .teaser-card,
+html.rn-dark .blog-card,
+html.rn-dark .svc-panel {
+  background: #121a2f !important;
+  border-color: rgba(255,255,255,0.08) !important;
+  color: #E5E7EB !important;
+}
+html.rn-dark .service-card h3,
+html.rn-dark .product-name,
+html.rn-dark .section-title,
+html.rn-dark h1, html.rn-dark h2, html.rn-dark h3 {
+  color: #F9FAFB !important;
+}
+html.rn-dark .service-intro,
+html.rn-dark .product-desc,
+html.rn-dark .section-sub,
+html.rn-dark p {
+  color: #9CA3AF !important;
+}
+html.rn-dark .service-list,
+html.rn-dark .service-list li {
+  color: #D1D5DB !important;
+}
+html.rn-dark .nav:not(.nav-transparent) {
+  background: rgba(10, 15, 26, 0.92) !important;
+  border-bottom-color: rgba(255,255,255,0.06) !important;
+}
+html.rn-dark .btn-outline-dark {
+  background: #121a2f !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.15) !important;
+}
+html.rn-dark .btn-outline-dark:hover {
+  border-color: #00B4D8 !important;
+  color: #00B4D8 !important;
+  background: rgba(0,180,216,0.1) !important;
+}
+html.rn-dark input,
+html.rn-dark textarea,
+html.rn-dark select {
+  background: #0f1629 !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.rn-dark .filter-btn {
+  background: #121a2f !important;
+  color: #E5E7EB !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.rn-dark .filter-btn.active,
+html.rn-dark .filter-btn:hover {
+  background: rgba(0,180,216,0.15) !important;
+  border-color: #00B4D8 !important;
+}
+html.rn-dark .footer {
+  background: #060a12 !important;
+}
+html.rn-dark .service-card.open {
+  border-color: rgba(0,180,216,0.45) !important;
+}
+html.rn-dark .expand-hint {
+  background: rgba(0,180,216,0.12) !important;
+}
+html.rn-dark .rn-theme-btn {
+  border-color: rgba(255,255,255,0.2);
+  color: #E5E7EB;
+}
+.rn-theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.rn-theme-btn:hover {
+  border-color: #00B4D8;
+  background: rgba(0,180,216,0.15);
+  transform: translateY(-1px);
+}
+.rn-theme-btn:focus-visible {
+  outline: 2px solid #00B4D8;
+  outline-offset: 2px;
+}
+html.rn-dark .rn-theme-btn {
+  background: rgba(255,255,255,0.06);
+}
+/* light nav pages (store/blog) */
+.nav-light .rn-theme-btn,
+html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
+  border-color: rgba(11,30,58,0.12);
+  background: #fff;
+  color: #0B1E3A;
+}
+</style>
+
+<script>
+(function(){
+  try {
+    var t = localStorage.getItem('rn_theme');
+    if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('rn-dark');
+    }
+  } catch(e){}
+})();
+</script>
+
 </head>
 <body>
-<nav class="nav" id="nav">
+
+<nav class="nav nav-scrolled" id="nav" style="background:#0B1E3A;">
   <div class="container">
-    <div class="nav-inner">
-      <a href="/" class="nav-logo"><strong style="color:#fff">RuffNeck</strong></a>
-      <ul class="nav-links">
-        <li><a href="/">Home</a></li>
-        <li><a href="/#services">Services</a></li>
-        <li><a href="/store">Store</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+    <div class="nav-inner" style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;">
+      <a href="/" class="nav-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
+        <img src="/icon-192.png" alt="RuffNeck Entertainment" width="36" height="36" style="border-radius:8px;"/>
+        <span style="color:#fff;font-weight:700;font-size:1.05rem;">RuffNeck<span style="color:#00B4D8;">Entertainment</span></span>
+      </a>
+      <ul class="nav-links" style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;flex-wrap:wrap;">
+        <li><a href="/#services" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Services</a></li>
+        <li><a href="/store" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Store</a></li>
+        <li><a href="/blog" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Blog</a></li>
+        <li><a href="/#contact" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Contact</a></li>
+        <li><a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Book a Call</a></li>
       </ul>
-      <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+      <button class="nav-hamburger" id="hamburger" aria-label="Menu" type="button"><span></span><span></span><span></span></button>
     </div>
   </div>
   <div class="nav-mobile" id="mobileMenu">
@@ -35,56 +195,107 @@
   </div>
 </nav>
 
-<section class="hero" style="min-height:auto;padding:120px 0 64px;">
-  <div class="container">
-    <div class="hero-content" style="max-width:720px;margin:0 auto;text-align:center;">
-      <div class="hero-eyebrow"><div class="hero-dot"></div><span>RuffNeck Services</span></div>
-      <h1 style="font-size:clamp(28px,4vw,42px);">AI Solutions &amp; Training</h1>
-      <p class="hero-sub" style="margin:0 auto 28px;">Practical AI training, automation, and implementation for Nigerian businesses and teams.</p>
-      <div class="hero-actions" style="justify-content:center;">
-        <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Consultation</a>
-        <a href="/#free-guide" class="btn btn-outline">Free AI Prompts</a>
-      </div>
+<section class="svc-page-hero">
+  <div class="container" style="text-align:center;">
+    <div class="section-label" style="color:#00B4D8;">Services · AI</div>
+    <h1>AI Solutions &amp; Training</h1>
+    <p>Practical AI training and automation for individuals, teams, and organisations — results, not theory.</p>
+    <div class="svc-actions">
+      <a class="btn btn-primary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book a Consultation</a>
+      <a class="btn btn-outline" href="/#services" style="border-color:rgba(255,255,255,.35);color:#fff;">All services</a>
+      <a class="btn btn-outline" href="/store" style="border-color:rgba(255,255,255,.35);color:#fff;">Store</a>
     </div>
   </div>
 </section>
-
-<section class="section">
+<section class="section" style="padding-top:12px;padding-bottom:64px;">
   <div class="container" style="max-width:720px;">
-    <h2 class="section-title" style="text-align:center;">What you get</h2>
-    <ul class="service-list" style="margin-top:28px;">
-        <li>AI literacy and team training</li>
+    <div class="svc-panel">
+      <h2>What you get</h2>
+      <ul>
+        <li>AI literacy and fluency training (online or on-site when required)</li>
         <li>Workflow automation with modern AI tools</li>
-        <li>Prompt systems for marketing, ops, and support</li>
+        <li>Prompt systems for marketing, operations, and support</li>
         <li>AI content and research workflows</li>
-        <li>Responsible AI use guidance</li>
-    </ul>
-    <div style="text-align:center;margin-top:40px;">
-      <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Free Consultation</a>
-      <p style="margin-top:16px;font-size:14px;color:#6B7280;">WhatsApp: <a href="https://wa.me/2348033807856">+234 803 380 7856</a></p>
+        <li>Responsible AI use and quality review</li>
+        <li>One-on-one or group AI coaching</li>
+      </ul>
+      <p style="margin-top:16px;font-size:14px;color:#6B7280;">Related: <a href="/#free-guide">Free 20 AI Prompts guide</a> · <a href="/store">Prompt packs in the store</a></p>
+      <div class="svc-actions">
+        <a class="btn btn-primary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book a Free Consultation</a>
+        <a class="btn btn-outline-dark" href="https://wa.me/2348033807856" target="_blank" rel="noopener">WhatsApp +234 803 380 7856</a>
+      </div>
+      <p style="text-align:center;margin-top:16px;font-size:13px;color:#6B7280;">
+        Or <a href="/#contact">use the contact form</a> · <a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a>
+      </p>
     </div>
   </div>
 </section>
 
-<footer class="footer" style="padding:32px 0;text-align:center;background:#0A0F1E;color:rgba(255,255,255,0.5);font-size:13px;">
-  <div class="container">© 2026 RuffNeck Entertainment · CAC 3770977 · <a href="/" style="color:#00B4D8;">Home</a></div>
+<footer class="footer" style="padding:40px 0;text-align:center;background:#0A0F1E;color:rgba(255,255,255,0.55);font-size:13px;">
+  <div class="container">
+    <a href="/" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;margin-bottom:12px;">
+      <img src="/icon-192.png" alt="" width="28" height="28" style="border-radius:6px;"/>
+      <span style="color:#fff;font-weight:600;">RuffNeck Entertainment</span>
+    </a>
+    <p style="margin:8px 0;">CAC 3770977 · SMEDAN Certified · Kano, Nigeria</p>
+    <p style="margin:8px 0;">
+      <a href="/" style="color:#00B4D8;">Home</a> ·
+      <a href="/store" style="color:#00B4D8;">Store</a> ·
+      <a href="/blog" style="color:#00B4D8;">Blog</a> ·
+      <a href="https://maps.app.goo.gl/4ejBep7GQdejzYsW9" style="color:#00B4D8;" target="_blank" rel="noopener">Google</a>
+    </p>
+    <p style="margin:12px 0 0;">© 2026 RuffNeck Entertainment</p>
+  </div>
 </footer>
 <script>
 (function(){
   var h=document.getElementById('hamburger'), m=document.getElementById('mobileMenu');
-  if(h&&m){ h.onclick=function(){ m.classList.toggle('open'); }; m.querySelectorAll('a').forEach(function(a){ a.onclick=function(){ m.classList.remove('open'); }; }); }
+  if(h&&m){
+    h.addEventListener('click', function(){ m.classList.toggle('open'); h.classList.toggle('is-open'); });
+    m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ m.classList.remove('open'); }); });
+  }
 })();
 </script>
 
-<!-- Vercel Web Analytics + Speed Insights -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+
+<script id="rn-dark-mode-js">
+(function(){
+  var KEY = 'rn_theme';
+  function apply(theme){
+    var dark = theme === 'dark';
+    document.documentElement.classList.toggle('rn-dark', dark);
+    try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch(e){}
+    document.querySelectorAll('.rn-theme-btn').forEach(function(btn){
+      btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
+      btn.setAttribute('title', dark ? 'Light mode' : 'Dark mode');
+      btn.innerHTML = dark ? '☀️' : '🌙';
+    });
+  }
+  function current(){
+    try {
+      var s = localStorage.getItem(KEY);
+      if (s === 'dark' || s === 'light') return s;
+    } catch(e){}
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
+    return 'light';
+  }
+  function toggle(){
+    apply(document.documentElement.classList.contains('rn-dark') ? 'light' : 'dark');
+  }
+  // Apply ASAP to reduce flash
+  apply(current());
+  document.addEventListener('DOMContentLoaded', function(){
+    apply(current());
+    document.querySelectorAll('.rn-theme-btn').forEach(function(btn){
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        toggle();
+      });
+    });
+  });
+  window.rnToggleTheme = toggle;
+})();
 </script>
-<script defer src="/_vercel/insights/script.js"></script>
-<script>
-  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
 
 </body>
 </html>
