@@ -1088,6 +1088,27 @@ html.rn-dark #blog .section-title { color: #F9FAFB !important; }
 html.rn-dark #blog .section-sub { color: #D1D5DB !important; }
 </style>
 
+
+<style id="rn-internship-border">
+#internship .teaser-card,
+#internship .intern-grid > div {
+  border: 1.5px solid rgba(0,180,216,0.45) !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  box-shadow: 0 6px 20px rgba(11,30,58,0.06) !important;
+}
+html.rn-dark #internship .teaser-card,
+html.rn-dark #internship .intern-grid > div {
+  background: #151D2E !important;
+  border-color: rgba(0,180,216,0.5) !important;
+}
+#internship .btn-primary {
+  background: #00B4D8 !important;
+  color: #0B1E3A !important;
+  font-weight: 700 !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -1836,7 +1857,11 @@ html.rn-dark #blog .section-sub { color: #D1D5DB !important; }
           <div style="display:flex;flex-direction:column;gap:8px;">
             <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.04);border-radius:8px;padding:12px 14px;">
               <span style="font-size:18px;flex-shrink:0;">✍️</span>
-              <div><div style="font-size:14px;font-weight:600;color:var(--white);">AI Technical Content Writer · Data Mining · Digital Marketing</div><div style="font-size:12px;color:rgba(255,255,255,0.5);">GAOTek Inc. · 2026–Present</div></div>
+              <div>
+                <div style="font-size:14px;font-weight:600;color:var(--white);">AI Technical Content Writing Internship — Platoon Leader</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.55);">GAO Tek Inc. · March 2026 – July 2026</div>
+                <div style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:6px;line-height:1.45;">AI, technical content, AI-assisted research, Tech Support, and team leadership. Credentials: Certificate of Training in AI · Certificate of Completion (4-month programme) · Certificate of Training in Tech Support. ID: GAO-ZAKARIYA-HAS-20260311-MAT · Issued Aug 21, 2026.</div>
+              </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.04);border-radius:8px;padding:12px 14px;">
               <span style="font-size:18px;flex-shrink:0;">🎓</span>
@@ -1881,7 +1906,7 @@ html.rn-dark #blog .section-sub { color: #D1D5DB !important; }
           <div style="font-size:11px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">🎥 3MTT KNOWLEDGE SHOWCASE</div>
           <div style="position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);">
             <iframe
-              src="https://www.youtube.com/embed/cTA0ipwcu30"
+              src="https://www.youtube.com/embed/cTA0ipwcu30" loading="lazy" title="RuffNeck video"
               title="RuffNeck Entertainment Knowledge Hub — 3MTT Knowledge Showcase"
               style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1899,6 +1924,25 @@ html.rn-dark #blog .section-sub { color: #D1D5DB !important; }
       <div style="font-size:11px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:2px;text-transform:uppercase;margin-bottom:20px;text-align:center;">Certifications & Credentials</div>
 
       <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;" class="cert-grid">
+
+        <!-- GAO Tek Inc -->
+        <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.15);border-radius:12px;padding:18px;">
+          <div style="font-size:11px;font-weight:700;color:var(--cyan);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">GAO TEK INC.</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.65);margin-bottom:10px;line-height:1.45;">AI Technical Content Writing Internship · Platoon Leader<br/>March 2026 – July 2026</div>
+          <div style="display:flex;flex-direction:column;gap:8px;">
+            <div style="background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;">
+              <span style="font-size:13px;color:var(--white);font-weight:500;">Certificate of Training in Artificial Intelligence</span>
+            </div>
+            <div style="background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;">
+              <span style="font-size:13px;color:var(--white);font-weight:500;">Certificate of Completion — Four-Month Internship</span>
+            </div>
+            <div style="background:rgba(0,180,216,0.06);border-radius:6px;padding:8px 12px;">
+              <span style="font-size:13px;color:var(--white);font-weight:500;">Certificate of Training in Tech Support</span>
+            </div>
+          </div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:10px;font-family:var(--font-mono);">ID: GAO-ZAKARIYA-HAS-20260311-MAT · Issued Aug 21, 2026</div>
+        </div>
+
 
         <!-- Anthropic -->
         <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.15);border-radius:12px;padding:18px;">
@@ -2199,7 +2243,7 @@ html.rn-dark #blog .section-sub { color: #D1D5DB !important; }
 
 <!-- INTERNSHIP & VOLUNTEER PROGRAM -->
 
-<section class="section" id="internship">
+<section class="section" id="internship" class="rn-internship-section">
   <div class="container">
     <div class="section-label" style="text-align:center;">Open applications</div>
     <h2 class="section-title" style="text-align:center;font-size:clamp(22px,3vw,30px);margin-bottom:8px;">Internship &amp; Volunteer Pathways</h2>
