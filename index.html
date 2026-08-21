@@ -971,10 +971,8 @@ html.rn-dark .rn-svc-landing-cta { color: #22D3EE !important; }
   box-shadow: 0 12px 32px rgba(11,30,58,0.1);
   transform: translateY(-3px);
 }
-#blog .blog-card .blog-preview,
-#blog .blog-card .card-expand,
-#blog .blog-card .blog-expand {
-  display: none;
+/* old selectors removed */
+#blog .blog-card .blog-preview { display: none;
   padding: 0 16px 16px;
   color: #374151;
   font-size: 14px;
@@ -1008,6 +1006,83 @@ html.rn-dark #blog .blog-card {
 html.rn-dark #blog .blog-card .rn-blog-hint {
   background: rgba(0,180,216,0.12);
   color: #22D3EE;
+}
+html.rn-dark #blog .section-title { color: #F9FAFB !important; }
+html.rn-dark #blog .section-sub { color: #D1D5DB !important; }
+</style>
+
+
+<style id="rn-blog-popup-fix">
+#blog .blog-card .blog-popup {
+  display: none !important;
+  margin-top: 12px;
+  padding: 14px 14px;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  background: #F8FAFC;
+  color: #1F2937 !important;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: left;
+}
+#blog .blog-card.open .blog-popup {
+  display: block !important;
+  animation: rnBlogIn 0.25s ease;
+}
+@keyframes rnBlogIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#blog .blog-card {
+  cursor: pointer;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 16px;
+  background: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+#blog .blog-card:hover {
+  border-color: rgba(0,180,216,0.5);
+  box-shadow: 0 12px 32px rgba(11,30,58,0.1);
+  transform: translateY(-3px);
+}
+#blog .blog-card.open {
+  border-color: #00B4D8;
+  box-shadow: 0 12px 32px rgba(0,180,216,0.15);
+}
+#blog .blog-card h3 {
+  color: #0B1E3A !important;
+  font-size: 1.05rem;
+  margin: 8px 0;
+}
+#blog .blog-intro {
+  color: #4B5563 !important;
+  font-size: 14px;
+  line-height: 1.5;
+}
+#blog .rn-blog-hint {
+  display: inline-flex;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0891B2;
+  background: #ECFEFF;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+#blog .blog-card.open .rn-blog-hint {
+  background: rgba(11,30,58,0.06);
+  color: #0B1E3A;
+}
+html.rn-dark #blog .blog-card {
+  background: #151D2E;
+  border-color: rgba(255,255,255,0.1);
+}
+html.rn-dark #blog .blog-card h3 { color: #F9FAFB !important; }
+html.rn-dark #blog .blog-intro { color: #D1D5DB !important; }
+html.rn-dark #blog .blog-card .blog-popup {
+  background: #1a2336;
+  border-color: rgba(255,255,255,0.1);
+  color: #F3F4F6 !important;
 }
 html.rn-dark #blog .section-title { color: #F9FAFB !important; }
 html.rn-dark #blog .section-sub { color: #D1D5DB !important; }
@@ -3285,24 +3360,59 @@ if ('serviceWorker' in navigator) {
 
 
 
+
+
+
 <script id="rn-blog-expand-js">
 (function(){
-  function enhance(){
-    document.querySelectorAll('#blog .blog-card').forEach(function(card){
-      if (card.querySelector('.rn-blog-hint')) return;
-      var hint = document.createElement('div');
-      hint.className = 'rn-blog-hint';
-      hint.textContent = 'Click to expand preview ▾';
-      card.appendChild(hint);
-      card.addEventListener('click', function(e){
-        if (e.target.closest('a')) return;
-        var open = card.classList.toggle('open');
-        hint.textContent = open ? 'Click to collapse ▴' : 'Click to expand preview ▾';
-      });
-    });
+  function ready(fn){
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
   }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance);
-  else enhance();
+  ready(function(){
+    var cards = document.querySelectorAll('#blog .blog-card');
+    cards.forEach(function(card){
+      // ensure popup exists
+      var popup = card.querySelector('.blog-popup');
+      if (!popup) return;
+
+      // hint
+      var hint = card.querySelector('.rn-blog-hint');
+      if (!hint) {
+        hint = document.createElement('div');
+        hint.className = 'rn-blog-hint';
+        hint.textContent = 'Click to expand preview ▾';
+        var body = card.querySelector('.blog-body') || card;
+        body.appendChild(hint);
+      }
+
+      function setOpen(open){
+        card.classList.toggle('open', open);
+        hint.textContent = open ? 'Click to collapse ▴' : 'Click to expand preview ▾';
+      }
+
+      // Remove conflicting inline handlers by replacing with our controlled toggle
+      card.onclick = function(e){
+        if (e.target.closest('a')) return;
+        e.preventDefault();
+        // accordion: close others
+        cards.forEach(function(c){
+          if (c !== card) {
+            c.classList.remove('open');
+            var h = c.querySelector('.rn-blog-hint');
+            if (h) h.textContent = 'Click to expand preview ▾';
+          }
+        });
+        setOpen(!card.classList.contains('open'));
+      };
+      card.onkeydown = function(e){
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      };
+    });
+  });
 })();
 </script>
 
