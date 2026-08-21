@@ -888,6 +888,131 @@ a.btn-outline-dark{
 })();
 </script>
 
+
+<style id="rn-founder-fix">
+.rn-founder-section,
+#founder {
+  background: #0B1E3A !important;
+  color: #F9FAFB !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+#founder .section-title,
+#founder h2,
+#founder h3,
+#founder .section-label {
+  color: #FFFFFF !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+#founder p, #founder li, #founder span {
+  color: rgba(255,255,255,0.9) !important;
+}
+html.rn-dark #founder,
+html.rn-dark .rn-founder-section {
+  background: #0B1E3A !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+html.rn-dark #founder .section-title,
+html.rn-dark #founder h2 {
+  color: #FFFFFF !important;
+}
+/* Landing service page CTAs */
+.rn-svc-landing-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto 8px;
+}
+.rn-svc-landing-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 16px 16px 14px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(0,180,216,0.35);
+  background: #F0F9FF;
+  text-decoration: none !important;
+  color: #0B1E3A !important;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  box-shadow: 0 4px 14px rgba(11,30,58,0.06);
+}
+.rn-svc-landing-card:hover {
+  transform: translateY(-3px);
+  border-color: #00B4D8;
+  box-shadow: 0 10px 28px rgba(0,180,216,0.2);
+}
+.rn-svc-landing-icon { font-size: 22px; line-height: 1; }
+.rn-svc-landing-title { font-weight: 700; font-size: 15px; color: #0B1E3A !important; }
+.rn-svc-landing-cta { font-size: 12px; font-weight: 700; color: #0891B2 !important; }
+html.rn-dark .rn-svc-landing-card {
+  background: #151D2E;
+  border-color: rgba(0,180,216,0.4);
+  color: #F3F4F6 !important;
+}
+html.rn-dark .rn-svc-landing-title { color: #F9FAFB !important; }
+html.rn-dark .rn-svc-landing-cta { color: #22D3EE !important; }
+/* Resources / blog expand upgrade */
+#blog .blog-card {
+  border: 1.5px solid #E5E7EB;
+  border-radius: 16px;
+  background: #fff;
+  overflow: hidden;
+  transition: box-shadow .25s ease, border-color .25s ease, transform .2s ease;
+  cursor: pointer;
+}
+#blog .blog-card:hover {
+  border-color: rgba(0,180,216,0.45);
+  box-shadow: 0 12px 32px rgba(11,30,58,0.1);
+  transform: translateY(-3px);
+}
+#blog .blog-card .blog-preview,
+#blog .blog-card .card-expand,
+#blog .blog-card .blog-expand {
+  display: none;
+  padding: 0 16px 16px;
+  color: #374151;
+  font-size: 14px;
+  line-height: 1.55;
+  border-top: 1px solid #E5E7EB;
+  margin-top: 12px;
+  padding-top: 12px;
+}
+#blog .blog-card.open .blog-preview,
+#blog .blog-card.open .card-expand,
+#blog .blog-card.open .blog-expand,
+#blog .blog-card.open .blog-body-extra {
+  display: block !important;
+}
+#blog .blog-card .rn-blog-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 10px 16px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0891B2;
+  background: #ECFEFF;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+html.rn-dark #blog .blog-card {
+  background: #151D2E;
+  border-color: rgba(255,255,255,0.1);
+}
+html.rn-dark #blog .blog-card .rn-blog-hint {
+  background: rgba(0,180,216,0.12);
+  color: #22D3EE;
+}
+html.rn-dark #blog .section-title { color: #F9FAFB !important; }
+html.rn-dark #blog .section-sub { color: #D1D5DB !important; }
+</style>
+
 </head>
 <body>
 
@@ -1064,7 +1189,7 @@ a.btn-outline-dark{
         <span>Years Experience</span>
       </div>
       <div class="trust-item">
-        <strong>12+</strong>
+        <strong>16</strong>
         <span>Service Lines</span>
       </div>
       <div class="trust-item">
@@ -1464,12 +1589,31 @@ a.btn-outline-dark{
 
     <div class="services-more-wrap fade-up" id="servicesMoreWrap">
       <button type="button" class="btn btn-outline-dark" id="showAllServices">Show all services</button>
-      <div style="margin-top:16px;font-size:14px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center;">
-        <a href="/services-ai" style="color:var(--cyan);font-weight:600;">AI Solutions</a>
-        <a href="/services-marketing" style="color:var(--cyan);font-weight:600;">Marketing</a>
-        <a href="/services-va" style="color:var(--cyan);font-weight:600;">Virtual Assistance</a>
-        <a href="/consulting" style="color:var(--cyan);font-weight:600;">Consulting</a>
+
+      <p style="margin:18px 0 10px;font-size:13px;font-weight:600;color:#6B7280;text-align:center;">Or open a dedicated service page →</p>
+      <div class="rn-svc-landing-grid">
+        <a class="rn-svc-landing-card" href="/services-ai">
+          <span class="rn-svc-landing-icon" aria-hidden="true">🤖</span>
+          <span class="rn-svc-landing-title">AI Solutions</span>
+          <span class="rn-svc-landing-cta">View page →</span>
+        </a>
+        <a class="rn-svc-landing-card" href="/services-marketing">
+          <span class="rn-svc-landing-icon" aria-hidden="true">📣</span>
+          <span class="rn-svc-landing-title">Marketing</span>
+          <span class="rn-svc-landing-cta">View page →</span>
+        </a>
+        <a class="rn-svc-landing-card" href="/services-va">
+          <span class="rn-svc-landing-icon" aria-hidden="true">💼</span>
+          <span class="rn-svc-landing-title">Virtual Assistance</span>
+          <span class="rn-svc-landing-cta">View page →</span>
+        </a>
+        <a class="rn-svc-landing-card" href="/consulting">
+          <span class="rn-svc-landing-icon" aria-hidden="true">🧭</span>
+          <span class="rn-svc-landing-title">Consulting</span>
+          <span class="rn-svc-landing-cta">View page →</span>
+        </a>
       </div>
+
     </div>
     <div class="services-cta-wrap" style="text-align:center;margin-top:40px;">
       <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Free Consultation →</a>
@@ -1576,7 +1720,7 @@ a.btn-outline-dark{
 </section>
 
 <!-- FOUNDER -->
-<section class="section" id="founder" style="background:var(--navy);padding:64px 0;">
+<section class="section" id="founder" class="rn-founder-section" style="background:#0B1E3A;padding:64px 0;">
   <div class="container">
     <div class="fade-up" style="text-align:center;margin-bottom:56px;">
       <div class="section-label" style="color:var(--cyan)">Leadership · 2026</div>
@@ -2079,7 +2223,7 @@ a.btn-outline-dark{
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Resources · Insights · 2026</div>
       <h2 class="section-title">Practical guides for AI, IT &amp; growth</h2>
-      <p class="section-sub" style="margin:0 auto;">Short, practical articles on AI, computer & Office skills, careers, and digital operations. Open a card for a preview — full posts live on the blog. New guides added through 2026.</p>
+      <p class="section-sub" style="margin:0 auto;">Click any card to expand a short preview, then open the full article on the blog. Topics: AI, computer &amp; Office skills, careers, IT support, and digital operations — updated through 2026.</p>
     </div>
     <div class="blog-grid fade-up">
       <div class="blog-card" onclick="this.classList.toggle('open')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open')}">
@@ -3139,6 +3283,28 @@ if ('serviceWorker' in navigator) {
 
 
 
+
+
+<script id="rn-blog-expand-js">
+(function(){
+  function enhance(){
+    document.querySelectorAll('#blog .blog-card').forEach(function(card){
+      if (card.querySelector('.rn-blog-hint')) return;
+      var hint = document.createElement('div');
+      hint.className = 'rn-blog-hint';
+      hint.textContent = 'Click to expand preview ▾';
+      card.appendChild(hint);
+      card.addEventListener('click', function(e){
+        if (e.target.closest('a')) return;
+        var open = card.classList.toggle('open');
+        hint.textContent = open ? 'Click to collapse ▴' : 'Click to expand preview ▾';
+      });
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', enhance);
+  else enhance();
+})();
+</script>
 
 </body>
 </html>
