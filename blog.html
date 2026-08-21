@@ -558,6 +558,66 @@ html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
 })();
 </script>
 
+
+<style id="rn-contrast-fix">
+/* Readable text on light surfaces */
+.service-card h3,
+.product-name,
+.section-title { color: #0B1E3A !important; }
+.service-intro,
+.product-desc,
+.section-sub { color: #4B5563 !important; }
+.service-list li { color: #374151 !important; }
+.hero-next-hint {
+  color: rgba(255,255,255,0.95) !important;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.45) !important;
+  opacity: 1 !important;
+}
+/* Dark mode readable */
+html.rn-dark body { background: #0B1220 !important; color: #E5E7EB !important; }
+html.rn-dark .section-title,
+html.rn-dark .service-card h3,
+html.rn-dark .product-name,
+html.rn-dark h1, html.rn-dark h2, html.rn-dark h3 { color: #F3F4F6 !important; }
+html.rn-dark .service-intro,
+html.rn-dark .product-desc,
+html.rn-dark .section-sub,
+html.rn-dark p { color: #D1D5DB !important; }
+html.rn-dark .service-list li { color: #E5E7EB !important; }
+html.rn-dark .service-card,
+html.rn-dark .product-card,
+html.rn-dark .teaser-card,
+html.rn-dark .blog-card {
+  background: #151D2E !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+html.rn-dark .section { background: #0B1220 !important; }
+html.rn-dark .rn-results { background: #111827 !important; }
+/* Theme button always visible */
+.rn-theme-btn {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  width: 42px !important;
+  height: 42px !important;
+  min-width: 42px;
+  border-radius: 11px !important;
+  border: 1.5px solid rgba(0,180,216,0.5) !important;
+  background: rgba(0,180,216,0.15) !important;
+  color: #fff !important;
+  font-size: 18px !important;
+  cursor: pointer !important;
+  z-index: 60;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+.nav-inner { display: flex; align-items: center; }
+html.rn-dark .rn-theme-btn {
+  background: rgba(255,255,255,0.1) !important;
+  border-color: rgba(255,255,255,0.35) !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -592,7 +652,7 @@ html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
 </div>
 <div id="google_translate_element" aria-hidden="true"></div>
 
-</nav>
+<button type="button" class="rn-theme-btn" id="rnThemeBtn" aria-label="Toggle dark mode" title="Toggle dark / light mode">🌙</button></nav>
 
 <main id="main-content">
 <!-- HERO -->
@@ -1818,42 +1878,38 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
+
+
+
 <script id="rn-dark-mode-js">
 (function(){
   var KEY = 'rn_theme';
+  function isDark(){ return document.documentElement.classList.contains('rn-dark'); }
   function apply(theme){
     var dark = theme === 'dark';
     document.documentElement.classList.toggle('rn-dark', dark);
     try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch(e){}
     document.querySelectorAll('.rn-theme-btn').forEach(function(btn){
+      btn.textContent = dark ? '☀️' : '🌙';
       btn.setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-      btn.setAttribute('title', dark ? 'Light mode' : 'Dark mode');
-      btn.innerHTML = dark ? '☀️' : '🌙';
     });
   }
-  function current(){
-    try {
-      var s = localStorage.getItem(KEY);
-      if (s === 'dark' || s === 'light') return s;
-    } catch(e){}
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) return 'dark';
-    return 'light';
-  }
-  function toggle(){
-    apply(document.documentElement.classList.contains('rn-dark') ? 'light' : 'dark');
-  }
-  // Apply ASAP to reduce flash
-  apply(current());
-  document.addEventListener('DOMContentLoaded', function(){
-    apply(current());
+  function init(){
+    var saved = null;
+    try { saved = localStorage.getItem(KEY); } catch(e){}
+    if (saved === 'dark' || saved === 'light') apply(saved);
+    else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) apply('dark');
+    else apply('light');
     document.querySelectorAll('.rn-theme-btn').forEach(function(btn){
-      btn.addEventListener('click', function(e){
+      btn.onclick = function(e){
         e.preventDefault();
-        toggle();
-      });
+        e.stopPropagation();
+        apply(isDark() ? 'light' : 'dark');
+      };
     });
-  });
-  window.rnToggleTheme = toggle;
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+  else init();
 })();
 </script>
 
