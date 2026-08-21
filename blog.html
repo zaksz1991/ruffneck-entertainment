@@ -355,6 +355,71 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 @media(max-width:768px){.rn-responsive-img{min-height:120px;max-height:180px}.rn-article-img{max-height:240px}}
 
 </style>
+<style>
+/* Language switcher */
+.rn-lang {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  z-index: 100;
+}
+.rn-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.nav-light .rn-lang-btn, footer .rn-lang-btn {
+  border-color: rgba(11,30,58,0.12);
+  background: #fff;
+  color: #0B1E3A;
+}
+.rn-lang-btn:hover { border-color: #00B4D8; color: #00B4D8; }
+.rn-lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: #fff;
+  color: #0B1E3A;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(11,30,58,0.18);
+  border: 1px solid #E5E7EB;
+  padding: 6px;
+  z-index: 200;
+}
+.rn-lang.open .rn-lang-menu { display: block; }
+.rn-lang-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #0B1E3A;
+  font-family: inherit;
+}
+.rn-lang-menu button:hover { background: #F0F9FF; color: #00B4D8; }
+.rn-lang-menu button.active { background: #ECFEFF; font-weight: 700; }
+/* Hide Google's default banner/gadget chrome when possible */
+.goog-te-banner-frame, .goog-te-balloon-frame { display: none !important; }
+body { top: 0 !important; }
+#google_translate_element { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+.skiptranslate iframe { display: none !important; }
+</style>
 </head>
 <body>
 
@@ -372,6 +437,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
       <a href="/store" class="nav-store-btn">🛒 Store</a>
     </div>
   </div>
+
+<div class="rn-lang" id="rnLang">
+  <button type="button" class="rn-lang-btn" id="rnLangBtn" aria-haspopup="true" aria-expanded="false" title="Translate page">
+    <span aria-hidden="true">🌐</span> <span id="rnLangLabel">EN</span>
+  </button>
+  <div class="rn-lang-menu" role="menu" id="rnLangMenu">
+    <button type="button" data-lang="en" data-label="EN" class="active">English</button>
+    <button type="button" data-lang="ha" data-label="HA">Hausa</button>
+    <button type="button" data-lang="yo" data-label="YO">Yorùbá</button>
+    <button type="button" data-lang="ig" data-label="IG">Igbo</button>
+    <button type="button" data-lang="fr" data-label="FR">Français</button>
+    <button type="button" data-lang="es" data-label="ES">Español</button>
+    <button type="button" data-lang="ar" data-label="AR">العربية</button>
+  </div>
+</div>
+<div id="google_translate_element" aria-hidden="true"></div>
+
 </nav>
 
 <main id="main-content">
@@ -399,7 +481,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
       <div class="blog-search">
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Search articles..." oninput="filterBlog()"/>
-        <button type="button" class="search-btn" onclick="filterBlog()" aria-label="Search">Search</button>
+        <button type="button" class="search-btn" onclick="filterBlog()" aria-label="Search" type="button" data-search-btn onclick="filterBlog()">Search</button>
       </div>
     </div>
   </div>
@@ -590,6 +672,62 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
       </div>
 
+      <div class="blog-card" data-cat="operations" data-title="Microsoft Office and Excel for Nigerian Businesses">
+        <div class="blog-thumb rn-responsive-img" style="background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1551288049-bebda4e38f71&w=720&q=75&output=webp&fit=cover')"></div>
+        <div class="blog-body">
+          <div class="blog-cat">Operations</div>
+          <h3>Microsoft Office &amp; Excel for Nigerian Businesses</h3>
+          <p>Excel data entry, analysis, and Office support that save hours — plus when to use RuffNeck professional help.</p>
+          <a href="/#svc-office">Get Office / Excel support →</a>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="ai" data-title="AI Technology Consulting for Small Businesses">
+        <div class="blog-thumb rn-responsive-img" style="background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1677442136019-21780ecad995&w=720&q=75&output=webp&fit=cover')"></div>
+        <div class="blog-body">
+          <div class="blog-cat">AI &amp; Automation</div>
+          <h3>AI Technology Consulting for Small Businesses</h3>
+          <p>Practical AI for Nigerian SMEs — training, automation, and tools. Links to our AI services and free prompt guide.</p>
+          <a href="/#services">View AI services →</a>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="operations" data-title="Computer Setup Wi-Fi and Printer Support">
+        <div class="blog-thumb rn-responsive-img" style="background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1518770660439-4636190af475&w=720&q=75&output=webp&fit=cover')"></div>
+        <div class="blog-body">
+          <div class="blog-cat">IT Support</div>
+          <h3>Computer Setup, Wi-Fi &amp; Printer Support</h3>
+          <p>OS install, virus removal, Wi-Fi and printer setup for homes and small offices — on-site awareness and remote help.</p>
+          <a href="/#svc-computer">Request IT support →</a>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="careers" data-title="CV Cover Letter and LinkedIn for Job Seekers">
+        <div class="blog-thumb rn-responsive-img" style="background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1454165804606-c3d57bc86b40&w=720&q=75&output=webp&fit=cover')"></div>
+        <div class="blog-body">
+          <div class="blog-cat">Careers</div>
+          <h3>CV, Cover Letter &amp; LinkedIn That Get Replies</h3>
+          <p>ATS-friendly CVs and cover letters from RuffNeck Career Services. Pair with templates in the digital store.</p>
+          <a href="/store">Browse career products →</a>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="business" data-title="Business Automation Services That Stick">
+        <div class="blog-thumb rn-responsive-img" style="background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1460925895917-afdab827c52f&w=720&q=75&output=webp&fit=cover')"></div>
+        <div class="blog-body">
+          <div class="blog-cat">Business Growth</div>
+          <h3>Business Automation Services That Actually Stick</h3>
+          <p>Automate admin and reporting without unused tools. SOPs and digital operations for founders with RuffNeck.</p>
+          <a href="/#contact">Book a consultation →</a>
+        </div>
+      </div>
+      <div class="blog-card" data-cat="prompts" data-title="Free 20 AI Prompts Guide Nigerian Businesses">
+        <div class="blog-thumb rn-responsive-img" style="background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1620712943543-bcc4688e7485&w=720&q=75&output=webp&fit=cover')"></div>
+        <div class="blog-body">
+          <div class="blog-cat">Content &amp; Prompts</div>
+          <h3>Free: 20 AI Prompts Every Nigerian Business Should Use</h3>
+          <p>Download our free lead magnet, then explore paid prompt packs and career guides in the RuffNeck store.</p>
+          <a href="/#free-guide">Download free guide →</a>
+        </div>
+      </div>
+
+
     </div><!-- end blog-grid -->
   </div>
 </div>
@@ -608,6 +746,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 </div>
 
 <!-- BLOG FOOTER -->
+
+    <div class="teaser-card" style="margin:28px auto;max-width:800px;text-align:center;padding:22px;">
+      <h3 style="margin-bottom:8px;">Need computer, Office, Excel, Wi‑Fi or printer help?</h3>
+      <p style="color:#6B7280;font-size:14px;margin-bottom:14px;">Book IT services for individuals, homes, businesses, and organisations on the RuffNeck Store.</p>
+      <a class="btn btn-primary" href="/store">Browse IT Services on Store →</a>
+      <a class="btn btn-outline-dark" href="/#svc-computer" style="margin-left:8px;">View service details</a>
+    </div>
+
 </main>
 
 <div class="blog-footer">
@@ -1174,30 +1320,8 @@ if(si){
   si.addEventListener('input', filterBlog);
 }
 
-function filterBlog() {
-  var activeBtn = document.querySelector('.filter-btn.active');
-  var activeCat = (activeBtn && activeBtn.dataset.cat) ? activeBtn.dataset.cat : 'all';
-  var input = document.getElementById('searchInput');
-  var search = (input && input.value ? input.value : '').trim().toLowerCase();
-  var tokens = search ? search.split(/\s+/).filter(Boolean) : [];
-  document.querySelectorAll('.blog-card').forEach(function(card) {
-    var cat = card.getAttribute('data-cat') || '';
-    var catMatch = activeCat === 'all' || cat === activeCat;
-    if (!tokens.length) {
-      card.style.display = catMatch ? '' : 'none';
-      return;
-    }
-    var searchable = [
-      card.getAttribute('data-title') || '',
-      card.getAttribute('data-cat') || '',
-      (card.querySelector('h3') && card.querySelector('h3').textContent) || '',
-      (card.querySelector('p') && card.querySelector('p').textContent) || '',
-      card.textContent || ''
-    ].join(' ').toLowerCase();
-    var match = tokens.every(function(t) { return searchable.indexOf(t) !== -1; });
-    card.style.display = (catMatch && match) ? '' : 'none';
-  });
-}
+/* filterBlog moved */
+
 
 // ============================================================
 // NEWSLETTER
@@ -1450,6 +1574,110 @@ function shareArticle(platform){
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+
+
+<script>
+window.filterBlog = function filterBlog() {
+  try {
+    var activeBtn = document.querySelector('.filter-btn.active');
+    var activeCat = (activeBtn && (activeBtn.getAttribute('data-cat') || activeBtn.dataset.cat)) || 'all';
+    var input = document.getElementById('searchInput');
+    var search = (input && input.value ? input.value : '').trim().toLowerCase();
+    var tokens = search ? search.split(/\s+/).filter(Boolean) : [];
+    var cards = document.querySelectorAll('.blog-card, .article-card, [data-blog-card]');
+    var shown = 0;
+    cards.forEach(function(card) {
+      var cat = card.getAttribute('data-cat') || '';
+      var catMatch = activeCat === 'all' || cat === activeCat || activeCat === '';
+      var text = (
+        (card.getAttribute('data-title') || '') + ' ' +
+        (card.getAttribute('data-cat') || '') + ' ' +
+        (card.textContent || '')
+      ).toLowerCase();
+      var match = !tokens.length || tokens.every(function(t) { return text.indexOf(t) !== -1; });
+      var ok = catMatch && match;
+      card.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    var empty = document.getElementById('blogSearchEmpty');
+    if (empty) empty.style.display = (shown === 0 && tokens.length) ? 'block' : 'none';
+  } catch (e) { console.warn('filterBlog', e); }
+};
+document.addEventListener('DOMContentLoaded', function() {
+  var input = document.getElementById('searchInput');
+  if (input) {
+    input.addEventListener('input', window.filterBlog);
+    input.addEventListener('keyup', window.filterBlog);
+  }
+  document.querySelectorAll('.search-btn, [data-search-btn]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) { e.preventDefault(); window.filterBlog(); });
+  });
+});
+</script>
+
+
+<script>
+(function(){
+  function loadGT(){
+    if (window.google && google.translate) return;
+    var s = document.createElement('script');
+    s.src = '//translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate';
+    document.head.appendChild(s);
+  }
+  window.rnInitGoogleTranslate = function(){
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,ha,yo,ig,fr,es,ar',
+      autoDisplay: false,
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  };
+  function setLang(lang, label){
+    document.querySelectorAll('#rnLangMenu button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+    var lab = document.getElementById('rnLangLabel');
+    if (lab) lab.textContent = label || lang.toUpperCase();
+    localStorage.setItem('rn_lang', lang);
+    localStorage.setItem('rn_lang_label', label || lang.toUpperCase());
+    if (lang === 'en') {
+      // clear translate cookie-ish by reloading without googtrans
+      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
+      if (location.href.indexOf('googtrans') >= 0) location.href = location.pathname + location.search + location.hash;
+      else location.reload();
+      return;
+    }
+    document.cookie = 'googtrans=/en/' + lang + ';path=/;';
+    document.cookie = 'googtrans=/en/' + lang + ';path=/;domain=.' + location.hostname;
+    location.reload();
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    loadGT();
+    var wrap = document.getElementById('rnLang');
+    var btn = document.getElementById('rnLangBtn');
+    var menu = document.getElementById('rnLangMenu');
+    if (!btn || !menu) return;
+    var saved = localStorage.getItem('rn_lang');
+    var savedL = localStorage.getItem('rn_lang_label');
+    if (saved && savedL) {
+      var lab = document.getElementById('rnLangLabel');
+      if (lab) lab.textContent = savedL;
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded', wrap.classList.contains('open'));
+    });
+    menu.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        setLang(b.getAttribute('data-lang'), b.getAttribute('data-label'));
+      });
+    });
+    document.addEventListener('click', function(){ wrap.classList.remove('open'); });
+  });
+})();
+</script>
 
 </body>
 </html>

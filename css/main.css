@@ -2649,3 +2649,160 @@ a.hero-trust-card:hover{
   border-radius: 6px;
 }
 .services-grid .service-card { position: relative; }
+
+
+/* Logo animation — upgraded */
+@keyframes rn-logo-breathe {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,180,216,0)); }
+  50% { transform: scale(1.04); filter: drop-shadow(0 0 10px rgba(0,180,216,0.45)); }
+}
+@keyframes rn-logo-ring {
+  0% { box-shadow: 0 0 0 0 rgba(0,180,216,0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(0,180,216,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,180,216,0); }
+}
+@keyframes rn-logo-shine {
+  0% { background-position: -120% 0; }
+  100% { background-position: 220% 0; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .nav-logo img,
+  .nav-logo .logo-img,
+  a.nav-logo img {
+    animation: rn-logo-breathe 3.2s ease-in-out infinite;
+    border-radius: 10px;
+  }
+  .nav-logo {
+    position: relative;
+    border-radius: 12px;
+  }
+  .nav-logo::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 14px;
+    pointer-events: none;
+    animation: rn-logo-ring 2.8s ease-out infinite;
+  }
+  .nav-logo:hover img {
+    animation: none;
+    transform: scale(1.08);
+    transition: transform 0.25s ease;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-logo img, .nav-logo::after { animation: none !important; }
+}
+
+
+/* =========================================================
+   COMMERCIAL UI POLISH — spacing, cards, buttons
+   ========================================================= */
+.product-card {
+  border-radius: 16px !important;
+  border: 1px solid rgba(11, 30, 58, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(11, 30, 58, 0.04) !important;
+  overflow: hidden !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease !important;
+  background: #fff !important;
+}
+.product-card:hover {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 14px 36px rgba(11, 30, 58, 0.1) !important;
+  border-color: rgba(0, 180, 216, 0.35) !important;
+}
+.product-body {
+  padding: 18px 18px 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+.product-img {
+  height: 160px !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+.product-name {
+  font-size: 1.05rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: -0.01em !important;
+  margin: 0 !important;
+}
+.product-desc {
+  font-size: 13.5px !important;
+  line-height: 1.55 !important;
+  color: #4B5563 !important;
+  margin: 0 !important;
+}
+.product-footer {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  margin-top: 10px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid #F3F4F6 !important;
+}
+.product-cat {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #00B4D8 !important;
+}
+.btn {
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em !important;
+  padding: 11px 18px !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+}
+.btn-sm {
+  padding: 9px 14px !important;
+  font-size: 13px !important;
+  border-radius: 9px !important;
+}
+.btn-primary {
+  box-shadow: 0 4px 14px rgba(0, 180, 216, 0.25) !important;
+}
+.btn-primary:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 8px 22px rgba(0, 180, 216, 0.35) !important;
+}
+.filter-btn {
+  padding: 9px 16px !important;
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+}
+.service-card {
+  border-radius: 16px !important;
+  padding: 18px !important;
+  border: 1px solid rgba(11, 30, 58, 0.08) !important;
+}
+.service-media {
+  border-radius: 12px !important;
+  margin-bottom: 14px !important;
+}
+.teaser-card {
+  border-radius: 16px !important;
+  padding: 24px !important;
+}
+.search-box {
+  border-radius: 12px !important;
+  padding: 4px 4px 4px 12px !important;
+  border: 1px solid #E5E7EB !important;
+  box-shadow: 0 2px 8px rgba(11, 30, 58, 0.04) !important;
+}
+.section {
+  padding-top: clamp(48px, 6vw, 80px) !important;
+  padding-bottom: clamp(48px, 6vw, 80px) !important;
+}
+.container {
+  padding-left: max(16px, 4vw) !important;
+  padding-right: max(16px, 4vw) !important;
+}
+
+
+.rn-svc-extra.rn-svc-hidden { display: none !important; }
+.rn-svc-toggle-wrap { margin: 8px 0 24px; }
+

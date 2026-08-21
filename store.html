@@ -420,6 +420,71 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 }
 
 </style>
+<style>
+/* Language switcher */
+.rn-lang {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  z-index: 100;
+}
+.rn-lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(255,255,255,0.08);
+  color: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+.nav-light .rn-lang-btn, footer .rn-lang-btn {
+  border-color: rgba(11,30,58,0.12);
+  background: #fff;
+  color: #0B1E3A;
+}
+.rn-lang-btn:hover { border-color: #00B4D8; color: #00B4D8; }
+.rn-lang-menu {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 200px;
+  background: #fff;
+  color: #0B1E3A;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(11,30,58,0.18);
+  border: 1px solid #E5E7EB;
+  padding: 6px;
+  z-index: 200;
+}
+.rn-lang.open .rn-lang-menu { display: block; }
+.rn-lang-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  color: #0B1E3A;
+  font-family: inherit;
+}
+.rn-lang-menu button:hover { background: #F0F9FF; color: #00B4D8; }
+.rn-lang-menu button.active { background: #ECFEFF; font-weight: 700; }
+/* Hide Google's default banner/gadget chrome when possible */
+.goog-te-banner-frame, .goog-te-balloon-frame { display: none !important; }
+body { top: 0 !important; }
+#google_translate_element { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+.skiptranslate iframe { display: none !important; }
+</style>
 </head>
 <body>
 
@@ -527,6 +592,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">📅 Get Started →</a>
   </div>
   </div>
+
+<div class="rn-lang" id="rnLang">
+  <button type="button" class="rn-lang-btn" id="rnLangBtn" aria-haspopup="true" aria-expanded="false" title="Translate page">
+    <span aria-hidden="true">🌐</span> <span id="rnLangLabel">EN</span>
+  </button>
+  <div class="rn-lang-menu" role="menu" id="rnLangMenu">
+    <button type="button" data-lang="en" data-label="EN" class="active">English</button>
+    <button type="button" data-lang="ha" data-label="HA">Hausa</button>
+    <button type="button" data-lang="yo" data-label="YO">Yorùbá</button>
+    <button type="button" data-lang="ig" data-label="IG">Igbo</button>
+    <button type="button" data-lang="fr" data-label="FR">Français</button>
+    <button type="button" data-lang="es" data-label="ES">Español</button>
+    <button type="button" data-lang="ar" data-label="AR">العربية</button>
+  </div>
+</div>
+<div id="google_translate_element" aria-hidden="true"></div>
+
 </nav>
 
 <main id="main-content">
@@ -559,10 +641,11 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
       <button class="filter-btn" data-cat="business">Business Toolkits</button>
       <button class="filter-btn" data-cat="practical-business-idea">Practical Business Ideas</button>
       <button class="filter-btn" data-cat="content">Content Services</button>
+        <button class="filter-btn" data-cat="it-support">IT Services</button>
       <div class="search-box">
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Search products..." oninput="filterProducts()"/>
-        <button type="button" class="search-btn" onclick="filterProducts()" aria-label="Search">Search</button>
+        <button type="button" class="search-btn" onclick="filterProducts()" aria-label="Search" type="button" data-search-btn onclick="filterProducts()">Search</button>
       </div>
       <div class="currency-toggle" role="group" aria-label="Currency selector">
         <button class="curr-btn active" id="currBtnNGN" onclick="setCurrency('NGN')" aria-pressed="true">₦ NGN</button>
@@ -575,6 +658,59 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
     <span style="opacity:.85;font-size:14px;line-height:1.5;">Pay with Flutterwave. Get your digital products after payment. Start with a featured item or browse categories below.</span>
   </div>
 </div>
+    <div class="container" style="margin-top:-8px;margin-bottom:20px;">
+      <div style="max-width:900px;margin:0 auto;padding:14px 18px;border-radius:12px;background:#F0F9FF;border:1px solid rgba(0,180,216,0.25);font-size:14px;color:#0B1E3A;line-height:1.5;">
+        <strong>IT Services — scoped packages:</strong> Entry prices are for defined single-user / single-device scope.
+        Professional and Organisation tiers cover teams, multi-device, and training groups.
+        <a href="/RuffNeck_IT_Services_Guide.pdf" style="color:#00B4D8;font-weight:600;">Download IT Services Guide (PDF) →</a>
+      </div>
+
+<section class="rn-featured" style="padding:28px 0 8px;background:#F8FAFC;">
+  <div class="container">
+    <div class="section-label" style="text-align:center;">Featured</div>
+    <h2 style="text-align:center;font-size:clamp(20px,2.5vw,26px);margin:0 0 8px;color:#0B1E3A;">Start here — high-demand packages</h2>
+    <p style="text-align:center;max-width:560px;margin:0 auto 20px;font-size:14px;color:#6B7280;">Career documents and IT support for individuals, homes, and organisations. Optional tiers on each product.</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:1000px;margin:0 auto;">
+      <div class="product-card" style="margin:0;" data-cat="templates" data-name="Professional CV Cover Letter LinkedIn" data-id="feat-p014">
+        <div class="product-body" style="padding:18px;">
+          <div class="product-cat">Career Service</div>
+          <h3 class="product-name">Professional CV, Cover Letter &amp; LinkedIn</h3>
+          <p class="product-desc">ATS-oriented writing. Packages from Essential to Executive. <a href="/RuffNeck_CV_CoverLetter_LinkedIn_Service.pdf" target="_blank">Service PDF →</a></p>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span> ₦8,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p014')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" style="margin:0;" data-cat="it-support" data-name="Computer Support" data-id="feat-p017">
+        <div class="product-body" style="padding:18px;">
+          <div class="product-cat">IT Services</div>
+          <h3 class="product-name">Computer Support &amp; Services</h3>
+          <p class="product-desc">Setup, troubleshooting, maintenance for home and business. <a href="/RuffNeck_IT_Services_Guide.pdf" target="_blank">IT Guide PDF →</a></p>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span> ₦25,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p017')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" style="margin:0;" data-cat="it-support" data-name="Excel Analysis" data-id="feat-p016">
+        <div class="product-body" style="padding:18px;">
+          <div class="product-cat">IT Services</div>
+          <h3 class="product-name">Excel Data Entry &amp; Analysis</h3>
+          <p class="product-desc">Entry, cleaning, formulas, and reporting for professionals and businesses.</p>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span> ₦20,000</div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p016')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:16px;font-size:13px;"><a href="#products" onclick="document.querySelector('[data-cat=\'it-support\']')?.click()">Browse all IT Services</a> · <a href="/#services">Service details on homepage</a></p>
+  </div>
+</section>
+
+    </div>
+
 
   </div>
 </div>
@@ -797,6 +933,116 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         </div>
       </div>
 
+      <div class="product-card" data-cat="templates" data-name="Professional CV Cover Letter LinkedIn Service" data-id="p014">
+        <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#123050);background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1454165804606-c3d57bc86b40&w=720&q=75&output=webp&fit=cover');background-size:cover;">
+          <span class="product-new">SERVICE</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">Career Service</div>
+          <h3 class="product-name">Professional CV, Cover Letter &amp; LinkedIn</h3>
+          <p class="product-desc">Internationally oriented CV/resume, cover letter, and LinkedIn profile writing. ATS-aware structure. Optional packages (Essential, Professional, Executive). Clear requirements checklist in our service PDF. Fast delivery via email or WhatsApp.</p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill tier-beg">Essential — <span class="price-val" data-ngn="8000">₦8,000</span></span>
+            <span class="tier-pill tier-mid">Pro — <span class="price-val" data-ngn="15000">₦15,000</span></span>
+            <span class="tier-pill tier-adv">Executive — <span class="price-val" data-ngn="25000">₦25,000</span></span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="8000">₦8,000</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p014')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card" data-cat="it-support" data-name="Microsoft Office Setup Support" data-id="p015">
+        <div class="product-img" style="background:linear-gradient(135deg,#1e3a5f,#0B1E3A);background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1551288049-bebda4e38f71&w=720&q=75&output=webp&fit=cover');background-size:cover;">
+          <span class="product-new">IT</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">IT Services</div>
+          <h3 class="product-name">Microsoft Office Setup &amp; Support</h3>
+          <p class="product-desc">Office configuration and support for individuals, homes, businesses, and organisations. <a href="/#svc-office">Related service →</a></p>
+          <div class="product-tiers-preview">
+            <span class="tier-pill">From <span class="price-val" data-ngn="15000">₦15,000</span></span>
+          </div>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="15000">₦15,000</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p015')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-cat="it-support" data-name="Excel Data Entry Analysis" data-id="p016">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a2a1a,#1a3a2a);background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1460925895917-afdab827c52f&w=720&q=75&output=webp&fit=cover');background-size:cover;">
+          <span class="product-new">IT</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">IT Services</div>
+          <h3 class="product-name">Excel Data Entry &amp; Analysis</h3>
+          <p class="product-desc">Data entry, cleaning, formulas, and analysis for students, professionals, and businesses. <a href="/blog">Read related articles →</a></p>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="20000">₦20,000</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p016')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-cat="it-support" data-name="Computer Support Services" data-id="p017">
+        <div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#123050);background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1518770660439-4636190af475&w=720&q=75&output=webp&fit=cover');background-size:cover;">
+          <span class="product-new">IT</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">IT Services</div>
+          <h3 class="product-name">Computer Support &amp; Services</h3>
+          <p class="product-desc">Setup, troubleshooting, maintenance, and performance support for home and business PCs. <a href="/#svc-computer">Service details →</a></p>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="25000">₦25,000</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p017')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-cat="it-support" data-name="Printer Setup Configuration" data-id="p018">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a1a2a,#2a2a3a);">
+          <span class="emoji-fallback">🖨️</span><span class="product-new">IT</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">IT Services</div>
+          <h3 class="product-name">Printer Setup &amp; Configuration</h3>
+          <p class="product-desc">Printer install and troubleshooting for home and office. <a href="/#svc-network">Network &amp; devices →</a></p>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="12000">₦12,000</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p018')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-cat="it-support" data-name="Wi-Fi Setup Configuration" data-id="p019">
+        <div class="product-img" style="background:linear-gradient(135deg,#0a2030,#103040);">
+          <span class="emoji-fallback">📶</span><span class="product-new">IT</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">IT Services</div>
+          <h3 class="product-name">Wi-Fi Setup &amp; Configuration</h3>
+          <p class="product-desc">Home and office Wi-Fi setup, security basics, and connectivity help. <a href="/#svc-network">Related service →</a></p>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="15000">₦15,000</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p019')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+      <div class="product-card" data-cat="it-support" data-name="Computer Training Individual Group" data-id="p020">
+        <div class="product-img" style="background:linear-gradient(135deg,#1a1030,#2a2040);background-image:url('https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1524178232363-1fb2b075b655&w=720&q=75&output=webp&fit=cover');background-size:cover;">
+          <span class="product-new">IT</span>
+        </div>
+        <div class="product-body">
+          <div class="product-cat">IT Services</div>
+          <h3 class="product-name">Computer Training (Individual or Group)</h3>
+          <p class="product-desc">Practical computer training for beginners, staff, schools, and organisations. <a href="/#svc-computer">Training service →</a> · <a href="/blog">Blog →</a></p>
+          <div class="product-footer">
+            <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="30000">₦30,000</span></div>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p020')">View &amp; Buy</button>
+          </div>
+        </div>
+      </div>
+
+
+
       <div class="product-card" data-cat="templates" data-name="Content Calendar Template Pack" data-id="p010">
         <div class="product-img" style="background:linear-gradient(135deg,#0a2a2a,#1a3a3a);">
           <span class="emoji-fallback">📅</span><span class="product-new">2026</span>
@@ -806,7 +1052,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
           <h3 class="product-name">Content Calendar Template Pack</h3>
           <p class="product-desc">30, 60, and 90-day content planning templates for social media, blogs, and email — pre-filled with niche-specific ideas.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">30-Day — <span class="price-val" data-ngn="2500">₦2,500</span></span>
+            <span class="tier-pill tier-beg">30-Day — <span class="price-val" data-ngn="30000">₦30,00000</span></span>
             <span class="tier-pill tier-mid">60-Day — <span class="price-val" data-ngn="4500">₦4,500</span></span>
             <span class="tier-pill tier-adv">90-Day — <span class="price-val" data-ngn="6500">₦6,500</span></span>
           </div>
@@ -947,7 +1193,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
         <ul id="modalIncludes"></ul>
       </div>
       <h4 style="font-size:13px;font-weight:700;color:var(--text-dark);text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;font-family:var(--font-mono);">Choose Your Level</h4>
-      <div class="modal-levels" id="modalLevels"></div>
+      <div class="modal-levels" id="modalLevels" data-note="Tiers are optional — pick a package that fits, or the first option is used by default"></div>
       <button class="btn btn-primary modal-add-btn" id="modalAddBtn" onclick="addToCartFromModal()">Add to Cart</button>
       <div class="modal-delivery">
         <strong>📥 Delivery:</strong> After successful payment, your PDF download link is instantly displayed on screen and sent to your email. No waiting — access your guide immediately.<br/><br/>
@@ -1611,6 +1857,120 @@ const PRODUCTS = {
         ]
       }
     ]
+  },
+  p014: {
+    name: 'Professional CV, Cover Letter & LinkedIn Service',
+    cat: 'Career Service',
+    emoji: '🧾',
+    optionalTiers: true,
+    desc: 'Commercial-grade CV/resume, cover letter, and LinkedIn profile writing for job seekers and professionals. ATS-friendly. Fast delivery via email/WhatsApp.',
+    tiers: [
+      {
+        level: '🟢 Essential', price: 8000, label: 'CV only',
+        desc: 'Optional tier — one ATS-optimized CV tailored to your target role.',
+        includes: [
+          'ATS-optimized CV / resume (PDF + editable)',
+          'Role-targeted keywords and structure',
+          '1 revision round',
+          'Delivery within 48–72 hours'
+        ]
+      },
+      {
+        level: '🔵 Professional', price: 15000, label: 'CV + Cover Letter',
+        desc: 'Optional tier — CV plus a tailored cover letter for applications.',
+        includes: [
+          'Everything in Essential',
+          'Custom cover letter matched to job type',
+          '2 revision rounds',
+          'Email + WhatsApp delivery'
+        ]
+      },
+      {
+        level: '🟣 Executive', price: 25000, label: 'Full Career Pack',
+        desc: 'Optional tier — full career brand package.',
+        includes: [
+          'CV + Cover Letter + LinkedIn profile rewrite',
+          'Keyword optimization for recruiters',
+          '3 revision rounds',
+          'Priority delivery',
+          'Short application tips sheet'
+        ]
+      }
+    ]
+  },
+  p015: {
+    name: 'Microsoft Office Setup & Support',
+    cat: 'IT Services', emoji: '📘', optionalTiers: true,
+    desc: 'Microsoft Office installation guidance, configuration, and support for individuals, homes, offices, and organisations.',
+    tiers: [
+      { level: '🟢 Individual / Home', price: 15000, label: 'Home', desc: 'Office setup and support for personal or home use.',
+        includes: ['Office apps guidance (Word, Excel, PowerPoint)', 'Basic configuration', 'Remote support session', 'Tips sheet PDF'] },
+      { level: '🔵 Small Business', price: 35000, label: 'Business', desc: 'Office support for a small team or office.',
+        includes: ['Everything in Home', 'Multi-user guidance', 'Document templates intro', 'Follow-up support window'] },
+      { level: '🟣 Organisation', price: 75000, label: 'Organisation', desc: 'Structured Office support for organisations and training groups.',
+        includes: ['Team-oriented setup guidance', 'Standard operating tips', 'Short staff orientation', 'Priority remote support'] }
+    ]
+  },
+  p016: {
+    name: 'Excel Data Entry & Analysis Support',
+    cat: 'IT Services', emoji: '📊', optionalTiers: true,
+    desc: 'Excel data entry, cleaning, formulas, and basic analysis for students, professionals, and businesses.',
+    tiers: [
+      { level: '🟢 Starter', price: 20000, label: 'Starter', desc: 'Data entry and simple spreadsheets.',
+        includes: ['Structured data entry', 'Basic formulas', 'Clean formatted sheet', 'Summary notes'] },
+      { level: '🔵 Analysis', price: 45000, label: 'Analysis', desc: 'Pivot-ready data and analysis support.',
+        includes: ['Cleaning + structuring', 'Formulas and charts', 'Pivot table setup guidance', 'One revision'] },
+      { level: '🟣 Business Pack', price: 90000, label: 'Business', desc: 'Ongoing-style Excel support scope for business reporting.',
+        includes: ['Reporting layout', 'KPI-style sheets', 'Two revision rounds', 'Handover notes'] }
+    ]
+  },
+  p017: {
+    name: 'Computer Support & Services',
+    cat: 'IT Services', emoji: '💻', optionalTiers: true,
+    desc: 'Computer setup, troubleshooting, maintenance, OS guidance, performance, and virus-related support for home and business.',
+    tiers: [
+      { level: '🟢 Home / Individual', price: 25000, label: 'Home', desc: 'Support for a personal PC or laptop.',
+        includes: ['Diagnostics guidance', 'Setup/troubleshooting checklist', 'Remote support session', 'Care tips PDF'] },
+      { level: '🔵 Business Workstation', price: 55000, label: 'Business', desc: 'Support scoped for office workstations.',
+        includes: ['Everything in Home', 'Office-ready configuration tips', 'Backup guidance', 'Follow-up window'] },
+      { level: '🟣 Multi-device', price: 120000, label: 'Multi-device', desc: 'Coordinated support for multiple devices.',
+        includes: ['Up to 3 devices scope', 'Standard checklist per device', 'Priority scheduling', 'Written summary'] }
+    ]
+  },
+  p018: {
+    name: 'Printer Setup & Configuration',
+    cat: 'IT Services', emoji: '🖨️', optionalTiers: true,
+    desc: 'Printer installation, configuration, and troubleshooting for home and office environments.',
+    tiers: [
+      { level: '🟢 Single Printer', price: 12000, label: 'Single', desc: 'One printer setup or fix guidance.',
+        includes: ['Driver/install guidance', 'Test print checklist', 'Remote help session'] },
+      { level: '🔵 Office Printer', price: 28000, label: 'Office', desc: 'Office printer sharing and configuration help.',
+        includes: ['Network/share guidance', 'User access tips', 'Troubleshooting steps', 'Follow-up'] }
+    ]
+  },
+  p019: {
+    name: 'Wi-Fi Setup & Configuration',
+    cat: 'IT Services', emoji: '📶', optionalTiers: true,
+    desc: 'Wi-Fi and basic network setup for homes, offices, and small organisations.',
+    tiers: [
+      { level: '🟢 Home Wi-Fi', price: 15000, label: 'Home', desc: 'Home router and device connection support.',
+        includes: ['Router basic setup guidance', 'Device connection help', 'Security basics', 'Remote session'] },
+      { level: '🔵 Office Network', price: 40000, label: 'Office', desc: 'Small office Wi-Fi and connectivity support.',
+        includes: ['SSID/security guidance', 'Multi-device connectivity', 'Simple network tips', 'Follow-up window'] }
+    ]
+  },
+  p020: {
+    name: 'Computer Training (Individual or Group)',
+    cat: 'IT Services', emoji: '🎓', optionalTiers: true,
+    desc: 'Practical computer training for beginners, staff, schools, and organisations — fundamentals through Office productivity.',
+    tiers: [
+      { level: '🟢 Individual', price: 30000, label: '1 person', desc: 'One-on-one computer literacy session package.',
+        includes: ['Needs assessment', 'Practical session block', 'Notes PDF', 'Q&A window'] },
+      { level: '🔵 Small Group', price: 90000, label: 'Up to 5', desc: 'Small group training for home or office staff.',
+        includes: ['Curriculum outline', 'Group sessions', 'Handout materials', 'Feedback summary'] },
+      { level: '🟣 Organisation', price: 200000, label: 'Organisation', desc: 'Organisation-oriented computer training programme.',
+        includes: ['Custom outline', 'Multi-session plan', 'Materials pack', 'Certificate of attendance (digital)'] }
+    ]
   }
 };
 
@@ -1752,7 +2112,7 @@ function openModal(productId) {
   if (incEl) incEl.innerHTML = '';
   const levelsEl = document.getElementById('modalLevels');
   levelsEl.innerHTML = p.tiers.map((t, i) => `
-    <div class="modal-level${i===0?' selected':''}" onclick="selectModalLevel(this,${i},'${productId}')">
+    <div class="modal-level${(i===0)?' selected':''}" onclick="selectModalLevel(this,${i},'${productId}')">
       <div class="modal-level-header">
         <span class="modal-level-name">${t.level}</span>
         <span class="modal-level-price">${formatPrice(t.price)}</span>
@@ -1789,11 +2149,17 @@ function closeModalOutside(e) {
 }
 
 function addToCartFromModal() {
-  if (!currentModal || !selectedModalLevel) return;
+  if (!currentModal) return;
+  // Tiers are optional: if none selected, use first tier as default package
+  var level = selectedModalLevel || (currentModal.tiers && currentModal.tiers[0]) || null;
+  if (!level) {
+    if (typeof showToast === 'function') showToast('Please choose a package (optional tiers available)', 'error');
+    return;
+  }
   addToCart({
     name: currentModal.name,
-    level: selectedModalLevel.level,
-    price: selectedModalLevel.price,
+    level: level.level || level.label || 'Standard',
+    price: level.price,
     emoji: currentModal.emoji,
     pdfUrl: null
   });
@@ -1989,31 +2355,8 @@ function closeSuccessModal() {
 // ============================================================
 // FILTER & SEARCH
 // ============================================================
-function filterProducts() {
-  var activeBtn = document.querySelector('.filter-btn.active');
-  var activeCat = (activeBtn && activeBtn.dataset.cat) ? activeBtn.dataset.cat : 'all';
-  var input = document.getElementById('searchInput');
-  var search = (input && input.value ? input.value : '').trim().toLowerCase();
-  var tokens = search ? search.split(/\s+/).filter(Boolean) : [];
-  document.querySelectorAll('.product-card').forEach(function(card) {
-    var cat = card.getAttribute('data-cat') || '';
-    var catMatch = activeCat === 'all' || cat === activeCat;
-    if (!tokens.length) {
-      card.style.display = catMatch ? '' : 'none';
-      return;
-    }
-    var searchable = [
-      card.getAttribute('data-name') || '',
-      card.getAttribute('data-cat') || '',
-      (card.querySelector('.product-name') && card.querySelector('.product-name').textContent) || '',
-      (card.querySelector('.product-desc') && card.querySelector('.product-desc').textContent) || '',
-      (card.querySelector('.product-cat') && card.querySelector('.product-cat').textContent) || '',
-      card.textContent || ''
-    ].join(' ').toLowerCase();
-    var match = tokens.every(function(t) { return searchable.indexOf(t) !== -1; });
-    card.style.display = (catMatch && match) ? '' : 'none';
-  });
-}
+/* filterProducts moved to robust script */
+
 
 // ============================================================
 </script>
@@ -2199,6 +2542,117 @@ if ('serviceWorker' in navigator) {
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
 <script defer src="/_vercel/speed-insights/script.js"></script>
+
+
+<script>
+/* Robust product search — global */
+window.filterProducts = function filterProducts() {
+  try {
+    var activeBtn = document.querySelector('.filter-btn.active');
+    var activeCat = (activeBtn && (activeBtn.getAttribute('data-cat') || activeBtn.dataset.cat)) || 'all';
+    var input = document.getElementById('searchInput');
+    var search = (input && input.value ? input.value : '').trim().toLowerCase();
+    var tokens = search ? search.split(/\s+/).filter(Boolean) : [];
+    var cards = document.querySelectorAll('.product-card');
+    var shown = 0;
+    cards.forEach(function(card) {
+      var cat = card.getAttribute('data-cat') || '';
+      var catMatch = activeCat === 'all' || cat === activeCat;
+      var text = (
+        (card.getAttribute('data-name') || '') + ' ' +
+        (card.getAttribute('data-cat') || '') + ' ' +
+        (card.getAttribute('data-id') || '') + ' ' +
+        (card.textContent || '')
+      ).toLowerCase();
+      var match = !tokens.length || tokens.every(function(t) { return text.indexOf(t) !== -1; });
+      var ok = catMatch && match;
+      card.style.display = ok ? '' : 'none';
+      if (ok) shown++;
+    });
+    var empty = document.getElementById('searchEmpty');
+    if (empty) empty.style.display = (shown === 0 && (tokens.length || activeCat !== 'all')) ? 'block' : 'none';
+  } catch (e) { console.warn('filterProducts', e); }
+};
+document.addEventListener('DOMContentLoaded', function() {
+  var input = document.getElementById('searchInput');
+  if (input) {
+    input.addEventListener('input', window.filterProducts);
+    input.addEventListener('keyup', window.filterProducts);
+  }
+  document.querySelectorAll('.search-btn, [data-search-btn]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) { e.preventDefault(); window.filterProducts(); });
+  });
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setTimeout(window.filterProducts, 10);
+    });
+  });
+});
+</script>
+
+
+<script>
+(function(){
+  function loadGT(){
+    if (window.google && google.translate) return;
+    var s = document.createElement('script');
+    s.src = '//translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate';
+    document.head.appendChild(s);
+  }
+  window.rnInitGoogleTranslate = function(){
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'en,ha,yo,ig,fr,es,ar',
+      autoDisplay: false,
+      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+    }, 'google_translate_element');
+  };
+  function setLang(lang, label){
+    document.querySelectorAll('#rnLangMenu button').forEach(function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+    var lab = document.getElementById('rnLangLabel');
+    if (lab) lab.textContent = label || lang.toUpperCase();
+    localStorage.setItem('rn_lang', lang);
+    localStorage.setItem('rn_lang_label', label || lang.toUpperCase());
+    if (lang === 'en') {
+      // clear translate cookie-ish by reloading without googtrans
+      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
+      if (location.href.indexOf('googtrans') >= 0) location.href = location.pathname + location.search + location.hash;
+      else location.reload();
+      return;
+    }
+    document.cookie = 'googtrans=/en/' + lang + ';path=/;';
+    document.cookie = 'googtrans=/en/' + lang + ';path=/;domain=.' + location.hostname;
+    location.reload();
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    loadGT();
+    var wrap = document.getElementById('rnLang');
+    var btn = document.getElementById('rnLangBtn');
+    var menu = document.getElementById('rnLangMenu');
+    if (!btn || !menu) return;
+    var saved = localStorage.getItem('rn_lang');
+    var savedL = localStorage.getItem('rn_lang_label');
+    if (saved && savedL) {
+      var lab = document.getElementById('rnLangLabel');
+      if (lab) lab.textContent = savedL;
+    }
+    btn.addEventListener('click', function(e){
+      e.stopPropagation();
+      wrap.classList.toggle('open');
+      btn.setAttribute('aria-expanded', wrap.classList.contains('open'));
+    });
+    menu.querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click', function(){
+        setLang(b.getAttribute('data-lang'), b.getAttribute('data-label'));
+      });
+    });
+    document.addEventListener('click', function(){ wrap.classList.remove('open'); });
+  });
+})();
+</script>
 
 </body>
 </html>
