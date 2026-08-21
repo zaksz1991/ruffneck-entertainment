@@ -3054,3 +3054,39 @@ html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
   background: #fff;
   color: #0B1E3A;
 }
+
+
+/* Aligned deliverable lists */
+.service-card .service-list {
+  list-style: none !important;
+  margin: 0 0 12px !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left;
+}
+.service-card .service-list li {
+  position: relative;
+  padding: 10px 12px 10px 38px !important;
+  background: #F8FAFC;
+  border: 1px solid #E5E7EB;
+  border-radius: 10px;
+  color: #1F2937 !important;
+  font-size: 13.5px;
+  line-height: 1.5;
+  text-align: left !important;
+}
+.service-card .service-list li::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ECFEFF;
+  border: 2px solid #00B4D8;
+  box-sizing: border-box;
+}

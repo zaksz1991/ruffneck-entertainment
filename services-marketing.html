@@ -225,6 +225,190 @@ html.rn-dark .rn-theme-btn {
 }
 </style>
 
+
+<style id="rn-readable-ui">
+/* ========== Readable surfaces (light) ========== */
+body {
+  color: #1F2937;
+}
+.svc-page-hero {
+  background: linear-gradient(160deg, #0B1E3A 0%, #123050 55%, #0a1628 100%) !important;
+  color: #FFFFFF !important;
+}
+.svc-page-hero h1,
+.svc-page-hero .section-label {
+  color: #FFFFFF !important;
+}
+.svc-page-hero p {
+  color: rgba(255, 255, 255, 0.92) !important;
+}
+.svc-panel {
+  background: #FFFFFF !important;
+  color: #1F2937 !important;
+  border: 1px solid #E5E7EB !important;
+  border-radius: 16px !important;
+  padding: 28px 24px !important;
+  box-shadow: 0 8px 28px rgba(11, 30, 58, 0.06) !important;
+}
+.svc-panel h2 {
+  color: #0B1E3A !important;
+  font-size: 1.25rem !important;
+  margin: 0 0 16px !important;
+  letter-spacing: -0.02em;
+}
+/* What you get — aligned bullet list */
+.svc-panel ul,
+.rn-deliverables {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.svc-panel ul li,
+.rn-deliverables li {
+  position: relative;
+  margin: 0 !important;
+  padding: 12px 14px 12px 42px !important;
+  background: #F8FAFC !important;
+  border: 1px solid #E5E7EB !important;
+  border-radius: 12px !important;
+  color: #1F2937 !important;
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+}
+.svc-panel ul li::before,
+.rn-deliverables li::before {
+  content: "";
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ECFEFF;
+  border: 2px solid #00B4D8;
+  box-sizing: border-box;
+}
+.svc-panel ul li::after,
+.rn-deliverables li::after {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 50%;
+  width: 5px;
+  height: 9px;
+  border: solid #0B1E3A;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-60%) rotate(45deg);
+}
+.svc-panel p,
+.svc-panel a {
+  color: #374151 !important;
+}
+.svc-panel a {
+  color: #0891B2 !important;
+  font-weight: 600;
+}
+
+/* Homepage service accordion lists — same system */
+.service-card .service-popup,
+.service-card .service-list {
+  text-align: left !important;
+}
+.service-card .service-list {
+  list-style: none !important;
+  margin: 0 0 12px !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.service-card .service-list li {
+  position: relative;
+  margin: 0 !important;
+  padding: 10px 12px 10px 38px !important;
+  background: #F8FAFC !important;
+  border: 1px solid #E5E7EB !important;
+  border-radius: 10px !important;
+  color: #1F2937 !important;
+  font-size: 13.5px !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+}
+.service-card .service-list li::before {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ECFEFF;
+  border: 2px solid #00B4D8;
+  box-sizing: border-box;
+}
+.service-card h3 {
+  color: #0B1E3A !important;
+  text-align: left !important;
+}
+.service-card .service-intro {
+  color: #4B5563 !important;
+  text-align: left !important;
+}
+.service-card .service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.service-card .service-tag {
+  background: #ECFEFF !important;
+  color: #0E7490 !important;
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.service-card .service-outcome {
+  color: #4B5563 !important;
+  font-size: 13px !important;
+  margin-top: 10px !important;
+  text-align: left !important;
+}
+
+/* Dark mode — high contrast */
+html.rn-dark .svc-panel {
+  background: #151D2E !important;
+  border-color: rgba(255,255,255,0.12) !important;
+  color: #F3F4F6 !important;
+}
+html.rn-dark .svc-panel h2 {
+  color: #F9FAFB !important;
+}
+html.rn-dark .svc-panel ul li,
+html.rn-dark .rn-deliverables li,
+html.rn-dark .service-card .service-list li {
+  background: #1a2336 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #F3F4F6 !important;
+}
+html.rn-dark .svc-panel p,
+html.rn-dark .service-card .service-intro,
+html.rn-dark .service-card .service-outcome {
+  color: #D1D5DB !important;
+}
+html.rn-dark .service-card h3 {
+  color: #F9FAFB !important;
+}
+html.rn-dark .svc-panel a {
+  color: #22D3EE !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -235,7 +419,7 @@ html.rn-dark .rn-theme-btn {
         <img src="/icon-192.png" alt="RuffNeck Entertainment" width="36" height="36" style="border-radius:8px;"/>
         <span style="color:#fff;font-weight:700;font-size:1.05rem;">RuffNeck<span style="color:#00B4D8;">Entertainment</span></span>
       </a>
-      <ul class="nav-links" style="display:flex;align-items:center;gap:8px;list-style:none;margin:0;padding:0;flex-wrap:wrap;">
+      <ul class="nav-links">
         <li><a href="/#services" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Services</a></li>
         <li><a href="/store" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Store</a></li>
         <li><a href="/blog" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Blog</a></li>
@@ -280,12 +464,12 @@ html.rn-dark .rn-theme-btn {
         <li>Lead generation and funnel setup support</li>
         <li>Measurable KPIs for brand awareness</li>
       </ul>
-      <p style="margin-top:16px;font-size:14px;color:#6B7280;">Related: <a href="/store">Marketing templates &amp; toolkits</a> · <a href="/blog">Insights on the blog</a></p>
+      <p style="margin-top:16px;font-size:14px;color:#374151;">Related: <a href="/store">Marketing templates &amp; toolkits</a> · <a href="/blog">Insights on the blog</a></p>
       <div class="svc-actions">
         <a class="btn btn-primary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book a Free Consultation</a>
         <a class="btn btn-outline-dark" href="https://wa.me/2348033807856" target="_blank" rel="noopener">WhatsApp +234 803 380 7856</a>
       </div>
-      <p style="text-align:center;margin-top:16px;font-size:13px;color:#6B7280;">
+      <p style="text-align:center;margin-top:16px;font-size:13px;color:#374151;">
         Or <a href="/#contact">use the contact form</a> · <a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a>
       </p>
     </div>
