@@ -145,6 +145,86 @@
 .service-card .service-popup{display:none!important}
 .service-card.open .service-popup{display:block!important;margin-top:16px;padding-top:16px;border-top:1px solid #E5E7EB}
 @media(max-width:768px){.hero-trust-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Modern service expand */
+.service-card {
+  cursor: pointer;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+}
+.service-card:hover {
+  border-color: rgba(0,180,216,0.35);
+}
+.service-card .service-popup {
+  display: none !important;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+.service-card.open {
+  border-color: rgba(0,180,216,0.5) !important;
+  box-shadow: 0 12px 32px rgba(11,30,58,0.1) !important;
+}
+.service-card.open .service-popup {
+  display: block !important;
+  opacity: 1;
+  max-height: 2000px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #E5E7EB;
+  animation: rn-expand-in 0.28s ease;
+}
+@keyframes rn-expand-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.service-card .expand-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00B4D8;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(0,180,216,0.08);
+  width: fit-content;
+}
+.service-card.open .expand-hint {
+  background: rgba(11,30,58,0.06);
+  color: #0B1E3A;
+}
+.service-card .expand-chevron {
+  transition: transform 0.25s ease;
+  display: inline-block;
+}
+.service-card.open .expand-chevron {
+  transform: rotate(180deg);
+}
+.service-list {
+  margin: 0 0 12px;
+  padding-left: 18px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #374151;
+}
+.service-list li { margin-bottom: 4px; }
+.service-media {
+  min-height: 140px;
+  background: linear-gradient(135deg, #0B1E3A, #123050);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.service-media img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+.service-media.img-fallback {
+  min-height: 140px;
+}
+
 </style>
 
 <link rel="preconnect" href="https://images.weserv.nl" crossorigin/>
@@ -330,9 +410,8 @@ body { top: 0 !important; }
         <div class="hero-actions">
           <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Consultation</a>
           <a href="#free-guide" class="btn btn-outline">Download Free AI Prompts</a>
-          <a href="/store" class="btn btn-outline" style="margin-left:0;">View Store</a>
         </div>
-        <p class="hero-next-hint" style="margin-top:14px;font-size:13px;opacity:0.8;text-align:center;max-width:440px;margin-left:auto;margin-right:auto;">Next step: book a consultation — or use the free guide / store below.</p>
+        <p class="hero-next-hint" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.92);text-align:center;max-width:440px;margin-left:auto;margin-right:auto;text-shadow:0 1px 2px rgba(0,0,0,0.35);"><p class="hero-next-hint" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.92);text-align:center;max-width:440px;margin-left:auto;margin-right:auto;text-shadow:0 1px 2px rgba(0,0,0,0.35);">Next step: book a consultation — or use the free guide / store below.</p>
         <div class="hero-meta">
           <a href="/store" class="hero-store-chip">
             <span class="hero-store-icon">🛒</span>
@@ -588,7 +667,7 @@ body { top: 0 !important; }
 
       <div class="service-card rn-svc-extra fade-up" data-category="admin">
         <div class="service-year">2026</div>
-        <div class="service-media"><img data-fallback="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d" src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1486312338219-ce68d2c6f44d&w=720&q=75&output=webp&fit=cover&we" srcset="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1486312338219-ce68d2c6f44d&w=480&q=70&output=webp&fit=cover&we 480w, https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1486312338219-ce68d2c6f44d&w=720&q=75&output=webp&fit=cover&we 720w, https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1486312338219-ce68d2c6f44d&w=960&q=75&output=webp&fit=cover&we 960w" sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 360px" alt="Customer Support Services" width="720" height="405" loading="lazy" decoding="async" fetchpriority="low" onerror="if(!this.dataset.err){this.dataset.err=1;this.srcset='';this.src=this.dataset.fallback||'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d';}else{this.onerror=null;this.style.display='none';if(this.parentElement)this.parentElement.classList.add('img-fallback');}"/></div>
+        <div class="service-media"><img data-fallback="https://images.unsplash.com/photo-1556761175-b413da4baf72" src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1556761175-b413da4baf72&w=720&q=75&output=webp&fit=cover&we" srcset="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1556761175-b413da4baf72&w=480&q=70&output=webp&fit=cover&we 480w, https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1556761175-b413da4baf72&w=720&q=75&output=webp&fit=cover&we 720w, https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1556761175-b413da4baf72&w=960&q=75&output=webp&fit=cover&we 960w" sizes="(max-width:640px) 100vw, (max-width:1024px) 50vw, 360px" alt="Customer Support Services" width="720" height="405" loading="lazy" decoding="async" fetchpriority="low" onerror="if(!this.dataset.err){this.dataset.err=1;this.srcset='';this.src=this.dataset.fallback||'https://images.unsplash.com/photo-1556761175-b413da4baf72';}else{this.onerror=null;this.style.display='none';if(this.parentElement)this.parentElement.classList.add('img-fallback');}"/></div>
         <div class="service-icon" aria-hidden="true"><svg class="svc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.3 1.8.6 2.6a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.5-1.1a2 2 0 0 1 2.1-.4c.8.3 1.7.5 2.6.6a2 2 0 0 1 1.7 2z"/></svg></div>
         <h3>Customer Support Services</h3>
         <p class="service-intro">Professional customer-facing support systems that build loyalty &amp; protect your brand.</p>
@@ -769,7 +848,7 @@ body { top: 0 !important; }
 
       <div class="service-card rn-svc-extra fade-up" data-category="operations" id="svc-network">
         <div class="service-year">2026</div>
-        <div class="service-media"><img data-fallback="https://images.unsplash.com/photo-1544197150-b99a580bb7a2" src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544197150-b99a580bb7a2&w=720&q=75&output=webp&fit=cover&we" srcset="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544197150-b99a580bb7a2&w=480&q=70&output=webp&fit=cover&we 480w, https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544197150-b99a580bb7a2&w=720&q=75&output=webp&fit=cover&we 720w, https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1544197150-b99a580bb7a2&w=960&q=75&output=webp&fit=cover&we 960w" sizes="(max-width:640px) 100vw, 360px" alt="Network Wi-Fi Printer" width="720" height="405" loading="lazy" decoding="async" onerror="if(!this.dataset.err){this.dataset.err=1;this.srcset='';this.src=this.dataset.fallback;}else{this.onerror=null;this.style.display='none';if(this.parentElement)this.parentElement.classList.add('img-fallback');}"/></div>
+        <div class="service-media"><img data-fallback="https://images.unsplash.com/photo-1606904826582-8c0e0c8e0e0e" src="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1558494949-ef526b0040ad&w=720&q=75&output=webp&fit=cover&we" srcset="https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1558494949-ef526b0040ad&w=480&q=70&output=webp&fit=cover&we 480w, https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1558494949-ef526b0040ad&w=720&q=75&output=webp&fit=cover&we 720w, https://images.weserv.nl/?url=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1558494949-ef526b0040ad&w=960&q=75&output=webp&fit=cover&we 960w" sizes="(max-width:640px) 100vw, 360px" alt="Network Wi-Fi Printer" width="720" height="405" loading="lazy" decoding="async" onerror="if(!this.dataset.err){this.dataset.err=1;this.srcset='';this.src=this.dataset.fallback;}else{this.onerror=null;this.style.display='none';if(this.parentElement)this.parentElement.classList.add('img-fallback');}"/></div>
         <div class="service-icon" aria-hidden="true"><svg class="svc-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><circle cx="12" cy="20" r="1"/></svg></div>
         <h3>Network, Wi-Fi &amp; Printer Support</h3>
         <p class="service-intro">Wi-Fi setup, printer configuration, network troubleshooting, and connectivity fixes for home and office.</p>
@@ -1284,32 +1363,20 @@ body { top: 0 !important; }
 </section>
 
 <!-- AI ASSISTANT -->
-<section class="ai-assistant-section" id="ai-assistant">
+
+<section class="section" id="ai-assistant" style="padding:28px 0;">
   <div class="container">
-    <div class="ai-assistant-inner fade-up">
-      <div class="ai-embed-wrap">
-        <div class="ai-embed-placeholder">
-          <div class="big-icon">🤖</div>
-          <p>The RuffNeck AI Assistant is live on the Pi Testnet Ecosystem.<br/>Tap the button below to launch it directly.</p>
-          <a href="https://lnkd.in/epda3wBW" target="_blank" rel="noopener" class="btn btn-primary">Launch AI Assistant (@RuffNeckEntertainment) →</a>
-        </div>
+    <div class="teaser-card" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;">
+      <div style="flex:1;min-width:220px;">
+        <div class="section-label" style="margin-bottom:4px;">Optional · AI tool</div>
+        <strong style="font-size:1.05rem;">RuffNeck AI Assistant</strong>
+        <p style="margin:6px 0 0;font-size:13.5px;color:#6B7280;line-height:1.45;">Research, content, and tech guidance on the Pi Testnet ecosystem.</p>
       </div>
-      <div class="ai-content">
-        <div class="section-label">AI-Powered Tool · 2026</div>
-        <h2>Meet the RuffNeck AI Assistant</h2>
-        <p>Your intelligent digital partner for research, content creation, branding strategy, AI business consulting, and technology guidance — built by Hassan Zakariya and available on the Pi Testnet Ecosystem.</p>
-        <div class="ai-feature-list">
-          <div class="ai-feature"><div class="ai-feature-icon">🔍</div>AI-powered research and market insights</div>
-          <div class="ai-feature"><div class="ai-feature-icon">✍️</div>Content generation and brand messaging</div>
-          <div class="ai-feature"><div class="ai-feature-icon">🤖</div>Business process automation guidance</div>
-          <div class="ai-feature"><div class="ai-feature-icon">📊</div>Digital tool selection and implementation advice</div>
-          <div class="ai-feature"><div class="ai-feature-icon">🎓</div>AI literacy Q&amp;A and learning support</div>
-        </div>
-        <a href="https://lnkd.in/epda3wBW" target="_blank" rel="noopener" class="btn btn-primary">Try RuffNeck AI Assistant →</a>
-      </div>
+      <a class="btn btn-primary btn-sm" href="https://lnkd.in/epda3wBW" target="_blank" rel="noopener">Open AI Assistant →</a>
     </div>
   </div>
 </section>
+
 
 <!-- AI CAREERS SECTION -->
 <section class="section section-teaser" id="ai-careers">
@@ -1352,7 +1419,7 @@ body { top: 0 !important; }
           <li>Skills exposure with guidance</li>
           <li>Apply with a short message or PDF</li>
         </ul>
-        <a class="btn btn-primary" href="mailto:ruffneckhassan@gmail.com?subject=Remote%20Internship%20Application%202026%20%E2%80%93%20RuffNeck%20Entertainment&body=Dear%20RuffNeck%20Team%2C%0A%0AI%20am%20applying%20for%20the%20Remote%20Internship%20Programme.%0A%0AFull%20name%3A%0APhone%20%2F%20WhatsApp%3A%0AEmail%3A%0APreferred%20track%20(Data%2FAI%2C%20Admin%2C%20Content%2C%20Support%2C%20Operations)%3A%0ABrief%20background%20%26%20availability%3A%0A%0AThank%20you.%0A">Email Internship Application →</a>
+        <a class="btn btn-primary" href="mailto:ruffneckhassan@gmail.com?subject=Remote%20Internship%20Application%202026%20%E2%80%93%20RuffNeck%20Entertainment&body=Dear%20RuffNeck%20Team%2C%0A%0AI%20am%20applying%20for%20the%20Remote%20Internship%20Programme.%0A%0AFull%20name%3A%0APhone%20%2F%20WhatsApp%3A%0AEmail%3A%0APreferred%20track%20(Data%2FAI%2C%20Admin%2C%20Content%2C%20Support%2C%20Operations)%3A%0ABrief%20background%20%26%20availability%3A%0A%0AThank%20you.%0A">Email Internship Application →</a> <a class="btn btn-outline-dark btn-sm" href="#contact" style="margin-left:8px;">Or use contact form</a>
       </div>
       <div class="teaser-card fade-up" style="text-align:left;padding:22px;">
         <div class="section-label">Volunteer</div>
@@ -1363,7 +1430,7 @@ body { top: 0 !important; }
           <li>Community and skills impact</li>
           <li>Separate from internship applications</li>
         </ul>
-        <a class="btn btn-outline-dark" href="mailto:ruffneckhassan@gmail.com?subject=Volunteer%20Programme%20Application%202026%20%E2%80%93%20RuffNeck%20Entertainment&body=Dear%20RuffNeck%20Team%2C%0A%0AI%20am%20applying%20for%20the%20Volunteer%20Programme.%0A%0AFull%20name%3A%0APhone%20%2F%20WhatsApp%3A%0AEmail%3A%0AAreas%20I%20can%20support%20(content%2C%20training%2C%20admin%2C%20community%2C%20other)%3A%0ABrief%20background%20%26%20weekly%20availability%3A%0A%0AThank%20you.%0A">Email Volunteer Application →</a>
+        <a class="btn btn-outline-dark" href="mailto:ruffneckhassan@gmail.com?subject=Volunteer%20Programme%20Application%202026%20%E2%80%93%20RuffNeck%20Entertainment&body=Dear%20RuffNeck%20Team%2C%0A%0AI%20am%20applying%20for%20the%20Volunteer%20Programme.%0A%0AFull%20name%3A%0APhone%20%2F%20WhatsApp%3A%0AEmail%3A%0AAreas%20I%20can%20support%20(content%2C%20training%2C%20admin%2C%20community%2C%20other)%3A%0ABrief%20background%20%26%20weekly%20availability%3A%0A%0AThank%20you.%0A">Email Volunteer Application →</a> <a class="btn btn-outline-dark btn-sm" href="#contact" style="margin-left:8px;">Or use contact form</a>
       </div>
     </div>
     <p style="text-align:center;margin-top:16px;font-size:13px;color:var(--text-muted,#6B7280);">Or use the contact form and select the matching option. WhatsApp: +234 803 380 7856</p>
@@ -2383,6 +2450,57 @@ if ('serviceWorker' in navigator) {
       });
     });
     document.addEventListener('click', function(){ wrap.classList.remove('open'); });
+  });
+})();
+</script>
+
+
+<script>
+(function(){
+  function qs(s, el){ return (el||document).querySelector(s); }
+  function qsa(s, el){ return Array.prototype.slice.call((el||document).querySelectorAll(s)); }
+  function closeAll(grid){
+    qsa('.service-card.open', grid||document).forEach(function(c){
+      c.classList.remove('open');
+      c.setAttribute('aria-expanded','false');
+      var h = qs('.expand-hint', c);
+      if(h) h.innerHTML = 'View details <span class="expand-chevron">⌄</span>';
+    });
+  }
+  function openCard(card, grid){
+    closeAll(grid);
+    card.classList.add('open');
+    card.setAttribute('aria-expanded','true');
+    var h = qs('.expand-hint', card);
+    if(h) h.innerHTML = 'Hide details <span class="expand-chevron">⌃</span>';
+    try { card.scrollIntoView({behavior:'smooth', block:'nearest'}); } catch(e){}
+  }
+  function bindCards(grid){
+    if(!grid) grid = qs('#servicesGrid') || qs('#services');
+    if(!grid) return;
+    qsa('.service-card', grid).forEach(function(card){
+      if(card.dataset.rnBound) return;
+      card.dataset.rnBound = '1';
+      card.setAttribute('role','button');
+      card.setAttribute('tabindex','0');
+      card.setAttribute('aria-expanded','false');
+      card.addEventListener('click', function(e){
+        if(e.target.closest('a')) return;
+        e.preventDefault();
+        if(card.classList.contains('open')) closeAll(grid);
+        else openCard(card, grid);
+      });
+      card.addEventListener('keydown', function(e){
+        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); card.click(); }
+      });
+    });
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    bindCards();
+    var btn = document.getElementById('rnSvcToggle');
+    if(btn){
+      btn.addEventListener('click', function(){ setTimeout(bindCards, 50); });
+    }
   });
 })();
 </script>
