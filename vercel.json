@@ -19,6 +19,18 @@
       "destination": "/consulting.html"
     },
     {
+      "source": "/services-ai",
+      "destination": "/services-ai.html"
+    },
+    {
+      "source": "/services-marketing",
+      "destination": "/services-marketing.html"
+    },
+    {
+      "source": "/services-va",
+      "destination": "/services-va.html"
+    },
+    {
       "source": "/services/ai",
       "destination": "/services-ai.html"
     },
@@ -33,45 +45,6 @@
     {
       "source": "/services/va",
       "destination": "/services-va.html"
-    },
-    {
-      "source": "/services-ai",
-      "destination": "/services-ai.html"
-    },
-    {
-      "source": "/services-marketing",
-      "destination": "/services-marketing.html"
-    },
-    {
-      "source": "/services-va",
-      "destination": "/services-va.html"
-    },
-    {
-      "source": "/ai-solutions",
-      "destination": "/services-ai.html"
-    },
-    {
-      "source": "/business-consultation",
-      "destination": "/consulting.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        }
-      ]
     }
   ]
 }

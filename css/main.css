@@ -3090,3 +3090,13 @@ html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
   border: 2px solid #00B4D8;
   box-sizing: border-box;
 }
+
+a.btn-primary, .btn-primary {
+  background: #00B4D8 !important;
+  color: #0B1E3A !important;
+  font-weight: 700 !important;
+}
+a.btn-primary:hover, .btn-primary:hover {
+  background: #22D3EE !important;
+  color: #0B1E3A !important;
+}
