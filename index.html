@@ -142,8 +142,8 @@
 .hero-trust-card{display:flex;flex-direction:column;gap:4px;padding:12px 10px;border-radius:12px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);box-sizing:border-box}
 .htc-label{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.5);font-weight:600}
 .htc-value{font-size:12px;font-weight:700;color:rgba(255,255,255,.95)}
-.service-card .service-popup{display:none!important}
-.service-card.open .service-popup{display:block!important;margin-top:16px;padding-top:16px;border-top:1px solid #E5E7EB}
+/* accordion handles visibility */
+/* accordion open state in rn-accordion-css */
 @media(max-width:768px){.hero-trust-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
 /* Modern service expand */
@@ -154,12 +154,7 @@
 .service-card:hover {
   border-color: rgba(0,180,216,0.35);
 }
-.service-card .service-popup {
-  display: none !important;
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-}
+/* neutralized max-height trap */
 .service-card.open {
   border-color: rgba(0,180,216,0.5) !important;
   box-shadow: 0 12px 32px rgba(11,30,58,0.1) !important;
@@ -322,6 +317,86 @@ body { top: 0 !important; }
 #google_translate_element { position: absolute; left: -9999px; height: 0; overflow: hidden; }
 .skiptranslate iframe { display: none !important; }
 </style>
+
+
+
+
+<style id="rn-accordion-css">
+/* Service cards — accordion pattern */
+#servicesGrid {
+  align-items: start;
+}
+.service-card {
+  cursor: pointer;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.service-card .service-popup {
+  display: grid;
+  grid-template-rows: 0fr;
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0 solid transparent;
+  opacity: 0;
+  transition:
+    grid-template-rows 0.32s ease,
+    opacity 0.25s ease,
+    margin-top 0.25s ease,
+    padding-top 0.25s ease,
+    border-color 0.25s ease;
+}
+.service-card .service-popup > .rn-acc-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+.service-card.open {
+  border-color: rgba(0, 180, 216, 0.45) !important;
+  box-shadow: 0 12px 32px rgba(11, 30, 58, 0.1) !important;
+}
+.service-card.open .service-popup {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid #E5E7EB;
+}
+.service-card .expand-hint {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #00B4D8;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background: rgba(0, 180, 216, 0.1);
+  width: fit-content;
+  user-select: none;
+}
+.service-card.open .expand-hint {
+  background: rgba(11, 30, 58, 0.06);
+  color: #0B1E3A;
+}
+.service-card .expand-chevron {
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+.service-card.open .expand-chevron {
+  transform: rotate(180deg);
+}
+.service-card:focus-visible {
+  outline: 2px solid #00B4D8;
+  outline-offset: 3px;
+}
+.service-list {
+  margin: 0 0 10px;
+  padding-left: 1.15em;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: #374151;
+}
+</style>
+
 </head>
 <body>
 
@@ -1501,9 +1576,9 @@ body { top: 0 !important; }
 <section class="section" id="blog">
   <div class="container">
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
-      <div class="section-label">Resources · 2026</div>
-      <h2 class="section-title">Insights &amp; Guides for 2026</h2>
-      <p class="section-sub" style="margin:0 auto;">Click any article to read a preview. Practical AI, operations, and digital growth content from the RuffNeck team — updated regularly through 2026.</p>
+      <div class="section-label">Resources · Insights · 2026</div>
+      <h2 class="section-title">Practical guides for AI, IT &amp; growth</h2>
+      <p class="section-sub" style="margin:0 auto;">Short, practical articles on AI, computer & Office skills, careers, and digital operations. Open a card for a preview — full posts live on the blog. New guides added through 2026.</p>
     </div>
     <div class="blog-grid fade-up">
       <div class="blog-card" onclick="this.classList.toggle('open')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.classList.toggle('open')}">
@@ -2272,7 +2347,7 @@ if ('serviceWorker' in navigator) {
   }
 
   function boot(){
-    var grid = qs('#servicesGrid');
+    var grid = qs('#servicesGrid_DISABLED_USE_RN');
     if(!grid) return;
 
     // Click card to expand (ignore real links)
@@ -2455,51 +2530,101 @@ if ('serviceWorker' in navigator) {
 </script>
 
 
-<script>
-(function(){
-  function qs(s, el){ return (el||document).querySelector(s); }
-  function qsa(s, el){ return Array.prototype.slice.call((el||document).querySelectorAll(s)); }
-  function closeAll(grid){
-    qsa('.service-card.open', grid||document).forEach(function(c){
-      c.classList.remove('open');
-      c.setAttribute('aria-expanded','false');
-      var h = qs('.expand-hint', c);
-      if(h) h.innerHTML = 'View details <span class="expand-chevron">⌄</span>';
-    });
+
+
+
+
+
+
+<script id="rn-accordion-js">
+(function () {
+  'use strict';
+
+  function qs(sel, root) {
+    return (root || document).querySelector(sel);
   }
-  function openCard(card, grid){
-    closeAll(grid);
-    card.classList.add('open');
-    card.setAttribute('aria-expanded','true');
+  function qsa(sel, root) {
+    return Array.prototype.slice.call((root || document).querySelectorAll(sel));
+  }
+
+  /** Ensure popup content is wrapped for CSS grid 0fr/1fr animation */
+  function ensureInner(popup) {
+    if (!popup || qs('.rn-acc-inner', popup)) return;
+    var inner = document.createElement('div');
+    inner.className = 'rn-acc-inner';
+    while (popup.firstChild) inner.appendChild(popup.firstChild);
+    popup.appendChild(inner);
+  }
+
+  function setHint(card, open) {
     var h = qs('.expand-hint', card);
-    if(h) h.innerHTML = 'Hide details <span class="expand-chevron">⌃</span>';
-    try { card.scrollIntoView({behavior:'smooth', block:'nearest'}); } catch(e){}
+    if (!h) return;
+    h.innerHTML = open
+      ? 'Hide details <span class="expand-chevron" aria-hidden="true">⌃</span>'
+      : 'View details <span class="expand-chevron" aria-hidden="true">⌄</span>';
   }
-  function bindCards(grid){
-    if(!grid) grid = qs('#servicesGrid') || qs('#services');
-    if(!grid) return;
-    qsa('.service-card', grid).forEach(function(card){
-      if(card.dataset.rnBound) return;
-      card.dataset.rnBound = '1';
-      card.setAttribute('role','button');
-      card.setAttribute('tabindex','0');
-      card.setAttribute('aria-expanded','false');
-      card.addEventListener('click', function(e){
-        if(e.target.closest('a')) return;
+
+  function closeCard(card) {
+    card.classList.remove('open');
+    card.setAttribute('aria-expanded', 'false');
+    setHint(card, false);
+  }
+
+  function openCard(card) {
+    // Accordion: only one open at a time
+    qsa('.service-card.open').forEach(function (c) {
+      if (c !== card) closeCard(c);
+    });
+    card.classList.add('open');
+    card.setAttribute('aria-expanded', 'true');
+    setHint(card, true);
+  }
+
+  function toggleCard(card) {
+    if (card.classList.contains('open')) closeCard(card);
+    else openCard(card);
+  }
+
+  function bindCard(card) {
+    if (card.getAttribute('data-rn-acc') === '1') return;
+    card.setAttribute('data-rn-acc', '1');
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-expanded', 'false');
+
+    var popup = qs('.service-popup', card);
+    ensureInner(popup);
+
+    card.addEventListener('click', function (e) {
+      if (e.target.closest('a')) return;
+      e.preventDefault();
+      toggleCard(card);
+    });
+
+    card.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        if(card.classList.contains('open')) closeAll(grid);
-        else openCard(card, grid);
-      });
-      card.addEventListener('keydown', function(e){
-        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); card.click(); }
-      });
+        toggleCard(card);
+      }
+      if (e.key === 'Escape' && card.classList.contains('open')) {
+        closeCard(card);
+      }
     });
   }
-  document.addEventListener('DOMContentLoaded', function(){
-    bindCards();
-    var btn = document.getElementById('rnSvcToggle');
-    if(btn){
-      btn.addEventListener('click', function(){ setTimeout(bindCards, 50); });
+
+  function bindAll() {
+    qsa('.service-card').forEach(bindCard);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bindAll);
+  } else {
+    bindAll();
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.target && e.target.id === 'rnSvcToggle') {
+      setTimeout(bindAll, 40);
     }
   });
 })();
