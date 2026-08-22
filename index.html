@@ -1461,6 +1461,51 @@ html.rn-dark .rn-store-featured .rn-feat-card p { color:#D1D5DB; }
 }
 </style>
 
+
+<script id="rn-ab-btn-boot">
+(function(){
+  try {
+    var v = localStorage.getItem('rn_btn_ab');
+    if (v !== 'A' && v !== 'B') {
+      v = Math.random() < 0.5 ? 'A' : 'B';
+      localStorage.setItem('rn_btn_ab', v);
+    }
+    document.documentElement.setAttribute('data-rn-btn', v);
+  } catch(e) {
+    document.documentElement.setAttribute('data-rn-btn', 'A');
+  }
+})();
+</script>
+
+<style id="rn-ab-btn-css">
+/* Variant A — current brand cyan */
+html[data-rn-btn="A"] a.btn-primary,
+html[data-rn-btn="A"] .btn-primary,
+html[data-rn-btn="A"] button.btn-primary {
+  background: #00B4D8 !important;
+  border-color: #00B4D8 !important;
+  color: #0B1E3A !important;
+}
+html[data-rn-btn="A"] a.btn-primary:hover,
+html[data-rn-btn="A"] .btn-primary:hover {
+  background: #22D3EE !important;
+  color: #0B1E3A !important;
+}
+/* Variant B — deeper teal / higher contrast CTA */
+html[data-rn-btn="B"] a.btn-primary,
+html[data-rn-btn="B"] .btn-primary,
+html[data-rn-btn="B"] button.btn-primary {
+  background: #0D9488 !important;
+  border-color: #0D9488 !important;
+  color: #FFFFFF !important;
+}
+html[data-rn-btn="B"] a.btn-primary:hover,
+html[data-rn-btn="B"] .btn-primary:hover {
+  background: #14B8A6 !important;
+  color: #FFFFFF !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -3972,6 +4017,82 @@ document.addEventListener('DOMContentLoaded', function(){
       }
     });
   });
+})();
+</script>
+
+
+<script id="rn-ab-btn-js">
+(function(){
+  var KEY = 'rn_btn_ab';
+  var VARIANT;
+
+  function pick(){
+    try {
+      var saved = localStorage.getItem(KEY);
+      if (saved === 'A' || saved === 'B') return saved;
+    } catch(e){}
+    var v = Math.random() < 0.5 ? 'A' : 'B';
+    try { localStorage.setItem(KEY, v); } catch(e){}
+    return v;
+  }
+
+  function apply(v){
+    document.documentElement.setAttribute('data-rn-btn', v);
+    VARIANT = v;
+  }
+
+  function track(eventName, extra){
+    extra = extra || {};
+    extra.btn_variant = VARIANT;
+    try {
+      if (typeof gtag === 'function') {
+        gtag('event', eventName, extra);
+      }
+    } catch(e){}
+    try {
+      if (window.dataLayer && Array.isArray(window.dataLayer)) {
+        window.dataLayer.push(Object.assign({ event: eventName }, extra));
+      }
+    } catch(e){}
+  }
+
+  // Assign as early as possible
+  apply(pick());
+  track('rn_btn_ab_exposure', { page: location.pathname });
+
+  document.addEventListener('DOMContentLoaded', function(){
+    apply(VARIANT || pick());
+
+    // Click tracking on primary CTAs
+    document.body.addEventListener('click', function(e){
+      var t = e.target.closest('a.btn-primary, button.btn-primary, .btn-primary');
+      if (!t) return;
+      var label = (t.textContent || '').trim().slice(0, 80);
+      track('rn_btn_ab_click', {
+        page: location.pathname,
+        button_label: label,
+        href: t.getAttribute('href') || ''
+      });
+    }, true);
+  });
+
+  // Debug helper: ?rn_btn=A or ?rn_btn=B to force variant
+  try {
+    var q = new URLSearchParams(location.search).get('rn_btn');
+    if (q === 'A' || q === 'B') {
+      localStorage.setItem(KEY, q);
+      apply(q);
+    }
+  } catch(e){}
+
+  window.rnBtnAb = {
+    variant: function(){ return VARIANT; },
+    set: function(v){
+      if (v !== 'A' && v !== 'B') return;
+      try { localStorage.setItem(KEY, v); } catch(e){}
+      apply(v);
+    }
+  };
 })();
 </script>
 
