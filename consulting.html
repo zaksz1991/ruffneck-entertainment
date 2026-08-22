@@ -621,5 +621,20 @@ a.btn-outline-dark{
 
 
 
+
+<script id="rn-wa-templates">
+window.RN_WA = {
+  phone: "2348033807856",
+  templates: {"general": "Hello RuffNeck Entertainment,\n\nI found you online and I would like to enquire about your services.\n\nName:\nBusiness / role:\nHow we can help:", "consultation": "Hello RuffNeck Entertainment,\n\nI would like to book a consultation / discovery call.\n\nName:\nBusiness:\nTopic (AI / IT / Marketing / Career / Other):\nPreferred time:", "cv": "Hello RuffNeck Entertainment,\n\nI am interested in the Professional CV, Cover Letter & LinkedIn service.\n\nName:\nTarget role / industry:\nPackage interest (Essential / Professional / Executive):", "it_support": "Hello RuffNeck Entertainment,\n\nI need IT / computer support.\n\nName:\nDevice (Windows/Mac):\nIssue or service (setup, Excel, Wi-Fi, printer, training):\nLocation (home / office / remote):", "warehouse_template": "Hello RuffNeck Entertainment,\n\nI want the free warehouse reporting template mentioned on the website.\n\nName:\nEmail:\nBusiness type:", "internship": "Hello RuffNeck Entertainment,\n\nI am applying for the Remote Internship Programme 2026.\n\nFull name:\nPhone/WhatsApp:\nEmail:\nPreferred track (Data/AI, Admin, Content, Support, Operations):\nShort intro:", "volunteer": "Hello RuffNeck Entertainment,\n\nI am applying for the Volunteer Programme 2026.\n\nFull name:\nPhone/WhatsApp:\nEmail:\nSkills / availability:", "ai_training": "Hello RuffNeck Entertainment,\n\nI am interested in AI training / automation for my team or myself.\n\nName:\nOrganisation (if any):\nTeam size:\nGoals:"},
+  link: function(key) {
+    var t = this.templates[key] || this.templates.general;
+    return "https://wa.me/" + this.phone + "?text=" + encodeURIComponent(t);
+  },
+  open: function(key) {
+    window.open(this.link(key), "_blank", "noopener,noreferrer");
+  }
+};
+</script>
+
 </body>
 </html>
