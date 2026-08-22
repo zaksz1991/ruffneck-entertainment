@@ -2442,5 +2442,89 @@ window.RNCms = {
 })();
 </script>
 
+
+<script id="rn-admin-simple-login">
+(function(){
+  var DEFAULT_PASS = 'ruffneck2026admin';
+
+  function showShell(){
+    var loginScreen = document.getElementById('loginScreen');
+    var shell = document.getElementById('adminShell');
+    if (loginScreen) loginScreen.style.display = 'none';
+    if (shell) {
+      shell.classList.add('visible');
+      shell.style.display = 'block';
+      shell.style.visibility = 'visible';
+      shell.style.opacity = '1';
+    }
+    if (typeof initAdmin === 'function') {
+      try { initAdmin(); } catch(e) { console.warn(e); }
+    }
+  }
+
+  function showErr(msg, ok){
+    var err = document.getElementById('loginError');
+    if (!err) return;
+    err.style.display = 'block';
+    err.style.color = ok ? '#86EFAC' : '#f87171';
+    err.textContent = msg;
+  }
+
+  // Hard override — always wins over older scripts
+  window.doLogin = async function doLogin(){
+    var input = document.getElementById('adminPass');
+    var val = (input && input.value ? input.value : '').trim();
+    if (!val) { showErr('Enter the password.'); return; }
+
+    // 1) Try server auth if API exists
+    try {
+      var res = await fetch('/api/admin-login', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: val })
+      });
+      if (res.status === 200) {
+        var data = await res.json().catch(function(){ return {}; });
+        if (data.ok) { showShell(); return; }
+      }
+      // 401 / 404 / 503 → fall through to local default
+    } catch (e) { /* offline / no API */ }
+
+    // 2) Local default always works
+    if (val === DEFAULT_PASS) {
+      try { localStorage.removeItem('rn_admin_pass'); } catch(e) {}
+      showShell();
+      return;
+    }
+
+    // 3) Custom stored password (legacy)
+    try {
+      var stored = localStorage.getItem('rn_admin_pass');
+      if (stored && val === String(stored).trim()) {
+        showShell();
+        return;
+      }
+    } catch(e) {}
+
+    showErr('Incorrect password. Use: ruffneck2026admin  — or click Reset below.');
+    if (input) { input.value = ''; input.focus(); }
+  };
+
+  window.resetPasswordToDefault = function(){
+    try { localStorage.removeItem('rn_admin_pass'); } catch(e) {}
+    showErr('Reset done. Password is: ruffneck2026admin', true);
+    var input = document.getElementById('adminPass');
+    if (input) { input.value = ''; input.focus(); }
+  };
+
+  document.addEventListener('DOMContentLoaded', function(){
+    // Auto-clear bad stored password if user lands on login
+    var btn = document.getElementById('resetLoginPass');
+    if (btn) btn.onclick = function(){ window.resetPasswordToDefault(); };
+  });
+})();
+</script>
+
 </body>
 </html>
