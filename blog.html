@@ -1083,6 +1083,156 @@ html[data-rn-btn="B"] .btn-primary:hover {
 }
 </style>
 
+
+<style id="rn-root-vars-fix">
+
+:root {
+  --rn-navy: #0B1E3A;
+  --rn-navy-deep: #061525;
+  --rn-cyan: #00B4D8;
+  --rn-cyan-lt: #22D3EE;
+  --rn-teal: #0D9488;
+  --rn-white: #FFFFFF;
+  --rn-off-white: #F8FAFC;
+  --rn-ice: #ECFEFF;
+  --rn-sky: #F0F9FF;
+  --rn-text: #1F2937;
+  --rn-text-muted: #4B5563;
+  --rn-border: #E5E7EB;
+  --rn-gold: #F5C518;
+  --rn-radius: 12px;
+  --rn-radius-lg: 16px;
+  --rn-shadow: 0 8px 24px rgba(11, 30, 58, 0.08);
+}
+
+/* Admin always readable */
+body.admin-page, .admin-body, #adminApp, .login-screen {
+  color: #E5E7EB;
+}
+.login-box input, .admin-panel input, .admin-panel textarea, .admin-panel select {
+  color: #0B1E3A !important;
+  background: #fff !important;
+}
+html.rn-dark body.admin-page .admin-main,
+html.rn-dark .admin-content {
+  color: #E5E7EB !important;
+}
+/* Product/blog cards when filtered back */
+.product-card { display: flex; flex-direction: column; }
+.product-card[hidden], .blog-card[hidden] { display: none !important; }
+.blog-card { display: flex; flex-direction: column; }
+/* Hero meta polish */
+.hero-next-hint {
+  margin: 16px auto 0 !important;
+  max-width: 420px;
+  padding: 10px 16px !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(0,180,216,0.35) !important;
+  color: rgba(255,255,255,0.95) !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+}
+.hero-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin-top: 22px !important;
+}
+.hero-store-chip {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: min(100%, 420px) !important;
+  padding: 14px 18px !important;
+  border-radius: 14px !important;
+  background: rgba(0,180,216,0.12) !important;
+  border: 1.5px solid rgba(0,180,216,0.45) !important;
+  text-decoration: none !important;
+  color: #fff !important;
+  transition: transform .2s ease, background .2s ease !important;
+}
+.hero-store-chip:hover {
+  background: rgba(0,180,216,0.2) !important;
+  transform: translateY(-2px);
+}
+.hero-trust-cards {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  justify-content: center !important;
+}
+.hero-trust-cards > * {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  min-width: 100px;
+  text-align: center;
+}
+/* Tighter explore teasers */
+#industries, #capabilities, #how-we-work,
+section.section-teaser {
+  padding-top: 28px !important;
+  padding-bottom: 28px !important;
+}
+.section-teaser .teaser-card {
+  padding: 22px 24px !important;
+  border-radius: 16px !important;
+  border: 1.5px solid var(--rn-border, #E5E7EB) !important;
+  background: var(--rn-white, #fff) !important;
+  box-shadow: var(--rn-shadow) !important;
+}
+.section-teaser + .section-teaser {
+  margin-top: 0 !important;
+}
+/* AI assistant row */
+#ai-assistant .teaser-card,
+.rn-ai-assistant-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 20px 22px !important;
+  border: 1.5px solid rgba(0,180,216,0.4) !important;
+  border-radius: 16px !important;
+  background: #F0F9FF !important;
+}
+/* Internship cards equal */
+#internship .teaser-card {
+  border: 2px solid #00B4D8 !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  padding: 22px !important;
+  box-shadow: 0 8px 24px rgba(11,30,58,0.08) !important;
+  height: 100%;
+}
+html.rn-dark #internship .teaser-card {
+  background: #151D2E !important;
+}
+html.rn-dark #ai-assistant .teaser-card,
+html.rn-dark .rn-ai-assistant-row {
+  background: #151D2E !important;
+}
+/* Pricing */
+.pricing-grid {
+  gap: 18px !important;
+}
+.pricing-card {
+  border-radius: 16px !important;
+  border: 1.5px solid #E5E7EB !important;
+  padding: 24px !important;
+  background: #fff !important;
+}
+.pricing-card.featured {
+  border-color: #00B4D8 !important;
+  box-shadow: 0 12px 32px rgba(0,180,216,0.15) !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -2242,32 +2392,7 @@ function shareArticle(platform){
 
 
 <script>
-window.filterBlog = function filterBlog() {
-  try {
-    var activeBtn = document.querySelector('.filter-btn.active');
-    var activeCat = (activeBtn && (activeBtn.getAttribute('data-cat') || activeBtn.dataset.cat)) || 'all';
-    var input = document.getElementById('searchInput');
-    var search = (input && input.value ? input.value : '').trim().toLowerCase();
-    var tokens = search ? search.split(/\s+/).filter(Boolean) : [];
-    var cards = document.querySelectorAll('.blog-card, .article-card, [data-blog-card]');
-    var shown = 0;
-    cards.forEach(function(card) {
-      var cat = card.getAttribute('data-cat') || '';
-      var catMatch = activeCat === 'all' || cat === activeCat || activeCat === '';
-      var text = (
-        (card.getAttribute('data-title') || '') + ' ' +
-        (card.getAttribute('data-cat') || '') + ' ' +
-        (card.textContent || '')
-      ).toLowerCase();
-      var match = !tokens.length || tokens.every(function(t) { return text.indexOf(t) !== -1; });
-      var ok = catMatch && match;
-      card.style.display = ok ? '' : 'none';
-      if (ok) shown++;
-    });
-    var empty = document.getElementById('blogSearchEmpty');
-    if (empty) empty.style.display = (shown === 0 && tokens.length) ? 'block' : 'none';
-  } catch (e) { console.warn('filterBlog', e); }
-};
+
 document.addEventListener('DOMContentLoaded', function() {
   var input = document.getElementById('searchInput');
   if (input) {
@@ -2427,6 +2552,54 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   };
 })();
+</script>
+
+
+<script id="rn-blog-search-fix">
+window.filterBlog = function filterBlog() {
+  try {
+    var input = document.getElementById('searchInput');
+    var search = (input && input.value ? input.value : '').trim().toLowerCase();
+    var activeBtn = document.querySelector('.filter-btn.active');
+    var activeCat = (activeBtn && (activeBtn.getAttribute('data-cat') || activeBtn.dataset.cat)) || 'all';
+    var cards = document.querySelectorAll('.blog-grid .blog-card, .blog-card, .article-card');
+    var shown = 0;
+    cards.forEach(function(card) {
+      var cat = card.getAttribute('data-cat') || '';
+      var catMatch = activeCat === 'all' || !activeCat || cat === activeCat;
+      var title = (card.querySelector('h3, .blog-title') || {}).textContent || '';
+      var intro = (card.querySelector('.blog-intro, p') || {}).textContent || '';
+      var hay = (title + ' ' + intro + ' ' + cat).toLowerCase();
+      var match = !search || hay.indexOf(search) !== -1;
+      var ok = catMatch && match;
+      if (ok) {
+        card.style.display = '';
+        card.removeAttribute('hidden');
+        shown++;
+      } else {
+        card.style.display = 'none';
+        card.setAttribute('hidden', '');
+      }
+    });
+    var empty = document.getElementById('blogSearchEmpty');
+    if (!empty) {
+      empty = document.createElement('p');
+      empty.id = 'blogSearchEmpty';
+      empty.style.cssText = 'display:none;text-align:center;padding:24px;color:#6B7280;';
+      empty.textContent = 'No articles match your search.';
+      var grid = document.querySelector('.blog-grid, #blog');
+      if (grid) grid.parentNode.insertBefore(empty, grid.nextSibling);
+    }
+    empty.style.display = (shown === 0 && search ? 'block' : 'none');
+  } catch (e) { console.warn('filterBlog', e); }
+};
+document.addEventListener('DOMContentLoaded', function() {
+  var input = document.getElementById('searchInput');
+  if (input) {
+    input.oninput = window.filterBlog;
+    input.addEventListener('input', window.filterBlog);
+  }
+});
 </script>
 
 </body>

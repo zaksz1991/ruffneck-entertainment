@@ -525,6 +525,25 @@ html.rn-dark .service-list li {
 </style>
 
 <script id="rn-theme-boot">(function(){try{if(localStorage.getItem('rn_theme')==='dark'){document.documentElement.classList.add('rn-dark');document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();</script>
+
+<style id="rn-admin-visibility-fix">
+html, body { background: #040C1A !important; color: #E5E7EB !important; }
+.login-screen { display: flex !important; visibility: visible !important; opacity: 1 !important; }
+.login-box { color: #E5E7EB !important; }
+.login-box h1, .login-box h2, .login-box label, .login-box p { color: #E5E7EB !important; }
+.login-box input[type="password"], .login-box input[type="text"], .login-box input[type="email"] {
+  background: #fff !important; color: #0B1E3A !important; border: 1px solid #D1D5DB !important;
+}
+.login-box button, .login-box .btn {
+  background: #00B4D8 !important; color: #0B1E3A !important; font-weight: 700 !important;
+}
+#dashboard, .dashboard, .admin-shell, .admin-main {
+  color: #E5E7EB !important; visibility: visible !important;
+}
+.admin-main h1, .admin-main h2, .admin-main h3 { color: #F9FAFB !important; }
+table, .card, .panel { color: inherit; }
+</style>
+
 </head>
 <body>
 

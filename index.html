@@ -1506,6 +1506,156 @@ html[data-rn-btn="B"] .btn-primary:hover {
 }
 </style>
 
+
+<style id="rn-root-vars-fix">
+
+:root {
+  --rn-navy: #0B1E3A;
+  --rn-navy-deep: #061525;
+  --rn-cyan: #00B4D8;
+  --rn-cyan-lt: #22D3EE;
+  --rn-teal: #0D9488;
+  --rn-white: #FFFFFF;
+  --rn-off-white: #F8FAFC;
+  --rn-ice: #ECFEFF;
+  --rn-sky: #F0F9FF;
+  --rn-text: #1F2937;
+  --rn-text-muted: #4B5563;
+  --rn-border: #E5E7EB;
+  --rn-gold: #F5C518;
+  --rn-radius: 12px;
+  --rn-radius-lg: 16px;
+  --rn-shadow: 0 8px 24px rgba(11, 30, 58, 0.08);
+}
+
+/* Admin always readable */
+body.admin-page, .admin-body, #adminApp, .login-screen {
+  color: #E5E7EB;
+}
+.login-box input, .admin-panel input, .admin-panel textarea, .admin-panel select {
+  color: #0B1E3A !important;
+  background: #fff !important;
+}
+html.rn-dark body.admin-page .admin-main,
+html.rn-dark .admin-content {
+  color: #E5E7EB !important;
+}
+/* Product/blog cards when filtered back */
+.product-card { display: flex; flex-direction: column; }
+.product-card[hidden], .blog-card[hidden] { display: none !important; }
+.blog-card { display: flex; flex-direction: column; }
+/* Hero meta polish */
+.hero-next-hint {
+  margin: 16px auto 0 !important;
+  max-width: 420px;
+  padding: 10px 16px !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(0,180,216,0.35) !important;
+  color: rgba(255,255,255,0.95) !important;
+  font-size: 13px !important;
+  line-height: 1.4 !important;
+  text-align: center !important;
+}
+.hero-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin-top: 22px !important;
+}
+.hero-store-chip {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: min(100%, 420px) !important;
+  padding: 14px 18px !important;
+  border-radius: 14px !important;
+  background: rgba(0,180,216,0.12) !important;
+  border: 1.5px solid rgba(0,180,216,0.45) !important;
+  text-decoration: none !important;
+  color: #fff !important;
+  transition: transform .2s ease, background .2s ease !important;
+}
+.hero-store-chip:hover {
+  background: rgba(0,180,216,0.2) !important;
+  transform: translateY(-2px);
+}
+.hero-trust-cards {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  justify-content: center !important;
+}
+.hero-trust-cards > * {
+  background: rgba(255,255,255,0.06) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  border-radius: 10px !important;
+  padding: 10px 14px !important;
+  min-width: 100px;
+  text-align: center;
+}
+/* Tighter explore teasers */
+#industries, #capabilities, #how-we-work,
+section.section-teaser {
+  padding-top: 28px !important;
+  padding-bottom: 28px !important;
+}
+.section-teaser .teaser-card {
+  padding: 22px 24px !important;
+  border-radius: 16px !important;
+  border: 1.5px solid var(--rn-border, #E5E7EB) !important;
+  background: var(--rn-white, #fff) !important;
+  box-shadow: var(--rn-shadow) !important;
+}
+.section-teaser + .section-teaser {
+  margin-top: 0 !important;
+}
+/* AI assistant row */
+#ai-assistant .teaser-card,
+.rn-ai-assistant-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  padding: 20px 22px !important;
+  border: 1.5px solid rgba(0,180,216,0.4) !important;
+  border-radius: 16px !important;
+  background: #F0F9FF !important;
+}
+/* Internship cards equal */
+#internship .teaser-card {
+  border: 2px solid #00B4D8 !important;
+  border-radius: 16px !important;
+  background: #fff !important;
+  padding: 22px !important;
+  box-shadow: 0 8px 24px rgba(11,30,58,0.08) !important;
+  height: 100%;
+}
+html.rn-dark #internship .teaser-card {
+  background: #151D2E !important;
+}
+html.rn-dark #ai-assistant .teaser-card,
+html.rn-dark .rn-ai-assistant-row {
+  background: #151D2E !important;
+}
+/* Pricing */
+.pricing-grid {
+  gap: 18px !important;
+}
+.pricing-card {
+  border-radius: 16px !important;
+  border: 1.5px solid #E5E7EB !important;
+  padding: 24px !important;
+  background: #fff !important;
+}
+.pricing-card.featured {
+  border-color: #00B4D8 !important;
+  box-shadow: 0 12px 32px rgba(0,180,216,0.15) !important;
+}
+</style>
+
 </head>
 <body>
 
@@ -1600,7 +1750,7 @@ html[data-rn-btn="B"] .btn-primary:hover {
           <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Consultation</a>
           <a href="#free-guide" class="btn btn-outline">Download Free AI Prompts</a>
         </div>
-        <p class="hero-next-hint" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.92);text-align:center;max-width:440px;margin-left:auto;margin-right:auto;text-shadow:0 1px 2px rgba(0,0,0,0.35);"><p class="hero-next-hint" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.92);text-align:center;max-width:440px;margin-left:auto;margin-right:auto;text-shadow:0 1px 2px rgba(0,0,0,0.35);">Next step: book a consultation — or use the free guide / store below.</p>
+        <p class="hero-next-hint" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.92);text-align:center;max-width:440px;margin-left:auto;margin-right:auto;text-shadow:0 1px 2px rgba(0,0,0,0.35);"><p class="hero-next-hint" style="margin-top:14px;font-size:13.5px;color:rgba(255,255,255,0.92);text-align:center;max-width:440px;margin-left:auto;margin-right:auto;text-shadow:0 1px 2px rgba(0,0,0,0.35);"><p class="hero-next-hint">Next step: <strong>Book a consultation</strong> — or use the free guide / store below.</p>
         <div class="hero-meta">
           <a href="/store" class="hero-store-chip">
             <span class="hero-store-icon">🛒</span>
@@ -2136,7 +2286,6 @@ html[data-rn-btn="B"] .btn-primary:hover {
       <a class="btn btn-primary btn-sm" href="https://maps.app.goo.gl/4ejBep7GQdejzYsW9" target="_blank" rel="noopener noreferrer">📍 See us on Google Maps</a>
       <a class="btn btn-outline-dark btn-sm" href="/store">Browse store →</a>
     </div>
-    <p style="text-align:center;margin-top:12px;font-size:13px;color:#6B7280;"><span>CAC 3770977</span><span style="margin:0 8px;opacity:.5;">·</span><span>SMEDAN Certified</span></p>
     <p style="text-align:center;margin-top:12px;font-size:13px;color:#6B7280;">
       <span>CAC 3770977</span><span style="margin:0 8px;opacity:.5;">·</span><span>SMEDAN Certified</span>
     </p>
@@ -2544,7 +2693,7 @@ html[data-rn-btn="B"] .btn-primary:hover {
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Investment · 2026 Rates</div>
       <h2 class="section-title">Transparent Pricing Tiers</h2>
-      <p class="section-sub" style="margin:0 auto;">Clear 2026 tiers for freelancers, SMEs, and growing teams. Start with a focused package or request a custom quote for multi-service and international work. Final scope confirmed before payment.</p>
+      <p class="section-sub" style="margin:0 auto;">Three 2026 tiers — Starter, Growth, and Scale. Prices below are starting points; final quote depends on scope. WhatsApp or book a call for a custom package.</p>
     </div>
     <div class="pricing-grid fade-up">
       <div class="pricing-card">
@@ -2620,9 +2769,9 @@ html[data-rn-btn="B"] .btn-primary:hover {
 
 <!-- AI ASSISTANT -->
 
-<section class="section" id="ai-assistant" style="padding:28px 0;">
+<section class="section" id="ai-assistant" class="rn-ai-assistant-section" style="padding:28px 0;">
   <div class="container">
-    <div class="teaser-card"  style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;border:1.5px solid rgba(0,180,216,0.35);border-radius:16px;background:#F0F9FF;">
+    <div class="teaser-card rn-ai-assistant-row"  style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;border:1.5px solid rgba(0,180,216,0.35);border-radius:16px;background:#F0F9FF;">
       <div style="flex:1;min-width:220px;">
         <div class="section-label" style="margin-bottom:4px;">Optional · AI tool</div>
         <strong style="font-size:1.05rem;">RuffNeck AI Assistant</strong>
@@ -2677,7 +2826,7 @@ html[data-rn-btn="B"] .btn-primary:hover {
         </ul>
         <a class="btn btn-primary" href="mailto:ruffneckhassan@gmail.com?subject=Remote%20Internship%20Application%202026%20%E2%80%93%20RuffNeck%20Entertainment&body=Dear%20RuffNeck%20Team%2C%0A%0AI%20am%20applying%20for%20the%20Remote%20Internship%20Programme.%0A%0AFull%20name%3A%0APhone%20%2F%20WhatsApp%3A%0AEmail%3A%0APreferred%20track%20(Data%2FAI%2C%20Admin%2C%20Content%2C%20Support%2C%20Operations)%3A%0ABrief%20background%20%26%20availability%3A%0A%0AThank%20you.%0A">Email Internship Application →</a> <a class="btn btn-outline-dark btn-sm" href="#contact" style="margin-left:8px;">Or use contact form</a>
       </div>
-      <div class="teaser-card fade-up" style="text-align:left;padding:22px;;border:2px solid #00B4D8;border-radius:16px;background:#fff;">
+      <div class="teaser-card fade-up" style="text-align:left;padding:22px;border:2px solid #00B4D8;border-radius:16px;background:#fff;">
         <div class="section-label">Volunteer</div>
         <h3 style="margin:6px 0 10px;font-size:1.15rem;">Volunteer Programme</h3>
         <p style="color:var(--text-muted,#6B7280);font-size:14px;margin-bottom:14px;">Contribute your time and skills to community training, content, operations support, or AI literacy initiatives. Ideal if you want experience and impact without a formal internship track.</p>
