@@ -302,132 +302,7 @@ body { top: 0 !important; }
 #google_translate_element { position: absolute; left: -9999px; height: 0; overflow: hidden; }
 .skiptranslate iframe { display: none !important; }
 </style>
-<style id="rn-dark-css">
-/* =========================================================
-   DARK MODE
-   ========================================================= */
-html.rn-dark {
-  color-scheme: dark;
-}
-html.rn-dark body {
-  background: #0a0f1a !important;
-  color: #E5E7EB !important;
-}
-html.rn-dark .section,
-html.rn-dark .rn-results,
-html.rn-dark .rn-featured {
-  background: #0a0f1a !important;
-}
-html.rn-dark .section.alt,
-html.rn-dark [style*="background:#F8FAFC"],
-html.rn-dark [style*="background: #F8FAFC"] {
-  background: #0f1629 !important;
-}
-html.rn-dark .service-card,
-html.rn-dark .product-card,
-html.rn-dark .teaser-card,
-html.rn-dark .blog-card,
-html.rn-dark .svc-panel {
-  background: #121a2f !important;
-  border-color: rgba(255,255,255,0.08) !important;
-  color: #E5E7EB !important;
-}
-html.rn-dark .service-card h3,
-html.rn-dark .product-name,
-html.rn-dark .section-title,
-html.rn-dark h1, html.rn-dark h2, html.rn-dark h3 {
-  color: #F9FAFB !important;
-}
-html.rn-dark .service-intro,
-html.rn-dark .product-desc,
-html.rn-dark .section-sub,
-html.rn-dark p {
-  color: #9CA3AF !important;
-}
-html.rn-dark .service-list,
-html.rn-dark .service-list li {
-  color: #D1D5DB !important;
-}
-html.rn-dark .nav:not(.nav-transparent) {
-  background: rgba(10, 15, 26, 0.92) !important;
-  border-bottom-color: rgba(255,255,255,0.06) !important;
-}
-html.rn-dark .btn-outline-dark {
-  background: #121a2f !important;
-  color: #E5E7EB !important;
-  border-color: rgba(255,255,255,0.15) !important;
-}
-html.rn-dark .btn-outline-dark:hover {
-  border-color: #00B4D8 !important;
-  color: #00B4D8 !important;
-  background: rgba(0,180,216,0.1) !important;
-}
-html.rn-dark input,
-html.rn-dark textarea,
-html.rn-dark select {
-  background: #0f1629 !important;
-  color: #E5E7EB !important;
-  border-color: rgba(255,255,255,0.12) !important;
-}
-html.rn-dark .filter-btn {
-  background: #121a2f !important;
-  color: #E5E7EB !important;
-  border-color: rgba(255,255,255,0.12) !important;
-}
-html.rn-dark .filter-btn.active,
-html.rn-dark .filter-btn:hover {
-  background: rgba(0,180,216,0.15) !important;
-  border-color: #00B4D8 !important;
-}
-html.rn-dark .footer {
-  background: #060a12 !important;
-}
-html.rn-dark .service-card.open {
-  border-color: rgba(0,180,216,0.45) !important;
-}
-html.rn-dark .expand-hint {
-  background: rgba(0,180,216,0.12) !important;
-}
-html.rn-dark .rn-theme-btn {
-  border-color: rgba(255,255,255,0.2);
-  color: #E5E7EB;
-}
-.rn-theme-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 10px;
-  border: 1.5px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.08);
-  color: #fff;
-  cursor: pointer;
-  font-size: 18px;
-  line-height: 1;
-  padding: 0;
-  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
-}
-.rn-theme-btn:hover {
-  border-color: #00B4D8;
-  background: rgba(0,180,216,0.15);
-  transform: translateY(-1px);
-}
-.rn-theme-btn:focus-visible {
-  outline: 2px solid #00B4D8;
-  outline-offset: 2px;
-}
-html.rn-dark .rn-theme-btn {
-  background: rgba(255,255,255,0.06);
-}
-/* light nav pages (store/blog) */
-.nav-light .rn-theme-btn,
-html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
-  border-color: rgba(11,30,58,0.12);
-  background: #fff;
-  color: #0B1E3A;
-}
-</style>
+
 
 <script>
 (function(){
@@ -441,90 +316,9 @@ html:not(.rn-dark) .nav.nav-scrolled .rn-theme-btn {
 </script>
 
 
-<style id="rn-theme-css">
-/* Theme toggle — always clickable */
-#rnThemeBtn.rn-theme-btn,
-button.rn-theme-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 44px !important;
-  height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
-  padding: 0 !important;
-  margin: 0 6px !important;
-  border-radius: 12px !important;
-  border: 2px solid #00B4D8 !important;
-  background: #0B1E3A !important;
-  color: #fff !important;
-  font-size: 20px !important;
-  line-height: 1 !important;
-  cursor: pointer !important;
-  pointer-events: auto !important;
-  position: relative !important;
-  z-index: 10050 !important;
-  flex-shrink: 0 !important;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.2) !important;
-  -webkit-tap-highlight-color: transparent;
-}
-#rnThemeBtn.rn-theme-btn:hover {
-  background: #123050 !important;
-  transform: scale(1.05);
-}
-/* Dark mode root */
-html.rn-dark,
-html.rn-dark body {
-  background-color: #0B1220 !important;
-  color: #E5E7EB !important;
-}
-html.rn-dark .section,
-html.rn-dark .rn-results,
-html.rn-dark main {
-  background-color: #0B1220 !important;
-}
-html.rn-dark .service-card,
-html.rn-dark .product-card,
-html.rn-dark .teaser-card,
-html.rn-dark .blog-card,
-html.rn-dark .svc-panel {
-  background-color: #151D2E !important;
-  border-color: rgba(255,255,255,0.12) !important;
-  color: #E5E7EB !important;
-}
-html.rn-dark h1, html.rn-dark h2, html.rn-dark h3,
-html.rn-dark .section-title,
-html.rn-dark .service-card h3,
-html.rn-dark .product-name {
-  color: #F3F4F6 !important;
-}
-html.rn-dark p,
-html.rn-dark .service-intro,
-html.rn-dark .section-sub,
-html.rn-dark .product-desc {
-  color: #D1D5DB !important;
-}
-html.rn-dark .nav {
-  background: rgba(11,18,32,0.95) !important;
-}
-html.rn-dark .footer {
-  background: #060a12 !important;
-}
-html.rn-dark input,
-html.rn-dark textarea,
-html.rn-dark select {
-  background: #151D2E !important;
-  color: #F3F4F6 !important;
-  border-color: rgba(255,255,255,0.15) !important;
-}
-html.rn-dark .service-list li {
-  background: #1a2336 !important;
-  color: #F3F4F6 !important;
-  border-color: rgba(255,255,255,0.1) !important;
-}
-</style>
 
-<script id="rn-theme-boot">(function(){try{if(localStorage.getItem('rn_theme')==='dark'){document.documentElement.classList.add('rn-dark');document.documentElement.setAttribute('data-theme','dark');}}catch(e){}})();</script>
+
+
 
 <style id="rn-admin-visibility-fix">
 html, body { background: #040C1A !important; color: #E5E7EB !important; }
@@ -542,6 +336,77 @@ html, body { background: #040C1A !important; color: #E5E7EB !important; }
 }
 .admin-main h1, .admin-main h2, .admin-main h3 { color: #F9FAFB !important; }
 table, .card, .panel { color: inherit; }
+</style>
+
+
+<style id="rn-admin-mobile-fix">
+/* Mobile-first admin visibility */
+html, body {
+  background: #040C1A !important;
+  color: #E5E7EB !important;
+  margin: 0;
+  min-height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+#loginScreen, .login-screen {
+  display: flex !important;
+  min-height: 100vh !important;
+  min-height: 100dvh !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.login-box {
+  width: 100% !important;
+  max-width: 420px !important;
+  padding: 28px 20px !important;
+  box-sizing: border-box !important;
+  color: #E5E7EB !important;
+}
+.login-box * { max-width: 100%; }
+.login-input, #adminPass {
+  width: 100% !important;
+  box-sizing: border-box !important;
+  font-size: 16px !important; /* prevents iOS zoom */
+  padding: 14px !important;
+  background: #fff !important;
+  color: #0B1E3A !important;
+}
+#adminShell.visible {
+  display: flex !important;
+  flex-direction: column !important;
+  min-height: 100vh !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.admin-main, .admin-content, .page {
+  overflow-x: auto !important;
+  max-width: 100vw !important;
+  padding: 12px !important;
+  box-sizing: border-box !important;
+}
+.admin-sidebar {
+  max-width: 100% !important;
+}
+@media (max-width: 768px) {
+  .admin-shell.visible { flex-direction: column !important; }
+  .admin-sidebar {
+    width: 100% !important;
+    position: relative !important;
+    height: auto !important;
+  }
+  table { display: block; overflow-x: auto; }
+}
+.rn-static-note {
+  font-size: 12px;
+  color: #FBBF24;
+  margin: 8px 0 16px;
+  padding: 10px 12px;
+  border: 1px solid rgba(251,191,36,0.35);
+  border-radius: 10px;
+  background: rgba(251,191,36,0.08);
+}
 </style>
 
 </head>
@@ -625,7 +490,7 @@ table, .card, .panel { color: inherit; }
   </div>
 </div>
 <div id="google_translate_element" aria-hidden="true"></div>
-<button type="button" class="rn-theme-btn" id="rnThemeBtn" aria-label="Toggle dark mode" title="Toggle dark / light mode" onclick="if(window.rnToggleTheme){window.rnToggleTheme();}return false;">🌙</button>
+
 </nav>
 
     <!-- MAIN -->
@@ -841,7 +706,8 @@ table, .card, .panel { color: inherit; }
               <span id="blogCountBadge" style="font-size:12px;color:var(--muted);font-weight:400;"></span>
             </div>
           </div>
-          <div id="blogList"></div>
+          <p class="rn-static-note" id="blogListNote"><strong>Note:</strong> Built-in (static) articles cannot be edited here — they are hardcoded on the website. Only posts you create in Admin can be edited, published, or deleted. Publish status must be <strong>Published</strong> to show on /blog. Data is saved in this browser only (not in GitHub).</p>
+<div id="blogList"></div>
         </div>
       </div>
 
@@ -2111,71 +1977,7 @@ updateStats = function(){
 
 
 
-<script id="rn-theme-js">
-(function(){
-  var KEY = 'rn_theme';
 
-  function setTheme(theme) {
-    var dark = (theme === 'dark');
-    var root = document.documentElement;
-    if (dark) {
-      root.classList.add('rn-dark');
-      root.setAttribute('data-theme', 'dark');
-      if (document.body) document.body.classList.add('rn-dark');
-    } else {
-      root.classList.remove('rn-dark');
-      root.setAttribute('data-theme', 'light');
-      if (document.body) document.body.classList.remove('rn-dark');
-    }
-    try { localStorage.setItem(KEY, dark ? 'dark' : 'light'); } catch (e) {}
-    var label = dark ? '☀️' : '🌙';
-    var btns = document.querySelectorAll('#rnThemeBtn, .rn-theme-btn');
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].textContent = label;
-      btns[i].setAttribute('aria-label', dark ? 'Switch to light mode' : 'Switch to dark mode');
-    }
-  }
-
-  function getTheme() {
-    try {
-      var s = localStorage.getItem(KEY);
-      if (s === 'dark' || s === 'light') return s;
-    } catch (e) {}
-    return 'light';
-  }
-
-  function toggleTheme() {
-    var next = document.documentElement.classList.contains('rn-dark') ? 'light' : 'dark';
-    setTheme(next);
-  }
-
-  window.rnToggleTheme = toggleTheme;
-  window.rnSetTheme = setTheme;
-
-  // Apply saved theme immediately
-  setTheme(getTheme());
-
-  function bind() {
-    setTheme(getTheme());
-    var btns = document.querySelectorAll('#rnThemeBtn, .rn-theme-btn');
-    for (var i = 0; i < btns.length; i++) {
-      (function(btn){
-        btn.addEventListener('click', function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          toggleTheme();
-        }, true);
-      })(btns[i]);
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', bind);
-  } else {
-    bind();
-  }
-})();
-</script>
 
 
 <script id="rn-admin-login-reset">
@@ -2316,6 +2118,326 @@ updateStats = function(){
     if (session.authenticated) {
       showShell();
     }
+  });
+})();
+</script>
+
+
+<script id="rn-cms-db-client">
+window.RNCms = {
+  async listPosts(){
+    try {
+      var res = await fetch('/api/cms/posts', { credentials: 'same-origin', cache: 'no-store' });
+      var data = await res.json();
+      if (res.ok && data.ok && Array.isArray(data.posts)) {
+        return { source: 'db', posts: data.posts.map(window.RNCms.normalizePost) };
+      }
+      if (data.code === 'NO_DB') return { source: 'local', posts: window.RNCms.localPosts() };
+    } catch (e) {}
+    return { source: 'local', posts: window.RNCms.localPosts() };
+  },
+  async listProducts(){
+    try {
+      var res = await fetch('/api/cms/products', { credentials: 'same-origin', cache: 'no-store' });
+      var data = await res.json();
+      if (res.ok && data.ok && Array.isArray(data.products)) {
+        return { source: 'db', products: data.products.map(window.RNCms.normalizeProduct) };
+      }
+      if (data.code === 'NO_DB') return { source: 'local', products: window.RNCms.localProducts() };
+    } catch (e) {}
+    return { source: 'local', products: window.RNCms.localProducts() };
+  },
+  async savePost(post){
+    var method = post._exists ? 'PUT' : 'POST';
+    delete post._exists;
+    try {
+      var res = await fetch('/api/cms/posts', {
+        method: method,
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+      });
+      var data = await res.json();
+      if (res.ok && data.ok) return { source: 'db', post: data.post };
+      if (res.status === 503) {
+        window.RNCms.savePostLocal(post);
+        return { source: 'local', post: post };
+      }
+      throw new Error(data.error || 'Save failed');
+    } catch (e) {
+      if (e.message && e.message.indexOf('Save failed') === 0) throw e;
+      window.RNCms.savePostLocal(post);
+      return { source: 'local', post: post };
+    }
+  },
+  async deletePost(id){
+    try {
+      var res = await fetch('/api/cms/posts', {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+      });
+      var data = await res.json();
+      if (res.ok && data.ok) return { source: 'db' };
+      if (res.status === 503) {
+        window.RNCms.deletePostLocal(id);
+        return { source: 'local' };
+      }
+      throw new Error(data.error || 'Delete failed');
+    } catch (e) {
+      window.RNCms.deletePostLocal(id);
+      return { source: 'local' };
+    }
+  },
+  async saveProduct(product){
+    var method = product._exists ? 'PUT' : 'POST';
+    delete product._exists;
+    try {
+      var res = await fetch('/api/cms/products', {
+        method: method,
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(product)
+      });
+      var data = await res.json();
+      if (res.ok && data.ok) return { source: 'db', product: data.product };
+      if (res.status === 503) {
+        window.RNCms.saveProductLocal(product);
+        return { source: 'local', product: product };
+      }
+      throw new Error(data.error || 'Save failed');
+    } catch (e) {
+      if (e.message && e.message.indexOf('Save failed') === 0) throw e;
+      window.RNCms.saveProductLocal(product);
+      return { source: 'local', product: product };
+    }
+  },
+  async deleteProduct(id){
+    try {
+      var res = await fetch('/api/cms/products', {
+        method: 'DELETE',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: id })
+      });
+      var data = await res.json();
+      if (res.ok && data.ok) return { source: 'db' };
+      if (res.status === 503) {
+        window.RNCms.deleteProductLocal(id);
+        return { source: 'local' };
+      }
+      throw new Error(data.error || 'Delete failed');
+    } catch (e) {
+      window.RNCms.deleteProductLocal(id);
+      return { source: 'local' };
+    }
+  },
+  normalizePost: function(p){
+    if (!p) return p;
+    return {
+      id: p.id,
+      title: p.title,
+      cat: p.cat,
+      emoji: p.emoji,
+      image: p.image,
+      desc: p.desc || p.description || '',
+      body: p.body || '',
+      tags: p.tags || [],
+      author: p.author,
+      readTime: p.read_time || p.readTime || '5',
+      status: p.status || 'draft',
+      created: p.created,
+      updated: p.updated
+    };
+  },
+  normalizeProduct: function(p){
+    if (!p) return p;
+    return {
+      id: p.id,
+      name: p.name,
+      cat: p.cat,
+      emoji: p.emoji,
+      image: p.image,
+      desc: p.desc || '',
+      fullDesc: p.full_desc || p.fullDesc || '',
+      tiers: p.tiers || {},
+      price: p.price,
+      status: p.status || 'active',
+      created: p.created,
+      updated: p.updated
+    };
+  },
+  localPosts: function(){
+    try { return JSON.parse(localStorage.getItem('rn_blog_posts') || '[]'); } catch(e){ return []; }
+  },
+  localProducts: function(){
+    try { return JSON.parse(localStorage.getItem('rn_products') || '[]'); } catch(e){ return []; }
+  },
+  savePostLocal: function(post){
+    var posts = window.RNCms.localPosts();
+    var i = posts.findIndex(function(x){ return x.id === post.id; });
+    if (i >= 0) posts[i] = post; else posts.unshift(post);
+    localStorage.setItem('rn_blog_posts', JSON.stringify(posts));
+  },
+  deletePostLocal: function(id){
+    var posts = window.RNCms.localPosts().filter(function(x){ return x.id !== id; });
+    localStorage.setItem('rn_blog_posts', JSON.stringify(posts));
+  },
+  saveProductLocal: function(product){
+    var list = window.RNCms.localProducts();
+    var i = list.findIndex(function(x){ return x.id === product.id; });
+    if (i >= 0) list[i] = product; else list.unshift(product);
+    localStorage.setItem('rn_products', JSON.stringify(list));
+  },
+  deleteProductLocal: function(id){
+    var list = window.RNCms.localProducts().filter(function(x){ return x.id !== id; });
+    localStorage.setItem('rn_products', JSON.stringify(list));
+  }
+};
+</script>
+
+<script id="rn-cms-admin-bridge">
+(function(){
+  // After RNCms loads, bridge existing admin functions to database
+  function ready(fn){
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+
+  ready(function(){
+    if (!window.RNCms) return;
+
+    // Replace list loaders used by renderBlogList / renderProductsTable
+    window.getBlogPosts = function(){
+      // sync cache for immediate UI; refresh async
+      return window.__rnBlogCache || window.RNCms.localPosts();
+    };
+    window.getProducts = function(){
+      return window.__rnProductCache || window.RNCms.localProducts();
+    };
+
+    window.__rnRefreshBlogFromDb = async function(){
+      var r = await window.RNCms.listPosts();
+      window.__rnBlogCache = r.posts || [];
+      window.__rnCmsSource = r.source;
+      if (typeof renderBlogList === 'function') renderBlogList();
+      var note = document.getElementById('cmsSourceNote');
+      if (note) note.textContent = r.source === 'db' ? 'Storage: Database (synced)' : 'Storage: This browser only (set Supabase on Vercel to sync)';
+    };
+    window.__rnRefreshProductsFromDb = async function(){
+      var r = await window.RNCms.listProducts();
+      window.__rnProductCache = r.products || [];
+      if (typeof renderProductsTable === 'function') renderProductsTable();
+      else if (typeof renderProducts === 'function') renderProducts();
+    };
+
+    // Wrap saveBlogPost to persist via API
+    if (typeof saveBlogPost === 'function') {
+      var _saveBlogPost = saveBlogPost;
+      window.saveBlogPost = async function(statusOverride){
+        var title = (document.getElementById('blogTitle') || {}).value || '';
+        title = title.trim();
+        var cat = (document.getElementById('blogCat') || {}).value || '';
+        var desc = ((document.getElementById('blogDesc') || {}).value || '').trim();
+        var editor = document.getElementById('blogEditor');
+        var body = editor ? editor.innerHTML.trim() : '';
+        if (!title) { if (typeof showToast==='function') showToast('Please enter a post title','error'); return; }
+        if (!cat) { if (typeof showToast==='function') showToast('Please select a category','error'); return; }
+        if (!body || body === '<br>') { if (typeof showToast==='function') showToast('Please write some content','error'); return; }
+        var status = statusOverride || (document.getElementById('blogStatus') || {}).value || 'draft';
+        var blogImgEl = document.getElementById('blogImgPreview');
+        var blogImageData = (blogImgEl && blogImgEl.style.display !== 'none') ? blogImgEl.src : null;
+        var editingId = window.editingBlogId || null;
+        var post = {
+          id: editingId || String(Date.now()),
+          title: title,
+          cat: cat,
+          emoji: (document.getElementById('blogEmoji') || {}).value || '📝',
+          image: blogImageData,
+          desc: desc || title.substring(0, 100),
+          body: body,
+          tags: ((document.getElementById('blogTags') || {}).value || '').split(',').map(function(t){ return t.trim(); }).filter(Boolean),
+          author: (document.getElementById('blogAuthor') || {}).value || 'RuffNeck Entertainment',
+          readTime: (document.getElementById('blogReadTime') || {}).value || '5',
+          status: status,
+          created: new Date().toLocaleDateString('en-GB'),
+          updated: new Date().toLocaleDateString('en-GB'),
+          _exists: !!editingId
+        };
+        try {
+          var result = await window.RNCms.savePost(post);
+          // also mirror local for offline
+          window.RNCms.savePostLocal(window.RNCms.normalizePost(result.post || post));
+          if (typeof showToast === 'function') {
+            showToast('Saved (' + result.source + '): ' + title, 'success');
+          }
+          window.editingBlogId = null;
+          if (typeof clearBlogForm === 'function') clearBlogForm();
+          await window.__rnRefreshBlogFromDb();
+          if (typeof showPage === 'function') showPage('blog', null);
+        } catch (e) {
+          if (typeof showToast === 'function') showToast(e.message || 'Save failed', 'error');
+        }
+      };
+    }
+
+    if (typeof deleteBlogPost === 'function') {
+      window.deleteBlogPost = async function(id){
+        if (!confirm('Delete this post?')) return;
+        await window.RNCms.deletePost(id);
+        window.RNCms.deletePostLocal(id);
+        await window.__rnRefreshBlogFromDb();
+        if (typeof showToast === 'function') showToast('Post deleted', 'success');
+      };
+    }
+
+    // Products save wrapper if saveProduct exists
+    if (typeof saveProduct === 'function') {
+      var _saveProduct = saveProduct;
+      window.saveProduct = async function(){
+        // Call original to build object if too complex — intercept after local save by re-reading
+        // Simpler: run original then push last local item to DB
+        try {
+          _saveProduct();
+        } catch (e) {}
+        var list = window.RNCms.localProducts();
+        if (list[0]) {
+          var p = list[0];
+          p._exists = true;
+          try {
+            await window.RNCms.saveProduct(p);
+            if (typeof showToast === 'function') showToast('Product synced to database', 'success');
+          } catch (err) {
+            if (typeof showToast === 'function') showToast('Saved locally; DB: ' + (err.message||''), 'error');
+          }
+        }
+        await window.__rnRefreshProductsFromDb();
+      };
+    }
+
+    if (typeof deleteProduct === 'function') {
+      var _delP = deleteProduct;
+      window.deleteProduct = async function(id){
+        if (!confirm('Delete this product?')) return;
+        await window.RNCms.deleteProduct(id);
+        window.RNCms.deleteProductLocal(id);
+        await window.__rnRefreshProductsFromDb();
+        if (typeof showToast === 'function') showToast('Product deleted', 'success');
+      };
+    }
+
+    // Initial load from DB
+    window.__rnRefreshBlogFromDb();
+    window.__rnRefreshProductsFromDb();
+
+    // Source banner
+    var bar = document.createElement('div');
+    bar.id = 'cmsSourceNote';
+    bar.style.cssText = 'padding:8px 14px;font-size:12px;background:#0B1E3A;color:#FBBF24;text-align:center;';
+    bar.textContent = 'Checking storage…';
+    var shell = document.getElementById('adminShell');
+    if (shell) shell.insertBefore(bar, shell.firstChild);
   });
 })();
 </script>

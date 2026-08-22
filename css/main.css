@@ -2950,19 +2950,7 @@ select:focus {
 }
 
 
-/* =========================================================
-   DARK MODE
-   ========================================================= */
-html.rn-dark {
-  color-scheme: dark;
-}
-html.rn-dark body {
-  background: #0a0f1a !important;
-  color: #E5E7EB !important;
-}
-html.rn-dark .section,
-html.rn-dark .rn-results,
-html.rn-dark .rn-featured {
+{
   background: #0a0f1a !important;
 }
 html.rn-dark .section.alt,
@@ -3120,3 +3108,6 @@ a.btn-primary:hover, .btn-primary:hover {
   background: #22D3EE !important;
   color: #0B1E3A !important;
 }
+
+/* Force light public UI — dark mode removed */
+html.rn-dark { /* neutralized */ }
