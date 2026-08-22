@@ -112,9 +112,9 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="/css/main.css"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" media="print" onload="this.media='all'"/>
 
 <style id="rn-critical-hero-services">.service-media{width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;margin:0 0 16px;background:#0B1E3A}
 .service-media img{width:100%;height:100%;object-fit:cover;display:block}
@@ -1966,14 +1966,23 @@ html.rn-dark #internship .intern-grid > div {
         <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;">
           <div style="font-size:11px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">🎥 3MTT KNOWLEDGE SHOWCASE</div>
           <div style="position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);">
-            <iframe
-              src="https://www.youtube.com/embed/cTA0ipwcu30" loading="lazy" title="RuffNeck video"
-              title="RuffNeck Entertainment Knowledge Hub — 3MTT Knowledge Showcase"
-              style="position:absolute;top:0;left:0;width:100%;height:100%;border:0;"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen
-              loading="lazy">
-            </iframe>
+            
+<div id="rnYtWrap" class="rn-yt-wrap" style="position:relative;max-width:800px;margin:0 auto;border-radius:16px;overflow:hidden;background:#0B1E3A;aspect-ratio:16/9;">
+  <button type="button" id="rnYtPlay" aria-label="Play video" style="position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:linear-gradient(135deg,#0B1E3A,#123050);color:#fff;font-weight:700;font-size:16px;">
+    ▶ Play video
+  </button>
+</div>
+<script>
+(function(){
+  var b=document.getElementById('rnYtPlay');
+  var w=document.getElementById('rnYtWrap');
+  if(!b||!w) return;
+  b.addEventListener('click', function(){
+    w.innerHTML='<iframe src="https://www.youtube.com/embed/cTA0ipwcu30?autoplay=1" title="RuffNeck video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy" style="width:100%;height:100%;border:0;"></iframe>';
+  });
+})();
+</script>
+
           </div>
           <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:10px;">RuffNeck Entertainment Knowledge Hub — 3MTT Knowledge Showcase</p>
         </div>
@@ -3611,6 +3620,25 @@ window.RN_WA = {
     window.open(this.link(key), "_blank", "noopener,noreferrer");
   }
 };
+</script>
+
+
+<script id="rn-translate-gate">
+window.rnLoadTranslate = function(){
+  if (window.__rnTranslateLoaded) return;
+  window.__rnTranslateLoaded = true;
+  var s = document.createElement('script');
+  s.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+  document.body.appendChild(s);
+};
+// Only load when user opens language menu
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.querySelector('.rn-lang-btn, #rnLangBtn, [data-lang-toggle]');
+  var root = document.getElementById('rnLang');
+  function arm(){ window.rnLoadTranslate && window.rnLoadTranslate(); }
+  if (btn) btn.addEventListener('click', arm, { once: true });
+  if (root) root.addEventListener('click', arm, { once: true });
+});
 </script>
 
 </body>
