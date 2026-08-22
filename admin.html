@@ -339,73 +339,194 @@ table, .card, .panel { color: inherit; }
 </style>
 
 
-<style id="rn-admin-mobile-fix">
-/* Mobile-first admin visibility */
+
+
+
+<style id="rn-admin-mobile-v2">
+/* ===== Admin mobile + login overlay fix ===== */
 html, body {
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 100% !important;
   background: #040C1A !important;
   color: #E5E7EB !important;
-  margin: 0;
-  min-height: 100%;
-  -webkit-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100% !important;
 }
+
+/* Login */
 #loginScreen, .login-screen {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
   display: flex !important;
-  min-height: 100vh !important;
-  min-height: 100dvh !important;
-  padding: 16px !important;
-  box-sizing: border-box !important;
   align-items: center !important;
   justify-content: center !important;
+  background: radial-gradient(ellipse at 30% 50%, #0B1E3A 0%, #040C1A 70%) !important;
+  padding: 16px !important;
+  box-sizing: border-box !important;
 }
+#loginScreen.rn-hidden,
+.login-screen.rn-hidden,
+body.rn-admin-in #loginScreen {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  opacity: 0 !important;
+  z-index: -1 !important;
+}
+
 .login-box {
   width: 100% !important;
-  max-width: 420px !important;
+  max-width: 400px !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(0,180,216,0.25) !important;
+  border-radius: 16px !important;
   padding: 28px 20px !important;
-  box-sizing: border-box !important;
   color: #E5E7EB !important;
+  box-sizing: border-box !important;
 }
-.login-box * { max-width: 100%; }
-.login-input, #adminPass {
+.login-box input, #adminPass {
   width: 100% !important;
   box-sizing: border-box !important;
-  font-size: 16px !important; /* prevents iOS zoom */
+  font-size: 16px !important;
   padding: 14px !important;
   background: #fff !important;
   color: #0B1E3A !important;
+  border-radius: 10px !important;
+  border: 1px solid #D1D5DB !important;
 }
-#adminShell.visible {
+.login-box button, .login-box .btn {
+  width: 100% !important;
+  background: #00B4D8 !important;
+  color: #0B1E3A !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 14px !important;
+  margin-top: 12px !important;
+}
+
+/* Shell after login */
+#adminShell {
+  display: none !important;
+  min-height: 100vh !important;
+  background: #0B1220 !important;
+  color: #E5E7EB !important;
+}
+#adminShell.visible,
+body.rn-admin-in #adminShell {
   display: flex !important;
   flex-direction: column !important;
-  min-height: 100vh !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
-.admin-main, .admin-content, .page {
-  overflow-x: auto !important;
-  max-width: 100vw !important;
-  padding: 12px !important;
+
+/* Top bar */
+.admin-topbar, .admin-header, #adminShell > header {
+  background: #0B1E3A !important;
+  color: #F9FAFB !important;
+  border-bottom: 1px solid rgba(0,180,216,0.2) !important;
+}
+
+/* Sidebar */
+.admin-sidebar, .sidebar, nav.admin-nav {
+  background: #0B1E3A !important;
+  color: #E5E7EB !important;
+}
+.admin-sidebar a, .sidebar a, .nav-item {
+  color: #E5E7EB !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  padding: 12px 14px !important;
+  text-decoration: none !important;
+}
+.admin-sidebar a span, .nav-item span, .nav-label {
+  display: inline !important;
+  color: #E5E7EB !important;
+  font-size: 14px !important;
+}
+
+/* Main content — kill white blank */
+.admin-main, .admin-content, .page, .dashboard, main {
+  background: #0B1220 !important;
+  color: #E5E7EB !important;
+  min-height: 50vh !important;
+  padding: 16px !important;
   box-sizing: border-box !important;
 }
-.admin-sidebar {
-  max-width: 100% !important;
+.admin-main h1, .admin-main h2, .admin-main h3,
+.page h1, .page h2 {
+  color: #F9FAFB !important;
 }
+.card, .panel, .stat-card, .table-wrap {
+  background: #151D2E !important;
+  border: 1px solid rgba(0,180,216,0.2) !important;
+  border-radius: 12px !important;
+  color: #E5E7EB !important;
+}
+
+/* Forms on dark */
+.admin-main input, .admin-main textarea, .admin-main select,
+.page input, .page textarea, .page select {
+  background: #fff !important;
+  color: #0B1E3A !important;
+  border: 1px solid #D1D5DB !important;
+  border-radius: 8px !important;
+  font-size: 16px !important;
+}
+
+/* Mobile layout */
 @media (max-width: 768px) {
-  .admin-shell.visible { flex-direction: column !important; }
-  .admin-sidebar {
+  #adminShell.visible {
+    flex-direction: column !important;
+  }
+  .admin-sidebar, .sidebar {
     width: 100% !important;
+    max-width: 100% !important;
     position: relative !important;
     height: auto !important;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 4px !important;
+    padding: 8px !important;
+    box-sizing: border-box !important;
   }
-  table { display: block; overflow-x: auto; }
+  .admin-sidebar a, .nav-item {
+    flex: 1 1 auto !important;
+    min-width: 44px !important;
+    justify-content: center !important;
+    border-radius: 10px !important;
+    background: rgba(255,255,255,0.06) !important;
+  }
+  /* Show labels under icons on mobile */
+  .admin-sidebar a span, .nav-label {
+    display: block !important;
+    font-size: 10px !important;
+    margin-top: 2px !important;
+    text-align: center !important;
+  }
+  .admin-main, .admin-content {
+    width: 100% !important;
+    max-width: 100vw !important;
+    padding: 12px !important;
+    overflow-x: auto !important;
+  }
+  table {
+    display: block !important;
+    overflow-x: auto !important;
+    width: 100% !important;
+  }
 }
-.rn-static-note {
-  font-size: 12px;
-  color: #FBBF24;
-  margin: 8px 0 16px;
-  padding: 10px 12px;
-  border: 1px solid rgba(251,191,36,0.35);
-  border-radius: 10px;
-  background: rgba(251,191,36,0.08);
+
+/* Source banner */
+#cmsSourceNote {
+  background: #0B1E3A !important;
+  color: #FBBF24 !important;
+  padding: 8px 12px !important;
+  font-size: 12px !important;
+  text-align: center !important;
 }
 </style>
 
@@ -2443,22 +2564,44 @@ window.RNCms = {
 </script>
 
 
+
+
+
 <script id="rn-admin-simple-login">
 (function(){
   var DEFAULT_PASS = 'ruffneck2026admin';
 
   function showShell(){
+    document.body.classList.add('rn-admin-in');
     var loginScreen = document.getElementById('loginScreen');
+    if (loginScreen) {
+      loginScreen.classList.add('rn-hidden');
+      loginScreen.style.display = 'none';
+      loginScreen.style.visibility = 'hidden';
+      loginScreen.style.pointerEvents = 'none';
+      loginScreen.style.opacity = '0';
+      loginScreen.style.zIndex = '-1';
+    }
     var shell = document.getElementById('adminShell');
-    if (loginScreen) loginScreen.style.display = 'none';
     if (shell) {
       shell.classList.add('visible');
-      shell.style.display = 'block';
+      shell.style.display = 'flex';
       shell.style.visibility = 'visible';
       shell.style.opacity = '1';
     }
+    // hide any leftover login overlays
+    document.querySelectorAll('.login-screen').forEach(function(el){
+      el.classList.add('rn-hidden');
+      el.style.display = 'none';
+    });
     if (typeof initAdmin === 'function') {
       try { initAdmin(); } catch(e) { console.warn(e); }
+    }
+    if (typeof window.__rnRefreshBlogFromDb === 'function') {
+      try { window.__rnRefreshBlogFromDb(); } catch(e) {}
+    }
+    if (typeof window.__rnRefreshProductsFromDb === 'function') {
+      try { window.__rnRefreshProductsFromDb(); } catch(e) {}
     }
   }
 
@@ -2470,13 +2613,12 @@ window.RNCms = {
     err.textContent = msg;
   }
 
-  // Hard override — always wins over older scripts
   window.doLogin = async function doLogin(){
     var input = document.getElementById('adminPass');
     var val = (input && input.value ? input.value : '').trim();
     if (!val) { showErr('Enter the password.'); return; }
 
-    // 1) Try server auth if API exists
+    // Server auth first
     try {
       var res = await fetch('/api/admin-login', {
         method: 'POST',
@@ -2488,40 +2630,36 @@ window.RNCms = {
         var data = await res.json().catch(function(){ return {}; });
         if (data.ok) { showShell(); return; }
       }
-      // 401 / 404 / 503 → fall through to local default
-    } catch (e) { /* offline / no API */ }
+    } catch (e) {}
 
-    // 2) Local default always works
+    // Default always works
     if (val === DEFAULT_PASS) {
       try { localStorage.removeItem('rn_admin_pass'); } catch(e) {}
       showShell();
       return;
     }
 
-    // 3) Custom stored password (legacy)
     try {
       var stored = localStorage.getItem('rn_admin_pass');
-      if (stored && val === String(stored).trim()) {
-        showShell();
-        return;
-      }
+      if (stored && val === String(stored).trim()) { showShell(); return; }
     } catch(e) {}
 
-    showErr('Incorrect password. Use: ruffneck2026admin  — or click Reset below.');
+    showErr('Incorrect password. Use: ruffneck2026admin');
     if (input) { input.value = ''; input.focus(); }
   };
 
   window.resetPasswordToDefault = function(){
     try { localStorage.removeItem('rn_admin_pass'); } catch(e) {}
-    showErr('Reset done. Password is: ruffneck2026admin', true);
-    var input = document.getElementById('adminPass');
-    if (input) { input.value = ''; input.focus(); }
+    showErr('Reset done. Password: ruffneck2026admin', true);
   };
 
-  document.addEventListener('DOMContentLoaded', function(){
-    // Auto-clear bad stored password if user lands on login
-    var btn = document.getElementById('resetLoginPass');
-    if (btn) btn.onclick = function(){ window.resetPasswordToDefault(); };
+  // If already has session cookie, open shell
+  document.addEventListener('DOMContentLoaded', async function(){
+    try {
+      var res = await fetch('/api/admin-session', { credentials: 'same-origin', cache: 'no-store' });
+      var data = await res.json();
+      if (data && data.authenticated) showShell();
+    } catch(e) {}
   });
 })();
 </script>
