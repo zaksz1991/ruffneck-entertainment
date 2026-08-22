@@ -558,7 +558,15 @@ table, .card, .panel { color: inherit; }
     <label class="login-label" for="adminPass">Admin Password</label>
     <input class="login-input" type="password" id="adminPass" placeholder="Enter password…" onkeydown="if(event.key==='Enter')doLogin()"/>
     <button class="login-btn" onclick="doLogin()">Sign In →</button>
-    <div class="login-error" id="loginError">Incorrect password. Please try again.</div>
+    <div class="login-error" id="loginError" style="display:none;">Incorrect password. Please try again.</div>
+    <p style="text-align:center;margin-top:12px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">
+      Default password: <strong style="color:#00B4D8;">ruffneck2026admin</strong><br/>
+      <button type="button" onclick="resetPasswordToDefault()" style="margin-top:8px;background:rgba(0,180,216,0.15);border:1px solid #00B4D8;color:#00B4D8;font-weight:700;cursor:pointer;padding:8px 14px;border-radius:8px;">Reset password</button>
+    </p>
+    <p style="text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,0.55);">
+      Forgot password?
+      <button type="button" id="resetLoginPass" style="background:none;border:none;color:#00B4D8;font-weight:700;cursor:pointer;text-decoration:underline;padding:0;">Reset to default</button>
+    </p>
     <p class="login-hint">Authorised personnel only · Do not share this URL · © 2026</p>
   </div>
 </div>
@@ -1154,35 +1162,9 @@ table, .card, .panel { color: inherit; }
 
 <script>
 // ── AUTH ──
-const ADMIN_PASS_KEY = 'rn_admin_pass';
-const DEFAULT_PASS = 'ruffneck2026admin';
 
-function getPass(){
-  try {
-    return localStorage.getItem(ADMIN_PASS_KEY) || DEFAULT_PASS;
-  } catch(e) {
-    return DEFAULT_PASS;
-  }
-}
 
-function doLogin(){
-  try {
-    const val = document.getElementById('adminPass').value;
-    if(val === getPass()){
-      document.getElementById('loginScreen').style.display = 'none';
-      document.getElementById('adminShell').classList.add('visible');
-      initAdmin();
-    } else {
-      document.getElementById('loginError').textContent = 'Incorrect password. Please try again.';
-      document.getElementById('loginError').style.display = 'block';
-      document.getElementById('adminPass').value = '';
-      document.getElementById('adminPass').focus();
-    }
-  } catch(e) {
-    document.getElementById('loginError').textContent = 'Login error: ' + e.message + '. Try a different browser or disable private/incognito mode.';
-    document.getElementById('loginError').style.display = 'block';
-  }
-}
+
 
 function doLogout(){
   document.getElementById('adminShell').classList.remove('visible');
@@ -1191,30 +1173,9 @@ function doLogout(){
   document.getElementById('loginError').style.display = 'none';
 }
 
-function changePassword(){
-  const np = document.getElementById('newPass').value;
-  const cp = document.getElementById('confirmPass').value;
-  if(np.length < 8){ showToast('Password must be at least 8 characters','error'); return; }
-  if(np !== cp){ showToast('Passwords do not match','error'); return; }
-  try {
-    localStorage.setItem(ADMIN_PASS_KEY, np);
-    showToast('Password updated successfully','success');
-    document.getElementById('newPass').value='';
-    document.getElementById('confirmPass').value='';
-  } catch(e) {
-    showToast('⚠️ Could not save new password — your browser is blocking storage.','error');
-  }
-}
 
-function resetPasswordToDefault(){
-  if(!confirm('Reset admin password back to the default (ruffneck2026admin)?')) return;
-  try {
-    localStorage.removeItem(ADMIN_PASS_KEY);
-    showToast('Password reset to default: ruffneck2026admin','success');
-  } catch(e) {
-    showToast('⚠️ Could not reset — storage is blocked in this browser.','error');
-  }
-}
+
+
 
 // ── NAVIGATION ──
 function showPage(id, btn){
@@ -1237,6 +1198,122 @@ function checkStorageAvailable(){
     return true;
   } catch(e) {
     return false;
+  }
+}
+
+
+const ADMIN_PASS_KEY = 'rn_admin_pass';
+const DEFAULT_PASS = 'ruffneck2026admin';
+
+function getPass(){
+  try {
+    var stored = localStorage.getItem(ADMIN_PASS_KEY);
+    if (stored != null && String(stored).trim() !== '') {
+      return String(stored).trim();
+    }
+  } catch (e) {}
+  return DEFAULT_PASS;
+}
+
+function clearStoredPass(){
+  try { localStorage.removeItem(ADMIN_PASS_KEY); } catch (e) {}
+}
+
+/** Login: accepts stored password OR always the default (default clears override). */
+function doLogin(){
+  try {
+    var input = document.getElementById('adminPass');
+    var err = document.getElementById('loginError');
+    var val = (input && input.value ? input.value : '').trim();
+
+    if (!val) {
+      if (err) {
+        err.style.display = 'block';
+        err.style.color = '#f87171';
+        err.textContent = 'Enter the password.';
+      }
+      return;
+    }
+
+    var stored = getPass();
+    var ok = (val === stored) || (val === DEFAULT_PASS);
+
+    if (ok) {
+      // If user used default, wipe any old custom password so default keeps working
+      if (val === DEFAULT_PASS) clearStoredPass();
+
+      var loginScreen = document.getElementById('loginScreen');
+      var shell = document.getElementById('adminShell');
+      if (loginScreen) loginScreen.style.display = 'none';
+      if (shell) {
+        shell.classList.add('visible');
+        shell.style.display = 'block';
+        shell.style.visibility = 'visible';
+        shell.style.opacity = '1';
+      }
+      if (typeof initAdmin === 'function') initAdmin();
+      if (err) err.style.display = 'none';
+    } else {
+      if (err) {
+        err.style.display = 'block';
+        err.style.color = '#f87171';
+        err.textContent = 'Incorrect password. Click “Reset password” below, then use: ruffneck2026admin';
+      }
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+    }
+  } catch (e) {
+    var err2 = document.getElementById('loginError');
+    if (err2) {
+      err2.style.display = 'block';
+      err2.textContent = 'Login error: ' + e.message;
+    }
+  }
+}
+
+function resetPasswordToDefault(){
+  clearStoredPass();
+  try {
+    if (typeof showToast === 'function') {
+      showToast('Password reset to default: ruffneck2026admin', 'success');
+    }
+  } catch (e) {}
+  var err = document.getElementById('loginError');
+  if (err) {
+    err.style.display = 'block';
+    err.style.color = '#86EFAC';
+    err.textContent = 'Reset done. Password is: ruffneck2026admin';
+  }
+  var input = document.getElementById('adminPass');
+  if (input) {
+    input.value = '';
+    input.focus();
+  }
+  alert('Admin password reset.\\n\\nUse: ruffneck2026admin');
+}
+
+function changePassword(){
+  var npEl = document.getElementById('newPass');
+  var cpEl = document.getElementById('confirmPass');
+  var np = (npEl && npEl.value ? npEl.value : '').trim();
+  var cp = (cpEl && cpEl.value ? cpEl.value : '').trim();
+  if (np.length < 8) {
+    if (typeof showToast === 'function') showToast('Password must be at least 8 characters', 'error');
+    return;
+  }
+  if (np !== cp) {
+    if (typeof showToast === 'function') showToast('Passwords do not match', 'error');
+    return;
+  }
+  try {
+    localStorage.setItem(ADMIN_PASS_KEY, np);
+    if (typeof showToast === 'function') showToast('Password updated for this browser only', 'success');
+    if (npEl) npEl.value = '';
+    if (cpEl) cpEl.value = '';
+  } catch (e) {
+    if (typeof showToast === 'function') showToast('Could not save password — storage blocked', 'error');
   }
 }
 
@@ -2097,6 +2174,35 @@ updateStats = function(){
   } else {
     bind();
   }
+})();
+</script>
+
+
+<script id="rn-admin-login-reset">
+(function(){
+  function bind(){
+    var btn = document.getElementById('resetLoginPass');
+    if (!btn) return;
+    btn.addEventListener('click', function(){
+      try {
+        localStorage.removeItem('rn_admin_pass');
+      } catch(e) {}
+      var err = document.getElementById('loginError');
+      if (err) {
+        err.style.display = 'block';
+        err.style.color = '#86EFAC';
+        err.textContent = 'Password reset. Use: ruffneck2026admin';
+      }
+      var input = document.getElementById('adminPass');
+      if (input) {
+        input.value = '';
+        input.focus();
+      }
+      alert('Admin password reset to default:\n\nruffneck2026admin');
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+  else bind();
 })();
 </script>
 
