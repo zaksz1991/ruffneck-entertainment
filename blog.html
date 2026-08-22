@@ -949,6 +949,95 @@ a.btn-outline-dark{
   ]
 }
 </script>
+
+<style id="rn-ux-best">
+/* Primary buttons — navy on cyan everywhere */
+a.btn-primary, .btn-primary, button.btn-primary {
+  background: #00B4D8 !important;
+  color: #0B1E3A !important;
+  font-weight: 700 !important;
+  border: 2px solid #00B4D8 !important;
+  border-radius: 12px !important;
+  text-shadow: none !important;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s ease !important;
+}
+a.btn-primary:hover, .btn-primary:hover {
+  background: #22D3EE !important;
+  color: #0B1E3A !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,180,216,.35) !important;
+}
+a.btn-outline-dark, .btn-outline-dark {
+  border: 1.5px solid #00B4D8 !important;
+  color: #0B1E3A !important;
+  background: #fff !important;
+  border-radius: 12px !important;
+  font-weight: 600 !important;
+}
+a.btn-outline-dark:hover, .btn-outline-dark:hover {
+  background: #ECFEFF !important;
+  color: #0891B2 !important;
+}
+html.rn-dark a.btn-outline-dark, html.rn-dark .btn-outline-dark {
+  background: #151D2E !important;
+  color: #F3F4F6 !important;
+  border-color: rgba(0,180,216,.5) !important;
+}
+/* Trust actions */
+.rn-trust-actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
+.rn-trust-actions .btn { text-decoration:none !important; }
+/* Show all services */
+.service-card.rn-svc-extra { display:none !important; }
+body.rn-show-all-services .service-card.rn-svc-extra { display:block !important; }
+#showAllServices {
+  border:1.5px solid #00B4D8 !important;
+  background:#ECFEFF !important;
+  color:#0B1E3A !important;
+  font-weight:700 !important;
+  border-radius:12px !important;
+  padding:12px 20px !important;
+}
+/* Store featured */
+.rn-store-featured {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:16px;
+  margin:0 0 28px;
+}
+.rn-store-featured .rn-feat-card {
+  border:1.5px solid rgba(0,180,216,.4);
+  border-radius:16px;
+  padding:20px;
+  background:#F0F9FF;
+  text-align:left;
+}
+.rn-store-featured .rn-feat-card h3 { margin:0 0 8px; color:#0B1E3A; font-size:1.1rem; }
+.rn-store-featured .rn-feat-card p { margin:0 0 14px; color:#4B5563; font-size:14px; line-height:1.5; }
+html.rn-dark .rn-store-featured .rn-feat-card { background:#151D2E; border-color:rgba(0,180,216,.4); }
+html.rn-dark .rn-store-featured .rn-feat-card h3 { color:#F9FAFB; }
+html.rn-dark .rn-store-featured .rn-feat-card p { color:#D1D5DB; }
+/* Product images never blank */
+.product-card img, .store-card img, .product-media img {
+  background:linear-gradient(135deg,#0B1E3A,#1a4a6e);
+  object-fit:cover;
+  min-height:140px;
+  width:100%;
+}
+.product-card .product-media, .store-card .product-thumb {
+  background:linear-gradient(135deg,#0B1E3A,#123050);
+  border-radius:12px;
+  min-height:140px;
+}
+/* Service page hero CTAs row */
+.svc-actions {
+  display:flex !important;
+  flex-wrap:wrap !important;
+  gap:12px !important;
+  justify-content:center !important;
+  margin-top:28px !important;
+}
+</style>
+
 </head>
 <body>
 
