@@ -560,7 +560,7 @@ table, .card, .panel { color: inherit; }
     <button class="login-btn" onclick="doLogin()">Sign In →</button>
     <div class="login-error" id="loginError" style="display:none;">Incorrect password. Please try again.</div>
     <p style="text-align:center;margin-top:12px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">
-      Default password: <strong style="color:#00B4D8;">ruffneck2026admin</strong><br/>
+      After Vercel setup, password is <code>ADMIN_PASSWORD</code> env var.<br/>Default password (fallback only): <strong style="color:#00B4D8;">ruffneck2026admin</strong><br/>
       <button type="button" onclick="resetPasswordToDefault()" style="margin-top:8px;background:rgba(0,180,216,0.15);border:1px solid #00B4D8;color:#00B4D8;font-weight:700;cursor:pointer;padding:8px 14px;border-radius:8px;">Reset password</button>
     </p>
     <p style="text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,0.55);">
@@ -2203,6 +2203,120 @@ updateStats = function(){
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
   else bind();
+})();
+</script>
+
+
+<script id="rn-server-auth">
+(function(){
+  var USE_SERVER = true;
+
+  async function serverSession(){
+    try {
+      var res = await fetch("/api/admin-session", { credentials: "same-origin", cache: "no-store" });
+      var data = await res.json();
+      return data;
+    } catch (e) {
+      return { authenticated: false, configured: false };
+    }
+  }
+
+  async function serverLogin(password){
+    var res = await fetch("/api/admin-login", {
+      method: "POST",
+      credentials: "same-origin",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password: password })
+    });
+    var data = await res.json().catch(function(){ return {}; });
+    return { status: res.status, data: data };
+  }
+
+  async function serverLogout(){
+    try {
+      await fetch("/api/admin-logout", { method: "POST", credentials: "same-origin" });
+    } catch (e) {}
+  }
+
+  function showShell(){
+    var loginScreen = document.getElementById("loginScreen");
+    var shell = document.getElementById("adminShell");
+    if (loginScreen) loginScreen.style.display = "none";
+    if (shell) {
+      shell.classList.add("visible");
+      shell.style.display = "block";
+      shell.style.visibility = "visible";
+      shell.style.opacity = "1";
+    }
+    if (typeof initAdmin === "function") initAdmin();
+  }
+
+  function showError(msg){
+    var err = document.getElementById("loginError");
+    if (!err) return;
+    err.style.display = "block";
+    err.style.color = "#f87171";
+    err.textContent = msg;
+  }
+
+  // Replace doLogin with server-first version
+  window.doLogin = async function doLogin(){
+    var input = document.getElementById("adminPass");
+    var val = (input && input.value ? input.value : "").trim();
+    if (!val) {
+      showError("Enter the password.");
+      return;
+    }
+
+    // Try server-side auth first
+    try {
+      var result = await serverLogin(val);
+      if (result.status === 200 && result.data && result.data.ok) {
+        showShell();
+        return;
+      }
+      if (result.status === 503) {
+        // Server not configured — fall back to client default for recovery
+        if (typeof getPass === "function" && (val === getPass() || val === "ruffneck2026admin")) {
+          showShell();
+          showError("");
+          var err = document.getElementById("loginError");
+          if (err) {
+            err.style.display = "block";
+            err.style.color = "#FBBF24";
+            err.textContent = "Warning: server auth not configured. Using temporary client login. Set ADMIN_PASSWORD on Vercel.";
+          }
+          return;
+        }
+        showError(result.data && result.data.error ? result.data.error : "Server auth not configured.");
+        return;
+      }
+      showError((result.data && result.data.error) || "Incorrect password");
+      if (input) { input.value = ""; input.focus(); }
+      return;
+    } catch (e) {
+      // Network failure — optional client fallback
+      if (typeof getPass === "function" && (val === getPass() || val === "ruffneck2026admin")) {
+        showShell();
+        return;
+      }
+      showError("Login failed. Check connection or try again.");
+    }
+  };
+
+  window.adminLogout = async function(){
+    await serverLogout();
+    try { localStorage.removeItem("rn_admin_pass"); } catch(e) {}
+    location.reload();
+  };
+
+  // Auto-resume session if cookie valid
+  document.addEventListener("DOMContentLoaded", async function(){
+    var session = await serverSession();
+    if (session.authenticated) {
+      showShell();
+    }
+  });
 })();
 </script>
 
