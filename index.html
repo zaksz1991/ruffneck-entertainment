@@ -1323,6 +1323,55 @@ html.rn-dark #internship .intern-grid > div {
   ]
 }
 </script>
+
+<style id="rn-show-all-svc">
+.service-card.rn-svc-extra { display: none !important; }
+#servicesGrid.rn-show-all .service-card.rn-svc-extra,
+.services-grid.rn-show-all .service-card.rn-svc-extra,
+body.rn-show-all-services .service-card.rn-svc-extra {
+  display: flex !important;
+}
+/* if cards are block */
+body.rn-show-all-services .service-card.rn-svc-extra {
+  display: block !important;
+}
+#showAllServices {
+  border: 1.5px solid #00B4D8 !important;
+  color: #0B1E3A !important;
+  background: #ECFEFF !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+  padding: 12px 20px !important;
+}
+</style>
+
+
+<style id="rn-intern-cards-force">
+#internship .intern-grid > div,
+#internship .teaser-card {
+  border: 2px solid #00B4D8 !important;
+  border-radius: 16px !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(11,30,58,0.08) !important;
+  padding: 22px !important;
+}
+html.rn-dark #internship .intern-grid > div,
+html.rn-dark #internship .teaser-card {
+  background: #151D2E !important;
+  border-color: #00B4D8 !important;
+}
+#internship .btn-primary {
+  background: #00B4D8 !important;
+  color: #0B1E3A !important;
+  font-weight: 700 !important;
+  border: none !important;
+}
+#internship a.btn {
+  display: inline-flex !important;
+  margin-top: 4px;
+}
+</style>
+
 </head>
 <body>
 
@@ -2117,24 +2166,29 @@ html.rn-dark #internship .intern-grid > div {
 
         <!-- 3MTT KNOWLEDGE SHOWCASE VIDEO -->
         <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;">
-          <div style="font-size:11px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">🎥 3MTT KNOWLEDGE SHOWCASE</div>
-          <div style="position:relative;width:100%;padding-top:56.25%;border-radius:12px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,0.35);">
-            
-<div id="rnYtWrap" class="rn-yt-wrap" style="position:relative;max-width:800px;margin:0 auto;border-radius:16px;overflow:hidden;background:#0B1E3A;aspect-ratio:16/9;">
-  <button type="button" id="rnYtPlay" aria-label="Play video" style="position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:linear-gradient(135deg,#0B1E3A,#123050);color:#fff;font-weight:700;font-size:16px;">
-    ▶ Play video
-  </button>
-</div>
-<script>
-(function(){
-  var b=document.getElementById('rnYtPlay');
-  var w=document.getElementById('rnYtWrap');
-  if(!b||!w) return;
-  b.addEventListener('click', function(){
-    w.innerHTML='<iframe src="https://www.youtube.com/embed/cTA0ipwcu30?autoplay=1" title="RuffNeck video" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen loading="lazy" style="width:100%;height:100%;border:0;"></iframe>';
-  });
-})();
-</script>
+          <div style="font-size:11px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:12px;">
+        <!-- 3MTT KNOWLEDGE SHOWCASE VIDEO -->
+        <div style="border-top:1px solid rgba(255,255,255,0.12);padding-top:20px;margin-top:8px;">
+          <div style="font-size:11px;font-weight:700;color:var(--gold,#F5C518);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:8px;">🎥 3MTT KNOWLEDGE SHOWCASE</div>
+          <p style="font-size:13px;color:rgba(255,255,255,0.75);margin:0 0 12px;line-height:1.5;">Hassan Zakariya — 3MTT Fellow knowledge showcase. Click play to load the video (saves page speed until you need it).</p>
+          <div id="rnYtWrap" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#0B1E3A,#123050);box-shadow:0 8px 32px rgba(0,0,0,0.35);">
+            <button type="button" id="rnYtPlay" aria-label="Play 3MTT showcase video" style="position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:transparent;color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;">
+              <span style="width:56px;height:56px;border-radius:50%;background:#00B4D8;color:#0B1E3A;display:flex;align-items:center;justify-content:center;font-size:22px;">▶</span>
+              <span>Play 3MTT Knowledge Showcase</span>
+            </button>
+          </div>
+          <script>
+          (function(){
+            var b=document.getElementById('rnYtPlay');
+            var w=document.getElementById('rnYtWrap');
+            if(!b||!w) return;
+            b.addEventListener('click', function(){
+              w.innerHTML='<iframe src="https://www.youtube.com/embed/cTA0ipwcu30?autoplay=1" title="3MTT Knowledge Showcase" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0;"></iframe>';
+            });
+          })();
+          </script>
+        </div>
+
 
           </div>
           <p style="font-size:12px;color:rgba(255,255,255,0.5);margin-top:10px;">RuffNeck Entertainment Knowledge Hub — 3MTT Knowledge Showcase</p>
@@ -2282,7 +2336,7 @@ html.rn-dark #internship .intern-grid > div {
       </div><!-- end cert-grid -->
 
       <div style="text-align:center;margin-top:24px;">
-        <p style="font-size:13px;color:rgba(255,255,255,0.4);">💡 More certifications available — provide links and they will be added here.</p>
+        <p style="font-size:13px;color:rgba(255,255,255,0.55);">Selected credentials shown above. Full profile: <a href="https://linkedin.com/in/hassanzakariya" target="_blank" rel="noopener" style="color:#00B4D8;">LinkedIn</a> · <a href="#founder" style="color:#00B4D8;">Meet the Founder</a></p>
       </div>
     </div>
 
@@ -2330,7 +2384,8 @@ html.rn-dark #internship .intern-grid > div {
   <div class="container">
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Client Feedback</div>
-      <h2 class="section-title">Results That Speak for Themselves</h2>
+      <h2 class="section-title">What clients say</h2>
+      <p class="section-sub" style="margin:0 auto 24px;">Real feedback from businesses that used RuffNeck for AI workflows, content, and web presence.</p>
     </div>
     <div class="testimonials-grid fade-up">
       <div class="testimonial-card"><div class="stars">★★★★★</div><blockquote>"RuffNeck helped us set up an AI-assisted workflow that cut our reporting time in half. The training was practical — our team actually uses what they learned every single day."</blockquote><div class="t-author"><div class="t-avatar">AM</div><div><div class="t-name">Aisha Mohammed</div><div class="t-role">Operations Manager, Kano SME</div></div></div></div>
@@ -2350,13 +2405,13 @@ html.rn-dark #internship .intern-grid > div {
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Investment · 2026 Rates</div>
       <h2 class="section-title">Transparent Pricing Tiers</h2>
-      <p class="section-sub" style="margin:0 auto;">Flexible packages designed for every stage of business growth. Custom quotes available for international and enterprise engagements.</p>
+      <p class="section-sub" style="margin:0 auto;">Clear 2026 tiers for freelancers, SMEs, and growing teams. Start with a focused package or request a custom quote for multi-service and international work. Final scope confirmed before payment.</p>
     </div>
     <div class="pricing-grid fade-up">
       <div class="pricing-card">
         <div class="pricing-year">2026 Rates</div>
         <div class="pricing-tier">Starter</div>
-        <div class="pricing-price">₦80K</div>
+        <div class="pricing-price">From ₦80K</div>
         <div class="pricing-period">/ month or per project</div>
         <div class="pricing-desc">For freelancers and small businesses needing focused, professional digital support to get started strong in 2026.</div>
         <div class="pricing-features">
@@ -2374,7 +2429,7 @@ html.rn-dark #internship .intern-grid > div {
         <div class="pricing-popular">Most Popular</div>
         <div class="pricing-year">2026 Rates</div>
         <div class="pricing-tier">Growth</div>
-        <div class="pricing-price">₦180K</div>
+        <div class="pricing-price">From ₦180K</div>
         <div class="pricing-period">/ month</div>
         <div class="pricing-desc">For growing businesses that need consistent digital execution, operations support, and AI integration in 2026.</div>
         <div class="pricing-features">
@@ -2428,13 +2483,13 @@ html.rn-dark #internship .intern-grid > div {
 
 <section class="section" id="ai-assistant" style="padding:28px 0;">
   <div class="container">
-    <div class="teaser-card" style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:18px 20px;">
+    <div class="teaser-card"  style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;border:1.5px solid rgba(0,180,216,0.35);border-radius:16px;background:#F0F9FF;">
       <div style="flex:1;min-width:220px;">
         <div class="section-label" style="margin-bottom:4px;">Optional · AI tool</div>
         <strong style="font-size:1.05rem;">RuffNeck AI Assistant</strong>
         <p style="margin:6px 0 0;font-size:13.5px;color:#6B7280;line-height:1.45;">Research, content, and tech guidance on the Pi Testnet ecosystem.</p>
       </div>
-      <a class="btn btn-primary btn-sm" href="https://lnkd.in/epda3wBW" target="_blank" rel="noopener">Open AI Assistant →</a>
+      <a class="btn btn-primary btn-sm" href="https://lnkd.in/epda3wBW" target="_blank" rel="noopener" style="flex-shrink:0;align-self:center;background:#00B4D8;color:#0B1E3A;font-weight:700;border-radius:10px;padding:12px 18px;">Open AI Assistant →</a>
     </div>
   </div>
 </section>
@@ -2483,7 +2538,7 @@ html.rn-dark #internship .intern-grid > div {
         </ul>
         <a class="btn btn-primary" href="mailto:ruffneckhassan@gmail.com?subject=Remote%20Internship%20Application%202026%20%E2%80%93%20RuffNeck%20Entertainment&body=Dear%20RuffNeck%20Team%2C%0A%0AI%20am%20applying%20for%20the%20Remote%20Internship%20Programme.%0A%0AFull%20name%3A%0APhone%20%2F%20WhatsApp%3A%0AEmail%3A%0APreferred%20track%20(Data%2FAI%2C%20Admin%2C%20Content%2C%20Support%2C%20Operations)%3A%0ABrief%20background%20%26%20availability%3A%0A%0AThank%20you.%0A">Email Internship Application →</a> <a class="btn btn-outline-dark btn-sm" href="#contact" style="margin-left:8px;">Or use contact form</a>
       </div>
-      <div class="teaser-card fade-up" style="text-align:left;padding:22px;">
+      <div class="teaser-card fade-up" style="text-align:left;padding:22px;;border:2px solid #00B4D8;border-radius:16px;background:#fff;">
         <div class="section-label">Volunteer</div>
         <h3 style="margin:6px 0 10px;font-size:1.15rem;">Volunteer Programme</h3>
         <p style="color:var(--text-muted,#6B7280);font-size:14px;margin-bottom:14px;">Contribute your time and skills to community training, content, operations support, or AI literacy initiatives. Ideal if you want experience and impact without a formal internship track.</p>
@@ -3792,6 +3847,38 @@ document.addEventListener('DOMContentLoaded', function(){
   if (btn) btn.addEventListener('click', arm, { once: true });
   if (root) root.addEventListener('click', arm, { once: true });
 });
+</script>
+
+
+<script id="rn-show-all-svc-js">
+(function(){
+  function ready(fn){
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+    else fn();
+  }
+  ready(function(){
+    var btn = document.getElementById('showAllServices') || document.getElementById('rnSvcToggle');
+    if (!btn) return;
+    var extras = document.querySelectorAll('.service-card.rn-svc-extra');
+    if (!extras.length) {
+      btn.style.display = 'none';
+      return;
+    }
+    // ensure hidden initially
+    document.body.classList.remove('rn-show-all-services');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = 'Show all services (' + extras.length + ' more)';
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      var open = document.body.classList.toggle('rn-show-all-services');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'Show fewer services' : ('Show all services (' + extras.length + ' more)');
+      if (open) {
+        try { extras[0].scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } catch(err){}
+      }
+    });
+  });
+})();
 </script>
 
 </body>
