@@ -3,40 +3,52 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/store",
-      "destination": "/store.html"
+      "source": "/admin",
+      "destination": "/admin.html"
     },
     {
-      "source": "/blog",
-      "destination": "/blog.html"
+      "source": "/start-here",
+      "destination": "/start-here.html"
     },
     {
-      "source": "/consulting",
-      "destination": "/consulting.html"
-    },
-    {
-      "source": "/services-ai",
+      "source": "/services/ai",
       "destination": "/services-ai.html"
     },
     {
-      "source": "/services-marketing",
+      "source": "/services/marketing",
       "destination": "/services-marketing.html"
     },
     {
-      "source": "/services-va",
-      "destination": "/services-va.html"
+      "source": "/services/operations",
+      "destination": "/services-operations.html"
     },
     {
-      "source": "/services/virtual-assistance",
-      "destination": "/services-va.html"
-    },
-    {
-      "source": "/services/va",
-      "destination": "/services-va.html"
+      "source": "/services/creative",
+      "destination": "/services-creative.html"
     },
     {
       "source": "/services",
       "destination": "/services-ai.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies.html"
+    },
+    {
+      "source": "/internship",
+      "destination": "/internship.html"
+    },
+    {
+      "source": "/volunteer",
+      "destination": "/volunteer.html"
+    },
+    {
+      "source": "/partnerships",
+      "destination": "/partnerships.html"
+    },
+    {
+      "source": "/about-full",
+      "destination": "/about-full.html"
     },
     {
       "source": "/privacy",
@@ -61,51 +73,6 @@
     {
       "source": "/product",
       "destination": "/product.html"
-    },
-    {
-      "source": "/start-here",
-      "destination": "/start-here.html"
-    },
-    {
-      "source": "/services/ai",
-      "destination": "/services-ai.html"
-    },
-    {
-      "source": "/services/marketing",
-      "destination": "/services-marketing.html"
-    },
-    {
-      "source": "/services/operations",
-      "destination": "/services-operations.html"
-    },
-    {
-      "source": "/services/creative",
-      "destination": "/services-creative.html"
-    },
-    {
-      "source": "/case-studies",
-      "destination": "/case-studies.html"
-    },
-    {
-      "source": "/internship",
-      "destination": "/internship.html"
-    },
-    {
-      "source": "/volunteer",
-      "destination": "/volunteer.html"
-    },
-    {
-      "source": "/partnerships",
-      "destination": "/partnerships.html"
-    },
-    {
-      "source": "/about-full",
-      "destination": "/about-full.html"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin.html"
     }
-  ],
-  "routes": []
+  ]
 }
