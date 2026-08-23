@@ -97,5 +97,41 @@ li{margin:6px 0}
   </div>
   <p class="muted"><a href="/">← Home</a> · <a href="/store">Store</a> · <a href="/blog">Blog</a> · CAC 3770977 · SMEDAN Certified · Kano, Nigeria</p>
 </main>
+
+<script id="rn-phase-d-analytics">
+(function(){
+  window.rnTrack = function(name, params){
+    try {
+      params = params || {};
+      if (typeof gtag === 'function') {
+        gtag('event', name, params);
+      }
+      if (window.dataLayer && Array.isArray(window.dataLayer)) {
+        window.dataLayer.push(Object.assign({ event: name }, params));
+      }
+    } catch (e) {}
+  };
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a,button');
+    if (!a) return;
+    var href = (a.getAttribute('href') || '').toLowerCase();
+    var text = (a.textContent || '').trim().slice(0, 80);
+    if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp') !== -1) {
+      window.rnTrack('whatsapp_click', { link_text: text });
+    } else if (href.indexOf('calendly') !== -1) {
+      window.rnTrack('consultation_start', { link_text: text });
+    } else if (href.indexOf('free-guide') !== -1 || href.indexOf('start-here') !== -1) {
+      window.rnTrack('free_guide_click', { link_text: text });
+    } else if (href.indexOf('/store') !== -1) {
+      window.rnTrack('store_nav_click', { link_text: text });
+    } else if (href.indexOf('/services/') !== -1) {
+      window.rnTrack('service_view', { link_url: href });
+    } else if (href.indexOf('flutterwave') !== -1 || /buy|checkout|pay/i.test(text)) {
+      window.rnTrack('checkout_start', { link_text: text });
+    }
+  }, true);
+})();
+</script>
+
 </body>
 </html>

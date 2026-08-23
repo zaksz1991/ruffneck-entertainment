@@ -1421,6 +1421,65 @@ section.section-teaser {
 }
 </style>
 
+
+<script type="application/ld+json" id="rn-phase-d-org">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://ruffneck-entertainment.vercel.app/#organization",
+      "name": "RuffNeck Entertainment",
+      "url": "https://ruffneck-entertainment.vercel.app/",
+      "email": "ruffneckhassan@gmail.com",
+      "telephone": "+2348033807856",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kano",
+        "addressRegion": "Kano State",
+        "addressCountry": "NG"
+      },
+      "areaServed": ["NG", "Africa"],
+      "sameAs": [
+        "https://maps.app.goo.gl/4ejBep7GQdejzYsW9"
+      ]
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": "https://ruffneck-entertainment.vercel.app/#localbusiness",
+      "name": "RuffNeck Entertainment",
+      "image": "https://ruffneck-entertainment.vercel.app/og-image.png",
+      "url": "https://ruffneck-entertainment.vercel.app/",
+      "telephone": "+2348033807856",
+      "email": "ruffneckhassan@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kano",
+        "addressRegion": "Kano State",
+        "addressCountry": "NG"
+      },
+      "priceRange": "₦₦",
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "name": "RuffNeck Entertainment",
+      "url": "https://ruffneck-entertainment.vercel.app/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://ruffneck-entertainment.vercel.app/blog?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 
@@ -3988,6 +4047,42 @@ document.addEventListener('DOMContentLoaded', function(){
   <a class="rn-mb-book" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book Call</a>
   <a class="rn-mb-store" href="/store">Store</a>
 </nav>
+
+
+<script id="rn-phase-d-analytics">
+(function(){
+  window.rnTrack = function(name, params){
+    try {
+      params = params || {};
+      if (typeof gtag === 'function') {
+        gtag('event', name, params);
+      }
+      if (window.dataLayer && Array.isArray(window.dataLayer)) {
+        window.dataLayer.push(Object.assign({ event: name }, params));
+      }
+    } catch (e) {}
+  };
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a,button');
+    if (!a) return;
+    var href = (a.getAttribute('href') || '').toLowerCase();
+    var text = (a.textContent || '').trim().slice(0, 80);
+    if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp') !== -1) {
+      window.rnTrack('whatsapp_click', { link_text: text });
+    } else if (href.indexOf('calendly') !== -1) {
+      window.rnTrack('consultation_start', { link_text: text });
+    } else if (href.indexOf('free-guide') !== -1 || href.indexOf('start-here') !== -1) {
+      window.rnTrack('free_guide_click', { link_text: text });
+    } else if (href.indexOf('/store') !== -1) {
+      window.rnTrack('store_nav_click', { link_text: text });
+    } else if (href.indexOf('/services/') !== -1) {
+      window.rnTrack('service_view', { link_url: href });
+    } else if (href.indexOf('flutterwave') !== -1 || /buy|checkout|pay/i.test(text)) {
+      window.rnTrack('checkout_start', { link_text: text });
+    }
+  }, true);
+})();
+</script>
 
 </body>
 </html>
