@@ -2,772 +2,481 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RuffNeck Admin — Backend Dashboard</title>
-<meta name="robots" content="noindex, nofollow"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>RuffNeck Admin</title>
+<meta name="robots" content="noindex,nofollow"/>
 <style>
-:root{
-  --navy:#0B1E3A;--midnight:#040C1A;--cyan:#00B4D8;--cyan-lt:#00F0FF;
-  --gold:#FFC107;--purple:#7B2FFF;--white:#FFFFFF;
-  --success:#10B981;--warning:#F59E0B;--danger:#EF4444;
-  --bg:#F0F4F8;--card:#FFFFFF;--border:#E2E8F0;
-  --text:#1E293B;--muted:#64748B;--light:#F8FAFC;
-  --font:'Space Grotesk',sans-serif;--mono:'Space Mono',monospace;
-  --radius:10px;--shadow:0 2px 12px rgba(11,30,58,0.08);--shadow-lg:0 8px 32px rgba(11,30,58,0.14);
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#020617;color:#f8fafc}
+a{color:#38bdf8;text-decoration:none}
+
+/* LOGIN */
+#loginScreen{
+  min-height:100vh;min-height:100dvh;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  background:radial-gradient(ellipse at 30% 40%,#0B1E3A 0%,#020617 70%);
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font);background:var(--midnight);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;width:100%}
-html{overflow-x:hidden;max-width:100%}
-a{text-decoration:none;color:inherit}
-button{cursor:pointer;font-family:var(--font);border:none}
-input,textarea,select{font-family:var(--font)}
-ul{list-style:none}
-
-/* ── LOGIN SCREEN ── */
-.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at 30% 50%,#0B1E3A 0%,#040C1A 70%,#010408 100%);padding:20px}
-.login-box{background:rgba(255,255,255,0.03);border:1px solid rgba(0,180,216,0.2);border-radius:16px;padding:48px 40px;width:100%;max-width:420px;backdrop-filter:blur(12px)}
-.login-logo{text-align:center;margin-bottom:32px}
-.login-logo-mark{width:56px;height:56px;background:linear-gradient(135deg,#00F0FF,#0055AA);border-radius:12px;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:16px;font-weight:700;color:#fff;margin-bottom:12px}
-.login-logo h1{font-size:22px;font-weight:700;color:#fff;margin-bottom:4px}
-.login-logo p{font-size:13px;color:rgba(255,255,255,0.4);font-family:var(--mono);letter-spacing:1px}
-.login-label{font-size:13px;font-weight:600;color:rgba(255,255,255,0.7);margin-bottom:8px;display:block}
-.login-input{width:100%;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;padding:13px 16px;font-size:15px;color:#fff;outline:none;transition:border-color 0.2s;margin-bottom:16px}
-.login-input:focus{border-color:var(--cyan)}
-.login-input::placeholder{color:rgba(255,255,255,0.25)}
-.login-btn{width:100%;background:linear-gradient(135deg,var(--cyan),#0077CC);color:#fff;border:none;border-radius:8px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.2s;margin-top:4px}
-.login-btn:hover{opacity:0.9;transform:translateY(-1px)}
-.login-error{color:#ff6b6b;font-size:13px;text-align:center;margin-top:12px;display:none}
-.login-hint{text-align:center;font-size:12px;color:rgba(255,255,255,0.25);margin-top:20px;font-family:var(--mono)}
-
-/* ── ADMIN SHELL ── */
-.admin-shell{display:none;min-height:100vh;background:var(--bg)}
-.admin-shell.visible{display:flex;flex-direction:column}
-
-/* TOP BAR */
-.topbar{background:var(--midnight);border-bottom:1px solid rgba(0,180,216,0.15);padding:0 24px;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.topbar-left{display:flex;align-items:center;gap:12px}
-.topbar-mark{width:32px;height:32px;background:linear-gradient(135deg,#00F0FF,#0055AA);border-radius:7px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:700;color:#fff}
-.topbar-name{font-size:15px;font-weight:700;color:#fff}
-.topbar-name span{color:var(--cyan)}
-.topbar-right{display:flex;align-items:center;gap:12px}
-.topbar-date{font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.35)}
-.topbar-site{font-size:12px;font-weight:600;color:rgba(255,255,255,0.6);padding:6px 14px;border:1px solid rgba(255,255,255,0.12);border-radius:6px;transition:all 0.2s}
-.topbar-site:hover{border-color:var(--cyan);color:var(--cyan)}
-.topbar-logout{font-size:12px;font-weight:600;color:rgba(255,255,255,0.4);padding:6px 14px;cursor:pointer;transition:color 0.2s}
-.topbar-logout:hover{color:#ff6b6b}
-
-/* SIDEBAR */
-.admin-body{display:flex;flex:1}
-.sidebar{width:220px;background:var(--white);border-right:1px solid var(--border);flex-shrink:0;padding:20px 0}
-.sidebar-section{padding:0 12px;margin-bottom:6px}
-.sidebar-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);padding:8px 12px;margin-bottom:4px}
-.sidebar-btn{display:flex;align-items:center;gap:10px;width:100%;padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;color:var(--muted);background:none;border:none;cursor:pointer;transition:all 0.15s;text-align:left}
-.sidebar-btn:hover{background:var(--light);color:var(--text)}
-.sidebar-btn.active{background:rgba(0,180,216,0.08);color:var(--navy);border:1px solid rgba(0,180,216,0.15)}
-.sidebar-btn .sb-icon{font-size:16px;flex-shrink:0}
-.sidebar-divider{height:1px;background:var(--border);margin:12px 12px}
-
-/* MAIN CONTENT */
-.admin-main{flex:1;padding:28px;overflow-y:auto}
-.page{display:none}.page.active{display:block}
-.page-header{margin-bottom:24px}
-.page-header h2{font-size:22px;font-weight:700;color:var(--navy);margin-bottom:4px}
-.page-header p{font-size:14px;color:var(--muted)}
-
-/* STATS GRID */
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
-.stat-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:8px}
-.stat-icon{font-size:24px}
-.stat-val{font-size:28px;font-weight:700;color:var(--navy);font-family:var(--mono)}
-.stat-label{font-size:12px;color:var(--muted);font-weight:500}
-.stat-trend{font-size:11px;font-weight:600;color:var(--success)}
-
-/* CARD */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
-.card-title{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;display:flex;align-items:center;gap:8px}
-.card-title-actions{margin-left:auto;display:flex;gap:8px}
-
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all 0.2s;font-family:var(--font)}
-.btn-primary{background:var(--navy);color:#fff}.btn-primary:hover{background:#0a2a4a}
-.btn-cyan{background:var(--cyan);color:var(--navy)}.btn-cyan:hover{background:var(--cyan-lt)}
-.btn-gold{background:var(--gold);color:var(--navy)}.btn-gold:hover{background:#FFE57F}
-.btn-danger{background:var(--danger);color:#fff}.btn-danger:hover{background:#dc2626}
-.btn-ghost{background:transparent;color:var(--muted);border:1.5px solid var(--border)}.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan)}
-.btn-sm{padding:6px 13px;font-size:12px}
-.btn-xs{padding:4px 10px;font-size:11px;border-radius:5px}
-
-/* FORM */
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
-.form-full{grid-column:1/-1}
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-label{font-size:12px;font-weight:600;color:var(--navy)}
-.form-label span{color:var(--danger)}
-.form-input,.form-select,.form-textarea{border:1.5px solid var(--border);border-radius:7px;padding:10px 13px;font-size:13px;color:var(--text);outline:none;transition:border-color 0.2s;width:100%}
-.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:var(--cyan)}
-.form-textarea{resize:vertical;min-height:90px;line-height:1.6}
-.form-hint{font-size:11px;color:var(--muted)}
-.form-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
-
-/* TIER PRICING */
-.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.tier-box{border:1.5px solid var(--border);border-radius:8px;padding:14px}
-.tier-box-label{font-size:11px;font-weight:700;font-family:var(--mono);color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.tier-box.beginner{border-color:rgba(0,180,216,0.3);background:rgba(0,180,216,0.03)}
-.tier-box.intermediate{border-color:rgba(123,47,255,0.3);background:rgba(123,47,255,0.03)}
-.tier-box.advanced{border-color:rgba(255,193,7,0.3);background:rgba(255,193,7,0.03)}
-
-/* PRODUCTS TABLE */
-.products-table{width:100%;border-collapse:collapse}
-.products-table th{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--muted);padding:10px 12px;border-bottom:2px solid var(--border);text-align:left;white-space:nowrap}
-.products-table td{padding:12px;border-bottom:1px solid var(--border);font-size:13px;color:var(--text);vertical-align:middle}
-.products-table tr:last-child td{border-bottom:none}
-.products-table tr:hover td{background:var(--light)}
-.prod-thumb{width:36px;height:36px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--light);border:1px solid var(--border)}
-.prod-name{font-weight:600;color:var(--navy)}
-.prod-cat{font-size:11px;color:var(--muted);margin-top:2px}
-.badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;font-family:var(--mono)}
-.badge-active{background:rgba(16,185,129,0.1);color:var(--success);border:1px solid rgba(16,185,129,0.2)}
-.badge-draft{background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2)}
-.badge-cat{background:rgba(0,180,216,0.08);color:var(--cyan);border:1px solid rgba(0,180,216,0.15)}
-
-/* BLOG MANAGER */
-.blog-list{display:flex;flex-direction:column;gap:12px}
-.blog-item{background:var(--light);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;align-items:center;gap:14px}
-.blog-item-icon{font-size:24px}
-.blog-item-info{flex:1}
-.blog-item-title{font-size:14px;font-weight:600;color:var(--navy)}
-.blog-item-meta{font-size:11px;color:var(--muted);font-family:var(--mono);margin-top:3px}
-.blog-item-actions{display:flex;gap:6px}
-
-/* MESSAGES TABLE */
-.messages-list{display:flex;flex-direction:column;gap:10px}
-.msg-item{background:var(--light);border:1px solid var(--border);border-radius:8px;padding:16px;display:flex;gap:14px;align-items:flex-start}
-.msg-avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--purple));display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:#fff;flex-shrink:0}
-.msg-body{flex:1}
-.msg-name{font-size:14px;font-weight:600;color:var(--navy)}
-.msg-email{font-size:11px;color:var(--muted);font-family:var(--mono)}
-.msg-text{font-size:13px;color:var(--text);margin-top:6px;line-height:1.6}
-.msg-service{display:inline-block;font-size:10px;font-weight:700;background:rgba(0,180,216,0.08);color:var(--cyan);border:1px solid rgba(0,180,216,0.15);padding:2px 8px;border-radius:100px;margin-top:6px;font-family:var(--mono)}
-.msg-actions{display:flex;gap:6px;flex-shrink:0}
-
-/* SETTINGS */
-.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.settings-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px}
-.settings-section h3{font-size:15px;font-weight:700;color:var(--navy);margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
-
-/* TOAST */
-.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
-.toast{background:var(--navy);color:#fff;padding:12px 20px;border-radius:8px;font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;box-shadow:var(--shadow-lg);animation:slideIn 0.25s ease;min-width:220px}
-.toast.success{border-left:3px solid var(--success)}
-.toast.error{border-left:3px solid var(--danger)}
-.toast.info{border-left:3px solid var(--cyan)}
-@keyframes slideIn{from{transform:translateX(60px);opacity:0}to{transform:translateX(0);opacity:1}}
-
-/* IMAGE UPLOAD */
-.img-upload-zone{border:2px dashed var(--border);border-radius:8px;padding:24px;text-align:center;cursor:pointer;transition:all 0.2s;position:relative}
-.img-upload-zone:hover{border-color:var(--cyan);background:rgba(0,180,216,0.03)}
-.img-upload-zone input{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.img-upload-zone p{font-size:13px;color:var(--muted);margin-top:6px}
-.img-preview{width:64px;height:64px;border-radius:8px;object-fit:cover;border:1px solid var(--border);display:none}
-
-/* MODAL */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:500;align-items:center;justify-content:center;padding:20px}
-.modal-overlay.open{display:flex}
-.modal{background:var(--card);border-radius:var(--radius);max-width:600px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
-.modal-head{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.modal-head h3{font-size:16px;font-weight:700;color:var(--navy)}
-.modal-close{font-size:20px;color:var(--muted);cursor:pointer;background:none;border:none;line-height:1}
-.modal-close:hover{color:var(--danger)}
-.modal-body{padding:24px}
-
-/* RESPONSIVE */
-@media(max-width:900px){
-  .sidebar{width:56px;overflow:hidden}.sidebar-btn span:not(.sb-icon){display:none}.sidebar-label{display:none}
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .form-grid,.form-grid-3,.tier-grid,.settings-grid{grid-template-columns:1fr}
+#loginScreen.hidden{display:none!important}
+.login-card{
+  width:100%;max-width:400px;
+  background:#0f172a;border:1px solid #1e293b;border-radius:16px;
+  padding:28px 22px;
 }
-@media(max-width:600px){.stats-grid{grid-template-columns:1fr}.admin-main{padding:16px}}
+.login-card h1{font-size:1.35rem;margin-bottom:6px}
+.login-card p{color:#94a3b8;font-size:13px;margin-bottom:18px}
+.login-card label{display:block;font-size:13px;margin:12px 0 6px;color:#cbd5e1}
+.login-card input{
+  width:100%;padding:14px;border-radius:10px;border:1px solid #334155;
+  background:#fff;color:#0f172a;font-size:16px;
+}
+.login-card button{
+  width:100%;margin-top:16px;padding:14px;border:none;border-radius:10px;
+  background:#0ea5e9;color:#0f172a;font-weight:700;font-size:15px;cursor:pointer;
+}
+.login-card button:active{opacity:.9}
+#loginError{display:none;margin-top:12px;padding:10px;border-radius:8px;background:rgba(239,68,68,.15);color:#fca5a5;font-size:13px}
+.login-hint{margin-top:14px;font-size:12px;color:#64748b;text-align:center;line-height:1.5}
 
-/* ── BLOG EDITOR ── */
-.editor-toolbar{display:flex;flex-wrap:wrap;gap:4px;padding:8px;background:var(--light);border:1.5px solid var(--border);border-bottom:none;border-radius:var(--radius) var(--radius) 0 0}
-.editor-btn{background:var(--white);border:1px solid var(--border);border-radius:4px;padding:5px 10px;font-size:12px;font-weight:600;cursor:pointer;color:var(--text);transition:all 0.15s;font-family:var(--font)}
-.editor-btn:hover{background:var(--navy);color:var(--white)}
-.editor-btn.sep{width:1px;background:var(--border);padding:0;margin:0 4px;cursor:default}
-#blogEditor{width:100%;min-height:280px;border:1.5px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:16px;font-family:var(--font);font-size:14px;line-height:1.7;color:var(--text);outline:none;resize:vertical}
-#blogEditor:focus{border-color:var(--cyan)}
-.blog-preview-item{background:var(--light);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
-.blog-preview-item .blog-item-title{font-size:14px;font-weight:600;color:var(--navy);flex:1}
-.blog-preview-item .blog-item-meta{font-size:11px;color:var(--muted);font-family:var(--mono)}
-.blog-saved-badge{font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(16,185,129,0.1);color:var(--success);border:1px solid rgba(16,185,129,0.2);font-family:var(--mono);font-weight:700}
-.blog-draft-badge{font-size:10px;padding:2px 8px;border-radius:100px;background:rgba(245,158,11,0.1);color:var(--warning);border:1px solid rgba(245,158,11,0.2);font-family:var(--mono);font-weight:700}
-
-@media(max-width:900px){
-  #page-add-blog>div[style*="grid-template-columns:2fr"]{grid-template-columns:1fr!important}
+/* SHELL */
+#adminShell{display:none;min-height:100vh;min-height:100dvh;flex-direction:column}
+#adminShell.visible{display:flex!important}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 16px;background:#0f172a;border-bottom:1px solid #1e293b;
+}
+.topbar strong{font-size:15px}
+.topbar .muted{color:#94a3b8;font-size:12px}
+.topbar-actions{display:flex;gap:8px;align-items:center}
+.topbar-actions a,.topbar-actions button{
+  border:1px solid #334155;background:transparent;color:#e2e8f0;
+  padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;
+}
+#banner{
+  padding:10px 14px;text-align:center;font-size:12px;
+  background:#0f172a;border-bottom:1px solid #1e293b;color:#fbbf24;
 }
 
-@keyframes shakeError{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-
-/* ── ACCESSIBILITY ── */
-a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2.5px solid var(--cyan);outline-offset:2px}
-@media(prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
-
-@media(max-width:600px){
-  .img-upload-zone{padding:16px}
-  .img-upload-zone p{font-size:12px}
-  .img-preview{width:56px;height:56px}
+/* NAV */
+.nav{
+  display:flex;flex-wrap:wrap;gap:8px;padding:12px;
+  background:#0f172a;border-bottom:1px solid #1e293b;
 }
-
-/* === ADMIN UX POLISH 2026 === */
-.login-box{box-shadow:0 24px 64px rgba(0,0,0,.4)}
-.login-input:focus{border-color:#00B4D8;box-shadow:0 0 0 3px rgba(0,180,216,.15)}
-.login-btn{transition:transform .15s,opacity .15s}
-.login-btn:hover{transform:translateY(-1px)}
-.sidebar-btn{border-radius:10px;transition:background .15s,color .15s}
-.stats-grid .stat-card, .stat-card{border-radius:14px;transition:transform .2s,box-shadow .2s}
-.stat-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
-.admin-main{background:#f8fafc}
-@media(max-width:768px){
-  .sidebar{width:100%;border-right:none}
-  .stats-grid{grid-template-columns:1fr 1fr!important}
+.nav button{
+  flex:1 1 30%;min-width:90px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:12px 8px;border-radius:12px;border:1px solid #334155;
+  background:#1e293b;color:#f8fafc;font-size:11px;cursor:pointer;
 }
+.nav button.active{border-color:#0ea5e9;background:rgba(14,165,233,.2)}
+.nav button span{font-size:18px}
 
+/* MAIN */
+.main{flex:1;padding:16px;width:100%;max-width:900px;margin:0 auto}
+.page{display:none}
+.page.active{display:block}
+.page h2{font-size:1.25rem;margin-bottom:6px}
+.page .sub{color:#94a3b8;font-size:13px;margin-bottom:16px}
+.card{
+  background:#0f172a;border:1px solid #1e293b;border-radius:12px;
+  padding:14px;margin-bottom:12px;
+}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat .n{font-size:1.5rem;font-weight:700}
+.stat .l{font-size:12px;color:#94a3b8}
+label.field{display:block;font-size:13px;margin:10px 0 6px;color:#cbd5e1}
+input.field,select.field,textarea.field{
+  width:100%;padding:12px;border-radius:8px;border:1px solid #334155;
+  background:#fff;color:#0f172a;font-size:16px;margin-bottom:8px;
+}
+textarea.field{min-height:140px;resize:vertical}
+.btn{
+  display:inline-block;padding:12px 16px;border:none;border-radius:10px;
+  background:#0ea5e9;color:#0f172a;font-weight:700;cursor:pointer;font-size:14px;
+}
+.btn.secondary{background:#1e293b;color:#f8fafc;border:1px solid #334155}
+.btn.danger{background:#7f1d1d;color:#fecaca}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.list-item{
+  display:flex;justify-content:space-between;gap:10px;align-items:flex-start;
+  padding:12px 0;border-bottom:1px solid #1e293b;
+}
+.list-item:last-child{border-bottom:none}
+.badge{font-size:11px;padding:2px 8px;border-radius:999px;background:#1e293b;color:#94a3b8}
+.badge.ok{background:rgba(16,185,129,.15);color:#6ee7b7}
+.badge.warn{background:rgba(245,158,11,.15);color:#fcd34d}
+.empty{color:#64748b;font-size:14px;padding:20px 0;text-align:center}
+@media(min-width:800px){
+  .nav button{flex-direction:row;justify-content:flex-start;gap:10px;font-size:13px}
+  .stats{grid-template-columns:repeat(4,1fr)}
+}
 </style>
-<style>.img-upload-zone{cursor:pointer}.img-upload-zone.drag-over{border-color:#00B4D8!important;background:rgba(0,180,216,.08)!important}</style>
-<style>
-/* Language switcher */
-.rn-lang {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  z-index: 100;
-}
-.rn-lang-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 7px 12px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background: rgba(255,255,255,0.08);
-  color: inherit;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: inherit;
-}
-.nav-light .rn-lang-btn, footer .rn-lang-btn {
-  border-color: rgba(11,30,58,0.12);
-  background: #fff;
-  color: #0B1E3A;
-}
-.rn-lang-btn:hover { border-color: #00B4D8; color: #00B4D8; }
-.rn-lang-menu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  min-width: 200px;
-  background: #fff;
-  color: #0B1E3A;
-  border-radius: 12px;
-  box-shadow: 0 12px 40px rgba(11,30,58,0.18);
-  border: 1px solid #E5E7EB;
-  padding: 6px;
-  z-index: 200;
-}
-.rn-lang.open .rn-lang-menu { display: block; }
-.rn-lang-menu button {
-  display: block;
-  width: 100%;
-  text-align: left;
-  padding: 10px 12px;
-  border: none;
-  background: transparent;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  color: #0B1E3A;
-  font-family: inherit;
-}
-.rn-lang-menu button:hover { background: #F0F9FF; color: #00B4D8; }
-.rn-lang-menu button.active { background: #ECFEFF; font-weight: 700; }
-/* Hide Google's default banner/gadget chrome when possible */
-.goog-te-banner-frame, .goog-te-balloon-frame { display: none !important; }
-body { top: 0 !important; }
-#google_translate_element { position: absolute; left: -9999px; height: 0; overflow: hidden; }
-.skiptranslate iframe { display: none !important; }
-</style>
+</head>
+<body>
 
+<!-- LOGIN (always visible until signed in) -->
+<div id="loginScreen">
+  <div class="login-card">
+    <h1>RuffNeck Admin</h1>
+    <p>Sign in to manage blog posts and store products.</p>
+    <label for="adminPass">Password</label>
+    <input id="adminPass" type="password" autocomplete="current-password" placeholder="Enter admin password"/>
+    <button type="button" id="loginBtn">Sign in</button>
+    <div id="loginError"></div>
+    <p class="login-hint">Password: your <code>ADMIN_PASSWORD</code> on Vercel<br/>or fallback <code>ruffneck2026admin</code></p>
+  </div>
+</div>
 
+<!-- ADMIN SHELL -->
+<div id="adminShell">
+  <header class="topbar">
+    <div>
+      <strong>RuffNeck Admin</strong>
+      <div class="muted" id="topDate"></div>
+    </div>
+    <div class="topbar-actions">
+      <a href="/" target="_blank" rel="noopener">View site</a>
+      <button type="button" id="logoutBtn">Sign out</button>
+    </div>
+  </header>
+  <div id="banner">Checking database…</div>
+  <nav class="nav" id="nav">
+    <button type="button" data-page="dashboard" class="active"><span>📊</span>Dashboard</button>
+    <button type="button" data-page="products"><span>🛒</span>Products</button>
+    <button type="button" data-page="add-product"><span>➕</span>Add product</button>
+    <button type="button" data-page="blog"><span>📝</span>Blog</button>
+    <button type="button" data-page="add-blog"><span>✍️</span>Add post</button>
+    <button type="button" data-page="settings"><span>⚙️</span>Settings</button>
+  </nav>
+  <main class="main">
+    <section class="page active" id="page-dashboard">
+      <h2>Dashboard</h2>
+      <p class="sub">Overview — posts and products from your database.</p>
+      <div class="stats">
+        <div class="card stat"><div class="n" id="statProducts">0</div><div class="l">Products</div></div>
+        <div class="card stat"><div class="n" id="statPosts">0</div><div class="l">Blog posts</div></div>
+        <div class="card stat"><div class="n" id="statPublished">0</div><div class="l">Published</div></div>
+        <div class="card stat"><div class="n" id="statDb">…</div><div class="l">Database</div></div>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <p style="font-size:14px;color:#cbd5e1">Use <strong>Add post</strong> or <strong>Add product</strong>, set status to Published/Active, then check the public Blog or Store pages.</p>
+      </div>
+    </section>
 
+    <section class="page" id="page-products">
+      <h2>Products</h2>
+      <p class="sub">Store items in the database.</p>
+      <div class="card" id="productList"><div class="empty">Loading…</div></div>
+    </section>
 
+    <section class="page" id="page-add-product">
+      <h2>Add product</h2>
+      <p class="sub">Saved to Supabase when connected.</p>
+      <div class="card">
+        <label class="field">Name</label>
+        <input class="field" id="pName" placeholder="Product name"/>
+        <label class="field">Category</label>
+        <input class="field" id="pCat" placeholder="e.g. IT Services"/>
+        <label class="field">Short description</label>
+        <textarea class="field" id="pDesc" placeholder="What the buyer gets"></textarea>
+        <label class="field">Price (₦)</label>
+        <input class="field" id="pPrice" type="number" placeholder="0"/>
+        <label class="field">Status</label>
+        <select class="field" id="pStatus">
+          <option value="active">Active (visible on store)</option>
+          <option value="draft">Draft</option>
+        </select>
+        <div class="row">
+          <button type="button" class="btn" id="saveProductBtn">Save product</button>
+        </div>
+      </div>
+    </section>
 
+    <section class="page" id="page-blog">
+      <h2>Blog posts</h2>
+      <p class="sub">Posts stored in the database.</p>
+      <div class="card" id="blogList"><div class="empty">Loading…</div></div>
+    </section>
 
+    <section class="page" id="page-add-blog">
+      <h2>Add blog post</h2>
+      <p class="sub">Published posts appear on /blog.</p>
+      <div class="card">
+        <label class="field">Title</label>
+        <input class="field" id="bTitle" placeholder="Post title"/>
+        <label class="field">Category</label>
+        <input class="field" id="bCat" placeholder="e.g. AI & Automation"/>
+        <label class="field">Short summary</label>
+        <textarea class="field" id="bDesc" placeholder="One or two sentences"></textarea>
+        <label class="field">Body</label>
+        <textarea class="field" id="bBody" placeholder="Full article text" style="min-height:200px"></textarea>
+        <label class="field">Status</label>
+        <select class="field" id="bStatus">
+          <option value="published">Published (visible on blog)</option>
+          <option value="draft">Draft</option>
+        </select>
+        <div class="row">
+          <button type="button" class="btn" id="saveBlogBtn">Save post</button>
+        </div>
+      </div>
+    </section>
 
+    <section class="page" id="page-settings">
+      <h2>Settings</h2>
+      <p class="sub">Admin access notes.</p>
+      <div class="card">
+        <p style="font-size:14px;line-height:1.6;color:#cbd5e1">
+          Login uses <code>ADMIN_PASSWORD</code> from Vercel when the API is available.
+          Fallback password: <code>ruffneck2026admin</code>.
+          Database: <code>SUPABASE_URL</code> + <code>SUPABASE_SERVICE_KEY</code> on Vercel.
+          No language translator on this admin page (translator is on the public site only).
+        </p>
+      </div>
+    </section>
+  </main>
+</div>
 
-
-
-
-<script id="rn-admin-login-reset">
-(function(){
-  function bind(){
-    var btn = document.getElementById('resetLoginPass');
-    if (!btn) return;
-    btn.addEventListener('click', function(){
-      try {
-        localStorage.removeItem('rn_admin_pass');
-      } catch(e) {}
-      var err = document.getElementById('loginError');
-      if (err) {
-        err.style.display = 'block';
-        err.style.color = '#86EFAC';
-        err.textContent = 'Password reset. Use: ruffneck2026admin';
-      }
-      var input = document.getElementById('adminPass');
-      if (input) {
-        input.value = '';
-        input.focus();
-      }
-      alert('Admin password reset to default:\n\nruffneck2026admin');
-    });
-  }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
-  else bind();
-})();
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script id="rn-cms-db-client">
-window.RNCms = {
-  async listPosts(){
-    try {
-      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (res.ok && data.ok && Array.isArray(data.posts)) {
-        return { source:'db', posts: data.posts.map(function(p){
-          return {
-            id:p.id, title:p.title, cat:p.cat, emoji:p.emoji, image:p.image,
-            desc:p.desc||'', body:p.body||'', tags:p.tags||[], author:p.author,
-            readTime:p.read_time||p.readTime||'5', status:p.status||'draft',
-            created:p.created, updated:p.updated
-          };
-        })};
-      }
-    } catch(e) {}
-    try { return { source:'local', posts: JSON.parse(localStorage.getItem('rn_blog_posts')||'[]') }; }
-    catch(e){ return { source:'local', posts: [] }; }
-  },
-  async listProducts(){
-    try {
-      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (res.ok && data.ok && Array.isArray(data.products)) {
-        return { source:'db', products: data.products.map(function(p){
-          return {
-            id:p.id, name:p.name, cat:p.cat, emoji:p.emoji, image:p.image,
-            desc:p.desc||'', fullDesc:p.full_desc||p.fullDesc||'', tiers:p.tiers||{},
-            price:p.price, status:p.status||'active', created:p.created, updated:p.updated
-          };
-        })};
-      }
-    } catch(e) {}
-    try { return { source:'local', products: JSON.parse(localStorage.getItem('rn_products')||'[]') }; }
-    catch(e){ return { source:'local', products: [] }; }
-  },
-  async savePost(post){
-    var method = post.id && post._exists ? 'PUT' : 'POST';
-    delete post._exists;
-    var res = await fetch('/api/cms/posts', {
-      method: method, credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(post)
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
-    return data.post || post;
-  },
-  async deletePost(id){
-    var res = await fetch('/api/cms/posts', {
-      method:'DELETE', credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id:id})
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
-  },
-  async saveProduct(product){
-    var method = product.id && product._exists ? 'PUT' : 'POST';
-    delete product._exists;
-    var res = await fetch('/api/cms/products', {
-      method: method, credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(product)
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
-    return data.product || product;
-  },
-  async deleteProduct(id){
-    var res = await fetch('/api/cms/products', {
-      method:'DELETE', credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id:id})
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
-  }
-};
-</script>
-
-<script id="rn-admin-simple-login">
+<script>
 (function(){
   var FALLBACK = 'ruffneck2026admin';
+  var loginScreen = document.getElementById('loginScreen');
+  var shell = document.getElementById('adminShell');
+  var banner = document.getElementById('banner');
+  var passInput = document.getElementById('adminPass');
+  var loginError = document.getElementById('loginError');
+
+  document.getElementById('topDate').textContent = new Date().toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'short', year:'numeric'});
+
+  function showError(msg){
+    loginError.style.display = 'block';
+    loginError.textContent = msg;
+  }
 
   function showShell(){
-    document.body.classList.add('rn-admin-in');
-    var login = document.getElementById('loginScreen');
-    if (login) {
-      login.classList.add('rn-hidden');
-      login.style.cssText = 'display:none!important;visibility:hidden!important;pointer-events:none!important;z-index:-1!important;';
-    }
-    var shell = document.getElementById('adminShell');
-    if (shell) {
-      shell.classList.add('visible');
-      shell.style.cssText = 'display:flex!important;visibility:visible!important;opacity:1!important;flex-direction:column;min-height:100vh;';
-    }
-    try { if (typeof initAdmin === 'function') initAdmin(); } catch(e) {}
-    refreshCmsBanner();
+    loginScreen.classList.add('hidden');
+    shell.classList.add('visible');
+    try { sessionStorage.setItem('rn_admin_ok', '1'); } catch(e) {}
+    refreshDb();
+    loadLists();
   }
 
-  async function refreshCmsBanner(){
-    var el = document.getElementById('cmsSourceNote');
-    if (!el) {
-      el = document.createElement('div');
-      el.id = 'cmsSourceNote';
-      el.style.cssText = 'padding:8px 12px;text-align:center;font-size:12px;background:#0B1E3A;color:#FBBF24;';
-      var shell = document.getElementById('adminShell');
-      if (shell) shell.insertBefore(el, shell.firstChild);
-    }
-    try {
-      var r = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
-      var d = await r.json();
-      if (r.ok && d.ok) {
-        el.style.color = '#86EFAC';
-        el.textContent = 'Storage: Database connected (Supabase) — posts sync across devices';
-        return;
-      }
-      if (d && d.code === 'NO_DB') {
-        el.textContent = 'Checking database…';
-        return;
-      }
-      el.textContent = 'Storage: database error — ' + (d.error || r.status);
-    } catch(e) {
-      el.textContent = 'Storage: browser only (API not reachable)';
-    }
+  function showLogin(){
+    try { sessionStorage.removeItem('rn_admin_ok'); } catch(e) {}
+    shell.classList.remove('visible');
+    loginScreen.classList.remove('hidden');
   }
 
-  window.doLogin = async function(){
-    var input = document.getElementById('adminPass');
-    var err = document.getElementById('loginError');
-    var val = (input && input.value ? input.value : '').trim();
-    if (!val) {
-      if (err) { err.style.display='block'; err.textContent='Enter password'; }
-      return;
-    }
-    // Try server password first (ADMIN_PASSWORD on Vercel)
+  async function doLogin(){
+    var val = (passInput.value || '').trim();
+    if (!val) { showError('Enter the password.'); return; }
+
+    // Try server auth
     try {
       var res = await fetch('/api/admin-login', {
-        method:'POST', credentials:'same-origin',
-        headers:{'Content-Type':'application/json'},
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ password: val })
       });
       if (res.status === 200) {
         var data = await res.json();
         if (data.ok) { showShell(); return; }
       }
-    } catch(e) {}
-    // Fallback password always works
-    if (val === FALLBACK) {
-      try { sessionStorage.setItem('rn_admin_ok','1'); } catch(e) {}
-      showShell();
-      return;
-    }
-    if (err) {
-      err.style.display = 'block';
-      err.style.color = '#f87171';
-      err.textContent = 'Wrong password. Try: ruffneck2026admin  (or your ADMIN_PASSWORD if set on Vercel)';
-    }
+    } catch (e) {}
+
+    if (val === FALLBACK) { showShell(); return; }
+    showError('Incorrect password. Use ADMIN_PASSWORD or ruffneck2026admin');
+    passInput.value = '';
+    passInput.focus();
+  }
+
+  document.getElementById('loginBtn').onclick = doLogin;
+  passInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') doLogin(); });
+  document.getElementById('logoutBtn').onclick = function(){
+    fetch('/api/admin-logout', { method:'POST', credentials:'same-origin' }).catch(function(){});
+    showLogin();
   };
 
-  window.resetPasswordToDefault = function(){
-    var err = document.getElementById('loginError');
-    if (err) {
-      err.style.display = 'block';
-      err.style.color = '#86EFAC';
-      err.textContent = 'Use password: ruffneck2026admin';
-    }
-  };
-
-  document.addEventListener('DOMContentLoaded', async function(){
-    try {
-      if (sessionStorage.getItem('rn_admin_ok') === '1') { showShell(); return; }
-    } catch(e) {}
-    try {
-      var res = await fetch('/api/admin-session', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (data && data.authenticated) showShell();
-    } catch(e) {}
-    var input = document.getElementById('adminPass');
-    if (input) input.onkeydown = function(e){ if (e.key === 'Enter') window.doLogin(); };
+  // Navigation
+  document.querySelectorAll('#nav button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-page');
+      document.querySelectorAll('#nav button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+      var page = document.getElementById('page-' + id);
+      if (page) page.classList.add('active');
+      if (id === 'blog' || id === 'products' || id === 'dashboard') loadLists();
+    });
   });
 
-  // Bridge save blog to database when available
-  document.addEventListener('DOMContentLoaded', function(){
-    if (!window.RNCms) return;
-    var origSave = window.saveBlogPost;
-    window.saveBlogPost = async function(statusOverride){
-      var title = ((document.getElementById('blogTitle')||{}).value||'').trim();
-      var cat = ((document.getElementById('blogCat')||{}).value||'');
-      var desc = ((document.getElementById('blogDesc')||{}).value||'').trim();
-      var editor = document.getElementById('blogEditor');
-      var body = editor ? editor.innerHTML.trim() : '';
-      var status = statusOverride || ((document.getElementById('blogStatus')||{}).value||'draft');
-      if (!title) { alert('Enter a title'); return; }
-      var imgEl = document.getElementById('blogImgPreview');
-      var post = {
-        id: window.editingBlogId || String(Date.now()),
-        title: title, cat: cat, desc: desc || title.slice(0,100), body: body,
-        emoji: ((document.getElementById('blogEmoji')||{}).value)||'📝',
-        image: (imgEl && imgEl.style.display !== 'none') ? imgEl.src : null,
-        tags: (((document.getElementById('blogTags')||{}).value)||'').split(',').map(function(t){return t.trim();}).filter(Boolean),
-        author: ((document.getElementById('blogAuthor')||{}).value)||'RuffNeck Entertainment',
-        readTime: ((document.getElementById('blogReadTime')||{}).value)||'5',
-        status: status,
-        created: new Date().toLocaleDateString('en-GB'),
-        updated: new Date().toLocaleDateString('en-GB'),
-        _exists: !!window.editingBlogId
-      };
-      try {
-        await window.RNCms.savePost(post);
-        // also local backup
-        try {
-          var list = JSON.parse(localStorage.getItem('rn_blog_posts')||'[]');
-          var i = list.findIndex(function(x){return x.id===post.id;});
-          if (i>=0) list[i]=post; else list.unshift(post);
-          localStorage.setItem('rn_blog_posts', JSON.stringify(list));
-        } catch(e) {}
-        alert('Saved to database: ' + title);
-        window.editingBlogId = null;
-        if (typeof clearBlogForm === 'function') clearBlogForm();
-        if (typeof renderBlogList === 'function') renderBlogList();
-      } catch (err) {
-        // fallback local only
-        try {
-          var list2 = JSON.parse(localStorage.getItem('rn_blog_posts')||'[]');
-          list2.unshift(post);
-          localStorage.setItem('rn_blog_posts', JSON.stringify(list2));
-          alert('Saved on this browser only (database not connected): ' + (err.message||''));
-        } catch(e2) {
-          alert(err.message || 'Save failed');
-        }
-      }
-    };
-  });
-})();
-</script>
-
-
-<script id="rn-cms-banner-fix">
-(function(){
-  async function updateBanner(){
-    var el = document.getElementById('cmsSourceNote');
-    if (!el) {
-      el = document.createElement('div');
-      el.id = 'cmsSourceNote';
-      var shell = document.getElementById('adminShell');
-      if (shell) shell.insertBefore(el, shell.firstChild);
-      else return;
-    }
+  async function refreshDb(){
     try {
       var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
       var data = await res.json();
       if (res.ok && data.ok) {
-        el.style.color = '#86EFAC';
-        el.style.background = '#0B1E3A';
-        el.textContent = 'Storage: Database connected (Supabase). Posts sync across devices.';
-        return;
+        banner.style.color = '#86efac';
+        banner.textContent = 'Storage: Database connected (Supabase)';
+        document.getElementById('statDb').textContent = 'ON';
+        return true;
       }
       if (data && data.code === 'NO_DB') {
-        el.style.color = '#FBBF24';
-        el.textContent = 'Checking database…';
-        return;
+        banner.style.color = '#fbbf24';
+        banner.textContent = 'Storage: browser only — set SUPABASE_URL + SUPABASE_SERVICE_KEY on Vercel, then redeploy';
+        document.getElementById('statDb').textContent = 'OFF';
+        return false;
       }
-      el.style.color = '#FBBF24';
-      el.textContent = 'Storage: API error ' + res.status + (data && data.error ? (' — ' + data.error) : '');
+      banner.style.color = '#fbbf24';
+      banner.textContent = 'Storage: API error ' + res.status;
+      document.getElementById('statDb').textContent = 'ERR';
     } catch (e) {
-      el.style.color = '#FBBF24';
-      el.textContent = 'Storage: cannot reach API — ' + (e.message || 'network error');
+      banner.style.color = '#fbbf24';
+      banner.textContent = 'Storage: cannot reach API';
+      document.getElementById('statDb').textContent = 'ERR';
     }
+    return false;
   }
-  document.addEventListener('DOMContentLoaded', function(){
-    setTimeout(updateBanner, 300);
-    setTimeout(updateBanner, 1500);
-  });
-  // When shell opens
-  var _obs = new MutationObserver(function(){
-    if (document.body.classList.contains('rn-admin-in') || (document.getElementById('adminShell')||{}).classList.contains('visible')) {
-      updateBanner();
-    }
-  });
-  _obs.observe(document.documentElement, { attributes:true, subtree:true, attributeFilter:['class'] });
-})();
-</script>
 
-
-
-
-
-
-
-
-<script id="rn-admin-mobile-boot">
-(function(){
-  function showDash(){
-    try {
-      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-      var d = document.getElementById('page-dashboard');
-      if (d) d.classList.add('active');
-      document.querySelectorAll('.sidebar-btn').forEach(function(b, i){
-        b.classList.toggle('active', i === 0);
-      });
-      if (typeof renderDashboard === 'function') renderDashboard();
-    } catch(e) {}
+  function localPosts(){
+    try { return JSON.parse(localStorage.getItem('rn_blog_posts') || '[]'); } catch(e){ return []; }
   }
-  async function banner(){
-    var el = document.getElementById('cmsSourceNote');
-    if (!el) {
-      el = document.createElement('div');
-      el.id = 'cmsSourceNote';
-      var shell = document.getElementById('adminShell');
-      if (!shell) return;
-      var top = shell.querySelector('.topbar');
-      if (top && top.nextSibling) shell.insertBefore(el, top.nextSibling);
-      else shell.insertBefore(el, shell.firstChild);
-    }
+  function localProducts(){
+    try { return JSON.parse(localStorage.getItem('rn_products') || '[]'); } catch(e){ return []; }
+  }
+  function saveLocalPosts(list){
+    localStorage.setItem('rn_blog_posts', JSON.stringify(list));
+  }
+  function saveLocalProducts(list){
+    localStorage.setItem('rn_products', JSON.stringify(list));
+  }
+
+  async function fetchPosts(){
     try {
       var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
       var data = await res.json();
-      if (res.ok && data.ok) {
-        el.style.color = '#86efac';
-        el.textContent = 'Storage: Database connected (Supabase). Posts sync across devices.';
-      } else if (data && data.code === 'NO_DB') {
-        el.style.color = '#fbbf24';
-        el.textContent = 'Storage: browser only — set SUPABASE_URL + SUPABASE_SERVICE_KEY on Vercel, then redeploy';
-      } else {
-        el.style.color = '#fbbf24';
-        el.textContent = 'Storage: API ' + res.status + (data && data.error ? (' — ' + data.error) : '');
-      }
-    } catch(e) {
-      el.style.color = '#fbbf24';
-      el.textContent = 'Storage: cannot reach /api/cms/posts';
-    }
+      if (res.ok && data.ok && Array.isArray(data.posts)) return data.posts;
+    } catch(e) {}
+    return localPosts();
   }
-  function boot(){
-    showDash();
-    banner();
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    setTimeout(boot, 100);
-    setTimeout(boot, 600);
-  });
-  // when login shows shell
-  var obs = new MutationObserver(function(){
-    if (document.body.classList.contains('rn-admin-in')) {
-      setTimeout(boot, 50);
-    }
-  });
-  obs.observe(document.body, { attributes:true, attributeFilter:['class'] });
-})();
-</script>
-
-
-<script id="rn-showpage-force">
-(function(){
-  window.showPage = function(id, btn){
-    document.querySelectorAll('.page').forEach(function(p){
-      p.classList.remove('active');
-      p.style.setProperty('display', 'none', 'important');
-    });
-    document.querySelectorAll('.sidebar-btn').forEach(function(b){
-      b.classList.remove('active');
-    });
-    var page = document.getElementById('page-' + id);
-    if (page) {
-      page.classList.add('active');
-      page.style.setProperty('display', 'block', 'important');
-      page.style.setProperty('visibility', 'visible', 'important');
-      page.style.setProperty('opacity', '1', 'important');
-      page.style.setProperty('background', '#020617', 'important');
-      page.style.setProperty('color', '#f8fafc', 'important');
-      page.style.setProperty('min-height', '40vh', 'important');
-      page.style.setProperty('padding', '12px', 'important');
-    } else {
-      console.warn('page not found', id);
-      alert('Page not found: ' + id);
-    }
-    if (btn) btn.classList.add('active');
-    var main = document.querySelector('.admin-main');
-    if (main) {
-      main.style.setProperty('display', 'block', 'important');
-      main.style.setProperty('visibility', 'visible', 'important');
-      main.style.setProperty('background', '#020617', 'important');
-      main.style.setProperty('color', '#f8fafc', 'important');
-      main.style.setProperty('min-height', '50vh', 'important');
-      main.style.setProperty('width', '100%', 'important');
-      main.style.setProperty('max-width', '100%', 'important');
-      main.style.setProperty('padding', '16px', 'important');
-    }
+  async function fetchProducts(){
     try {
-      if (id === 'products' && typeof renderProductsTable === 'function') renderProductsTable();
-      if (id === 'dashboard' && typeof renderDashboard === 'function') renderDashboard();
-      if (id === 'blog' && typeof renderBlogList === 'function') renderBlogList();
-      if (id === 'add-product') {
-        var t = document.getElementById('addProductTitle');
-        if (t) t.textContent = 'Add New Product';
-        if (typeof clearProductForm === 'function') clearProductForm();
-      }
-      if (id === 'add-blog' && typeof clearBlogForm === 'function') clearBlogForm();
-    } catch (e) { console.warn(e); }
-    // scroll main into view
-    if (main) try { main.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch(e) {}
+      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
+      var data = await res.json();
+      if (res.ok && data.ok && Array.isArray(data.products)) return data.products;
+    } catch(e) {}
+    return localProducts();
+  }
+
+  async function loadLists(){
+    var posts = await fetchPosts();
+    var products = await fetchProducts();
+    document.getElementById('statPosts').textContent = posts.length;
+    document.getElementById('statProducts').textContent = products.length;
+    document.getElementById('statPublished').textContent = posts.filter(function(p){ return (p.status||'') === 'published'; }).length;
+
+    var bl = document.getElementById('blogList');
+    if (!posts.length) bl.innerHTML = '<div class="empty">No posts yet. Use Add post.</div>';
+    else bl.innerHTML = posts.map(function(p){
+      var st = (p.status||'draft');
+      return '<div class="list-item"><div><strong>'+escapeHtml(p.title||'Untitled')+'</strong><div style="font-size:12px;color:#94a3b8;margin-top:4px">'+escapeHtml(p.cat||'')+' · '+escapeHtml(p.created||'')+'</div></div><span class="badge '+(st==='published'?'ok':'warn')+'">'+escapeHtml(st)+'</span></div>';
+    }).join('');
+
+    var pl = document.getElementById('productList');
+    if (!products.length) pl.innerHTML = '<div class="empty">No products yet. Use Add product.</div>';
+    else pl.innerHTML = products.map(function(p){
+      var st = (p.status||'active');
+      return '<div class="list-item"><div><strong>'+escapeHtml(p.name||'Untitled')+'</strong><div style="font-size:12px;color:#94a3b8;margin-top:4px">'+escapeHtml(p.cat||'')+' · ₦'+escapeHtml(String(p.price!=null?p.price:0))+'</div></div><span class="badge '+(st==='active'?'ok':'warn')+'">'+escapeHtml(st)+'</span></div>';
+    }).join('');
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  document.getElementById('saveBlogBtn').onclick = async function(){
+    var post = {
+      id: String(Date.now()),
+      title: document.getElementById('bTitle').value.trim(),
+      cat: document.getElementById('bCat').value.trim() || 'General',
+      desc: document.getElementById('bDesc').value.trim(),
+      body: document.getElementById('bBody').value.trim(),
+      status: document.getElementById('bStatus').value,
+      author: 'RuffNeck Entertainment',
+      readTime: '5',
+      emoji: '📝',
+      created: new Date().toLocaleDateString('en-GB'),
+      updated: new Date().toLocaleDateString('en-GB')
+    };
+    if (!post.title) { alert('Enter a title'); return; }
+    if (!post.body) { alert('Enter body text'); return; }
+    try {
+      var res = await fetch('/api/cms/posts', {
+        method:'POST', credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(post)
+      });
+      var data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || 'API save failed');
+      alert('Saved to database: ' + post.title);
+    } catch (err) {
+      var list = localPosts();
+      list.unshift(post);
+      saveLocalPosts(list);
+      alert('Saved on this browser only (' + (err.message||'no DB') + ')');
+    }
+    document.getElementById('bTitle').value = '';
+    document.getElementById('bDesc').value = '';
+    document.getElementById('bBody').value = '';
+    loadLists();
+    document.querySelector('[data-page="blog"]').click();
   };
+
+  document.getElementById('saveProductBtn').onclick = async function(){
+    var product = {
+      id: String(Date.now()),
+      name: document.getElementById('pName').value.trim(),
+      cat: document.getElementById('pCat').value.trim() || 'General',
+      desc: document.getElementById('pDesc').value.trim(),
+      price: Number(document.getElementById('pPrice').value) || 0,
+      status: document.getElementById('pStatus').value,
+      emoji: '📦',
+      tiers: {},
+      created: new Date().toLocaleDateString('en-GB'),
+      updated: new Date().toLocaleDateString('en-GB')
+    };
+    if (!product.name) { alert('Enter a name'); return; }
+    try {
+      var res = await fetch('/api/cms/products', {
+        method:'POST', credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(product)
+      });
+      var data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || 'API save failed');
+      alert('Saved to database: ' + product.name);
+    } catch (err) {
+      var list = localProducts();
+      list.unshift(product);
+      saveLocalProducts(list);
+      alert('Saved on this browser only (' + (err.message||'no DB') + ')');
+    }
+    document.getElementById('pName').value = '';
+    document.getElementById('pDesc').value = '';
+    document.getElementById('pPrice').value = '';
+    loadLists();
+    document.querySelector('[data-page="products"]').click();
+  };
+
+  // Auto session
+  try {
+    if (sessionStorage.getItem('rn_admin_ok') === '1') showShell();
+  } catch(e) {}
+  // Also check server session
+  fetch('/api/admin-session', { credentials:'same-origin', cache:'no-store' })
+    .then(function(r){ return r.json(); })
+    .then(function(d){ if (d && d.authenticated) showShell(); })
+    .catch(function(){});
 })();
 </script>
-
 </body>
 </html>

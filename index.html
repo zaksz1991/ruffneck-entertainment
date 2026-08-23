@@ -3821,5 +3821,50 @@ document.addEventListener('DOMContentLoaded', function(){
 
 
 
+
+<!-- Language switcher (public site) -->
+<div id="rnLang" style="position:fixed;bottom:88px;right:16px;z-index:99990;">
+  <button type="button" id="rnLangBtn" aria-label="Change language" style="background:#0B1E3A;color:#00B4D8;border:2px solid #00B4D8;border-radius:999px;padding:12px 16px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.35);">🌐 Language</button>
+  <div id="rnLangMenu" role="menu" style="display:none;position:absolute;bottom:52px;right:0;background:#0B1E3A;border:1px solid rgba(0,180,216,.4);border-radius:12px;padding:8px;min-width:180px;box-shadow:0 8px 30px rgba(0,0,0,.4);">
+    <button type="button" data-lang="" data-label="EN" style="display:block;width:100%;text-align:left;background:none;border:none;color:#fff;padding:10px 12px;cursor:pointer;border-radius:8px;">English</button>
+    <button type="button" data-lang="ha" data-label="HA" style="display:block;width:100%;text-align:left;background:none;border:none;color:#fff;padding:10px 12px;cursor:pointer;border-radius:8px;">Hausa</button>
+    <button type="button" data-lang="yo" data-label="YO" style="display:block;width:100%;text-align:left;background:none;border:none;color:#fff;padding:10px 12px;cursor:pointer;border-radius:8px;">Yoruba</button>
+    <button type="button" data-lang="ig" data-label="IG" style="display:block;width:100%;text-align:left;background:none;border:none;color:#fff;padding:10px 12px;cursor:pointer;border-radius:8px;">Igbo</button>
+    <button type="button" data-lang="fr" data-label="FR" style="display:block;width:100%;text-align:left;background:none;border:none;color:#fff;padding:10px 12px;cursor:pointer;border-radius:8px;">Français</button>
+    <button type="button" data-lang="es" data-label="ES" style="display:block;width:100%;text-align:left;background:none;border:none;color:#fff;padding:10px 12px;cursor:pointer;border-radius:8px;">Español</button>
+  </div>
+</div>
+<div id="google_translate_element" style="display:none!important;height:0;overflow:hidden;"></div>
+<script>
+(function(){
+  var btn = document.getElementById('rnLangBtn');
+  var menu = document.getElementById('rnLangMenu');
+  if (!btn || !menu) return;
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    if (window.rnLoadTranslate) window.rnLoadTranslate();
+  });
+  document.addEventListener('click', function(){ menu.style.display = 'none'; });
+  menu.querySelectorAll('[data-lang]').forEach(function(b){
+    b.addEventListener('click', function(e){
+      e.stopPropagation();
+      var lang = b.getAttribute('data-lang');
+      var label = b.getAttribute('data-label') || 'EN';
+      btn.textContent = '🌐 ' + label;
+      menu.style.display = 'none';
+      if (window.rnLoadTranslate) window.rnLoadTranslate();
+      setTimeout(function(){
+        var sel = document.querySelector('.goog-te-combo');
+        if (sel) {
+          sel.value = lang;
+          sel.dispatchEvent(new Event('change'));
+        }
+      }, 800);
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
