@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>RuffNeck Admin — Backend Dashboard</title>
 <meta name="robots" content="noindex, nofollow"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
@@ -332,66 +332,111 @@ body { top: 0 !important; }
 
 
 
-<style id="rn-admin-mobile-v4">
-/* ===== CLEAN ADMIN LAYOUT ===== */
+
+
+
+<style id="rn-admin-mobile-final">
+/* ========== MOBILE-FIRST ADMIN (final) ========== */
 html, body {
-  margin: 0;
-  padding: 0;
-  background: #0B1220 !important;
-  color: #E5E7EB !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow-x: hidden !important;
+  background: #020617 !important;
+  color: #f8fafc !important;
+  -webkit-text-size-adjust: 100%;
 }
+
+/* Hide login when in */
 body.rn-admin-in #loginScreen,
 #loginScreen.rn-hidden {
   display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
   height: 0 !important;
   overflow: hidden !important;
-  pointer-events: none !important;
 }
+
+/* Shell: column on mobile, row on desktop */
 #adminShell {
   display: none;
-  background: #0B1220 !important;
   min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  background: #020617 !important;
+  color: #f8fafc !important;
+  flex-direction: column;
 }
 #adminShell.visible,
 body.rn-admin-in #adminShell {
-  display: block !important;
+  display: flex !important;
+  flex-direction: column !important;
   visibility: visible !important;
   opacity: 1 !important;
 }
-.topbar {
-  background: #0B1E3A !important;
-  color: #F9FAFB !important;
-  border-bottom: 1px solid rgba(0,180,216,0.25);
-}
-.topbar * { color: #F9FAFB !important; }
 
-/* Sidebar: horizontal on mobile, readable */
+.topbar {
+  flex-shrink: 0;
+  width: 100%;
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border-bottom: 1px solid #1e293b;
+  z-index: 20;
+}
+.topbar, .topbar * { color: #f8fafc !important; }
+
+/* Body row under topbar: on mobile stack, on md side-by-side */
+.admin-body,
+#adminShell > .admin-body,
+#adminShell .layout,
+#adminShell > div:not(.topbar):not(#cmsSourceNote) {
+  /* fallback handled below */
+}
+
+/* Sidebar mobile-first */
 .sidebar {
-  background: #0B1E3A !important;
-  color: #E5E7EB !important;
-  display: flex !important;
-  flex-direction: row !important;
-  flex-wrap: wrap !important;
-  gap: 8px !important;
-  padding: 10px !important;
+  display: block !important;
   width: 100% !important;
   max-width: 100% !important;
-  box-sizing: border-box !important;
   height: auto !important;
+  min-height: 0 !important;
   position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  top: auto !important;
+  bottom: auto !important;
+  transform: none !important;
   overflow: visible !important;
+  background: #0f172a !important;
+  color: #f8fafc !important;
+  border-bottom: 1px solid #1e293b;
+  border-right: none !important;
+  padding: 10px !important;
+  box-sizing: border-box !important;
+  flex-shrink: 0;
 }
 .sidebar-section {
   display: flex !important;
   flex-wrap: wrap !important;
   gap: 8px !important;
-  width: 100% !important;
+  margin-bottom: 8px !important;
 }
-.sidebar-label, .sidebar-divider {
+.sidebar-label {
   width: 100% !important;
-  color: #94A3B8 !important;
   font-size: 11px !important;
-  margin: 4px 0 !important;
+  color: #94a3b8 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.04em !important;
+  margin: 4px 0 2px !important;
+}
+.sidebar-divider {
+  width: 100% !important;
+  height: 1px !important;
+  background: #1e293b !important;
+  margin: 6px 0 !important;
 }
 .sidebar-btn {
   display: inline-flex !important;
@@ -399,89 +444,163 @@ body.rn-admin-in #adminShell {
   align-items: center !important;
   justify-content: center !important;
   gap: 4px !important;
-  min-width: 72px !important;
-  padding: 10px 8px !important;
-  background: rgba(255,255,255,0.08) !important;
-  border: 1px solid rgba(0,180,216,0.3) !important;
+  min-width: 70px !important;
+  flex: 1 1 70px !important;
+  max-width: 110px !important;
+  padding: 10px 6px !important;
+  margin: 0 !important;
+  background: #1e293b !important;
+  border: 1px solid #334155 !important;
   border-radius: 12px !important;
-  color: #E5E7EB !important;
+  color: #f8fafc !important;
   font-size: 11px !important;
+  line-height: 1.2 !important;
   cursor: pointer !important;
+  white-space: normal !important;
 }
-.sidebar-btn span { display: inline !important; color: #E5E7EB !important; }
+.sidebar-btn .sb-icon { font-size: 18px !important; display: block !important; }
+.sidebar-btn span { display: inline !important; color: #f8fafc !important; }
 .sidebar-btn.active {
-  background: rgba(0,180,216,0.25) !important;
-  border-color: #00B4D8 !important;
+  background: rgba(14, 165, 233, 0.25) !important;
+  border-color: #0ea5e9 !important;
   color: #fff !important;
 }
 
-/* Main content area */
-.admin-main, .main-content, .content {
+/* Main: always visible, never hidden on mobile */
+.admin-main {
   display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   width: 100% !important;
   max-width: 100% !important;
-  background: #0B1220 !important;
-  color: #E5E7EB !important;
+  min-width: 0 !important;
+  flex: 1 1 auto !important;
+  background: #020617 !important;
+  color: #f8fafc !important;
   padding: 16px !important;
   box-sizing: border-box !important;
-  min-height: 60vh !important;
+  overflow-x: auto !important;
+  min-height: 50vh !important;
 }
+
+/* Pages */
 .page {
   display: none !important;
-  background: #0B1220 !important;
-  color: #E5E7EB !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  background: transparent !important;
+  color: #f8fafc !important;
 }
 .page.active {
   display: block !important;
 }
-.page-header h2, .page h2, .page h3 {
-  color: #F9FAFB !important;
+.page-header h2,
+.page h1, .page h2, .page h3,
+.admin-main h1, .admin-main h2 {
+  color: #f8fafc !important;
 }
-.stat-card, .card, .form-card, .panel {
-  background: #151D2E !important;
-  border: 1px solid rgba(0,180,216,0.25) !important;
-  border-radius: 12px !important;
-  color: #E5E7EB !important;
-  padding: 14px !important;
-  margin-bottom: 12px !important;
-}
-.stat-val, .stat-label, .stat-trend { color: #E5E7EB !important; }
-input, textarea, select, .form-input, .login-input {
-  background: #fff !important;
-  color: #0B1E3A !important;
-  font-size: 16px !important;
-}
-.btn, .btn-primary, button.btn-primary {
-  background: #00B4D8 !important;
-  color: #0B1E3A !important;
-  font-weight: 700 !important;
-}
-#cmsSourceNote {
-  padding: 10px !important;
-  text-align: center !important;
-  font-size: 12px !important;
-  background: #0B1E3A !important;
-  color: #86EFAC !important;
+.page p, .admin-main p, .stat-label, .stat-trend {
+  color: #cbd5e1 !important;
 }
 
+/* Cards */
+.stats-grid {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+}
+.stat-card, .card, .form-card, .panel, .table-wrap {
+  background: #0f172a !important;
+  border: 1px solid #1e293b !important;
+  border-radius: 12px !important;
+  color: #f8fafc !important;
+  padding: 14px !important;
+  margin-bottom: 12px !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+.stat-val { color: #f8fafc !important; font-size: 1.4rem !important; font-weight: 700 !important; }
+
+/* Forms */
+.admin-main input,
+.admin-main textarea,
+.admin-main select,
+.page input,
+.page textarea,
+.page select {
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  background: #fff !important;
+  color: #0f172a !important;
+  font-size: 16px !important;
+  padding: 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid #cbd5e1 !important;
+  margin-bottom: 10px !important;
+}
+.btn, .btn-primary, button.btn-primary {
+  background: #0ea5e9 !important;
+  color: #0f172a !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: 10px !important;
+  padding: 12px 16px !important;
+}
+
+/* Tables scroll on mobile */
+.table-wrap, table {
+  max-width: 100% !important;
+}
+table {
+  display: block !important;
+  overflow-x: auto !important;
+  width: 100% !important;
+}
+
+#cmsSourceNote {
+  flex-shrink: 0;
+  width: 100%;
+  padding: 10px 12px !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  background: #0f172a !important;
+  color: #86efac !important;
+  border-bottom: 1px solid #1e293b;
+  box-sizing: border-box;
+}
+
+/* Desktop */
 @media (min-width: 900px) {
-  #adminShell.visible {
-    display: flex !important;
+  #adminShell.visible,
+  body.rn-admin-in #adminShell {
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
+    flex-wrap: wrap !important;
   }
+  .topbar, #cmsSourceNote { width: 100% !important; flex-basis: 100% !important; }
   .sidebar {
-    flex-direction: column !important;
     width: 240px !important;
-    min-height: 100vh !important;
-    flex-shrink: 0 !important;
+    max-width: 240px !important;
+    min-height: calc(100vh - 120px) !important;
+    border-bottom: none !important;
+    border-right: 1px solid #1e293b !important;
   }
+  .sidebar-section { flex-direction: column !important; flex-wrap: nowrap !important; }
   .sidebar-btn {
     flex-direction: row !important;
+    max-width: none !important;
     width: 100% !important;
     justify-content: flex-start !important;
+    gap: 10px !important;
   }
-  .admin-main { flex: 1 !important; }
+  .admin-main { flex: 1 !important; width: auto !important; }
+  .stats-grid { grid-template-columns: repeat(4, 1fr) !important; }
+}
+
+/* Kill desktop-only hide patterns if any */
+.hidden-mobile, .desktop-only { display: none !important; }
+@media (min-width: 900px) {
+  .desktop-only { display: block !important; }
 }
 </style>
 
@@ -2395,24 +2514,66 @@ window.RNCms = {
 
 
 
-<script id="rn-admin-show-dash">
+
+
+
+<script id="rn-admin-mobile-boot">
 (function(){
-  function goDash(){
+  function showDash(){
     try {
-      if (typeof showPage === 'function') {
-        var btn = document.querySelector('.sidebar-btn');
-        showPage('dashboard', btn);
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+      var d = document.getElementById('page-dashboard');
+      if (d) d.classList.add('active');
+      document.querySelectorAll('.sidebar-btn').forEach(function(b, i){
+        b.classList.toggle('active', i === 0);
+      });
+      if (typeof renderDashboard === 'function') renderDashboard();
+    } catch(e) {}
+  }
+  async function banner(){
+    var el = document.getElementById('cmsSourceNote');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'cmsSourceNote';
+      var shell = document.getElementById('adminShell');
+      if (!shell) return;
+      var top = shell.querySelector('.topbar');
+      if (top && top.nextSibling) shell.insertBefore(el, top.nextSibling);
+      else shell.insertBefore(el, shell.firstChild);
+    }
+    try {
+      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
+      var data = await res.json();
+      if (res.ok && data.ok) {
+        el.style.color = '#86efac';
+        el.textContent = 'Storage: Database connected (Supabase). Posts sync across devices.';
+      } else if (data && data.code === 'NO_DB') {
+        el.style.color = '#fbbf24';
+        el.textContent = 'Storage: browser only — set SUPABASE_URL + SUPABASE_SERVICE_KEY on Vercel, then redeploy';
       } else {
-        document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-        var d = document.getElementById('page-dashboard');
-        if (d) d.classList.add('active');
+        el.style.color = '#fbbf24';
+        el.textContent = 'Storage: API ' + res.status + (data && data.error ? (' — ' + data.error) : '');
       }
-    } catch(e) { console.warn(e); }
+    } catch(e) {
+      el.style.color = '#fbbf24';
+      el.textContent = 'Storage: cannot reach /api/cms/posts';
+    }
+  }
+  function boot(){
+    showDash();
+    banner();
   }
   document.addEventListener('DOMContentLoaded', function(){
-    setTimeout(goDash, 200);
-    setTimeout(goDash, 800);
+    setTimeout(boot, 100);
+    setTimeout(boot, 600);
   });
+  // when login shows shell
+  var obs = new MutationObserver(function(){
+    if (document.body.classList.contains('rn-admin-in')) {
+      setTimeout(boot, 50);
+    }
+  });
+  obs.observe(document.body, { attributes:true, attributeFilter:['class'] });
 })();
 </script>
 
