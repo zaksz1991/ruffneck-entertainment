@@ -2,476 +2,100 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Digital Marketing | RuffNeck Entertainment</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Digital Marketing & Lead Generation for Nigerian SMEs | RuffNeck Entertainment</title>
+<meta name="description" content="Strategy-led digital marketing, content, SEO, and lead systems for Nigerian businesses."/>
 <link rel="canonical" href="https://ruffneck-entertainment.vercel.app/services/marketing"/>
-<meta name="description" content="Strategy-led digital marketing for visibility, leads, and conversion."/>
-<link rel="stylesheet" href="/css/main.css"/>
-<link rel="icon" href="/favicon-32x32.png"/>
-<link rel="apple-touch-icon" href="/apple-touch-icon.png"/>
-<meta name="theme-color" content="#0B1E3A"/>
+<meta property="og:title" content="Digital Marketing & Lead Generation for Nigerian SMEs | RuffNeck"/>
+<meta property="og:description" content="Strategy-led digital marketing, content, SEO, and lead systems for Nigerian businesses."/>
+<meta property="og:url" content="https://ruffneck-entertainment.vercel.app/services/marketing"/>
 <style>
-  body { background:#F8FAFC; }
-  .svc-page-hero {
-    background: linear-gradient(160deg, #0B1E3A 0%, #123050 55%, #0a1628 100%);
-    color:#fff; padding: 110px 0 56px;
-  }
-  .svc-page-hero h1 { font-size:clamp(28px,4vw,40px); margin:10px 0 14px; line-height:1.2; }
-  .svc-page-hero p { color:rgba(255,255,255,.88); max-width:560px; margin:0 auto 24px; line-height:1.55; }
-  .svc-panel {
-    background:#fff; border-radius:16px; border:1px solid rgba(11,30,58,.08);
-    padding:28px 24px; box-shadow:0 8px 28px rgba(11,30,58,.06); margin-top:-28px; position:relative;
-  }
-  .svc-panel h2 { font-size:1.25rem; color:#0B1E3A; margin:0 0 12px; }
-  .svc-panel ul { margin:0; padding-left:1.2em; color:#374151; line-height:1.6; }
-  .svc-panel li { margin-bottom:8px; }
-  .svc-actions { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin-top:28px; }
+:root{--bg:#040C1A;--card:#0B1E3A;--cyan:#00B4D8;--text:#E5E7EB;--muted:#94A3B8}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);line-height:1.55}
+a{color:#7DD3FC}
+.top{background:#0B1E3A;border-bottom:1px solid rgba(0,180,216,.25);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.top .brand{color:var(--cyan);font-weight:800;text-decoration:none}
+.top nav{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}
+.top nav a{color:#CBD5E1;text-decoration:none}
+.wrap{max-width:800px;margin:0 auto;padding:28px 16px 80px}
+.kicker{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--cyan);font-weight:700}
+h1{font-size:clamp(1.5rem,4vw,2rem);line-height:1.2;margin:8px 0 12px}
+.lead{color:var(--muted);font-size:1.05rem;margin-bottom:20px}
+.card{background:var(--card);border:1px solid rgba(0,180,216,.28);border-radius:14px;padding:18px;margin:16px 0}
+.card h2{font-size:1.1rem;margin:0 0 10px}
+ul{margin:0;padding-left:18px}
+li{margin:6px 0}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:12px 18px;border-radius:10px;font-weight:800;text-decoration:none;font-size:14px}
+.btn-primary{background:var(--cyan);color:#0B1E3A}
+.btn-wa{background:#25D366;color:#053}
+.btn-ghost{border:1px solid rgba(0,180,216,.4);color:#E5E7EB}
+.faq{border-top:1px solid rgba(255,255,255,.08);padding:12px 0}
+.faq:first-child{border-top:none}
+.faq p{margin:6px 0 0;color:var(--muted);font-size:14px}
+.price{font-size:1.15rem;font-weight:700;color:#F9FAFB}
+.muted{color:var(--muted);font-size:14px}
+@media(max-width:600px){.btns .btn{width:100%}}
 </style>
-
-
-<script>
-(function(){
-  try {
-    var t = localStorage.getItem('rn_theme');
-    if (t === 'dark' || (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('rn-dark');
-    }
-  } catch(e){}
-})();
-</script>
-
-
-<style id="rn-contrast-fix">
-/* Readable text on light surfaces */
-.service-card h3,
-.product-name,
-.section-title { color: #0B1E3A !important; }
-.service-intro,
-.product-desc,
-.section-sub { color: #4B5563 !important; }
-.service-list li { color: #374151 !important; }
-.hero-next-hint {
-  color: rgba(255,255,255,0.95) !important;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.45) !important;
-  opacity: 1 !important;
-}
-/* Dark mode readable */
-
-
-
-
-
-
-
-/* Theme button always visible */
-.rn-theme-btn {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 42px !important;
-  height: 42px !important;
-  min-width: 42px;
-  border-radius: 11px !important;
-  border: 1.5px solid rgba(0,180,216,0.5) !important;
-  background: rgba(0,180,216,0.15) !important;
-  color: #fff !important;
-  font-size: 18px !important;
-  cursor: pointer !important;
-  z-index: 60;
-  flex-shrink: 0;
-  margin-left: 8px;
-}
-.nav-inner { display: flex; align-items: center; }
-
-</style>
-
-
-<style id="rn-readable-ui">
-/* ========== Readable surfaces (light) ========== */
-body {
-  color: #1F2937;
-}
-.svc-page-hero {
-  background: linear-gradient(160deg, #0B1E3A 0%, #123050 55%, #0a1628 100%) !important;
-  color: #FFFFFF !important;
-}
-.svc-page-hero h1,
-.svc-page-hero .section-label {
-  color: #FFFFFF !important;
-}
-.svc-page-hero p {
-  color: rgba(255, 255, 255, 0.92) !important;
-}
-.svc-panel {
-  background: #FFFFFF !important;
-  color: #1F2937 !important;
-  border: 1px solid #E5E7EB !important;
-  border-radius: 16px !important;
-  padding: 28px 24px !important;
-  box-shadow: 0 8px 28px rgba(11, 30, 58, 0.06) !important;
-}
-.svc-panel h2 {
-  color: #0B1E3A !important;
-  font-size: 1.25rem !important;
-  margin: 0 0 16px !important;
-  letter-spacing: -0.02em;
-}
-/* What you get — aligned bullet list */
-.svc-panel ul,
-.rn-deliverables {
-  list-style: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.svc-panel ul li,
-.rn-deliverables li {
-  position: relative;
-  margin: 0 !important;
-  padding: 12px 14px 12px 42px !important;
-  background: #F8FAFC !important;
-  border: 1px solid #E5E7EB !important;
-  border-radius: 12px !important;
-  color: #1F2937 !important;
-  font-size: 15px !important;
-  line-height: 1.55 !important;
-}
-.svc-panel ul li::before,
-.rn-deliverables li::before {
-  content: "";
-  position: absolute;
-  left: 14px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #ECFEFF;
-  border: 2px solid #00B4D8;
-  box-sizing: border-box;
-}
-.svc-panel ul li::after,
-.rn-deliverables li::after {
-  content: "";
-  position: absolute;
-  left: 19px;
-  top: 50%;
-  width: 5px;
-  height: 9px;
-  border: solid #0B1E3A;
-  border-width: 0 2px 2px 0;
-  transform: translateY(-60%) rotate(45deg);
-}
-.svc-panel p,
-.svc-panel a {
-  color: #374151 !important;
-}
-.svc-panel a {
-  color: #0891B2 !important;
-  font-weight: 600;
-}
-
-/* Homepage service accordion lists — same system */
-.service-card .service-popup,
-.service-card .service-list {
-  text-align: left !important;
-}
-.service-card .service-list {
-  list-style: none !important;
-  margin: 0 0 12px !important;
-  padding: 0 !important;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.service-card .service-list li {
-  position: relative;
-  margin: 0 !important;
-  padding: 10px 12px 10px 38px !important;
-  background: #F8FAFC !important;
-  border: 1px solid #E5E7EB !important;
-  border-radius: 10px !important;
-  color: #1F2937 !important;
-  font-size: 13.5px !important;
-  line-height: 1.5 !important;
-  text-align: left !important;
-}
-.service-card .service-list li::before {
-  content: "";
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #ECFEFF;
-  border: 2px solid #00B4D8;
-  box-sizing: border-box;
-}
-.service-card h3 {
-  color: #0B1E3A !important;
-  text-align: left !important;
-}
-.service-card .service-intro {
-  color: #4B5563 !important;
-  text-align: left !important;
-}
-.service-card .service-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-.service-card .service-tag {
-  background: #ECFEFF !important;
-  color: #0E7490 !important;
-  border-radius: 999px;
-  padding: 4px 10px;
-  font-size: 11px;
-  font-weight: 600;
-}
-.service-card .service-outcome {
-  color: #4B5563 !important;
-  font-size: 13px !important;
-  margin-top: 10px !important;
-  text-align: left !important;
-}
-
-/* Dark mode — high contrast */
-
-
-
-
-
-
-</style>
-
-
-
-
-
-
-
-
-
-<script type="application/ld+json" id="rn-jsonld-service">
-{
-  "@context": "https://schema.org",
-  "@type": "Service",
-  "name": "Digital Marketing Solutions",
-  "description": "Strategy-led digital marketing for visibility and leads.",
-  "provider": {
-    "@type": "Organization",
-    "name": "RuffNeck Entertainment",
-    "url": "https://ruffneck-entertainment.vercel.app/",
-    "telephone": "+2348033807856"
-  },
-  "areaServed": {
-    "@type": "Country",
-    "name": "Nigeria"
-  },
-  "url": "https://ruffneck-entertainment.vercel.app/services-marketing"
-}
-</script>
-
-<style id="rn-ux-best">
-/* Primary buttons — navy on cyan everywhere */
-a.btn-primary, .btn-primary, button.btn-primary {
-  background: #00B4D8 !important;
-  color: #0B1E3A !important;
-  font-weight: 700 !important;
-  border: 2px solid #00B4D8 !important;
-  border-radius: 12px !important;
-  text-shadow: none !important;
-  transition: transform .2s ease, box-shadow .2s ease, background .2s ease !important;
-}
-a.btn-primary:hover, .btn-primary:hover {
-  background: #22D3EE !important;
-  color: #0B1E3A !important;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,180,216,.35) !important;
-}
-a.btn-outline-dark, .btn-outline-dark {
-  border: 1.5px solid #00B4D8 !important;
-  color: #0B1E3A !important;
-  background: #fff !important;
-  border-radius: 12px !important;
-  font-weight: 600 !important;
-}
-a.btn-outline-dark:hover, .btn-outline-dark:hover {
-  background: #ECFEFF !important;
-  color: #0891B2 !important;
-}
-
-/* Trust actions */
-.rn-trust-actions { display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin-top:20px; }
-.rn-trust-actions .btn { text-decoration:none !important; }
-/* Show all services */
-.service-card.rn-svc-extra { display:none !important; }
-body.rn-show-all-services .service-card.rn-svc-extra { display:block !important; }
-#showAllServices {
-  border:1.5px solid #00B4D8 !important;
-  background:#ECFEFF !important;
-  color:#0B1E3A !important;
-  font-weight:700 !important;
-  border-radius:12px !important;
-  padding:12px 20px !important;
-}
-/* Store featured */
-.rn-store-featured {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:16px;
-  margin:0 0 28px;
-}
-.rn-store-featured .rn-feat-card {
-  border:1.5px solid rgba(0,180,216,.4);
-  border-radius:16px;
-  padding:20px;
-  background:#F0F9FF;
-  text-align:left;
-}
-.rn-store-featured .rn-feat-card h3 { margin:0 0 8px; color:#0B1E3A; font-size:1.1rem; }
-.rn-store-featured .rn-feat-card p { margin:0 0 14px; color:#4B5563; font-size:14px; line-height:1.5; }
-
-
-
-/* Product images never blank */
-.product-card img, .store-card img, .product-media img {
-  background:linear-gradient(135deg,#0B1E3A,#1a4a6e);
-  object-fit:cover;
-  min-height:140px;
-  width:100%;
-}
-.product-card .product-media, .store-card .product-thumb {
-  background:linear-gradient(135deg,#0B1E3A,#123050);
-  border-radius:12px;
-  min-height:140px;
-}
-/* Service page hero CTAs row */
-.svc-actions {
-  display:flex !important;
-  flex-wrap:wrap !important;
-  gap:12px !important;
-  justify-content:center !important;
-  margin-top:28px !important;
-}
-</style>
-
-
-
-
-
-
 </head>
 <body>
-
-<nav class="nav nav-scrolled" id="nav" style="background:#0B1E3A;">
-  <div class="container">
-    <div class="nav-inner" style="display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;">
-      <a href="/" class="nav-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-        <img src="/icon-192.png" alt="RuffNeck Entertainment" width="36" height="36" style="border-radius:8px;"/>
-        <span style="color:#fff;font-weight:700;font-size:1.05rem;">RuffNeck<span style="color:#00B4D8;">Entertainment</span></span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="/#services" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Services</a></li>
-        <li><a href="/store" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Store</a></li>
-        <li><a href="/blog" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Blog</a></li>
-        <li><a href="/#contact" style="color:rgba(255,255,255,.9);text-decoration:none;padding:8px 12px;border-radius:8px;">Contact</a></li>
-        <li><a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Book a Call</a></li>
-      </ul>
-      
-
-      
-      <button class="nav-hamburger" id="hamburger" aria-label="Menu" type="button"><span></span><span></span><span></span></button>
-    </div>
-  </div>
-  <div class="nav-mobile" id="mobileMenu">
-    <a href="/">Home</a>
-    <a href="/#services">Services</a>
+<header class="top">
+  <a class="brand" href="/">RuffNeck Entertainment</a>
+  <nav>
+    <a href="/services/ai">AI</a>
+    <a href="/services/marketing">Marketing</a>
+    <a href="/services/operations">Operations &amp; IT</a>
+    <a href="/services/creative">Creative &amp; Career</a>
     <a href="/store">Store</a>
-    <a href="/blog">Blog</a>
-    <a href="/#contact">Contact</a>
-    <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="mobile-cta">Book a Call →</a>
+    <a href="/start-here">Free guide</a>
+  </nav>
+</header>
+<main class="wrap">
+  <p class="kicker">Service</p>
+  <h1>Digital Marketing & Lead Generation for Nigerian SMEs</h1>
+  <p class="lead">Grow visibility and generate qualified enquiries with campaigns and content systems built for how Nigerian customers actually search, chat, and buy.</p>
+  <div class="btns">
+    <a class="btn btn-primary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book a free consultation</a>
+    <a class="btn btn-wa" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%2C%20I%20need%20help%20with%20marketing." target="_blank" rel="noopener">WhatsApp</a>
+    <a class="btn btn-ghost" href="/start-here">Free AI guide</a>
   </div>
-</nav>
 
-<section class="svc-page-hero">
-  <div class="container" style="text-align:center;">
-    <div class="section-label" style="color:#00B4D8;">Services · Marketing</div>
-    <h1>Digital Marketing Solutions</h1>
-    <p>Strategy-led campaigns that grow visibility, generate leads, and convert audiences.</p>
-    <div class="svc-actions">
-        <a class="btn btn-primary" style="background:#00B4D8;color:#0B1E3A;font-weight:700;" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book a Free Consultation</a>
-        <a class="btn btn-outline-dark" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%20Entertainment%2C%0A%0AI%20would%20like%20to%20book%20a%20consultation.%0A%0AName%3A%0ABusiness%3A%0ATopic%3A" target="_blank" rel="noopener">WhatsApp +234 803 380 7856</a>
-        <a class="btn btn-outline-dark" href="/">← Back to home</a>
-      </div>
+  <div class="card">
+    <h2>Who it is for</h2>
+    <p>SMEs, startups, e-commerce brands, consultants, and local service businesses that need consistent leads — not random posting.</p>
   </div>
-</section>
-<section class="section" style="padding-top:12px;padding-bottom:64px;">
-  <div class="container" style="max-width:720px;">
-    <div class="svc-panel">
-      <h2>What you get</h2>
-      <ul>
-        <li>Marketing strategy and channel planning</li>
-        <li>Social media systems and content calendars</li>
-        <li>On-page, technical, and content SEO foundations</li>
-        <li>Email campaigns and simple automation</li>
-        <li>Lead generation and funnel setup support</li>
-        <li>Measurable KPIs for brand awareness</li>
-      </ul>
-      <p style="margin-top:16px;font-size:14px;color:#374151;">Related: <a href="/store">Marketing templates &amp; toolkits</a> · <a href="/blog">Insights on the blog</a></p>
-      <div class="svc-actions">
-        <a class="btn btn-primary" style="background:#00B4D8;color:#0B1E3A;font-weight:700;" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" style="background:#00B4D8;color:#0B1E3A;font-weight:700;">Book a Free Consultation</a>
-        <a class="btn btn-outline-dark" href="https://wa.me/2348033807856" target="_blank" rel="noopener">WhatsApp +234 803 380 7856</a>
-      </div>
-      <p style="text-align:center;margin-top:16px;font-size:13px;color:#374151;">
-        Or <a href="/#contact">use the contact form</a> · <a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a>
-      </p>
+  <div class="card">
+    <h2>What we deliver</h2>
+    <ul><li>Marketing strategy and channel plan</li><li>Social content systems and calendars</li><li>SEO foundations (on-page and content)</li><li>Email sequences and lead capture</li><li>Lead generation funnels and WhatsApp-friendly CTAs</li><li>Basic performance reporting</li></ul>
+  </div>
+  <div class="card">
+    <h2>Expected outcome</h2>
+    <p>Clearer positioning, steadier content output, and a path from attention → enquiry → conversation.</p>
+  </div>
+  <div class="card">
+    <h2>How we work</h2>
+    <p>Audit → priority plan → execution sprints → review. You approve messaging and offers before publish.</p>
+  </div>
+  <div class="card">
+    <h2>Investment</h2>
+    <p class="price">From ₦100,000 / project or monthly packages by scope.</p>
+    <p class="muted" style="margin-top:8px">Final price depends on scope. Third-party tools (hosting, ads, software licences) are separate unless agreed in writing.</p>
+  </div>
+  <div class="card">
+    <h2>FAQ</h2>
+    <div class="faq"><strong>Do you run ads?</strong><p>We can plan and manage campaigns where budget allows. Ad spend is paid to the platform separately.</p></div><div class="faq"><strong>How fast will I see results?</strong><p>Content and profile improvements can start quickly; search and reputation compound over weeks.</p></div><div class="faq"><strong>Can you work with my existing brand?</strong><p>Yes — we adapt to your voice, colours, and offers.</p></div>
+  </div>
+  <div class="card">
+    <h2>Next step</h2>
+    <p class="muted">Response within 24 hours (WAT) on business days.</p>
+    <div class="btns">
+      <a class="btn btn-primary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book consultation</a>
+      <a class="btn btn-wa" href="https://wa.me/2348033807856" target="_blank" rel="noopener">Chat on WhatsApp</a>
+      
     </div>
   </div>
-</section>
-
-<footer class="footer" style="padding:40px 0;text-align:center;background:#0A0F1E;color:rgba(255,255,255,0.55);font-size:13px;">
-  <div class="container">
-    <a href="/" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none;margin-bottom:12px;">
-      <img src="/icon-192.png" alt="" width="28" height="28" style="border-radius:6px;"/>
-      <span style="color:#fff;font-weight:600;">RuffNeck Entertainment</span>
-    </a>
-    <p style="margin:8px 0;">CAC 3770977 · SMEDAN Certified · Kano, Nigeria</p>
-    <p style="margin:8px 0;">
-      <a href="/" style="color:#00B4D8;">Home</a> ·
-      <a href="/store" style="color:#00B4D8;">Store</a> ·
-      <a href="/blog" style="color:#00B4D8;">Blog</a> ·
-      <a href="https://maps.app.goo.gl/4ejBep7GQdejzYsW9" style="color:#00B4D8;" target="_blank" rel="noopener">Google</a>
-    </p>
-    <p style="margin:12px 0 0;">© 2026 RuffNeck Entertainment</p>
-  </div>
-</footer>
-<script>
-(function(){
-  var h=document.getElementById('hamburger'), m=document.getElementById('mobileMenu');
-  if(h&&m){
-    h.addEventListener('click', function(){ m.classList.toggle('open'); h.classList.toggle('is-open'); });
-    m.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ m.classList.remove('open'); }); });
-  }
-})();
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <p class="muted"><a href="/">← Home</a> · <a href="/store">Store</a> · <a href="/blog">Blog</a> · CAC 3770977 · SMEDAN Certified · Kano, Nigeria</p>
+</main>
 </body>
 </html>

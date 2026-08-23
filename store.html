@@ -959,6 +959,60 @@ section.section-teaser {
 }
 </style>
 
+
+<style id="rn-store-phase-c">
+/* Stronger product cards & purchase clarity */
+.product-card, .store-card, [class*="product-card"] {
+  border-radius: 14px !important;
+  border: 1px solid rgba(0,180,216,0.28) !important;
+  background: #0B1E3A !important;
+  padding: 14px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  min-height: 0 !important;
+}
+.product-card img, .store-card img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: 180px !important;
+  object-fit: cover !important;
+  border-radius: 10px !important;
+  background: #151D2E !important;
+}
+.product-card .price, .store-card .price, [class*="price"] {
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  color: #F9FAFB !important;
+}
+.product-card .btn, .product-card button, .store-card .btn, .buy-btn {
+  min-height: 44px !important;
+  border-radius: 10px !important;
+  font-weight: 800 !important;
+  width: 100% !important;
+  margin-top: auto !important;
+}
+.rn-store-trust {
+  display: block !important;
+  max-width: 900px;
+  margin: 12px auto 20px;
+  padding: 12px 14px;
+  background: rgba(0,180,216,0.08);
+  border: 1px solid rgba(0,180,216,0.3);
+  border-radius: 12px;
+  color: #CBD5E1;
+  font-size: 13px;
+  line-height: 1.45;
+  text-align: center;
+}
+@media (max-width: 600px) {
+  .products-grid, .store-grid, #productsGrid, .product-grid {
+    grid-template-columns: 1fr !important;
+    gap: 14px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 

@@ -31,14 +31,6 @@
       "destination": "/services-va.html"
     },
     {
-      "source": "/services/ai",
-      "destination": "/services-ai.html"
-    },
-    {
-      "source": "/services/marketing",
-      "destination": "/services-marketing.html"
-    },
-    {
       "source": "/services/virtual-assistance",
       "destination": "/services-va.html"
     },
@@ -65,6 +57,30 @@
     {
       "source": "/about-full",
       "destination": "/about-full.html"
+    },
+    {
+      "source": "/services/ai",
+      "destination": "/services-ai.html"
+    },
+    {
+      "source": "/services/marketing",
+      "destination": "/services-marketing.html"
+    },
+    {
+      "source": "/services/operations",
+      "destination": "/services-operations.html"
+    },
+    {
+      "source": "/services/creative",
+      "destination": "/services-creative.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services-ai.html"
     }
   ]
 }
