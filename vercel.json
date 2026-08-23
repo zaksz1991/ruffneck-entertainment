@@ -45,6 +45,10 @@
     {
       "source": "/services/va",
       "destination": "/services-va.html"
+    },
+    {
+      "source": "/start-here",
+      "destination": "/start-here.html"
     }
   ]
 }

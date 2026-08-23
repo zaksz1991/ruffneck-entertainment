@@ -7,7 +7,7 @@
      Replace ENCODED_ORIGIN with encodeURIComponent('https://your-image-host/photo.jpg') -->
 
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
 <title>RuffNeck Entertainment | AI Solutions, Digital Marketing, IT Support &amp; Training — Kano, Nigeria</title>
 <meta name="keywords" content="RuffNeck Entertainment, AI training Nigeria, digital marketing Kano, computer support Kano, Microsoft Office support, Excel data analysis, CV writing Nigeria, remote internship Nigeria"/>
 <link rel="canonical" href="https://ruffneck-entertainment.vercel.app/"/>
@@ -1305,6 +1305,41 @@ section.section-teaser {
 }
 </style>
 
+
+<style id="rn-mobile-bar-css">
+#rnMobileBar{
+  display:none;
+  position:fixed;left:0;right:0;bottom:0;z-index:99980;
+  background:rgba(11,30,58,.96);
+  backdrop-filter:blur(10px);
+  border-top:1px solid rgba(0,180,216,.35);
+  padding:8px 10px calc(8px + env(safe-area-inset-bottom));
+  gap:8px;
+  box-shadow:0 -8px 24px rgba(0,0,0,.35);
+}
+#rnMobileBar a{
+  flex:1;text-align:center;text-decoration:none;
+  padding:12px 6px;border-radius:10px;font-size:12px;font-weight:700;
+  min-height:44px;display:flex;align-items:center;justify-content:center;
+}
+#rnMobileBar .rn-mb-wa{background:#25D366;color:#053; }
+#rnMobileBar .rn-mb-book{background:#00B4D8;color:#0B1E3A;}
+#rnMobileBar .rn-mb-store{background:transparent;color:#E5E7EB;border:1px solid rgba(0,180,216,.45);}
+@media (max-width:900px){
+  #rnMobileBar{display:flex;}
+  body{padding-bottom:72px;}
+}
+</style>
+
+
+<style id="rn-hero-cta-mobile">
+@media (max-width:700px){
+  .hero-actions{display:flex!important;flex-direction:column!important;gap:10px!important;width:100%!important;max-width:360px!important;margin-left:auto!important;margin-right:auto!important;}
+  .hero-actions .btn{width:100%!important;min-height:44px!important;justify-content:center!important;text-align:center!important;}
+  .hero-store-chip{width:100%!important;max-width:360px!important;margin-left:auto!important;margin-right:auto!important;}
+}
+</style>
+
 </head>
 <body>
 
@@ -1399,7 +1434,7 @@ section.section-teaser {
           <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-primary">Book a Consultation</a>
           <a href="#free-guide" class="btn btn-outline">Download Free AI Prompts</a>
         </div>
-        <p class="hero-next-hint">Next step: <strong>Book a consultation</strong> — or use the free guide / store below.</p>
+        <p class="hero-next-hint"><strong>Start free:</strong> download the AI prompts guide — or book a consultation when you are ready.</p>
         <div class="hero-meta">
           <a href="/store" class="hero-store-chip">
             <span class="hero-store-icon">🛒</span>
@@ -3865,6 +3900,13 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 })();
 </script>
+
+
+<nav id="rnMobileBar" aria-label="Quick actions">
+  <a class="rn-mb-wa" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%20Entertainment%2C%20I%20need%20help%20with%20my%20business." target="_blank" rel="noopener">WhatsApp</a>
+  <a class="rn-mb-book" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book Call</a>
+  <a class="rn-mb-store" href="/store">Store</a>
+</nav>
 
 </body>
 </html>
