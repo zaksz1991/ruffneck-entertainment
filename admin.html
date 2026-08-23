@@ -546,7 +546,7 @@ body.rn-admin-in #adminShell {
     <button class="login-btn" onclick="doLogin()">Sign In →</button>
     <div class="login-error" id="loginError" style="display:none;">Incorrect password. Please try again.</div>
     <p style="text-align:center;margin-top:12px;font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">
-      After Vercel setup, password is <code>ADMIN_PASSWORD</code> env var.<br/>Default password (fallback only): <strong style="color:#00B4D8;">ruffneck2026admin</strong><br/>
+      Admin password: <strong style="color:#00B4D8;">ruffneck2026admin</strong><br/>
       <button type="button" onclick="resetPasswordToDefault()" style="margin-top:8px;background:rgba(0,180,216,0.15);border:1px solid #00B4D8;color:#00B4D8;font-weight:700;cursor:pointer;padding:8px 14px;border-radius:8px;">Reset password</button>
     </p>
     <p style="text-align:center;margin-top:14px;font-size:13px;color:rgba(255,255,255,0.55);">
@@ -827,7 +827,7 @@ body.rn-admin-in #adminShell {
               <span id="blogCountBadge" style="font-size:12px;color:var(--muted);font-weight:400;"></span>
             </div>
           </div>
-          <p class="rn-static-note" id="blogListNote"><strong>Note:</strong> Built-in (static) articles cannot be edited here — they are hardcoded on the website. Only posts you create in Admin can be edited, published, or deleted. Publish status must be <strong>Published</strong> to show on /blog. Data is saved in this browser only (not in GitHub).</p>
+          <p class="rn-static-note"><strong>Note:</strong> Posts and products you create here are saved in <strong>this browser only</strong>. Built-in articles/products on the site cannot be edited here. Use status <strong>Published</strong> / <strong>Active</strong> so they show on Blog and Store.</p>
 <div id="blogList"></div>
         </div>
       </div>
@@ -2130,536 +2130,261 @@ updateStats = function(){
 </script>
 
 
-<script id="rn-server-auth">
-(function(){
-  var USE_SERVER = true;
 
-  async function serverSession(){
-    try {
-      var res = await fetch("/api/admin-session", { credentials: "same-origin", cache: "no-store" });
-      var data = await res.json();
-      return data;
-    } catch (e) {
-      return { authenticated: false, configured: false };
-    }
-  }
 
-  async function serverLogin(password){
-    var res = await fetch("/api/admin-login", {
-      method: "POST",
-      credentials: "same-origin",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password: password })
-    });
-    var data = await res.json().catch(function(){ return {}; });
-    return { status: res.status, data: data };
-  }
 
-  async function serverLogout(){
-    try {
-      await fetch("/api/admin-logout", { method: "POST", credentials: "same-origin" });
-    } catch (e) {}
-  }
 
-  function showShell(){
-    var loginScreen = document.getElementById("loginScreen");
-    var shell = document.getElementById("adminShell");
-    if (loginScreen) loginScreen.style.display = "none";
-    if (shell) {
-      shell.classList.add("visible");
-      shell.style.display = "block";
-      shell.style.visibility = "visible";
-      shell.style.opacity = "1";
-    }
-    if (typeof initAdmin === "function") initAdmin();
-  }
 
-  function showError(msg){
-    var err = document.getElementById("loginError");
-    if (!err) return;
-    err.style.display = "block";
-    err.style.color = "#f87171";
-    err.textContent = msg;
-  }
 
-  // Replace doLogin with server-first version
-  window.doLogin = async function doLogin(){
-    var input = document.getElementById("adminPass");
-    var val = (input && input.value ? input.value : "").trim();
-    if (!val) {
-      showError("Enter the password.");
-      return;
-    }
 
-    // Try server-side auth first
-    try {
-      var result = await serverLogin(val);
-      if (result.status === 200 && result.data && result.data.ok) {
-        showShell();
-        return;
-      }
-      if (result.status === 503) {
-        // Server not configured — fall back to client default for recovery
-        if (typeof getPass === "function" && (val === getPass() || val === "ruffneck2026admin")) {
-          showShell();
-          showError("");
-          var err = document.getElementById("loginError");
-          if (err) {
-            err.style.display = "block";
-            err.style.color = "#FBBF24";
-            err.textContent = "Warning: server auth not configured. Using temporary client login. Set ADMIN_PASSWORD on Vercel.";
-          }
-          return;
-        }
-        showError(result.data && result.data.error ? result.data.error : "Server auth not configured.");
-        return;
-      }
-      showError((result.data && result.data.error) || "Incorrect password");
-      if (input) { input.value = ""; input.focus(); }
-      return;
-    } catch (e) {
-      // Network failure — optional client fallback
-      if (typeof getPass === "function" && (val === getPass() || val === "ruffneck2026admin")) {
-        showShell();
-        return;
-      }
-      showError("Login failed. Check connection or try again.");
-    }
-  };
 
-  window.adminLogout = async function(){
-    await serverLogout();
-    try { localStorage.removeItem("rn_admin_pass"); } catch(e) {}
-    location.reload();
-  };
 
-  // Auto-resume session if cookie valid
-  document.addEventListener("DOMContentLoaded", async function(){
-    var session = await serverSession();
-    if (session.authenticated) {
-      showShell();
-    }
-  });
-})();
-</script>
+
+
+
+
+
+
+
+
+
 
 
 <script id="rn-cms-db-client">
 window.RNCms = {
   async listPosts(){
     try {
-      var res = await fetch('/api/cms/posts', { credentials: 'same-origin', cache: 'no-store' });
+      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
       var data = await res.json();
       if (res.ok && data.ok && Array.isArray(data.posts)) {
-        return { source: 'db', posts: data.posts.map(window.RNCms.normalizePost) };
+        return { source:'db', posts: data.posts.map(function(p){
+          return {
+            id:p.id, title:p.title, cat:p.cat, emoji:p.emoji, image:p.image,
+            desc:p.desc||'', body:p.body||'', tags:p.tags||[], author:p.author,
+            readTime:p.read_time||p.readTime||'5', status:p.status||'draft',
+            created:p.created, updated:p.updated
+          };
+        })};
       }
-      if (data.code === 'NO_DB') return { source: 'local', posts: window.RNCms.localPosts() };
-    } catch (e) {}
-    return { source: 'local', posts: window.RNCms.localPosts() };
+    } catch(e) {}
+    try { return { source:'local', posts: JSON.parse(localStorage.getItem('rn_blog_posts')||'[]') }; }
+    catch(e){ return { source:'local', posts: [] }; }
   },
   async listProducts(){
     try {
-      var res = await fetch('/api/cms/products', { credentials: 'same-origin', cache: 'no-store' });
+      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
       var data = await res.json();
       if (res.ok && data.ok && Array.isArray(data.products)) {
-        return { source: 'db', products: data.products.map(window.RNCms.normalizeProduct) };
+        return { source:'db', products: data.products.map(function(p){
+          return {
+            id:p.id, name:p.name, cat:p.cat, emoji:p.emoji, image:p.image,
+            desc:p.desc||'', fullDesc:p.full_desc||p.fullDesc||'', tiers:p.tiers||{},
+            price:p.price, status:p.status||'active', created:p.created, updated:p.updated
+          };
+        })};
       }
-      if (data.code === 'NO_DB') return { source: 'local', products: window.RNCms.localProducts() };
-    } catch (e) {}
-    return { source: 'local', products: window.RNCms.localProducts() };
+    } catch(e) {}
+    try { return { source:'local', products: JSON.parse(localStorage.getItem('rn_products')||'[]') }; }
+    catch(e){ return { source:'local', products: [] }; }
   },
   async savePost(post){
-    var method = post._exists ? 'PUT' : 'POST';
+    var method = post.id && post._exists ? 'PUT' : 'POST';
     delete post._exists;
-    try {
-      var res = await fetch('/api/cms/posts', {
-        method: method,
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(post)
-      });
-      var data = await res.json();
-      if (res.ok && data.ok) return { source: 'db', post: data.post };
-      if (res.status === 503) {
-        window.RNCms.savePostLocal(post);
-        return { source: 'local', post: post };
-      }
-      throw new Error(data.error || 'Save failed');
-    } catch (e) {
-      if (e.message && e.message.indexOf('Save failed') === 0) throw e;
-      window.RNCms.savePostLocal(post);
-      return { source: 'local', post: post };
-    }
+    var res = await fetch('/api/cms/posts', {
+      method: method, credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(post)
+    });
+    var data = await res.json().catch(function(){return {};});
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
+    return data.post || post;
   },
   async deletePost(id){
-    try {
-      var res = await fetch('/api/cms/posts', {
-        method: 'DELETE',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id })
-      });
-      var data = await res.json();
-      if (res.ok && data.ok) return { source: 'db' };
-      if (res.status === 503) {
-        window.RNCms.deletePostLocal(id);
-        return { source: 'local' };
-      }
-      throw new Error(data.error || 'Delete failed');
-    } catch (e) {
-      window.RNCms.deletePostLocal(id);
-      return { source: 'local' };
-    }
+    var res = await fetch('/api/cms/posts', {
+      method:'DELETE', credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({id:id})
+    });
+    var data = await res.json().catch(function(){return {};});
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
   },
   async saveProduct(product){
-    var method = product._exists ? 'PUT' : 'POST';
+    var method = product.id && product._exists ? 'PUT' : 'POST';
     delete product._exists;
-    try {
-      var res = await fetch('/api/cms/products', {
-        method: method,
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product)
-      });
-      var data = await res.json();
-      if (res.ok && data.ok) return { source: 'db', product: data.product };
-      if (res.status === 503) {
-        window.RNCms.saveProductLocal(product);
-        return { source: 'local', product: product };
-      }
-      throw new Error(data.error || 'Save failed');
-    } catch (e) {
-      if (e.message && e.message.indexOf('Save failed') === 0) throw e;
-      window.RNCms.saveProductLocal(product);
-      return { source: 'local', product: product };
-    }
+    var res = await fetch('/api/cms/products', {
+      method: method, credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(product)
+    });
+    var data = await res.json().catch(function(){return {};});
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
+    return data.product || product;
   },
   async deleteProduct(id){
-    try {
-      var res = await fetch('/api/cms/products', {
-        method: 'DELETE',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id })
-      });
-      var data = await res.json();
-      if (res.ok && data.ok) return { source: 'db' };
-      if (res.status === 503) {
-        window.RNCms.deleteProductLocal(id);
-        return { source: 'local' };
-      }
-      throw new Error(data.error || 'Delete failed');
-    } catch (e) {
-      window.RNCms.deleteProductLocal(id);
-      return { source: 'local' };
-    }
-  },
-  normalizePost: function(p){
-    if (!p) return p;
-    return {
-      id: p.id,
-      title: p.title,
-      cat: p.cat,
-      emoji: p.emoji,
-      image: p.image,
-      desc: p.desc || p.description || '',
-      body: p.body || '',
-      tags: p.tags || [],
-      author: p.author,
-      readTime: p.read_time || p.readTime || '5',
-      status: p.status || 'draft',
-      created: p.created,
-      updated: p.updated
-    };
-  },
-  normalizeProduct: function(p){
-    if (!p) return p;
-    return {
-      id: p.id,
-      name: p.name,
-      cat: p.cat,
-      emoji: p.emoji,
-      image: p.image,
-      desc: p.desc || '',
-      fullDesc: p.full_desc || p.fullDesc || '',
-      tiers: p.tiers || {},
-      price: p.price,
-      status: p.status || 'active',
-      created: p.created,
-      updated: p.updated
-    };
-  },
-  localPosts: function(){
-    try { return JSON.parse(localStorage.getItem('rn_blog_posts') || '[]'); } catch(e){ return []; }
-  },
-  localProducts: function(){
-    try { return JSON.parse(localStorage.getItem('rn_products') || '[]'); } catch(e){ return []; }
-  },
-  savePostLocal: function(post){
-    var posts = window.RNCms.localPosts();
-    var i = posts.findIndex(function(x){ return x.id === post.id; });
-    if (i >= 0) posts[i] = post; else posts.unshift(post);
-    localStorage.setItem('rn_blog_posts', JSON.stringify(posts));
-  },
-  deletePostLocal: function(id){
-    var posts = window.RNCms.localPosts().filter(function(x){ return x.id !== id; });
-    localStorage.setItem('rn_blog_posts', JSON.stringify(posts));
-  },
-  saveProductLocal: function(product){
-    var list = window.RNCms.localProducts();
-    var i = list.findIndex(function(x){ return x.id === product.id; });
-    if (i >= 0) list[i] = product; else list.unshift(product);
-    localStorage.setItem('rn_products', JSON.stringify(list));
-  },
-  deleteProductLocal: function(id){
-    var list = window.RNCms.localProducts().filter(function(x){ return x.id !== id; });
-    localStorage.setItem('rn_products', JSON.stringify(list));
+    var res = await fetch('/api/cms/products', {
+      method:'DELETE', credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({id:id})
+    });
+    var data = await res.json().catch(function(){return {};});
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
   }
 };
 </script>
 
-<script id="rn-cms-admin-bridge">
-(function(){
-  // After RNCms loads, bridge existing admin functions to database
-  function ready(fn){
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
-    else fn();
-  }
-
-  ready(function(){
-    if (!window.RNCms) return;
-
-    // Replace list loaders used by renderBlogList / renderProductsTable
-    window.getBlogPosts = function(){
-      // sync cache for immediate UI; refresh async
-      return window.__rnBlogCache || window.RNCms.localPosts();
-    };
-    window.getProducts = function(){
-      return window.__rnProductCache || window.RNCms.localProducts();
-    };
-
-    window.__rnRefreshBlogFromDb = async function(){
-      var r = await window.RNCms.listPosts();
-      window.__rnBlogCache = r.posts || [];
-      window.__rnCmsSource = r.source;
-      if (typeof renderBlogList === 'function') renderBlogList();
-      var note = document.getElementById('cmsSourceNote');
-      if (note) note.textContent = r.source === 'db' ? 'Storage: Database (synced)' : 'Storage: This browser only (set Supabase on Vercel to sync)';
-    };
-    window.__rnRefreshProductsFromDb = async function(){
-      var r = await window.RNCms.listProducts();
-      window.__rnProductCache = r.products || [];
-      if (typeof renderProductsTable === 'function') renderProductsTable();
-      else if (typeof renderProducts === 'function') renderProducts();
-    };
-
-    // Wrap saveBlogPost to persist via API
-    if (typeof saveBlogPost === 'function') {
-      var _saveBlogPost = saveBlogPost;
-      window.saveBlogPost = async function(statusOverride){
-        var title = (document.getElementById('blogTitle') || {}).value || '';
-        title = title.trim();
-        var cat = (document.getElementById('blogCat') || {}).value || '';
-        var desc = ((document.getElementById('blogDesc') || {}).value || '').trim();
-        var editor = document.getElementById('blogEditor');
-        var body = editor ? editor.innerHTML.trim() : '';
-        if (!title) { if (typeof showToast==='function') showToast('Please enter a post title','error'); return; }
-        if (!cat) { if (typeof showToast==='function') showToast('Please select a category','error'); return; }
-        if (!body || body === '<br>') { if (typeof showToast==='function') showToast('Please write some content','error'); return; }
-        var status = statusOverride || (document.getElementById('blogStatus') || {}).value || 'draft';
-        var blogImgEl = document.getElementById('blogImgPreview');
-        var blogImageData = (blogImgEl && blogImgEl.style.display !== 'none') ? blogImgEl.src : null;
-        var editingId = window.editingBlogId || null;
-        var post = {
-          id: editingId || String(Date.now()),
-          title: title,
-          cat: cat,
-          emoji: (document.getElementById('blogEmoji') || {}).value || '📝',
-          image: blogImageData,
-          desc: desc || title.substring(0, 100),
-          body: body,
-          tags: ((document.getElementById('blogTags') || {}).value || '').split(',').map(function(t){ return t.trim(); }).filter(Boolean),
-          author: (document.getElementById('blogAuthor') || {}).value || 'RuffNeck Entertainment',
-          readTime: (document.getElementById('blogReadTime') || {}).value || '5',
-          status: status,
-          created: new Date().toLocaleDateString('en-GB'),
-          updated: new Date().toLocaleDateString('en-GB'),
-          _exists: !!editingId
-        };
-        try {
-          var result = await window.RNCms.savePost(post);
-          // also mirror local for offline
-          window.RNCms.savePostLocal(window.RNCms.normalizePost(result.post || post));
-          if (typeof showToast === 'function') {
-            showToast('Saved (' + result.source + '): ' + title, 'success');
-          }
-          window.editingBlogId = null;
-          if (typeof clearBlogForm === 'function') clearBlogForm();
-          await window.__rnRefreshBlogFromDb();
-          if (typeof showPage === 'function') showPage('blog', null);
-        } catch (e) {
-          if (typeof showToast === 'function') showToast(e.message || 'Save failed', 'error');
-        }
-      };
-    }
-
-    if (typeof deleteBlogPost === 'function') {
-      window.deleteBlogPost = async function(id){
-        if (!confirm('Delete this post?')) return;
-        await window.RNCms.deletePost(id);
-        window.RNCms.deletePostLocal(id);
-        await window.__rnRefreshBlogFromDb();
-        if (typeof showToast === 'function') showToast('Post deleted', 'success');
-      };
-    }
-
-    // Products save wrapper if saveProduct exists
-    if (typeof saveProduct === 'function') {
-      var _saveProduct = saveProduct;
-      window.saveProduct = async function(){
-        // Call original to build object if too complex — intercept after local save by re-reading
-        // Simpler: run original then push last local item to DB
-        try {
-          _saveProduct();
-        } catch (e) {}
-        var list = window.RNCms.localProducts();
-        if (list[0]) {
-          var p = list[0];
-          p._exists = true;
-          try {
-            await window.RNCms.saveProduct(p);
-            if (typeof showToast === 'function') showToast('Product synced to database', 'success');
-          } catch (err) {
-            if (typeof showToast === 'function') showToast('Saved locally; DB: ' + (err.message||''), 'error');
-          }
-        }
-        await window.__rnRefreshProductsFromDb();
-      };
-    }
-
-    if (typeof deleteProduct === 'function') {
-      var _delP = deleteProduct;
-      window.deleteProduct = async function(id){
-        if (!confirm('Delete this product?')) return;
-        await window.RNCms.deleteProduct(id);
-        window.RNCms.deleteProductLocal(id);
-        await window.__rnRefreshProductsFromDb();
-        if (typeof showToast === 'function') showToast('Product deleted', 'success');
-      };
-    }
-
-    // Initial load from DB
-    window.__rnRefreshBlogFromDb();
-    window.__rnRefreshProductsFromDb();
-
-    // Source banner
-    var bar = document.createElement('div');
-    bar.id = 'cmsSourceNote';
-    bar.style.cssText = 'padding:8px 14px;font-size:12px;background:#0B1E3A;color:#FBBF24;text-align:center;';
-    bar.textContent = 'Checking storage…';
-    var shell = document.getElementById('adminShell');
-    if (shell) shell.insertBefore(bar, shell.firstChild);
-  });
-})();
-</script>
-
-
-
-
-
 <script id="rn-admin-simple-login">
 (function(){
-  var DEFAULT_PASS = 'ruffneck2026admin';
+  var FALLBACK = 'ruffneck2026admin';
 
   function showShell(){
     document.body.classList.add('rn-admin-in');
-    var loginScreen = document.getElementById('loginScreen');
-    if (loginScreen) {
-      loginScreen.classList.add('rn-hidden');
-      loginScreen.style.display = 'none';
-      loginScreen.style.visibility = 'hidden';
-      loginScreen.style.pointerEvents = 'none';
-      loginScreen.style.opacity = '0';
-      loginScreen.style.zIndex = '-1';
+    var login = document.getElementById('loginScreen');
+    if (login) {
+      login.classList.add('rn-hidden');
+      login.style.cssText = 'display:none!important;visibility:hidden!important;pointer-events:none!important;z-index:-1!important;';
     }
     var shell = document.getElementById('adminShell');
     if (shell) {
       shell.classList.add('visible');
-      shell.style.display = 'flex';
-      shell.style.visibility = 'visible';
-      shell.style.opacity = '1';
+      shell.style.cssText = 'display:flex!important;visibility:visible!important;opacity:1!important;flex-direction:column;min-height:100vh;';
     }
-    // hide any leftover login overlays
-    document.querySelectorAll('.login-screen').forEach(function(el){
-      el.classList.add('rn-hidden');
-      el.style.display = 'none';
-    });
-    if (typeof initAdmin === 'function') {
-      try { initAdmin(); } catch(e) { console.warn(e); }
+    try { if (typeof initAdmin === 'function') initAdmin(); } catch(e) {}
+    refreshCmsBanner();
+  }
+
+  async function refreshCmsBanner(){
+    var el = document.getElementById('cmsSourceNote');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'cmsSourceNote';
+      el.style.cssText = 'padding:8px 12px;text-align:center;font-size:12px;background:#0B1E3A;color:#FBBF24;';
+      var shell = document.getElementById('adminShell');
+      if (shell) shell.insertBefore(el, shell.firstChild);
     }
-    if (typeof window.__rnRefreshBlogFromDb === 'function') {
-      try { window.__rnRefreshBlogFromDb(); } catch(e) {}
-    }
-    if (typeof window.__rnRefreshProductsFromDb === 'function') {
-      try { window.__rnRefreshProductsFromDb(); } catch(e) {}
+    try {
+      var r = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
+      var d = await r.json();
+      if (r.ok && d.ok) {
+        el.style.color = '#86EFAC';
+        el.textContent = 'Storage: Database connected (Supabase) — posts sync across devices';
+        return;
+      }
+      if (d && d.code === 'NO_DB') {
+        el.textContent = 'Storage: browser only — add SUPABASE_URL + SUPABASE_SERVICE_KEY on Vercel, then redeploy';
+        return;
+      }
+      el.textContent = 'Storage: database error — ' + (d.error || r.status);
+    } catch(e) {
+      el.textContent = 'Storage: browser only (API not reachable)';
     }
   }
 
-  function showErr(msg, ok){
-    var err = document.getElementById('loginError');
-    if (!err) return;
-    err.style.display = 'block';
-    err.style.color = ok ? '#86EFAC' : '#f87171';
-    err.textContent = msg;
-  }
-
-  window.doLogin = async function doLogin(){
+  window.doLogin = async function(){
     var input = document.getElementById('adminPass');
+    var err = document.getElementById('loginError');
     var val = (input && input.value ? input.value : '').trim();
-    if (!val) { showErr('Enter the password.'); return; }
-
-    // Server auth first
+    if (!val) {
+      if (err) { err.style.display='block'; err.textContent='Enter password'; }
+      return;
+    }
+    // Try server password first (ADMIN_PASSWORD on Vercel)
     try {
       var res = await fetch('/api/admin-login', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
+        method:'POST', credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ password: val })
       });
       if (res.status === 200) {
-        var data = await res.json().catch(function(){ return {}; });
+        var data = await res.json();
         if (data.ok) { showShell(); return; }
       }
-    } catch (e) {}
-
-    // Default always works
-    if (val === DEFAULT_PASS) {
-      try { localStorage.removeItem('rn_admin_pass'); } catch(e) {}
+    } catch(e) {}
+    // Fallback password always works
+    if (val === FALLBACK) {
+      try { sessionStorage.setItem('rn_admin_ok','1'); } catch(e) {}
       showShell();
       return;
     }
-
-    try {
-      var stored = localStorage.getItem('rn_admin_pass');
-      if (stored && val === String(stored).trim()) { showShell(); return; }
-    } catch(e) {}
-
-    showErr('Incorrect password. Use: ruffneck2026admin');
-    if (input) { input.value = ''; input.focus(); }
+    if (err) {
+      err.style.display = 'block';
+      err.style.color = '#f87171';
+      err.textContent = 'Wrong password. Try: ruffneck2026admin  (or your ADMIN_PASSWORD if set on Vercel)';
+    }
   };
 
   window.resetPasswordToDefault = function(){
-    try { localStorage.removeItem('rn_admin_pass'); } catch(e) {}
-    showErr('Reset done. Password: ruffneck2026admin', true);
+    var err = document.getElementById('loginError');
+    if (err) {
+      err.style.display = 'block';
+      err.style.color = '#86EFAC';
+      err.textContent = 'Use password: ruffneck2026admin';
+    }
   };
 
-  // If already has session cookie, open shell
   document.addEventListener('DOMContentLoaded', async function(){
     try {
-      var res = await fetch('/api/admin-session', { credentials: 'same-origin', cache: 'no-store' });
+      if (sessionStorage.getItem('rn_admin_ok') === '1') { showShell(); return; }
+    } catch(e) {}
+    try {
+      var res = await fetch('/api/admin-session', { credentials:'same-origin', cache:'no-store' });
       var data = await res.json();
       if (data && data.authenticated) showShell();
     } catch(e) {}
+    var input = document.getElementById('adminPass');
+    if (input) input.onkeydown = function(e){ if (e.key === 'Enter') window.doLogin(); };
+  });
+
+  // Bridge save blog to database when available
+  document.addEventListener('DOMContentLoaded', function(){
+    if (!window.RNCms) return;
+    var origSave = window.saveBlogPost;
+    window.saveBlogPost = async function(statusOverride){
+      var title = ((document.getElementById('blogTitle')||{}).value||'').trim();
+      var cat = ((document.getElementById('blogCat')||{}).value||'');
+      var desc = ((document.getElementById('blogDesc')||{}).value||'').trim();
+      var editor = document.getElementById('blogEditor');
+      var body = editor ? editor.innerHTML.trim() : '';
+      var status = statusOverride || ((document.getElementById('blogStatus')||{}).value||'draft');
+      if (!title) { alert('Enter a title'); return; }
+      var imgEl = document.getElementById('blogImgPreview');
+      var post = {
+        id: window.editingBlogId || String(Date.now()),
+        title: title, cat: cat, desc: desc || title.slice(0,100), body: body,
+        emoji: ((document.getElementById('blogEmoji')||{}).value)||'📝',
+        image: (imgEl && imgEl.style.display !== 'none') ? imgEl.src : null,
+        tags: (((document.getElementById('blogTags')||{}).value)||'').split(',').map(function(t){return t.trim();}).filter(Boolean),
+        author: ((document.getElementById('blogAuthor')||{}).value)||'RuffNeck Entertainment',
+        readTime: ((document.getElementById('blogReadTime')||{}).value)||'5',
+        status: status,
+        created: new Date().toLocaleDateString('en-GB'),
+        updated: new Date().toLocaleDateString('en-GB'),
+        _exists: !!window.editingBlogId
+      };
+      try {
+        await window.RNCms.savePost(post);
+        // also local backup
+        try {
+          var list = JSON.parse(localStorage.getItem('rn_blog_posts')||'[]');
+          var i = list.findIndex(function(x){return x.id===post.id;});
+          if (i>=0) list[i]=post; else list.unshift(post);
+          localStorage.setItem('rn_blog_posts', JSON.stringify(list));
+        } catch(e) {}
+        alert('Saved to database: ' + title);
+        window.editingBlogId = null;
+        if (typeof clearBlogForm === 'function') clearBlogForm();
+        if (typeof renderBlogList === 'function') renderBlogList();
+      } catch (err) {
+        // fallback local only
+        try {
+          var list2 = JSON.parse(localStorage.getItem('rn_blog_posts')||'[]');
+          list2.unshift(post);
+          localStorage.setItem('rn_blog_posts', JSON.stringify(list2));
+          alert('Saved on this browser only (database not connected): ' + (err.message||''));
+        } catch(e2) {
+          alert(err.message || 'Save failed');
+        }
+      }
+    };
   });
 })();
 </script>

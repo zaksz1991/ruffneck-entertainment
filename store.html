@@ -3132,234 +3132,124 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 
+
+
+
+
+
+
+
+
 <script id="rn-cms-db-client">
 window.RNCms = {
   async listPosts(){
     try {
-      var res = await fetch('/api/cms/posts', { credentials: 'same-origin', cache: 'no-store' });
+      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
       var data = await res.json();
       if (res.ok && data.ok && Array.isArray(data.posts)) {
-        return { source: 'db', posts: data.posts.map(window.RNCms.normalizePost) };
+        return { source:'db', posts: data.posts.map(function(p){
+          return {
+            id:p.id, title:p.title, cat:p.cat, emoji:p.emoji, image:p.image,
+            desc:p.desc||'', body:p.body||'', tags:p.tags||[], author:p.author,
+            readTime:p.read_time||p.readTime||'5', status:p.status||'draft',
+            created:p.created, updated:p.updated
+          };
+        })};
       }
-      if (data.code === 'NO_DB') return { source: 'local', posts: window.RNCms.localPosts() };
-    } catch (e) {}
-    return { source: 'local', posts: window.RNCms.localPosts() };
+    } catch(e) {}
+    try { return { source:'local', posts: JSON.parse(localStorage.getItem('rn_blog_posts')||'[]') }; }
+    catch(e){ return { source:'local', posts: [] }; }
   },
   async listProducts(){
     try {
-      var res = await fetch('/api/cms/products', { credentials: 'same-origin', cache: 'no-store' });
+      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
       var data = await res.json();
       if (res.ok && data.ok && Array.isArray(data.products)) {
-        return { source: 'db', products: data.products.map(window.RNCms.normalizeProduct) };
+        return { source:'db', products: data.products.map(function(p){
+          return {
+            id:p.id, name:p.name, cat:p.cat, emoji:p.emoji, image:p.image,
+            desc:p.desc||'', fullDesc:p.full_desc||p.fullDesc||'', tiers:p.tiers||{},
+            price:p.price, status:p.status||'active', created:p.created, updated:p.updated
+          };
+        })};
       }
-      if (data.code === 'NO_DB') return { source: 'local', products: window.RNCms.localProducts() };
-    } catch (e) {}
-    return { source: 'local', products: window.RNCms.localProducts() };
+    } catch(e) {}
+    try { return { source:'local', products: JSON.parse(localStorage.getItem('rn_products')||'[]') }; }
+    catch(e){ return { source:'local', products: [] }; }
   },
   async savePost(post){
-    var method = post._exists ? 'PUT' : 'POST';
+    var method = post.id && post._exists ? 'PUT' : 'POST';
     delete post._exists;
-    try {
-      var res = await fetch('/api/cms/posts', {
-        method: method,
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(post)
-      });
-      var data = await res.json();
-      if (res.ok && data.ok) return { source: 'db', post: data.post };
-      if (res.status === 503) {
-        window.RNCms.savePostLocal(post);
-        return { source: 'local', post: post };
-      }
-      throw new Error(data.error || 'Save failed');
-    } catch (e) {
-      if (e.message && e.message.indexOf('Save failed') === 0) throw e;
-      window.RNCms.savePostLocal(post);
-      return { source: 'local', post: post };
-    }
+    var res = await fetch('/api/cms/posts', {
+      method: method, credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(post)
+    });
+    var data = await res.json().catch(function(){return {};});
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
+    return data.post || post;
   },
   async deletePost(id){
-    try {
-      var res = await fetch('/api/cms/posts', {
-        method: 'DELETE',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id })
-      });
-      var data = await res.json();
-      if (res.ok && data.ok) return { source: 'db' };
-      if (res.status === 503) {
-        window.RNCms.deletePostLocal(id);
-        return { source: 'local' };
-      }
-      throw new Error(data.error || 'Delete failed');
-    } catch (e) {
-      window.RNCms.deletePostLocal(id);
-      return { source: 'local' };
-    }
+    var res = await fetch('/api/cms/posts', {
+      method:'DELETE', credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({id:id})
+    });
+    var data = await res.json().catch(function(){return {};});
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
   },
   async saveProduct(product){
-    var method = product._exists ? 'PUT' : 'POST';
+    var method = product.id && product._exists ? 'PUT' : 'POST';
     delete product._exists;
-    try {
-      var res = await fetch('/api/cms/products', {
-        method: method,
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product)
-      });
-      var data = await res.json();
-      if (res.ok && data.ok) return { source: 'db', product: data.product };
-      if (res.status === 503) {
-        window.RNCms.saveProductLocal(product);
-        return { source: 'local', product: product };
-      }
-      throw new Error(data.error || 'Save failed');
-    } catch (e) {
-      if (e.message && e.message.indexOf('Save failed') === 0) throw e;
-      window.RNCms.saveProductLocal(product);
-      return { source: 'local', product: product };
-    }
+    var res = await fetch('/api/cms/products', {
+      method: method, credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(product)
+    });
+    var data = await res.json().catch(function(){return {};});
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
+    return data.product || product;
   },
   async deleteProduct(id){
-    try {
-      var res = await fetch('/api/cms/products', {
-        method: 'DELETE',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: id })
-      });
-      var data = await res.json();
-      if (res.ok && data.ok) return { source: 'db' };
-      if (res.status === 503) {
-        window.RNCms.deleteProductLocal(id);
-        return { source: 'local' };
-      }
-      throw new Error(data.error || 'Delete failed');
-    } catch (e) {
-      window.RNCms.deleteProductLocal(id);
-      return { source: 'local' };
-    }
-  },
-  normalizePost: function(p){
-    if (!p) return p;
-    return {
-      id: p.id,
-      title: p.title,
-      cat: p.cat,
-      emoji: p.emoji,
-      image: p.image,
-      desc: p.desc || p.description || '',
-      body: p.body || '',
-      tags: p.tags || [],
-      author: p.author,
-      readTime: p.read_time || p.readTime || '5',
-      status: p.status || 'draft',
-      created: p.created,
-      updated: p.updated
-    };
-  },
-  normalizeProduct: function(p){
-    if (!p) return p;
-    return {
-      id: p.id,
-      name: p.name,
-      cat: p.cat,
-      emoji: p.emoji,
-      image: p.image,
-      desc: p.desc || '',
-      fullDesc: p.full_desc || p.fullDesc || '',
-      tiers: p.tiers || {},
-      price: p.price,
-      status: p.status || 'active',
-      created: p.created,
-      updated: p.updated
-    };
-  },
-  localPosts: function(){
-    try { return JSON.parse(localStorage.getItem('rn_blog_posts') || '[]'); } catch(e){ return []; }
-  },
-  localProducts: function(){
-    try { return JSON.parse(localStorage.getItem('rn_products') || '[]'); } catch(e){ return []; }
-  },
-  savePostLocal: function(post){
-    var posts = window.RNCms.localPosts();
-    var i = posts.findIndex(function(x){ return x.id === post.id; });
-    if (i >= 0) posts[i] = post; else posts.unshift(post);
-    localStorage.setItem('rn_blog_posts', JSON.stringify(posts));
-  },
-  deletePostLocal: function(id){
-    var posts = window.RNCms.localPosts().filter(function(x){ return x.id !== id; });
-    localStorage.setItem('rn_blog_posts', JSON.stringify(posts));
-  },
-  saveProductLocal: function(product){
-    var list = window.RNCms.localProducts();
-    var i = list.findIndex(function(x){ return x.id === product.id; });
-    if (i >= 0) list[i] = product; else list.unshift(product);
-    localStorage.setItem('rn_products', JSON.stringify(list));
-  },
-  deleteProductLocal: function(id){
-    var list = window.RNCms.localProducts().filter(function(x){ return x.id !== id; });
-    localStorage.setItem('rn_products', JSON.stringify(list));
+    var res = await fetch('/api/cms/products', {
+      method:'DELETE', credentials:'same-origin',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({id:id})
+    });
+    var data = await res.json().catch(function(){return {};});
+    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
   }
 };
 </script>
 
 <script id="rn-admin-store-load">
-async function rnLoadAdminProducts(){
-  var adminProducts = [];
+document.addEventListener('DOMContentLoaded', async function(){
+  var products = [];
   if (window.RNCms) {
     var r = await window.RNCms.listProducts();
-    adminProducts = r.products || [];
-  } else {
-    try { adminProducts = JSON.parse(localStorage.getItem('rn_products') || '[]'); } catch(e){ adminProducts = []; }
+    products = r.products || [];
   }
-  var activeProducts = adminProducts.filter(function(p){
-    var s = (p.status || 'active').toLowerCase();
-    return s === 'active' || s === 'published' || s === 'live';
+  var active = products.filter(function(p){
+    var s=(p.status||'active').toLowerCase();
+    return s==='active'||s==='published'||s==='live';
   });
-  var grid = document.getElementById('newArrivalsGrid') ||
-             document.getElementById('productsGrid') ||
-             document.querySelector('.products-grid');
-  var section = document.getElementById('newArrivalsSection');
+  var grid = document.getElementById('newArrivalsGrid') || document.querySelector('.products-grid');
   if (!grid) return;
   grid.querySelectorAll('[data-admin-product="1"]').forEach(function(n){ n.remove(); });
   window.PRODUCTS = window.PRODUCTS || {};
-  activeProducts.forEach(function(p){
-    if (!p || !p.id) return;
-    var tiers = [];
-    var t = p.tiers || {};
-    if (t.beginner || t.intermediate || t.advanced) {
-      ['beginner','intermediate','advanced'].forEach(function(key, idx){
-        if (!t[key]) return;
-        var emoji = idx===0?'🟢':(idx===1?'🔵':'⭐');
-        tiers.push({ level: emoji + ' ' + (t[key].label || key), price: t[key].price, desc: p.fullDesc || p.desc, includes: [p.desc || ''], pdf: t[key].pdf || '' });
-      });
-    } else {
-      tiers.push({ level: 'Standard', price: p.price || 0, desc: p.desc || '', includes: [p.desc || ''], pdf: '' });
-    }
-    PRODUCTS[p.id] = { name: p.name, cat: p.cat, emoji: p.emoji || '📦', tiers: tiers };
-    var minPrice = tiers.length ? Math.min.apply(null, tiers.map(function(x){ return Number(x.price)||0; })) : 0;
+  active.forEach(function(p){
+    if (!p||!p.id) return;
+    var price = p.price || 0;
+    if (p.tiers && p.tiers.beginner) price = p.tiers.beginner.price || price;
+    PRODUCTS[p.id] = { name:p.name, cat:p.cat, emoji:p.emoji||'📦', tiers:[{level:'Standard', price:price, desc:p.desc||'', includes:[p.desc||''], pdf:''}] };
     var card = document.createElement('div');
     card.className = 'product-card';
-    card.setAttribute('data-admin-product', '1');
-    card.setAttribute('data-cat', (p.cat || '').toLowerCase().replace(/\s+/g,'-'));
-    card.setAttribute('data-name', p.name || '');
-    card.setAttribute('data-id', p.id);
-    var imgBg = p.image ? ('background-image:url(\'' + String(p.image).replace(/'/g,'%27') + '\');background-size:cover;') : '';
-    card.innerHTML = '<div class="product-img" style="background:linear-gradient(135deg,#0B1E3A,#0a2a4a);' + imgBg + '">' +
-      (!p.image ? ('<span class="emoji-fallback">' + (p.emoji||'📦') + '</span>') : '') +
-      '<span class="product-new">New</span></div><div class="product-body">' +
-      '<div class="product-cat">' + (p.cat||'') + '</div><h3 class="product-name">' + (p.name||'') + '</h3>' +
-      '<p class="product-desc">' + (p.desc||'') + '</p>' +
-      '<div class="product-price">From ₦' + (minPrice?minPrice.toLocaleString():'0') + '</div>' +
-      '<button type="button" class="btn btn-primary btn-sm" onclick="typeof openModal===\'function\'&&openModal(\'' + p.id + '\')">View / Buy</button></div>';
+    card.setAttribute('data-admin-product','1');
+    card.setAttribute('data-name', p.name||'');
+    card.innerHTML = '<div class="product-img"><span>'+(p.emoji||'📦')+'</span><span class="product-new">New</span></div><div class="product-body"><h3 class="product-name">'+(p.name||'')+'</h3><p class="product-desc">'+(p.desc||'')+'</p><div class="product-price">From ₦'+(Number(price)||0).toLocaleString()+'</div><button type="button" class="btn btn-primary btn-sm" onclick="typeof openModal===\'function\'&&openModal(\''+p.id+'\')">View / Buy</button></div>';
     grid.insertBefore(card, grid.firstChild);
-    if (section) { section.style.display = ''; section.removeAttribute('hidden'); }
   });
-}
-document.addEventListener('DOMContentLoaded', rnLoadAdminProducts);
+});
 </script>
 
 </body>
