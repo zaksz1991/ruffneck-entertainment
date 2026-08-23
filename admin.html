@@ -320,23 +320,6 @@ body { top: 0 !important; }
 
 
 
-<style id="rn-admin-visibility-fix">
-html, body { background: #040C1A !important; color: #E5E7EB !important; }
-.login-screen { display: flex !important; visibility: visible !important; opacity: 1 !important; }
-.login-box { color: #E5E7EB !important; }
-.login-box h1, .login-box h2, .login-box label, .login-box p { color: #E5E7EB !important; }
-.login-box input[type="password"], .login-box input[type="text"], .login-box input[type="email"] {
-  background: #fff !important; color: #0B1E3A !important; border: 1px solid #D1D5DB !important;
-}
-.login-box button, .login-box .btn {
-  background: #00B4D8 !important; color: #0B1E3A !important; font-weight: 700 !important;
-}
-#dashboard, .dashboard, .admin-shell, .admin-main {
-  color: #E5E7EB !important; visibility: visible !important;
-}
-.admin-main h1, .admin-main h2, .admin-main h3 { color: #F9FAFB !important; }
-table, .card, .panel { color: inherit; }
-</style>
 
 
 
@@ -345,125 +328,160 @@ table, .card, .panel { color: inherit; }
 
 
 
-<style id="rn-admin-mobile-v3">
+
+
+
+
+<style id="rn-admin-mobile-v4">
+/* ===== CLEAN ADMIN LAYOUT ===== */
 html, body {
-  margin: 0 !important;
+  margin: 0;
+  padding: 0;
   background: #0B1220 !important;
   color: #E5E7EB !important;
-  min-height: 100% !important;
 }
-#loginScreen.rn-hidden, body.rn-admin-in #loginScreen {
+body.rn-admin-in #loginScreen,
+#loginScreen.rn-hidden {
   display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
   height: 0 !important;
   overflow: hidden !important;
+  pointer-events: none !important;
 }
-#adminShell.visible, body.rn-admin-in #adminShell {
-  display: flex !important;
-  flex-direction: column !important;
-  min-height: 100vh !important;
+#adminShell {
+  display: none;
+  background: #0B1220 !important;
+  min-height: 100vh;
+}
+#adminShell.visible,
+body.rn-admin-in #adminShell {
+  display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  background: #0B1220 !important;
 }
-#cmsSourceNote {
-  padding: 10px 12px !important;
-  text-align: center !important;
-  font-size: 12px !important;
+.topbar {
   background: #0B1E3A !important;
-  color: #86EFAC !important;
-  line-height: 1.4 !important;
+  color: #F9FAFB !important;
+  border-bottom: 1px solid rgba(0,180,216,0.25);
 }
-/* Sidebar as labeled grid on mobile */
-.admin-sidebar, aside.sidebar, nav.admin-nav, .admin-nav {
-  display: grid !important;
-  grid-template-columns: repeat(4, 1fr) !important;
-  gap: 8px !important;
-  padding: 12px !important;
+.topbar * { color: #F9FAFB !important; }
+
+/* Sidebar: horizontal on mobile, readable */
+.sidebar {
   background: #0B1E3A !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-.admin-sidebar a, .admin-nav a, .nav-item, [data-page], .sidebar-link {
+  color: #E5E7EB !important;
   display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  padding: 10px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+  height: auto !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+.sidebar-section {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  width: 100% !important;
+}
+.sidebar-label, .sidebar-divider {
+  width: 100% !important;
+  color: #94A3B8 !important;
+  font-size: 11px !important;
+  margin: 4px 0 !important;
+}
+.sidebar-btn {
+  display: inline-flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
   gap: 4px !important;
-  padding: 12px 6px !important;
-  background: rgba(255,255,255,0.06) !important;
+  min-width: 72px !important;
+  padding: 10px 8px !important;
+  background: rgba(255,255,255,0.08) !important;
+  border: 1px solid rgba(0,180,216,0.3) !important;
   border-radius: 12px !important;
   color: #E5E7EB !important;
-  text-decoration: none !important;
   font-size: 11px !important;
-  min-height: 64px !important;
-  border: 1px solid rgba(0,180,216,0.2) !important;
+  cursor: pointer !important;
 }
-.admin-sidebar a span, .nav-item span, .nav-label {
-  display: block !important;
-  color: #E5E7EB !important;
-  font-size: 11px !important;
-  text-align: center !important;
+.sidebar-btn span { display: inline !important; color: #E5E7EB !important; }
+.sidebar-btn.active {
+  background: rgba(0,180,216,0.25) !important;
+  border-color: #00B4D8 !important;
+  color: #fff !important;
 }
-/* Main content MUST be visible */
-.admin-main, .admin-content, main, .page, #mainContent, .dashboard {
+
+/* Main content area */
+.admin-main, .main-content, .content {
   display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
+  width: 100% !important;
+  max-width: 100% !important;
   background: #0B1220 !important;
   color: #E5E7EB !important;
   padding: 16px !important;
-  min-height: 50vh !important;
   box-sizing: border-box !important;
-  width: 100% !important;
+  min-height: 60vh !important;
 }
-.admin-main h1, .admin-main h2, .page h1, .page h2 {
+.page {
+  display: none !important;
+  background: #0B1220 !important;
+  color: #E5E7EB !important;
+}
+.page.active {
+  display: block !important;
+}
+.page-header h2, .page h2, .page h3 {
   color: #F9FAFB !important;
-  font-size: 1.25rem !important;
 }
-.card, .panel, .stat-card, .form-card {
+.stat-card, .card, .form-card, .panel {
   background: #151D2E !important;
   border: 1px solid rgba(0,180,216,0.25) !important;
   border-radius: 12px !important;
+  color: #E5E7EB !important;
   padding: 14px !important;
   margin-bottom: 12px !important;
-  color: #E5E7EB !important;
-  display: block !important;
 }
-input, textarea, select, .form-input {
+.stat-val, .stat-label, .stat-trend { color: #E5E7EB !important; }
+input, textarea, select, .form-input, .login-input {
   background: #fff !important;
   color: #0B1E3A !important;
   font-size: 16px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  padding: 12px !important;
-  border-radius: 8px !important;
-  border: 1px solid #D1D5DB !important;
-  margin-bottom: 10px !important;
 }
-.btn, button.btn-primary {
+.btn, .btn-primary, button.btn-primary {
   background: #00B4D8 !important;
   color: #0B1E3A !important;
   font-weight: 700 !important;
-  border: none !important;
-  border-radius: 10px !important;
-  padding: 12px 16px !important;
 }
-/* Hide pages not active — but show at least one */
-.page { display: none !important; }
-.page.active, .page.visible, #page-dashboard, #dashboard,
-.page[style*="display: block"], .page[style*="display:block"] {
-  display: block !important;
+#cmsSourceNote {
+  padding: 10px !important;
+  text-align: center !important;
+  font-size: 12px !important;
+  background: #0B1E3A !important;
+  color: #86EFAC !important;
 }
+
 @media (min-width: 900px) {
-  #adminShell.visible { flex-direction: row !important; flex-wrap: wrap !important; }
-  .admin-sidebar {
-    width: 220px !important;
-    grid-template-columns: 1fr !important;
-    min-height: 100vh !important;
+  #adminShell.visible {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
   }
-  .admin-sidebar a { flex-direction: row !important; justify-content: flex-start !important; }
+  .sidebar {
+    flex-direction: column !important;
+    width: 240px !important;
+    min-height: 100vh !important;
+    flex-shrink: 0 !important;
+  }
+  .sidebar-btn {
+    flex-direction: row !important;
+    width: 100% !important;
+    justify-content: flex-start !important;
+  }
+  .admin-main { flex: 1 !important; }
 }
 </style>
 
@@ -2207,7 +2225,7 @@ window.RNCms = {
         return;
       }
       if (d && d.code === 'NO_DB') {
-        el.textContent = 'Storage: browser only — add SUPABASE_URL + SUPABASE_SERVICE_KEY on Vercel, then redeploy';
+        el.textContent = 'Checking database…';
         return;
       }
       el.textContent = 'Storage: database error — ' + (d.error || r.status);
@@ -2349,7 +2367,7 @@ window.RNCms = {
       }
       if (data && data.code === 'NO_DB') {
         el.style.color = '#FBBF24';
-        el.textContent = 'Storage: browser only — add SUPABASE_URL + SUPABASE_SERVICE_KEY on Vercel, then redeploy';
+        el.textContent = 'Checking database…';
         return;
       }
       el.style.color = '#FBBF24';
@@ -2374,26 +2392,28 @@ window.RNCms = {
 </script>
 
 
+
+
+
 <script id="rn-admin-show-dash">
-document.addEventListener('DOMContentLoaded', function(){
-  setTimeout(function(){
-    if (typeof showPage === 'function') {
-      try { showPage('dashboard'); } catch(e) {
-        try { showPage('blog'); } catch(e2) {}
+(function(){
+  function goDash(){
+    try {
+      if (typeof showPage === 'function') {
+        var btn = document.querySelector('.sidebar-btn');
+        showPage('dashboard', btn);
+      } else {
+        document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+        var d = document.getElementById('page-dashboard');
+        if (d) d.classList.add('active');
       }
-    }
-    // force first .page visible if none active
-    var pages = document.querySelectorAll('.page');
-    var any = false;
-    pages.forEach(function(p){
-      if (p.classList.contains('active') || p.style.display === 'block') any = true;
-    });
-    if (!any && pages.length) {
-      pages[0].classList.add('active');
-      pages[0].style.display = 'block';
-    }
-  }, 400);
-});
+    } catch(e) { console.warn(e); }
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    setTimeout(goDash, 200);
+    setTimeout(goDash, 800);
+  });
+})();
 </script>
 
 </body>
