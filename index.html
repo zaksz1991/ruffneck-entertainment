@@ -1340,6 +1340,87 @@ section.section-teaser {
 }
 </style>
 
+
+<style id="rn-phase-b-home">
+/* Phase B — homepage focus: hero → trust → guide → services → proof → pricing → contact */
+#internship,
+#partnerships,
+#ai-assistant,
+#ai-careers,
+#skills,
+#webinar,
+#whatsapp-templates,
+#portfolio,
+#process,
+#industries {
+  display: none !important;
+}
+
+/* Compact founder on home: collapse long bio by default */
+#founder .founder-long,
+#founder .credentials-grid,
+#founder .cert-list,
+#founder .timeline,
+#founder .founder-detail-block {
+  display: none !important;
+}
+#founder .rn-founder-compact-note { display: block !important; }
+
+/* Services: keep grid; hide "show all" noise slightly cleaner */
+#services .section-kicker { letter-spacing: 0.06em; }
+
+/* Spacing: reduce oversized section padding on mobile */
+@media (max-width: 700px) {
+  section { scroll-margin-top: 72px; }
+  .section { padding-top: 40px !important; padding-bottom: 40px !important; }
+}
+
+/* Explore more strip */
+#rnExploreMore {
+  display: block;
+  background: #0B1E3A;
+  border-top: 1px solid rgba(0,180,216,0.25);
+  border-bottom: 1px solid rgba(0,180,216,0.25);
+  padding: 28px 16px;
+  text-align: center;
+}
+#rnExploreMore h3 {
+  margin: 0 0 8px;
+  font-size: 1.1rem;
+  color: #F9FAFB;
+}
+#rnExploreMore p {
+  margin: 0 0 16px;
+  color: #94A3B8;
+  font-size: 14px;
+}
+#rnExploreMore .rn-em-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+#rnExploreMore a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,180,216,0.35);
+  color: #E5E7EB;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  background: rgba(255,255,255,0.04);
+}
+#rnExploreMore a:hover {
+  border-color: #00B4D8;
+  color: #00B4D8;
+}
+</style>
+
 </head>
 <body>
 
