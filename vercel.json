@@ -39,6 +39,30 @@
       "destination": "/services-ai.html"
     },
     {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/refund",
+      "destination": "/refund.html"
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq.html"
+    },
+    {
+      "source": "/contact-page",
+      "destination": "/contact-page.html"
+    },
+    {
+      "source": "/product",
+      "destination": "/product.html"
+    },
+    {
       "source": "/start-here",
       "destination": "/start-here.html"
     },
@@ -82,5 +106,6 @@
       "source": "/admin",
       "destination": "/admin.html"
     }
-  ]
+  ],
+  "routes": []
 }
