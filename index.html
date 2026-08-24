@@ -1875,6 +1875,11 @@ body > a[href*="wa.me"][style*="fixed"],
 <style id="rn-gt-banner-chat-fix">
 
 
+
+<style id="rn-nuclear-gt-head">
+iframe.goog-te-banner-frame,.goog-te-banner-frame,body>.skiptranslate{display:none!important;height:0!important}
+body{top:0!important}
+</style>
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -3629,44 +3634,7 @@ document.addEventListener('keydown', function(e) {
 
 /* notifyWebinar → /js/forms.js */
 </script>
-<!-- ── RUFFNECK CHATBOT (mobile-safe) ── -->
-<div class="rn-chat-bubble" id="rnChatBubble">
-  <button type="button" class="rn-chat-toggle" id="rnChatToggle" onclick="rnToggleChat()" aria-label="Open chat" aria-expanded="false">💬</button>
-
-  <div class="rn-chat-panel" id="rnChatPanel" data-open="0">
-    <div class="rn-chat-head">
-      <div class="rn-chat-avatar">
-        <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-      </div>
-      <div style="flex:1;min-width:0;">
-        <div class="rn-chat-name">RuffNeck Assistant</div>
-        <div class="rn-chat-status">Online now</div>
-      </div>
-      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat">✕</button>
-    </div>
-    <div class="rn-chat-messages" id="rnChatMessages">
-      <div class="rn-msg bot">👋 Welcome to <strong>RuffNeck Entertainment</strong>. I can help with AI &amp; digital services, computer/IT support, Excel &amp; Office, the store, free AI prompts, internships, and contact. Ask in English, Hausa, Yoruba, or Igbo.</div>
-    </div>
-    <div class="rn-chat-quick" id="rnQuickReplies">
-      <button class="rn-quick-btn" onclick="rnQuickAsk('services')">Services</button>
-      <button class="rn-quick-btn" onclick="rnQuickAsk('computer')">Computer / IT</button>
-      <button class="rn-quick-btn" onclick="rnQuickAsk('office')">Excel / Office</button>
-      <button class="rn-quick-btn" onclick="rnQuickAsk('store')">Store</button>
-      <button class="rn-quick-btn" onclick="rnQuickAsk('internship')">Internship</button>
-      <button class="rn-quick-btn" onclick="rnQuickAsk('contact')">Contact</button>
-    </div>
-    <div class="rn-chat-input-row">
-      <input class="rn-chat-input" id="rnChatInput" type="text" placeholder="Type a message…" onkeydown="if(event.key==='Enter')rnSendChat()"/>
-      <button class="rn-chat-send" onclick="rnSendChat()" aria-label="Send message">
-        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
-      </button>
-    </div>
-  </div>
-  <button class="rn-chat-toggle" onclick="rnToggleChat()" aria-label="Open chat">
-    <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
-  </button>
-</div>
-
+<!-- old chat removed; replaced by rn-nuclear-ui -->
 <script>
 // ── RUFFNECK CHATBOT ──
 function rnToggleChat(){
@@ -4698,18 +4666,7 @@ function rnToggleChat(){
 }
 </style>
 
-<div id="rnFixedLang">
-  <button type="button" id="rnFixedLangBtn" aria-haspopup="true" aria-expanded="false">🌐 Language</button>
-  <div id="rnFixedLangMenu" role="menu">
-    <button type="button" data-lang="" data-label="EN">English</button>
-    <button type="button" data-lang="ha" data-label="HA">Hausa</button>
-    <button type="button" data-lang="yo" data-label="YO">Yoruba</button>
-    <button type="button" data-lang="ig" data-label="IG">Igbo</button>
-    <button type="button" data-lang="fr" data-label="FR">Français</button>
-    <button type="button" data-lang="es" data-label="ES">Español</button>
-  </div>
-</div>
-<div id="google_translate_element" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true"></div>
+
 
 <script id="rn-fixed-lang-chat-js">
 (function(){
@@ -4909,6 +4866,252 @@ function rnToggleChat(){
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
   else bind();
+})();
+</script>
+
+
+<style id="rn-nuclear-ui-css">
+/* === NUCLEAR UI: language + chat — cannot be covered by header === */
+#rnNLang, #rnNChatBtn, #rnNChatPanel {
+  font-family: system-ui, -apple-system, sans-serif !important;
+}
+#rnNLang {
+  position: fixed !important;
+  right: 12px !important;
+  bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
+  z-index: 2147483000 !important;
+}
+#rnNLang > button {
+  min-height: 44px !important;
+  padding: 8px 14px !important;
+  border-radius: 999px !important;
+  border: 2px solid #00B4D8 !important;
+  background: #0B1E3A !important;
+  color: #00B4D8 !important;
+  font-weight: 800 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,.4) !important;
+}
+#rnNLangMenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  bottom: 48px;
+  min-width: 160px;
+  background: #0B1E3A;
+  border: 1px solid #00B4D8;
+  border-radius: 12px;
+  padding: 6px;
+  z-index: 2147483001;
+}
+#rnNLangMenu.open { display: block !important; }
+#rnNLangMenu button {
+  display: block; width: 100%; text-align: left;
+  background: none; border: none; color: #fff;
+  padding: 12px; min-height: 44px; font-size: 14px; cursor: pointer; border-radius: 8px;
+}
+
+#rnNChatBtn {
+  position: fixed !important;
+  left: 12px !important;
+  bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
+  z-index: 2147483000 !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  background: #00B4D8 !important;
+  color: #0B1E3A !important;
+  font-size: 22px !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,.45) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#rnNChatPanel {
+  display: none;
+  position: fixed !important;
+  left: 12px !important;
+  right: 12px !important;
+  bottom: calc(145px + env(safe-area-inset-bottom, 0px)) !important;
+  max-width: 360px !important;
+  max-height: 50vh !important;
+  background: #0B1E3A !important;
+  border: 1px solid rgba(0,180,216,.5) !important;
+  border-radius: 16px !important;
+  z-index: 2147483002 !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,.55) !important;
+}
+#rnNChatPanel.open { display: flex !important; }
+#rnNChatPanel header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; background: #061225; color: #F9FAFB; font-weight: 700;
+}
+#rnNChatPanel header button {
+  background: none; border: none; color: #94A3B8; font-size: 20px;
+  min-width: 40px; min-height: 40px; cursor: pointer;
+}
+#rnNChatBody { padding: 12px; overflow-y: auto; color: #E5E7EB; font-size: 14px; line-height: 1.45; flex: 1; }
+#rnNChatBody a { color: #00B4D8; font-weight: 700; }
+#rnNChatActions { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-top: 1px solid rgba(0,180,216,.25); }
+#rnNChatActions a, #rnNChatActions button {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 44px; border-radius: 10px; font-weight: 800; text-decoration: none;
+  border: none; cursor: pointer; font-size: 14px;
+}
+#rnNChatActions .wa { background: #25D366; color: #053; }
+#rnNChatActions .call { background: #00B4D8; color: #0B1E3A; }
+#rnNChatActions .store { background: transparent; color: #E5E7EB; border: 1px solid rgba(0,180,216,.4); }
+
+/* Kill Google top banner hard */
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame,
+body > .skiptranslate {
+  display: none !important;
+  height: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+body { top: 0 !important; position: static !important; }
+
+/* Hide ALL old chat / lang widgets */
+#rnChatBubble, #rnFixedLang, #rnLang, .rn-chat-bubble, #rnChatToggle {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+</style>
+
+<script id="rn-nuclear-ui-js">
+(function(){
+  function el(tag, attrs, html){
+    var n = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function(k){ n.setAttribute(k, attrs[k]); });
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+
+  function killGoogleBanner(){
+    try {
+      document.querySelectorAll('iframe.goog-te-banner-frame, .goog-te-banner-frame, body > .skiptranslate').forEach(function(n){
+        n.style.cssText = 'display:none!important;height:0!important;visibility:hidden!important';
+      });
+      document.body.style.top = '0';
+      document.body.style.position = 'static';
+    } catch(e){}
+  }
+
+  function setLang(lang){
+    var v = lang ? '/en/' + lang : '';
+    document.cookie = 'googtrans=' + v + ';path=/';
+    try { document.cookie = 'googtrans=' + v + ';path=/;domain=' + location.hostname; } catch(e){}
+    if (!lang) { location.reload(); return; }
+    // load GT then set
+    function apply(){
+      var sel = document.querySelector('.goog-te-combo');
+      if (sel) {
+        sel.value = lang;
+        sel.dispatchEvent(new Event('change'));
+        setTimeout(killGoogleBanner, 300);
+        setTimeout(killGoogleBanner, 1000);
+        setTimeout(killGoogleBanner, 2000);
+        return true;
+      }
+      return false;
+    }
+    if (!document.getElementById('google_translate_element')) {
+      document.body.appendChild(el('div', {id:'google_translate_element', style:'display:none'}));
+    }
+    window.googleTranslateElementInit = function(){
+      try {
+        new google.translate.TranslateElement({
+          pageLanguage:'en', includedLanguages:'en,ha,yo,ig,fr,es', autoDisplay:false
+        }, 'google_translate_element');
+      } catch(e){}
+    };
+    if (!(window.google && google.translate)) {
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    var tries = 0;
+    (function tick(){
+      if (apply()) return;
+      if (++tries < 30) setTimeout(tick, 200);
+      else location.reload();
+    })();
+  }
+
+  function mount(){
+    if (document.getElementById('rnNChatBtn')) return;
+
+    // Language
+    var langWrap = el('div', {id:'rnNLang'});
+    var langBtn = el('button', {type:'button', id:'rnNLangBtn'}, '🌐 Language');
+    var langMenu = el('div', {id:'rnNLangMenu'});
+    [['English',''],['Hausa','ha'],['Yoruba','yo'],['Igbo','ig'],['Français','fr'],['Español','es']].forEach(function(p){
+      var b = el('button', {type:'button', 'data-lang': p[1]}, p[0]);
+      b.onclick = function(e){
+        e.stopPropagation();
+        langMenu.classList.remove('open');
+        setLang(p[1]);
+      };
+      langMenu.appendChild(b);
+    });
+    langBtn.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      langMenu.classList.toggle('open');
+    };
+    document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+    langWrap.appendChild(langBtn);
+    langWrap.appendChild(langMenu);
+    document.body.appendChild(langWrap);
+
+    // Chat button
+    var chatBtn = el('button', {type:'button', id:'rnNChatBtn', 'aria-label':'Open chat'}, '💬');
+    var panel = el('div', {id:'rnNChatPanel'});
+    panel.innerHTML =
+      '<header><span>RuffNeck Assistant</span><button type="button" id="rnNChatClose" aria-label="Close">✕</button></header>' +
+      '<div id="rnNChatBody">' +
+      '<p>How can we help?</p>' +
+      '<p style="color:#94A3B8;font-size:13px">AI, IT support, marketing, store products, CV/career, or training — pick an option below.</p>' +
+      '</div>' +
+      '<div id="rnNChatActions">' +
+      '<a class="wa" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%20Entertainment" target="_blank" rel="noopener">WhatsApp us</a>' +
+      '<a class="call" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book a call</a>' +
+      '<a class="store" href="/store">View store</a>' +
+      '</div>';
+    document.body.appendChild(chatBtn);
+    document.body.appendChild(panel);
+
+    chatBtn.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      panel.classList.toggle('open');
+    };
+    document.getElementById('rnNChatClose').onclick = function(e){
+      e.preventDefault();
+      panel.classList.remove('open');
+    };
+
+    // Hide old widgets if present
+    ['rnChatBubble','rnFixedLang','rnLang','rnChatToggle'].forEach(function(id){
+      var n = document.getElementById(id);
+      if (n) n.style.display = 'none';
+    });
+
+    killGoogleBanner();
+    setInterval(killGoogleBanner, 1500);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
+  else mount();
 })();
 </script>
 
