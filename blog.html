@@ -987,6 +987,83 @@ button,a,.btn{touch-action:manipulation}
 #rnBlogCats button{min-height:40px;padding:8px 14px;border-radius:999px;border:1px solid rgba(0,180,216,.35);background:rgba(255,255,255,.04);color:#E5E7EB;font-size:13px;font-weight:600;cursor:pointer}
 #rnBlogCats button.active{background:rgba(0,180,216,.25);border-color:#00B4D8;color:#fff}
 </style>
+
+<style id="rn-p1-blog-search">
+#rnBlogSearchWrap {
+  max-width: 640px;
+  margin: 12px auto 8px;
+  padding: 0 16px;
+}
+#rnBlogSearch {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,180,216,.35);
+  background: #0B1E3A;
+  color: #F8FAFC;
+  font-size: 16px;
+}
+#rnBlogSearch::placeholder { color: #94A3B8; }
+#rnBlogSearchCount {
+  text-align: center;
+  color: #94A3B8;
+  font-size: 13px;
+  margin: 6px 0 0;
+}
+</style>
+<div id="rnBlogSearchWrap">
+  <label for="rnBlogSearch" class="sr-only" style="position:absolute;left:-9999px">Search articles</label>
+  <input type="search" id="rnBlogSearch" placeholder="Search articles…" autocomplete="off" enterkeyhint="search"/>
+  <p id="rnBlogSearchCount" aria-live="polite"></p>
+</div>
+<script id="rn-p1-blog-search-js">
+(function(){
+  function cards(){
+    var list = document.querySelectorAll('.blog-card, article.post, article, .post-card, [class*="blog-card"]');
+    if (!list.length) list = document.querySelectorAll('#blogGrid > *, .posts-grid > *, .blog-grid > *');
+    return Array.prototype.slice.call(list);
+  }
+  function apply(){
+    var q = (document.getElementById('rnBlogSearch') || {}).value || '';
+    q = q.trim().toLowerCase();
+    var catBtn = document.querySelector('#rnBlogCats button.active');
+    var cat = catBtn ? (catBtn.getAttribute('data-cat') || 'all') : 'all';
+    var n = 0;
+    cards().forEach(function(c){
+      var text = (c.textContent || '').toLowerCase();
+      var okQ = !q || text.indexOf(q) !== -1;
+      var okC = true;
+      if (cat && cat !== 'all') {
+        if (cat === 'ai') okC = /ai|automation|chatgpt|prompt|llm/.test(text);
+        else if (cat === 'ops') okC = /warehouse|operation|reporting|sop|logistics/.test(text);
+        else if (cat === 'marketing') okC = /marketing|social|seo|content|brand|lead/.test(text);
+        else if (cat === 'career') okC = /career|cv|resume|linkedin|job|internship/.test(text);
+        else if (cat === 'it') okC = /excel|office|computer|wifi|printer|network|microsoft|it support/.test(text);
+      }
+      var show = okQ && okC;
+      c.style.display = show ? '' : 'none';
+      if (show) n++;
+    });
+    var el = document.getElementById('rnBlogSearchCount');
+    if (el) el.textContent = q || (cat && cat !== 'all') ? (n + ' article(s) shown') : '';
+  }
+  document.addEventListener('DOMContentLoaded', function(){
+    var input = document.getElementById('rnBlogSearch');
+    if (input) {
+      input.addEventListener('input', apply);
+      input.addEventListener('search', apply);
+    }
+    var wrap = document.getElementById('rnBlogCats');
+    if (wrap) {
+      wrap.querySelectorAll('button').forEach(function(btn){
+        btn.addEventListener('click', function(){ setTimeout(apply, 0); });
+      });
+    }
+  });
+})();
+</script>
+
 <div id="rnBlogCats" role="tablist" aria-label="Blog categories">
   <button type="button" data-cat="all" class="active">All</button>
   <button type="button" data-cat="ai">AI &amp; Automation</button>

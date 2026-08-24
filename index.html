@@ -1732,6 +1732,145 @@ body { top: 0 !important; position: static !important; }
 }
 </style>
 
+
+<style id="rn-p0-header-chat">
+/* P0: Mobile header + single chat */
+@media (max-width: 900px) {
+  #nav, header.nav, .nav {
+    min-height: 60px !important;
+  }
+  #nav .nav-inner, .nav-inner, header .nav-container {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    width: 100% !important;
+    padding: 8px 12px !important;
+  }
+  /* Hide desktop Book a Call that drops under logo */
+  #nav .nav-cta, header a.nav-cta, .nav-cta {
+    display: none !important;
+  }
+  /* Logo shrink */
+  #nav .logo, .logo, .brand {
+    max-width: 48vw !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+  #nav .logo img, .logo img {
+    max-height: 40px !important;
+    width: auto !important;
+  }
+  #hamburger, .hamburger {
+    display: flex !important;
+    order: 3 !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
+/* Fixed language stays top-right, clear of logo */
+#rnFixedLang {
+  position: fixed !important;
+  top: max(10px, env(safe-area-inset-top)) !important;
+  right: 56px !important;
+  z-index: 100000 !important;
+}
+/* ONE chat button only */
+#rnChatBubble, .rn-chat-bubble {
+  position: fixed !important;
+  left: 12px !important;
+  bottom: calc(80px + env(safe-area-inset-bottom)) !important;
+  z-index: 99990 !important;
+}
+/* Hide any second floating chat/message buttons that are not our bubble */
+body > a[href*="wa.me"][style*="fixed"],
+.chat-widget:not(#rnChatBubble),
+.rn-wa-float {
+  display: none !important;
+}
+/* Hide duplicate chat toggles inside bubble except #rnChatToggle */
+#rnChatBubble .rn-chat-toggle:not(#rnChatToggle) {
+  display: none !important;
+}
+#rnChatToggle {
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  font-size: 22px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #00B4D8 !important;
+  color: #0B1E3A !important;
+  border: none !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,.4) !important;
+}
+#rnChatPanel {
+  display: none;
+  position: fixed !important;
+  left: 12px !important;
+  right: 12px !important;
+  bottom: calc(150px + env(safe-area-inset-bottom)) !important;
+  max-width: 360px !important;
+  max-height: 55vh !important;
+  background: #0B1E3A !important;
+  border: 1px solid rgba(0,180,216,.4) !important;
+  border-radius: 16px !important;
+  z-index: 99991 !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+#rnChatBubble.open #rnChatPanel,
+#rnChatPanel.is-open {
+  display: flex !important;
+}
+</style>
+
+
+<style id="rn-p1-polish">
+/* P1: cleaner mobile header */
+@media (max-width: 900px) {
+  #nav .nav-inner, .nav-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 10px 12px !important;
+  }
+  #nav .logo span, .logo-text, .brand-text {
+    max-width: 42vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
+  /* Book a Call only in sticky bar / hero — not floating under logo */
+  #nav a.nav-cta,
+  header a.nav-cta {
+    display: none !important;
+  }
+  #hamburger {
+    margin-left: auto;
+  }
+}
+/* Language button clear of hamburger */
+#rnFixedLang {
+  top: max(12px, env(safe-area-inset-top)) !important;
+  right: 58px !important;
+}
+#rnFixedLangBtn {
+  min-height: 40px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+}
+/* Reduce hero competition: store chip slightly quieter */
+.hero-store-chip { opacity: 0.95; }
+</style>
+
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -1789,6 +1928,10 @@ button,a,.btn{touch-action:manipulation}
     </div>
   </div>
     <div class="nav-mobile" id="mobileMenu">
+<a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" style="display:block;padding:14px 16px;font-weight:800;color:#00B4D8;">Book a Call</a>
+<a href="/store" style="display:block;padding:14px 16px;font-weight:700;color:#E5E7EB;">Store</a>
+<a href="/blog" style="display:block;padding:14px 16px;font-weight:700;color:#E5E7EB;">Blog</a>
+
     <a href="#services">Services</a>
     <a href="/store">Products</a>
     <a href="#about">About</a>
@@ -3335,7 +3478,6 @@ document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
 
 // Form submit
 /* contact form handled by /js/forms.js */
-}
 </script>
 
 <!-- POLICY MODAL -->
@@ -3531,7 +3673,6 @@ function rnToggleChat(){
   if (panel) {
     panel.style.display = b.classList.contains('open') ? 'flex' : 'none';
   }
-}
 }
 
 function rnCloseChat(){
@@ -4668,6 +4809,53 @@ function rnToggleChat(){
         if (panel) { panel.classList.remove('is-open'); panel.style.display = 'none'; }
       });
     }
+  });
+})();
+</script>
+
+
+<script id="rn-p0-fixes">
+(function(){
+  // Single authoritative chat toggle
+  window.rnToggleChat = function(){
+    var bubble = document.getElementById('rnChatBubble');
+    var panel = document.getElementById('rnChatPanel');
+    if (!bubble || !panel) return;
+    var open = !bubble.classList.contains('open');
+    bubble.classList.toggle('open', open);
+    panel.classList.toggle('is-open', open);
+    panel.style.setProperty('display', open ? 'flex' : 'none', 'important');
+  };
+  document.addEventListener('DOMContentLoaded', function(){
+    var btn = document.getElementById('rnChatToggle');
+    if (btn) {
+      btn.onclick = function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.rnToggleChat();
+      };
+    }
+    var closer = document.querySelector('#rnChatPanel .rn-chat-close, .rn-chat-close');
+    if (closer) {
+      closer.onclick = function(e){
+        e.preventDefault();
+        var bubble = document.getElementById('rnChatBubble');
+        var panel = document.getElementById('rnChatPanel');
+        if (bubble) bubble.classList.remove('open');
+        if (panel) {
+          panel.classList.remove('is-open');
+          panel.style.setProperty('display', 'none', 'important');
+        }
+      };
+    }
+    // Remove extra fixed chat-like buttons (not WhatsApp bar)
+    document.querySelectorAll('body > button, body > a').forEach(function(el){
+      if (el.id === 'rnChatToggle' || el.closest('#rnChatBubble') || el.closest('#rnMobileBar') || el.closest('#rnFixedLang')) return;
+      var s = window.getComputedStyle(el);
+      if (s.position === 'fixed' && (el.textContent||'').indexOf('Chat') !== -1) {
+        el.style.display = 'none';
+      }
+    });
   });
 })();
 </script>
