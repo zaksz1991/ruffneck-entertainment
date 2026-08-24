@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <title>RuffNeck Digital Empowerment Programme | Women in Digital &amp; Youth in Tech</title>
+  <meta name="description" content="RuffNeck Digital Empowerment Programme (RDEP) equips women and young people in Nigeria and Africa with practical AI, digital-business, technology, and entrepreneurship skills for employment, freelancing, and self-employment."/>
+  <link rel="canonical" href="https://ruffneck-entertainment.vercel.app/programmes"/>
+  <meta property="og:title" content="RuffNeck Digital Empowerment Programme"/>
+  <meta property="og:description" content="Practical AI, digital-business, and tech skills for women and youth across Nigeria and Africa."/>
+  <meta property="og:url" content="https://ruffneck-entertainment.vercel.app/programmes"/>
+  <meta property="og:type" content="website"/>
+  <meta name="twitter:card" content="summary_large_image"/>
+  <style>
+    :root {
+      --navy: #0B1E3A;
+      --cyan: #00B4D8;
+      --emerald: #10B981;
+      --text: #F8FAFC;
+      --muted: #94A3B8;
+      --card: #0f2744;
+      --line: rgba(0,180,216,.28);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: var(--navy);
+      color: var(--text);
+      line-height: 1.55;
+    }
+    a { color: var(--cyan); }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 16px; }
+    header.top {
+      position: sticky; top: 0; z-index: 50;
+      background: rgba(11,30,58,.95);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .top-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 56px; gap: 12px;
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--text); font-weight: 800;
+    }
+    .brand span { color: var(--cyan); font-weight: 700; }
+    .nav-links { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+    .nav-links a {
+      color: #E5E7EB; text-decoration: none; font-size: 14px; font-weight: 600;
+      padding: 8px 10px; min-height: 44px; display: inline-flex; align-items: center;
+    }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 44px; padding: 12px 18px; border-radius: 12px;
+      font-weight: 800; text-decoration: none; border: none; cursor: pointer; font-size: 15px;
+    }
+    .btn-primary { background: var(--cyan); color: var(--navy); }
+    .btn-emerald { background: var(--emerald); color: #042f1a; }
+    .btn-outline {
+      background: transparent; color: var(--text);
+      border: 1px solid var(--line);
+    }
+    .hero {
+      padding: 48px 0 36px;
+      background: linear-gradient(160deg, #0B1E3A 0%, #0f2f4a 50%, #0a1628 100%);
+      border-bottom: 1px solid var(--line);
+    }
+    .badge {
+      display: inline-block;
+      padding: 6px 12px; border-radius: 999px;
+      border: 1px solid rgba(16,185,129,.45);
+      color: #6EE7B7; font-size: 12px; font-weight: 800;
+      letter-spacing: .04em; text-transform: uppercase; margin-bottom: 14px;
+    }
+    h1 { font-size: clamp(1.75rem, 5vw, 2.5rem); line-height: 1.15; margin: 0 0 14px; letter-spacing: -0.02em; }
+    h1 em { color: var(--cyan); font-style: normal; }
+    .lead { color: #CBD5E1; font-size: 1.05rem; max-width: 720px; margin: 0 0 20px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px; }
+    .impact {
+      color: var(--muted); font-size: 15px; max-width: 720px;
+      border-left: 3px solid var(--emerald); padding-left: 14px; margin: 18px 0 0;
+    }
+    section { padding: 40px 0; }
+    h2 { font-size: 1.4rem; margin: 0 0 10px; }
+    h3 { font-size: 1.1rem; margin: 0 0 8px; }
+    .sub { color: var(--muted); margin: 0 0 22px; max-width: 680px; }
+    .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    @media (max-width: 800px) {
+      .grid3 { grid-template-columns: 1fr; }
+      .nav-links a.hide-sm { display: none; }
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+    }
+    .card .tag {
+      display: inline-block; font-size: 11px; font-weight: 800;
+      color: #042f1a; background: var(--emerald); padding: 4px 10px;
+      border-radius: 999px; margin-bottom: 10px;
+    }
+    .card ul { margin: 0 0 14px; padding-left: 18px; color: #E5E7EB; font-size: 14px; }
+    .card li { margin-bottom: 6px; }
+    .outcome {
+      font-size: 13px; color: #A7F3D0; border-top: 1px solid rgba(16,185,129,.25);
+      padding-top: 12px; margin-top: 8px;
+    }
+    .pillars { display: grid; gap: 12px; }
+    .pillar {
+      display: grid; grid-template-columns: 48px 1fr;
+      gap: 12px; align-items: start;
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 14px; padding: 16px;
+    }
+    .pillar .ico {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: rgba(16,185,129,.12); border: 1px solid rgba(16,185,129,.35);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800; color: #6EE7B7;
+    }
+    table {
+      width: 100%; border-collapse: collapse; font-size: 14px;
+      background: var(--card); border-radius: 14px; overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid rgba(255,255,255,.06); }
+    th { background: #061225; color: #E5E7EB; font-size: 13px; }
+    td { color: #CBD5E1; }
+    @media (max-width: 640px) {
+      table, thead, tbody, th, td, tr { display: block; }
+      thead { display: none; }
+      tr { border-bottom: 1px solid var(--line); padding: 10px 0; }
+      td { border: none; padding: 4px 14px; }
+      td::before { content: attr(data-label); display: block; color: var(--cyan); font-weight: 700; font-size: 12px; }
+    }
+    form.apply {
+      background: var(--card); border: 1px solid var(--line);
+      border-radius: 16px; padding: 20px;
+    }
+    label { display: block; font-size: 13px; font-weight: 700; margin: 12px 0 6px; color: #E5E7EB; }
+    input, select, textarea {
+      width: 100%; min-height: 44px; padding: 10px 12px;
+      border-radius: 10px; border: 1px solid rgba(148,163,184,.35);
+      background: #0B1E3A; color: var(--text); font-size: 16px;
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 640px) { .row2 { grid-template-columns: 1fr; } }
+    .note { font-size: 13px; color: var(--muted); margin-top: 10px; }
+    .partner-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px;
+    }
+    @media (max-width: 640px) { .partner-grid { grid-template-columns: 1fr; } }
+    footer {
+      border-top: 1px solid var(--line); padding: 28px 0 40px;
+      color: var(--muted); font-size: 13px; text-align: center;
+    }
+    footer a { color: #CBD5E1; margin: 0 8px; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap top-inner">
+      <a class="brand" href="/">RuffNeck <span>Entertainment</span></a>
+      <nav class="nav-links" aria-label="Programme navigation">
+        <a class="hide-sm" href="/">Home</a>
+        <a class="hide-sm" href="/services-ai.html">Services</a>
+        <a class="hide-sm" href="/store">Store</a>
+        <a href="#apply" class="btn btn-primary" style="padding:8px 14px;min-height:40px;font-size:13px">Apply</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div class="badge">Community Impact · RDEP</div>
+      <h1>Building Africa’s Next Generation of <em>Digital Professionals</em></h1>
+      <p class="lead">
+        The <strong>RuffNeck Digital Empowerment Programme</strong> equips women and young people with practical AI, digital-business, technology, and entrepreneurship skills for employment, freelancing, and self-employment.
+      </p>
+      <div class="actions">
+        <a class="btn btn-emerald" href="#apply">Apply for the Next Cohort</a>
+        <a class="btn btn-outline" href="#partner">Partner or Sponsor the Programme</a>
+      </div>
+      <p class="impact">
+        We believe access to practical digital skills should not depend on location, gender, background, or formal employment status. Through training, mentorship, portfolio development, and partnerships, RuffNeck helps participants move from interest to practical capability.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Programme tracks</h2>
+      <p class="sub">Three practical pathways under one flagship community-impact initiative — structured cohorts, measurable outcomes, and continued mentorship.</p>
+      <div class="grid3">
+        <article class="card">
+          <div class="tag">Track 1</div>
+          <h3>Women in Digital Business</h3>
+          <p style="color:#94A3B8;font-size:14px;margin:0 0 10px">For women starting, improving, or growing a digital business — or seeking freelance and remote opportunities.</p>
+          <ul>
+            <li>AI-assisted content &amp; social media</li>
+            <li>Canva, branding &amp; digital products</li>
+            <li>WhatsApp Business &amp; client support</li>
+            <li>Freelancing, pricing &amp; operations</li>
+          </ul>
+          <p class="outcome"><strong>Outcome:</strong> A practical digital-business plan, sample content, a professional online profile, and a clear next earning step.</p>
+          <a class="btn btn-primary" href="#apply" style="width:100%;margin-top:12px">Apply — Women track</a>
+        </article>
+        <article class="card">
+          <div class="tag">Track 2</div>
+          <h3>Youth AI &amp; Tech Skills</h3>
+          <p style="color:#94A3B8;font-size:14px;margin:0 0 10px">Beginner-friendly pathway for young people exploring AI, tech, and remote-work careers.</p>
+          <ul>
+            <li>AI literacy &amp; responsible AI</li>
+            <li>Prompt engineering &amp; research</li>
+            <li>Data annotation &amp; tech content</li>
+            <li>Portfolio, CV &amp; remote readiness</li>
+          </ul>
+          <p class="outcome"><strong>Outcome:</strong> Foundational tech skills, practical projects, and portfolio evidence for internships, freelancing, or further training.</p>
+          <a class="btn btn-primary" href="#apply" style="width:100%;margin-top:12px">Apply — Youth track</a>
+        </article>
+        <article class="card">
+          <div class="tag">Track 3</div>
+          <h3>Digital Entrepreneurship</h3>
+          <p style="color:#94A3B8;font-size:14px;margin:0 0 10px">Shared track for women and youth turning skills into services or products.</p>
+          <ul>
+            <li>Offer design &amp; market problem fit</li>
+            <li>Brand identity &amp; online presence</li>
+            <li>First customers via WhatsApp &amp; social</li>
+            <li>Basic finances &amp; responsible AI use</li>
+          </ul>
+          <p class="outcome"><strong>Outcome:</strong> A simple market-ready digital offer and a practical plan to reach first customers.</p>
+          <a class="btn btn-primary" href="#apply" style="width:100%;margin-top:12px">Apply — Entrepreneurship</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#08182c;border-top:1px solid rgba(0,180,216,.15);border-bottom:1px solid rgba(0,180,216,.15)">
+    <div class="wrap">
+      <h2>Mentorship &amp; community</h2>
+      <p class="sub">Training continues after the workshop. Participants get support to apply what they learn.</p>
+      <div class="pillars">
+        <div class="pillar"><div class="ico">1</div><div><h3>Monthly community sessions</h3><p style="margin:0;color:#94A3B8;font-size:14px">Peer accountability, Q&amp;A, and progress check-ins.</p></div></div>
+        <div class="pillar"><div class="ico">2</div><div><h3>Mentor office hours</h3><p style="margin:0;color:#94A3B8;font-size:14px">Feedback on projects, portfolios, and business ideas.</p></div></div>
+        <div class="pillar"><div class="ico">3</div><div><h3>Career &amp; portfolio support</h3><p style="margin:0;color:#94A3B8;font-size:14px">CV/LinkedIn reviews, showcase days, and pathway information (internships/volunteer — by application).</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <h2>Six-week cohort structure</h2>
+      <p class="sub">Example format: online, on-site, or blended · 25–50 participants · 2 sessions/week · 90–120 minutes · final showcase.</p>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr><th>Week</th><th>Theme</th><th>Practical output</th></tr>
+          </thead>
+          <tbody>
+            <tr><td data-label="Week">1</td><td data-label="Theme">Digital &amp; AI foundations</td><td data-label="Output">Skills audit &amp; learning plan</td></tr>
+            <tr><td data-label="Week">2</td><td data-label="Theme">AI tools &amp; responsible use</td><td data-label="Output">Prompt library &amp; checklist</td></tr>
+            <tr><td data-label="Week">3</td><td data-label="Theme">Content, branding &amp; communication</td><td data-label="Output">Brand profile &amp; sample content</td></tr>
+            <tr><td data-label="Week">4</td><td data-label="Theme">Business, freelancing &amp; remote work</td><td data-label="Output">Service offer or career pathway</td></tr>
+            <tr><td data-label="Week">5</td><td data-label="Theme">Portfolio &amp; digital presence</td><td data-label="Output">CV, LinkedIn, portfolio, or business page</td></tr>
+            <tr><td data-label="Week">6</td><td data-label="Theme">Showcase &amp; next steps</td><td data-label="Output">Final project, presentation &amp; action plan</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="margin-top:14px">Participants receive structured training, guided assignments, portfolio-ready projects, mentorship, community access, and a certificate of participation where applicable. We offer career guidance and pathway support — not guaranteed job placement.</p>
+    </div>
+  </section>
+
+  <section id="apply">
+    <div class="wrap">
+      <h2>Apply for the next cohort</h2>
+      <p class="sub">Complete the form below. Selected applicants will be contacted using the details you provide. Applying does not guarantee acceptance.</p>
+      <form class="apply" id="rdepForm">
+        <div class="row2">
+          <div>
+            <label for="fullName">Full name *</label>
+            <input id="fullName" name="fullName" required autocomplete="name"/>
+          </div>
+          <div>
+            <label for="email">Email *</label>
+            <input id="email" name="email" type="email" required autocomplete="email"/>
+          </div>
+        </div>
+        <div class="row2">
+          <div>
+            <label for="whatsapp">WhatsApp number *</label>
+            <input id="whatsapp" name="whatsapp" required placeholder="+234..." autocomplete="tel"/>
+          </div>
+          <div>
+            <label for="location">Location *</label>
+            <input id="location" name="location" required placeholder="City, State"/>
+          </div>
+        </div>
+        <div class="row2">
+          <div>
+            <label for="track">Programme track *</label>
+            <select id="track" name="track" required>
+              <option value="">Select track</option>
+              <option>Women in Digital Business</option>
+              <option>Youth AI &amp; Tech Skills</option>
+              <option>Digital Entrepreneurship</option>
+            </select>
+          </div>
+          <div>
+            <label for="level">Digital skills level *</label>
+            <select id="level" name="level" required>
+              <option value="">Select level</option>
+              <option>Beginner</option>
+              <option>Intermediate</option>
+              <option>Advanced</option>
+            </select>
+          </div>
+        </div>
+        <div class="row2">
+          <div>
+            <label for="status">Occupation / education status</label>
+            <input id="status" name="status" placeholder="Student, employed, business owner..."/>
+          </div>
+          <div>
+            <label for="access">Device &amp; internet access *</label>
+            <select id="access" name="access" required>
+              <option value="">Select</option>
+              <option>Smartphone + internet</option>
+              <option>Computer + internet</option>
+              <option>Both</option>
+              <option>Limited access</option>
+            </select>
+          </div>
+        </div>
+        <label for="why">Why do you want to join? *</label>
+        <textarea id="why" name="why" required></textarea>
+        <label for="achieve">What do you hope to achieve? *</label>
+        <textarea id="achieve" name="achieve" required></textarea>
+        <label for="availability">Availability (days/times)</label>
+        <input id="availability" name="availability" placeholder="e.g. Weekday evenings"/>
+        <label style="display:flex;gap:10px;align-items:flex-start;font-weight:500;margin-top:14px">
+          <input type="checkbox" name="consent" value="yes" required style="width:auto;min-height:auto;margin-top:4px"/>
+          <span>I consent to RuffNeck Entertainment processing my application data for programme selection and communication. I understand selection is not guaranteed.</span>
+        </label>
+        <div class="actions" style="margin-top:18px">
+          <button class="btn btn-emerald" type="submit">Submit application</button>
+          <a class="btn btn-outline" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%2C%20I%20want%20to%20apply%20for%20the%20Digital%20Empowerment%20Programme%20(RDEP)." target="_blank" rel="noopener">Apply via WhatsApp</a>
+        </div>
+        <p class="note" id="formNote">Thank you for applying. Your application will be reviewed. Selected applicants will be contacted using the details provided.</p>
+      </form>
+    </div>
+  </section>
+
+  <section id="partner" style="background:#08182c;border-top:1px solid rgba(0,180,216,.15)">
+    <div class="wrap">
+      <h2>Partner with us to expand digital opportunity</h2>
+      <p class="sub">We welcome NGOs, schools, universities, government programmes, development organisations, technology companies, and socially responsible businesses.</p>
+      <div class="partner-grid">
+        <div class="card"><h3>Funding partners</h3><p style="margin:0;color:#94A3B8;font-size:14px">Support training, equipment, internet access, and participant resources.</p></div>
+        <div class="card"><h3>Training partners</h3><p style="margin:0;color:#94A3B8;font-size:14px">Instructors, curriculum, platforms, or specialist sessions.</p></div>
+        <div class="card"><h3>Venue &amp; technology</h3><p style="margin:0;color:#94A3B8;font-size:14px">Workshop spaces, software, devices, licenses, or cloud access.</p></div>
+        <div class="card"><h3>Employment &amp; media</h3><p style="margin:0;color:#94A3B8;font-size:14px">Internships, project pathways, promotion, and success stories.</p></div>
+      </div>
+      <div class="actions" style="margin-top:18px">
+        <a class="btn btn-primary" href="mailto:ruffneckhassan@gmail.com?subject=RDEP%20Partnership%20Enquiry">Discuss a partnership</a>
+        <a class="btn btn-outline" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%2C%20I%20want%20to%20partner%20or%20sponsor%20the%20Digital%20Empowerment%20Programme." target="_blank" rel="noopener">WhatsApp partnership</a>
+        <a class="btn btn-outline" href="/partnerships.html">General partnerships page</a>
+      </div>
+      <p class="note">Impact targets are goals, not claimed results. Metrics tracked: applications, completion, projects, portfolios, and follow-up outcomes.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <p style="margin:0 0 10px"><strong style="color:#E5E7EB">RuffNeck Digital Empowerment Programme</strong><br/>Women in Digital Business · Youth in Tech · Digital Entrepreneurship</p>
+      <p>
+        <a href="/">Home</a>
+        <a href="/services-ai.html">Services</a>
+        <a href="/store">Store</a>
+        <a href="/blog">Blog</a>
+        <a href="/start-here">Free Guide</a>
+        <a href="/privacy.html">Privacy</a>
+      </p>
+      <p style="margin-top:12px">© 2026 RuffNeck Entertainment · CAC 3770977 · Kano, Nigeria · Remote delivery</p>
+    </div>
+  </footer>
+  <script>
+  (function(){
+    var form = document.getElementById('rdepForm');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var d = {
+        fullName: form.fullName.value.trim(),
+        email: form.email.value.trim(),
+        whatsapp: form.whatsapp.value.trim(),
+        location: form.location.value.trim(),
+        track: form.track.value,
+        level: form.level.value,
+        status: form.status.value.trim(),
+        access: form.access.value,
+        why: form.why.value.trim(),
+        achieve: form.achieve.value.trim(),
+        availability: form.availability.value.trim()
+      };
+      var body =
+        'RDEP Application%0A%0A' +
+        'Name: ' + encodeURIComponent(d.fullName) + '%0A' +
+        'Email: ' + encodeURIComponent(d.email) + '%0A' +
+        'WhatsApp: ' + encodeURIComponent(d.whatsapp) + '%0A' +
+        'Location: ' + encodeURIComponent(d.location) + '%0A' +
+        'Track: ' + encodeURIComponent(d.track) + '%0A' +
+        'Skills: ' + encodeURIComponent(d.level) + '%0A' +
+        'Status: ' + encodeURIComponent(d.status) + '%0A' +
+        'Access: ' + encodeURIComponent(d.access) + '%0A' +
+        'Why: ' + encodeURIComponent(d.why) + '%0A' +
+        'Goals: ' + encodeURIComponent(d.achieve) + '%0A' +
+        'Availability: ' + encodeURIComponent(d.availability);
+      window.location.href = 'mailto:ruffneckhassan@gmail.com?subject=' +
+        encodeURIComponent('RDEP Programme Application — ' + d.fullName) +
+        '&body=' + body;
+      var note = document.getElementById('formNote');
+      if (note) note.textContent = 'Your email app should open with the application. You can also use Apply via WhatsApp.';
+    });
+  })();
+  </script>
+</body>
+</html>
