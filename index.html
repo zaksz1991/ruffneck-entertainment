@@ -2332,6 +2332,147 @@ footer .social a, .footer-social a {
 }
 </style>
 
+
+<style id="rn-nuclear-ui-css">
+/* Language in HEADER (top-right, left of hamburger on mobile) */
+#rnNLang {
+  position: fixed !important;
+  top: max(10px, env(safe-area-inset-top, 0px)) !important;
+  right: 60px !important;
+  bottom: auto !important;
+  left: auto !important;
+  z-index: 10050 !important;
+}
+@media (min-width: 901px) {
+  #rnNLang {
+    right: 24px !important;
+    top: 14px !important;
+  }
+}
+#rnNLang > button {
+  min-height: 40px !important;
+  min-width: 48px !important;
+  padding: 6px 12px !important;
+  border-radius: 999px !important;
+  border: 2px solid #00B4D8 !important;
+  background: #0B1E3A !important;
+  color: #00B4D8 !important;
+  font-weight: 800 !important;
+  font-size: 12px !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,.35) !important;
+}
+#rnNLangMenu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 44px;
+  bottom: auto;
+  min-width: 160px;
+  background: #0B1E3A;
+  border: 1px solid #00B4D8;
+  border-radius: 12px;
+  padding: 6px;
+  z-index: 10051;
+  box-shadow: 0 12px 32px rgba(0,0,0,.45);
+}
+#rnNLangMenu.open { display: block !important; }
+#rnNLangMenu button {
+  display: block; width: 100%; text-align: left;
+  background: none; border: none; color: #fff;
+  padding: 12px; min-height: 44px; font-size: 14px; cursor: pointer; border-radius: 8px;
+}
+#rnNLangMenu button:hover { background: rgba(0,180,216,.15); }
+
+/* Chat button bottom-left above sticky bar */
+#rnNChatBtn {
+  position: fixed !important;
+  left: 12px !important;
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
+  z-index: 10040 !important;
+  width: 56px !important;
+  height: 56px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  background: #00B4D8 !important;
+  color: #0B1E3A !important;
+  font-size: 22px !important;
+  cursor: pointer !important;
+  box-shadow: 0 6px 20px rgba(0,0,0,.45) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#rnNChatPanel {
+  display: none !important;
+  position: fixed !important;
+  left: 12px !important;
+  right: 12px !important;
+  bottom: calc(150px + env(safe-area-inset-bottom, 0px)) !important;
+  max-width: 360px !important;
+  max-height: 55vh !important;
+  background: #0B1E3A !important;
+  border: 1px solid rgba(0,180,216,.5) !important;
+  border-radius: 16px !important;
+  z-index: 10041 !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  box-shadow: 0 12px 40px rgba(0,0,0,.55) !important;
+}
+#rnNChatPanel.open {
+  display: flex !important;
+}
+#rnNChatPanel header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; background: #061225; color: #F9FAFB; font-weight: 700;
+  flex-shrink: 0;
+}
+#rnNChatPanel header button#rnNChatClose {
+  background: rgba(255,255,255,.08) !important;
+  border: 1px solid rgba(255,255,255,.15) !important;
+  color: #F8FAFC !important;
+  font-size: 18px !important;
+  min-width: 40px !important;
+  min-height: 40px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  line-height: 1 !important;
+}
+#rnNChatBody { padding: 12px; overflow-y: auto; color: #E5E7EB; font-size: 14px; line-height: 1.45; flex: 1; }
+#rnNChatActions { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-top: 1px solid rgba(0,180,216,.25); }
+#rnNChatActions a {
+  display: flex; align-items: center; justify-content: center;
+  min-height: 44px; border-radius: 10px; font-weight: 800; text-decoration: none;
+  border: none; cursor: pointer; font-size: 14px;
+}
+#rnNChatActions .wa { background: #25D366; color: #053; }
+#rnNChatActions .store { background: transparent; color: #E5E7EB; border: 1px solid rgba(0,180,216,.4); }
+
+/* Hide legacy widgets */
+#rnChatBubble, #rnFixedLang, #rnLang, #rnChatToggle, .rn-chat-bubble {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+iframe.goog-te-banner-frame, .goog-te-banner-frame, body > .skiptranslate {
+  display: none !important; height: 0 !important; visibility: hidden !important;
+}
+body { top: 0 !important; position: static !important; }
+</style>
+
+
+<style id="rn-lang-header-space">
+@media (max-width: 900px) {
+  #nav .nav-hamburger, #hamburger {
+    margin-right: 0 !important;
+  }
+  /* room for EN button top-right */
+  #nav .nav-inner {
+    padding-right: 4px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -5188,252 +5329,9 @@ function rnToggleChat(){
 </script>
 
 
-<style id="rn-nuclear-ui-css">
-/* === NUCLEAR UI: language + chat — cannot be covered by header === */
-#rnNLang, #rnNChatBtn, #rnNChatPanel {
-  font-family: system-ui, -apple-system, sans-serif !important;
-}
-#rnNLang {
-  position: fixed !important;
-  right: 12px !important;
-  bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
-  z-index: 2147483000 !important;
-}
-#rnNLang > button {
-  min-height: 44px !important;
-  padding: 8px 14px !important;
-  border-radius: 999px !important;
-  border: 2px solid #00B4D8 !important;
-  background: #0B1E3A !important;
-  color: #00B4D8 !important;
-  font-weight: 800 !important;
-  font-size: 13px !important;
-  cursor: pointer !important;
-  box-shadow: 0 4px 16px rgba(0,0,0,.4) !important;
-}
-#rnNLangMenu {
-  display: none;
-  position: absolute;
-  right: 0;
-  bottom: 48px;
-  min-width: 160px;
-  background: #0B1E3A;
-  border: 1px solid #00B4D8;
-  border-radius: 12px;
-  padding: 6px;
-  z-index: 2147483001;
-}
-#rnNLangMenu.open { display: block !important; }
-#rnNLangMenu button {
-  display: block; width: 100%; text-align: left;
-  background: none; border: none; color: #fff;
-  padding: 12px; min-height: 44px; font-size: 14px; cursor: pointer; border-radius: 8px;
-}
 
-#rnNChatBtn {
-  position: fixed !important;
-  left: 12px !important;
-  bottom: calc(78px + env(safe-area-inset-bottom, 0px)) !important;
-  z-index: 2147483000 !important;
-  width: 56px !important;
-  height: 56px !important;
-  border-radius: 50% !important;
-  border: none !important;
-  background: #00B4D8 !important;
-  color: #0B1E3A !important;
-  font-size: 22px !important;
-  cursor: pointer !important;
-  box-shadow: 0 6px 20px rgba(0,0,0,.45) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-}
-#rnNChatPanel {
-  display: none;
-  position: fixed !important;
-  left: 12px !important;
-  right: 12px !important;
-  bottom: calc(145px + env(safe-area-inset-bottom, 0px)) !important;
-  max-width: 360px !important;
-  max-height: 50vh !important;
-  background: #0B1E3A !important;
-  border: 1px solid rgba(0,180,216,.5) !important;
-  border-radius: 16px !important;
-  z-index: 2147483002 !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-  box-shadow: 0 12px 40px rgba(0,0,0,.55) !important;
-}
-#rnNChatPanel.open { display: flex !important; }
-#rnNChatPanel header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 12px 14px; background: #061225; color: #F9FAFB; font-weight: 700;
-}
-#rnNChatPanel header button {
-  background: none; border: none; color: #94A3B8; font-size: 20px;
-  min-width: 40px; min-height: 40px; cursor: pointer;
-}
-#rnNChatBody { padding: 12px; overflow-y: auto; color: #E5E7EB; font-size: 14px; line-height: 1.45; flex: 1; }
-#rnNChatBody a { color: #00B4D8; font-weight: 700; }
-#rnNChatActions { display: flex; flex-direction: column; gap: 8px; padding: 12px; border-top: 1px solid rgba(0,180,216,.25); }
-#rnNChatActions a, #rnNChatActions button {
-  display: flex; align-items: center; justify-content: center;
-  min-height: 44px; border-radius: 10px; font-weight: 800; text-decoration: none;
-  border: none; cursor: pointer; font-size: 14px;
-}
-#rnNChatActions .wa { background: #25D366; color: #053; }
-#rnNChatActions .call { background: #00B4D8; color: #0B1E3A; }
-#rnNChatActions .store { background: transparent; color: #E5E7EB; border: 1px solid rgba(0,180,216,.4); }
 
-/* Kill Google top banner hard */
-iframe.goog-te-banner-frame,
-.goog-te-banner-frame,
-body > .skiptranslate {
-  display: none !important;
-  height: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-body { top: 0 !important; position: static !important; }
 
-/* Hide ALL old chat / lang widgets */
-#rnChatBubble, #rnFixedLang, #rnLang, .rn-chat-bubble, #rnChatToggle {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-</style>
-
-<script id="rn-nuclear-ui-js">
-(function(){
-  function el(tag, attrs, html){
-    var n = document.createElement(tag);
-    if (attrs) Object.keys(attrs).forEach(function(k){ n.setAttribute(k, attrs[k]); });
-    if (html != null) n.innerHTML = html;
-    return n;
-  }
-
-  function killGoogleBanner(){
-    try {
-      document.querySelectorAll('iframe.goog-te-banner-frame, .goog-te-banner-frame, body > .skiptranslate').forEach(function(n){
-        n.style.cssText = 'display:none!important;height:0!important;visibility:hidden!important';
-      });
-      document.body.style.top = '0';
-      document.body.style.position = 'static';
-    } catch(e){}
-  }
-
-  function setLang(lang){
-    var v = lang ? '/en/' + lang : '';
-    document.cookie = 'googtrans=' + v + ';path=/';
-    try { document.cookie = 'googtrans=' + v + ';path=/;domain=' + location.hostname; } catch(e){}
-    if (!lang) { location.reload(); return; }
-    // load GT then set
-    function apply(){
-      var sel = document.querySelector('.goog-te-combo');
-      if (sel) {
-        sel.value = lang;
-        sel.dispatchEvent(new Event('change'));
-        setTimeout(killGoogleBanner, 300);
-        setTimeout(killGoogleBanner, 1000);
-        setTimeout(killGoogleBanner, 2000);
-        return true;
-      }
-      return false;
-    }
-    if (!document.getElementById('google_translate_element')) {
-      document.body.appendChild(el('div', {id:'google_translate_element', style:'display:none'}));
-    }
-    window.googleTranslateElementInit = function(){
-      try {
-        new google.translate.TranslateElement({
-          pageLanguage:'en', includedLanguages:'en,ha,yo,ig,fr,es', autoDisplay:false
-        }, 'google_translate_element');
-      } catch(e){}
-    };
-    if (!(window.google && google.translate)) {
-      var s = document.createElement('script');
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      s.async = true;
-      document.head.appendChild(s);
-    }
-    var tries = 0;
-    (function tick(){
-      if (apply()) return;
-      if (++tries < 30) setTimeout(tick, 200);
-      else location.reload();
-    })();
-  }
-
-  function mount(){
-    if (document.getElementById('rnNChatBtn')) return;
-
-    // Language
-    var langWrap = el('div', {id:'rnNLang'});
-    var langBtn = el('button', {type:'button', id:'rnNLangBtn', title:'Language', 'aria-label':'Language'}, '🌐 EN');
-    var langMenu = el('div', {id:'rnNLangMenu'});
-    [['English',''],['Hausa','ha'],['Yoruba','yo'],['Igbo','ig'],['Français','fr'],['Español','es']].forEach(function(p){
-      var b = el('button', {type:'button', 'data-lang': p[1]}, p[0]);
-      b.onclick = function(e){
-        e.stopPropagation();
-        langMenu.classList.remove('open');
-        setLang(p[1]);
-      };
-      langMenu.appendChild(b);
-    });
-    langBtn.onclick = function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      langMenu.classList.toggle('open');
-    };
-    document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
-    langWrap.appendChild(langBtn);
-    langWrap.appendChild(langMenu);
-    document.body.appendChild(langWrap);
-
-    // Chat button
-    var chatBtn = el('button', {type:'button', id:'rnNChatBtn', 'aria-label':'Open chat'}, '💬');
-    var panel = el('div', {id:'rnNChatPanel'});
-    panel.innerHTML =
-      '<header><span>RuffNeck Assistant</span><button type="button" id="rnNChatClose" aria-label="Close">✕</button></header>' +
-      '<div id="rnNChatBody">' +
-      '<p><strong>Ask about a topic</strong></p>' +
-      '<p style="color:#94A3B8;font-size:13px;margin:0 0 10px">Choose one — we will open WhatsApp with a ready message.</p>' +
-      '</div>' +
-      '<div id="rnNChatActions">' +
-      '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I need help with AI training / automation.') + '" target="_blank" rel="noopener">🤖 AI & training</a>' +
-      '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I need IT / computer / Office support.') + '" target="_blank" rel="noopener">💻 IT & Office support</a>' +
-      '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I want a quote for digital marketing.') + '" target="_blank" rel="noopener">📣 Marketing quote</a>' +
-      '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I need CV / LinkedIn / career help.') + '" target="_blank" rel="noopener">📄 CV & career</a>' +
-      '<a class="store" href="/start-here">📘 Free AI guide</a>' +
-      '</div>';
-    document.body.appendChild(chatBtn);
-    document.body.appendChild(panel);
-
-    chatBtn.onclick = function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      var on=!panel.classList.contains('open');panel.classList.toggle('open',on);panel.style.display=on?'flex':'none';
-    };
-    document.getElementById('rnNChatClose').onclick = function(e){
-      e.preventDefault();
-      panel.classList.remove('open');
-    };
-
-    // Hide old widgets if present
-    ['rnChatBubble','rnFixedLang','rnLang','rnChatToggle'].forEach(function(id){
-      var n = document.getElementById(id);
-      if (n) n.style.display = 'none';
-    });
-
-    killGoogleBanner();
-    setInterval(killGoogleBanner, 1500);
-  }
-
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
-  else mount();
-})();
-</script>
 
 
 <script id="rn-audit-impl-js">
@@ -5511,6 +5409,157 @@ body { top: 0 !important; position: static !important; }
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindMenu);
   else bindMenu();
+})();
+</script>
+
+
+<script id="rn-nuclear-ui-js">
+(function(){
+  function el(tag, attrs, html){
+    var n = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function(k){ n.setAttribute(k, attrs[k]); });
+    if (html != null) n.innerHTML = html;
+    return n;
+  }
+  function killGoogleBanner(){
+    try {
+      document.querySelectorAll('iframe.goog-te-banner-frame, .goog-te-banner-frame, body > .skiptranslate').forEach(function(n){
+        n.style.cssText = 'display:none!important;height:0!important';
+      });
+      document.body.style.top = '0';
+    } catch(e){}
+  }
+  function setLang(lang){
+    var v = lang ? '/en/' + lang : '';
+    document.cookie = 'googtrans=' + v + ';path=/';
+    try { document.cookie = 'googtrans=' + v + ';path=/;domain=' + location.hostname; } catch(e){}
+    if (!lang) { location.reload(); return; }
+    function apply(){
+      var sel = document.querySelector('.goog-te-combo');
+      if (sel) {
+        sel.value = lang;
+        sel.dispatchEvent(new Event('change'));
+        setTimeout(killGoogleBanner, 300);
+        setTimeout(killGoogleBanner, 1200);
+        return true;
+      }
+      return false;
+    }
+    if (!document.getElementById('google_translate_element')) {
+      document.body.appendChild(el('div', {id:'google_translate_element', style:'display:none'}));
+    }
+    window.googleTranslateElementInit = function(){
+      try {
+        new google.translate.TranslateElement({
+          pageLanguage:'en', includedLanguages:'en,ha,yo,ig,fr,es', autoDisplay:false
+        }, 'google_translate_element');
+      } catch(e){}
+    };
+    if (!(window.google && google.translate)) {
+      var s = document.createElement('script');
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      s.async = true;
+      document.head.appendChild(s);
+    }
+    var tries = 0;
+    (function tick(){
+      if (apply()) return;
+      if (++tries < 30) setTimeout(tick, 200);
+      else location.reload();
+    })();
+  }
+
+  function setChatOpen(open){
+    var panel = document.getElementById('rnNChatPanel');
+    if (!panel) return;
+    if (open) {
+      panel.classList.add('open');
+      panel.style.setProperty('display', 'flex', 'important');
+    } else {
+      panel.classList.remove('open');
+      panel.style.setProperty('display', 'none', 'important');
+    }
+  }
+
+  function mount(){
+    if (document.getElementById('rnNChatBtn')) return;
+
+    // Language — header
+    var langWrap = el('div', {id:'rnNLang'});
+    var langBtn = el('button', {type:'button', id:'rnNLangBtn', title:'Language', 'aria-label':'Language'}, '🌐 EN');
+    var langMenu = el('div', {id:'rnNLangMenu'});
+    [['English',''],['Hausa','ha'],['Yoruba','yo'],['Igbo','ig'],['Français','fr'],['Español','es']].forEach(function(p){
+      var b = el('button', {type:'button'}, p[0]);
+      b.onclick = function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        langMenu.classList.remove('open');
+        setLang(p[1]);
+      };
+      langMenu.appendChild(b);
+    });
+    langBtn.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      langMenu.classList.toggle('open');
+    };
+    document.addEventListener('click', function(){ langMenu.classList.remove('open'); });
+    langWrap.appendChild(langBtn);
+    langWrap.appendChild(langMenu);
+    document.body.appendChild(langWrap);
+
+    // Chat
+    var chatBtn = el('button', {type:'button', id:'rnNChatBtn', 'aria-label':'Open chat'}, '💬');
+    var panel = el('div', {id:'rnNChatPanel'});
+    panel.innerHTML =
+      '<header><span>RuffNeck Assistant</span><button type="button" id="rnNChatClose" aria-label="Close">✕</button></header>' +
+      '<div id="rnNChatBody">' +
+      '<p><strong>Ask about a topic</strong></p>' +
+      '<p style="color:#94A3B8;font-size:13px;margin:0 0 10px">Opens WhatsApp with a ready message.</p>' +
+      '</div>' +
+      '<div id="rnNChatActions">' +
+      '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I need help with AI training / automation.') + '" target="_blank" rel="noopener">🤖 AI & training</a>' +
+      '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I need IT / computer / Office support.') + '" target="_blank" rel="noopener">💻 IT & Office support</a>' +
+      '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I want a quote for digital marketing.') + '" target="_blank" rel="noopener">📣 Marketing quote</a>' +
+      '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I need CV / LinkedIn / career help.') + '" target="_blank" rel="noopener">📄 CV & career</a>' +
+      '<a class="store" href="/start-here">📘 Free AI guide</a>' +
+      '</div>';
+    document.body.appendChild(chatBtn);
+    document.body.appendChild(panel);
+
+    chatBtn.onclick = function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var open = !panel.classList.contains('open');
+      setChatOpen(open);
+    };
+    // Close button — bind after panel in DOM
+    var closer = document.getElementById('rnNChatClose');
+    if (closer) {
+      closer.onclick = function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        setChatOpen(false);
+      };
+    }
+    // Also close when tapping outside panel (not chat button)
+    document.addEventListener('click', function(e){
+      if (!panel.classList.contains('open')) return;
+      if (panel.contains(e.target) || chatBtn.contains(e.target)) return;
+      setChatOpen(false);
+    });
+    setChatOpen(false);
+
+    ['rnChatBubble','rnFixedLang','rnLang','rnChatToggle'].forEach(function(id){
+      var n = document.getElementById(id);
+      if (n) n.style.display = 'none';
+    });
+    killGoogleBanner();
+    setInterval(killGoogleBanner, 2000);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
+  else mount();
 })();
 </script>
 
