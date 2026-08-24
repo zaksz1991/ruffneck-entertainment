@@ -1871,6 +1871,10 @@ body > a[href*="wa.me"][style*="fixed"],
 .hero-store-chip { opacity: 0.95; }
 </style>
 
+
+<style id="rn-gt-banner-chat-fix">
+
+
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -3629,7 +3633,7 @@ document.addEventListener('keydown', function(e) {
 <div class="rn-chat-bubble" id="rnChatBubble">
   <button type="button" class="rn-chat-toggle" id="rnChatToggle" onclick="rnToggleChat()" aria-label="Open chat" aria-expanded="false">💬</button>
 
-  <div class="rn-chat-panel" id="rnChatPanel">
+  <div class="rn-chat-panel" id="rnChatPanel" data-open="0">
     <div class="rn-chat-head">
       <div class="rn-chat-avatar">
         <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
@@ -4857,6 +4861,54 @@ function rnToggleChat(){
       }
     });
   });
+})();
+</script>
+
+
+<script id="rn-chat-open-fix">
+(function(){
+  function setOpen(open){
+    var panel = document.getElementById('rnChatPanel');
+    var bubble = document.getElementById('rnChatBubble');
+    if (!panel) return;
+    if (open) {
+      panel.setAttribute('data-open', '1');
+      panel.style.cssText = 'display:flex!important;position:fixed!important;left:12px;right:12px;bottom:145px;max-width:360px;max-height:50vh;background:#0B1E3A;border:1px solid rgba(0,180,216,.45);border-radius:16px;z-index:99997;flex-direction:column;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.55);';
+      if (bubble) bubble.classList.add('open');
+    } else {
+      panel.setAttribute('data-open', '0');
+      panel.style.cssText = 'display:none!important';
+      if (bubble) bubble.classList.remove('open');
+    }
+  }
+  window.rnToggleChat = function(){
+    var panel = document.getElementById('rnChatPanel');
+    if (!panel) { console.warn('rnChatPanel missing'); return; }
+    var open = panel.getAttribute('data-open') === '1';
+    setOpen(!open);
+  };
+  window.rnCloseChat = function(){ setOpen(false); };
+
+  function bind(){
+    var btn = document.getElementById('rnChatToggle');
+    if (btn) {
+      btn.onclick = function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        window.rnToggleChat();
+      };
+    }
+    document.querySelectorAll('.rn-chat-close').forEach(function(c){
+      c.onclick = function(e){
+        e.preventDefault();
+        setOpen(false);
+      };
+    });
+    // Start closed
+    setOpen(false);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
+  else bind();
 })();
 </script>
 
