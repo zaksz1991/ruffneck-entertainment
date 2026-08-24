@@ -2230,6 +2230,108 @@ footer .social a, .footer-social a {
 <link rel="dns-prefetch" href="https://translate.google.com"/>
 <link rel="dns-prefetch" href="https://wa.me"/>
 
+
+<style id="rn-menu-final-fix">
+/* FINAL MENU FIX — do not hide hamburger */
+#nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+#nav .nav-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 8px !important;
+  min-height: 56px !important;
+  width: 100% !important;
+}
+#nav .nav-logo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  text-decoration: none !important;
+}
+#nav .nav-hamburger,
+#hamburger {
+  display: none; /* desktop default */
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  padding: 8px !important;
+  margin: 0 0 0 auto !important;
+  border: 1px solid rgba(0,180,216,0.35) !important;
+  border-radius: 10px !important;
+  background: rgba(11,30,58,0.9) !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  z-index: 1001 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+#nav .nav-hamburger span,
+#hamburger span {
+  display: block !important;
+  width: 20px !important;
+  height: 2px !important;
+  margin: 2px 0 !important;
+  background: #F8FAFC !important;
+  border-radius: 1px !important;
+}
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  background: #0B1E3A;
+  border-top: 1px solid rgba(0,180,216,0.25);
+  padding: 8px 0 16px;
+}
+.nav-mobile[hidden] { display: none !important; }
+.nav-mobile.is-open,
+.nav-mobile.open {
+  display: flex !important;
+}
+.nav-mobile a {
+  display: block !important;
+  padding: 14px 18px !important;
+  color: #E5E7EB !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  min-height: 44px !important;
+}
+.nav-mobile a.mobile-cta {
+  color: #00B4D8 !important;
+  font-weight: 800 !important;
+}
+@media (max-width: 900px) {
+  #nav .nav-inner > ul,
+  #nav ul.nav-links {
+    display: none !important;
+  }
+  #nav .nav-hamburger,
+  #hamburger {
+    display: flex !important;
+  }
+}
+@media (min-width: 901px) {
+  #nav .nav-hamburger,
+  #hamburger {
+    display: none !important;
+  }
+  .nav-mobile {
+    display: none !important;
+  }
+}
+</style>
+
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -2273,29 +2375,28 @@ button,a,.btn{touch-action:manipulation}
         </li>
         <li><a href="/blog">Blog</a></li>
         <li><a href="#free-guide">Free Guide</a></li>
-        <li><a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="nav-cta">Book a Call</a><!-- lang moved to fixed control --></div>
-<div id="google_translate_element" aria-hidden="true"></div>
-
-<a class="btn btn-primary nav-cta" href="#contact">Book a Call</a></ul>
-      <button type="button" class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <li><a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
+      </ul>
+      <button type="button" class="nav-hamburger" id="hamburger" aria-label="Open menu" aria-controls="mobileMenu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
-    <div class="nav-mobile" id="mobileMenu">
-<a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" style="display:block;padding:14px 16px;font-weight:800;color:#00B4D8;">Book a Call</a>
-<a href="/store" style="display:block;padding:14px 16px;font-weight:700;color:#E5E7EB;">Store</a>
-<a href="/blog" style="display:block;padding:14px 16px;font-weight:700;color:#E5E7EB;">Blog</a>
-
+  <div class="nav-mobile" id="mobileMenu" hidden>
     <a href="#services">Services</a>
-    <a href="/store">Products</a>
-    <a href="#about">About</a>
+    <a href="/store">Store</a>
     <a href="/blog">Blog</a>
     <a href="#free-guide">Free Guide</a>
+    <a href="#about">About</a>
+    <a href="#founder">Founder</a>
+    <a href="#pricing">Pricing</a>
     <a href="#contact">Contact</a>
-    <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="mobile-cta">Get Started →</a>
+    <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="mobile-cta">Book a Call</a>
+    <a href="https://wa.me/2348033807856" target="_blank" rel="noopener">WhatsApp</a>
   </div>
 </nav>
 
-<main\1 id="main">
+<main id="main">
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="container">
@@ -5501,5 +5602,44 @@ body { top: 0 !important; position: static !important; }
   <a href="/refund.html" style="color:#94A3B8">Refund</a> ·
   <a href="/faq.html" style="color:#94A3B8">FAQ</a>
 </p>
+
+<script id="rn-menu-final-js">
+(function(){
+  function bindMenu(){
+    var btn = document.getElementById('hamburger');
+    var menu = document.getElementById('mobileMenu');
+    if (!btn || !menu) {
+      console.warn('RuffNeck menu: hamburger or mobileMenu missing');
+      return;
+    }
+    function setOpen(open){
+      menu.classList.toggle('open', open);
+      menu.classList.toggle('is-open', open);
+      if (open) menu.removeAttribute('hidden');
+      else menu.setAttribute('hidden', '');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('nav-open', open);
+    }
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var open = !menu.classList.contains('open');
+      setOpen(open);
+    });
+    menu.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ setOpen(false); });
+    });
+    document.addEventListener('click', function(e){
+      if (!menu.classList.contains('open')) return;
+      if (menu.contains(e.target) || btn.contains(e.target)) return;
+      setOpen(false);
+    });
+    setOpen(false);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindMenu);
+  else bindMenu();
+})();
+</script>
+
 </body>
 </html>
