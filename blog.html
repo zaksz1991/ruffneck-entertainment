@@ -2498,5 +2498,38 @@ document.addEventListener('DOMContentLoaded', async function(){
 })();
 </script>
 
+
+<script id="rn-audit-impl-js">
+(function(){
+  // Lazy-load images missing loading attr
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('img:not([loading])').forEach(function(img){
+      if (!img.closest('header') && !img.closest('#nav')) {
+        img.setAttribute('loading', 'lazy');
+        img.setAttribute('decoding', 'async');
+      }
+    });
+    // ARIA for expand toggles
+    document.querySelectorAll('[data-expand], .view-details, .service-card button, .accordion-trigger').forEach(function(btn){
+      if (!btn.getAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', function(){
+        var ex = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', ex ? 'false' : 'true');
+      });
+    });
+    // Footer social aria-labels if missing
+    document.querySelectorAll('footer a[href]').forEach(function(a){
+      if (a.getAttribute('aria-label')) return;
+      var h = (a.getAttribute('href')||'').toLowerCase();
+      if (h.indexOf('linkedin')!==-1) a.setAttribute('aria-label','LinkedIn');
+      else if (h.indexOf('facebook')!==-1) a.setAttribute('aria-label','Facebook');
+      else if (h.indexOf('instagram')!==-1) a.setAttribute('aria-label','Instagram');
+      else if (h.indexOf('twitter')!==-1 || h.indexOf('x.com')!==-1) a.setAttribute('aria-label','X (Twitter)');
+      else if (h.indexOf('wa.me')!==-1 || h.indexOf('whatsapp')!==-1) a.setAttribute('aria-label','WhatsApp');
+    });
+  });
+})();
+</script>
+
 </body>
 </html>
