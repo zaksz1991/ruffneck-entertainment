@@ -3,28 +3,8 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/admin",
-      "destination": "/admin.html"
-    },
-    {
       "source": "/start-here",
       "destination": "/start-here.html"
-    },
-    {
-      "source": "/services/ai",
-      "destination": "/services-ai.html"
-    },
-    {
-      "source": "/services/marketing",
-      "destination": "/services-marketing.html"
-    },
-    {
-      "source": "/services/operations",
-      "destination": "/services-operations.html"
-    },
-    {
-      "source": "/services/creative",
-      "destination": "/services-creative.html"
     },
     {
       "source": "/services",
@@ -73,6 +53,26 @@
     {
       "source": "/product",
       "destination": "/product.html"
+    },
+    {
+      "source": "/services/ai",
+      "destination": "/services-ai.html"
+    },
+    {
+      "source": "/services/marketing",
+      "destination": "/services-marketing.html"
+    },
+    {
+      "source": "/services/operations",
+      "destination": "/services-operations.html"
+    },
+    {
+      "source": "/services/creative",
+      "destination": "/services-creative.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
     }
   ]
 }

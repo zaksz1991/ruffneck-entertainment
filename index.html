@@ -1880,6 +1880,91 @@ body > a[href*="wa.me"][style*="fixed"],
 iframe.goog-te-banner-frame,.goog-te-banner-frame,body>.skiptranslate{display:none!important;height:0!important}
 body{top:0!important}
 </style>
+
+<style id="rn-next-fix-css">
+/* Next fix: mobile header + spacing with nuclear FABs */
+@media (max-width: 900px) {
+  #nav .nav-inner,
+  .nav-inner {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px !important;
+    padding: 8px 12px !important;
+    min-height: 56px !important;
+  }
+  #nav .logo,
+  .logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    max-width: calc(100% - 56px) !important;
+    min-width: 0 !important;
+    text-decoration: none !important;
+  }
+  #nav .logo img,
+  .logo img {
+    width: 36px !important;
+    height: 36px !important;
+    flex-shrink: 0 !important;
+  }
+  /* Full brand on two lines if needed — never under Language */
+  #nav .logo span,
+  #nav .logo .logo-text,
+  .logo-text {
+    font-size: 14px !important;
+    line-height: 1.15 !important;
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    max-width: none !important;
+    color: #F9FAFB !important;
+  }
+  #nav a.nav-cta,
+  header a.nav-cta {
+    display: none !important;
+  }
+  #hamburger {
+    flex-shrink: 0 !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+  }
+  /* Offset hero so sticky + FABs don't feel cramped */
+  body {
+    padding-bottom: 88px !important;
+  }
+}
+/* Nuclear FABs clear of sticky bar */
+#rnNLang {
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
+  right: 12px !important;
+}
+#rnNChatBtn {
+  bottom: calc(84px + env(safe-area-inset-bottom, 0px)) !important;
+  left: 12px !important;
+}
+#rnNChatPanel {
+  bottom: calc(150px + env(safe-area-inset-bottom, 0px)) !important;
+}
+/* Sticky bar solid */
+#rnMobileBar {
+  z-index: 99950 !important;
+}
+/* Hide legacy widgets completely */
+#rnFixedLang,
+#rnLang,
+#rnChatBubble,
+#rnChatToggle,
+.rn-chat-bubble {
+  display: none !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+}
+</style>
+
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -5093,7 +5178,7 @@ body { top: 0 !important; position: static !important; }
     chatBtn.onclick = function(e){
       e.preventDefault();
       e.stopPropagation();
-      panel.classList.toggle('open');
+      var on=!panel.classList.contains('open');panel.classList.toggle('open',on);panel.style.display=on?'flex':'none';
     };
     document.getElementById('rnNChatClose').onclick = function(e){
       e.preventDefault();
