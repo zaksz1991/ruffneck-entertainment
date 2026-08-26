@@ -16,6 +16,41 @@
       "permanent": true
     },
     {
+      "source": "/services/it-support",
+      "destination": "/services-operations.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/training",
+      "destination": "/services-ai.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/career-services",
+      "destination": "/services-marketing.html",
+      "permanent": true
+    },
+    {
+      "source": "/contact-page",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/contact-page.html",
+      "destination": "/contact",
+      "permanent": false
+    },
+    {
+      "source": "/blog.html",
+      "destination": "/blog",
+      "permanent": false
+    },
+    {
+      "source": "/store.html",
+      "destination": "/store",
+      "permanent": false
+    },
+    {
       "source": "/case-studies.html",
       "destination": "/case-studies",
       "permanent": false
@@ -33,6 +68,18 @@
   ],
   "rewrites": [
     {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/store",
+      "destination": "/store.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact-page.html"
+    },
+    {
       "source": "/case-studies",
       "destination": "/case-studies.html"
     },
@@ -47,6 +94,10 @@
     {
       "source": "/programmes",
       "destination": "/programmes.html"
+    },
+    {
+      "source": "/start-here",
+      "destination": "/start-here.html"
     }
   ],
   "headers": [
