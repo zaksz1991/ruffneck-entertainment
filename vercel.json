@@ -1,78 +1,75 @@
 {
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/services/ai",
+      "destination": "/services-ai.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/operations",
+      "destination": "/services-operations.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/digital-growth",
+      "destination": "/services-marketing.html",
+      "permanent": true
+    },
+    {
+      "source": "/case-studies.html",
+      "destination": "/case-studies",
+      "permanent": false
+    },
+    {
+      "source": "/founder.html",
+      "destination": "/founder",
+      "permanent": false
+    },
+    {
+      "source": "/accessibility.html",
+      "destination": "/accessibility",
+      "permanent": false
+    }
+  ],
   "rewrites": [
-    {
-      "source": "/start-here",
-      "destination": "/start-here.html"
-    },
-    {
-      "source": "/services",
-      "destination": "/services-ai.html"
-    },
     {
       "source": "/case-studies",
       "destination": "/case-studies.html"
     },
     {
-      "source": "/internship",
-      "destination": "/internship.html"
+      "source": "/founder",
+      "destination": "/founder.html"
     },
     {
-      "source": "/volunteer",
-      "destination": "/volunteer.html"
+      "source": "/accessibility",
+      "destination": "/accessibility.html"
     },
     {
-      "source": "/partnerships",
-      "destination": "/partnerships.html"
-    },
+      "source": "/programmes",
+      "destination": "/programmes.html"
+    }
+  ],
+  "headers": [
     {
-      "source": "/about-full",
-      "destination": "/about-full.html"
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy.html"
-    },
-    {
-      "source": "/terms",
-      "destination": "/terms.html"
-    },
-    {
-      "source": "/refund",
-      "destination": "/refund.html"
-    },
-    {
-      "source": "/faq",
-      "destination": "/faq.html"
-    },
-    {
-      "source": "/contact-page",
-      "destination": "/contact-page.html"
-    },
-    {
-      "source": "/product",
-      "destination": "/product.html"
-    },
-    {
-      "source": "/services/ai",
-      "destination": "/services-ai.html"
-    },
-    {
-      "source": "/services/marketing",
-      "destination": "/services-marketing.html"
-    },
-    {
-      "source": "/services/operations",
-      "destination": "/services-operations.html"
-    },
-    {
-      "source": "/services/creative",
-      "destination": "/services-creative.html"
-    },
-    {
-      "source": "/admin",
-      "destination": "/admin.html"
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
     }
   ]
 }
