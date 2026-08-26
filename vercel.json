@@ -1,6 +1,21 @@
 {
   "redirects": [
     {
+      "source": "/services/it-support",
+      "destination": "/services-it.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/training",
+      "destination": "/services-training.html",
+      "permanent": true
+    },
+    {
+      "source": "/services/career-services",
+      "destination": "/services-career.html",
+      "permanent": true
+    },
+    {
       "source": "/services/ai",
       "destination": "/services-ai.html",
       "permanent": true
@@ -12,21 +27,6 @@
     },
     {
       "source": "/services/digital-growth",
-      "destination": "/services-marketing.html",
-      "permanent": true
-    },
-    {
-      "source": "/services/it-support",
-      "destination": "/services-operations.html",
-      "permanent": true
-    },
-    {
-      "source": "/services/training",
-      "destination": "/services-ai.html",
-      "permanent": true
-    },
-    {
-      "source": "/services/career-services",
       "destination": "/services-marketing.html",
       "permanent": true
     },
