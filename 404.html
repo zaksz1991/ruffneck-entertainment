@@ -1,27 +1,63 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Page not found | RuffNeck Entertainment</title>
+<meta name="description" content="The page you requested is missing or has moved.">
+<link rel="canonical" href="https://ruffneck-entertainment.vercel.app/404.html">
 <style>
-body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif;background:#040C1A;color:#E5E7EB;padding:24px;text-align:center}
-a{color:#00B4D8;font-weight:700;text-decoration:none;margin:0 8px}
-h1{font-size:1.6rem}
-p{color:#94A3B8}
+:root{--navy:#0b1e3a;--cyan:#00b4d8;--text:#1f2937;--muted:#4b5563;--border:#e5e7eb;--off:#f8fafc}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,sans-serif;color:var(--text);line-height:1.65}
+a{color:#087f99}.wrap{max-width:800px;margin:0 auto;padding:0 16px}
+header{background:var(--navy);color:#fff;padding:14px 0;position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:800;text-decoration:none}
+.brand img{width:40px;height:40px;border-radius:8px;background:#fff;object-fit:contain}
+.nav{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}
+.nav a{color:rgba(255,255,255,.9);text-decoration:none;font-size:14px;font-weight:600;margin-left:12px}
+main{padding:40px 0 64px}h1{font-size:clamp(1.5rem,4vw,2rem);color:var(--navy);margin:0 0 12px}
+h2{font-size:1.1rem;color:var(--navy);margin:0}.lead{color:var(--muted);margin:0 0 24px}
+details{border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:0 0 10px;background:var(--off)}
+summary{cursor:pointer;font-weight:700;color:var(--navy);list-style:none}
+summary::-webkit-details-marker{display:none}
+details[open] summary{margin-bottom:8px}
+.btn{display:inline-flex;min-height:44px;align-items:center;padding:10px 16px;border-radius:10px;font-weight:800;text-decoration:none;margin:6px 8px 6px 0}
+.btn-primary{background:var(--cyan);color:var(--navy)}.btn-outline{border:2px solid var(--cyan);color:var(--navy)}
+.skip-link{position:absolute;left:-9999px;top:0;background:#00b4d8;color:#0b1e3a;padding:12px 16px;font-weight:800;z-index:10000}
+.skip-link:focus{left:12px;top:12px}
+:focus-visible{outline:3px solid #00b4d8;outline-offset:3px}
+footer{background:#040d1a;color:rgba(255,255,255,.7);padding:24px 16px;text-align:center;font-size:13px}
+footer a{color:#cbd5e1;margin:0 8px;text-decoration:none}
+.card{border:1px solid var(--border);border-radius:14px;padding:20px;background:var(--off);margin:16px 0}
+label{display:block;font-weight:700;font-size:14px;margin:12px 0 4px}
+input,textarea{width:100%;padding:12px;border:1px solid var(--border);border-radius:10px;font:inherit}
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<header><div class="wrap nav">
+<a class="brand" href="/"><img src="/logo.png" width="40" height="40" alt="RuffNeck Entertainment logo">RuffNeck Entertainment</a>
 <div>
-  <h1>Page not found</h1>
-  <p>That link is missing or has moved.</p>
-  <p>
-    <a href="/">Home</a>
-    <a href="/store">Store</a>
-    <a href="/blog">Blog</a>
-    <a href="/start-here">Free guide</a>
-    <a href="/contact-page">Contact</a>
-  </p>
+<a href="/#solutions">Solutions</a>
+<a href="/store">Store</a>
+<a href="/blog">Blog</a>
+<a href="/contact">Contact</a>
 </div>
+</div></header>
+<main id="main-content"><div class="wrap">
+<h1>Page not found</h1>
+<p class="lead">That link is missing or has moved. Use one of the paths below.</p>
+<p>
+<a class="btn btn-primary" href="/">Home</a>
+<a class="btn btn-outline" href="/store">Store</a>
+<a class="btn btn-outline" href="/blog">Blog</a>
+<a class="btn btn-outline" href="/contact">Contact</a>
+<a class="btn btn-outline" href="/start-here">Free AI guide</a>
+</p>
+</div></main>
+<footer>
+<p><strong style="color:#fff">RuffNeck Entertainment</strong> · CAC 3770977 · Kano, Nigeria</p>
+<p><a href="/">Home</a><a href="/privacy.html">Privacy</a><a href="/faq.html">FAQ</a><a href="/contact">Contact</a></p>
+</footer>
 </body>
 </html>

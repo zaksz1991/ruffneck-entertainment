@@ -114,6 +114,10 @@
     {
       "source": "/delivery-policy",
       "destination": "/delivery-policy.html"
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq.html"
     }
   ],
   "headers": [
