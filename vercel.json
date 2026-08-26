@@ -98,6 +98,22 @@
     {
       "source": "/start-here",
       "destination": "/start-here.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/refund",
+      "destination": "/refund.html"
+    },
+    {
+      "source": "/delivery-policy",
+      "destination": "/delivery-policy.html"
     }
   ],
   "headers": [
