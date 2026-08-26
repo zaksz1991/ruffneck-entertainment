@@ -25,6 +25,15 @@ ul.clean{padding-left:18px}ul.clean li{margin:6px 0}
 footer{background:#040d1a;color:rgba(255,255,255,.7);padding:28px 16px;font-size:13px;text-align:center}
 footer a{color:#cbd5e1;margin:0 8px;text-decoration:none}
 .tag{display:inline-block;background:rgba(0,180,216,.15);color:#087f99;font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;margin-bottom:10px}
+
+/* rn-a11y */
+:focus-visible{outline:3px solid #00b4d8;outline-offset:3px}
+.skip-link{position:absolute;left:-9999px;top:0;background:#00b4d8;color:#0b1e3a;padding:12px 16px;font-weight:800;z-index:10000;text-decoration:none}
+.skip-link:focus{left:12px;top:12px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
+
 </style>
 </head>
 <body>
@@ -38,7 +47,7 @@ footer a{color:#cbd5e1;margin:0 8px;text-decoration:none}
 <a class="btn btn-primary" style="min-height:36px;padding:8px 12px;font-size:13px" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book a call</a>
 </div>
 </div></header>
-<main><div class="wrap">
+<main id="main-content"><div class="wrap">
 
 <p class="tag">Service</p>
 <h1>Operations and technology support</h1>

@@ -168,7 +168,16 @@
       .whatsapp{right:12px;bottom:12px;left:12px;justify-content:center}
     }
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}}
-  </style>
+  
+/* rn-a11y */
+:focus-visible{outline:3px solid #00b4d8;outline-offset:3px}
+.skip-link{position:absolute;left:-9999px;top:0;background:#00b4d8;color:#0b1e3a;padding:12px 16px;font-weight:800;z-index:10000;text-decoration:none}
+.skip-link:focus{left:12px;top:12px}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;scroll-behavior:auto!important}
+}
+
+</style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@graph":[
     {"@type":"Organization","@id":"https://ruffneck-entertainment.vercel.app/#organization","name":"RuffNeck Entertainment","url":"https://ruffneck-entertainment.vercel.app/","telephone":"+2348033807856","email":"ruffneckhassan@gmail.com","address":{"@type":"PostalAddress","addressLocality":"Kano","addressRegion":"Kano State","addressCountry":"NG"},"founder":{"@id":"https://ruffneck-entertainment.vercel.app/#hassan-zakariya"},"identifier":[{"@type":"PropertyValue","propertyID":"CAC Registration Number","value":"3770977"}]},
