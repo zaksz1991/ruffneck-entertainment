@@ -1,7 +1,11 @@
-BLOG FILTER FIX
-Category buttons are <button data-cat="..."> WITHOUT class filter-btn.
-Previous CSS targeted .filter-btn only — so chips stayed invisible.
+Branch: ux-polish-pass2-home
+File ONLY: css/main.css
+Marker: RN-UX-POLISH-PASS-2-HOME
 
-Also removed global p { color: white } that faded author card text.
+git checkout -b ux-polish-pass2-home
+# copy css/main.css
+git add css/main.css
+git commit -m "preview homepage CSS tuning pass 2"
+git push -u origin ux-polish-pass2-home
 
-Deploy: blog.html only
+Do NOT push main or vercel --prod until Preview approved.
