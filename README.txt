@@ -1,5 +1,5 @@
-RN-UX-POLISH-PASS-2-HOME
-Branch: ux-polish-pass2-home
-Allowed file: css/main.css ONLY
-Copy only css/main.css — do not overwrite index/blog/store/admin
-Preview only — do not promote until checklist passes
+Pass 4 — Store visual refinement ONLY
+File: store.html (style#rn-ux-store-pass-4 only)
+Branch: ux-polish-pass4-store
+Do NOT change Flutterwave links, product IDs, payment JS, or Admin.
+Preview only.
