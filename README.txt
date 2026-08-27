@@ -1,11 +1,16 @@
-Branch: ux-polish-pass2-home
-File ONLY: css/main.css
-Marker: RN-UX-POLISH-PASS-2-HOME
+CHECK RESULT + SAFE IMPLEMENTATION
 
-git checkout -b ux-polish-pass2-home
-# copy css/main.css
-git add css/main.css
-git commit -m "preview homepage CSS tuning pass 2"
-git push -u origin ux-polish-pass2-home
+DO NOT put Knowledge Hub mobile repair into main.css (would risk homepage).
+DO NOT remove blog-card onclick="openArticle(...)" — that opens the article modal.
+DO NOT replace with accordion toggle — would break reading full articles.
 
-Do NOT push main or vercel --prod until Preview approved.
+Implemented:
+- css/knowledge-hub.css (Blog-only)
+- linked from blog.html
+
+Deploy:
+  css/knowledge-hub.css
+  blog.html
+
+Branch suggestion: ux-knowledge-hub-mobile
+Preview only until approved.
