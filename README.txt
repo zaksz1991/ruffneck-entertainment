@@ -1,9 +1,7 @@
-CRITICAL FIX
-============
-Bug: site-wide contrast set ALL h1 to dark #0f172a.
-On dark heroes that made "RuffNeck" in "RuffNeck Digital Store" nearly invisible.
+BLOG FILTER FIX
+Category buttons are <button data-cat="..."> WITHOUT class filter-btn.
+Previous CSS targeted .filter-btn only — so chips stayed invisible.
 
-Also: filter chips forced to solid dark text + stronger borders at SOURCE CSS.
+Also removed global p { color: white } that faded author card text.
 
-Deploy ALL html in this folder + css/main.css
-Hard refresh phone after deploy.
+Deploy: blog.html only

@@ -318,7 +318,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 .blog-hero .label{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
 .blog-hero h1{font-size:clamp(28px,4vw,46px);font-weight:700;margin-bottom:14px;line-height:1.2;color:#fff!important;-webkit-text-fill-color:#fff!important}
 .blog-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan-lt),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.blog-hero p{font-size:16px;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto;line-height:1.7}
+.blog-hero p{font-size:16px;color:#334155;max-width:560px;margin:0 auto;line-height:1.7}
 
 /* FILTERS */
 .blog-filters{background:var(--white);border-bottom:1px solid var(--border);padding:16px 0;position:sticky;top:64px;z-index:90}
@@ -714,9 +714,7 @@ body {
 .svc-page-hero .section-label {
   color: #FFFFFF !important;
 }
-.svc-page-hero p {
-  color: rgba(255, 255, 255, 0.92) !important;
-}
+.svc-page-hero p { color: #334155 !important; } /* was white-on-white — fixed */
 .svc-panel {
   background: #FFFFFF !important;
   color: #1F2937 !important;
@@ -3091,6 +3089,47 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
   }
 }
 /* ==== END RN-SITE-WIDE-CONTRAST ==== */
+</style>
+
+
+<style id="rn-blog-data-cat-fix">
+/* Blog category buttons use data-cat, NOT .filter-btn */
+[role="tablist"] button,
+button[data-cat] {
+  color: #0b1e3a !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+  background: #ffffff !important;
+  border: 2px solid #64748b !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  border-radius: 999px !important;
+  padding: 8px 16px !important;
+  min-height: 40px !important;
+}
+[role="tablist"] button.active,
+button[data-cat].active,
+[role="tablist"] button:hover,
+button[data-cat]:hover {
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #0b1e3a !important;
+}
+/* Author card body text MUST stay dark */
+.rn-blog-meta,
+.rn-blog-meta p,
+.rn-blog-meta span,
+.rn-blog-meta strong,
+div.rn-blog-meta p {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta a {
+  color: #0e7490 !important;
+  -webkit-text-fill-color: #0e7490 !important;
+  font-weight: 700 !important;
+}
 </style>
 
 </body>
