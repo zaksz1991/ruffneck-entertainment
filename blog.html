@@ -1,11 +1,107 @@
+
+<style id="rn-ux-blog-pass-3">
+/* ==== RN-UX-BLOG-PASS-3 (preview) — visual only; no content/URL/JS changes ==== */
+.rn-blog-meta {
+  line-height: 1.55 !important;
+  color: #374151 !important;
+}
+.rn-blog-meta a {
+  color: #087f99 !important;
+}
+.card-meta,
+.article-meta,
+.featured-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 6px 10px !important;
+  margin-top: 10px !important;
+  margin-bottom: 8px !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  color: #4b5563 !important;
+}
+.card-meta span,
+.article-meta span,
+.featured-meta span {
+  display: inline-flex !important;
+  align-items: center !important;
+  color: #4b5563 !important;
+  opacity: 1 !important;
+}
+.card-dot {
+  width: 4px !important;
+  height: 4px !important;
+  border-radius: 50% !important;
+  background: #94a3b8 !important;
+  flex-shrink: 0 !important;
+  opacity: 1 !important;
+}
+.read-time {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+.card-cat-badge,
+.blog-card .card-cat-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  margin-bottom: 8px !important;
+  line-height: 1.3 !important;
+}
+.blog-card {
+  border-radius: 14px !important;
+  border: 1px solid rgba(11, 30, 58, 0.1) !important;
+  box-shadow: 0 6px 20px rgba(11, 30, 58, 0.05) !important;
+  overflow: hidden;
+}
+.blog-card-body {
+  padding: 16px 16px 18px !important;
+}
+.blog-card h3,
+.blog-card .card-title {
+  line-height: 1.35 !important;
+  margin: 6px 0 8px !important;
+  color: #0b1e3a !important;
+}
+.read-link {
+  display: inline-flex !important;
+  margin-top: 10px !important;
+  font-weight: 700 !important;
+  color: #087f99 !important;
+}
+.card-author {
+  font-weight: 600 !important;
+  color: #374151 !important;
+}
+@media (max-width: 640px) {
+  .card-meta,
+  .article-meta,
+  .featured-meta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+  .card-dot {
+    display: none !important;
+  }
+}
+/* ==== END RN-UX-BLOG-PASS-3 ==== */
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="preload" href="/logo.png" as="image"/>
 <link rel="canonical" href="https://ruffneck-entertainment.vercel.app/blog"/>
-<title>RuffNeck Blog | AI, Operations & Digital Growth Insights — 2026</title>
-<meta name="description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
+<title>AI, Operations and Digital Growth Insights | RuffNeck</title>
+<meta name="author" content="Hassan Zakariya, RuffNeck Entertainment"/>
+<meta name="description" content="Practical guides on AI for business, digital operations, IT skills, marketing and careers from RuffNeck Entertainment in Nigeria."/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
@@ -22,7 +118,12 @@
     "@type": "Organization",
     "name": "RuffNeck Entertainment",
     "url": "https://ruffneck-entertainment.vercel.app/",
-    "logo": "https://ruffneck-entertainment.vercel.app/icon-512.png"
+    "logo": "https://ruffneck-entertainment.vercel.app/logo.png"
+  },
+  "author": {
+    "@type": "Person",
+    "name": "Hassan Zakariya",
+    "url": "https://ruffneck-entertainment.vercel.app/founder"
   },
   "inLanguage": "en"
 }
@@ -33,8 +134,8 @@
 <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://ruffneck-entertainment.vercel.app/blog"/>
-<meta property="og:title" content="RuffNeck Blog | AI, Operations & Digital Growth Insights — 2026"/>
-<meta property="og:description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
+<meta property="og:title" content="AI, Operations and Digital Growth Insights | RuffNeck"/>
+<meta property="og:description" content="Practical guides on AI for business, digital operations, IT skills, marketing and careers from RuffNeck Entertainment in Nigeria."/>
 <meta property="og:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -43,8 +144,8 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:url" content="https://ruffneck-entertainment.vercel.app/blog"/>
-<meta name="twitter:title" content="RuffNeck Blog | AI, Operations & Digital Growth Insights — 2026"/>
-<meta name="twitter:description" content="Practical AI, operations, digital marketing, and career growth articles from RuffNeck Entertainment. Updated 2026."/>
+<meta name="twitter:title" content="AI, Operations and Digital Growth Insights | RuffNeck"/>
+<meta name="twitter:description" content="Practical guides on AI for business, digital operations, IT skills, marketing and careers from RuffNeck Entertainment in Nigeria."/>
 <meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 
 <!-- Google Analytics (GA4) — replace G-XF92RSFBHX with your real Measurement ID -->
@@ -1113,6 +1214,14 @@ button,a,.btn{touch-action:manipulation}
   <div class="container">
     <div class="label">Resources · Insights · Guides · 2026</div>
     <h1>RuffNeck <em>Knowledge Hub</em></h1>
+<div class="rn-blog-meta" style="max-width:720px;margin:0 0 24px;padding:14px 16px;border:1px solid #e5e7eb;border-radius:12px;background:#f8fafc;font-size:14px;line-height:1.5;color:#374151">
+  <strong>Author:</strong> Hassan Zakariya · RuffNeck Entertainment<br>
+  <strong>Updated:</strong> August 2026 · <a href="/founder" style="color:#087f99;font-weight:700">About the founder</a>
+  · <a href="/services-ai.html" style="color:#087f99;font-weight:700">AI services</a>
+  · <a href="/store" style="color:#087f99;font-weight:700">Digital store</a>
+  <p style="margin:8px 0 0">Articles are written for Nigerian and African businesses and professionals. Prefer a service conversation? <a href="https://calendly.com/hassanzakariyabiz/30min" style="color:#087f99;font-weight:700">Book a discovery call</a>.</p>
+</div>
+
     <p>Practical AI, operations, digital marketing, career development, and business growth insights from RuffNeck Entertainment.</p>
   </div>
 </div>
@@ -2009,7 +2118,7 @@ function subscribeNewsletter() {
         <div class="rn-chat-name">RuffNeck Assistant</div>
         <div class="rn-chat-status">Online now</div>
       </div>
-      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat">✕</button>
+      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat" aria-label="Close">✕</button>
     </div>
     <div class="rn-chat-messages" id="rnChatMessages">
       <div class="rn-msg bot">👋 Hi! I'm here to help with <strong>services</strong>, <strong>products</strong>, <strong>AI careers</strong>, and more. I understand Hausa, Yoruba, and Igbo too — feel free to ask in your language! What can I help with today?</div>
