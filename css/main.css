@@ -3617,3 +3617,14 @@ p.section-sub {
   font-size: 16px !important;
 }
 /* ==== END RN-UX-CONTRAST-SECTION-SUB ==== */
+
+/* ==== RN-CONTRAST-FORCE (must win on light sections) ==== */
+body .section-sub,
+body p.section-sub,
+body #services .section-sub,
+body #services p.section-sub {
+  color: #374151 !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #374151 !important;
+}
+/* ==== END RN-CONTRAST-FORCE ==== */

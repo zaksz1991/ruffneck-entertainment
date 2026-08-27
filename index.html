@@ -2040,8 +2040,20 @@ footer .social a, .footer-social a {
 }
 
 /* Contrast: muted text slightly brighter on dark bg */
-.muted, .text-muted, .hero-sub, .section-sub {
+.muted, .text-muted {
+  color: #64748B !important;
+}
+/* Hero subtitle stays light on dark hero */
+.hero .hero-sub,
+.hero-sub {
   color: #CBD5E1 !important;
+}
+/* Section intros on light backgrounds must be readable */
+.section-sub,
+p.section-sub,
+#services .section-sub {
+  color: #374151 !important;
+  opacity: 1 !important;
 }
 
 /* font-display hint for linked fonts */
