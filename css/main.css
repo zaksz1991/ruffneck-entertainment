@@ -3999,3 +3999,132 @@ a.btn-primary:hover,
   }
 }
 /* ==== END RN-LIVE-AUDIT-HOME-2A ==== */
+
+/* ==== RN-AUDIT-FINAL-2A-HOME (preview) ==== */
+/* Audit homepage CSS — append only. Forms/IDs/JS untouched. */
+
+:root {
+  --rn-ink: #10202b;
+  --rn-muted: #5d6b75;
+  --rn-primary: #0f6b78;
+  --rn-primary-dark: #084e59;
+  --rn-border: #d9e3e8;
+  --rn-surface: #ffffff;
+  --rn-surface-soft: #f5f8fa;
+  --rn-radius: 0.9rem;
+  --rn-shadow: 0 8px 24px rgba(16, 32, 43, 0.08);
+}
+
+.hero-content { max-width: 48rem; }
+.hero h1,
+.hero-content h1 {
+  max-width: 13ch;
+  line-height: 1.06 !important;
+  letter-spacing: -0.035em;
+}
+.hero-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.875rem !important;
+  margin-top: 1.75rem !important;
+}
+
+.btn,
+.btn-primary,
+.btn-outline,
+a.btn,
+a.btn-primary,
+a.btn-outline {
+  min-height: 2.875rem;
+  border-radius: 0.65rem !important;
+  padding: 0.75rem 1.1rem !important;
+  font-weight: 700 !important;
+  transition: color 160ms ease, background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.btn-primary:hover,
+a.btn-primary:hover,
+.nav-cta:hover {
+  box-shadow: 0 8px 18px rgba(15, 107, 120, 0.22);
+  transform: translateY(-1px);
+}
+
+.service-card {
+  border: 1px solid var(--rn-border) !important;
+  border-radius: var(--rn-radius) !important;
+  background: var(--rn-surface) !important;
+  box-shadow: var(--rn-shadow) !important;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+.service-card:hover,
+.service-card.open {
+  border-color: rgba(15, 107, 120, 0.45) !important;
+  box-shadow: 0 14px 32px rgba(16, 32, 43, 0.12) !important;
+}
+.service-popup { line-height: 1.65 !important; }
+
+/* Readable intros on light sections */
+body .section-sub,
+body p.section-sub,
+body #services .section-sub {
+  color: #374151 !important;
+  opacity: 1 !important;
+  line-height: 1.65 !important;
+}
+
+.form-group { margin-bottom: 1rem; }
+.form-group label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+.contact-form input,
+.contact-form textarea,
+#leadMagnetForm input {
+  min-height: 3rem;
+  border: 1px solid var(--rn-border) !important;
+  border-radius: 0.6rem !important;
+  padding: 0.75rem 0.875rem !important;
+  background: var(--rn-surface) !important;
+}
+.contact-form input:focus,
+.contact-form textarea:focus,
+#leadMagnetForm input:focus {
+  border-color: var(--rn-primary) !important;
+  box-shadow: 0 0 0 3px rgba(15, 107, 120, 0.16) !important;
+  outline: none;
+}
+
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid #1aa7b8 !important;
+  outline-offset: 3px !important;
+}
+
+@media (max-width: 768px) {
+  .hero { padding-block: 3.5rem 3rem !important; }
+  .hero h1, .hero-content h1 {
+    max-width: 100% !important;
+    font-size: clamp(2.15rem, 10vw, 3.25rem) !important;
+  }
+  .hero-actions {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .hero-actions .btn,
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline { width: 100% !important; }
+  .service-card { border-radius: 0.75rem !important; }
+  .contact-form input,
+  .contact-form textarea,
+  #leadMagnetForm input { font-size: 1rem !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* ==== END RN-AUDIT-FINAL-2A-HOME ==== */
