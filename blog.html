@@ -2876,5 +2876,83 @@ document.addEventListener('DOMContentLoaded', async function(){
 /* ==== END RN-AUDIT-FINAL-2B-BLOG ==== */
 </style>
 
+
+<style id="rn-screenshot-fix-blog">
+/* ==== RN-SCREENSHOT-FIX-BLOG ==== */
+/* Force readable filters + clean metadata (mobile + desktop) */
+
+/* Inactive filter chips were nearly invisible */
+.filter-btn,
+button.filter-btn,
+.filters-inner .filter-btn {
+  color: #0b1e3a !important;
+  background: #ffffff !important;
+  border: 1.5px solid #94a3b8 !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+}
+.filter-btn.active,
+.filter-btn:hover,
+button.filter-btn.active {
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #0b1e3a !important;
+}
+
+/* Metadata: horizontal with real gaps — not stacked lonely dots */
+.card-meta,
+.article-meta,
+.featured-meta {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.35rem 0.65rem !important;
+  color: #475569 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.45 !important;
+  opacity: 1 !important;
+}
+.card-meta span,
+.article-meta span {
+  color: #475569 !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #475569 !important;
+}
+.card-dot {
+  width: 3px !important;
+  height: 3px !important;
+  background: #94a3b8 !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+}
+.read-time {
+  display: inline-flex !important;
+  padding: 0.2rem 0.55rem !important;
+  border-radius: 999px !important;
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+
+/* Author intro card — already improved; keep strong */
+.rn-blog-meta,
+.rn-blog-meta p,
+.rn-blog-meta span,
+.rn-blog-meta strong {
+  color: #0f172a !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+.rn-blog-meta a {
+  color: #0e7490 !important;
+  -webkit-text-fill-color: #0e7490 !important;
+  font-weight: 700 !important;
+}
+/* ==== END RN-SCREENSHOT-FIX-BLOG ==== */
+</style>
+
 </body>
 </html>

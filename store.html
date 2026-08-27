@@ -1307,8 +1307,8 @@ button,a,.btn{touch-action:manipulation}
 
 <main\1 id="main">
 
-<p id="rn-ng-pay-note" style="text-align:center;color:#94A3B8;font-size:13px;max-width:640px;margin:8px auto 16px;padding:0 16px">
-  Pay in <strong style="color:#E5E7EB">₦ Naira</strong> via Flutterwave. Digital delivery after successful payment. Need help? WhatsApp +234 803 380 7856.
+<p id="rn-ng-pay-note" style="text-align:center;color:#1e293b;font-size:13px;font-weight:600;max-width:640px;margin:8px auto 16px;padding:0 16px;line-height:1.5">
+  Pay in <strong style="color:#0f172a">₦ Naira</strong> via Flutterwave. Digital delivery after successful payment. Need help? WhatsApp +234 803 380 7856.
 </p>
 
 
@@ -3680,6 +3680,92 @@ document.addEventListener('DOMContentLoaded', async function(){
   .product-footer .btn { width: 100% !important; justify-content: center !important; }
 }
 /* ==== END RN-AUDIT-FINAL-2C-STORE ==== */
+</style>
+
+
+<style id="rn-screenshot-fix-store">
+/* ==== RN-SCREENSHOT-FIX-STORE ==== */
+/* Faded pay banner + weak chips from screenshots */
+
+/* Top pay / delivery notice — was light grey on white */
+.store-top-note,
+.pay-banner,
+.store-banner,
+.announcement-bar,
+.top-notice,
+header + .container > p,
+.hero-note,
+[class*="pay-note"],
+.store-subhead {
+  color: #0f172a !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+/* Common store intro strip */
+body p {
+  /* do not global override all p — scoped below */
+}
+.store-hero p,
+.hero p,
+.hero-sub,
+.store-lead {
+  color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+
+/* Light strip under nav (pay in Naira line) */
+.container > p,
+.store-page > p,
+main > p:first-of-type {
+  color: #1e293b !important;
+  opacity: 1 !important;
+  font-weight: 500 !important;
+  -webkit-text-fill-color: #1e293b !important;
+}
+
+/* Filters */
+.filter-btn,
+button.filter-btn {
+  color: #0b1e3a !important;
+  background: #fff !important;
+  border: 1.5px solid #94a3b8 !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+}
+.filter-btn.active,
+.filter-btn:hover {
+  background: #0b1e3a !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  border-color: #0b1e3a !important;
+}
+
+/* Currency toggle readable */
+.currency-toggle,
+.currency-btn,
+[data-currency],
+.fx-toggle {
+  color: #0b1e3a !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* Product text */
+.product-name { color: #0f172a !important; }
+.product-desc { color: #475569 !important; opacity: 1 !important; }
+.product-price, .price-val { color: #084e59 !important; font-weight: 800 !important; opacity: 1 !important; }
+
+/* Secure checkout banner — avoid cut-off feel */
+.checkout-banner,
+.secure-banner,
+.store-alert {
+  white-space: normal !important;
+  line-height: 1.45 !important;
+  padding: 0.85rem 1rem !important;
+}
+/* ==== END RN-SCREENSHOT-FIX-STORE ==== */
 </style>
 
 </body>
