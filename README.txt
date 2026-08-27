@@ -1,12 +1,5 @@
-CRITICAL CONTRAST FIX
-
-Root causes found:
-1. index.html forced .section-sub { color: #CBD5E1 } (light grey) on ALL sections including white backgrounds
-2. blog.html global p { color: rgba(255,255,255,...) } made text invisible on white cards
-
-Changed files ONLY:
-- index.html (contrast CSS rule only — forms/IDs untouched)
-- blog.html (contrast CSS overrides only)
-- css/main.css (reinforcing override)
-
-Deploy all three on Preview branch. Production not auto-deployed.
+RN-UX-POLISH-PASS-2-HOME
+Branch: ux-polish-pass2-home
+Allowed file: css/main.css ONLY
+Copy only css/main.css — do not overwrite index/blog/store/admin
+Preview only — do not promote until checklist passes
