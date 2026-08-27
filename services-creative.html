@@ -114,7 +114,7 @@ footer .social a, .footer-social a {
 
 /* Contrast: muted text slightly brighter on dark bg */
 .muted, .text-muted, .hero-sub, .section-sub {
-  color: #CBD5E1 !important;
+  color:#374151 !important;
 }
 
 /* font-display hint for linked fonts */
@@ -134,7 +134,7 @@ footer .social a, .footer-social a {
   </nav>
 </header>
 <main class="wrap">
-  <nav aria-label="Breadcrumb" class="muted" style="font-size:13px;margin-bottom:12px;color:#94A3B8">
+  <nav aria-label="Breadcrumb" class="muted" style="font-size:13px;margin-bottom:12px;color:#1e293b">
     <a href="/" style="color:#7DD3FC">Home</a> / <a href="/services-ai.html" style="color:#7DD3FC">Services</a> / <span>Current</span>
   </nav>
 
@@ -257,6 +257,123 @@ footer .social a, .footer-social a {
   });
 })();
 </script>
+
+
+<style id="rn-site-wide-contrast">
+/* ==== RN-SITE-WIDE-CONTRAST (all public pages) ==== */
+/* Readable text, chips, forms. Does not change Admin/auth/payments. */
+
+:root {
+  --rn-ink: #0f172a;
+  --rn-body: #334155;
+  --rn-muted-ok: #475569;
+  --rn-border: #94a3b8;
+  --rn-surface: #ffffff;
+  --rn-primary: #0f6b78;
+}
+
+/* Generic body text on light surfaces */
+body {
+  color: var(--rn-ink);
+}
+p, li, .section-sub, .section-subtitle, .muted, .text-muted,
+.card p, .service-card p, .product-desc, .blog-card p {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+h1, h2, h3, h4, .section-title, .product-name {
+  color: #0f172a !important;
+}
+
+/* Dark hero / dark sections: keep light text */
+.hero p, .hero .hero-sub, .hero-sub,
+.hero li, footer p, footer a,
+[class*="hero"] .muted {
+  color: #e2e8f0 !important;
+}
+.hero h1, .hero h2 {
+  color: #ffffff !important;
+}
+
+/* Filter / chip / tab buttons — was nearly invisible when inactive */
+.filter-btn,
+button.filter-btn,
+.services-tabs button,
+.tab-btn,
+.chip,
+.cat-btn {
+  color: #0b1e3a !important;
+  background: #ffffff !important;
+  border: 1.5px solid #94a3b8 !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+}
+.filter-btn.active,
+.filter-btn:hover,
+.services-tabs button.active,
+.tab-btn.active,
+.chip.active {
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #0b1e3a !important;
+}
+
+/* Forms */
+input, textarea, select {
+  color: #0f172a !important;
+  background: #ffffff !important;
+  border-color:#374151 !important;
+}
+label {
+  color: #0f172a !important;
+  font-weight: 650 !important;
+}
+
+/* Cards */
+.service-card, .product-card, .blog-card, .card, .pricing-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+.service-card h3, .product-name, .blog-card h3 {
+  color: #0f172a !important;
+}
+.product-price, .price-val {
+  color: #084e59 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+/* Legal / long content readability */
+.legal-content, .page-content, .programme-content, article, .content {
+  line-height: 1.7;
+  color: #334155 !important;
+}
+.legal-content h2, .page-content h2, .programme-content h2 {
+  color: #0f172a !important;
+  margin-top: 2rem;
+}
+
+/* Links on light bg */
+a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
+  /* leave brand links; ensure not invisible */
+}
+
+/* Focus */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid #1aa7b8 !important;
+  outline-offset: 2px !important;
+}
+
+/* Mobile filter / meta */
+@media (max-width: 640px) {
+  .filter-btn, .services-tabs button {
+    min-height: 2.5rem !important;
+  }
+}
+/* ==== END RN-SITE-WIDE-CONTRAST ==== */
+</style>
 
 </body>
 </html>

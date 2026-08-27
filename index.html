@@ -1391,7 +1391,7 @@ section.section-teaser {
 }
 #rnExploreMore p {
   margin: 0 0 16px;
-  color: #94A3B8;
+  color:#1e293b;
   font-size: 14px;
 }
 #rnExploreMore .rn-em-links {
@@ -1666,7 +1666,7 @@ body { top: 0 !important; position: static !important; }
 .rn-chat-name { font-weight: 700; font-size: 14px; color: #F9FAFB; }
 .rn-chat-status { font-size: 11px; color: #86EFAC; }
 .rn-chat-close {
-  background: transparent; border: none; color: #94A3B8;
+  background: transparent; border: none; color:#1e293b;
   font-size: 18px; cursor: pointer; padding: 6px; min-width: 36px; min-height: 36px;
 }
 .rn-chat-messages {
@@ -2046,7 +2046,7 @@ footer .social a, .footer-social a {
 /* Hero subtitle stays light on dark hero */
 .hero .hero-sub,
 .hero-sub {
-  color: #CBD5E1 !important;
+  color:#374151 !important;
 }
 /* Section intros on light backgrounds must be readable */
 .section-sub,
@@ -5382,11 +5382,11 @@ function rnToggleChat(){
 
 
 <p style="text-align:center;padding:12px;font-size:12px;color:#64748B">
-  <a href="/privacy.html" style="color:#94A3B8">Privacy</a> ·
-  <a href="/terms.html" style="color:#94A3B8">Terms</a> ·
-  <a href="/refund.html" style="color:#94A3B8">Refund</a> ·
-  <a href="/faq.html" style="color:#94A3B8">FAQ</a>
-  <a href="/programmes.html" style="color:#94A3B8">Community Impact</a>
+  <a href="/privacy.html" style="color:#1e293b">Privacy</a> ·
+  <a href="/terms.html" style="color:#1e293b">Terms</a> ·
+  <a href="/refund.html" style="color:#1e293b">Refund</a> ·
+  <a href="/faq.html" style="color:#1e293b">FAQ</a>
+  <a href="/programmes.html" style="color:#1e293b">Community Impact</a>
 </p>
 
 <script id="rn-menu-final-js">
@@ -5530,7 +5530,7 @@ function rnToggleChat(){
       '<header><span>RuffNeck Assistant</span><button type="button" id="rnNChatClose" aria-label="Close">✕</button></header>' +
       '<div id="rnNChatBody">' +
       '<p><strong>Ask about a topic</strong></p>' +
-      '<p style="color:#94A3B8;font-size:13px;margin:0 0 10px">Opens WhatsApp with a ready message.</p>' +
+      '<p style="color:#1e293b;font-size:13px;margin:0 0 10px">Opens WhatsApp with a ready message.</p>' +
       '</div>' +
       '<div id="rnNChatActions">' +
       '<a class="wa" href="https://wa.me/2348033807856?text=' + encodeURIComponent('Hello RuffNeck, I need help with AI training / automation.') + '" target="_blank" rel="noopener">🤖 AI & training</a>' +
@@ -5577,6 +5577,123 @@ function rnToggleChat(){
   else mount();
 })();
 </script>
+
+
+<style id="rn-site-wide-contrast">
+/* ==== RN-SITE-WIDE-CONTRAST (all public pages) ==== */
+/* Readable text, chips, forms. Does not change Admin/auth/payments. */
+
+:root {
+  --rn-ink: #0f172a;
+  --rn-body: #334155;
+  --rn-muted-ok: #475569;
+  --rn-border: #94a3b8;
+  --rn-surface: #ffffff;
+  --rn-primary: #0f6b78;
+}
+
+/* Generic body text on light surfaces */
+body {
+  color: var(--rn-ink);
+}
+p, li, .section-sub, .section-subtitle, .muted, .text-muted,
+.card p, .service-card p, .product-desc, .blog-card p {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+h1, h2, h3, h4, .section-title, .product-name {
+  color: #0f172a !important;
+}
+
+/* Dark hero / dark sections: keep light text */
+.hero p, .hero .hero-sub, .hero-sub,
+.hero li, footer p, footer a,
+[class*="hero"] .muted {
+  color: #e2e8f0 !important;
+}
+.hero h1, .hero h2 {
+  color: #ffffff !important;
+}
+
+/* Filter / chip / tab buttons — was nearly invisible when inactive */
+.filter-btn,
+button.filter-btn,
+.services-tabs button,
+.tab-btn,
+.chip,
+.cat-btn {
+  color: #0b1e3a !important;
+  background: #ffffff !important;
+  border: 1.5px solid #94a3b8 !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+}
+.filter-btn.active,
+.filter-btn:hover,
+.services-tabs button.active,
+.tab-btn.active,
+.chip.active {
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #0b1e3a !important;
+}
+
+/* Forms */
+input, textarea, select {
+  color: #0f172a !important;
+  background: #ffffff !important;
+  border-color:#374151 !important;
+}
+label {
+  color: #0f172a !important;
+  font-weight: 650 !important;
+}
+
+/* Cards */
+.service-card, .product-card, .blog-card, .card, .pricing-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+.service-card h3, .product-name, .blog-card h3 {
+  color: #0f172a !important;
+}
+.product-price, .price-val {
+  color: #084e59 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+/* Legal / long content readability */
+.legal-content, .page-content, .programme-content, article, .content {
+  line-height: 1.7;
+  color: #334155 !important;
+}
+.legal-content h2, .page-content h2, .programme-content h2 {
+  color: #0f172a !important;
+  margin-top: 2rem;
+}
+
+/* Links on light bg */
+a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
+  /* leave brand links; ensure not invisible */
+}
+
+/* Focus */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid #1aa7b8 !important;
+  outline-offset: 2px !important;
+}
+
+/* Mobile filter / meta */
+@media (max-width: 640px) {
+  .filter-btn, .services-tabs button {
+    min-height: 2.5rem !important;
+  }
+}
+/* ==== END RN-SITE-WIDE-CONTRAST ==== */
+</style>
 
 </body>
 </html>
