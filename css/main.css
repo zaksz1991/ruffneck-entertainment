@@ -4152,3 +4152,8 @@ body #services .section-sub {
   border-color: #0b1e3a !important;
 }
 /* ==== END RN-SITE-WIDE-CONTRAST-CSS ==== */
+
+/* Emergency: never force dark h1 on dark heroes */
+.hero h1, .store-hero h1, .blog-hero h1 {
+  color: #fff !important;
+}

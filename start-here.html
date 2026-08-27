@@ -96,6 +96,27 @@ p, li, .section-sub, .section-subtitle, .muted, .text-muted,
 h1, h2, h3, h4, .section-title, .product-name {
   color: #0f172a !important;
 }
+/* Dark heroes must stay light — previous rule made titles vanish */
+.hero h1, .hero h2, .hero h3,
+.store-hero h1, .store-hero h2,
+.blog-hero h1, .blog-hero h2,
+[class*="-hero"] h1, [class*="-hero"] h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+.store-hero h1 em, .blog-hero h1 em, .hero h1 em {
+  background: linear-gradient(90deg, #7dd3fc, #00b4d8) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+.store-hero p, .blog-hero p, .hero .hero-sub, .hero-sub {
+  color: rgba(255,255,255,0.88) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: rgba(255,255,255,0.88) !important;
+}
 
 /* Dark hero / dark sections: keep light text */
 .hero p, .hero .hero-sub, .hero-sub,
@@ -113,10 +134,11 @@ button.filter-btn,
 .services-tabs button,
 .tab-btn,
 .chip,
-.cat-btn {
+.cat-btn,
+.filters-inner button {
   color: #0b1e3a !important;
   background: #ffffff !important;
-  border: 1.5px solid #94a3b8 !important;
+  border: 2px solid #64748b !important;
   opacity: 1 !important;
   font-weight: 700 !important;
   -webkit-text-fill-color: #0b1e3a !important;
