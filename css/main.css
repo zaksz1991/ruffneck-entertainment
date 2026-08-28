@@ -4123,3 +4123,18 @@ html {
 }
 
 /* ==== END RN-UX-POLISH-PASS-2-HOME ==== */
+
+
+/* ==== RN-LEAD-MAGNET-HOME ==== */
+.lead-magnet-section h2,
+.lead-magnet-text h2,
+#free-guide h2 {
+  color: #ffffff !important;
+}
+.lead-magnet-section p,
+.lead-magnet-text p,
+.lead-magnet-section li,
+#free-guide .lm-checklist li {
+  color: #e2e8f0 !important;
+}
+/* ==== END RN-LEAD-MAGNET-HOME ==== */

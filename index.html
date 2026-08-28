@@ -480,11 +480,10 @@ body {
   padding: 28px 24px !important;
   box-shadow: 0 8px 28px rgba(11, 30, 58, 0.06) !important;
 }
-.svc-panel h2 {
-  color: #0B1E3A !important;
-  font-size: 1.25rem !important;
-  margin: 0 0 16px !important;
-  letter-spacing: -0.02em;
+.svc-panel h2 { color: #0B1E3A !important; }
+.lead-magnet-section h2, .lead-magnet-text h2, .hero h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 /* What you get — aligned bullet list */
 .svc-panel ul,
@@ -5604,6 +5603,15 @@ p, li, .section-sub, .section-subtitle, .muted, .text-muted,
 h1, h2, h3, h4, .section-title, .product-name {
   color: #0f172a !important;
 }
+/* Never force dark headings on dark sections */
+.hero h1, .hero h2,
+.lead-magnet-section h1, .lead-magnet-section h2,
+.lead-magnet-text h1, .lead-magnet-text h2,
+.store-hero h1, .blog-hero h1 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
 /* Dark heroes must stay light — previous rule made titles vanish */
 .hero h1, .hero h2, .hero h3,
 .store-hero h1, .store-hero h2,
@@ -5715,6 +5723,125 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
   }
 }
 /* ==== END RN-SITE-WIDE-CONTRAST ==== */
+</style>
+
+
+<style id="rn-lead-magnet-contrast">
+/* ==== LEAD MAGNET + HOME DARK-SECTION CONTRAST ==== */
+.lead-magnet-section,
+#free-guide {
+  background: linear-gradient(165deg, #040c1a 0%, #0b1e3a 55%, #061525 100%) !important;
+  padding: 48px 0 56px !important;
+  color: #f8fafc !important;
+}
+.lead-magnet-inner {
+  display: grid;
+  gap: 24px;
+  align-items: start;
+}
+.lead-magnet-text,
+.lead-magnet-text h2,
+.lead-magnet-text p,
+.lead-magnet-text li,
+.lead-magnet-section h2,
+.lead-magnet-section p,
+.lead-magnet-section li,
+#free-guide h2,
+#free-guide .lead-magnet-text p,
+#free-guide .lm-checklist li {
+  color: #f1f5f9 !important;
+  -webkit-text-fill-color: #f1f5f9 !important;
+  opacity: 1 !important;
+}
+.lead-magnet-text h2,
+#free-guide h2 {
+  font-size: clamp(1.45rem, 5vw, 2rem) !important;
+  line-height: 1.2 !important;
+  font-weight: 800 !important;
+  margin: 12px 0 12px !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.lead-magnet-text p {
+  font-size: 1rem !important;
+  line-height: 1.65 !important;
+  color: rgba(248, 250, 252, 0.92) !important;
+  -webkit-text-fill-color: rgba(248, 250, 252, 0.92) !important;
+  max-width: 36rem;
+}
+.lm-checklist {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0;
+  display: grid;
+  gap: 10px;
+}
+.lm-checklist li {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+  font-size: 0.95rem !important;
+  line-height: 1.45 !important;
+}
+.lm-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 8px 14px !important;
+  border-radius: 999px !important;
+  border: 1px solid rgba(250, 204, 21, 0.45) !important;
+  color: #fde68a !important;
+  -webkit-text-fill-color: #fde68a !important;
+  font-weight: 800 !important;
+  font-size: 0.78rem !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  background: rgba(15, 23, 42, 0.5) !important;
+}
+/* Form card stays light with dark labels */
+.lead-magnet-form,
+.lead-magnet-form-wrap,
+#leadMagnetForm {
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border-radius: 16px !important;
+  padding: 20px !important;
+}
+.lead-magnet-form label,
+#leadMagnetForm label {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  font-weight: 700 !important;
+}
+#leadMagnetForm input {
+  color: #0f172a !important;
+  background: #fff !important;
+  border: 1px solid #cbd5e1 !important;
+}
+/* Hero spacing polish (homepage) */
+.hero {
+  padding-top: clamp(4.5rem, 12vw, 6.5rem) !important;
+  padding-bottom: clamp(2.5rem, 6vw, 4rem) !important;
+}
+.hero h1 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.hero .hero-sub,
+.hero-sub {
+  color: rgba(248, 250, 252, 0.9) !important;
+  -webkit-text-fill-color: rgba(248, 250, 252, 0.9) !important;
+}
+@media (max-width: 700px) {
+  .lead-magnet-section,
+  #free-guide {
+    padding: 36px 0 44px !important;
+  }
+  .lead-magnet-text h2,
+  #free-guide h2 {
+    font-size: 1.35rem !important;
+  }
+}
+/* ==== END LEAD MAGNET CONTRAST ==== */
 </style>
 
 </body>

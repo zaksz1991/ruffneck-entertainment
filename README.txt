@@ -1,16 +1,10 @@
-CHECK RESULT + SAFE IMPLEMENTATION
+LEAD MAGNET VISIBILITY FIX
+Dark text on dark background was caused by global h2/p color #0B1E3A / #0f172a !important.
 
-DO NOT put Knowledge Hub mobile repair into main.css (would risk homepage).
-DO NOT remove blog-card onclick="openArticle(...)" — that opens the article modal.
-DO NOT replace with accordion toggle — would break reading full articles.
+Fixed:
+- #free-guide / .lead-magnet-section text forced light
+- Form card stays white with dark labels
+- Hero title/sub stay light
+- Forms IDs unchanged
 
-Implemented:
-- css/knowledge-hub.css (Blog-only)
-- linked from blog.html
-
-Deploy:
-  css/knowledge-hub.css
-  blog.html
-
-Branch suggestion: ux-knowledge-hub-mobile
-Preview only until approved.
+Deploy: index.html + css/main.css
