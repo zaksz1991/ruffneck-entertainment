@@ -340,3 +340,63 @@ section .store-cta-flex h2 {
   color: #cbd5e1 !important;
   -webkit-text-fill-color: #cbd5e1 !important;
 }
+
+/* === Pass 6: mobile + performance polish === */
+img, video, iframe {
+  max-width: 100%;
+  height: auto;
+}
+iframe[src*="google.com/maps"] {
+  width: 100%;
+  max-width: 100%;
+  min-height: 220px;
+  border: 0;
+}
+
+/* Safe area for sticky mobile bar */
+#rnMobileBar,
+.rn-mobile-bar {
+  padding-bottom: calc(8px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Avoid content hidden under sticky bottom bar */
+@media (max-width: 760px) {
+  body:has(#rnMobileBar),
+  body:has(.rn-mobile-bar) {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+  .hero-actions .btn,
+  .btn-primary,
+  .btn-outline {
+    min-height: 48px;
+  }
+  /* Prevent horizontal bleed from wide grids */
+  .container,
+  .wrap {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  .hero h1 {
+    overflow-wrap: normal;
+    word-break: normal;
+  }
+}
+
+/* Reduce animation work when user prefers less motion */
+@media (prefers-reduced-motion: reduce) {
+  .aos-animate,
+  [data-aos] {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+/* Contain layout for media blocks */
+.service-media,
+.lead-magnet-media,
+.blog-card img,
+.product-card img {
+  content-visibility: auto;
+  contain: layout paint;
+}
