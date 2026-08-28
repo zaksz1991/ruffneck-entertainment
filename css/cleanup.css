@@ -321,3 +321,22 @@ button.service-toggle:focus-visible {
 .service-card.open .service-details {
   display: block;
 }
+
+/* === Store band contrast (dark navy section) === */
+.store-cta-flex h2,
+.rn-store-band-title,
+section .store-cta-flex h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+.store-cta-flex p,
+.rn-store-band-sub {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+  opacity: 1 !important;
+}
+.rn-store-band-link {
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+}
