@@ -1,22 +1,11 @@
-Pass 4 — SEO metadata & structured data
-========================================
-Updated 15 HTML pages + robots.txt + sitemap.xml
+Pass 5 — Conversion copy hierarchy
+==================================
+Changed: index.html copy only (hero, services intro, lead magnet H2, final CTA, testimonials disclaimer, pricing label)
+Fixed: duplicated WhatsApp ?text= query if present
 
-Per service page (where applicable):
-- Unique title + meta description
-- Canonical URL
-- robots index,follow
-- Open Graph + Twitter card
-- Service JSON-LD
-- BreadcrumbList JSON-LD
-- Visible breadcrumb nav
+Unchanged: URLs/destinations (Calendly, #free-guide, /store), forms, GAS, CSS, JS, SEO files
 
-Sitemap: 27 URLs, lastmod 2026-08-28
-robots.txt: Allow /, Disallow admin & whatsapp-test
-
-After deploy:
-1. https://ruffneck-entertainment.vercel.app/robots.txt
-2. https://ruffneck-entertainment.vercel.app/sitemap.xml
-3. Google Search Console → Sitemaps → submit sitemap.xml
-4. Rich Results Test on a service URL
-5. View source on services-ai.html for og: + ld+json
+Primary CTA hierarchy:
+1. Book a Free Discovery Call (Calendly)
+2. Get the Free AI Prompts Guide (#free-guide)
+3. Store chip / WhatsApp / contact section
