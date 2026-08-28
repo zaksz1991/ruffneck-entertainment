@@ -230,3 +230,50 @@ img {
     transform: none !important;
   }
 }
+
+/* === Pass 2b: lead magnet form contrast (white card on dark section) === */
+.lead-magnet-form-wrap,
+.lead-magnet-form-wrap form,
+#leadMagnetForm {
+  color: #0f172a !important;
+}
+#leadMagnetForm label,
+#leadMagnetForm .lm-consent-row,
+#leadMagnetForm .lm-consent-row span {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  opacity: 1 !important;
+}
+#leadMagnetForm .lm-privacy,
+.lead-magnet-form-wrap .lm-privacy {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+  opacity: 1 !important;
+  font-size: 12px !important;
+  line-height: 1.45 !important;
+}
+#leadMagnetForm input[type="text"],
+#leadMagnetForm input[type="email"] {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  background: #ffffff !important;
+}
+#leadMagnetForm #lmMsg {
+  color: #0f172a !important;
+  opacity: 1 !important;
+}
+#leadMagnetForm #lmMsg[style*="EF4444"],
+#leadMagnetForm #lmMsg.form-error {
+  color: #b91c1c !important;
+}
+.lm-success,
+.lm-success h3,
+.lm-success p {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  opacity: 1 !important;
+}
+.lm-success p {
+  color: #334155 !important;
+  -webkit-text-fill-color: #334155 !important;
+}

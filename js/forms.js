@@ -134,26 +134,27 @@ function showLeadSuccess(form, name) {
   if (!form) return;
   const first = (name || '').split(' ')[0];
   form.innerHTML =
-    '<div style="text-align:center;padding:8px 0;" role="status" aria-live="polite">' +
+    '<div class="lm-success" style="text-align:center;padding:8px 0;color:#0f172a;" role="status" aria-live="polite">' +
     '<div style="font-size:36px;margin-bottom:12px;" aria-hidden="true">✅</div>' +
-    '<h3 style="color:#0A0F1E;font-size:18px;margin:0 0 8px;">Thank you' +
+    '<h3 style="color:#0f172a !important;-webkit-text-fill-color:#0f172a !important;font-size:18px;margin:0 0 10px;font-weight:800;">Thank you' +
     (first ? ', ' + first : '') +
     '!</h3>' +
-    '<p style="color:#64748b;font-size:14px;margin:0 0 16px;line-height:1.5;">' +
+    '<p style="color:#334155 !important;-webkit-text-fill-color:#334155 !important;font-size:14px;margin:0 0 16px;line-height:1.55;opacity:1 !important;">' +
     'Your free guide is on its way by email. Check inbox and spam if needed.<br>' +
     'You can also download it instantly below.</p>' +
     '<a href="' + PDF_URL + '" target="_blank" rel="noopener" ' +
-    'style="display:inline-block;background:#00C2FF;color:#0A0F1E;font-weight:700;' +
-    'padding:12px 22px;border-radius:8px;text-decoration:none;font-size:14px;margin-bottom:12px;">' +
+    'style="display:inline-block;background:#00b4d8;color:#04111f !important;-webkit-text-fill-color:#04111f !important;font-weight:800;' +
+    'padding:12px 22px;border-radius:10px;text-decoration:none;font-size:14px;margin-bottom:12px;">' +
     'Download PDF Now →</a>' +
-    '<p style="color:#64748b;font-size:13px;margin:16px 0 8px;">Want personalised AI support?</p>' +
+    '<p style="color:#475569 !important;-webkit-text-fill-color:#475569 !important;font-size:13px;margin:16px 0 8px;opacity:1 !important;font-weight:600;">Want personalised AI support?</p>' +
     '<a href="' + CALENDLY_URL + '" target="_blank" rel="noopener" ' +
-    'style="display:inline-block;border:1.5px solid #00C2FF;color:#00C2FF;font-weight:600;' +
-    'padding:10px 18px;border-radius:8px;text-decoration:none;font-size:13px;">' +
+    'style="display:inline-block;border:2px solid #00b4d8;color:#0e7490 !important;-webkit-text-fill-color:#0e7490 !important;font-weight:700;' +
+    'padding:10px 18px;border-radius:10px;text-decoration:none;font-size:13px;background:#fff;">' +
     'Book a Free 30-min Call</a>' +
     '</div>';
   __rnLeadSubmitting = false;
 }
+
 
 /* ───────── Contact Form ───────── */
 function initContactForm() {
