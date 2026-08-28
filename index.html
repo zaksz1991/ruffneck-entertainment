@@ -5844,5 +5844,220 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 /* ==== END LEAD MAGNET CONTRAST ==== */
 </style>
 
+
+<style id="rn-hero-ux-repair">
+/* ==== RN-HERO-UX-REPAIR ====
+   Standardize hero hierarchy, spacing, contrast (mobile + desktop).
+   Does not change links, form IDs, or integrations. */
+
+.hero {
+  --hero-gap: 1rem;
+  --hero-pad-x: 1.25rem;
+  background: radial-gradient(ellipse at 30% 20%, #0b1e3a 0%, #061525 45%, #040c1a 100%) !important;
+  padding: clamp(4.25rem, 10vw, 6.5rem) 0 clamp(2.75rem, 6vw, 4.5rem) !important;
+  color: #f8fafc !important;
+}
+.hero .container {
+  width: min(100% - 2 * var(--hero-pad-x), 1120px);
+  margin-inline: auto;
+}
+.hero-content,
+.hero-centered {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  gap: 0 !important;
+  max-width: 40rem !important;
+  margin-inline: auto !important;
+}
+.hero-eyebrow {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  margin-bottom: 0.85rem !important;
+  color: rgba(248, 250, 252, 0.75) !important;
+  font-size: 0.8rem !important;
+  letter-spacing: 0.04em !important;
+}
+.hero h1 {
+  margin: 0 0 0.85rem !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: clamp(1.85rem, 7.5vw, 3rem) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.03em !important;
+  max-width: 16ch !important;
+}
+.hero h1 em {
+  font-style: normal !important;
+  background: linear-gradient(90deg, #67e8f9, #00b4d8) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+.hero-sub {
+  margin: 0 0 1.25rem !important;
+  max-width: 34rem !important;
+  color: rgba(248, 250, 252, 0.88) !important;
+  -webkit-text-fill-color: rgba(248, 250, 252, 0.88) !important;
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+}
+.hero-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+  max-width: 22rem !important;
+  gap: 0.75rem !important;
+  margin: 0 0 0.85rem !important;
+}
+.hero-actions .btn,
+.hero-actions a.btn {
+  width: 100% !important;
+  min-height: 3rem !important;
+  justify-content: center !important;
+  border-radius: 0.75rem !important;
+  font-weight: 800 !important;
+  font-size: 0.98rem !important;
+}
+.hero-actions .btn-primary {
+  background: #00b4d8 !important;
+  color: #062033 !important;
+  border: none !important;
+  box-shadow: 0 8px 20px rgba(0, 180, 216, 0.28) !important;
+}
+.hero-actions .btn-outline {
+  background: transparent !important;
+  color: #f8fafc !important;
+  border: 1.5px solid rgba(148, 163, 184, 0.65) !important;
+}
+.hero-next-hint {
+  width: 100% !important;
+  max-width: 22rem !important;
+  margin: 0 0 1rem !important;
+  padding: 0.7rem 0.9rem !important;
+  border-radius: 0.85rem !important;
+  border: 1px solid rgba(0, 180, 216, 0.28) !important;
+  background: rgba(15, 23, 42, 0.55) !important;
+  color: rgba(248, 250, 252, 0.9) !important;
+  -webkit-text-fill-color: rgba(248, 250, 252, 0.9) !important;
+  font-size: 0.86rem !important;
+  line-height: 1.45 !important;
+  text-align: center !important;
+}
+.hero-next-hint strong {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.hero-meta {
+  width: 100% !important;
+  max-width: 22rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.85rem !important;
+  margin: 0 !important;
+}
+.hero-store-chip {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  width: 100% !important;
+  padding: 0.9rem 1rem !important;
+  border-radius: 0.9rem !important;
+  border: 1px solid rgba(0, 180, 216, 0.35) !important;
+  background: rgba(8, 47, 73, 0.55) !important;
+  color: #f8fafc !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+}
+.hero-store-chip strong {
+  display: block !important;
+  color: #ffffff !important;
+  font-size: 0.95rem !important;
+}
+.hero-store-chip small {
+  display: block !important;
+  color: rgba(226, 232, 240, 0.85) !important;
+  font-size: 0.78rem !important;
+  margin-top: 0.15rem !important;
+}
+.hero-store-arrow {
+  margin-left: auto !important;
+  color: #67e8f9 !important;
+}
+.hero-trust-cards {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.55rem !important;
+  width: 100% !important;
+}
+.hero-trust-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.2rem !important;
+  min-height: 4.1rem !important;
+  padding: 0.65rem 0.45rem !important;
+  border-radius: 0.75rem !important;
+  border: 1px solid rgba(148, 163, 184, 0.28) !important;
+  background: rgba(15, 23, 42, 0.65) !important;
+  box-sizing: border-box !important;
+}
+.hero-trust-card .htc-label {
+  color: rgba(148, 163, 184, 0.95) !important;
+  -webkit-text-fill-color: rgba(148, 163, 184, 0.95) !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+}
+.hero-trust-card .htc-value {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.82rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  text-align: center !important;
+}
+
+/* Desktop: side-by-side CTAs, wider meta */
+@media (min-width: 768px) {
+  .hero-content,
+  .hero-centered {
+    max-width: 44rem !important;
+  }
+  .hero h1 {
+    max-width: 18ch !important;
+  }
+  .hero-actions {
+    flex-direction: row !important;
+    max-width: 28rem !important;
+    gap: 0.75rem !important;
+  }
+  .hero-actions .btn {
+    width: auto !important;
+    flex: 1 1 auto !important;
+    padding-inline: 1.15rem !important;
+  }
+  .hero-next-hint,
+  .hero-meta {
+    max-width: 28rem !important;
+  }
+  .hero-trust-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Keep sticky bottom bar from covering hero CTAs on small screens */
+@media (max-width: 900px) {
+  .hero {
+    padding-bottom: 5.5rem !important;
+  }
+}
+/* ==== END RN-HERO-UX-REPAIR ==== */
+</style>
+
 </body>
 </html>

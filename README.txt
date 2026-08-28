@@ -1,10 +1,9 @@
-LEAD MAGNET VISIBILITY FIX
-Dark text on dark background was caused by global h2/p color #0B1E3A / #0f172a !important.
+HERO UX/UI REPAIR
+- Consistent vertical rhythm
+- Readable light text on dark hero
+- Full-width mobile CTAs with equal height
+- Trust cards 2x2 mobile / 4-col desktop
+- Store chip clearer hierarchy
+- Forms/links unchanged
 
-Fixed:
-- #free-guide / .lead-magnet-section text forced light
-- Form card stays white with dark labels
-- Hero title/sub stay light
-- Forms IDs unchanged
-
-Deploy: index.html + css/main.css
+Deploy index.html only (hero styles are in page style block).
