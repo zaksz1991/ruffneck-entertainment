@@ -1,12 +1,18 @@
-PROFESSIONAL UX SYSTEM
-======================
-css/professional-ux.css — design system (load after main.css)
-Linked on all public HTML pages (admin excluded)
-programmes.html restored (Digital Empowerment Programme)
-Optional vercel rewrite for /programmes
+CLEANUP.CSS — post-repair polish
+================================
+Linked AFTER professional-ux.css / main.css
 
-NOT changed: GAS endpoints, Flutterwave, form field names/IDs on existing pages,
-external URLs intentionally preserved.
+Implements audit goals safely:
+- Uniform section + card padding (clamp)
+- Fluid type scale
+- Primary CTA contrast + hover + focus-visible
+- Lead magnet submit highlight (gold) without forced pulse
+- Mobile hero CTA stack
+- No universal * { margin:0; padding:0 } (destructive)
+- Brand cyan/navy (not unrelated cobalt)
 
-Deploy entire folder contents to repo root.
-Preview first, then Production.
+Deploy:
+  css/cleanup.css
+  updated HTML files (link tags only)
+
+Do not change GAS / form fields / Flutterwave.
