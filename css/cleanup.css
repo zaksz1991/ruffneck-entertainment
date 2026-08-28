@@ -277,3 +277,47 @@ img {
   color: #334155 !important;
   -webkit-text-fill-color: #334155 !important;
 }
+
+/* === Pass 3: accessible service toggles === */
+.service-card {
+  position: relative;
+}
+button.service-toggle,
+.service-card .service-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  min-height: 44px;
+  margin-top: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border: 1px solid var(--rn-border, #dbe4ea);
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+button.service-toggle:hover,
+.service-card .service-toggle:hover {
+  border-color: #00b4d8;
+  background: #ecfeff;
+}
+button.service-toggle:focus-visible {
+  outline: 3px solid rgba(0, 180, 216, 0.45);
+  outline-offset: 2px;
+}
+.service-card .service-popup[hidden],
+.service-card .service-details[hidden] {
+  display: none !important;
+}
+.service-card.open .service-popup,
+.service-card.open .service-details {
+  display: block;
+}

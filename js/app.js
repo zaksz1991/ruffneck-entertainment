@@ -122,7 +122,7 @@
     });
   };
 
-  /* ---------- Services accordion + show-all ---------- */
+  /* ---------- Services accordion (Pass 3: accessible toggles) ---------- */
   RN.services = function () {
     function ensureInner(popup) {
       if (!popup || qs(".rn-acc-inner", popup)) return;
@@ -132,27 +132,46 @@
       popup.appendChild(inner);
     }
 
-    function setHint(card, open) {
-      var h = qs(".expand-hint", card);
-      if (!h) return;
-      h.innerHTML = open
-        ? 'Hide details <span class="expand-chevron" aria-hidden="true">⌃</span>'
-        : 'View details <span class="expand-chevron" aria-hidden="true">⌄</span>';
+    function setHint(btn, open) {
+      if (!btn) return;
+      var label = open ? "Hide details" : "View details";
+      var chev = open ? "⌃" : "⌄";
+      btn.innerHTML =
+        label +
+        ' <span class="expand-chevron" aria-hidden="true">' +
+        chev +
+        "</span>";
     }
 
     function closeCard(card) {
+      var btn = qs(".service-toggle", card);
+      var panel = qs(".service-popup, .service-details", card);
       card.classList.remove("open");
-      card.setAttribute("aria-expanded", "false");
-      setHint(card, false);
+      if (btn) {
+        btn.setAttribute("aria-expanded", "false");
+        setHint(btn, false);
+      }
+      if (panel) {
+        panel.hidden = true;
+        panel.setAttribute("hidden", "");
+      }
     }
 
     function openCard(card) {
       qsa(".service-card.open").forEach(function (c) {
         if (c !== card) closeCard(c);
       });
+      var btn = qs(".service-toggle", card);
+      var panel = qs(".service-popup, .service-details", card);
       card.classList.add("open");
-      card.setAttribute("aria-expanded", "true");
-      setHint(card, true);
+      if (btn) {
+        btn.setAttribute("aria-expanded", "true");
+        setHint(btn, true);
+      }
+      if (panel) {
+        panel.hidden = false;
+        panel.removeAttribute("hidden");
+      }
     }
 
     function toggleCard(card) {
@@ -160,26 +179,76 @@
       else openCard(card);
     }
 
-    function bindCard(card) {
+    function ensureToggle(card, index) {
+      var panel = qs(".service-popup, .service-details", card);
+      if (!panel) return null;
+
+      var panelId = panel.id;
+      if (!panelId) {
+        panelId = (card.id || "svc-" + index) + "-details";
+        panel.id = panelId;
+      }
+      ensureInner(panel);
+
+      // Prefer existing button; else promote .expand-hint to a real button
+      var btn = qs(".service-toggle", card);
+      if (!btn) {
+        var hint = qs(".expand-hint", card);
+        if (hint && hint.tagName === "BUTTON") {
+          btn = hint;
+          btn.classList.add("service-toggle");
+        } else if (hint) {
+          btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "service-toggle expand-hint";
+          btn.innerHTML = hint.innerHTML || "View details";
+          hint.parentNode.replaceChild(btn, hint);
+        } else {
+          btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "service-toggle expand-hint";
+          btn.innerHTML =
+            'View details <span class="expand-chevron" aria-hidden="true">⌄</span>';
+          panel.parentNode.insertBefore(btn, panel);
+        }
+      }
+
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-controls", panelId);
+      if (!btn.id) btn.id = panelId + "-btn";
+
+      // Card is no longer a fake button
+      card.removeAttribute("role");
+      card.removeAttribute("tabindex");
+      card.removeAttribute("aria-expanded");
+
+      // Closed by default
+      if (!card.classList.contains("open")) {
+        panel.hidden = true;
+        panel.setAttribute("hidden", "");
+      }
+
+      return btn;
+    }
+
+    function bindCard(card, index) {
       if (card.getAttribute("data-rn-acc") === "1") return;
       card.setAttribute("data-rn-acc", "1");
-      card.setAttribute("role", "button");
-      card.setAttribute("tabindex", "0");
-      card.setAttribute("aria-expanded", "false");
-      ensureInner(qs(".service-popup", card));
 
-      card.addEventListener("click", function (e) {
-        if (e.target.closest("a")) return;
+      var btn = ensureToggle(card, index);
+      if (!btn) return;
+
+      btn.addEventListener("click", function (e) {
         e.preventDefault();
+        e.stopPropagation();
         toggleCard(card);
       });
 
-      card.addEventListener("keydown", function (e) {
-        if (e.key === "Enter" || e.key === " ") {
-          e.preventDefault();
-          toggleCard(card);
-        }
-        if (e.key === "Escape" && card.classList.contains("open")) closeCard(card);
+      // Optional: clicking card body (not links / not button) still toggles
+      card.addEventListener("click", function (e) {
+        if (e.target.closest("a, button, input, textarea, select, label")) return;
+        if (e.target.closest(".service-popup, .service-details")) return;
+        toggleCard(card);
       });
     }
 
@@ -208,13 +277,15 @@
               extras[0].scrollIntoView({ behavior: "smooth", block: "nearest" });
             } catch (err) {}
           }
-          qsa(".service-card").forEach(bindCard);
+          qsa(".service-card").forEach(function (card, i) {
+            card.removeAttribute("data-rn-acc");
+            bindCard(card, i);
+          });
         });
       });
     }
   };
 
-  /* ---------- Chat ---------- */
   RN.chat = function () {
     window.rnToggleChat = function () {
       var bubble = qs("#rnChatBubble");
