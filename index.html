@@ -2623,14 +2623,18 @@ button,a,.btn{touch-action:manipulation}
         </ul>
       </div>
       <div class="lead-magnet-form-wrap">
-        <form id="leadMagnetForm" onsubmit="return submitLeadMagnet(event)">
+        <form id="leadMagnetForm" onsubmit="return submitLeadMagnet(event)" novalidate>
           <label for="lmName">Full Name</label>
-          <input type="text" id="lmName" placeholder="Your name" required/>
+          <input type="text" id="lmName" name="name" placeholder="Your name" autocomplete="name" required/>
           <label for="lmEmail">Email Address</label>
-          <input type="email" id="lmEmail" placeholder="you@email.com" required/>
+          <input type="email" id="lmEmail" name="email" placeholder="you@email.com" autocomplete="email" required/>
+          <label class="lm-consent-row" for="lmConsent" style="display:flex;align-items:flex-start;gap:10px;margin:12px 0 14px;font-size:13px;line-height:1.45;cursor:pointer;">
+            <input type="checkbox" id="lmConsent" name="consent" value="yes" required style="margin-top:3px;min-width:18px;min-height:18px;"/>
+            <span>I agree to receive the free AI prompts guide and occasional RuffNeck updates. I can unsubscribe anytime.</span>
+          </label>
           <button type="submit" class="btn btn-primary" id="lmSubmitBtn" style="width:100%;justify-content:center;">Send Me the Free Guide →</button>
-          <p id="lmMsg" style="display:none;font-size:13px;margin-top:10px;text-align:center;"></p>
-          <p class="lm-privacy">No spam. Instant PDF delivery. Unsubscribe anytime.</p>
+          <p id="lmMsg" role="status" aria-live="polite" style="display:none;font-size:13px;margin-top:10px;text-align:center;"></p>
+          <p class="lm-privacy">No spam. Instant PDF download available after submit. Email delivery depends on your inbox.</p>
         </form>
       </div>
     </div>
