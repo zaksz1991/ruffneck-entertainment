@@ -4732,5 +4732,46 @@ body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
 })();
 </script>
 
+
+<style id="rn-store-price-contrast">
+  .product-price,
+  .product-price .currency,
+  .product-price .price-val,
+  .product-footer .product-price {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-weight: 800 !important;
+    font-size: 1rem !important;
+  }
+  .product-price .currency {
+    font-weight: 600 !important;
+    margin-right: 0.25rem;
+  }
+  .product-desc,
+  .product-desc a {
+    color: #334155 !important;
+    -webkit-text-fill-color: #334155 !important;
+    opacity: 1 !important;
+  }
+  .product-card .btn,
+  .product-card .btn-primary {
+    display: inline-flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    min-height: 44px;
+  }
+  /* Cart count badge readable; no fake spinner */
+  .cart-btn, .nav-cart, [onclick*="toggleCart"] {
+    position: relative;
+  }
+  .cart-count, #cartCount, .cart-badge {
+    color: #04111f !important;
+    -webkit-text-fill-color: #04111f !important;
+    opacity: 1 !important;
+  }
+</style>
+
 </body>
 </html>
