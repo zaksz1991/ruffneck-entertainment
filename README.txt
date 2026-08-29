@@ -1,20 +1,13 @@
-Pass 6 — Mobile & performance
-==============================
-Changes:
-- index.html: preconnect/dns-prefetch, AOS defer, forms/app defer,
-  Google Maps iframe loading=lazy
-- css/cleanup.css: safe-area mobile bar, 48px touch targets,
-  reduced-motion for AOS, media containment, maps responsive
+STORE POLISH PASS — store.html only
+===================================
+Preserved: product IDs, prices, tiers, Flutterwave, webhooks, required globals
+Changed: a11y modal/cart, checkout reassurance, CSS polish layer, hero/delivery wording, Escape handler, filter aria-pressed sync, View options label
 
-Unchanged: forms logic, GAS, design system, business copy
-
-Manual tests (320 / 375 / 390 / 414 / 768 / 1024):
-- No horizontal scroll
-- Mobile menu open/close
-- Sticky bar above home indicator
-- Chat + language usable
-- Forms usable
-- Lighthouse mobile (optional)
-
-Note: Homepage is still content-heavy (~300KB HTML).
-Further gains: split inline CSS, fewer third-party scripts, image CDN already in use.
+Regression:
+1. Open product modal from card
+2. Select tier, add to cart
+3. Cart qty +/- remove
+4. Pay button still calls initiatePayment
+5. Escape closes modal then cart
+6. Filters + search still work
+7. Mobile 320–414 cart drawer usable
