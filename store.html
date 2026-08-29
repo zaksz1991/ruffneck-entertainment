@@ -3269,15 +3269,16 @@ document.addEventListener('DOMContentLoaded', function() {
       document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
       document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
       if (location.href.indexOf('googtrans') >= 0) location.href = location.pathname + location.search + location.hash;
-      else location.reload();
+      else { /* reload disabled - was causing stuck store */ }
       return;
     }
     document.cookie = 'googtrans=/en/' + lang + ';path=/;';
     document.cookie = 'googtrans=/en/' + lang + ';path=/;domain=.' + location.hostname;
-    location.reload();
+    /* location.reload disabled */
   }
   document.addEventListener('DOMContentLoaded', function(){
-    loadGT();
+    /* loadGT deferred */
+    if (false) /* loadGT() disabled */;
     var wrap = document.getElementById('rnLang');
     var btn = document.getElementById('rnLangBtn');
     var menu = document.getElementById('rnLangMenu');
@@ -4772,6 +4773,145 @@ body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
     opacity: 1 !important;
   }
 </style>
+
+
+<style id="rn-store-nuclear-visible">
+  html, body {
+    visibility: visible !important;
+    opacity: 1 !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    height: auto !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    position: relative !important;
+    top: 0 !important;
+  }
+  body.rn-modal-open:not(:has(#productModal.open)),
+  body.rn-cart-open:not(:has(#cartSidebar.open)):not(:has(#cartOverlay.open)) {
+    overflow: auto !important;
+  }
+  /* Show ALL store sections and cards */
+  .store-main,
+  .rn-featured,
+  .products-grid,
+  #productsGrid,
+  .product-card,
+  section,
+  .store-filters {
+    display: revert !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  .products-grid,
+  #productsGrid {
+    display: grid !important;
+  }
+  .product-card[hidden],
+  .product-card[aria-hidden="true"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  .product-price,
+  .product-price .price-val,
+  .product-price .currency {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    opacity: 1 !important;
+    font-weight: 800 !important;
+  }
+  /* Closed overlays only */
+  #productModal:not(.open),
+  #cartOverlay:not(.open),
+  #successModal:not(.open) {
+    display: none !important;
+  }
+  #storeLoader, #storeLoading, .loading-overlay, .page-loader, .preloader {
+    display: none !important;
+  }
+</style>
+<script id="rn-store-nuclear-js">
+(function () {
+  "use strict";
+  if (window.__rnStoreNuclear) return;
+  window.__rnStoreNuclear = true;
+
+  function forceShow() {
+    try {
+      document.documentElement.style.cssText =
+        "visibility:visible;opacity:1;overflow-y:auto;height:auto";
+      document.body.style.cssText =
+        "visibility:visible;opacity:1;overflow-y:auto;height:auto;position:relative;top:0";
+      document.body.classList.remove(
+        "loading",
+        "is-loading",
+        "store-loading",
+        "rn-store-loading",
+        "rn-modal-open",
+        "rn-cart-open"
+      );
+
+      var pm = document.getElementById("productModal");
+      var co = document.getElementById("cartOverlay");
+      var cs = document.getElementById("cartSidebar");
+      var sm = document.getElementById("successModal");
+      [pm, co, sm].forEach(function (el) {
+        if (el && !el.classList.contains("open")) {
+          el.style.display = "none";
+          el.setAttribute("aria-hidden", "true");
+        }
+      });
+      if (cs && !cs.classList.contains("open")) {
+        cs.setAttribute("aria-hidden", "true");
+      }
+
+      document.querySelectorAll(".product-card").forEach(function (card) {
+        card.hidden = false;
+        card.removeAttribute("hidden");
+        card.style.display = "";
+        card.style.visibility = "visible";
+        card.style.opacity = "1";
+        card.setAttribute("aria-hidden", "false");
+      });
+
+      document.querySelectorAll(".products-grid, #productsGrid").forEach(function (grid) {
+        grid.style.display = "grid";
+        grid.style.visibility = "visible";
+        grid.style.opacity = "1";
+      });
+    } catch (e) {}
+  }
+
+  forceShow();
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", forceShow, { once: true });
+  }
+  window.addEventListener("load", forceShow, { once: true });
+  setTimeout(forceShow, 300);
+  setTimeout(forceShow, 1000);
+  setTimeout(forceShow, 2500);
+
+  // Stop filter code from hiding every card if it runs with a bad state
+  var _fp = window.filterProducts;
+  if (typeof _fp === "function") {
+    window.filterProducts = function () {
+      try {
+        _fp.apply(this, arguments);
+      } catch (e) {}
+      // Ensure at least something visible
+      var any = document.querySelector(".product-card:not([hidden])");
+      if (!any) {
+        document.querySelectorAll(".product-card").forEach(function (c) {
+          c.hidden = false;
+          c.style.display = "";
+        });
+      }
+    };
+  }
+})();
+</script>
 
 </body>
 </html>
