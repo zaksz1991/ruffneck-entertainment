@@ -3511,38 +3511,148 @@ window.RNCms = {
 </script>
 
 <script id="rn-admin-store-load">
-document.addEventListener('DOMContentLoaded', async function(){
-  var products = [];
-  if (window.RNCms) {
-    try {
-      var r = await Promise.race([
-        window.RNCms.listProducts(),
-        new Promise(function(resolve){ setTimeout(function(){ resolve({ products: [] }); }, 2500); })
-      ]);
-      products = (r && r.products) || [];
-    } catch (e) { products = []; }
+<script id="rn-admin-store-load-safe">
+
+(() => {
+  "use strict";
+
+  const CMS_TIMEOUT = 1800;
+
+  function withTimeout(promise, timeoutMs) {
+    return Promise.race([
+      promise,
+      new Promise((_, reject) => {
+        window.setTimeout(() => {
+          reject(new Error("CMS request timed out"));
+        }, timeoutMs);
+      })
+    ]);
   }
-  var active = products.filter(function(p){
-    var s=(p.status||'active').toLowerCase();
-    return s==='active'||s==='published'||s==='live';
-  });
-  var grid = document.getElementById('newArrivalsGrid') || document.querySelector('.products-grid');
-  if (!grid) return;
-  grid.querySelectorAll('[data-admin-product="1"]').forEach(function(n){ n.remove(); });
-  window.PRODUCTS = window.PRODUCTS || {};
-  active.forEach(function(p){
-    if (!p||!p.id) return;
-    var price = p.price || 0;
-    if (p.tiers && p.tiers.beginner) price = p.tiers.beginner.price || price;
-    PRODUCTS[p.id] = { name:p.name, cat:p.cat, emoji:p.emoji||'📦', tiers:[{level:'Standard', price:price, desc:p.desc||'', includes:[p.desc||''], pdf:''}] };
-    var card = document.createElement('div');
-    card.className = 'product-card';
-    card.setAttribute('data-admin-product','1');
-    card.setAttribute('data-name', p.name||'');
-    card.innerHTML = '<div class="product-img"><span>'+(p.emoji||'📦')+'</span><span class="product-new">New</span></div><div class="product-body"><h3 class="product-name">'+(p.name||'')+'</h3><p class="product-desc">'+(p.desc||'')+'</p><div class="product-price">From ₦'+(Number(price)||0).toLocaleString()+'</div><button type="button" class="btn btn-primary btn-sm" onclick="typeof openModal===\'function\'&&openModal(\''+p.id+'\')">View / Buy</button></div>';
-    grid.insertBefore(card, grid.firstChild);
-  });
-});
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function escapeJs(value) {
+    return String(value)
+      .replace(/\\/g, "\\\\")
+      .replace(/'/g, "\\'");
+  }
+
+  function insertAdminProducts(products) {
+    if (!Array.isArray(products) || !products.length) return;
+
+    const grid =
+      document.getElementById("newArrivalsGrid") ||
+      document.getElementById("productsGrid") ||
+      document.querySelector(".products-grid");
+
+    if (!grid) return;
+
+    // remove previous admin-injected cards only
+    grid.querySelectorAll('[data-admin-product="1"], [data-admin-product]').forEach(function(n) {
+      if (n.getAttribute("data-admin-product") === "1" || n.dataset.adminProduct) {
+        // keep built-in cards; only remove ones we inject marked as admin
+        if (n.hasAttribute("data-admin-product")) n.remove();
+      }
+    });
+
+    const activeProducts = products.filter((product) => {
+      const status = String(product && product.status || "active")
+        .trim()
+        .toLowerCase();
+      return status === "active" || status === "published" || status === "live";
+    });
+
+    window.PRODUCTS = window.PRODUCTS || {};
+
+    activeProducts.forEach((product) => {
+      if (!product || !product.id) return;
+
+      const idStr = String(product.id);
+      if (grid.querySelector('[data-admin-product="' + idStr + '"]')) return;
+
+      var price = Number(product.price || 0);
+      if (product.tiers && product.tiers.beginner) {
+        price = Number(product.tiers.beginner.price || price);
+      } else if (Array.isArray(product.tiers) && product.tiers[0]) {
+        price = Number(product.tiers[0].price || price);
+      }
+
+      // Register for modal if not already in built-in PRODUCTS
+      if (!PRODUCTS[idStr]) {
+        PRODUCTS[idStr] = {
+          name: product.name,
+          cat: product.cat || "Digital Product",
+          emoji: product.emoji || "📦",
+          tiers: [{
+            level: "Standard",
+            price: price,
+            desc: product.desc || "",
+            includes: [product.desc || ""],
+            pdf: ""
+          }]
+        };
+      }
+
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.setAttribute("data-admin-product", "1");
+      card.dataset.adminProduct = "1";
+      card.setAttribute("data-name", product.name || "");
+      card.setAttribute("data-cat", product.cat || "");
+      card.setAttribute("data-id", idStr);
+
+      card.innerHTML =
+        '<div class="product-img"><span>' + (product.emoji || "📦") + '</span><span class="product-new">New</span></div>' +
+        '<div class="product-body">' +
+        '<div class="product-cat">' + escapeHtml(product.cat || "Digital Product") + '</div>' +
+        '<h3 class="product-name">' + escapeHtml(product.name || "Digital product") + '</h3>' +
+        '<p class="product-desc">' + escapeHtml(product.desc || "Practical digital resources for work and business.") + '</p>' +
+        '<div class="product-footer">' +
+        '<div class="product-price">From ₦' + (Number(price) || 0).toLocaleString("en-NG") + '</div>' +
+        '<button type="button" class="btn btn-primary btn-sm" aria-label="View options for ' + escapeHtml(product.name || "product") + '" onclick="typeof openModal===\'function\'&&openModal(\'' + escapeJs(idStr) + '\')">View options</button>' +
+        '</div></div>';
+
+      grid.insertBefore(card, grid.firstChild);
+    });
+  }
+
+  async function init() {
+    try {
+      if (window.RNCms && typeof window.RNCms.listProducts === "function") {
+        const result = await withTimeout(window.RNCms.listProducts(), CMS_TIMEOUT);
+        insertAdminProducts((result && result.products) || []);
+      }
+    } catch (error) {
+      console.warn(
+        "[RuffNeck Store] Optional CMS unavailable. Using built-in catalogue.",
+        error
+      );
+    } finally {
+      if (typeof window.renderCart === "function") {
+        try { window.renderCart(); } catch (e) {}
+      }
+      if (typeof window.updateAllPriceDisplays === "function") {
+        try { window.updateAllPriceDisplays(); } catch (e) {}
+      }
+      try {
+        window.dispatchEvent(new CustomEvent("rn:store-products-ready"));
+      } catch (e) {}
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+})();
 </script>
 
 
@@ -4348,6 +4458,38 @@ body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
 }
 </style>
 
+<style id="rn-store-force-visible">
+  html, body {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  main,
+  #main-content,
+  .store-main,
+  .store-content,
+  .products-grid,
+  #productsGrid {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  #storeLoader,
+  #storeLoading,
+  #loadingScreen,
+  #pageLoader,
+  .store-loader,
+  .store-loading,
+  .loading-overlay,
+  .page-loader,
+  .preloader,
+  [data-store-loader] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+</style>
+
+
 
 
 
@@ -4549,6 +4691,85 @@ body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
   window.addEventListener("load", revealStore, { once: true });
   window.setTimeout(revealStore, 500);
   window.setTimeout(revealStore, 4000);
+})();
+</script>
+
+
+<script id="rn-store-loading-failsafe">
+(() => {
+  "use strict";
+  if (window.__rnStoreFailsafeInstalled) return;
+  window.__rnStoreFailsafeInstalled = true;
+
+  let revealed = false;
+
+  function revealStore() {
+    if (revealed) return;
+    revealed = true;
+
+    const selectors = [
+      "#storeLoader",
+      "#storeLoading",
+      "#loadingScreen",
+      "#pageLoader",
+      ".store-loader",
+      ".store-loading",
+      ".loading-overlay",
+      ".page-loader",
+      ".preloader",
+      "[data-store-loader]"
+    ];
+
+    document.documentElement.classList.remove(
+      "loading", "is-loading", "store-loading", "rn-store-loading"
+    );
+    document.body.classList.remove(
+      "loading", "is-loading", "store-loading", "rn-store-loading"
+    );
+    document.body.removeAttribute("aria-busy");
+
+    // Unlock scroll if overlays closed
+    var pm = document.getElementById("productModal");
+    var co = document.getElementById("cartOverlay");
+    if ((!pm || !pm.classList.contains("open")) && (!co || !co.classList.contains("open"))) {
+      document.body.classList.remove("rn-modal-open", "rn-cart-open");
+      document.body.style.overflow = "";
+    }
+
+    document.querySelectorAll(selectors.join(",")).forEach((element) => {
+      element.hidden = true;
+      element.setAttribute("aria-hidden", "true");
+      element.style.display = "none";
+      element.style.visibility = "hidden";
+      element.style.opacity = "0";
+      element.style.pointerEvents = "none";
+    });
+
+    document
+      .querySelectorAll(
+        "main, #main-content, .store-main, .store-content, .products-grid, #productsGrid"
+      )
+      .forEach((element) => {
+        element.hidden = false;
+        element.removeAttribute("aria-busy");
+        element.style.removeProperty("display");
+        element.style.visibility = "visible";
+        element.style.opacity = "1";
+      });
+
+    try {
+      window.dispatchEvent(new CustomEvent("rn:store-ready"));
+    } catch (e) {}
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", revealStore, { once: true });
+  } else {
+    revealStore();
+  }
+
+  window.addEventListener("load", revealStore, { once: true });
+  window.setTimeout(revealStore, 2500);
 })();
 </script>
 
