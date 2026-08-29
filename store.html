@@ -3514,8 +3514,13 @@ window.RNCms = {
 document.addEventListener('DOMContentLoaded', async function(){
   var products = [];
   if (window.RNCms) {
-    var r = await window.RNCms.listProducts();
-    products = r.products || [];
+    try {
+      var r = await Promise.race([
+        window.RNCms.listProducts(),
+        new Promise(function(resolve){ setTimeout(function(){ resolve({ products: [] }); }, 2500); })
+      ]);
+      products = (r && r.products) || [];
+    } catch (e) { products = []; }
   }
   var active = products.filter(function(p){
     var s=(p.status||'active').toLowerCase();
@@ -4294,6 +4299,56 @@ button[data-cat].active {
   }
 </style>
 
+<style id="rn-store-loading-fix">
+/* Emergency: never block catalogue behind closed overlays */
+#productModal.modal-overlay:not(.open),
+.modal-overlay:not(.open),
+#cartOverlay.cart-overlay:not(.open),
+.cart-overlay:not(.open),
+#successModal:not(.open) {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+#productModal.modal-overlay.open,
+.modal-overlay.open {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+.cart-overlay.open {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+/* Catalogue always visible */
+.products-grid,
+#productsGrid,
+.store-main,
+main {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+/* Google Translate banner should not trap the page */
+.goog-te-banner-frame,
+.skiptranslate iframe.skiptranslate {
+  max-height: 0 !important;
+  visibility: hidden !important;
+}
+body {
+  top: 0 !important;
+  position: static !important;
+}
+body.rn-modal-open:not(:has(#productModal.open)),
+body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
+  overflow: auto !important;
+}
+</style>
+
+
 
 
 
@@ -4427,6 +4482,73 @@ button[data-cat].active {
   });
   syncModal();
   syncCart();
+})();
+</script>
+
+
+<script id="rn-store-reveal">
+(() => {
+  "use strict";
+  if (window.__rnStoreRevealInstalled) return;
+  window.__rnStoreRevealInstalled = true;
+
+  const revealStore = () => {
+    try {
+      document.documentElement.classList.remove("is-loading", "store-loading", "rn-store-loading");
+      document.body.classList.remove("is-loading", "store-loading", "rn-store-loading");
+      // Do not keep page locked if overlays are closed
+      var pm = document.getElementById("productModal");
+      var co = document.getElementById("cartOverlay");
+      var cs = document.getElementById("cartSidebar");
+      var sm = document.getElementById("successModal");
+      if (pm && !pm.classList.contains("open")) {
+        pm.classList.remove("open");
+        pm.setAttribute("aria-hidden", "true");
+        pm.style.display = "none";
+      }
+      if (co && !co.classList.contains("open")) {
+        co.classList.remove("open");
+        co.setAttribute("aria-hidden", "true");
+        co.style.display = "none";
+      }
+      if (cs && !cs.classList.contains("open")) {
+        cs.classList.remove("open");
+        cs.setAttribute("aria-hidden", "true");
+      }
+      if (sm && !sm.classList.contains("open")) {
+        sm.classList.remove("open");
+        sm.style.display = "none";
+      }
+      if ((!pm || !pm.classList.contains("open")) && (!co || !co.classList.contains("open"))) {
+        document.body.classList.remove("rn-modal-open", "rn-cart-open");
+        document.body.style.overflow = "";
+      }
+      document.querySelectorAll(
+        "#storeLoader, #storeLoading, .store-loader, .store-loading, .page-loader, .loading-overlay"
+      ).forEach(function (element) {
+        element.hidden = true;
+        element.setAttribute("aria-hidden", "true");
+        element.style.display = "none";
+      });
+      document.querySelectorAll(
+        "main, .store-main, .store-content, #storeContent, #productsGrid, .products-grid"
+      ).forEach(function (element) {
+        element.removeAttribute("aria-busy");
+        element.classList.remove("is-loading", "store-loading");
+        element.style.visibility = "visible";
+        element.style.opacity = "1";
+      });
+    } catch (e) {}
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", revealStore, { once: true });
+  } else {
+    revealStore();
+  }
+  window.addEventListener("load", revealStore, { once: true });
+  window.setTimeout(revealStore, 500);
+  window.setTimeout(revealStore, 4000);
 })();
 </script>
 
