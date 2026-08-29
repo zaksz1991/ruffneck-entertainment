@@ -3496,10 +3496,6 @@ window.RNCms = {
 };
 </script>
 
-<!-- DISABLED: rn-admin-store-load-safe — CMS must not block store catalogue -->
-
-
-
 <script id="rn-phase-d-analytics">
 (function(){
   window.rnTrack = function(name, params){
@@ -4302,36 +4298,6 @@ body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
 }
 </style>
 
-<style id="rn-store-force-visible">
-  html, body {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  main,
-  #main-content,
-  .store-main,
-  .store-content,
-  .products-grid,
-  #productsGrid {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  #storeLoader,
-  #storeLoading,
-  #loadingScreen,
-  #pageLoader,
-  .store-loader,
-  .store-loading,
-  .loading-overlay,
-  .page-loader,
-  .preloader,
-  [data-store-loader] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-</style>
 
 
 
@@ -4472,197 +4438,65 @@ body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
 </script>
 
 
-<script id="rn-store-reveal">
-(() => {
-  "use strict";
-  if (window.__rnStoreRevealInstalled) return;
-  window.__rnStoreRevealInstalled = true;
-
-  const revealStore = () => {
-    try {
-      document.documentElement.classList.remove("is-loading", "store-loading", "rn-store-loading");
-      document.body.classList.remove("is-loading", "store-loading", "rn-store-loading");
-      // Do not keep page locked if overlays are closed
-      var pm = document.getElementById("productModal");
-      var co = document.getElementById("cartOverlay");
-      var cs = document.getElementById("cartSidebar");
-      var sm = document.getElementById("successModal");
-      if (pm && !pm.classList.contains("open")) {
-        pm.classList.remove("open");
-        pm.setAttribute("aria-hidden", "true");
-        pm.style.display = "none";
-      }
-      if (co && !co.classList.contains("open")) {
-        co.classList.remove("open");
-        co.setAttribute("aria-hidden", "true");
-        co.style.display = "none";
-      }
-      if (cs && !cs.classList.contains("open")) {
-        cs.classList.remove("open");
-        cs.setAttribute("aria-hidden", "true");
-      }
-      if (sm && !sm.classList.contains("open")) {
-        sm.classList.remove("open");
-        sm.style.display = "none";
-      }
-      if ((!pm || !pm.classList.contains("open")) && (!co || !co.classList.contains("open"))) {
-        document.body.classList.remove("rn-modal-open", "rn-cart-open");
-        document.body.style.overflow = "";
-      }
-      document.querySelectorAll(
-        "#storeLoader, #storeLoading, .store-loader, .store-loading, .page-loader, .loading-overlay"
-      ).forEach(function (element) {
-        element.hidden = true;
-        element.setAttribute("aria-hidden", "true");
-        element.style.display = "none";
-      });
-      document.querySelectorAll(
-        "main, .store-main, .store-content, #storeContent, #productsGrid, .products-grid"
-      ).forEach(function (element) {
-        element.removeAttribute("aria-busy");
-        element.classList.remove("is-loading", "store-loading");
-        element.style.visibility = "visible";
-        element.style.opacity = "1";
-      });
-    } catch (e) {}
-  };
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", revealStore, { once: true });
-  } else {
-    revealStore();
-  }
-  window.addEventListener("load", revealStore, { once: true });
-  window.setTimeout(revealStore, 500);
-  window.setTimeout(revealStore, 4000);
-})();
-</script>
 
 
-<script id="rn-store-loading-failsafe">
-(() => {
-  "use strict";
-  if (window.__rnStoreFailsafeInstalled) return;
-  window.__rnStoreFailsafeInstalled = true;
-
-  let revealed = false;
-
-  function revealStore() {
-    if (revealed) return;
-    revealed = true;
-
-    const selectors = [
-      "#storeLoader",
-      "#storeLoading",
-      "#loadingScreen",
-      "#pageLoader",
-      ".store-loader",
-      ".store-loading",
-      ".loading-overlay",
-      ".page-loader",
-      ".preloader",
-      "[data-store-loader]"
-    ];
-
-    document.documentElement.classList.remove(
-      "loading", "is-loading", "store-loading", "rn-store-loading"
-    );
-    document.body.classList.remove(
-      "loading", "is-loading", "store-loading", "rn-store-loading"
-    );
-    document.body.removeAttribute("aria-busy");
-
-    // Unlock scroll if overlays closed
-    var pm = document.getElementById("productModal");
-    var co = document.getElementById("cartOverlay");
-    if ((!pm || !pm.classList.contains("open")) && (!co || !co.classList.contains("open"))) {
-      document.body.classList.remove("rn-modal-open", "rn-cart-open");
-      document.body.style.overflow = "";
-    }
-
-    document.querySelectorAll(selectors.join(",")).forEach((element) => {
-      element.hidden = true;
-      element.setAttribute("aria-hidden", "true");
-      element.style.display = "none";
-      element.style.visibility = "hidden";
-      element.style.opacity = "0";
-      element.style.pointerEvents = "none";
-    });
-
-    document
-      .querySelectorAll(
-        "main, #main-content, .store-main, .store-content, .products-grid, #productsGrid"
-      )
-      .forEach((element) => {
-        element.hidden = false;
-        element.removeAttribute("aria-busy");
-        element.style.removeProperty("display");
-        element.style.visibility = "visible";
-        element.style.opacity = "1";
-      });
-
-    try {
-      window.dispatchEvent(new CustomEvent("rn:store-ready"));
-    } catch (e) {}
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", revealStore, { once: true });
-  } else {
-    revealStore();
-  }
-
-  window.addEventListener("load", revealStore, { once: true });
-  window.setTimeout(revealStore, 2500);
-})();
-</script>
-
-
-<style id="rn-store-loading-override">
-  html, body {
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  main,
-  #main-content,
+<style id="rn-store-clean-layout">
+  /* Final store layout correction — single clean block */
   .store-main,
-  .store-content,
   .products-grid,
-  #productsGrid {
-    visibility: visible !important;
-    opacity: 1 !important;
+  .product-card {
+    transform: none !important;
   }
-  /* Keep product grids as grid, not forced block */
-  .products-grid,
-  #productsGrid {
+
+  .product-card {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    width: auto !important;
+    max-width: 100% !important;
+  }
+
+  .product-card:hover {
+    transform: translateY(-3px) !important;
+  }
+
+  .products-grid {
     display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: 1rem;
   }
-  #storeLoader,
-  #storeLoading,
-  #loadingScreen,
-  #pageLoader,
-  .store-loader,
-  .store-loading,
-  .loading-overlay,
-  .page-loader,
-  .preloader,
-  [data-store-loader] {
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
+
+  @media (max-width: 1024px) {
+    .products-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .products-grid {
+      grid-template-columns: 1fr !important;
+    }
+  }
+
+  .product-price,
+  .product-price .price-val,
+  .product-price .currency {
+    color: #0f172a !important;
+    -webkit-text-fill-color: #0f172a !important;
+    opacity: 1 !important;
+    font-weight: 700 !important;
   }
 </style>
-
-
-<script id="rn-store-emergency-reveal">
+<script id="rn-store-clean-finish">
 (function () {
   "use strict";
-  if (window.__rnEmergencyReveal) return;
-  window.__rnEmergencyReveal = true;
+  if (window.__rnStoreCleanFinish) return;
+  window.__rnStoreCleanFinish = true;
 
-  function revealStore() {
-    var selectors = [
+  function finishStoreLoading() {
+    var loaderSelectors = [
       "#storeLoader",
       "#storeLoading",
       "#loadingScreen",
@@ -4671,245 +4505,42 @@ body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
       ".store-loading",
       ".loading-overlay",
       ".page-loader",
-      ".preloader",
-      "[data-store-loader]"
+      ".preloader"
     ];
 
+    loaderSelectors.forEach(function (selector) {
+      document.querySelectorAll(selector).forEach(function (element) {
+        element.remove();
+      });
+    });
+
     document.documentElement.classList.remove(
-      "loading", "is-loading", "store-loading", "rn-store-loading"
+      "loading",
+      "is-loading",
+      "store-loading",
+      "rn-store-loading"
     );
 
     if (document.body) {
       document.body.classList.remove(
-        "loading", "is-loading", "store-loading", "rn-store-loading"
-      );
-      document.body.removeAttribute("aria-busy");
-      document.body.style.visibility = "visible";
-      document.body.style.opacity = "1";
-      // unlock if overlays closed
-      var pm = document.getElementById("productModal");
-      var co = document.getElementById("cartOverlay");
-      if ((!pm || !pm.classList.contains("open")) && (!co || !co.classList.contains("open"))) {
-        document.body.classList.remove("rn-modal-open", "rn-cart-open");
-        document.body.style.overflow = "";
-      }
-    }
-
-    document.querySelectorAll(selectors.join(",")).forEach(function (element) {
-      element.hidden = true;
-      element.setAttribute("aria-hidden", "true");
-      element.style.setProperty("display", "none", "important");
-      element.style.setProperty("visibility", "hidden", "important");
-      element.style.setProperty("opacity", "0", "important");
-      element.style.setProperty("pointer-events", "none", "important");
-    });
-
-    document.querySelectorAll(
-      "main, #main-content, .store-main, .store-content"
-    ).forEach(function (element) {
-      element.hidden = false;
-      element.removeAttribute("aria-busy");
-      element.style.setProperty("visibility", "visible", "important");
-      element.style.setProperty("opacity", "1", "important");
-    });
-
-    document.querySelectorAll(".products-grid, #productsGrid").forEach(function (element) {
-      element.hidden = false;
-      element.removeAttribute("aria-busy");
-      element.style.setProperty("display", "grid", "important");
-      element.style.setProperty("visibility", "visible", "important");
-      element.style.setProperty("opacity", "1", "important");
-    });
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", revealStore, { once: true });
-  } else {
-    revealStore();
-  }
-
-  window.addEventListener("load", revealStore, { once: true });
-  window.setTimeout(revealStore, 1500);
-})();
-</script>
-
-
-<style id="rn-store-price-contrast">
-  .product-price,
-  .product-price .currency,
-  .product-price .price-val,
-  .product-footer .product-price {
-    color: #0f172a !important;
-    -webkit-text-fill-color: #0f172a !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    font-weight: 800 !important;
-    font-size: 1rem !important;
-  }
-  .product-price .currency {
-    font-weight: 600 !important;
-    margin-right: 0.25rem;
-  }
-  .product-desc,
-  .product-desc a {
-    color: #334155 !important;
-    -webkit-text-fill-color: #334155 !important;
-    opacity: 1 !important;
-  }
-  .product-card .btn,
-  .product-card .btn-primary {
-    display: inline-flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    min-height: 44px;
-  }
-  /* Cart count badge readable; no fake spinner */
-  .cart-btn, .nav-cart, [onclick*="toggleCart"] {
-    position: relative;
-  }
-  .cart-count, #cartCount, .cart-badge {
-    color: #04111f !important;
-    -webkit-text-fill-color: #04111f !important;
-    opacity: 1 !important;
-  }
-</style>
-
-
-<style id="rn-store-nuclear-visible">
-  html, body {
-    visibility: visible !important;
-    opacity: 1 !important;
-    overflow-x: hidden !important;
-    overflow-y: auto !important;
-    height: auto !important;
-    min-height: 100% !important;
-    max-height: none !important;
-    position: relative !important;
-    top: 0 !important;
-  }
-  body.rn-modal-open:not(:has(#productModal.open)),
-  body.rn-cart-open:not(:has(#cartSidebar.open)):not(:has(#cartOverlay.open)) {
-    overflow: auto !important;
-  }
-  /* Show ALL store sections and cards */
-  .store-main,
-  .rn-featured,
-  .products-grid,
-  #productsGrid,
-  .product-card,
-  section,
-  .store-filters {
-    display: revert !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
-  }
-  .products-grid,
-  #productsGrid {
-    display: grid !important;
-  }
-  .product-card[hidden],
-  .product-card[aria-hidden="true"] {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  .product-price,
-  .product-price .price-val,
-  .product-price .currency {
-    color: #0f172a !important;
-    -webkit-text-fill-color: #0f172a !important;
-    opacity: 1 !important;
-    font-weight: 800 !important;
-  }
-  /* Closed overlays only */
-  #productModal:not(.open),
-  #cartOverlay:not(.open),
-  #successModal:not(.open) {
-    display: none !important;
-  }
-  #storeLoader, #storeLoading, .loading-overlay, .page-loader, .preloader {
-    display: none !important;
-  }
-</style>
-<script id="rn-store-nuclear-js">
-(function () {
-  "use strict";
-  if (window.__rnStoreNuclear) return;
-  window.__rnStoreNuclear = true;
-
-  function forceShow() {
-    try {
-      document.documentElement.style.cssText =
-        "visibility:visible;opacity:1;overflow-y:auto;height:auto";
-      document.body.style.cssText =
-        "visibility:visible;opacity:1;overflow-y:auto;height:auto;position:relative;top:0";
-      document.body.classList.remove(
         "loading",
         "is-loading",
         "store-loading",
-        "rn-store-loading",
-        "rn-modal-open",
-        "rn-cart-open"
+        "rn-store-loading"
       );
-
-      var pm = document.getElementById("productModal");
-      var co = document.getElementById("cartOverlay");
-      var cs = document.getElementById("cartSidebar");
-      var sm = document.getElementById("successModal");
-      [pm, co, sm].forEach(function (el) {
-        if (el && !el.classList.contains("open")) {
-          el.style.display = "none";
-          el.setAttribute("aria-hidden", "true");
-        }
-      });
-      if (cs && !cs.classList.contains("open")) {
-        cs.setAttribute("aria-hidden", "true");
-      }
-
-      document.querySelectorAll(".product-card").forEach(function (card) {
-        card.hidden = false;
-        card.removeAttribute("hidden");
-        card.style.display = "";
-        card.style.visibility = "visible";
-        card.style.opacity = "1";
-        card.setAttribute("aria-hidden", "false");
-      });
-
-      document.querySelectorAll(".products-grid, #productsGrid").forEach(function (grid) {
-        grid.style.display = "grid";
-        grid.style.visibility = "visible";
-        grid.style.opacity = "1";
-      });
-    } catch (e) {}
+      document.body.removeAttribute("aria-busy");
+    }
   }
 
-  forceShow();
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", forceShow, { once: true });
+    document.addEventListener("DOMContentLoaded", finishStoreLoading, {
+      once: true
+    });
+  } else {
+    finishStoreLoading();
   }
-  window.addEventListener("load", forceShow, { once: true });
-  setTimeout(forceShow, 300);
-  setTimeout(forceShow, 1000);
-  setTimeout(forceShow, 2500);
 
-  // Stop filter code from hiding every card if it runs with a bad state
-  var _fp = window.filterProducts;
-  if (typeof _fp === "function") {
-    window.filterProducts = function () {
-      try {
-        _fp.apply(this, arguments);
-      } catch (e) {}
-      // Ensure at least something visible
-      var any = document.querySelector(".product-card:not([hidden])");
-      if (!any) {
-        document.querySelectorAll(".product-card").forEach(function (c) {
-          c.hidden = false;
-          c.style.display = "";
-        });
-      }
-    };
-  }
+  window.setTimeout(finishStoreLoading, 1000);
 })();
 </script>
 
