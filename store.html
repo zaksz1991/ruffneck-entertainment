@@ -54,10 +54,13 @@
 <meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 
 <!-- Google Analytics (GA4) — replace G-XF92RSFBHX with your real Measurement ID -->
-<!-- gtag src removed from store for load stability -->
-
-<!-- gtag config removed from store -->
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XF92RSFBHX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XF92RSFBHX');
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <script src="https://checkout.flutterwave.com/v3.js"></script>
@@ -537,183 +540,128 @@ body { top: 0 !important; }
 
 <body>
 
-<style id="rn-store-commercial-ui">
-:root {
-  --rn-navy: #0b1e3a;
-  --rn-navy-deep: #061525;
-  --rn-cyan: #00b4d8;
-  --rn-cyan-light: #22d3ee;
-  --rn-gold: #f5c518;
-  --rn-white: #ffffff;
-  --rn-surface: #f8fafc;
-  --rn-border: #e2e8f0;
-  --rn-text: #172033;
-  --rn-muted: #5b6778;
-  --rn-radius: 16px;
-  --rn-shadow: 0 8px 24px rgba(11, 30, 58, 0.08);
-  --rn-shadow-hover: 0 18px 42px rgba(11, 30, 58, 0.14);
-}
-html { overflow-x: hidden; scroll-behavior: smooth; }
-body { margin: 0; overflow-x: hidden; background: var(--rn-surface); color: var(--rn-text); }
-*, *::before, *::after { box-sizing: border-box; }
-.store-main { width: 100%; padding: 48px 0 80px; }
-.store-main > .container, .store-main .container {
-  width: min(1180px, calc(100% - 32px));
-  margin-inline: auto;
-}
-.products-grid, #productsGrid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 24px !important;
-  align-items: stretch !important;
-  width: 100%;
-  margin: 0 0 56px;
-}
-.product-card {
-  display: flex !important;
-  flex-direction: column !important;
-  min-width: 0 !important;
-  min-height: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  position: relative !important;
-  transform: none !important;
-  background: var(--rn-white) !important;
-  border: 1px solid var(--rn-border) !important;
-  border-radius: var(--rn-radius) !important;
-  box-shadow: var(--rn-shadow) !important;
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease !important;
-}
-.product-card:hover {
-  transform: translateY(-4px) !important;
-  border-color: rgba(0, 180, 216, 0.55) !important;
-  box-shadow: var(--rn-shadow-hover) !important;
-}
-.product-img {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  width: 100% !important;
-  height: 184px !important;
-  min-height: 184px !important;
-  margin: 0 !important;
-  overflow: hidden !important;
-  position: relative !important;
-  transform: none !important;
-  background-size: cover !important;
-  background-position: center !important;
-}
-.product-img img {
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-}
-.product-img > span:first-child { font-size: 52px; line-height: 1; }
-.product-body {
-  display: flex !important;
-  flex: 1 1 auto !important;
-  flex-direction: column !important;
-  min-width: 0 !important;
-  padding: 20px !important;
-  background: var(--rn-white) !important;
-}
-.product-cat {
-  margin: 0 0 8px !important;
-  color: #087f96 !important;
-  font-size: 11px !important;
-  font-weight: 800 !important;
-  letter-spacing: 0.08em !important;
-  text-transform: uppercase !important;
-}
-.product-name, .product-body h3 {
-  margin: 0 0 10px !important;
-  color: var(--rn-navy) !important;
-  font-size: 18px !important;
-  font-weight: 800 !important;
-  line-height: 1.3 !important;
-}
-.product-desc, .product-body p {
-  margin: 0 0 16px !important;
-  color: var(--rn-muted) !important;
-  font-size: 14px !important;
-  line-height: 1.65 !important;
-}
-.product-footer {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 14px !important;
-  margin: 0 !important;
-  padding: 16px 20px 20px !important;
-  border-top: 1px solid var(--rn-border) !important;
-  background: var(--rn-white) !important;
-}
-.product-price, .product-prices {
-  color: var(--rn-navy) !important;
-  font-size: 18px !important;
-  font-weight: 900 !important;
-}
-.product-price .currency {
-  color: var(--rn-muted) !important;
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  margin-right: 0.35rem;
-}
-.product-price .price-val {
-  color: var(--rn-navy) !important;
-  font-weight: 900 !important;
-}
-.product-card .btn, .product-card button {
-  min-height: 44px !important;
-  border-radius: 10px !important;
-  font-weight: 800 !important;
-}
-.product-card .btn-primary, .product-card button.btn-primary {
-  color: var(--rn-navy) !important;
-  background: var(--rn-cyan) !important;
-  border: 1px solid var(--rn-cyan) !important;
-}
-.product-card .btn-primary:hover { background: var(--rn-cyan-light) !important; }
-.store-filters {
-  position: sticky; top: 64px; z-index: 20;
-  background: rgba(255,255,255,0.96);
-  border-bottom: 1px solid var(--rn-border);
-  backdrop-filter: blur(14px);
-}
-.filters-inner { display: flex !important; flex-wrap: wrap !important; align-items: center !important; gap: 8px !important; }
-.filter-btn {
-  min-height: 40px !important; padding: 8px 14px !important;
-  border: 1px solid var(--rn-border) !important; border-radius: 999px !important;
-  color: var(--rn-navy) !important; background: var(--rn-white) !important;
-  font-size: 13px !important; font-weight: 700 !important;
-}
-.filter-btn.active, .filter-btn:hover {
-  color: var(--rn-white) !important; background: var(--rn-navy) !important; border-color: var(--rn-navy) !important;
-}
-.search-box { min-width: 220px; margin-left: auto; }
-.search-box input, #searchInput, #rnStoreSearch {
-  min-height: 42px !important; border: 1px solid var(--rn-border) !important;
-  border-radius: 10px !important; color: var(--rn-text) !important; background: var(--rn-white) !important;
-}
-.cart-sidebar { width: min(460px, 100vw) !important; max-width: 100vw !important; }
-@media (max-width: 1024px) {
-  .products-grid, #productsGrid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 18px !important; }
-}
-@media (max-width: 680px) {
-  .store-main { padding-top: 32px; }
-  .store-main > .container, .store-main .container { width: min(100% - 24px, 560px); }
-  .products-grid, #productsGrid { grid-template-columns: 1fr !important; gap: 16px !important; }
-  .product-img { height: 170px !important; min-height: 170px !important; }
-  .product-footer { flex-direction: column !important; align-items: stretch !important; }
-  .product-card .btn, .product-card button { width: 100% !important; }
-  .search-box { width: 100%; min-width: 0; margin-left: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .product-card:hover { transform: none !important; }
-}
+<style id="rn-store-final-ui">
+  html, body {
+    min-width: 0;
+    overflow-x: hidden;
+  }
+  .store-main, .store-main *, .products-grid, .product-card, .product-img {
+    transform: none;
+    rotate: none;
+    scale: 1;
+  }
+  .store-main {
+    width: 100%;
+    padding: 48px 0 80px;
+  }
+  .store-main > .container {
+    width: min(1180px, calc(100% - 32px));
+    margin-inline: auto;
+  }
+  .products-grid, #productsGrid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    align-items: stretch !important;
+    gap: 24px !important;
+    width: 100% !important;
+  }
+  .product-card {
+    display: flex !important;
+    flex-direction: column !important;
+    height: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 16px !important;
+    box-shadow: 0 8px 24px rgba(11, 30, 58, 0.08) !important;
+  }
+  .product-card:hover {
+    transform: translateY(-3px) !important;
+  }
+  .product-img {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 180px !important;
+    min-height: 180px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: #eef6f8 !important;
+  }
+  .product-img img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    transform: none !important;
+  }
+  .product-body {
+    display: flex !important;
+    flex: 1 1 auto !important;
+    flex-direction: column !important;
+    padding: 20px !important;
+    background: #ffffff !important;
+  }
+  .product-body h3, .product-name {
+    margin: 0 0 10px !important;
+    color: #0b1e3a !important;
+    font-size: 18px !important;
+    font-weight: 800 !important;
+    line-height: 1.35 !important;
+  }
+  .product-body p, .product-desc {
+    margin: 0 0 16px !important;
+    color: #4b5563 !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+  }
+  .product-footer {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 12px !important;
+    margin-top: auto !important;
+    padding: 16px 20px 20px !important;
+    border-top: 1px solid #e2e8f0 !important;
+    background: #ffffff !important;
+  }
+  .product-price, .product-price .price-val {
+    color: #0b1e3a !important;
+    font-weight: 800 !important;
+    opacity: 1 !important;
+  }
+  .product-card .btn, .product-card button {
+    min-height: 44px !important;
+    border-radius: 10px !important;
+    font-weight: 800 !important;
+  }
+  @media (max-width: 1024px) {
+    .products-grid, #productsGrid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+  }
+  @media (max-width: 680px) {
+    .store-main > .container {
+      width: min(100% - 24px, 560px);
+    }
+    .products-grid, #productsGrid {
+      grid-template-columns: 1fr !important;
+      gap: 16px !important;
+    }
+    .product-footer {
+      align-items: stretch !important;
+      flex-direction: column !important;
+    }
+    .product-card .btn, .product-card button {
+      width: 100% !important;
+    }
+  }
 </style>
 
 
@@ -856,7 +804,6 @@ body { margin: 0; overflow-x: hidden; background: var(--rn-surface); color: var(
 <div id="rnStoreSearchWrap">
   <input type="search" id="rnStoreSearch" placeholder="Search products…" autocomplete="off"/>
 </div>
-<!-- removed rn-p1-store-search-js -->
 
 
 <!-- HERO -->
@@ -2742,19 +2689,16 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-<!-- /js/cms.js not loaded on store -->
 
 
 <!-- Vercel Web Analytics + Speed Insights -->
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
-<!-- /_vercel/insights/script.js deferred off store -->
 
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
-<!-- /_vercel/speed-insights/script.js deferred off store -->
 
 
 
@@ -2779,11 +2723,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-
-<!-- removed: Translate -->
-<!-- removed rn-wa-templates -->
-
-
 <script id="rn-img-fallback">
 document.addEventListener('DOMContentLoaded',function(){
   document.querySelectorAll('img').forEach(function(img){
@@ -2794,16 +2733,6 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 });
 </script>
-<!-- removed rn-store-search-fix -->
-
-<!-- removed rn-cms-db-client -->
-
-
-
-<!-- removed: CMS loader -->
-<!-- removed rn-phase-d-analytics -->
-<!-- removed rn-audit-impl-js -->
-
 
 
 
@@ -2943,52 +2872,34 @@ document.addEventListener('DOMContentLoaded',function(){
 </script>
 
 
-<script id="rn-store-safe-init">
+<script id="rn-store-final-reveal">
 (function () {
   "use strict";
-  if (window.__rnStoreSafeInit) return;
-  window.__rnStoreSafeInit = true;
-
-  function showStore() {
-    try {
-      document.documentElement.classList.remove(
+  function revealStore() {
+    document.documentElement.classList.remove(
+      "loading", "is-loading", "store-loading", "rn-store-loading"
+    );
+    if (document.body) {
+      document.body.classList.remove(
         "loading", "is-loading", "store-loading", "rn-store-loading"
       );
-      if (document.body) {
-        document.body.classList.remove(
-          "loading", "is-loading", "store-loading", "rn-store-loading",
-          "rn-modal-open", "rn-cart-open"
-        );
-        document.body.removeAttribute("aria-busy");
-        document.body.style.overflow = "auto";
-        document.body.style.visibility = "visible";
-        document.body.style.opacity = "1";
-      }
-      [
-        "#storeLoader", "#storeLoading", "#loadingScreen", "#pageLoader",
-        ".store-loader", ".store-loading", ".loading-overlay", ".page-loader", ".preloader"
-      ].forEach(function (selector) {
-        document.querySelectorAll(selector).forEach(function (element) {
-          element.hidden = true;
-          element.setAttribute("aria-hidden", "true");
-          element.style.setProperty("display", "none", "important");
-        });
-      });
-      // Ensure main content is scrollable/visible
-      document.querySelectorAll("main, .store-main, .products-grid, #productsGrid").forEach(function (el) {
-        el.style.visibility = "visible";
-        el.style.opacity = "1";
-      });
-    } catch (e) {}
+      document.body.removeAttribute("aria-busy");
+      document.body.style.removeProperty("visibility");
+      document.body.style.removeProperty("opacity");
+      document.body.style.overflow = "auto";
+    }
+    document.querySelectorAll(
+      ".loading-overlay, .page-loader, .preloader, #loadingScreen, #storeLoader, #storeLoading, #pageLoader"
+    ).forEach(function (element) {
+      element.remove();
+    });
   }
-
-  showStore();
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", showStore, { once: true });
+    document.addEventListener("DOMContentLoaded", revealStore, { once: true });
+  } else {
+    revealStore();
   }
-  window.addEventListener("load", showStore, { once: true });
-  window.setTimeout(showStore, 400);
-  window.setTimeout(showStore, 1200);
+  window.setTimeout(revealStore, 800);
 })();
 </script>
 
