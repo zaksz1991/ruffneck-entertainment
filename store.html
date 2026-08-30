@@ -54,13 +54,10 @@
 <meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 
 <!-- Google Analytics (GA4) — replace G-XF92RSFBHX with your real Measurement ID -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XF92RSFBHX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-XF92RSFBHX');
-</script>
+<!-- gtag src removed from store for load stability -->
+
+<!-- gtag config removed from store -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <script src="https://checkout.flutterwave.com/v3.js"></script>
@@ -859,22 +856,8 @@ body { margin: 0; overflow-x: hidden; background: var(--rn-surface); color: var(
 <div id="rnStoreSearchWrap">
   <input type="search" id="rnStoreSearch" placeholder="Search products…" autocomplete="off"/>
 </div>
-<script id="rn-p1-store-search-js">
-(function(){
-  function run(){
-    var q = ((document.getElementById('rnStoreSearch')||{}).value||'').trim().toLowerCase();
-    var cards = document.querySelectorAll('.product-card, .store-card, [class*="product-card"]');
-    cards.forEach(function(c){
-      var t = (c.textContent||'').toLowerCase();
-      c.style.display = !q || t.indexOf(q) !== -1 ? '' : 'none';
-    });
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    var i = document.getElementById('rnStoreSearch');
-    if (i) { i.addEventListener('input', run); i.addEventListener('search', run); }
-  });
-})();
-</script>
+<!-- removed rn-p1-store-search-js -->
+
 
 <!-- HERO -->
 <div class="store-hero">
@@ -2766,11 +2749,13 @@ if ('serviceWorker' in navigator) {
 <script>
   window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
 </script>
-<script defer src="/_vercel/insights/script.js"></script>
+<!-- /_vercel/insights/script.js deferred off store -->
+
 <script>
   window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
 </script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
+<!-- /_vercel/speed-insights/script.js deferred off store -->
+
 
 
 <script>
@@ -2796,31 +2781,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 <!-- removed: Translate -->
+<!-- removed rn-wa-templates -->
 
-
-
-
-
-
-
-
-
-
-
-
-<script id="rn-wa-templates">
-window.RN_WA = {
-  phone: "2348033807856",
-  templates: {"general": "Hello RuffNeck Entertainment,\n\nI found you online and I would like to enquire about your services.\n\nName:\nBusiness / role:\nHow we can help:", "consultation": "Hello RuffNeck Entertainment,\n\nI would like to book a consultation / discovery call.\n\nName:\nBusiness:\nTopic (AI / IT / Marketing / Career / Other):\nPreferred time:", "cv": "Hello RuffNeck Entertainment,\n\nI am interested in the Professional CV, Cover Letter & LinkedIn service.\n\nName:\nTarget role / industry:\nPackage interest (Essential / Professional / Executive):", "it_support": "Hello RuffNeck Entertainment,\n\nI need IT / computer support.\n\nName:\nDevice (Windows/Mac):\nIssue or service (setup, Excel, Wi-Fi, printer, training):\nLocation (home / office / remote):", "warehouse_template": "Hello RuffNeck Entertainment,\n\nI want the free warehouse reporting template mentioned on the website.\n\nName:\nEmail:\nBusiness type:", "internship": "Hello RuffNeck Entertainment,\n\nI am applying for the Remote Internship Programme 2026.\n\nFull name:\nPhone/WhatsApp:\nEmail:\nPreferred track (Data/AI, Admin, Content, Support, Operations):\nShort intro:", "volunteer": "Hello RuffNeck Entertainment,\n\nI am applying for the Volunteer Programme 2026.\n\nFull name:\nPhone/WhatsApp:\nEmail:\nSkills / availability:", "ai_training": "Hello RuffNeck Entertainment,\n\nI am interested in AI training / automation for my team or myself.\n\nName:\nOrganisation (if any):\nTeam size:\nGoals:"},
-  link: function(key) {
-    var t = this.templates[key] || this.templates.general;
-    return "https://wa.me/" + this.phone + "?text=" + encodeURIComponent(t);
-  },
-  open: function(key) {
-    window.open(this.link(key), "_blank", "noopener,noreferrer");
-  }
-};
-</script>
 
 <script id="rn-img-fallback">
 document.addEventListener('DOMContentLoaded',function(){
@@ -2832,236 +2794,16 @@ document.addEventListener('DOMContentLoaded',function(){
   });
 });
 </script>
+<!-- removed rn-store-search-fix -->
 
+<!-- removed rn-cms-db-client -->
 
-
-
-<script id="rn-store-search-fix">
-window.filterProducts = function filterProducts() {
-  try {
-    var activeBtn = document.querySelector('.filter-btn.active, .tab-btn.active, [data-filter].active');
-    var activeCat = 'all';
-    if (activeBtn) {
-      activeCat = activeBtn.getAttribute('data-cat') || activeBtn.getAttribute('data-filter') || activeBtn.dataset.cat || 'all';
-    }
-    var input = document.getElementById('searchInput');
-    var search = (input && input.value ? input.value : '').trim().toLowerCase();
-    var cards = document.querySelectorAll('#products .product-card, .products-grid .product-card, .product-card');
-    var shown = 0;
-    cards.forEach(function(card) {
-      // skip featured promo cards outside product grid if marked
-      if (card.closest && card.closest('.rn-store-featured')) return;
-      var cat = card.getAttribute('data-cat') || '';
-      var catMatch = !activeCat || activeCat === 'all' || cat === activeCat || cat.indexOf(activeCat) !== -1;
-      var hay = (
-        (card.getAttribute('data-name') || '') + ' ' +
-        (card.getAttribute('data-cat') || '') + ' ' +
-        (card.querySelector('h3, .product-name, .product-title') || {}).textContent + ' ' +
-        (card.querySelector('.product-desc, .product-description') || {}).textContent
-      ).toLowerCase();
-      var match = !search || hay.indexOf(search) !== -1;
-      var ok = catMatch && match;
-      if (ok) {
-        card.style.display = '';
-        card.removeAttribute('hidden');
-        shown++;
-      } else {
-        card.style.display = 'none';
-        card.setAttribute('hidden', '');
-      }
-    });
-    var empty = document.getElementById('searchEmpty');
-    if (!empty) {
-      empty = document.createElement('p');
-      empty.id = 'searchEmpty';
-      empty.style.cssText = 'display:none;text-align:center;padding:24px;color:#6B7280;';
-      empty.textContent = 'No products match your search.';
-      var grid = document.querySelector('.products-grid, #products');
-      if (grid) grid.appendChild(empty);
-    }
-    empty.style.display = (shown === 0 ? 'block' : 'none');
-  } catch (e) { console.warn('filterProducts', e); }
-};
-document.addEventListener('DOMContentLoaded', function() {
-  var input = document.getElementById('searchInput');
-  if (input) {
-    input.addEventListener('input', window.filterProducts);
-    input.addEventListener('keyup', window.filterProducts);
-  }
-  document.querySelectorAll('.filter-btn, .tab-btn, [data-filter]').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      setTimeout(window.filterProducts, 10);
-    });
-  });
-});
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script id="rn-cms-db-client">
-window.RNCms = {
-  async listPosts(){
-    try {
-      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (res.ok && data.ok && Array.isArray(data.posts)) {
-        return { source:'db', posts: data.posts.map(function(p){
-          return {
-            id:p.id, title:p.title, cat:p.cat, emoji:p.emoji, image:p.image,
-            desc:p.desc||'', body:p.body||'', tags:p.tags||[], author:p.author,
-            readTime:p.read_time||p.readTime||'5', status:p.status||'draft',
-            created:p.created, updated:p.updated
-          };
-        })};
-      }
-    } catch(e) {}
-    try { return { source:'local', posts: JSON.parse(localStorage.getItem('rn_blog_posts')||'[]') }; }
-    catch(e){ return { source:'local', posts: [] }; }
-  },
-  async listProducts(){
-    try {
-      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (res.ok && data.ok && Array.isArray(data.products)) {
-        return { source:'db', products: data.products.map(function(p){
-          return {
-            id:p.id, name:p.name, cat:p.cat, emoji:p.emoji, image:p.image,
-            desc:p.desc||'', fullDesc:p.full_desc||p.fullDesc||'', tiers:p.tiers||{},
-            price:p.price, status:p.status||'active', created:p.created, updated:p.updated
-          };
-        })};
-      }
-    } catch(e) {}
-    try { return { source:'local', products: JSON.parse(localStorage.getItem('rn_products')||'[]') }; }
-    catch(e){ return { source:'local', products: [] }; }
-  },
-  async savePost(post){
-    var method = post.id && post._exists ? 'PUT' : 'POST';
-    delete post._exists;
-    var res = await fetch('/api/cms/posts', {
-      method: method, credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(post)
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
-    return data.post || post;
-  },
-  async deletePost(id){
-    var res = await fetch('/api/cms/posts', {
-      method:'DELETE', credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id:id})
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
-  },
-  async saveProduct(product){
-    var method = product.id && product._exists ? 'PUT' : 'POST';
-    delete product._exists;
-    var res = await fetch('/api/cms/products', {
-      method: method, credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(product)
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
-    return data.product || product;
-  },
-  async deleteProduct(id){
-    var res = await fetch('/api/cms/products', {
-      method:'DELETE', credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id:id})
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
-  }
-};
-</script>
 
 
 <!-- removed: CMS loader -->
+<!-- removed rn-phase-d-analytics -->
+<!-- removed rn-audit-impl-js -->
 
-
-
-<script id="rn-phase-d-analytics">
-(function(){
-  window.rnTrack = function(name, params){
-    try {
-      params = params || {};
-      if (typeof gtag === 'function') {
-        gtag('event', name, params);
-      }
-      if (window.dataLayer && Array.isArray(window.dataLayer)) {
-        window.dataLayer.push(Object.assign({ event: name }, params));
-      }
-    } catch (e) {}
-  };
-  document.addEventListener('click', function(e){
-    var a = e.target.closest && e.target.closest('a,button');
-    if (!a) return;
-    var href = (a.getAttribute('href') || '').toLowerCase();
-    var text = (a.textContent || '').trim().slice(0, 80);
-    if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp') !== -1) {
-      window.rnTrack('whatsapp_click', { link_text: text });
-    } else if (href.indexOf('calendly') !== -1) {
-      window.rnTrack('consultation_start', { link_text: text });
-    } else if (href.indexOf('free-guide') !== -1 || href.indexOf('start-here') !== -1) {
-      window.rnTrack('free_guide_click', { link_text: text });
-    } else if (href.indexOf('/store') !== -1) {
-      window.rnTrack('store_nav_click', { link_text: text });
-    } else if (href.indexOf('/services/') !== -1) {
-      window.rnTrack('service_view', { link_url: href });
-    } else if (href.indexOf('flutterwave') !== -1 || /buy|checkout|pay/i.test(text)) {
-      window.rnTrack('checkout_start', { link_text: text });
-    }
-  }, true);
-})();
-</script>
-
-
-<script id="rn-audit-impl-js">
-(function(){
-  // Lazy-load images missing loading attr
-  document.addEventListener('DOMContentLoaded', function(){
-    document.querySelectorAll('img:not([loading])').forEach(function(img){
-      if (!img.closest('header') && !img.closest('#nav')) {
-        img.setAttribute('loading', 'lazy');
-        img.setAttribute('decoding', 'async');
-      }
-    });
-    // ARIA for expand toggles
-    document.querySelectorAll('[data-expand], .view-details, .service-card button, .accordion-trigger').forEach(function(btn){
-      if (!btn.getAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
-      btn.addEventListener('click', function(){
-        var ex = btn.getAttribute('aria-expanded') === 'true';
-        btn.setAttribute('aria-expanded', ex ? 'false' : 'true');
-      });
-    });
-    // Footer social aria-labels if missing
-    document.querySelectorAll('footer a[href]').forEach(function(a){
-      if (a.getAttribute('aria-label')) return;
-      var h = (a.getAttribute('href')||'').toLowerCase();
-      if (h.indexOf('linkedin')!==-1) a.setAttribute('aria-label','LinkedIn');
-      else if (h.indexOf('facebook')!==-1) a.setAttribute('aria-label','Facebook');
-      else if (h.indexOf('instagram')!==-1) a.setAttribute('aria-label','Instagram');
-      else if (h.indexOf('twitter')!==-1 || h.indexOf('x.com')!==-1) a.setAttribute('aria-label','X (Twitter)');
-      else if (h.indexOf('wa.me')!==-1 || h.indexOf('whatsapp')!==-1) a.setAttribute('aria-label','WhatsApp');
-    });
-  });
-})();
-</script>
 
 
 
@@ -3206,26 +2948,46 @@ window.RNCms = {
   "use strict";
   if (window.__rnStoreSafeInit) return;
   window.__rnStoreSafeInit = true;
+
   function showStore() {
-    document.documentElement.classList.remove("loading","is-loading","store-loading","rn-store-loading");
-    if (document.body) {
-      document.body.classList.remove("loading","is-loading","store-loading","rn-store-loading");
-      document.body.removeAttribute("aria-busy");
-    }
-    ["#storeLoader","#storeLoading","#loadingScreen","#pageLoader",".store-loader",".store-loading",".loading-overlay",".page-loader",".preloader"]
-      .forEach(function (sel) {
-        document.querySelectorAll(sel).forEach(function (el) {
-          el.hidden = true;
-          el.setAttribute("aria-hidden", "true");
-          el.style.setProperty("display", "none", "important");
+    try {
+      document.documentElement.classList.remove(
+        "loading", "is-loading", "store-loading", "rn-store-loading"
+      );
+      if (document.body) {
+        document.body.classList.remove(
+          "loading", "is-loading", "store-loading", "rn-store-loading",
+          "rn-modal-open", "rn-cart-open"
+        );
+        document.body.removeAttribute("aria-busy");
+        document.body.style.overflow = "auto";
+        document.body.style.visibility = "visible";
+        document.body.style.opacity = "1";
+      }
+      [
+        "#storeLoader", "#storeLoading", "#loadingScreen", "#pageLoader",
+        ".store-loader", ".store-loading", ".loading-overlay", ".page-loader", ".preloader"
+      ].forEach(function (selector) {
+        document.querySelectorAll(selector).forEach(function (element) {
+          element.hidden = true;
+          element.setAttribute("aria-hidden", "true");
+          element.style.setProperty("display", "none", "important");
         });
       });
+      // Ensure main content is scrollable/visible
+      document.querySelectorAll("main, .store-main, .products-grid, #productsGrid").forEach(function (el) {
+        el.style.visibility = "visible";
+        el.style.opacity = "1";
+      });
+    } catch (e) {}
   }
+
+  showStore();
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", showStore, { once: true });
-  } else {
-    showStore();
   }
+  window.addEventListener("load", showStore, { once: true });
+  window.setTimeout(showStore, 400);
   window.setTimeout(showStore, 1200);
 })();
 </script>
