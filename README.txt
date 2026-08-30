@@ -1,13 +1,12 @@
-RuffNeck store.html — complete file
+RESTORE: Good store page (pre heavy-patch baseline)
 
-Includes:
+Source: website_audit Index store.html
 - Full product catalogue
-- Cart, modal, Flutterwave (initiatePayment)
-- Delivery/payment/support card with high-contrast text
-- Mobile full-width layout (no left gap)
-- Naira prices
+- openModal + cart + Flutterwave
+- No listProducts / CMS wait
+- Fewer stacked scripts than later patches
 
-Deploy: replace store.html in repo root → Vercel Ready
+SHA-256: a1ae900bbe8e4b224e3782b814801452ea836b9db13a75fc4d1d8fa44fbc0b4a
+
+Deploy: replace ONLY store.html in repo root → push → Vercel Ready
 Test: https://ruffneck-entertainment.vercel.app/store
-
-Hash: 91b881308e21d6f22ea87445e8cb80493baf530cfe5bd8c5b174e0dc248719c6
