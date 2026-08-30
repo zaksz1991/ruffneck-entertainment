@@ -1,16 +1,15 @@
-CLEAN store repair (stop stacking patches)
+STABLE STORE (restored claims baseline)
 
-REMOVED:
-- rn-store-loading-failsafe
-- rn-store-emergency-reveal
-- rn-store-force-visible / loading-override
-- rn-store-nuclear-*
-- CMS listProducts loaders
-- body/html className wipe patterns
+Hang sources removed:
+1. Google Translate script (location.reload loop)
+2. /js/cms.js on store page
+3. CMS listProducts auto-loader
 
-ADDED (only one block):
-- #rn-store-clean-layout — no rotate/skew; grid; readable prices
-- #rn-store-clean-finish — remove loaders only; no CMS wait
+Kept intact:
+- Full catalogue (~60 product cards)
+- openModal, cart, Flutterwave initiatePayment
+- One small hideLoaders script
 
-Deploy store.html → https://ruffneck-entertainment.vercel.app/store?clean=1
-Private window + hard refresh. Scroll past hero.
+Deploy THIS store.html only.
+URL: https://ruffneck-entertainment.vercel.app/store?v=stable2
+Private window + hard refresh + scroll past hero.

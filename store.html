@@ -206,8 +206,23 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <script src="https://checkout.flutterwave.com/v3.js"></script>
-<!-- DISABLED: duplicate early search init -->
-
+<script>
+// Search input enhancements — runs after DOM is fully ready
+document.addEventListener('DOMContentLoaded', function(){
+  const si = document.getElementById('searchInput');
+  if(si){
+    si.addEventListener('keydown', function(e){ if(e.key==='Enter') filterProducts(); });
+  }
+  // Filter buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      filterProducts();
+    });
+  });
+});
+</script>
 <style>
 :root{
   --navy:#0B1E3A;--midnight:#040C1A;--cyan:#00B4D8;--cyan-lt:#00F0FF;
@@ -3206,7 +3221,8 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
-  <script src="/js/cms.js"></script>
+<!-- /js/cms.js removed from store (non-blocking) -->
+
 
 <!-- Vercel Web Analytics + Speed Insights -->
 <script>
@@ -3240,69 +3256,9 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-<script>
-(function(){
-  function loadGT(){
-    if (window.google && google.translate) return;
-    var s = document.createElement('script');
-    s.src = '//translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate';
-    document.head.appendChild(s);
-  }
-  window.rnInitGoogleTranslate = function(){
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,ha,yo,ig,fr,es,ar',
-      autoDisplay: false,
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  };
-  function setLang(lang, label){
-    document.querySelectorAll('#rnLangMenu button').forEach(function(b){
-      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-    });
-    var lab = document.getElementById('rnLangLabel');
-    if (lab) lab.textContent = label || lang.toUpperCase();
-    localStorage.setItem('rn_lang', lang);
-    localStorage.setItem('rn_lang_label', label || lang.toUpperCase());
-    if (lang === 'en') {
-      // clear translate cookie-ish by reloading without googtrans
-      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
-      if (location.href.indexOf('googtrans') >= 0) location.href = location.pathname + location.search + location.hash;
-      else { /* reload disabled - was causing stuck store */ }
-      return;
-    }
-    document.cookie = 'googtrans=/en/' + lang + ';path=/;';
-    document.cookie = 'googtrans=/en/' + lang + ';path=/;domain=.' + location.hostname;
-    /* location.reload disabled */
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    /* loadGT deferred */
-    if (false) /* loadGT() disabled */;
-    var wrap = document.getElementById('rnLang');
-    var btn = document.getElementById('rnLangBtn');
-    var menu = document.getElementById('rnLangMenu');
-    if (!btn || !menu) return;
-    var saved = localStorage.getItem('rn_lang');
-    var savedL = localStorage.getItem('rn_lang_label');
-    if (saved && savedL) {
-      var lab = document.getElementById('rnLangLabel');
-      if (lab) lab.textContent = savedL;
-    }
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      wrap.classList.toggle('open');
-      btn.setAttribute('aria-expanded', wrap.classList.contains('open'));
-    });
-    menu.querySelectorAll('button').forEach(function(b){
-      b.addEventListener('click', function(){
-        setLang(b.getAttribute('data-lang'), b.getAttribute('data-label'));
-      });
-    });
-    document.addEventListener('click', function(){ wrap.classList.remove('open'); });
-  });
-})();
-</script>
+
+<!-- Google Translate + location.reload removed -->
+
 
 
 
@@ -3495,6 +3451,11 @@ window.RNCms = {
   }
 };
 </script>
+
+
+<!-- CMS listProducts loader disabled -->
+
+
 
 <script id="rn-phase-d-analytics">
 (function(){
@@ -4249,58 +4210,6 @@ button[data-cat].active {
   }
 </style>
 
-<style id="rn-store-loading-fix">
-/* Emergency: never block catalogue behind closed overlays */
-#productModal.modal-overlay:not(.open),
-.modal-overlay:not(.open),
-#cartOverlay.cart-overlay:not(.open),
-.cart-overlay:not(.open),
-#successModal:not(.open) {
-  display: none !important;
-  pointer-events: none !important;
-  visibility: hidden !important;
-  opacity: 0 !important;
-}
-#productModal.modal-overlay.open,
-.modal-overlay.open {
-  display: flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-.cart-overlay.open {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-/* Catalogue always visible */
-.products-grid,
-#productsGrid,
-.store-main,
-main {
-  visibility: visible !important;
-  opacity: 1 !important;
-}
-/* Google Translate banner should not trap the page */
-.goog-te-banner-frame,
-.skiptranslate iframe.skiptranslate {
-  max-height: 0 !important;
-  visibility: hidden !important;
-}
-body {
-  top: 0 !important;
-  position: static !important;
-}
-body.rn-modal-open:not(:has(#productModal.open)),
-body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
-  overflow: auto !important;
-}
-</style>
-
-
-
-
 
 
 
@@ -4438,109 +4347,40 @@ body.rn-cart-open:not(:has(#cartOverlay.open)):not(:has(#cartSidebar.open)) {
 </script>
 
 
-
-
-<style id="rn-store-clean-layout">
-  /* Final store layout correction — single clean block */
-  .store-main,
-  .products-grid,
-  .product-card {
-    transform: none !important;
-  }
-
-  .product-card {
-    position: relative !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    width: auto !important;
-    max-width: 100% !important;
-  }
-
-  .product-card:hover {
-    transform: translateY(-3px) !important;
-  }
-
-  .products-grid {
-    display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    align-items: stretch !important;
-    gap: 1rem;
-  }
-
-  @media (max-width: 1024px) {
-    .products-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    }
-  }
-
-  @media (max-width: 680px) {
-    .products-grid {
-      grid-template-columns: 1fr !important;
-    }
-  }
-
-  .product-price,
-  .product-price .price-val,
-  .product-price .currency {
+<style id="rn-store-stable">
+  .product-card { transform: none; }
+  .product-card:hover { transform: translateY(-2px); }
+  .product-price, .product-price .price-val, .product-price .currency {
     color: #0f172a !important;
-    -webkit-text-fill-color: #0f172a !important;
     opacity: 1 !important;
     font-weight: 700 !important;
   }
+  #storeLoader, #storeLoading, .loading-overlay, .page-loader, .preloader {
+    display: none !important;
+  }
 </style>
-<script id="rn-store-clean-finish">
+<script id="rn-store-stable-init">
 (function () {
   "use strict";
-  if (window.__rnStoreCleanFinish) return;
-  window.__rnStoreCleanFinish = true;
-
-  function finishStoreLoading() {
-    var loaderSelectors = [
-      "#storeLoader",
-      "#storeLoading",
-      "#loadingScreen",
-      "#pageLoader",
-      ".store-loader",
-      ".store-loading",
-      ".loading-overlay",
-      ".page-loader",
-      ".preloader"
-    ];
-
-    loaderSelectors.forEach(function (selector) {
-      document.querySelectorAll(selector).forEach(function (element) {
-        element.remove();
+  if (window.__rnStoreStable) return;
+  window.__rnStoreStable = true;
+  function hideLoaders() {
+    ["#storeLoader","#storeLoading","#loadingScreen","#pageLoader",".store-loader",".loading-overlay",".page-loader",".preloader"]
+      .forEach(function (sel) {
+        document.querySelectorAll(sel).forEach(function (el) { el.remove(); });
       });
-    });
-
-    document.documentElement.classList.remove(
-      "loading",
-      "is-loading",
-      "store-loading",
-      "rn-store-loading"
-    );
-
+    document.documentElement.classList.remove("loading","is-loading","store-loading","rn-store-loading");
     if (document.body) {
-      document.body.classList.remove(
-        "loading",
-        "is-loading",
-        "store-loading",
-        "rn-store-loading"
-      );
+      document.body.classList.remove("loading","is-loading","store-loading","rn-store-loading");
       document.body.removeAttribute("aria-busy");
     }
   }
-
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", finishStoreLoading, {
-      once: true
-    });
+    document.addEventListener("DOMContentLoaded", hideLoaders, { once: true });
   } else {
-    finishStoreLoading();
+    hideLoaders();
   }
-
-  window.setTimeout(finishStoreLoading, 1000);
+  setTimeout(hideLoaders, 800);
 })();
 </script>
 
