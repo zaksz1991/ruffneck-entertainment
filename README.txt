@@ -1,13 +1,13 @@
-FINAL STORE UI — replace store.html completely
+RuffNeck store.html — complete file
 
-Contains:
-- rn-store-final-ui (one CSS layout)
-- rn-store-final-reveal (one non-blocking reveal)
-- No CMS/listProducts wait
-- No Translate reload
-- Products + openModal + Flutterwave preserved
+Includes:
+- Full product catalogue
+- Cart, modal, Flutterwave (initiatePayment)
+- Delivery/payment/support card with high-contrast text
+- Mobile full-width layout (no left gap)
+- Naira prices
 
-Deploy to GitHub root → Vercel Ready →
-https://ruffneck-entertainment.vercel.app/store?version=final-ui-1
+Deploy: replace store.html in repo root → Vercel Ready
+Test: https://ruffneck-entertainment.vercel.app/store
 
-Verify in page source: rn-store-final-ui
+Hash: 91b881308e21d6f22ea87445e8cb80493baf530cfe5bd8c5b174e0dc248719c6
