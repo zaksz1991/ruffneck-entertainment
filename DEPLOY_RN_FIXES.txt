@@ -1,0 +1,39 @@
+RUFFNECK FIXES — READY TO DEPLOY
+================================
+
+What was fixed and included:
+
+1. Language switcher now appears on Homepage (was missing HTML markup)
+2. Blog search fixed (ID mismatch rnBlogSearch vs searchInput)
+3. Category filters made more reliable on Blog + Store
+4. Currency switcher (₦ / $) strengthened on Store
+5. Light UI polish (hover effects) — safe
+
+Files changed:
+- js/rn-fixes.js          (NEW)
+- index.html              (added script tag only)
+- blog.html               (added script tag only)
+- store.html              (added script tag only)
+
+NOT changed:
+- Flutterwave checkout
+- Google Apps Script
+- /api/* routes
+- admin.html
+- forms.js / cms.js / app.js logic
+- Product IDs and payment flow
+
+HOW TO DEPLOY
+-------------
+1. Download the zip
+2. Upload/replace the files on Vercel (or push to your Git repo connected to Vercel)
+3. Hard refresh the live site (Ctrl+Shift+R)
+
+Test after deploy:
+- Homepage → 🌐 language button top-right
+- Blog → search + category filters
+- Store → search + filters + ₦/$ toggle
+- Store → complete a test purchase (Flutterwave still works)
+
+Optional: change USD rate in js/rn-fixes.js
+  Look for:  var RATE = 1600;
