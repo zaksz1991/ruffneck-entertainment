@@ -76,6 +76,14 @@
       "destination": "/store.html"
     },
     {
+      "source": "/admin",
+      "destination": "/admin.html"
+    },
+    {
+      "source": "/admin/",
+      "destination": "/admin.html"
+    },
+    {
       "source": "/contact",
       "destination": "/contact-page.html"
     },
