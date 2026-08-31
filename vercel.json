@@ -1,0 +1,78 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/start-here",
+      "destination": "/start-here.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services-ai.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies.html"
+    },
+    {
+      "source": "/internship",
+      "destination": "/internship.html"
+    },
+    {
+      "source": "/volunteer",
+      "destination": "/volunteer.html"
+    },
+    {
+      "source": "/partnerships",
+      "destination": "/partnerships.html"
+    },
+    {
+      "source": "/about-full",
+      "destination": "/about-full.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/refund",
+      "destination": "/refund.html"
+    },
+    {
+      "source": "/faq",
+      "destination": "/faq.html"
+    },
+    {
+      "source": "/contact-page",
+      "destination": "/contact-page.html"
+    },
+    {
+      "source": "/product",
+      "destination": "/product.html"
+    },
+    {
+      "source": "/services/ai",
+      "destination": "/services-ai.html"
+    },
+    {
+      "source": "/services/marketing",
+      "destination": "/services-marketing.html"
+    },
+    {
+      "source": "/services/operations",
+      "destination": "/services-operations.html"
+    },
+    {
+      "source": "/services/creative",
+      "destination": "/services-creative.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin.html"
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Digital product | RuffNeck Store</title>
+<meta name="description" content="RuffNeck digital product — instant PDF delivery, priced in Naira, paid via Flutterwave."/>
+<style>
+body{margin:0;font-family:system-ui,sans-serif;background:#040C1A;color:#E5E7EB;line-height:1.55}
+.wrap{max-width:640px;margin:0 auto;padding:24px 16px 64px}
+.card{background:#0B1E3A;border:1px solid rgba(0,180,216,.3);border-radius:14px;padding:18px;margin:14px 0}
+.price{font-size:1.4rem;font-weight:800}
+.btn{display:inline-flex;min-height:44px;align-items:center;padding:12px 16px;border-radius:10px;background:#00B4D8;color:#0B1E3A;font-weight:800;text-decoration:none;border:none;cursor:pointer}
+.muted{color:#94A3B8;font-size:14px}
+.brand{color:#00B4D8;font-weight:800;text-decoration:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="brand" href="/store">← Store</a>
+  <div class="card">
+    <p class="muted" id="pCat">Digital product</p>
+    <h1 id="pName">Loading…</h1>
+    <p class="price" id="pPrice"></p>
+    <p id="pDesc" class="muted"></p>
+    <p style="margin-top:14px"><a class="btn" id="pBuy" href="/store">View in store / Buy</a></p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0;font-size:1.05rem">What you get</h2>
+    <ul>
+      <li>Digital file (typically PDF or editable template)</li>
+      <li>Instant delivery after successful payment</li>
+      <li>Support via WhatsApp for verified payment issues</li>
+    </ul>
+    <p class="muted">See <a href="/refund" style="color:#7DD3FC">Refund &amp; Delivery</a> for full policy.</p>
+  </div>
+  <div class="card">
+    <h2 style="margin-top:0;font-size:1.05rem">Who it is for</h2>
+    <p class="muted" id="pWho">Nigerian professionals, SMEs, and teams who want practical templates and guides.</p>
+  </div>
+</div>
+<script>
+(function(){
+  var params = new URLSearchParams(location.search);
+  var id = params.get('id');
+  function set(name, cat, desc, price){
+    document.title = (name || 'Product') + ' | RuffNeck Store';
+    document.getElementById('pName').textContent = name || 'Product';
+    document.getElementById('pCat').textContent = cat || 'Digital product';
+    document.getElementById('pDesc').textContent = desc || 'Instant digital delivery after payment via Flutterwave.';
+    document.getElementById('pPrice').textContent = price != null && price !== '' ? ('₦' + Number(price).toLocaleString('en-NG')) : '';
+  }
+  // Try CMS API
+  if (id) {
+    fetch('/api/cms/products', { cache: 'no-store' }).then(function(r){ return r.json(); }).then(function(d){
+      var list = (d && d.products) || [];
+      var p = list.find(function(x){ return String(x.id) === String(id); });
+      if (p) set(p.name, p.cat, p.desc, p.price);
+      else set('Product ' + id, 'Store item', 'Open the store to purchase this item.', null);
+    }).catch(function(){
+      set('Digital product', 'Store', 'Browse the store for full catalogue and checkout.', null);
+    });
+  } else {
+    set('RuffNeck digital products', 'Store', 'Browse AI guides, CV templates, prompt packs, and business toolkits.', null);
+  }
+})();
+</script>
+</body>
+</html>
