@@ -1160,19 +1160,14 @@ section.section-teaser {
 
 <link rel="stylesheet" href="/css/knowledge-hub.css"/>
 
-<style id="rn-blog-cms-display-fix">
-  #blogGrid .blog-card[data-admin-post="1"],
-  .blog-grid .blog-card[data-admin-post="1"] {
-    display: flex !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-  }
-  #blogGrid .blog-card[data-admin-post="1"] .card-new {
-    display: inline-block;
-  }
-</style>
+
 
 <body>
+
+<script id="rn-filterblog-stub">
+window.filterBlog = window.filterBlog || function(){ /* defined later */ };
+</script>
+
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
 <style id="rn-a11y-phase-e">
 .rn-skip:focus{left:12px;top:12px}
@@ -1402,6 +1397,14 @@ button,a,.btn{touch-action:manipulation}
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- CMS published posts (Admin) — always visible -->
+<div id="cmsPostsSection" class="cms-posts-section" style="max-width:1100px;margin:0 auto 28px;padding:0 16px;">
+  <h2 class="grid-heading" style="margin-bottom:12px;">🆕 Latest from Admin</h2>
+  <p id="cmsPostsStatus" style="font-size:13px;color:#64748b;margin:0 0 12px;">Loading new posts…</p>
+  <div id="cmsPostsGrid" class="blog-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;"></div>
 </div>
 
 <!-- BLOG GRID -->
@@ -2622,6 +2625,7 @@ window.RNCms.listPosts = async function () {
 };
 </script>
 
+
 <script id="rn-admin-blog-load">
 (function () {
   "use strict";
@@ -2639,15 +2643,26 @@ window.RNCms.listPosts = async function () {
       .replace(/"/g, "&quot;");
   }
 
+  function mapDataCat(cat) {
+    var c = String(cat || "").toLowerCase();
+    if (/ai|automation|prompt|llm|chatgpt|webinar|future of work/.test(c)) return "ai";
+    if (/ops|warehouse|sop|operation|logistics/.test(c)) return "ops";
+    if (/market|seo|social|brand|content/.test(c)) return "marketing";
+    if (/career|cv|resume|job|internship/.test(c)) return "career";
+    if (/it |excel|office|computer|wifi|printer/.test(c)) return "it";
+    return "ai"; // default so filters don't hide unknown cats when not "all"
+  }
+
   function buildCard(p) {
     var card = document.createElement("article");
     card.className = "blog-card rn-cms-post";
     card.setAttribute("data-admin-post", "1");
     card.setAttribute("data-post-id", p.id || "");
     card.setAttribute("data-title", p.title || "");
-    card.setAttribute("data-cat", p.cat || "Blog");
+    card.setAttribute("data-cat", mapDataCat(p.cat));
     card.setAttribute("data-category", p.cat || "Blog");
-    card.setAttribute("tabindex", "0");
+    card.style.cssText = "display:flex;flex-direction:column;background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;cursor:pointer;min-height:180px;";
+    card.tabIndex = 0;
     card.setAttribute("role", "button");
 
     var emoji = escapeHtml(p.emoji || "📝");
@@ -2655,28 +2670,21 @@ window.RNCms.listPosts = async function () {
     var title = escapeHtml(p.title || "Untitled");
     var desc = escapeHtml(p.desc || "");
     var author = escapeHtml(p.author || "RuffNeck Entertainment");
-    var created = escapeHtml(p.created || "");
-    var read = escapeHtml(p.readTime || p.read_time || "5");
 
     card.innerHTML =
-      '<div class="blog-thumb">' +
-        '<span class="card-emoji">' + emoji + "</span>" +
-        '<span class="card-cat-badge">' + cat + "</span>" +
-        '<span class="card-new">New</span>' +
+      '<div class="blog-thumb" style="background:#0B1E3A;color:#fff;min-height:88px;display:flex;align-items:center;justify-content:center;position:relative;">' +
+        '<span style="font-size:28px;">' + emoji + "</span>" +
+        '<span class="card-cat-badge" style="position:absolute;left:10px;bottom:10px;background:#00B4D8;color:#0B1E3A;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;">' + cat + "</span>" +
+        '<span class="card-new" style="position:absolute;right:10px;top:10px;background:#FBBF24;color:#0B1E3A;font-size:10px;font-weight:800;padding:3px 7px;border-radius:999px;">NEW</span>' +
       "</div>" +
-      '<div class="blog-card-body">' +
-        "<h3>" + title + "</h3>" +
-        "<p>" + desc + "</p>" +
-        '<p class="blog-meta" style="font-size:12px;opacity:.85;margin-top:8px;">' +
-          author + (created ? " · " + created : "") + " · " + read + " min" +
-        "</p>" +
-        '<span class="read-link">Read →</span>' +
+      '<div class="blog-card-body" style="padding:14px 16px 16px;color:#0f172a;">' +
+        '<h3 style="margin:0 0 8px;font-size:16px;line-height:1.35;color:#0B1E3A;">' + title + "</h3>" +
+        '<p style="margin:0;font-size:13px;line-height:1.5;color:#475569;">' + desc + "</p>" +
+        '<p style="margin:10px 0 0;font-size:12px;color:#64748b;">' + author + " · Read →</p>" +
       "</div>";
 
     function open() {
-      if (typeof window.openArticle === "function") {
-        window.openArticle(p.id);
-      }
+      if (typeof window.openArticle === "function") window.openArticle(p.id);
     }
     card.addEventListener("click", open);
     card.addEventListener("keydown", function (e) {
@@ -2689,87 +2697,113 @@ window.RNCms.listPosts = async function () {
   }
 
   async function loadCmsPosts() {
-    var grid =
+    var statusEl = document.getElementById("cmsPostsStatus");
+    var cmsGrid = document.getElementById("cmsPostsGrid");
+    var mainGrid =
       document.getElementById("blogGrid") ||
-      document.querySelector(".blog-grid") ||
-      document.querySelector("[data-blog-grid]");
-    if (!grid) {
-      console.warn("Blog CMS: #blogGrid not found");
-      return;
-    }
+      document.querySelector(".blog-grid");
 
-    var listFn =
-      (window.RNCms && typeof window.RNCms.listPosts === "function" && window.RNCms.listPosts) ||
-      null;
-    if (!listFn) {
-      console.warn("Blog CMS: RNCms.listPosts missing");
+    if (!window.RNCms || typeof window.RNCms.listPosts !== "function") {
+      if (statusEl) statusEl.textContent = "Could not load Admin posts (CMS client missing).";
       return;
     }
 
     var result;
     try {
-      result = await listFn.call(window.RNCms);
+      result = await window.RNCms.listPosts();
     } catch (err) {
-      console.warn("Blog CMS: listPosts error", err);
+      console.warn(err);
+      if (statusEl) statusEl.textContent = "Could not load Admin posts.";
       return;
     }
 
     var posts = (result && result.posts) || [];
     var published = posts.filter(isPublished);
 
-    // Remove previous CMS-injected cards only
-    grid.querySelectorAll('[data-admin-post="1"]').forEach(function (n) {
-      n.remove();
+    // Dedupe by title+id preference
+    var seen = {};
+    published = published.filter(function (p) {
+      var key = (p.title || "") + "::" + (p.id || "");
+      if (seen[key]) return false;
+      seen[key] = true;
+      return true;
     });
 
-    window.articles = window.articles || {};
-
-    // Newest first
     published.sort(function (a, b) {
       return String(b.id || "").localeCompare(String(a.id || ""));
     });
 
-    var frag = document.createDocumentFragment();
+    window.articles = window.articles || {};
+
+    // Clear previous CMS cards
+    if (cmsGrid) cmsGrid.innerHTML = "";
+    if (mainGrid) {
+      mainGrid.querySelectorAll('[data-admin-post="1"]').forEach(function (n) {
+        n.remove();
+      });
+    }
+
+    if (!published.length) {
+      if (statusEl) statusEl.textContent = "No published Admin posts yet.";
+      return;
+    }
+
     published.forEach(function (p) {
       if (!p || !p.id) return;
       window.articles[p.id] = {
         label: p.cat || "Blog",
         title: p.title || "Untitled",
-        meta:
-          (p.author || "RuffNeck Entertainment") +
-          (p.created ? " · " + p.created : ""),
+        meta: (p.author || "RuffNeck Entertainment") + (p.created ? " · " + p.created : ""),
         body: p.body || p.desc || "",
         tags: p.tags || []
       };
-      frag.appendChild(buildCard(p));
+      var card = buildCard(p);
+      if (cmsGrid) cmsGrid.appendChild(card.cloneNode(true));
+      // re-bind events on clone - better append same builder twice
     });
 
-    // Prepend CMS posts so they appear first
-    if (frag.childNodes.length) {
-      grid.insertBefore(frag, grid.firstChild);
+    // Rebuild cleanly into both grids with live listeners
+    if (cmsGrid) {
+      cmsGrid.innerHTML = "";
+      published.forEach(function (p) {
+        if (p && p.id) cmsGrid.appendChild(buildCard(p));
+      });
+    }
+    if (mainGrid) {
+      var frag = document.createDocumentFragment();
+      published.forEach(function (p) {
+        if (p && p.id) frag.appendChild(buildCard(p));
+      });
+      mainGrid.insertBefore(frag, mainGrid.firstChild);
     }
 
-    // Re-apply active category filter if any
-    var activeBtn =
-      document.querySelector(".rn-blog-cat.active, [data-blog-cat].active, .blog-cat.active") ||
-      null;
-    if (activeBtn && typeof activeBtn.click === "function") {
-      // don't force click; ensure "all" shows CMS cards
+    if (statusEl) {
+      statusEl.textContent =
+        published.length +
+        " published post" +
+        (published.length === 1 ? "" : "s") +
+        " from Admin (including newest at top).";
+      statusEl.style.color = "#0f766e";
     }
 
-    // Make category filter include CMS cards by data-cat text
-    document.querySelectorAll(".blog-card[data-admin-post='1']").forEach(function (card) {
-      card.style.display = "";
-      card.hidden = false;
-    });
+    // Force visible after any filter scripts
+    setTimeout(function () {
+      document.querySelectorAll("[data-admin-post='1']").forEach(function (card) {
+        card.style.display = "flex";
+        card.hidden = false;
+        card.removeAttribute("hidden");
+      });
+      var sec = document.getElementById("cmsPostsSection");
+      if (sec) {
+        sec.style.display = "block";
+        sec.hidden = false;
+      }
+    }, 50);
 
-    console.info(
-      "Blog CMS: injected " + published.length + " published post(s) into #blogGrid"
-    );
+    console.info("Blog CMS: showing " + published.length + " published Admin post(s)");
   }
 
   function start() {
-    // Retry briefly if RNCms not ready yet
     var tries = 0;
     (function attempt() {
       tries += 1;
@@ -2777,10 +2811,10 @@ window.RNCms.listPosts = async function () {
         loadCmsPosts();
         return;
       }
-      if (tries < 20) {
-        setTimeout(attempt, 100);
-      } else {
-        console.warn("Blog CMS: RNCms.listPosts never became available");
+      if (tries < 25) setTimeout(attempt, 120);
+      else {
+        var statusEl = document.getElementById("cmsPostsStatus");
+        if (statusEl) statusEl.textContent = "CMS client did not load.";
       }
     })();
   }
@@ -2791,14 +2825,12 @@ window.RNCms.listPosts = async function () {
     start();
   }
 
-  // Also refresh when user returns to the tab
   document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible") {
-      loadCmsPosts();
-    }
+    if (document.visibilityState === "visible") loadCmsPosts();
   });
 })();
 </script>
+
 
 
 

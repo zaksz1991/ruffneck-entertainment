@@ -1,14 +1,12 @@
-Blog CMS display fix ONLY
+Blog CMS VISIBLE fix
 
-File: blog.html
-SHA-256: efb61078c17b0e2216c97271cf239420d5eb6347624492c104aaca11595ee082
+SHA-256: 9a40f880f10372d02c7594eaffd91b018f045b6965cd606487968db5ee04e938
 
-Changes:
-- Reliable RNCms.listPosts → /api/cms/posts
-- Inject published Admin posts into #blogGrid (newest first)
-- Retry if RNCms loads late
-- Does not remove static articles
-- Does not change store or admin
+- New section "Latest from Admin" above the main grid
+- Published Admin posts render there with strong contrast
+- Also still inject into #blogGrid
+- filterBlog stub prevents early ReferenceError
+- data-cat mapped so filters do not hide Webinar posts incorrectly
 
-Deploy: replace blog.html only → Vercel Ready
-Test: /blog private window → your Admin published posts at top of grid
+Deploy: replace blog.html only
+Then open /blog and look for heading: Latest from Admin
