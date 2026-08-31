@@ -1,13 +1,14 @@
-FULL STORE with IT services restored
+Blog CMS display fix ONLY
 
-Includes:
-- AI career guides, prompt packs, templates, design, ebooks
-- IT Services: Computer Support, Excel, Microsoft Office, Printer, Wi-Fi, Computer Training
-- CV/Cover Letter service
-- IT Services Guide PDF + CV service PDF links
-- Cart, modal, Flutterwave
+File: blog.html
+SHA-256: efb61078c17b0e2216c97271cf239420d5eb6347624492c104aaca11595ee082
 
-SHA-256: 5a164934442b10cf69ff3afdeed89d7175ec3ce8934abc53b1cfc4ffa9b3d6f3
+Changes:
+- Reliable RNCms.listPosts → /api/cms/posts
+- Inject published Admin posts into #blogGrid (newest first)
+- Retry if RNCms loads late
+- Does not remove static articles
+- Does not change store or admin
 
-Deploy: replace ONLY store.html → push → Vercel Ready
-Do NOT use RuffNeck_STORE_RESTORE_GOOD.zip (that older file had no IT services).
+Deploy: replace blog.html only → Vercel Ready
+Test: /blog private window → your Admin published posts at top of grid

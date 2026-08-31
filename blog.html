@@ -1159,6 +1159,19 @@ section.section-teaser {
 </script>
 
 <link rel="stylesheet" href="/css/knowledge-hub.css"/>
+
+<style id="rn-blog-cms-display-fix">
+  #blogGrid .blog-card[data-admin-post="1"],
+  .blog-grid .blog-card[data-admin-post="1"] {
+    display: flex !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  #blogGrid .blog-card[data-admin-post="1"] .card-new {
+    display: inline-block;
+  }
+</style>
+
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
 <style id="rn-a11y-phase-e">
@@ -2570,128 +2583,224 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <script id="rn-cms-db-client">
-window.RNCms = {
-  async listPosts(){
-    try {
-      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (res.ok && data.ok && Array.isArray(data.posts)) {
-        return { source:'db', posts: data.posts.map(function(p){
+window.RNCms = window.RNCms || {};
+window.RNCms.listPosts = async function () {
+  try {
+    var res = await fetch("/api/cms/posts", {
+      credentials: "same-origin",
+      cache: "no-store"
+    });
+    var data = await res.json();
+    if (res.ok && data && data.ok && Array.isArray(data.posts)) {
+      return {
+        source: "db",
+        posts: data.posts.map(function (p) {
           return {
-            id:p.id, title:p.title, cat:p.cat, emoji:p.emoji, image:p.image,
-            desc:p.desc||'', body:p.body||'', tags:p.tags||[], author:p.author,
-            readTime:p.read_time||p.readTime||'5', status:p.status||'draft',
-            created:p.created, updated:p.updated
+            id: p.id,
+            title: p.title,
+            cat: p.cat,
+            emoji: p.emoji,
+            image: p.image,
+            desc: p.desc || p.description || "",
+            body: p.body || "",
+            tags: p.tags || [],
+            author: p.author || "RuffNeck Entertainment",
+            readTime: p.read_time || p.readTime || "5",
+            status: p.status || "draft",
+            created: p.created || p.created_at || ""
           };
-        })};
-      }
-    } catch(e) {}
-    try { return { source:'local', posts: JSON.parse(localStorage.getItem('rn_blog_posts')||'[]') }; }
-    catch(e){ return { source:'local', posts: [] }; }
-  },
-  async listProducts(){
-    try {
-      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (res.ok && data.ok && Array.isArray(data.products)) {
-        return { source:'db', products: data.products.map(function(p){
-          return {
-            id:p.id, name:p.name, cat:p.cat, emoji:p.emoji, image:p.image,
-            desc:p.desc||'', fullDesc:p.full_desc||p.fullDesc||'', tiers:p.tiers||{},
-            price:p.price, status:p.status||'active', created:p.created, updated:p.updated
-          };
-        })};
-      }
-    } catch(e) {}
-    try { return { source:'local', products: JSON.parse(localStorage.getItem('rn_products')||'[]') }; }
-    catch(e){ return { source:'local', products: [] }; }
-  },
-  async savePost(post){
-    var method = post.id && post._exists ? 'PUT' : 'POST';
-    delete post._exists;
-    var res = await fetch('/api/cms/posts', {
-      method: method, credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(post)
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
-    return data.post || post;
-  },
-  async deletePost(id){
-    var res = await fetch('/api/cms/posts', {
-      method:'DELETE', credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id:id})
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
-  },
-  async saveProduct(product){
-    var method = product.id && product._exists ? 'PUT' : 'POST';
-    delete product._exists;
-    var res = await fetch('/api/cms/products', {
-      method: method, credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(product)
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
-    return data.product || product;
-  },
-  async deleteProduct(id){
-    var res = await fetch('/api/cms/products', {
-      method:'DELETE', credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id:id})
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
+        })
+      };
+    }
+    console.warn("RNCms.listPosts: bad response", res.status, data);
+    return { source: "db", posts: [] };
+  } catch (err) {
+    console.warn("RNCms.listPosts failed", err);
+    return { source: "error", posts: [] };
   }
 };
 </script>
 
 <script id="rn-admin-blog-load">
-document.addEventListener('DOMContentLoaded', async function(){
-  var posts = [];
-  if (window.RNCms) {
-    var r = await window.RNCms.listPosts();
-    posts = r.posts || [];
+(function () {
+  "use strict";
+
+  function isPublished(p) {
+    var s = String((p && p.status) || "published").toLowerCase().trim();
+    return s === "published" || s === "publish" || s === "live" || s === "public";
   }
-  var published = posts.filter(function(p){
-    var s = (p.status||'published').toLowerCase();
-    return s==='published'||s==='publish'||s==='live';
+
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function buildCard(p) {
+    var card = document.createElement("article");
+    card.className = "blog-card rn-cms-post";
+    card.setAttribute("data-admin-post", "1");
+    card.setAttribute("data-post-id", p.id || "");
+    card.setAttribute("data-title", p.title || "");
+    card.setAttribute("data-cat", p.cat || "Blog");
+    card.setAttribute("data-category", p.cat || "Blog");
+    card.setAttribute("tabindex", "0");
+    card.setAttribute("role", "button");
+
+    var emoji = escapeHtml(p.emoji || "📝");
+    var cat = escapeHtml(p.cat || "Blog");
+    var title = escapeHtml(p.title || "Untitled");
+    var desc = escapeHtml(p.desc || "");
+    var author = escapeHtml(p.author || "RuffNeck Entertainment");
+    var created = escapeHtml(p.created || "");
+    var read = escapeHtml(p.readTime || p.read_time || "5");
+
+    card.innerHTML =
+      '<div class="blog-thumb">' +
+        '<span class="card-emoji">' + emoji + "</span>" +
+        '<span class="card-cat-badge">' + cat + "</span>" +
+        '<span class="card-new">New</span>' +
+      "</div>" +
+      '<div class="blog-card-body">' +
+        "<h3>" + title + "</h3>" +
+        "<p>" + desc + "</p>" +
+        '<p class="blog-meta" style="font-size:12px;opacity:.85;margin-top:8px;">' +
+          author + (created ? " · " + created : "") + " · " + read + " min" +
+        "</p>" +
+        '<span class="read-link">Read →</span>' +
+      "</div>";
+
+    function open() {
+      if (typeof window.openArticle === "function") {
+        window.openArticle(p.id);
+      }
+    }
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open();
+      }
+    });
+    return card;
+  }
+
+  async function loadCmsPosts() {
+    var grid =
+      document.getElementById("blogGrid") ||
+      document.querySelector(".blog-grid") ||
+      document.querySelector("[data-blog-grid]");
+    if (!grid) {
+      console.warn("Blog CMS: #blogGrid not found");
+      return;
+    }
+
+    var listFn =
+      (window.RNCms && typeof window.RNCms.listPosts === "function" && window.RNCms.listPosts) ||
+      null;
+    if (!listFn) {
+      console.warn("Blog CMS: RNCms.listPosts missing");
+      return;
+    }
+
+    var result;
+    try {
+      result = await listFn.call(window.RNCms);
+    } catch (err) {
+      console.warn("Blog CMS: listPosts error", err);
+      return;
+    }
+
+    var posts = (result && result.posts) || [];
+    var published = posts.filter(isPublished);
+
+    // Remove previous CMS-injected cards only
+    grid.querySelectorAll('[data-admin-post="1"]').forEach(function (n) {
+      n.remove();
+    });
+
+    window.articles = window.articles || {};
+
+    // Newest first
+    published.sort(function (a, b) {
+      return String(b.id || "").localeCompare(String(a.id || ""));
+    });
+
+    var frag = document.createDocumentFragment();
+    published.forEach(function (p) {
+      if (!p || !p.id) return;
+      window.articles[p.id] = {
+        label: p.cat || "Blog",
+        title: p.title || "Untitled",
+        meta:
+          (p.author || "RuffNeck Entertainment") +
+          (p.created ? " · " + p.created : ""),
+        body: p.body || p.desc || "",
+        tags: p.tags || []
+      };
+      frag.appendChild(buildCard(p));
+    });
+
+    // Prepend CMS posts so they appear first
+    if (frag.childNodes.length) {
+      grid.insertBefore(frag, grid.firstChild);
+    }
+
+    // Re-apply active category filter if any
+    var activeBtn =
+      document.querySelector(".rn-blog-cat.active, [data-blog-cat].active, .blog-cat.active") ||
+      null;
+    if (activeBtn && typeof activeBtn.click === "function") {
+      // don't force click; ensure "all" shows CMS cards
+    }
+
+    // Make category filter include CMS cards by data-cat text
+    document.querySelectorAll(".blog-card[data-admin-post='1']").forEach(function (card) {
+      card.style.display = "";
+      card.hidden = false;
+    });
+
+    console.info(
+      "Blog CMS: injected " + published.length + " published post(s) into #blogGrid"
+    );
+  }
+
+  function start() {
+    // Retry briefly if RNCms not ready yet
+    var tries = 0;
+    (function attempt() {
+      tries += 1;
+      if (window.RNCms && typeof window.RNCms.listPosts === "function") {
+        loadCmsPosts();
+        return;
+      }
+      if (tries < 20) {
+        setTimeout(attempt, 100);
+      } else {
+        console.warn("Blog CMS: RNCms.listPosts never became available");
+      }
+    })();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
+
+  // Also refresh when user returns to the tab
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+      loadCmsPosts();
+    }
   });
-  var grid = document.getElementById('blogGrid') || document.querySelector('.blog-grid');
-  if (!grid) return;
-  grid.querySelectorAll('[data-admin-post="1"]').forEach(function(n){ n.remove(); });
-  window.articles = window.articles || {};
-  published.forEach(function(p){
-    if (!p||!p.id) return;
-    window.articles[p.id] = { label:p.cat||'Blog', title:p.title, meta:(p.author||'RuffNeck')+' · '+(p.created||''), body:p.body||p.desc||'', tags:p.tags||[] };
-    var card = document.createElement('div');
-    card.className = 'blog-card';
-    card.setAttribute('data-admin-post','1');
-    card.setAttribute('data-title', p.title||'');
-    card.onclick = function(){ if (typeof openArticle==='function') openArticle(p.id); };
-    card.innerHTML = '<div class="blog-thumb"><span>'+(p.emoji||'📝')+'</span><span class="card-cat-badge">'+(p.cat||'Blog')+'</span><span class="card-new">New</span></div><div class="blog-card-body"><h3>'+(p.title||'')+'</h3><p>'+(p.desc||'')+'</p></div>';
-    grid.insertBefore(card, grid.firstChild);
-  });
-});
+})();
 </script>
+
+
 
 
 <script id="rn-phase-d-analytics">
