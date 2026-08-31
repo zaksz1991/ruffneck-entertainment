@@ -1318,7 +1318,7 @@ button,a,.btn{touch-action:manipulation}
 #rnStoreSearchWrap{max-width:640px;margin:12px auto;padding:0 16px}
 #rnStoreSearch{width:100%;min-height:48px;padding:12px 16px;border-radius:12px;border:1px solid rgba(0,180,216,.35);background:#0B1E3A;color:#F8FAFC;font-size:16px}
 </style>
-<div id="rnStoreSearchWrap">
+<div id="rnStoreSearchWrap" style="display:none!important" aria-hidden="true" hidden>
   <input type="search" id="rnStoreSearch" placeholder="Search products…" autocomplete="off"/>
 </div>
 <script id="rn-p1-store-search-js">
@@ -3514,8 +3514,13 @@ window.RNCms = {
 document.addEventListener('DOMContentLoaded', async function(){
   var products = [];
   if (window.RNCms) {
-    var r = await window.RNCms.listProducts();
-    products = r.products || [];
+    try {
+      var r = await Promise.race([
+        window.RNCms.listProducts(),
+        new Promise(function(resolve){ setTimeout(function(){ resolve({ products: [] }); }, 4000); })
+      ]);
+      products = (r && r.products) || [];
+    } catch (e) { products = []; console.warn('CMS products load skipped', e); }
   }
   var active = products.filter(function(p){
     var s=(p.status||'active').toLowerCase();

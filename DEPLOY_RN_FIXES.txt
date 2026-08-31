@@ -1,47 +1,28 @@
-RUFFNECK FIXES v2 — READY TO DEPLOY
+RUFFNECK FIXES v3 — READY TO DEPLOY
 ===================================
 
-Deep audit results + what this package fixes:
+What was wrong (deep audit):
+1. TWO search bars on Blog and Store (hardcoded in HTML)
+   - Store: #rnStoreSearch + #searchInput
+   - Blog:  #rnBlogSearch + #searchInput
+2. Store could hang waiting on /api/cms/products (returns empty products)
+3. Blog category mismatches (ops vs operations, etc.)
+4. Homepage language button was missing markup (fixed earlier)
 
-1. LANGUAGE ON HOMEPAGE
-   - index.html was missing the language button HTML (Blog/Store already had it)
-   - Fix injects 🌐 EN button + Google Translate on Homepage only if missing
+What v3 does:
+- Hides the extra search bar on Blog + Store (one search only)
+- CMS product fetch has 4-second timeout so Store never stays loading forever
+- Search/filters/currency/language still fixed as before
+- Flutterwave / APIs / Google Apps Script / admin NOT touched
 
-2. BLOG SEARCH
-   - Two search inputs existed (rnBlogSearch + searchInput) but only one was wired
-   - filterBlog only read searchInput → rnBlogSearch did nothing
-   - Fix syncs both inputs and runs one unified filter
+DEPLOY:
+1. Unzip
+2. Upload entire folder to Vercel (or git push)
+3. Hard refresh Ctrl+Shift+R
 
-3. BLOG CATEGORY FILTERS
-   - Mismatch: buttons used "operations" / cards used "ops"; "career" vs "careers"
-   - CMS cards use mapped cats (ops, career, ai…)
-   - Fix uses soft aliases so both match
-
-4. STORE SEARCH + FILTERS
-   - Already mostly correct; strengthened event binding + fallback
-
-5. CURRENCY (₦ / $)
-   - setCurrency existed; strengthened binding + price update from data-ngn
-   - Does NOT change Flutterwave payment logic — only display + currency value passed if you already use currentCurrency
-
-6. UI polish
-   - Light hover only; no layout rewrite
-
-NOT CHANGED
-- Flutterwave checkout / product IDs / PRODUCTS object
-- Google Apps Script
-- /api/* and admin
-- forms.js, cms.js core, app.js
-
-DEPLOY
-1. Unzip this package
-2. Upload to Vercel (or git push)
-3. Hard refresh (Ctrl+Shift+R)
-
-TEST
-- Homepage: language button top-right
-- Blog: type in either search box + click categories
-- Store: search + category pills + ₦/$ toggle
-- Store: test purchase still works
-
-Optional: change rate in js/rn-fixes.js → var RATE = 1600;
+TEST:
+- Blog: only ONE search box visible; typing filters articles
+- Store: only ONE search box; page loads products (not stuck)
+- Store: ₦/$ toggle works
+- Homepage: 🌐 language button
+- Purchase still works

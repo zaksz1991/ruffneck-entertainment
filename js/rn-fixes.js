@@ -226,7 +226,24 @@
     document.head.appendChild(style);
   }
 
+  
+  /* Hide duplicate search UIs (keep one per page) */
+  function hideDuplicateSearch() {
+    var storeExtra = document.getElementById("rnStoreSearchWrap");
+    if (storeExtra) { storeExtra.style.display = "none"; storeExtra.setAttribute("hidden", ""); storeExtra.setAttribute("aria-hidden", "true"); }
+    var blogExtra = document.getElementById("rnBlogSearchWrap");
+    if (blogExtra) { blogExtra.style.display = "none"; blogExtra.setAttribute("hidden", ""); blogExtra.setAttribute("aria-hidden", "true"); }
+    // Alias rnStoreSearch -> searchInput for any leftover handlers
+    var rs = document.getElementById("rnStoreSearch");
+    var si = document.getElementById("searchInput");
+    if (rs && si) {
+      rs.addEventListener("input", function(){ si.value = rs.value; if (typeof window.filterProducts==="function") window.filterProducts(); if (typeof window.rnRunStoreFilter==="function") window.rnRunStoreFilter(); });
+    }
+  }
+
   function boot() {
+    try { hideDuplicateSearch(); } catch (e) {}
+
     try { ensureLanguageSwitcher(); } catch (e) { console.warn("RN lang", e); }
     try { fixBlogSearch(); } catch (e) { console.warn("RN blog", e); }
     try { fixStoreSearchAndFilters(); } catch (e) { console.warn("RN store", e); }
