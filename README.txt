@@ -1,12 +1,13 @@
-RESTORE: Good store page (pre heavy-patch baseline)
+FULL STORE with IT services restored
 
-Source: website_audit Index store.html
-- Full product catalogue
-- openModal + cart + Flutterwave
-- No listProducts / CMS wait
-- Fewer stacked scripts than later patches
+Includes:
+- AI career guides, prompt packs, templates, design, ebooks
+- IT Services: Computer Support, Excel, Microsoft Office, Printer, Wi-Fi, Computer Training
+- CV/Cover Letter service
+- IT Services Guide PDF + CV service PDF links
+- Cart, modal, Flutterwave
 
-SHA-256: a1ae900bbe8e4b224e3782b814801452ea836b9db13a75fc4d1d8fa44fbc0b4a
+SHA-256: 5a164934442b10cf69ff3afdeed89d7175ec3ce8934abc53b1cfc4ffa9b3d6f3
 
-Deploy: replace ONLY store.html in repo root → push → Vercel Ready
-Test: https://ruffneck-entertainment.vercel.app/store
+Deploy: replace ONLY store.html → push → Vercel Ready
+Do NOT use RuffNeck_STORE_RESTORE_GOOD.zip (that older file had no IT services).
