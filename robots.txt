@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-
-# Do not index admin or test utilities
-Disallow: /admin
-Disallow: /admin.html
-Disallow: /whatsapp-test.html
-
-Sitemap: https://ruffneck-entertainment.vercel.app/sitemap.xml
