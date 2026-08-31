@@ -1,39 +1,47 @@
-RUFFNECK FIXES — READY TO DEPLOY
-================================
+RUFFNECK FIXES v2 — READY TO DEPLOY
+===================================
 
-What was fixed and included:
+Deep audit results + what this package fixes:
 
-1. Language switcher now appears on Homepage (was missing HTML markup)
-2. Blog search fixed (ID mismatch rnBlogSearch vs searchInput)
-3. Category filters made more reliable on Blog + Store
-4. Currency switcher (₦ / $) strengthened on Store
-5. Light UI polish (hover effects) — safe
+1. LANGUAGE ON HOMEPAGE
+   - index.html was missing the language button HTML (Blog/Store already had it)
+   - Fix injects 🌐 EN button + Google Translate on Homepage only if missing
 
-Files changed:
-- js/rn-fixes.js          (NEW)
-- index.html              (added script tag only)
-- blog.html               (added script tag only)
-- store.html              (added script tag only)
+2. BLOG SEARCH
+   - Two search inputs existed (rnBlogSearch + searchInput) but only one was wired
+   - filterBlog only read searchInput → rnBlogSearch did nothing
+   - Fix syncs both inputs and runs one unified filter
 
-NOT changed:
-- Flutterwave checkout
+3. BLOG CATEGORY FILTERS
+   - Mismatch: buttons used "operations" / cards used "ops"; "career" vs "careers"
+   - CMS cards use mapped cats (ops, career, ai…)
+   - Fix uses soft aliases so both match
+
+4. STORE SEARCH + FILTERS
+   - Already mostly correct; strengthened event binding + fallback
+
+5. CURRENCY (₦ / $)
+   - setCurrency existed; strengthened binding + price update from data-ngn
+   - Does NOT change Flutterwave payment logic — only display + currency value passed if you already use currentCurrency
+
+6. UI polish
+   - Light hover only; no layout rewrite
+
+NOT CHANGED
+- Flutterwave checkout / product IDs / PRODUCTS object
 - Google Apps Script
-- /api/* routes
-- admin.html
-- forms.js / cms.js / app.js logic
-- Product IDs and payment flow
+- /api/* and admin
+- forms.js, cms.js core, app.js
 
-HOW TO DEPLOY
--------------
-1. Download the zip
-2. Upload/replace the files on Vercel (or push to your Git repo connected to Vercel)
-3. Hard refresh the live site (Ctrl+Shift+R)
+DEPLOY
+1. Unzip this package
+2. Upload to Vercel (or git push)
+3. Hard refresh (Ctrl+Shift+R)
 
-Test after deploy:
-- Homepage → 🌐 language button top-right
-- Blog → search + category filters
-- Store → search + filters + ₦/$ toggle
-- Store → complete a test purchase (Flutterwave still works)
+TEST
+- Homepage: language button top-right
+- Blog: type in either search box + click categories
+- Store: search + category pills + ₦/$ toggle
+- Store: test purchase still works
 
-Optional: change USD rate in js/rn-fixes.js
-  Look for:  var RATE = 1600;
+Optional: change rate in js/rn-fixes.js → var RATE = 1600;

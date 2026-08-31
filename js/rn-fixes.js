@@ -1,94 +1,52 @@
 /**
- * RuffNeck Entertainment — Targeted Fixes
- * ---------------------------------------
- * Fixes ONLY:
- *  1. Language switcher missing on Homepage
- *  2. Blog search (ID mismatch: rnBlogSearch vs searchInput)
- *  3. Category filters reliability
- *  4. Currency switcher reliability
- *  5. Light UI polish helpers
- *
- * DOES NOT touch:
- *  - Flutterwave checkout
- *  - Google Apps Script
- *  - API routes (/api/cms/*, admin)
- *  - Payment / delivery / product IDs
- *  - Forms that already work
+ * RuffNeck Entertainment — Targeted Fixes v2
+ * 1. Language on Homepage  2. Blog search+filters  3. Store search+filters
+ * 4. Currency  5. Light UI polish
+ * Does NOT touch Flutterwave, Google Apps Script, APIs, admin, payments
  */
 (function () {
   "use strict";
+  if (window.__RN_FIXES_V2__) return;
+  window.__RN_FIXES_V2__ = true;
 
-  /* ============================================================
-     1. LANGUAGE SWITCHER — ensure it exists on every page
-     ============================================================ */
+  function qs(s, r) { return (r || document).querySelector(s); }
+  function qsa(s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); }
+
   function ensureLanguageSwitcher() {
-    // Already present on Blog & Store
-    if (document.getElementById("rnLangBtn") || document.getElementById("rnFixedLangBtn")) {
-      return;
-    }
-
-    // Homepage is missing the HTML markup — inject it
-    var header =
-      document.querySelector("header .nav, .nav, header, #mainNav") ||
-      document.body;
-
-    var wrap = document.createElement("div");
-    wrap.className = "rn-lang";
-    wrap.id = "rnLang";
-    wrap.style.cssText =
-      "position:fixed;top:16px;right:16px;z-index:9999;";
-
-    wrap.innerHTML =
-      '<button type="button" class="rn-lang-btn" id="rnLangBtn" aria-haspopup="true" aria-expanded="false" title="Translate page" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:#0B1E3A;color:#fff;border:1px solid rgba(0,180,216,.4);font-size:13px;font-weight:600;cursor:pointer;">' +
-      '<span aria-hidden="true">🌐</span> <span id="rnLangLabel">EN</span>' +
-      "</button>" +
-      '<div class="rn-lang-menu" role="menu" id="rnLangMenu" style="display:none;position:absolute;right:0;top:110%;min-width:140px;background:#0B1E3A;border:1px solid rgba(0,180,216,.3);border-radius:12px;padding:6px;box-shadow:0 8px 24px rgba(0,0,0,.35);">' +
-      '<button type="button" data-lang="en" data-label="EN" role="menuitem" style="display:block;width:100%;text-align:left;padding:8px 12px;background:none;border:none;color:#e2e8f0;border-radius:8px;cursor:pointer;font-size:13px;">EN English</button>' +
-      '<button type="button" data-lang="ha" data-label="HA" role="menuitem" style="display:block;width:100%;text-align:left;padding:8px 12px;background:none;border:none;color:#e2e8f0;border-radius:8px;cursor:pointer;font-size:13px;">HA Hausa</button>' +
-      '<button type="button" data-lang="yo" data-label="YO" role="menuitem" style="display:block;width:100%;text-align:left;padding:8px 12px;background:none;border:none;color:#e2e8f0;border-radius:8px;cursor:pointer;font-size:13px;">YO Yoruba</button>' +
-      '<button type="button" data-lang="ig" data-label="IG" role="menuitem" style="display:block;width:100%;text-align:left;padding:8px 12px;background:none;border:none;color:#e2e8f0;border-radius:8px;cursor:pointer;font-size:13px;">IG Igbo</button>' +
-      '<button type="button" data-lang="fr" data-label="FR" role="menuitem" style="display:block;width:100%;text-align:left;padding:8px 12px;background:none;border:none;color:#e2e8f0;border-radius:8px;cursor:pointer;font-size:13px;">FR French</button>' +
-      '<button type="button" data-lang="es" data-label="ES" role="menuitem" style="display:block;width:100%;text-align:left;padding:8px 12px;background:none;border:none;color:#e2e8f0;border-radius:8px;cursor:pointer;font-size:13px;">ES Spanish</button>' +
-      '<button type="button" data-lang="ar" data-label="AR" role="menuitem" style="display:block;width:100%;text-align:left;padding:8px 12px;background:none;border:none;color:#e2e8f0;border-radius:8px;cursor:pointer;font-size:13px;">AR Arabic</button>' +
-      "</div>";
-
-    // Hidden Google Translate mount point
-    if (!document.getElementById("google_translate_element")) {
+    if (qs("#rnLangBtn") || qs("#rnFixedLangBtn")) return;
+    if (!qs("#google_translate_element")) {
       var gt = document.createElement("div");
       gt.id = "google_translate_element";
       gt.setAttribute("aria-hidden", "true");
       gt.style.cssText = "position:absolute;left:-9999px;height:0;overflow:hidden;";
       document.body.appendChild(gt);
     }
-
+    var wrap = document.createElement("div");
+    wrap.className = "rn-lang";
+    wrap.id = "rnLang";
+    wrap.style.cssText = "position:fixed;top:14px;right:14px;z-index:10050;";
+    function langBtn(code, short, name) {
+      return '<button type="button" data-lang="'+code+'" data-label="'+short+'" role="menuitem" style="display:block;width:100%;text-align:left;padding:8px 12px;background:none;border:none;color:#e2e8f0;border-radius:8px;cursor:pointer;font-size:13px;font-family:inherit;">'+short+' '+name+'</button>';
+    }
+    wrap.innerHTML =
+      '<button type="button" class="rn-lang-btn" id="rnLangBtn" aria-haspopup="true" aria-expanded="false" title="Translate page" style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:#0B1E3A;color:#fff;border:1px solid rgba(0,180,216,.45);font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;"><span aria-hidden="true">🌐</span> <span id="rnLangLabel">EN</span></button>' +
+      '<div class="rn-lang-menu" role="menu" id="rnLangMenu" style="display:none;position:absolute;right:0;top:112%;min-width:150px;background:#0B1E3A;border:1px solid rgba(0,180,216,.35);border-radius:12px;padding:6px;box-shadow:0 10px 28px rgba(0,0,0,.4);">' +
+      langBtn("en","EN","English")+langBtn("ha","HA","Hausa")+langBtn("yo","YO","Yoruba")+langBtn("ig","IG","Igbo")+langBtn("fr","FR","French")+langBtn("es","ES","Spanish")+langBtn("ar","AR","Arabic") +
+      "</div>";
     document.body.appendChild(wrap);
-
-    // Wire the same behaviour your other pages already use
-    var btn = document.getElementById("rnLangBtn");
-    var menu = document.getElementById("rnLangMenu");
-    var lab = document.getElementById("rnLangLabel");
-
+    var btn = qs("#rnLangBtn"), menu = qs("#rnLangMenu"), lab = qs("#rnLangLabel");
     function setLang(lang, label) {
       if (lab) lab.textContent = label || lang.toUpperCase();
-      try {
-        localStorage.setItem("rn_lang", lang);
-        localStorage.setItem("rn_lang_label", label || lang.toUpperCase());
-      } catch (e) {}
-
+      try { localStorage.setItem("rn_lang", lang); localStorage.setItem("rn_lang_label", label || lang.toUpperCase()); } catch (e) {}
       if (lang === "en") {
         document.cookie = "googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
-        document.cookie =
-          "googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=." +
-          location.hostname;
-        location.reload();
-        return;
+        document.cookie = "googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=." + location.hostname;
+        location.reload(); return;
       }
       document.cookie = "googtrans=/en/" + lang + ";path=/;";
-      document.cookie =
-        "googtrans=/en/" + lang + ";path=/;domain=." + location.hostname;
+      document.cookie = "googtrans=/en/" + lang + ";path=/;domain=." + location.hostname;
       location.reload();
     }
-
     if (btn && menu) {
       btn.addEventListener("click", function (e) {
         e.stopPropagation();
@@ -96,347 +54,185 @@
         menu.style.display = open ? "none" : "block";
         btn.setAttribute("aria-expanded", open ? "false" : "true");
       });
-      menu.querySelectorAll("button[data-lang]").forEach(function (b) {
-        b.addEventListener("click", function () {
-          setLang(b.getAttribute("data-lang"), b.getAttribute("data-label"));
-        });
+      qsa("button[data-lang]", menu).forEach(function (b) {
+        b.addEventListener("click", function () { setLang(b.getAttribute("data-lang"), b.getAttribute("data-label")); });
       });
-      document.addEventListener("click", function () {
-        menu.style.display = "none";
-        btn.setAttribute("aria-expanded", "false");
-      });
+      document.addEventListener("click", function () { menu.style.display = "none"; btn.setAttribute("aria-expanded", "false"); });
     }
-
-    // Restore saved label
-    try {
-      var savedL = localStorage.getItem("rn_lang_label");
-      if (savedL && lab) lab.textContent = savedL;
-    } catch (e) {}
-
-    // Load Google Translate if not already present
+    try { var savedL = localStorage.getItem("rn_lang_label"); if (savedL && lab) lab.textContent = savedL; } catch (e) {}
     if (!(window.google && window.google.translate)) {
       window.rnInitGoogleTranslate = function () {
         try {
-          new google.translate.TranslateElement(
-            {
-              pageLanguage: "en",
-              includedLanguages: "en,ha,yo,ig,fr,es,ar",
-              autoDisplay: false,
-              layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-            },
-            "google_translate_element"
-          );
+          new google.translate.TranslateElement({ pageLanguage: "en", includedLanguages: "en,ha,yo,ig,fr,es,ar", autoDisplay: false, layout: google.translate.TranslateElement.InlineLayout.SIMPLE }, "google_translate_element");
         } catch (e) {}
       };
       var s = document.createElement("script");
-      s.src =
-        "//translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate";
+      s.src = "//translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate";
       document.head.appendChild(s);
     }
   }
 
-  /* ============================================================
-     2. BLOG SEARCH — fix ID mismatch (rnBlogSearch vs searchInput)
-     ============================================================ */
-  function fixBlogSearch() {
-    var input =
-      document.getElementById("rnBlogSearch") ||
-      document.getElementById("searchInput");
-    if (!input) return;
-
-    // Make both IDs work
-    if (input.id === "rnBlogSearch" && !document.getElementById("searchInput")) {
-      // alias so older filterBlog code that looks for searchInput still works
-      input.setAttribute("data-alias", "searchInput");
-    }
-
-    function runFilter() {
-      if (typeof window.filterBlog === "function") {
-        window.filterBlog();
-        return;
-      }
-      // Fallback filter if filterBlog is broken / missing
-      var q = (input.value || "").trim().toLowerCase();
-      var activeBtn =
-        document.querySelector(".filter-btn.active, [data-cat].active, button.active[data-cat]");
-      var cat = activeBtn
-        ? activeBtn.getAttribute("data-cat") || "all"
-        : "all";
-
-      var cards = document.querySelectorAll(
-        ".blog-card, .article-card, [data-cat].blog-item, .blog-grid > article, .blog-grid > div"
-      );
-      var shown = 0;
-
-      cards.forEach(function (card) {
-        var cardCat = (card.getAttribute("data-cat") || "").toLowerCase();
-        var text = (
-          (card.getAttribute("data-name") || "") +
-          " " +
-          (card.textContent || "")
-        ).toLowerCase();
-
-        var catOk =
-          !cat || cat === "all" || cardCat === cat || cardCat.indexOf(cat) !== -1;
-        var searchOk = !q || text.indexOf(q) !== -1;
-        var ok = catOk && searchOk;
-
-        card.style.display = ok ? "" : "none";
-        if (ok) shown++;
-      });
-
-      var countEl = document.getElementById("rnBlogSearchCount");
-      if (countEl) {
-        countEl.textContent =
-          shown === 0 && (q || (cat && cat !== "all"))
-            ? "No articles match"
-            : shown + " article" + (shown !== 1 ? "s" : "");
-      }
-    }
-
-    input.addEventListener("input", runFilter);
-    input.addEventListener("keyup", runFilter);
-
-    // Also bind filter buttons
-    document
-      .querySelectorAll(".filter-btn, [data-cat], button[data-cat]")
-      .forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          setTimeout(runFilter, 20);
-        });
-      });
-
-    // Expose for external calls
-    window.rnRunBlogFilter = runFilter;
+  function catAliases(cat) {
+    cat = (cat || "all").toLowerCase();
+    var map = { all:["all"], ai:["ai","automation"], ops:["ops","operations","operation"], operations:["ops","operations","operation"], marketing:["marketing","market"], career:["career","careers"], careers:["career","careers"], it:["it","it-support"], ethics:["ethics"], content:["content","prompts"], business:["business"], prompts:["prompts","content"] };
+    return map[cat] || [cat];
   }
-
-  /* ============================================================
-     3. STORE SEARCH + FILTERS — make reliable
-     ============================================================ */
-  function fixStoreSearchAndFilters() {
-    var input = document.getElementById("searchInput");
-    if (!input && !document.querySelector(".product-card")) return;
-
-    function runFilter() {
-      if (typeof window.filterProducts === "function") {
-        window.filterProducts();
-        return;
-      }
-      // Fallback
-      var activeBtn = document.querySelector(".filter-btn.active");
-      var activeCat = activeBtn
-        ? activeBtn.getAttribute("data-cat") || "all"
-        : "all";
-      var search = (input && input.value ? input.value : "").trim().toLowerCase();
-      var cards = document.querySelectorAll(".product-card");
-      var shown = 0;
-
-      cards.forEach(function (card) {
-        if (card.closest && card.closest(".rn-featured, .rn-store-featured")) {
-          // keep featured section visible
-          return;
-        }
-        var cat = card.getAttribute("data-cat") || "";
-        var hay = (
-          (card.getAttribute("data-name") || "") +
-          " " +
-          cat +
-          " " +
-          (card.textContent || "")
-        ).toLowerCase();
-
-        var catMatch =
-          !activeCat ||
-          activeCat === "all" ||
-          cat === activeCat ||
-          cat.indexOf(activeCat) !== -1;
-        var match = !search || hay.indexOf(search) !== -1;
-        var ok = catMatch && match;
-
-        card.style.display = ok ? "" : "none";
-        if (ok) shown++;
+  function catMatches(cardCat, activeCat) {
+    if (!activeCat || activeCat === "all") return true;
+    var aliases = catAliases(activeCat);
+    var c = (cardCat || "").toLowerCase();
+    return aliases.indexOf(c) !== -1 || c.indexOf(activeCat) !== -1 || activeCat.indexOf(c) !== -1;
+  }
+  function getBlogSearchQuery() {
+    var a = qs("#rnBlogSearch"), b = qs("#searchInput"), q = "";
+    if (a && a.value) q = a.value; else if (b && b.value) q = b.value;
+    return (q || "").trim().toLowerCase();
+  }
+  function getActiveBlogCat() {
+    var btn = qs("#rnBlogCats button.active") || qs(".filter-btn.active") || qs("[data-cat].active");
+    return btn ? (btn.getAttribute("data-cat") || "all") : "all";
+  }
+  function runBlogFilter() {
+    var search = getBlogSearchQuery(), activeCat = getActiveBlogCat();
+    var cards = qsa(".blog-card, .article-card, .rn-cms-post, #blogGrid > *, #cmsPostsGrid > *, .blog-grid > article, .blog-grid > div");
+    var shown = 0;
+    cards.forEach(function (card) {
+      if (card.id === "blogSearchEmpty" || card.id === "searchEmpty") return;
+      var cardCat = card.getAttribute("data-cat") || card.getAttribute("data-category") || "";
+      var hay = ((card.getAttribute("data-title") || "") + " " + (card.getAttribute("data-name") || "") + " " + cardCat + " " + (card.textContent || "")).toLowerCase();
+      var ok = catMatches(cardCat, activeCat) && (!search || hay.indexOf(search) !== -1);
+      card.style.display = ok ? "" : "none";
+      if (ok) { card.removeAttribute("hidden"); shown++; } else card.setAttribute("hidden", "");
+    });
+    var countEl = qs("#rnBlogSearchCount");
+    if (countEl) countEl.textContent = shown === 0 && (search || (activeCat && activeCat !== "all")) ? "No articles match" : shown + " article" + (shown !== 1 ? "s" : "");
+    var empty = qs("#blogSearchEmpty");
+    if (empty) empty.style.display = shown === 0 && search ? "block" : "none";
+  }
+  function fixBlogSearch() {
+    var rn = qs("#rnBlogSearch"), si = qs("#searchInput");
+    function bind(el) {
+      if (!el) return;
+      el.addEventListener("input", function () {
+        if (rn && si && el === rn) si.value = rn.value;
+        if (rn && si && el === si) rn.value = si.value;
+        runBlogFilter();
       });
+      el.addEventListener("keyup", runBlogFilter);
+      el.addEventListener("search", runBlogFilter);
     }
-
-    if (input) {
-      input.addEventListener("input", runFilter);
-      input.addEventListener("keyup", runFilter);
-    }
-
-    document.querySelectorAll(".filter-btn").forEach(function (btn) {
+    bind(rn); bind(si);
+    qsa(".filter-btn, #rnBlogCats button").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        document
-          .querySelectorAll(".filter-btn")
-          .forEach(function (b) {
-            b.classList.remove("active");
-          });
+        var parent = btn.parentElement;
+        if (parent) qsa("button, .filter-btn", parent).forEach(function (b) { b.classList.remove("active"); });
         btn.classList.add("active");
-        setTimeout(runFilter, 10);
+        setTimeout(runBlogFilter, 15);
       });
     });
-
-    window.rnRunStoreFilter = runFilter;
+    window.filterBlog = runBlogFilter;
+    window.rnRunBlogFilter = runBlogFilter;
+    setTimeout(runBlogFilter, 800);
+    setTimeout(runBlogFilter, 2000);
   }
 
-  /* ============================================================
-     4. CURRENCY — ensure setCurrency + price updates work
-     ============================================================ */
+  function runStoreFilter() {
+    if (typeof window.filterProducts === "function") {
+      try { window.filterProducts(); return; } catch (e) { console.warn("filterProducts fallback", e); }
+    }
+    var activeBtn = qs(".filter-btn.active");
+    var activeCat = activeBtn ? activeBtn.getAttribute("data-cat") || "all" : "all";
+    var input = qs("#searchInput");
+    var search = (input && input.value ? input.value : "").trim().toLowerCase();
+    var cards = qsa(".product-card"), shown = 0;
+    cards.forEach(function (card) {
+      if (card.closest && card.closest(".rn-featured, .rn-store-featured")) return;
+      var cat = card.getAttribute("data-cat") || "";
+      var hay = ((card.getAttribute("data-name") || "") + " " + cat + " " + (card.textContent || "")).toLowerCase();
+      var catMatch = !activeCat || activeCat === "all" || cat === activeCat || cat.indexOf(activeCat) !== -1;
+      var match = !search || hay.indexOf(search) !== -1;
+      var ok = catMatch && match;
+      card.style.display = ok ? "" : "none";
+      if (ok) { card.removeAttribute("hidden"); shown++; } else card.setAttribute("hidden", "");
+    });
+    var empty = qs("#searchEmpty");
+    if (empty) empty.style.display = shown === 0 ? "block" : "none";
+  }
+  function fixStoreSearchAndFilters() {
+    if (!qs(".product-card") && !qs("#searchInput")) return;
+    var input = qs("#searchInput");
+    if (input) { input.addEventListener("input", runStoreFilter); input.addEventListener("keyup", runStoreFilter); }
+    qsa(".filter-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        qsa(".filter-btn").forEach(function (b) { b.classList.remove("active"); });
+        btn.classList.add("active");
+        setTimeout(runStoreFilter, 10);
+      });
+    });
+    qsa(".search-btn, [data-search-btn]").forEach(function (btn) {
+      btn.addEventListener("click", function (e) { e.preventDefault(); runStoreFilter(); });
+    });
+    window.rnRunStoreFilter = runStoreFilter;
+  }
+
   function fixCurrency() {
-    // Only run on store page
-    if (!document.getElementById("currBtnNGN") && !document.querySelector("[data-ngn]")) {
-      return;
-    }
-
-    var RATE = 1600; // 1 USD = ₦1600 — change if needed
-
-    // Ensure global currentCurrency exists
+    if (!qs("#currBtnNGN") && !qs("[data-ngn]")) return;
+    var RATE = 1600;
     if (typeof window.currentCurrency === "undefined") {
-      try {
-        window.currentCurrency =
-          localStorage.getItem("rn_store_currency") || "NGN";
-      } catch (e) {
-        window.currentCurrency = "NGN";
-      }
+      try { window.currentCurrency = localStorage.getItem("rn_store_currency") || "NGN"; } catch (e) { window.currentCurrency = "NGN"; }
     }
-
-    // Safe formatPrice if missing
     if (typeof window.formatPrice !== "function") {
       window.formatPrice = function (ngnAmount) {
         var n = Number(ngnAmount) || 0;
-        if (window.currentCurrency === "USD") {
-          return "$" + (n / RATE).toFixed(2);
-        }
+        if (window.currentCurrency === "USD") return "$" + (n / RATE).toFixed(2);
         return "₦" + n.toLocaleString();
       };
     }
-
-    // Safe updateAllPriceDisplays if missing / broken
     if (typeof window.updateAllPriceDisplays !== "function") {
       window.updateAllPriceDisplays = function () {
-        document.querySelectorAll(".price-val[data-ngn]").forEach(function (el) {
+        qsa(".price-val[data-ngn]").forEach(function (el) {
           var ngn = Number(el.getAttribute("data-ngn")) || 0;
           el.textContent = window.formatPrice(ngn);
         });
       };
     }
-
-    // Enhance existing setCurrency or create it
-    var originalSetCurrency = window.setCurrency;
+    var original = window.setCurrency;
     window.setCurrency = function (curr) {
       if (curr !== "NGN" && curr !== "USD") return;
       window.currentCurrency = curr;
-      try {
-        localStorage.setItem("rn_store_currency", curr);
-      } catch (e) {}
-
-      var ngnBtn = document.getElementById("currBtnNGN");
-      var usdBtn = document.getElementById("currBtnUSD");
-      if (ngnBtn) {
-        ngnBtn.classList.toggle("active", curr === "NGN");
-        ngnBtn.setAttribute("aria-pressed", curr === "NGN" ? "true" : "false");
-      }
-      if (usdBtn) {
-        usdBtn.classList.toggle("active", curr === "USD");
-        usdBtn.setAttribute("aria-pressed", curr === "USD" ? "true" : "false");
-      }
-
-      if (typeof window.updateAllPriceDisplays === "function") {
-        window.updateAllPriceDisplays();
-      }
-      if (typeof window.renderCart === "function") {
-        try {
-          window.renderCart();
-        } catch (e) {}
-      }
-
-      // Call original if it existed and is different
-      if (typeof originalSetCurrency === "function" && originalSetCurrency !== window.setCurrency) {
-        try {
-          originalSetCurrency(curr);
-        } catch (e) {}
-      }
+      try { localStorage.setItem("rn_store_currency", curr); } catch (e) {}
+      var ngnBtn = qs("#currBtnNGN"), usdBtn = qs("#currBtnUSD");
+      if (ngnBtn) { ngnBtn.classList.toggle("active", curr === "NGN"); ngnBtn.setAttribute("aria-pressed", curr === "NGN" ? "true" : "false"); }
+      if (usdBtn) { usdBtn.classList.toggle("active", curr === "USD"); usdBtn.setAttribute("aria-pressed", curr === "USD" ? "true" : "false"); }
+      try { window.updateAllPriceDisplays(); } catch (e) {}
+      if (typeof window.renderCart === "function") { try { window.renderCart(); } catch (e) {} }
+      if (typeof original === "function" && original !== window.setCurrency) { try { original(curr); } catch (e) {} }
     };
-
-    // Bind buttons (in case onclick is missing or broken)
-    var ngnBtn = document.getElementById("currBtnNGN");
-    var usdBtn = document.getElementById("currBtnUSD");
-    if (ngnBtn) {
-      ngnBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        window.setCurrency("NGN");
-      });
-    }
-    if (usdBtn) {
-      usdBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        window.setCurrency("USD");
-      });
-    }
-
-    // Apply saved currency on load
+    var ngnBtn = qs("#currBtnNGN"), usdBtn = qs("#currBtnUSD");
+    if (ngnBtn) ngnBtn.addEventListener("click", function (e) { e.preventDefault(); window.setCurrency("NGN"); });
+    if (usdBtn) usdBtn.addEventListener("click", function (e) { e.preventDefault(); window.setCurrency("USD"); });
     try {
       var saved = localStorage.getItem("rn_store_currency");
-      if (saved === "USD" || saved === "NGN") {
-        window.setCurrency(saved);
-      } else {
-        window.updateAllPriceDisplays();
-      }
-    } catch (e) {
-      window.updateAllPriceDisplays();
-    }
+      if (saved === "USD" || saved === "NGN") window.setCurrency(saved);
+      else window.updateAllPriceDisplays();
+    } catch (e) { try { window.updateAllPriceDisplays(); } catch (e2) {} }
   }
 
-  /* ============================================================
-     5. LIGHT UI POLISH (safe, no layout breaks)
-     ============================================================ */
   function applyUiPolish() {
+    if (qs("#rn-fixes-ui")) return;
     var style = document.createElement("style");
     style.id = "rn-fixes-ui";
-    style.textContent =
-      ".product-card,.article-card,.blog-card{transition:transform .2s ease,box-shadow .2s ease}" +
-      ".product-card:hover,.article-card:hover,.blog-card:hover{transform:translateY(-4px);box-shadow:0 12px 28px rgba(0,180,216,.12)}" +
-      ".filter-btn.active{box-shadow:0 4px 12px rgba(11,30,58,.25)}" +
-      ".btn-primary,.btn-gold{transition:transform .15s ease,filter .15s ease}" +
-      ".btn-primary:hover,.btn-gold:hover{transform:translateY(-1px);filter:brightness(1.06)}" +
-      "#rnLangBtn:hover{border-color:#00B4D8!important}" +
-      "@media(max-width:640px){.filter-btn,.curr-btn{min-height:40px}}";
-    if (!document.getElementById("rn-fixes-ui")) {
-      document.head.appendChild(style);
-    }
+    style.textContent = ".product-card,.article-card,.blog-card,.rn-cms-post{transition:transform .2s ease,box-shadow .2s ease}.product-card:hover,.article-card:hover,.blog-card:hover,.rn-cms-post:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(0,180,216,.12)}.filter-btn.active,#rnBlogCats button.active{box-shadow:0 4px 12px rgba(11,30,58,.22)}.btn-primary,.btn-gold{transition:transform .15s ease,filter .15s ease}.btn-primary:hover,.btn-gold:hover{transform:translateY(-1px);filter:brightness(1.06)}#rnLangBtn:hover{border-color:#00B4D8!important}@media(max-width:640px){.filter-btn,.curr-btn{min-height:40px}}";
+    document.head.appendChild(style);
   }
 
-  /* ============================================================
-     BOOT
-     ============================================================ */
   function boot() {
-    try {
-      ensureLanguageSwitcher();
-    } catch (e) {
-      console.warn("RN language fix", e);
-    }
-    try {
-      fixBlogSearch();
-    } catch (e) {
-      console.warn("RN blog search fix", e);
-    }
-    try {
-      fixStoreSearchAndFilters();
-    } catch (e) {
-      console.warn("RN store search fix", e);
-    }
-    try {
-      fixCurrency();
-    } catch (e) {
-      console.warn("RN currency fix", e);
-    }
-    try {
-      applyUiPolish();
-    } catch (e) {}
+    try { ensureLanguageSwitcher(); } catch (e) { console.warn("RN lang", e); }
+    try { fixBlogSearch(); } catch (e) { console.warn("RN blog", e); }
+    try { fixStoreSearchAndFilters(); } catch (e) { console.warn("RN store", e); }
+    try { fixCurrency(); } catch (e) { console.warn("RN currency", e); }
+    try { applyUiPolish(); } catch (e) {}
   }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", boot);
-  } else {
-    boot();
-  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
 })();
