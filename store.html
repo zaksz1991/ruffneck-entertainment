@@ -3375,7 +3375,10 @@ window.RNCms = {
   },
   async listProducts(){
     try {
-      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
+      var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+      var t = ctrl ? setTimeout(function(){ try { ctrl.abort(); } catch(e){} }, 2500) : null;
+      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store', signal: ctrl ? ctrl.signal : undefined });
+      if (t) clearTimeout(t);
       var data = await res.json();
       if (res.ok && data.ok && Array.isArray(data.products)) {
         return { source:'db', products: data.products.map(function(p){
@@ -3439,8 +3442,15 @@ window.RNCms = {
 document.addEventListener('DOMContentLoaded', async function(){
   var products = [];
   if (window.RNCms) {
-    var r = await window.RNCms.listProducts();
-    products = r.products || [];
+    try {
+      var r = await Promise.race([
+        window.RNCms.listProducts(),
+        new Promise(function(resolve){ setTimeout(function(){ resolve({ products: [] }); }, 2500); })
+      ]);
+      products = (r && r.products) || [];
+    } catch (e) {
+      products = [];
+    }
   }
   var active = products.filter(function(p){
     var s=(p.status||'active').toLowerCase();

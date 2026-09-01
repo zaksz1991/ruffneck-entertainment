@@ -1,22 +1,17 @@
-STORE — TRANSLATOR REMOVED
-==========================
+STORE — STOP ENDLESS LOADING
+==============================
 
-Base: your original backup store.html
+Base: store with translator already removed
 
-REMOVED:
-  - Language button (🌐 EN) and menu
-  - Google Translate element
-  - Google Translate loader script
+ONLY change:
+  CMS product fetch cannot wait forever (2.5s timeout).
+  Your static products still show immediately.
+  Empty admin/CMS product list does not block the page.
 
-ADDED (tiny):
-  - Clears leftover googtrans cookie so old translation state does not stick
-
-NOT TOUCHED:
-  - Flutterwave / checkout / products
-  - CMS / listProducts / loading logic
-  - Cart, filters, search
-  - No commercial CSS, no rn-fixes
+NOT changed:
+  Flutterwave, product IDs, cart, search, filters, layout CSS
 
 UPLOAD:
-  1. Replace store.html only
-  2. Hard refresh (Ctrl+Shift+R) or Incognito on phone
+  Replace store.html only
+  Hard refresh or Incognito on phone
+  Scroll down — all product sections should be reachable
