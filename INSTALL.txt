@@ -1,0 +1,31 @@
+RUFFNECK STORE — COMMERCIAL GRADE (Mobile + Desktop)
+====================================================
+
+What this is:
+  A commercial-grade visual redesign of YOUR existing store.
+  Same products, same Flutterwave checkout, same product IDs.
+
+Files to upload (only 2):
+  1. store.html          → replace your existing store.html
+  2. css/store-commercial.css  → new file in your /css/ folder
+
+What changed:
+  - Professional product grid (3 col desktop / 2 tablet / 1 mobile)
+  - Sticky filter bar with touch-friendly controls
+  - One search only (duplicate hidden)
+  - Stronger cards, prices, CTAs
+  - Mobile-first: full-width buttons, scrollable filters, 44px touch targets
+  - Cart + modal polish for small screens
+  - Safe-area padding for notched phones
+
+NOT changed:
+  - Flutterwave script and checkout
+  - PRODUCTS object / product IDs
+  - Payment, delivery, admin, APIs
+  - Google Apps Script
+
+Deploy:
+  1. Upload css/store-commercial.css to /css/ on your site
+  2. Replace store.html
+  3. Hard refresh (Ctrl+Shift+R)
+  4. Test on phone + desktop + one test purchase

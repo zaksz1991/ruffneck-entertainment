@@ -1,11 +1,158 @@
+<link rel="stylesheet" href="/css/professional-ux.css"/>
+  <link rel="stylesheet" href="/css/cleanup.css"/>
+
+<style id="rn-ux-store-pass-4">
+/* ==== RN-UX-STORE-PASS-4 (preview) — visual only ==== */
+/* Does not change Flutterwave, product IDs, payment or download logic. */
+
+.products-grid {
+  display: grid !important;
+  gap: 1.1rem !important;
+  align-items: stretch !important;
+}
+.product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  border: 1px solid #d9e3e8 !important;
+  border-radius: 1.1rem !important;
+  background: #fff !important;
+  box-shadow: 0 4px 14px rgba(16, 32, 43, 0.07) !important;
+  overflow: hidden !important;
+  transition: border-color 160ms ease, box-shadow 160ms ease !important;
+}
+.product-card:hover {
+  border-color: rgba(15, 107, 120, 0.4) !important;
+  box-shadow: 0 12px 28px rgba(16, 32, 43, 0.1) !important;
+}
+.product-img {
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  object-fit: cover !important;
+  background: #eef5f8 !important;
+  display: block !important;
+}
+.product-body {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  padding: 1rem 1rem 0.75rem !important;
+  gap: 0.35rem !important;
+}
+.product-cat {
+  display: inline-flex !important;
+  width: fit-content !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
+  color: #0f6b78 !important;
+  background: rgba(15, 107, 120, 0.1) !important;
+  margin-bottom: 0.25rem !important;
+}
+.product-name {
+  margin: 0 !important;
+  color: #10202b !important;
+  font-size: 1.05rem !important;
+  line-height: 1.35 !important;
+  font-weight: 800 !important;
+}
+.product-desc {
+  margin: 0 !important;
+  color: #5d6b75 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.55 !important;
+  opacity: 1 !important;
+}
+.product-footer {
+  margin-top: auto !important;
+  padding: 0.75rem 1rem 1rem !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0.75rem !important;
+  border-top: 1px solid #eef2f4 !important;
+}
+.product-price,
+.price-val {
+  color: #084e59 !important;
+  font-weight: 800 !important;
+  font-size: 1.1rem !important;
+  opacity: 1 !important;
+}
+.product-card .btn,
+.product-card a.btn,
+.product-footer .btn {
+  min-height: 2.75rem !important;
+  font-weight: 700 !important;
+  border-radius: 0.65rem !important;
+}
+.store-filters,
+.filters-inner {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.5rem !important;
+  align-items: center !important;
+  margin-bottom: 1.25rem !important;
+}
+.filter-btn {
+  min-height: 2.5rem !important;
+  padding: 0.45rem 0.95rem !important;
+  border-radius: 999px !important;
+  border: 1.5px solid #d9e3e8 !important;
+  background: #fff !important;
+  color: #10202b !important;
+  font-weight: 650 !important;
+  opacity: 1 !important;
+}
+.filter-btn.active,
+.filter-btn:hover {
+  background: #0b1e3a !important;
+  color: #fff !important;
+  border-color: #0b1e3a !important;
+}
+/* Readable body text on light surfaces */
+.product-card p,
+.checkout-form label {
+  color: #374151 !important;
+  opacity: 1 !important;
+}
+.checkout-input,
+.checkout-form input {
+  min-height: 3rem !important;
+  border-radius: 0.6rem !important;
+  border: 1px solid #d9e3e8 !important;
+  font-size: 1rem !important;
+}
+@media (max-width: 640px) {
+  .products-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.9rem !important;
+  }
+  .product-footer {
+    flex-direction: column !important;
+    align-items: stretch !important;
+  }
+  .product-footer .btn,
+  .product-card .btn {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+/* ==== END RN-UX-STORE-PASS-4 ==== */
+</style>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<link rel="preload" href="/logo.png" as="image"/>
 <link rel="canonical" href="https://ruffneck-entertainment.vercel.app/store"/>
-<title>RuffNeck Store | Digital Products, AI Guides & Templates — 2026</title>
-<meta name="description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
+<title>AI Guides, Templates and Digital Products | RuffNeck</title>
+<meta name="author" content="RuffNeck Entertainment"/>
+<meta name="description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Digital delivery after successful payment. RuffNeck Entertainment 2026."/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"/>
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
@@ -17,7 +164,7 @@
   "@type": "OnlineStore",
   "name": "RuffNeck Entertainment Store",
   "url": "https://ruffneck-entertainment.vercel.app/store",
-  "description": "Digital products including AI career guides, prompt packs, templates, design assets, and business ebooks — instant PDF delivery.",
+  "description": "Digital products including AI career guides, prompt packs, templates, design assets, and business ebooks — digital delivery after successful payment.",
   "parentOrganization": {
     "@type": "Organization",
     "name": "RuffNeck Entertainment",
@@ -34,8 +181,8 @@
 <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://ruffneck-entertainment.vercel.app/store"/>
-<meta property="og:title" content="RuffNeck Store | Digital Products, AI Guides & Templates — 2026"/>
-<meta property="og:description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
+<meta property="og:title" content="AI Guides, Templates and Digital Products | RuffNeck"/>
+<meta property="og:description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Digital delivery after successful payment. RuffNeck Entertainment 2026."/>
 <meta property="og:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
@@ -44,8 +191,8 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:url" content="https://ruffneck-entertainment.vercel.app/store"/>
-<meta name="twitter:title" content="RuffNeck Store | Digital Products, AI Guides & Templates — 2026"/>
-<meta name="twitter:description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Instant PDF delivery. RuffNeck Entertainment 2026."/>
+<meta name="twitter:title" content="AI Guides, Templates and Digital Products | RuffNeck"/>
+<meta name="twitter:description" content="Buy AI career guides, prompt packs, resume templates, design assets, business toolkits and more. Digital delivery after successful payment. RuffNeck Entertainment 2026."/>
 <meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
 
 <!-- Google Analytics (GA4) — replace G-XF92RSFBHX with your real Measurement ID -->
@@ -58,6 +205,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="/css/store-commercial.css"/>
 <script src="https://checkout.flutterwave.com/v3.js"></script>
 <script>
 // Search input enhancements — runs after DOM is fully ready
@@ -119,16 +267,16 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 
 /* HERO */
 .store-hero{background:radial-gradient(ellipse at 30% 50%,#0B1E3A 0%,#040C1A 70%,#010408 100%);padding:64px 0 48px;color:var(--white);text-align:center}
-.store-hero h1{font-size:clamp(28px,4vw,48px);font-weight:700;margin-bottom:14px}
+.store-hero h1{font-size:clamp(28px,4vw,48px);font-weight:700;margin-bottom:14px;color:#fff!important;-webkit-text-fill-color:#fff!important}
 .store-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan-lt),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.store-hero p{font-size:16px;color:rgba(255,255,255,0.6);max-width:580px;margin:0 auto 28px;line-height:1.7}
+.store-hero p{font-size:16px;color:rgba(255,255,255,0.9);max-width:580px;margin:0 auto 28px;line-height:1.7}
 .hero-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .hero-tag{font-family:var(--font-mono);font-size:11px;padding:5px 14px;border-radius:100px;border:1px solid rgba(0,180,216,0.3);color:var(--cyan);letter-spacing:1px}
 
 /* FILTERS */
 .store-filters{background:var(--white);border-bottom:1px solid var(--border);padding:16px 0;position:sticky;top:64px;z-index:90}
 .filters-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.filter-btn{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;border:1.5px solid var(--border);color:var(--text-muted);background:var(--white);transition:all 0.2s;cursor:pointer}
+.filter-btn{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:700;border:2px solid #64748b;color:#0b1e3a;background:#fff;transition:all 0.2s;cursor:pointer}
 .filter-btn.active,.filter-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
 .search-box{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--bg-light);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px}
 .search-box input{border:none;background:none;font-family:var(--font-display);font-size:13px;color:var(--text-dark);outline:none;width:180px}
@@ -1020,7 +1168,7 @@ section.section-teaser {
   "@type": "CollectionPage",
   "name": "RuffNeck Digital Store",
   "url": "https://ruffneck-entertainment.vercel.app/store",
-  "description": "AI guides, prompt packs, CV templates, and business toolkits with instant PDF delivery.",
+  "description": "AI guides, prompt packs, CV templates, and business toolkits with digital delivery after successful payment.",
   "isPartOf": { "@type": "WebSite", "url": "https://ruffneck-entertainment.vercel.app/" }
 }
 </script>
@@ -1162,8 +1310,8 @@ button,a,.btn{touch-action:manipulation}
 
 <main\1 id="main">
 
-<p id="rn-ng-pay-note" style="text-align:center;color:#94A3B8;font-size:13px;max-width:640px;margin:8px auto 16px;padding:0 16px">
-  Pay in <strong style="color:#E5E7EB">₦ Naira</strong> via Flutterwave. Digital delivery after successful payment. Need help? WhatsApp +234 803 380 7856.
+<p id="rn-ng-pay-note" style="text-align:center;color:#1e293b;font-size:13px;font-weight:600;max-width:640px;margin:8px auto 16px;padding:0 16px;line-height:1.5">
+  Pay in <strong style="color:#0f172a">₦ Naira</strong> via Flutterwave. Digital delivery after successful payment. Need help? WhatsApp +234 803 380 7856.
 </p>
 
 
@@ -1171,7 +1319,7 @@ button,a,.btn{touch-action:manipulation}
 #rnStoreSearchWrap{max-width:640px;margin:12px auto;padding:0 16px}
 #rnStoreSearch{width:100%;min-height:48px;padding:12px 16px;border-radius:12px;border:1px solid rgba(0,180,216,.35);background:#0B1E3A;color:#F8FAFC;font-size:16px}
 </style>
-<div id="rnStoreSearchWrap">
+<div id="rnStoreSearchWrap" style="display:none!important" hidden aria-hidden="true">
   <input type="search" id="rnStoreSearch" placeholder="Search products…" autocomplete="off"/>
 </div>
 <script id="rn-p1-store-search-js">
@@ -1195,12 +1343,12 @@ button,a,.btn{touch-action:manipulation}
 <div class="store-hero">
   <div class="container">
     <div style="margin-bottom:14px;">
-      <span class="badge badge-cyan">Digital Products · Instant PDF Delivery · 2026</span>
+      <span class="badge badge-cyan">Digital Products · Secure checkout · 2026</span>
     </div>
     <h1>RuffNeck <em>Digital Store</em></h1>
-    <p>AI career guides, prompt packs, resume templates, design assets, business toolkits — created once, instantly delivered. Everything you need to build skills, launch faster, and grow in 2026.</p>
+    <p>Practical digital products for careers, business, and everyday work — guides, templates, and toolkits with secure checkout and delivery after successful payment.</p>
     <div class="hero-tags">
-      <span class="hero-tag">📄 Instant PDF Delivery</span>
+      <span class="hero-tag">📄 PDF delivery after payment</span>
       <span class="hero-tag">🔒 Secure Flutterwave Checkout</span>
       <span class="hero-tag">🌍 Worldwide Access</span>
       <span class="hero-tag">✅ 2026 Updated Content</span>
@@ -1233,7 +1381,7 @@ button,a,.btn{touch-action:manipulation}
     </div>
 <div class="container" style="margin:20px auto;">
   <div style="background:linear-gradient(135deg,#0B1E3A,#0a2a4a);border-radius:14px;padding:22px 24px;color:#fff;">
-    <strong style="display:block;font-size:1.15rem;margin-bottom:6px;">Secure checkout · Instant PDF delivery</strong>
+    <strong style="display:block;font-size:1.15rem;margin-bottom:6px;">Secure checkout · Delivery after payment</strong>
     <span style="opacity:.85;font-size:14px;line-height:1.5;">Pay with Flutterwave. Get your digital products after payment. Start with a featured item or browse categories below.</span>
   </div>
 </div>
@@ -1257,7 +1405,7 @@ button,a,.btn{touch-action:manipulation}
           <p class="product-desc">ATS-oriented writing. Packages from Essential to Executive. <a href="/RuffNeck_CV_CoverLetter_LinkedIn_Service.pdf" target="_blank">Service PDF →</a></p>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span> ₦8,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p014')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p014')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1268,7 +1416,7 @@ button,a,.btn{touch-action:manipulation}
           <p class="product-desc">Setup, troubleshooting, maintenance for home and business. <a href="/RuffNeck_IT_Services_Guide.pdf" target="_blank">IT Guide PDF →</a></p>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span> ₦25,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p017')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p017')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1279,7 +1427,7 @@ button,a,.btn{touch-action:manipulation}
           <p class="product-desc">Entry, cleaning, formulas, and reporting for professionals and businesses.</p>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span> ₦20,000</div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p016')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p016')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1310,7 +1458,7 @@ button,a,.btn{touch-action:manipulation}
     <!-- AI CAREER GUIDES -->
     <div class="section-heading">
       <h2 id="cat-ai-career">🤖 AI Career Guides — Step-by-Step PDF Guides</h2>
-      <p>Complete practical guides to becoming a professional in high-demand AI roles. Tiered by experience level — each tier has different content, depth, and value. Instant PDF delivery after payment.</p>
+      <p>Complete practical guides to becoming a professional in high-demand AI roles. Tiered by experience level — each tier has different content, depth, and value. Digital product access after successful payment.</p>
     </div>
     <div class="products-grid" id="productsGrid">
 
@@ -1329,7 +1477,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p001')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p001')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1341,7 +1489,7 @@ button,a,.btn{touch-action:manipulation}
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
           <h3 class="product-name">AI Model Evaluator Guide</h3>
-          <p class="product-desc">Learn RLHF evaluation — rate AI responses, improve models, and earn consistently on Outlier, Surge AI & more.</p>
+          <p class="product-desc">Learn RLHF evaluation — rate AI responses, improve models, and explore paid evaluation platforms such as Outlier, Surge AI, and similar workflows.</p>
           <div class="product-tiers-preview">
             <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="3500">₦3,500</span></span>
             <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="6500">₦6,500</span></span>
@@ -1349,7 +1497,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p002')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p002')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1361,7 +1509,7 @@ button,a,.btn{touch-action:manipulation}
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
           <h3 class="product-name">AI Ethics Reviewer Guide</h3>
-          <p class="product-desc">Review AI outputs for bias, harmful content, and fairness — the fastest-growing AI role in 2026.</p>
+          <p class="product-desc">Review AI outputs for bias, harmful content, and fairness — an emerging AI role focused on safety, fairness, and output review in 2026.</p>
           <div class="product-tiers-preview">
             <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="4000">₦4,000</span></span>
             <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="7500">₦7,500</span></span>
@@ -1369,7 +1517,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="4000">₦4,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p003')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p003')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1381,7 +1529,7 @@ button,a,.btn{touch-action:manipulation}
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
           <h3 class="product-name">AI Technical Content Writer Guide</h3>
-          <p class="product-desc">Break into AI content writing — from first article to full-time income. Written by a working AI content writer at GAOTek Inc.</p>
+          <p class="product-desc">Break into AI content writing — from your first article toward a structured AI content-writing practice. Written by a working AI content writer at GAOTek Inc.</p>
           <div class="product-tiers-preview">
             <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="3500">₦3,500</span></span>
             <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="7000">₦7,000</span></span>
@@ -1389,7 +1537,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p004')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p004')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1409,7 +1557,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p005')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p005')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1421,7 +1569,7 @@ button,a,.btn{touch-action:manipulation}
         <div class="product-body">
           <div class="product-cat">AI Career Guide</div>
           <h3 class="product-name">AI Graphic Designer Guide</h3>
-          <p class="product-desc">Use Midjourney, Canva AI, Adobe Firefly to create and sell professional designs at scale — without a design degree.</p>
+          <p class="product-desc">Use Midjourney, Canva AI, Adobe Firefly to create professional designs and explore ways to package design services — without a design degree.</p>
           <div class="product-tiers-preview">
             <span class="tier-pill tier-beg">Beginner <span class="price-val" data-ngn="3500">₦3,500</span></span>
             <span class="tier-pill tier-mid">Intermediate <span class="price-val" data-ngn="6500">₦6,500</span></span>
@@ -1429,7 +1577,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p006')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p006')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1458,7 +1606,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3500">₦3,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p007')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p007')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1478,7 +1626,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="2500">₦2,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p008')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p008')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1507,7 +1655,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="2000">₦2,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p009')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p009')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1527,7 +1675,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="8000">₦8,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p014')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p014')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1545,7 +1693,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="15000">₦15,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p015')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p015')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1559,7 +1707,7 @@ button,a,.btn{touch-action:manipulation}
           <p class="product-desc">Data entry, cleaning, formulas, and analysis for students, professionals, and businesses. <a href="/blog">Read related articles →</a></p>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="20000">₦20,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p016')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p016')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1573,7 +1721,7 @@ button,a,.btn{touch-action:manipulation}
           <p class="product-desc">Setup, troubleshooting, maintenance, and performance support for home and business PCs. <a href="/#svc-computer">Service details →</a></p>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="25000">₦25,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p017')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p017')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1587,7 +1735,7 @@ button,a,.btn{touch-action:manipulation}
           <p class="product-desc">Printer install and troubleshooting for home and office. <a href="/#svc-network">Network &amp; devices →</a></p>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="12000">₦12,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p018')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p018')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1601,7 +1749,7 @@ button,a,.btn{touch-action:manipulation}
           <p class="product-desc">Home and office Wi-Fi setup, security basics, and connectivity help. <a href="/#svc-network">Related service →</a></p>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="15000">₦15,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p019')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p019')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1615,7 +1763,7 @@ button,a,.btn{touch-action:manipulation}
           <p class="product-desc">Practical computer training for beginners, staff, schools, and organisations. <a href="/#svc-computer">Training service →</a> · <a href="/blog">Blog →</a></p>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="30000">₦30,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p020')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p020')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1631,13 +1779,13 @@ button,a,.btn{touch-action:manipulation}
           <h3 class="product-name">Content Calendar Template Pack</h3>
           <p class="product-desc">30, 60, and 90-day content planning templates for social media, blogs, and email — pre-filled with niche-specific ideas.</p>
           <div class="product-tiers-preview">
-            <span class="tier-pill tier-beg">30-Day — <span class="price-val" data-ngn="30000">₦30,00000</span></span>
+            <span class="tier-pill tier-beg">30-Day — <span class="price-val" data-ngn="30000">₦3,000</span></span>
             <span class="tier-pill tier-mid">60-Day — <span class="price-val" data-ngn="4500">₦4,500</span></span>
             <span class="tier-pill tier-adv">90-Day — <span class="price-val" data-ngn="6500">₦6,500</span></span>
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="2500">₦2,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p010')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p010')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1666,7 +1814,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3000">₦3,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p011')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p011')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1695,7 +1843,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="4500">₦4,500</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p012')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p012')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1715,7 +1863,7 @@ button,a,.btn{touch-action:manipulation}
           </div>
           <div class="product-footer">
             <div class="product-price"><span class="currency">From</span><span class="price-val" data-ngn="3000">₦3,000</span></div>
-            <button class="btn btn-primary btn-sm" onclick="openModal('p013')">View &amp; Buy</button>
+            <button class="btn btn-primary btn-sm" onclick="openModal('p013')" aria-label="View options for this product">View options</button>
           </div>
         </div>
       </div>
@@ -1734,13 +1882,13 @@ button,a,.btn{touch-action:manipulation}
 
 
 <!-- CART SIDEBAR -->
-<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-<div class="cart-sidebar" id="cartSidebar">
+<div class="cart-overlay" id="cartOverlay" onclick="toggleCart()" role="presentation"></div>
+<div class="cart-sidebar" id="cartSidebar" role="dialog" aria-modal="true" aria-labelledby="cartTitle" aria-hidden="true">
   <div class="cart-header">
-    <h3>🛒 Your Cart</h3>
-    <button type="button" class="cart-close" onclick="toggleCart()" aria-label="Close cart">×</button>
+    <h3 id="cartTitle">🛒 Your Cart</h3>
+    <button type="button" class="cart-close" onclick="toggleCart()" aria-label="Close shopping cart">×</button>
   </div>
-  <div class="cart-items" id="cartItems">
+  <div class="cart-items" id="cartItems" aria-live="polite">
     <div class="cart-empty"><div class="icon">🛍️</div><p>Your cart is empty.<br/>Browse products and add items.</p></div>
   </div>
   <div class="cart-footer" id="cartFooter" style="display:none;">
@@ -1750,21 +1898,29 @@ button,a,.btn{touch-action:manipulation}
       <div class="cart-row total"><span>Total</span><span id="cartTotal">₦0</span></div>
     </div>
     <div class="checkout-form">
-      <input class="checkout-input" type="text" id="buyerName" placeholder="Full Name *" required/>
-      <input class="checkout-input" type="email" id="buyerEmail" placeholder="Email Address * (for product delivery)" required/>
+      <label class="checkout-label" for="buyerName">Full name</label>
+      <input class="checkout-input" type="text" id="buyerName" name="buyerName" placeholder="Full Name *" autocomplete="name" required/>
+      <label class="checkout-label" for="buyerEmail">Email for delivery</label>
+      <input class="checkout-input" type="email" id="buyerEmail" name="buyerEmail" placeholder="Email Address *" autocomplete="email" required/>
     </div>
-    <button class="btn btn-gold pay-btn" onclick="initiatePayment()">🔒 Pay with Flutterwave</button>
-    <p class="cart-note">✅ Instant PDF download link sent to your email after payment.<br/>🔒 Secured by Flutterwave · 2026<br/><span style="opacity:0.7">💱 USD prices are approximate — all payments are processed in NGN.</span></p>
+    <div class="checkout-reassurance" role="note">
+      <strong>What happens after payment?</strong>
+      <span>Your digital product becomes available after successful payment and is delivered using the email address entered above.</span>
+      <span>Prices are shown in Nigerian Naira. Payment is processed securely by Flutterwave.</span>
+      <span>If payment succeeds but delivery is missing, contact WhatsApp <a href="https://wa.me/2348033807856">+234 803 380 7856</a> with your payment reference.</span>
+    </div>
+    <button class="btn btn-gold pay-btn"<button class="btn btn-gold pay-btn" type="button" onclick="initiatePayment()">🔒 Pay with Flutterwave</button>
+    <p class="cart-note">Digital delivery is available after successful payment. Please enter an email address you can access. For verified payment or delivery issues, contact RuffNeck support.</p>
   </div>
 </div>
 
 <!-- PRODUCT MODAL -->
-<div class="modal-overlay" id="productModal" onclick="closeModalOutside(event)">
-  <div class="modal" id="modalContent">
+<div class="modal-overlay" id="productModal" class="modal-overlay" onclick="closeModalOutside(event)" role="presentation" aria-hidden="true">
+  <div class="modal" id="modalContent" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
     <button type="button" class="modal-close" onclick="closeModal()" aria-label="Close product details">×</button>
     <div class="modal-header">
       <div class="modal-cat" id="modalCat"></div>
-      <h3 id="modalTitle"></h3>
+      <h2 id="modalTitle" style="font-size:1.25rem;margin:0;"></h2>
     </div>
     <div class="modal-body">
       <div class="modal-includes">
@@ -2622,9 +2778,13 @@ document.addEventListener('DOMContentLoaded', function(){
   if (currentCurrency === 'USD') { setCurrency('USD'); } else { updateAllPriceDisplays(); }
 });
 
+var __rnLastModalTrigger = null;
+var __rnLastCartTrigger = null;
+
 function openModal(productId) {
   const p = PRODUCTS[productId];
   if (!p) { console.error('Product not found:', productId); return; }
+  try { __rnLastModalTrigger = document.activeElement; } catch (e) { __rnLastModalTrigger = null; }
   document.getElementById('modalCat').textContent = p.cat.toUpperCase();
   document.getElementById('modalTitle').textContent = p.name;
   const incEl = document.getElementById('modalIncludes');
@@ -2646,6 +2806,10 @@ function openModal(productId) {
   selectedModalLevel = { level: p.tiers[0].level, price: p.tiers[0].price };
   currentModal = { name: p.name, cat: p.cat, emoji: p.emoji, tiers: p.tiers };
   document.getElementById('productModal').classList.add('open');
+  var __pm = document.getElementById('productModal');
+  var __mc = document.getElementById('modalContent');
+  if (__pm) __pm.setAttribute('aria-hidden', 'false');
+  if (__mc) { try { __mc.focus(); } catch (e) {} };
   document.body.style.overflow = 'hidden';
 }
 
@@ -2659,8 +2823,16 @@ function selectModalLevel(el, tierIdx, productId) {
 }
 
 function closeModal() {
-  document.getElementById('productModal').classList.remove('open');
+  var pm = document.getElementById('productModal');
+  if (pm) {
+    pm.classList.remove('open');
+    pm.setAttribute('aria-hidden', 'true');
+  }
   document.body.style.overflow = '';
+  if (__rnLastModalTrigger && typeof __rnLastModalTrigger.focus === 'function') {
+    try { __rnLastModalTrigger.focus(); } catch (e) {}
+  }
+  __rnLastModalTrigger = null;
 }
 
 function closeModalOutside(e) {
@@ -2890,7 +3062,7 @@ function closeSuccessModal() {
         <div class="rn-chat-name">RuffNeck Assistant</div>
         <div class="rn-chat-status">Online now</div>
       </div>
-      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat">✕</button>
+      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat" aria-label="Close">✕</button>
     </div>
     <div class="rn-chat-messages" id="rnChatMessages">
       <div class="rn-msg bot">👋 Hi! I'm here to help with <strong>services</strong>, <strong>products</strong>, <strong>AI careers</strong>, and more. I understand Hausa, Yoruba, and Igbo too — feel free to ask in your language! What can I help with today?</div>
@@ -2934,7 +3106,7 @@ const RN_BOT_RESPONSES = {
   },
   store:{
     keys:['store','buy','product','guide','ebook','prompt','price','kudi','saya','sayarwa','ra','ìwé','owo','ra ọjà','ego','zụta'],
-    reply:`Visit our <a href="/store">Digital Store</a> for AI Career Guides, Prompt Packs, Templates, and Ebooks — all instant PDF delivery.<br><br><a href="/store">Browse Store →</a>`,
+    reply:`Visit our <a href="/store">Digital Store</a> for AI Career Guides, Prompt Packs, Templates, and Ebooks — digital delivery after successful payment.<br><br><a href="/store">Browse Store →</a>`,
     reply_ha:`Ziyarci <a href="/store">Shagon Dijital</a> namu don Jagororin Aiki na AI, Fakitin Tambaya, Samfura, da Littattafai — dukkansu ana turo su nan take.<br><br><a href="/store">Duba Shago →</a>`,
     reply_yo:`Ṣàbẹ̀wò sí <a href="/store">Ilé Ìtajà Dígítà</a> wa fún Ìtọ́sọ́nà Iṣẹ́ AI, Àwọn Ìbéèrè, Àwòṣe, àti Ìwé — gbogbo rẹ̀ ni a ń fi jíjẹ́rànṣẹ́ tọ̀nítọ̀nì.<br><br><a href="/store">Wo Ilé Ìtajà →</a>`,
     reply_ig:`Gaa na <a href="/store">Ụlọ Ahịa Dijitalụ</a> anyị maka Ntuziaka Ọrụ AI, Ngwugwu Prompt, Ihe atụ, na Akwụkwọ — niile na-eziga ozugbo.<br><br><a href="/store">Lelee Ụlọ Ahịa →</a>`
@@ -3113,12 +3285,12 @@ document.addEventListener('DOMContentLoaded', function() {
       document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
       document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
       if (location.href.indexOf('googtrans') >= 0) location.href = location.pathname + location.search + location.hash;
-      else location.reload();
+      else /*reload-disabled*/void 0;
       return;
     }
     document.cookie = 'googtrans=/en/' + lang + ';path=/;';
     document.cookie = 'googtrans=/en/' + lang + ';path=/;domain=.' + location.hostname;
-    location.reload();
+    /*reload-disabled*/void 0;
   }
   document.addEventListener('DOMContentLoaded', function(){
     loadGT();
@@ -3435,6 +3607,827 @@ document.addEventListener('DOMContentLoaded', async function(){
       else if (h.indexOf('wa.me')!==-1 || h.indexOf('whatsapp')!==-1) a.setAttribute('aria-label','WhatsApp');
     });
   });
+})();
+</script>
+
+
+<style id="rn-audit-final-2c-store">
+/* ==== RN-AUDIT-FINAL-2C-STORE (preview) ==== */
+/* Visual only — no Flutterwave / product ID / checkout logic changes */
+
+.products-grid {
+  display: grid !important;
+  gap: 1.1rem !important;
+  align-items: stretch !important;
+}
+.product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  border: 1px solid #d9e3e8 !important;
+  border-radius: 0.9rem !important;
+  background: #fff !important;
+  box-shadow: 0 8px 24px rgba(16, 32, 43, 0.07) !important;
+  overflow: hidden !important;
+}
+.product-card:hover {
+  border-color: rgba(15, 107, 120, 0.45) !important;
+  box-shadow: 0 14px 30px rgba(16, 32, 43, 0.12) !important;
+}
+.product-img {
+  width: 100% !important;
+  aspect-ratio: 16 / 10 !important;
+  object-fit: cover !important;
+  background: #f5f8fa !important;
+  display: block !important;
+}
+.product-body { padding: 1rem !important; flex: 1 !important; }
+.product-cat {
+  display: inline-flex !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  color: #0f6b78 !important;
+  background: rgba(15, 107, 120, 0.1) !important;
+  margin-bottom: 0.35rem !important;
+}
+.product-name {
+  color: #10202b !important;
+  line-height: 1.3 !important;
+  font-weight: 800 !important;
+  margin: 0 0 0.35rem !important;
+}
+.product-desc {
+  color: #5d6b75 !important;
+  line-height: 1.6 !important;
+  opacity: 1 !important;
+}
+.product-price,
+.price-val {
+  color: #084e59 !important;
+  font-weight: 800 !important;
+  font-size: 1.1rem !important;
+  opacity: 1 !important;
+}
+.product-footer {
+  margin-top: auto !important;
+  padding: 0.85rem 1rem 1rem !important;
+  border-top: 1px solid #eef2f4 !important;
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.65rem !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+.product-card .btn,
+.product-footer .btn {
+  min-height: 2.75rem !important;
+  font-weight: 700 !important;
+  border-radius: 0.65rem !important;
+}
+.filter-btn {
+  color: #10202b !important;
+  opacity: 1 !important;
+  border: 1.5px solid #d9e3e8 !important;
+  background: #fff !important;
+  border-radius: 999px !important;
+  min-height: 2.4rem !important;
+  font-weight: 650 !important;
+}
+.filter-btn.active,
+.filter-btn:hover {
+  background: #0b1e3a !important;
+  color: #fff !important;
+  border-color: #0b1e3a !important;
+}
+@media (max-width: 640px) {
+  .products-grid { grid-template-columns: 1fr !important; }
+  .product-footer { flex-direction: column !important; align-items: stretch !important; }
+  .product-footer .btn { width: 100% !important; justify-content: center !important; }
+}
+/* ==== END RN-AUDIT-FINAL-2C-STORE ==== */
+</style>
+
+
+<style id="rn-screenshot-fix-store">
+/* ==== RN-SCREENSHOT-FIX-STORE ==== */
+/* Faded pay banner + weak chips from screenshots */
+
+/* Top pay / delivery notice — was light grey on white */
+.store-top-note,
+.pay-banner,
+.store-banner,
+.announcement-bar,
+.top-notice,
+header + .container > p,
+.hero-note,
+[class*="pay-note"],
+.store-subhead {
+  color: #0f172a !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+
+/* Common store intro strip */
+body p {
+  /* do not global override all p — scoped below */
+}
+.store-hero p,
+.hero p,
+.hero-sub,
+.store-lead {
+  color:#374151 !important;
+  opacity: 1 !important;
+}
+
+/* Light strip under nav (pay in Naira line) */
+.container > p,
+.store-page > p,
+main > p:first-of-type {
+  color: #1e293b !important;
+  opacity: 1 !important;
+  font-weight: 500 !important;
+  -webkit-text-fill-color: #1e293b !important;
+}
+
+/* Filters */
+.filter-btn,
+button.filter-btn {
+  color: #0b1e3a !important;
+  background: #fff !important;
+  border: 1.5px solid #94a3b8 !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+}
+.filter-btn.active,
+.filter-btn:hover {
+  background: #0b1e3a !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  border-color: #0b1e3a !important;
+}
+
+/* Currency toggle readable */
+.currency-toggle,
+.currency-btn,
+[data-currency],
+.fx-toggle {
+  color: #0b1e3a !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+
+/* Product text */
+.product-name { color: #0f172a !important; }
+.product-desc { color: #475569 !important; opacity: 1 !important; }
+.product-price, .price-val { color: #084e59 !important; font-weight: 800 !important; opacity: 1 !important; }
+
+/* Secure checkout banner — avoid cut-off feel */
+.checkout-banner,
+.secure-banner,
+.store-alert {
+  white-space: normal !important;
+  line-height: 1.45 !important;
+  padding: 0.85rem 1rem !important;
+}
+/* ==== END RN-SCREENSHOT-FIX-STORE ==== */
+</style>
+
+
+<style id="rn-site-wide-contrast">
+/* ==== RN-SITE-WIDE-CONTRAST (all public pages) ==== */
+/* Readable text, chips, forms. Does not change Admin/auth/payments. */
+
+:root {
+  --rn-ink: #0f172a;
+  --rn-body: #334155;
+  --rn-muted-ok: #475569;
+  --rn-border: #94a3b8;
+  --rn-surface: #ffffff;
+  --rn-primary: #0f6b78;
+}
+
+/* Generic body text on light surfaces */
+body {
+  color: var(--rn-ink);
+}
+p, li, .section-sub, .section-subtitle, .muted, .text-muted,
+.card p, .service-card p, .product-desc, .blog-card p {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+h1, h2, h3, h4, .section-title, .product-name {
+  color: #0f172a !important;
+}
+/* Dark heroes must stay light — previous rule made titles vanish */
+.hero h1, .hero h2, .hero h3,
+.store-hero h1, .store-hero h2,
+.blog-hero h1, .blog-hero h2,
+[class*="-hero"] h1, [class*="-hero"] h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+.store-hero h1 em, .blog-hero h1 em, .hero h1 em {
+  background: linear-gradient(90deg, #7dd3fc, #00b4d8) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+.store-hero p, .blog-hero p, .hero .hero-sub, .hero-sub {
+  color: rgba(255,255,255,0.88) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: rgba(255,255,255,0.88) !important;
+}
+
+/* Dark hero / dark sections: keep light text */
+.hero p, .hero .hero-sub, .hero-sub,
+.hero li, footer p, footer a,
+[class*="hero"] .muted {
+  color: #e2e8f0 !important;
+}
+.hero h1, .hero h2 {
+  color: #ffffff !important;
+}
+
+/* Filter / chip / tab buttons — was nearly invisible when inactive */
+.filter-btn,
+button.filter-btn,
+.services-tabs button,
+.tab-btn,
+.chip,
+.cat-btn,
+.filters-inner button {
+  color: #0b1e3a !important;
+  background: #ffffff !important;
+  border: 2px solid #64748b !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+}
+.filter-btn.active,
+.filter-btn:hover,
+.services-tabs button.active,
+.tab-btn.active,
+.chip.active {
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #0b1e3a !important;
+}
+
+/* Forms */
+input, textarea, select {
+  color: #0f172a !important;
+  background: #ffffff !important;
+  border-color:#374151 !important;
+}
+label {
+  color: #0f172a !important;
+  font-weight: 650 !important;
+}
+
+/* Cards */
+.service-card, .product-card, .blog-card, .card, .pricing-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+.service-card h3, .product-name, .blog-card h3 {
+  color: #0f172a !important;
+}
+.product-price, .price-val {
+  color: #084e59 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+/* Legal / long content readability */
+.legal-content, .page-content, .programme-content, article, .content {
+  line-height: 1.7;
+  color: #334155 !important;
+}
+.legal-content h2, .page-content h2, .programme-content h2 {
+  color: #0f172a !important;
+  margin-top: 2rem;
+}
+
+/* Links on light bg */
+a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
+  /* leave brand links; ensure not invisible */
+}
+
+/* Focus */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid #1aa7b8 !important;
+  outline-offset: 2px !important;
+}
+
+/* Mobile filter / meta */
+@media (max-width: 640px) {
+  .filter-btn, .services-tabs button {
+    min-height: 2.5rem !important;
+  }
+}
+/* ==== END RN-SITE-WIDE-CONTRAST ==== */
+</style>
+
+<style id="rn-store-polish-final">
+/* ==== RN-STORE-POLISH-FINAL (single coherent override layer) ==== */
+:root {
+  --rn-store-ink: #0f172a;
+  --rn-store-muted: #475569;
+  --rn-store-border: #e2e8f0;
+  --rn-store-surface: #ffffff;
+  --rn-store-soft: #f8fafc;
+  --rn-store-cyan: #00b4d8;
+}
+
+/* Hierarchy */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border: 1px solid var(--rn-store-border);
+  border-radius: 14px;
+  background: var(--rn-store-surface);
+  overflow: hidden;
+}
+.product-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 14px 14px 12px;
+}
+.product-desc {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--rn-store-muted) !important;
+  -webkit-text-fill-color: var(--rn-store-muted) !important;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  max-height: 4.5em;
+}
+.product-name {
+  color: var(--rn-store-ink) !important;
+  -webkit-text-fill-color: var(--rn-store-ink) !important;
+  font-size: 1.02rem;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+}
+.product-footer {
+  margin-top: auto;
+  padding-top: 8px;
+}
+.product-card .btn,
+.product-card button {
+  min-height: 44px;
+}
+
+/* Filters */
+.filter-btn,
+button[data-cat] {
+  min-height: 40px;
+  border: 1px solid var(--rn-store-border);
+  border-radius: 999px;
+  background: #fff !important;
+  color: var(--rn-store-muted) !important;
+  -webkit-text-fill-color: var(--rn-store-muted) !important;
+}
+.filter-btn.active,
+button[data-cat].active {
+  border-color: var(--rn-store-cyan) !important;
+  background: var(--rn-store-cyan) !important;
+  color: #04111f !important;
+  -webkit-text-fill-color: #04111f !important;
+}
+
+/* Featured equal height */
+.rn-featured .featured-grid,
+.rn-featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  align-items: stretch;
+}
+.rn-featured article,
+.rn-featured .featured-card {
+  height: 100%;
+}
+
+/* Modal / cart dialogs */
+#productModal {
+  /* overlay */
+}
+#productModal .modal,
+#modalContent {
+  outline: none;
+}
+#productModal[aria-hidden="true"] {
+  /* closed state handled by existing .open */
+}
+.checkout-label {
+  display: block;
+  margin: 8px 0 4px;
+  color: var(--rn-store-ink) !important;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.checkout-reassure {
+  margin: 12px 0 14px;
+  padding: 12px 12px 8px;
+  border: 1px solid var(--rn-store-border);
+  border-radius: 10px;
+  background: var(--rn-store-soft);
+  color: var(--rn-store-ink) !important;
+  font-size: 0.8rem;
+  line-height: 1.45;
+}
+.checkout-reassure p {
+  margin: 0 0 6px;
+  color: var(--rn-store-ink) !important;
+  -webkit-text-fill-color: var(--rn-store-ink) !important;
+}
+.checkout-reassure ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--rn-store-muted) !important;
+  -webkit-text-fill-color: var(--rn-store-muted) !important;
+}
+.checkout-reassure li {
+  margin-bottom: 4px;
+}
+.pay-btn {
+  min-height: 48px;
+  width: 100%;
+}
+
+/* Search */
+#searchInput,
+#rnStoreSearch {
+  min-height: 44px;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+  .products-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .store-filters,
+  .filters-inner {
+    max-width: 100%;
+  }
+  .filter-btn,
+  button[data-cat] {
+    flex: 0 0 auto;
+  }
+  #cartSidebar {
+    width: min(100vw, 100%);
+    max-width: 100%;
+  }
+  #modalContent,
+  #productModal .modal {
+    max-width: calc(100vw - 24px);
+    max-height: min(90vh, 100%);
+    overflow-y: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>
+
+<style id="rn-store-polish-pass">
+  :root {
+    --store-content-width: 1200px;
+    --store-card-radius: 16px;
+    --store-soft-border: #dfe7ec;
+    --store-muted: #5b6873;
+    --store-shadow: 0 8px 24px rgba(11, 30, 58, 0.08);
+    --store-shadow-hover: 0 16px 36px rgba(11, 30, 58, 0.14);
+  }
+  body { overflow-x: hidden; }
+  .container, .nav-inner, .filters-inner {
+    width: min(100% - 32px, var(--store-content-width));
+    margin-inline: auto;
+  }
+  .store-hero {
+    isolation: isolate;
+    padding: clamp(56px, 8vw, 92px) 0 clamp(42px, 6vw, 68px);
+  }
+  .store-hero h1 {
+    max-width: 780px;
+    margin-inline: auto;
+    text-wrap: balance;
+    line-height: 1.08;
+  }
+  .store-hero p { max-width: 650px; text-wrap: balance; }
+  .hero-tags { max-width: 720px; margin-inline: auto; }
+  .rn-featured { padding-block: clamp(36px, 6vw, 68px); }
+  .rn-featured-grid, .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+  .rn-featured-card, .featured-card {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    min-height: 100%;
+    padding: 24px;
+    border: 1px solid var(--store-soft-border);
+    border-radius: var(--store-card-radius);
+    background: #fff;
+    box-shadow: var(--store-shadow);
+  }
+  .rn-featured-card p, .featured-card p {
+    flex: 1;
+    color: var(--store-muted);
+    line-height: 1.6;
+  }
+  .rn-featured-card .btn, .featured-card .btn {
+    align-self: flex-start;
+    margin-top: 16px;
+  }
+  .store-filters {
+    border-bottom: 1px solid var(--store-soft-border);
+    box-shadow: 0 3px 14px rgba(11, 30, 58, 0.05);
+  }
+  .filters-inner { min-height: 70px; }
+  .filter-btn { min-height: 44px; white-space: nowrap; }
+  .filter-btn:focus-visible,
+  .cart-btn:focus-visible,
+  .btn:focus-visible,
+  .level-tab:focus-visible,
+  .qty-btn:focus-visible,
+  .modal-close:focus-visible,
+  .cart-close:focus-visible {
+    outline: 3px solid var(--cyan, #00b4d8);
+    outline-offset: 3px;
+  }
+  .search-box { min-height: 44px; }
+  .search-box input { min-height: 28px; }
+  .products-grid { align-items: stretch; }
+  .product-card {
+    min-width: 0;
+    min-height: 100%;
+    border-color: var(--store-soft-border);
+    border-radius: var(--store-card-radius);
+    box-shadow: var(--store-shadow);
+  }
+  .product-card:hover { box-shadow: var(--store-shadow-hover); }
+  .product-img { min-height: 164px; }
+  .product-body { min-width: 0; }
+  .product-body h3, .product-name {
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+  .product-body p, .product-desc {
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+  .product-footer { gap: 12px; }
+  .product-footer .btn { min-height: 44px; }
+  .modal-overlay, .cart-overlay, #productModal, #cartOverlay {
+    overscroll-behavior: contain;
+  }
+  .modal, #modalContent {
+    width: min(92vw, 620px);
+    max-height: min(88vh, 760px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .modal-close, .cart-close {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .cart-sidebar, #cartSidebar {
+    width: min(100%, 460px);
+    overscroll-behavior: contain;
+  }
+  .cart-footer {
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+  }
+  .checkout-reassurance, .checkout-reassure {
+    display: grid;
+    gap: 8px;
+    margin: 12px 0 14px;
+    padding: 14px;
+    border: 1px solid rgba(0, 180, 216, 0.25);
+    border-radius: 12px;
+    background: rgba(0, 180, 216, 0.06);
+    color: #374151 !important;
+    -webkit-text-fill-color: #374151 !important;
+    font-size: 12px;
+    line-height: 1.55;
+  }
+  .checkout-reassurance strong, .checkout-reassure strong {
+    color: #0b1e3a !important;
+    -webkit-text-fill-color: #0b1e3a !important;
+  }
+  .store-empty-state {
+    display: none;
+    grid-column: 1 / -1;
+    padding: 48px 20px;
+    border: 1px dashed var(--store-soft-border);
+    border-radius: 16px;
+    color: var(--store-muted);
+    text-align: center;
+  }
+  .store-empty-state.is-visible { display: block; }
+  body.rn-modal-open, body.rn-cart-open { overflow: hidden; }
+  @media (max-width: 900px) {
+    .rn-featured-grid, .featured-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .products-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 640px) {
+    .container, .nav-inner, .filters-inner {
+      width: min(100% - 24px, var(--store-content-width));
+    }
+    .rn-featured-grid, .featured-grid, .products-grid {
+      grid-template-columns: 1fr;
+    }
+    .store-hero { padding-top: 44px; }
+    .store-hero h1 { font-size: clamp(30px, 10vw, 42px); }
+    .filters-inner {
+      align-items: stretch;
+      padding-block: 10px;
+    }
+    .filter-btn { flex: 0 0 auto; }
+    .search-box {
+      order: -1;
+      width: 100%;
+      margin-left: 0;
+    }
+    .search-box input { width: 100%; }
+    .product-img { min-height: 190px; }
+    .product-footer {
+      align-items: stretch;
+      flex-direction: column;
+    }
+    .product-footer .btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .cart-sidebar, #cartSidebar { width: 100%; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .product-card, .btn, .cart-sidebar, .toast {
+      transition: none !important;
+    }
+  }
+</style>
+
+
+
+
+<script>
+/* RN store polish: Escape closes modal/cart; filter aria-pressed sync */
+(function(){
+  if (window.__rnStorePolishEsc) return;
+  window.__rnStorePolishEsc = true;
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    var pm = document.getElementById('productModal');
+    if (pm && pm.classList.contains('open')) {
+      if (typeof closeModal === 'function') closeModal();
+      return;
+    }
+    var side = document.getElementById('cartSidebar');
+    var ov = document.getElementById('cartOverlay');
+    if (side && (side.classList.contains('open') || (ov && ov.classList.contains('open')))) {
+      if (typeof toggleCart === 'function') toggleCart();
+    }
+  });
+  function syncFilterPressed(){
+    document.querySelectorAll('.filter-btn, [data-cat].filter-btn, button[data-cat]').forEach(function(btn){
+      var active = btn.classList.contains('active');
+      btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+    });
+  }
+  document.addEventListener('click', function(e){
+    var t = e.target.closest && e.target.closest('.filter-btn, button[data-cat]');
+    if (t) setTimeout(syncFilterPressed, 0);
+  });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncFilterPressed);
+  else syncFilterPressed();
+})();
+</script>
+
+
+<script>
+/* RN store polish pass: single search/filter bind — calls existing filterProducts */
+(function(){
+  "use strict";
+  if (window.RNStoreFiltersInitialized) return;
+  window.RNStoreFiltersInitialized = true;
+
+  function getSearchInput() {
+    return document.getElementById("searchInput") || document.getElementById("rnStoreSearch");
+  }
+
+  function syncAriaPressed() {
+    document.querySelectorAll(".filter-btn, button[data-cat], [data-filter]").forEach(function(btn) {
+      btn.setAttribute("aria-pressed", btn.classList.contains("active") ? "true" : "false");
+    });
+  }
+
+  function runFilter() {
+    if (typeof window.filterProducts === "function") {
+      try { window.filterProducts(); } catch (e) {}
+    }
+    syncAriaPressed();
+  }
+
+  function init() {
+    var input = getSearchInput();
+    if (input && input.dataset.rnPolishBound !== "true") {
+      input.dataset.rnPolishBound = "true";
+      if (!input.getAttribute("aria-label")) {
+        input.setAttribute("aria-label", "Search digital products");
+      }
+      input.addEventListener("input", runFilter);
+      input.addEventListener("keydown", function(e) {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          runFilter();
+        }
+      });
+    }
+
+    document.querySelectorAll(".filter-btn, button[data-cat], [data-filter]").forEach(function(btn) {
+      if (btn.dataset.rnPolishBound === "true") return;
+      btn.dataset.rnPolishBound = "true";
+      btn.addEventListener("click", function() {
+        document.querySelectorAll(".filter-btn, button[data-cat], [data-filter]").forEach(function(b) {
+          b.classList.remove("active");
+        });
+        btn.classList.add("active");
+        // allow existing onclick="filterProducts()" to run; also run after
+        setTimeout(runFilter, 0);
+      });
+    });
+
+    syncAriaPressed();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init, { once: true });
+  } else {
+    init();
+  }
+})();
+</script>
+
+
+<script>
+/* RN store polish pass: modal/cart body scroll lock + aria sync */
+(function(){
+  "use strict";
+  if (window.RNStoreModalA11yInitialized) return;
+  window.RNStoreModalA11yInitialized = true;
+
+  function syncModal() {
+    var overlay = document.getElementById("productModal");
+    var content = document.getElementById("modalContent");
+    if (!overlay) return;
+    var isOpen = overlay.classList.contains("open");
+    overlay.setAttribute("aria-hidden", isOpen ? "false" : "true");
+    document.body.classList.toggle("rn-modal-open", isOpen);
+  }
+  function syncCart() {
+    var overlay = document.getElementById("cartOverlay");
+    var side = document.getElementById("cartSidebar");
+    if (!overlay && !side) return;
+    var isOpen = (overlay && overlay.classList.contains("open")) || (side && side.classList.contains("open"));
+    if (overlay) overlay.setAttribute("aria-hidden", isOpen ? "false" : "true");
+    if (side) side.setAttribute("aria-hidden", isOpen ? "false" : "true");
+    document.body.classList.toggle("rn-cart-open", !!isOpen);
+  }
+  var mo = new MutationObserver(function(){ syncModal(); syncCart(); });
+  ["productModal","cartOverlay","cartSidebar"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) mo.observe(el, { attributes: true, attributeFilter: ["class","style","aria-hidden"] });
+  });
+  syncModal();
+  syncCart();
 })();
 </script>
 
