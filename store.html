@@ -147,7 +147,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="preload" href="/logo.png" as="image"/>
 <link rel="canonical" href="https://ruffneck-entertainment.vercel.app/store"/>
 <title>AI Guides, Templates and Digital Products | RuffNeck</title>
@@ -205,7 +205,6 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="/css/store-commercial.css"/>
 <script src="https://checkout.flutterwave.com/v3.js"></script>
 <script>
 // Search input enhancements — runs after DOM is fully ready
@@ -1290,21 +1289,7 @@ button,a,.btn{touch-action:manipulation}
   </div>
   </div>
 
-<div class="rn-lang" id="rnLang">
-  <button type="button" class="rn-lang-btn" id="rnLangBtn" aria-haspopup="true" aria-expanded="false" title="Translate page">
-    <span aria-hidden="true">🌐</span> <span id="rnLangLabel">EN</span>
-  </button>
-  <div class="rn-lang-menu" role="menu" id="rnLangMenu">
-    <button type="button" data-lang="en" data-label="EN" class="active">English</button>
-    <button type="button" data-lang="ha" data-label="HA">Hausa</button>
-    <button type="button" data-lang="yo" data-label="YO">Yorùbá</button>
-    <button type="button" data-lang="ig" data-label="IG">Igbo</button>
-    <button type="button" data-lang="fr" data-label="FR">Français</button>
-    <button type="button" data-lang="es" data-label="ES">Español</button>
-    <button type="button" data-lang="ar" data-label="AR">العربية</button>
-  </div>
-</div>
-<div id="google_translate_element" aria-hidden="true"></div>
+
 
 </nav>
 
@@ -1319,7 +1304,7 @@ button,a,.btn{touch-action:manipulation}
 #rnStoreSearchWrap{max-width:640px;margin:12px auto;padding:0 16px}
 #rnStoreSearch{width:100%;min-height:48px;padding:12px 16px;border-radius:12px;border:1px solid rgba(0,180,216,.35);background:#0B1E3A;color:#F8FAFC;font-size:16px}
 </style>
-<div id="rnStoreSearchWrap" hidden style="display:none!important">
+<div id="rnStoreSearchWrap">
   <input type="search" id="rnStoreSearch" placeholder="Search products…" autocomplete="off"/>
 </div>
 <script id="rn-p1-store-search-js">
@@ -3256,68 +3241,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 
-<script>
-(function(){
-  function loadGT(){
-    if (window.google && google.translate) return;
-    var s = document.createElement('script');
-    s.src = '//translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate';
-    document.head.appendChild(s);
-  }
-  window.rnInitGoogleTranslate = function(){
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,ha,yo,ig,fr,es,ar',
-      autoDisplay: false,
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  };
-  function setLang(lang, label){
-    document.querySelectorAll('#rnLangMenu button').forEach(function(b){
-      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-    });
-    var lab = document.getElementById('rnLangLabel');
-    if (lab) lab.textContent = label || lang.toUpperCase();
-    localStorage.setItem('rn_lang', lang);
-    localStorage.setItem('rn_lang_label', label || lang.toUpperCase());
-    if (lang === 'en') {
-      // clear translate cookie-ish by reloading without googtrans
-      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
-      if (location.href.indexOf('googtrans') >= 0) location.href = location.pathname + location.search + location.hash;
-      else /*reload-disabled*/void 0;
-      return;
-    }
-    document.cookie = 'googtrans=/en/' + lang + ';path=/;';
-    document.cookie = 'googtrans=/en/' + lang + ';path=/;domain=.' + location.hostname;
-    /*reload-disabled*/void 0;
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    loadGT();
-    var wrap = document.getElementById('rnLang');
-    var btn = document.getElementById('rnLangBtn');
-    var menu = document.getElementById('rnLangMenu');
-    if (!btn || !menu) return;
-    var saved = localStorage.getItem('rn_lang');
-    var savedL = localStorage.getItem('rn_lang_label');
-    if (saved && savedL) {
-      var lab = document.getElementById('rnLangLabel');
-      if (lab) lab.textContent = savedL;
-    }
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      wrap.classList.toggle('open');
-      btn.setAttribute('aria-expanded', wrap.classList.contains('open'));
-    });
-    menu.querySelectorAll('button').forEach(function(b){
-      b.addEventListener('click', function(){
-        setLang(b.getAttribute('data-lang'), b.getAttribute('data-label'));
-      });
-    });
-    document.addEventListener('click', function(){ wrap.classList.remove('open'); });
-  });
-})();
-</script>
+
 
 
 
@@ -4428,6 +4352,17 @@ button[data-cat].active {
   });
   syncModal();
   syncCart();
+})();
+</script>
+
+
+<script>
+/* Translator removed: clear any leftover Google Translate cookie */
+(function(){
+  try {
+    document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+    document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
+  } catch(e) {}
 })();
 </script>
 
