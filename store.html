@@ -3201,6 +3201,14 @@ function rnQuickAsk(topic){
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function(){
+    // Clear outdated caches that could keep a loading state
+    if (window.caches && caches.keys) {
+      caches.keys().then(function(keys){
+        keys.forEach(function(k){
+          if (k.indexOf('ruffneck-v2026-09-01') === -1) caches.delete(k);
+        });
+      }).catch(function(){});
+    }
     navigator.serviceWorker.register('/sw.js')
       .then(function(reg){ console.log('RuffNeck SW registered:', reg.scope); })
       .catch(function(err){ console.log('SW registration failed:', err); });
@@ -3439,39 +3447,38 @@ window.RNCms = {
 </script>
 
 <script id="rn-admin-store-load">
-document.addEventListener('DOMContentLoaded', async function(){
-  var products = [];
-  if (window.RNCms) {
-    try {
-      var r = await Promise.race([
-        window.RNCms.listProducts(),
-        new Promise(function(resolve){ setTimeout(function(){ resolve({ products: [] }); }, 2500); })
-      ]);
-      products = (r && r.products) || [];
-    } catch (e) {
-      products = [];
-    }
+document.addEventListener('DOMContentLoaded', function(){
+  function applyCmsProducts(products){
+    products = products || [];
+    var active = products.filter(function(p){
+      var s=(p.status||'active').toLowerCase();
+      return s==='active'||s==='published'||s==='live';
+    });
+    var grid = document.getElementById('newArrivalsGrid') || document.querySelector('.products-grid');
+    if (!grid) return;
+    grid.querySelectorAll('[data-admin-product="1"]').forEach(function(n){ n.remove(); });
+    window.PRODUCTS = window.PRODUCTS || {};
+    active.forEach(function(p){
+      if (!p||!p.id) return;
+      var price = p.price || 0;
+      if (p.tiers && p.tiers.beginner) price = p.tiers.beginner.price || price;
+      PRODUCTS[p.id] = { name:p.name, cat:p.cat, emoji:p.emoji||'📦', tiers:[{level:'Standard', price:price, desc:p.desc||'', includes:[p.desc||''], pdf:''}] };
+      var card = document.createElement('div');
+      card.className = 'product-card';
+      card.setAttribute('data-admin-product','1');
+      card.setAttribute('data-name', p.name||'');
+      card.innerHTML = '<div class="product-img"><span>'+(p.emoji||'📦')+'</span><span class="product-new">New</span></div><div class="product-body"><h3 class="product-name">'+(p.name||'')+'</h3><p class="product-desc">'+(p.desc||'')+'</p><div class="product-price">From ₦'+(Number(price)||0).toLocaleString()+'</div><button type="button" class="btn btn-primary btn-sm" onclick="typeof openModal===\'function\'&&openModal(\''+p.id+'\')">View / Buy</button></div>';
+      grid.insertBefore(card, grid.firstChild);
+    });
   }
-  var active = products.filter(function(p){
-    var s=(p.status||'active').toLowerCase();
-    return s==='active'||s==='published'||s==='live';
-  });
-  var grid = document.getElementById('newArrivalsGrid') || document.querySelector('.products-grid');
-  if (!grid) return;
-  grid.querySelectorAll('[data-admin-product="1"]').forEach(function(n){ n.remove(); });
-  window.PRODUCTS = window.PRODUCTS || {};
-  active.forEach(function(p){
-    if (!p||!p.id) return;
-    var price = p.price || 0;
-    if (p.tiers && p.tiers.beginner) price = p.tiers.beginner.price || price;
-    PRODUCTS[p.id] = { name:p.name, cat:p.cat, emoji:p.emoji||'📦', tiers:[{level:'Standard', price:price, desc:p.desc||'', includes:[p.desc||''], pdf:''}] };
-    var card = document.createElement('div');
-    card.className = 'product-card';
-    card.setAttribute('data-admin-product','1');
-    card.setAttribute('data-name', p.name||'');
-    card.innerHTML = '<div class="product-img"><span>'+(p.emoji||'📦')+'</span><span class="product-new">New</span></div><div class="product-body"><h3 class="product-name">'+(p.name||'')+'</h3><p class="product-desc">'+(p.desc||'')+'</p><div class="product-price">From ₦'+(Number(price)||0).toLocaleString()+'</div><button type="button" class="btn btn-primary btn-sm" onclick="typeof openModal===\'function\'&&openModal(\''+p.id+'\')">View / Buy</button></div>';
-    grid.insertBefore(card, grid.firstChild);
-  });
+  // Non-blocking: never hold page load. Static products already in HTML.
+  if (window.RNCms && typeof window.RNCms.listProducts === 'function') {
+    try {
+      window.RNCms.listProducts().then(function(r){
+        applyCmsProducts((r && r.products) || []);
+      }).catch(function(){ applyCmsProducts([]); });
+    } catch (e) { applyCmsProducts([]); }
+  }
 });
 </script>
 
