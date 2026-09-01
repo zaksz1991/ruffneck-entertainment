@@ -3200,78 +3200,15 @@ function rnQuickAsk(topic){
 
 <script>
 if ('serviceWorker' in navigator) {
+  /* DISABLED on store — was keeping mobile browser in loading state */
   window.addEventListener('load', function(){
-    // Clear outdated caches that could keep a loading state
+    navigator.serviceWorker.getRegistrations().then(function(regs){
+      regs.forEach(function(r){ r.unregister(); });
+    }).catch(function(){});
     if (window.caches && caches.keys) {
-      caches.keys().then(function(keys){
-        keys.forEach(function(k){
-          if (k.indexOf('ruffneck-v2026-09-01') === -1) caches.delete(k);
-        });
-      }).catch(function(){});
+      caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
     }
-    navigator.serviceWorker.register('/sw.js')
-      .then(function(reg){ console.log('RuffNeck SW registered:', reg.scope); })
-      .catch(function(err){ console.log('SW registration failed:', err); });
   });
-}
-</script>
-  <script src="/js/cms.js"></script>
-
-<!-- Vercel Web Analytics + Speed Insights -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
-<script>
-  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/speed-insights/script.js"></script>
-
-
-<script>
-/* Robust product search — global */
-
-document.addEventListener('DOMContentLoaded', function() {
-  var input = document.getElementById('searchInput');
-  if (input) {
-    input.addEventListener('input', window.filterProducts);
-    input.addEventListener('keyup', window.filterProducts);
-  }
-  document.querySelectorAll('.search-btn, [data-search-btn]').forEach(function(btn) {
-    btn.addEventListener('click', function(e) { e.preventDefault(); window.filterProducts(); });
-  });
-  document.querySelectorAll('.filter-btn').forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      setTimeout(window.filterProducts, 10);
-    });
-  });
-});
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script id="rn-wa-templates">
-window.RN_WA = {
-  phone: "2348033807856",
-  templates: {"general": "Hello RuffNeck Entertainment,\n\nI found you online and I would like to enquire about your services.\n\nName:\nBusiness / role:\nHow we can help:", "consultation": "Hello RuffNeck Entertainment,\n\nI would like to book a consultation / discovery call.\n\nName:\nBusiness:\nTopic (AI / IT / Marketing / Career / Other):\nPreferred time:", "cv": "Hello RuffNeck Entertainment,\n\nI am interested in the Professional CV, Cover Letter & LinkedIn service.\n\nName:\nTarget role / industry:\nPackage interest (Essential / Professional / Executive):", "it_support": "Hello RuffNeck Entertainment,\n\nI need IT / computer support.\n\nName:\nDevice (Windows/Mac):\nIssue or service (setup, Excel, Wi-Fi, printer, training):\nLocation (home / office / remote):", "warehouse_template": "Hello RuffNeck Entertainment,\n\nI want the free warehouse reporting template mentioned on the website.\n\nName:\nEmail:\nBusiness type:", "internship": "Hello RuffNeck Entertainment,\n\nI am applying for the Remote Internship Programme 2026.\n\nFull name:\nPhone/WhatsApp:\nEmail:\nPreferred track (Data/AI, Admin, Content, Support, Operations):\nShort intro:", "volunteer": "Hello RuffNeck Entertainment,\n\nI am applying for the Volunteer Programme 2026.\n\nFull name:\nPhone/WhatsApp:\nEmail:\nSkills / availability:", "ai_training": "Hello RuffNeck Entertainment,\n\nI am interested in AI training / automation for my team or myself.\n\nName:\nOrganisation (if any):\nTeam size:\nGoals:"},
-  link: function(key) {
-    var t = this.templates[key] || this.templates.general;
-    return "https://wa.me/" + this.phone + "?text=" + encodeURIComponent(t);
-  },
-  open: function(key) {
-    window.open(this.link(key), "_blank", "noopener,noreferrer");
-  }
 };
 </script>
 
@@ -3446,41 +3383,7 @@ window.RNCms = {
 };
 </script>
 
-<script id="rn-admin-store-load">
-document.addEventListener('DOMContentLoaded', function(){
-  function applyCmsProducts(products){
-    products = products || [];
-    var active = products.filter(function(p){
-      var s=(p.status||'active').toLowerCase();
-      return s==='active'||s==='published'||s==='live';
-    });
-    var grid = document.getElementById('newArrivalsGrid') || document.querySelector('.products-grid');
-    if (!grid) return;
-    grid.querySelectorAll('[data-admin-product="1"]').forEach(function(n){ n.remove(); });
-    window.PRODUCTS = window.PRODUCTS || {};
-    active.forEach(function(p){
-      if (!p||!p.id) return;
-      var price = p.price || 0;
-      if (p.tiers && p.tiers.beginner) price = p.tiers.beginner.price || price;
-      PRODUCTS[p.id] = { name:p.name, cat:p.cat, emoji:p.emoji||'📦', tiers:[{level:'Standard', price:price, desc:p.desc||'', includes:[p.desc||''], pdf:''}] };
-      var card = document.createElement('div');
-      card.className = 'product-card';
-      card.setAttribute('data-admin-product','1');
-      card.setAttribute('data-name', p.name||'');
-      card.innerHTML = '<div class="product-img"><span>'+(p.emoji||'📦')+'</span><span class="product-new">New</span></div><div class="product-body"><h3 class="product-name">'+(p.name||'')+'</h3><p class="product-desc">'+(p.desc||'')+'</p><div class="product-price">From ₦'+(Number(price)||0).toLocaleString()+'</div><button type="button" class="btn btn-primary btn-sm" onclick="typeof openModal===\'function\'&&openModal(\''+p.id+'\')">View / Buy</button></div>';
-      grid.insertBefore(card, grid.firstChild);
-    });
-  }
-  // Non-blocking: never hold page load. Static products already in HTML.
-  if (window.RNCms && typeof window.RNCms.listProducts === 'function') {
-    try {
-      window.RNCms.listProducts().then(function(r){
-        applyCmsProducts((r && r.products) || []);
-      }).catch(function(){ applyCmsProducts([]); });
-    } catch (e) { applyCmsProducts([]); }
-  }
-});
-</script>
+<!-- rn-admin-store-load removed: was causing mobile loading hang -->
 
 
 <script id="rn-phase-d-analytics">

@@ -1,26 +1,21 @@
-FIX: Store endless loading
-==========================
+STORE — STATIC LOAD (nuclear fix for endless loading)
+=====================================================
 
-Cause:
-  Service worker was intercepting /api/cms/products.
-  That API is slow (~2s). Page stayed in "loading/processing".
+This store.html:
+  - Unregisters service workers and clears caches on open
+  - Does NOT load /js/cms.js
+  - Does NOT fetch /api/cms/products on page load
+  - Does NOT register a new service worker
+  - Keeps all your product cards, Flutterwave, cart, checkout
 
-Files to upload:
-  1. sw.js       → site root (replace existing sw.js)
-  2. store.html  → site root (replace existing store.html)
+Your products are already in the HTML (static). They do not need the API to show.
 
-What changed:
-  - SW no longer touches /api/* routes
-  - New cache name clears old bad cache
-  - CMS product load is non-blocking (static products show immediately)
+UPLOAD
+  1. Replace store.html only
+  2. On your PHONE you MUST clear the old worker once:
+     Chrome → padlock/site settings → Clear & reset
+     OR open in Incognito
+  3. Open /store
 
-NOT changed:
-  Flutterwave, product cards, checkout, cart
-
-AFTER UPLOAD:
-  1. Redeploy on Vercel
-  2. On phone: open site → clear site data OR Incognito
-  3. Visit /store — loading should finish; scroll to see all products
-
-If still stuck once: Chrome menu → Settings → Site settings →
-  ruffneck-entertainment.vercel.app → Clear & reset
+If Incognito works but normal browser does not, the old service worker
+is still on the device — Clear & reset is required once.
