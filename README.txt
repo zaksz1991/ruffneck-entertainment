@@ -1,11 +1,18 @@
-UX/UI STORE UPGRADE
-===================
-Hierarchy: announce → header → hero → trust → filters → featured → catalogue → services → process → FAQ → CTA → footer
+RUFFNECK MULTI-PAGE UX UPGRADE
+==============================
 
-NOT changed:
-- Flutterwave key & checkout script
-- initiatePayment / cart / modal commerce JS
-- WhatsApp, home, blog URLs
-- Product IDs and openModal targets
+Shared: css/rn-site-ux.css (design tokens, filters, cards, touch, a11y)
 
-Client-side only: category filter, search, mobile menu, result count.
+Updated HTML:
+  index.html, blog.html, store.html
+  start-here, faq, contact-page, founder, about-full, consulting, 404
+
+Store includes the full UX hierarchy upgrade.
+Home/Blog get shared visual system + structure fixes + announce bar.
+
+NOT changed: Flutterwave, APIs, admin, form handlers, external URLs.
+
+Deploy:
+  Upload css/rn-site-ux.css to /css/
+  Replace the HTML files
+  Incognito test Home → Blog → Store

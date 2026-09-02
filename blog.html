@@ -1,3 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link rel="stylesheet" href="/css/professional-ux.css"/>
+  <link rel="stylesheet" href="/css/cleanup.css"/>
+
+<style id="rn-live-audit-blog-2b">
+/* ==== RN-LIVE-AUDIT-BLOG-2B (preview) ==== */
+.card-meta,
+.article-meta,
+.featured-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.4rem 0.75rem !important;
+  margin-top: 0.75rem !important;
+  color: #5d6b75 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  opacity: 1 !important;
+}
+.card-meta span,
+.article-meta span,
+.featured-meta span {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.3rem !important;
+  color: #5d6b75 !important;
+  opacity: 1 !important;
+  white-space: normal !important;
+}
+.card-dot {
+  width: 4px !important;
+  height: 4px !important;
+  border-radius: 50% !important;
+  background: #94a3b8 !important;
+  flex-shrink: 0 !important;
+}
+.read-time { color: #64748b !important; font-weight: 600 !important; }
+.blog-card,
+.article-card {
+  height: 100% !important;
+  border: 1px solid #d9e3e8 !important;
+  border-radius: 0.9rem !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(16, 32, 43, 0.07) !important;
+}
+.blog-card:hover,
+.article-card:hover {
+  border-color: rgba(15, 107, 120, 0.45) !important;
+  box-shadow: 0 14px 30px rgba(16, 32, 43, 0.12) !important;
+}
+.blog-card h3,
+.article-card h3 { line-height: 1.25 !important; color: #10202b !important; }
+.blog-card p,
+.article-card p,
+.blog-card-body p {
+  color: #5d6b75 !important;
+  line-height: 1.65 !important;
+  opacity: 1 !important;
+}
+.card-cat-badge {
+  display: inline-flex !important;
+  padding: 0.25rem 0.65rem !important;
+  border-radius: 999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.35rem !important;
+}
+.rn-blog-meta,
+.rn-blog-meta p,
+.rn-blog-meta span,
+.rn-blog-meta strong {
+  color: #1f2937 !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta a { color: #0e7490 !important; font-weight: 700 !important; }
+@media (max-width: 600px) {
+  .card-meta,
+  .article-meta,
+  .featured-meta {
+    align-items: flex-start !important;
+    flex-direction: column !important;
+    gap: 0.25rem !important;
+  }
+  .card-dot { display: none !important; }
+}
+/* ==== END RN-LIVE-AUDIT-BLOG-2B ==== */
+</style>
 
 <style id="rn-ux-blog-pass-3">
 /* ==== RN-UX-BLOG-PASS-3 (preview) — visual only; no content/URL/JS changes ==== */
@@ -116,7 +205,7 @@
 }
 .filter-btn {
   color: #1f2937 !important;
-  border-color: #cbd5e1 !important;
+  border-color:#374151 !important;
   background: #fff !important;
   opacity: 1 !important;
 }
@@ -129,9 +218,7 @@
 
 /* ==== END RN-UX-BLOG-PASS-3 ==== */
 </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="preload" href="/logo.png" as="image"/>
@@ -232,14 +319,14 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 /* HERO */
 .blog-hero{background:radial-gradient(ellipse at 30% 50%,#0B1E3A 0%,#040C1A 70%,#010408 100%);padding:64px 0 48px;color:var(--white);text-align:center}
 .blog-hero .label{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--cyan);margin-bottom:14px}
-.blog-hero h1{font-size:clamp(28px,4vw,46px);font-weight:700;margin-bottom:14px;line-height:1.2}
+.blog-hero h1{font-size:clamp(28px,4vw,46px);font-weight:700;margin-bottom:14px;line-height:1.2;color:#fff!important;-webkit-text-fill-color:#fff!important}
 .blog-hero h1 em{font-style:normal;background:linear-gradient(90deg,var(--cyan-lt),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.blog-hero p{font-size:16px;color:rgba(255,255,255,0.6);max-width:560px;margin:0 auto;line-height:1.7}
+.blog-hero p{font-size:16px;color:#334155;max-width:560px;margin:0 auto;line-height:1.7}
 
 /* FILTERS */
 .blog-filters{background:var(--white);border-bottom:1px solid var(--border);padding:16px 0;position:sticky;top:64px;z-index:90}
 .filters-inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.filter-btn{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;border:1.5px solid var(--border);color:var(--text-muted);background:var(--white);transition:all 0.2s;cursor:pointer}
+.filter-btn{padding:8px 18px;border-radius:100px;font-size:13px;font-weight:700;border:2px solid #64748b;color:#0b1e3a;background:#fff;transition:all 0.2s;cursor:pointer}
 .filter-btn.active,.filter-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy)}
 .blog-search{margin-left:auto;display:flex;align-items:center;gap:8px;background:var(--bg-light);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:8px 14px}
 .blog-search input{border:none;background:none;font-family:var(--font-display);font-size:13px;color:var(--text-dark);outline:none;width:180px}
@@ -630,9 +717,7 @@ body {
 .svc-page-hero .section-label {
   color: #FFFFFF !important;
 }
-.svc-page-hero p {
-  color: rgba(255, 255, 255, 0.92) !important;
-}
+.svc-page-hero p { color: #334155 !important; } /* was white-on-white — fixed */
 .svc-panel {
   background: #FFFFFF !important;
   color: #1F2937 !important;
@@ -1074,7 +1159,20 @@ section.section-teaser {
 }
 </script>
 
-<body>
+<link rel="stylesheet" href="/css/knowledge-hub.css"/>
+
+
+
+<link rel="stylesheet" href="/css/rn-site-ux.css"/>
+</head>
+<body class="rn-ux-page">
+<div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
+
+
+<script id="rn-filterblog-stub">
+window.filterBlog = window.filterBlog || function(){ /* defined later */ };
+</script>
+
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
 <style id="rn-a11y-phase-e">
 .rn-skip:focus{left:12px;top:12px}
@@ -1118,7 +1216,7 @@ button,a,.btn{touch-action:manipulation}
 
 </nav>
 
-<main\1 id="main">
+<main id="main">
 
 <style id="rn-blog-phase-d">
 #rnBlogCats{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:12px 16px 8px;max-width:900px;margin:0 auto}
@@ -1142,15 +1240,15 @@ button,a,.btn{touch-action:manipulation}
   color: #F8FAFC;
   font-size: 16px;
 }
-#rnBlogSearch::placeholder { color: #94A3B8; }
+#rnBlogSearch::placeholder { color:#1e293b; }
 #rnBlogSearchCount {
   text-align: center;
-  color: #94A3B8;
+  color:#1e293b;
   font-size: 13px;
   margin: 6px 0 0;
 }
 </style>
-<div id="rnBlogSearchWrap">
+<div id="rnBlogSearchWrap" style="display:none!important" hidden>
   <label for="rnBlogSearch" class="sr-only" style="position:absolute;left:-9999px">Search articles</label>
   <input type="search" id="rnBlogSearch" placeholder="Search articles…" autocomplete="off" enterkeyhint="search"/>
   <p id="rnBlogSearchCount" aria-live="polite"></p>
@@ -1304,6 +1402,14 @@ button,a,.btn{touch-action:manipulation}
       </div>
     </div>
   </div>
+</div>
+
+
+<!-- CMS published posts (Admin) — always visible -->
+<div id="cmsPostsSection" class="cms-posts-section" style="max-width:1100px;margin:0 auto 28px;padding:0 16px;">
+  <h2 class="grid-heading" style="margin-bottom:12px;">🆕 Latest from Admin</h2>
+  <p id="cmsPostsStatus" style="font-size:13px;color:#64748b;margin:0 0 12px;">Loading new posts…</p>
+  <div id="cmsPostsGrid" class="blog-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;"></div>
 </div>
 
 <!-- BLOG GRID -->
@@ -2310,7 +2416,7 @@ function rnQuickAsk(topic){
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function(){
-    navigator.serviceWorker.register('/sw.js')
+    void 0
       .then(function(reg){ console.log('RuffNeck SW registered:', reg.scope); })
       .catch(function(err){ console.log('SW registration failed:', err); });
   });
@@ -2485,128 +2591,253 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
 <script id="rn-cms-db-client">
-window.RNCms = {
-  async listPosts(){
-    try {
-      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (res.ok && data.ok && Array.isArray(data.posts)) {
-        return { source:'db', posts: data.posts.map(function(p){
+window.RNCms = window.RNCms || {};
+window.RNCms.listPosts = async function () {
+  try {
+    var res = await fetch("/api/cms/posts", {
+      credentials: "same-origin",
+      cache: "no-store"
+    });
+    var data = await res.json();
+    if (res.ok && data && data.ok && Array.isArray(data.posts)) {
+      return {
+        source: "db",
+        posts: data.posts.map(function (p) {
           return {
-            id:p.id, title:p.title, cat:p.cat, emoji:p.emoji, image:p.image,
-            desc:p.desc||'', body:p.body||'', tags:p.tags||[], author:p.author,
-            readTime:p.read_time||p.readTime||'5', status:p.status||'draft',
-            created:p.created, updated:p.updated
+            id: p.id,
+            title: p.title,
+            cat: p.cat,
+            emoji: p.emoji,
+            image: p.image,
+            desc: p.desc || p.description || "",
+            body: p.body || "",
+            tags: p.tags || [],
+            author: p.author || "RuffNeck Entertainment",
+            readTime: p.read_time || p.readTime || "5",
+            status: p.status || "draft",
+            created: p.created || p.created_at || ""
           };
-        })};
-      }
-    } catch(e) {}
-    try { return { source:'local', posts: JSON.parse(localStorage.getItem('rn_blog_posts')||'[]') }; }
-    catch(e){ return { source:'local', posts: [] }; }
-  },
-  async listProducts(){
-    try {
-      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
-      var data = await res.json();
-      if (res.ok && data.ok && Array.isArray(data.products)) {
-        return { source:'db', products: data.products.map(function(p){
-          return {
-            id:p.id, name:p.name, cat:p.cat, emoji:p.emoji, image:p.image,
-            desc:p.desc||'', fullDesc:p.full_desc||p.fullDesc||'', tiers:p.tiers||{},
-            price:p.price, status:p.status||'active', created:p.created, updated:p.updated
-          };
-        })};
-      }
-    } catch(e) {}
-    try { return { source:'local', products: JSON.parse(localStorage.getItem('rn_products')||'[]') }; }
-    catch(e){ return { source:'local', products: [] }; }
-  },
-  async savePost(post){
-    var method = post.id && post._exists ? 'PUT' : 'POST';
-    delete post._exists;
-    var res = await fetch('/api/cms/posts', {
-      method: method, credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(post)
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
-    return data.post || post;
-  },
-  async deletePost(id){
-    var res = await fetch('/api/cms/posts', {
-      method:'DELETE', credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id:id})
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
-  },
-  async saveProduct(product){
-    var method = product.id && product._exists ? 'PUT' : 'POST';
-    delete product._exists;
-    var res = await fetch('/api/cms/products', {
-      method: method, credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify(product)
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Save failed — check Supabase on Vercel');
-    return data.product || product;
-  },
-  async deleteProduct(id){
-    var res = await fetch('/api/cms/products', {
-      method:'DELETE', credentials:'same-origin',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({id:id})
-    });
-    var data = await res.json().catch(function(){return {};});
-    if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
+        })
+      };
+    }
+    console.warn("RNCms.listPosts: bad response", res.status, data);
+    return { source: "db", posts: [] };
+  } catch (err) {
+    console.warn("RNCms.listPosts failed", err);
+    return { source: "error", posts: [] };
   }
 };
 </script>
 
+
 <script id="rn-admin-blog-load">
-document.addEventListener('DOMContentLoaded', async function(){
-  var posts = [];
-  if (window.RNCms) {
-    var r = await window.RNCms.listPosts();
-    posts = r.posts || [];
+(function () {
+  "use strict";
+
+  function isPublished(p) {
+    var s = String((p && p.status) || "published").toLowerCase().trim();
+    return s === "published" || s === "publish" || s === "live" || s === "public";
   }
-  var published = posts.filter(function(p){
-    var s = (p.status||'published').toLowerCase();
-    return s==='published'||s==='publish'||s==='live';
+
+  function escapeHtml(str) {
+    return String(str || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function mapDataCat(cat) {
+    var c = String(cat || "").toLowerCase();
+    if (/ai|automation|prompt|llm|chatgpt|webinar|future of work/.test(c)) return "ai";
+    if (/ops|warehouse|sop|operation|logistics/.test(c)) return "ops";
+    if (/market|seo|social|brand|content/.test(c)) return "marketing";
+    if (/career|cv|resume|job|internship/.test(c)) return "career";
+    if (/it |excel|office|computer|wifi|printer/.test(c)) return "it";
+    return "ai"; // default so filters don't hide unknown cats when not "all"
+  }
+
+  function buildCard(p) {
+    var card = document.createElement("article");
+    card.className = "blog-card rn-cms-post";
+    card.setAttribute("data-admin-post", "1");
+    card.setAttribute("data-post-id", p.id || "");
+    card.setAttribute("data-title", p.title || "");
+    card.setAttribute("data-cat", mapDataCat(p.cat));
+    card.setAttribute("data-category", p.cat || "Blog");
+    card.style.cssText = "display:flex;flex-direction:column;background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;cursor:pointer;min-height:180px;";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+
+    var emoji = escapeHtml(p.emoji || "📝");
+    var cat = escapeHtml(p.cat || "Blog");
+    var title = escapeHtml(p.title || "Untitled");
+    var desc = escapeHtml(p.desc || "");
+    var author = escapeHtml(p.author || "RuffNeck Entertainment");
+
+    card.innerHTML =
+      '<div class="blog-thumb" style="background:#0B1E3A;color:#fff;min-height:88px;display:flex;align-items:center;justify-content:center;position:relative;">' +
+        '<span style="font-size:28px;">' + emoji + "</span>" +
+        '<span class="card-cat-badge" style="position:absolute;left:10px;bottom:10px;background:#00B4D8;color:#0B1E3A;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;">' + cat + "</span>" +
+        '<span class="card-new" style="position:absolute;right:10px;top:10px;background:#FBBF24;color:#0B1E3A;font-size:10px;font-weight:800;padding:3px 7px;border-radius:999px;">NEW</span>' +
+      "</div>" +
+      '<div class="blog-card-body" style="padding:14px 16px 16px;color:#0f172a;">' +
+        '<h3 style="margin:0 0 8px;font-size:16px;line-height:1.35;color:#0B1E3A;">' + title + "</h3>" +
+        '<p style="margin:0;font-size:13px;line-height:1.5;color:#475569;">' + desc + "</p>" +
+        '<p style="margin:10px 0 0;font-size:12px;color:#64748b;">' + author + " · Read →</p>" +
+      "</div>";
+
+    function open() {
+      if (typeof window.openArticle === "function") window.openArticle(p.id);
+    }
+    card.addEventListener("click", open);
+    card.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        open();
+      }
+    });
+    return card;
+  }
+
+  async function loadCmsPosts() {
+    var statusEl = document.getElementById("cmsPostsStatus");
+    var cmsGrid = document.getElementById("cmsPostsGrid");
+    var mainGrid =
+      document.getElementById("blogGrid") ||
+      document.querySelector(".blog-grid");
+
+    if (!window.RNCms || typeof window.RNCms.listPosts !== "function") {
+      if (statusEl) statusEl.textContent = "Could not load Admin posts (CMS client missing).";
+      return;
+    }
+
+    var result;
+    try {
+      result = await window.RNCms.listPosts();
+    } catch (err) {
+      console.warn(err);
+      if (statusEl) statusEl.textContent = "Could not load Admin posts.";
+      return;
+    }
+
+    var posts = (result && result.posts) || [];
+    var published = posts.filter(isPublished);
+
+    // Dedupe by title+id preference
+    var seen = {};
+    published = published.filter(function (p) {
+      var key = (p.title || "") + "::" + (p.id || "");
+      if (seen[key]) return false;
+      seen[key] = true;
+      return true;
+    });
+
+    published.sort(function (a, b) {
+      return String(b.id || "").localeCompare(String(a.id || ""));
+    });
+
+    window.articles = window.articles || {};
+
+    // Clear previous CMS cards
+    if (cmsGrid) cmsGrid.innerHTML = "";
+    if (mainGrid) {
+      mainGrid.querySelectorAll('[data-admin-post="1"]').forEach(function (n) {
+        n.remove();
+      });
+    }
+
+    if (!published.length) {
+      if (statusEl) statusEl.textContent = "No published Admin posts yet.";
+      return;
+    }
+
+    published.forEach(function (p) {
+      if (!p || !p.id) return;
+      window.articles[p.id] = {
+        label: p.cat || "Blog",
+        title: p.title || "Untitled",
+        meta: (p.author || "RuffNeck Entertainment") + (p.created ? " · " + p.created : ""),
+        body: p.body || p.desc || "",
+        tags: p.tags || []
+      };
+      var card = buildCard(p);
+      if (cmsGrid) cmsGrid.appendChild(card.cloneNode(true));
+      // re-bind events on clone - better append same builder twice
+    });
+
+    // Rebuild cleanly into both grids with live listeners
+    if (cmsGrid) {
+      cmsGrid.innerHTML = "";
+      published.forEach(function (p) {
+        if (p && p.id) cmsGrid.appendChild(buildCard(p));
+      });
+    }
+    if (mainGrid) {
+      var frag = document.createDocumentFragment();
+      published.forEach(function (p) {
+        if (p && p.id) frag.appendChild(buildCard(p));
+      });
+      mainGrid.insertBefore(frag, mainGrid.firstChild);
+    }
+
+    if (statusEl) {
+      statusEl.textContent =
+        published.length +
+        " published post" +
+        (published.length === 1 ? "" : "s") +
+        " from Admin (including newest at top).";
+      statusEl.style.color = "#0f766e";
+    }
+
+    // Force visible after any filter scripts
+    setTimeout(function () {
+      document.querySelectorAll("[data-admin-post='1']").forEach(function (card) {
+        card.style.display = "flex";
+        card.hidden = false;
+        card.removeAttribute("hidden");
+      });
+      var sec = document.getElementById("cmsPostsSection");
+      if (sec) {
+        sec.style.display = "block";
+        sec.hidden = false;
+      }
+    }, 50);
+
+    console.info("Blog CMS: showing " + published.length + " published Admin post(s)");
+  }
+
+  function start() {
+    var tries = 0;
+    (function attempt() {
+      tries += 1;
+      if (window.RNCms && typeof window.RNCms.listPosts === "function") {
+        loadCmsPosts();
+        return;
+      }
+      if (tries < 25) setTimeout(attempt, 120);
+      else {
+        var statusEl = document.getElementById("cmsPostsStatus");
+        if (statusEl) statusEl.textContent = "CMS client did not load.";
+      }
+    })();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") loadCmsPosts();
   });
-  var grid = document.getElementById('blogGrid') || document.querySelector('.blog-grid');
-  if (!grid) return;
-  grid.querySelectorAll('[data-admin-post="1"]').forEach(function(n){ n.remove(); });
-  window.articles = window.articles || {};
-  published.forEach(function(p){
-    if (!p||!p.id) return;
-    window.articles[p.id] = { label:p.cat||'Blog', title:p.title, meta:(p.author||'RuffNeck')+' · '+(p.created||''), body:p.body||p.desc||'', tags:p.tags||[] };
-    var card = document.createElement('div');
-    card.className = 'blog-card';
-    card.setAttribute('data-admin-post','1');
-    card.setAttribute('data-title', p.title||'');
-    card.onclick = function(){ if (typeof openArticle==='function') openArticle(p.id); };
-    card.innerHTML = '<div class="blog-thumb"><span>'+(p.emoji||'📝')+'</span><span class="card-cat-badge">'+(p.cat||'Blog')+'</span><span class="card-new">New</span></div><div class="blog-card-body"><h3>'+(p.title||'')+'</h3><p>'+(p.desc||'')+'</p></div>';
-    grid.insertBefore(card, grid.firstChild);
-  });
-});
+})();
 </script>
+
+
+
 
 
 <script id="rn-phase-d-analytics">
@@ -2676,6 +2907,379 @@ document.addEventListener('DOMContentLoaded', async function(){
   });
 })();
 </script>
+
+
+<style id="rn-audit-final-2b-blog">
+/* ==== RN-AUDIT-FINAL-2B-BLOG (preview) ==== */
+/* Real blog.html classes — fixes compressed metadata */
+
+.card-meta,
+.article-meta,
+.featured-meta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.45rem 0.8rem !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.35rem !important;
+  color: #5d6b75 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+  opacity: 1 !important;
+}
+.card-meta span,
+.article-meta span,
+.featured-meta span {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.35rem !important;
+  color: #5d6b75 !important;
+  opacity: 1 !important;
+  white-space: normal !important;
+}
+.card-dot {
+  display: inline-block !important;
+  width: 4px !important;
+  height: 4px !important;
+  border-radius: 50% !important;
+  background: #94a3b8 !important;
+  margin: 0 0.15rem !important;
+  flex-shrink: 0 !important;
+}
+.read-time {
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+.card-cat-badge {
+  display: inline-flex !important;
+  padding: 0.28rem 0.7rem !important;
+  border-radius: 999px !important;
+  font-size: 0.72rem !important;
+  font-weight: 700 !important;
+  margin-bottom: 0.4rem !important;
+  letter-spacing: 0.02em !important;
+}
+.blog-card,
+.article-card {
+  height: 100% !important;
+  border: 1px solid #d9e3e8 !important;
+  border-radius: 0.9rem !important;
+  background: #ffffff !important;
+  box-shadow: 0 8px 24px rgba(16, 32, 43, 0.07) !important;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.blog-card:hover,
+.article-card:hover {
+  border-color: rgba(15, 107, 120, 0.45) !important;
+  box-shadow: 0 14px 30px rgba(16, 32, 43, 0.12) !important;
+  transform: translateY(-2px);
+}
+.blog-card h3,
+.article-card h3 {
+  line-height: 1.25 !important;
+  color: #10202b !important;
+}
+.blog-card p,
+.article-card p,
+.blog-card-body p {
+  color: #5d6b75 !important;
+  line-height: 1.65 !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta,
+.rn-blog-meta p,
+.rn-blog-meta span,
+.rn-blog-meta strong {
+  color: #1f2937 !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta a {
+  color: #0e7490 !important;
+  font-weight: 700 !important;
+}
+.filter-btn {
+  color: #10202b !important;
+  opacity: 1 !important;
+  border-color: #d9e3e8 !important;
+}
+.filter-btn.active,
+.filter-btn:hover {
+  background: #0b1e3a !important;
+  color: #fff !important;
+  border-color: #0b1e3a !important;
+}
+@media (max-width: 600px) {
+  .card-meta,
+  .article-meta,
+  .featured-meta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.3rem !important;
+  }
+  .card-dot { display: none !important; }
+  .blog-card,
+  .article-card { border-radius: 0.75rem !important; }
+}
+/* ==== END RN-AUDIT-FINAL-2B-BLOG ==== */
+</style>
+
+
+<style id="rn-screenshot-fix-blog">
+/* ==== RN-SCREENSHOT-FIX-BLOG ==== */
+/* Force readable filters + clean metadata (mobile + desktop) */
+
+/* Inactive filter chips were nearly invisible */
+.filter-btn,
+button.filter-btn,
+.filters-inner .filter-btn {
+  color: #0b1e3a !important;
+  background: #ffffff !important;
+  border: 1.5px solid #94a3b8 !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+}
+.filter-btn.active,
+.filter-btn:hover,
+button.filter-btn.active {
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #0b1e3a !important;
+}
+
+/* Metadata: horizontal with real gaps — not stacked lonely dots */
+.card-meta,
+.article-meta,
+.featured-meta {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.35rem 0.65rem !important;
+  color: #475569 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.45 !important;
+  opacity: 1 !important;
+}
+.card-meta span,
+.article-meta span {
+  color: #475569 !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #475569 !important;
+}
+.card-dot {
+  width: 3px !important;
+  height: 3px !important;
+  background: #94a3b8 !important;
+  border-radius: 50% !important;
+  display: inline-block !important;
+}
+.read-time {
+  display: inline-flex !important;
+  padding: 0.2rem 0.55rem !important;
+  border-radius: 999px !important;
+  background: #f1f5f9 !important;
+  color: #334155 !important;
+  font-weight: 700 !important;
+}
+
+/* Author intro card — already improved; keep strong */
+.rn-blog-meta,
+.rn-blog-meta p,
+.rn-blog-meta span,
+.rn-blog-meta strong {
+  color: #0f172a !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: #0f172a !important;
+}
+.rn-blog-meta a {
+  color: #0e7490 !important;
+  -webkit-text-fill-color: #0e7490 !important;
+  font-weight: 700 !important;
+}
+/* ==== END RN-SCREENSHOT-FIX-BLOG ==== */
+</style>
+
+
+<style id="rn-site-wide-contrast">
+/* ==== RN-SITE-WIDE-CONTRAST (all public pages) ==== */
+/* Readable text, chips, forms. Does not change Admin/auth/payments. */
+
+:root {
+  --rn-ink: #0f172a;
+  --rn-body: #334155;
+  --rn-muted-ok: #475569;
+  --rn-border: #94a3b8;
+  --rn-surface: #ffffff;
+  --rn-primary: #0f6b78;
+}
+
+/* Generic body text on light surfaces */
+body {
+  color: var(--rn-ink);
+}
+p, li, .section-sub, .section-subtitle, .muted, .text-muted,
+.card p, .service-card p, .product-desc, .blog-card p {
+  color: #334155 !important;
+  opacity: 1 !important;
+}
+h1, h2, h3, h4, .section-title, .product-name {
+  color: #0f172a !important;
+}
+/* Dark heroes must stay light — previous rule made titles vanish */
+.hero h1, .hero h2, .hero h3,
+.store-hero h1, .store-hero h2,
+.blog-hero h1, .blog-hero h2,
+[class*="-hero"] h1, [class*="-hero"] h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+.store-hero h1 em, .blog-hero h1 em, .hero h1 em {
+  background: linear-gradient(90deg, #7dd3fc, #00b4d8) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important;
+}
+.store-hero p, .blog-hero p, .hero .hero-sub, .hero-sub {
+  color: rgba(255,255,255,0.88) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: rgba(255,255,255,0.88) !important;
+}
+
+/* Dark hero / dark sections: keep light text */
+.hero p, .hero .hero-sub, .hero-sub,
+.hero li, footer p, footer a,
+[class*="hero"] .muted {
+  color: #e2e8f0 !important;
+}
+.hero h1, .hero h2 {
+  color: #ffffff !important;
+}
+
+/* Filter / chip / tab buttons — was nearly invisible when inactive */
+.filter-btn,
+button.filter-btn,
+.services-tabs button,
+.tab-btn,
+.chip,
+.cat-btn,
+.filters-inner button {
+  color: #0b1e3a !important;
+  background: #ffffff !important;
+  border: 2px solid #64748b !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+}
+.filter-btn.active,
+.filter-btn:hover,
+.services-tabs button.active,
+.tab-btn.active,
+.chip.active {
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #0b1e3a !important;
+}
+
+/* Forms */
+input, textarea, select {
+  color: #0f172a !important;
+  background: #ffffff !important;
+  border-color:#374151 !important;
+}
+label {
+  color: #0f172a !important;
+  font-weight: 650 !important;
+}
+
+/* Cards */
+.service-card, .product-card, .blog-card, .card, .pricing-card {
+  background: #ffffff !important;
+  border: 1px solid #e2e8f0 !important;
+}
+.service-card h3, .product-name, .blog-card h3 {
+  color: #0f172a !important;
+}
+.product-price, .price-val {
+  color: #084e59 !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+
+/* Legal / long content readability */
+.legal-content, .page-content, .programme-content, article, .content {
+  line-height: 1.7;
+  color: #334155 !important;
+}
+.legal-content h2, .page-content h2, .programme-content h2 {
+  color: #0f172a !important;
+  margin-top: 2rem;
+}
+
+/* Links on light bg */
+a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
+  /* leave brand links; ensure not invisible */
+}
+
+/* Focus */
+:where(a, button, input, textarea, select, [tabindex]):focus-visible {
+  outline: 3px solid #1aa7b8 !important;
+  outline-offset: 2px !important;
+}
+
+/* Mobile filter / meta */
+@media (max-width: 640px) {
+  .filter-btn, .services-tabs button {
+    min-height: 2.5rem !important;
+  }
+}
+/* ==== END RN-SITE-WIDE-CONTRAST ==== */
+</style>
+
+
+<style id="rn-blog-data-cat-fix">
+/* Blog category buttons use data-cat, NOT .filter-btn */
+[role="tablist"] button,
+button[data-cat] {
+  color: #0b1e3a !important;
+  -webkit-text-fill-color: #0b1e3a !important;
+  background: #ffffff !important;
+  border: 2px solid #64748b !important;
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  border-radius: 999px !important;
+  padding: 8px 16px !important;
+  min-height: 40px !important;
+}
+[role="tablist"] button.active,
+button[data-cat].active,
+[role="tablist"] button:hover,
+button[data-cat]:hover {
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border-color: #0b1e3a !important;
+}
+/* Author card body text MUST stay dark */
+.rn-blog-meta,
+.rn-blog-meta p,
+.rn-blog-meta span,
+.rn-blog-meta strong,
+div.rn-blog-meta p {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta a {
+  color: #0e7490 !important;
+  -webkit-text-fill-color: #0e7490 !important;
+  font-weight: 700 !important;
+}
+</style>
 
 </body>
 </html>
