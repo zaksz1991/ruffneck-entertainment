@@ -1,19 +1,14 @@
-STORE-CLEAN
-===========
-Built from YOUR original backup store.html
+FIX FOR YOUR SCREENSHOT
+=======================
+You saw: "AI Career Guides" heading, then empty white (no product cards).
 
-Fixed:
-- Document structure (DOCTYPE, head, main)
-- Broken buttons
-- Scroll locked / empty white space
-- Empty New Arrivals section hidden
-- Service worker / translator / CMS auto-load removed
-- Mobile product grid (1 column phone, 2 tablet, 3 desktop)
+Cause: search/filter scripts set product cards to display:none.
 
-Kept:
-- All 23 product cards
-- Flutterwave payment
-- Cart, modal, openModal, initiatePayment
+This build:
+- Removes the dual-search script that hid cards
+- Safe filterProducts (All + empty search = show everything)
+- CSS forces .products-grid cards visible
+- Boot script shows all cards on load
 
-Upload ONLY store.html
-Test in Incognito and SCROLL past the first product.
+Upload store.html
+Incognito → scroll to AI Career Guides → cards should appear under the title.
