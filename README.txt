@@ -1,18 +1,17 @@
-RUFFNECK MULTI-PAGE UX UPGRADE
-==============================
+LOGO + ADMIN EDIT/DELETE
+========================
+1) store.html — logo src /logo.png → /icon-192.png (file that exists)
+2) admin.html — Edit + Delete on CMS posts and products
+   - Edit loads form, Save uses PUT when id present, POST when new
+   - Delete calls DELETE /api/cms/posts or /products with {id}
+   - Requires admin login session (same as before)
 
-Shared: css/rn-site-ux.css (design tokens, filters, cards, touch, a11y)
+NOTE: Static products hardcoded in store.html are NOT in CMS.
+Only products/posts returned by /api/cms/* appear in admin lists.
 
-Updated HTML:
-  index.html, blog.html, store.html
-  start-here, faq, contact-page, founder, about-full, consulting, 404
+Upload:
+  store.html
+  admin.html
+  (optional index.html if included)
 
-Store includes the full UX hierarchy upgrade.
-Home/Blog get shared visual system + structure fixes + announce bar.
-
-NOT changed: Flutterwave, APIs, admin, form handlers, external URLs.
-
-Deploy:
-  Upload css/rn-site-ux.css to /css/
-  Replace the HTML files
-  Incognito test Home → Blog → Store
+Do NOT replace vercel.json unless you need routing recovery.
