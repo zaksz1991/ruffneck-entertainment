@@ -1,148 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style id="rn-ux-store-pass-4">
-/* ==== RN-UX-STORE-PASS-4 (preview) — visual only ==== */
-/* Does not change Flutterwave, product IDs, payment or download logic. */
 
-.products-grid {
-  display: grid !important;
-  gap: 1.1rem !important;
-  align-items: stretch !important;
-}
-.product-card {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  border: 1px solid #d9e3e8 !important;
-  border-radius: 1.1rem !important;
-  background: #fff !important;
-  box-shadow: 0 4px 14px rgba(16, 32, 43, 0.07) !important;
-  overflow: hidden !important;
-  transition: border-color 160ms ease, box-shadow 160ms ease !important;
-}
-.product-card:hover {
-  border-color: rgba(15, 107, 120, 0.4) !important;
-  box-shadow: 0 12px 28px rgba(16, 32, 43, 0.1) !important;
-}
-.product-img {
-  width: 100% !important;
-  aspect-ratio: 16 / 10 !important;
-  object-fit: cover !important;
-  background: #eef5f8 !important;
-  display: block !important;
-}
-.product-body {
-  display: flex !important;
-  flex-direction: column !important;
-  flex: 1 !important;
-  padding: 1rem 1rem 0.75rem !important;
-  gap: 0.35rem !important;
-}
-.product-cat {
-  display: inline-flex !important;
-  width: fit-content !important;
-  padding: 0.25rem 0.65rem !important;
-  border-radius: 999px !important;
-  font-size: 0.72rem !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.02em !important;
-  color: #0f6b78 !important;
-  background: rgba(15, 107, 120, 0.1) !important;
-  margin-bottom: 0.25rem !important;
-}
-.product-name {
-  margin: 0 !important;
-  color: #10202b !important;
-  font-size: 1.05rem !important;
-  line-height: 1.35 !important;
-  font-weight: 800 !important;
-}
-.product-desc {
-  margin: 0 !important;
-  color: #5d6b75 !important;
-  font-size: 0.92rem !important;
-  line-height: 1.55 !important;
-  opacity: 1 !important;
-}
-.product-footer {
-  margin-top: auto !important;
-  padding: 0.75rem 1rem 1rem !important;
-  display: flex !important;
-  flex-wrap: wrap !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  gap: 0.75rem !important;
-  border-top: 1px solid #eef2f4 !important;
-}
-.product-price,
-.price-val {
-  color: #084e59 !important;
-  font-weight: 800 !important;
-  font-size: 1.1rem !important;
-  opacity: 1 !important;
-}
-.product-card .btn,
-.product-card a.btn,
-.product-footer .btn {
-  min-height: 2.75rem !important;
-  font-weight: 700 !important;
-  border-radius: 0.65rem !important;
-}
-.store-filters,
-.filters-inner {
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 0.5rem !important;
-  align-items: center !important;
-  margin-bottom: 1.25rem !important;
-}
-.filter-btn {
-  min-height: 2.5rem !important;
-  padding: 0.45rem 0.95rem !important;
-  border-radius: 999px !important;
-  border: 1.5px solid #d9e3e8 !important;
-  background: #fff !important;
-  color: #10202b !important;
-  font-weight: 650 !important;
-  opacity: 1 !important;
-}
-.filter-btn.active,
-.filter-btn:hover {
-  background: #0b1e3a !important;
-  color: #fff !important;
-  border-color: #0b1e3a !important;
-}
-/* Readable body text on light surfaces */
-.product-card p,
-.checkout-form label {
-  color: #374151 !important;
-  opacity: 1 !important;
-}
-.checkout-input,
-.checkout-form input {
-  min-height: 3rem !important;
-  border-radius: 0.6rem !important;
-  border: 1px solid #d9e3e8 !important;
-  font-size: 1rem !important;
-}
-@media (max-width: 640px) {
-  .products-grid {
-    grid-template-columns: 1fr !important;
-    gap: 0.9rem !important;
-  }
-  .product-footer {
-    flex-direction: column !important;
-    align-items: stretch !important;
-  }
-  .product-footer .btn,
-  .product-card .btn {
-    width: 100% !important;
-    justify-content: center !important;
-  }
-}
-/* ==== END RN-UX-STORE-PASS-4 ==== */
-</style>
 
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -203,28 +62,7 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script>
-window.loadFlutterwave = function(cb){
-  if (window.FlutterwaveCheckout) { if(cb) cb(); return; }
-  if (window.__fwLoading) { window.__fwLoading.push(cb); return; }
-  window.__fwLoading = cb ? [cb] : [];
-  var s = document.createElement('script');
-  s.src = 'https://checkout.flutterwave.com/v3.js';
-  s.async = true;
-  s.onload = function(){
-    var q = window.__fwLoading || [];
-    window.__fwLoading = null;
-    q.forEach(function(fn){ try{ if(fn) fn(); }catch(e){} });
-  };
-  document.head.appendChild(s);
-};
-// Preload after page is interactive (does not block first paint)
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(function(){ window.loadFlutterwave(); }, { timeout: 4000 });
-} else {
-  window.addEventListener('load', function(){ setTimeout(function(){ window.loadFlutterwave(); }, 1500); });
-}
-</script>
+<script src="https://checkout.flutterwave.com/v3.js"></script>
 <script>
 // Search input enhancements — runs after DOM is fully ready
 document.addEventListener('DOMContentLoaded', function(){
@@ -448,7 +286,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   0%,100%{box-shadow:0 0 0 0 rgba(0,180,216,0.5)}
   50%{box-shadow:0 0 0 6px rgba(0,180,216,0)}
 }
-.nav-logo img{border-radius:8px;animation:none!important}
+.nav-logo img{border-radius:8px;animation:logoPulse 2.8s ease-in-out infinite}
 @media(prefers-reduced-motion:reduce){.nav-logo img{animation:none}}
 
 /* ── CHATBOT (mobile-safe, single source of truth) ── */
@@ -1192,14 +1030,59 @@ section.section-teaser {
 </script>
 
 
-<style id="rn-force-visible">
-html, body { overflow: auto !important; height: auto !important; }
+<style id="rn-clean-store">
+html, body {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 100% !important;
+}
 body.rn-modal-open, body.rn-cart-open { overflow: hidden !important; }
-.product-card { display: flex !important; }
+.nav-logo img { animation: none !important; }
+#newArrivalsSection, #newArrivalsGrid:empty { display: none !important; }
+.products-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 0 auto 32px !important;
+  padding: 0 16px !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+@media (min-width: 700px) {
+  .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+@media (min-width: 1024px) {
+  .products-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+}
+.product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  height: auto !important;
+  min-height: 0 !important;
+  background: #fff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  overflow: hidden !important;
+}
 .product-card[hidden] { display: none !important; }
-.products-grid { display: grid !important; }
-#newArrivalsGrid:empty { display: none !important; }
+.product-footer .btn, .product-card .btn {
+  min-height: 44px !important;
+  width: 100% !important;
+}
+.store-main { height: auto !important; overflow: visible !important; padding-bottom: 48px !important; }
+.section-heading { padding: 8px 16px !important; margin: 24px auto 8px !important; max-width: 1100px !important; }
+.store-hero { padding: 32px 16px !important; }
+.modal-overlay:not(.open), .cart-overlay:not(.open) {
+  display: none !important;
+  pointer-events: none !important;
+}
+#rnStoreSearchWrap { display: none !important; }
 </style>
+
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -1386,7 +1269,7 @@ button,a,.btn{touch-action:manipulation}
       <div class="search-box">
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Search products..." oninput="filterProducts()"/>
-        <button type="button" class="search-btn" onclick="filterProducts()" aria-label="Search" data-search-btn>Search</button>
+        <button type="button" class="search-btn" onclick="filterProducts()" aria-label="Search">Search</button>
       </div>
       <div class="currency-toggle" role="group" aria-label="Currency selector">
         <button class="curr-btn active" id="currBtnNGN" onclick="setCurrency('NGN')" aria-pressed="true">₦ NGN</button>
@@ -1461,7 +1344,7 @@ button,a,.btn{touch-action:manipulation}
   <div class="container">
 
     <!-- NEW ARRIVALS (admin-added products via /admin) -->
-    <div id="newArrivalsSection" style="display:none;">
+    <div id="newArrivalsSection" style="display:none!important" style="display:none;">
       <div class="section-heading">
         <h2>🆕 New Arrivals</h2>
         <p>Freshly added by RuffNeck Entertainment.</p>
@@ -2955,15 +2838,6 @@ function toggleCart(open) {
 // PAYMENT — FLUTTERWAVE
 // ============================================================
 function initiatePayment() {
-  if (typeof FlutterwaveCheckout === "undefined") {
-    if (window.loadFlutterwave) {
-      window.loadFlutterwave(function(){ try { initiatePayment(); } catch(e){} });
-      return;
-    }
-    alert("Payment system loading, try again in a moment.");
-    return;
-  }
-
   const name = document.getElementById('buyerName').value.trim();
   const email = document.getElementById('buyerEmail').value.trim();
   if (!name) { showToast('Please enter your full name'); return; }
@@ -3237,15 +3111,65 @@ function rnQuickAsk(topic){
 
 
 <script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function(){
-    navigator.serviceWorker.getRegistrations().then(function(regs){
-      regs.forEach(function(r){ r.unregister(); });
-    }).catch(function(){});
-    if (window.caches && caches.keys) {
-      caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
-    }
+/* service worker disabled */
+</script>
+  <script src="/js/cms.js"></script>
+
+<!-- Vercel Web Analytics + Speed Insights -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script>
+  window.si = window.si || function () { (window.siq = window.siq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
+
+
+<script>
+/* Robust product search — global */
+
+document.addEventListener('DOMContentLoaded', function() {
+  var input = document.getElementById('searchInput');
+  if (input) {
+    input.addEventListener('input', window.filterProducts);
+    input.addEventListener('keyup', window.filterProducts);
+  }
+  document.querySelectorAll('.search-btn, [data-search-btn]').forEach(function(btn) {
+    btn.addEventListener('click', function(e) { e.preventDefault(); window.filterProducts(); });
   });
+  document.querySelectorAll('.filter-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setTimeout(window.filterProducts, 10);
+    });
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script id="rn-wa-templates">
+window.RN_WA = {
+  phone: "2348033807856",
+  templates: {"general": "Hello RuffNeck Entertainment,\n\nI found you online and I would like to enquire about your services.\n\nName:\nBusiness / role:\nHow we can help:", "consultation": "Hello RuffNeck Entertainment,\n\nI would like to book a consultation / discovery call.\n\nName:\nBusiness:\nTopic (AI / IT / Marketing / Career / Other):\nPreferred time:", "cv": "Hello RuffNeck Entertainment,\n\nI am interested in the Professional CV, Cover Letter & LinkedIn service.\n\nName:\nTarget role / industry:\nPackage interest (Essential / Professional / Executive):", "it_support": "Hello RuffNeck Entertainment,\n\nI need IT / computer support.\n\nName:\nDevice (Windows/Mac):\nIssue or service (setup, Excel, Wi-Fi, printer, training):\nLocation (home / office / remote):", "warehouse_template": "Hello RuffNeck Entertainment,\n\nI want the free warehouse reporting template mentioned on the website.\n\nName:\nEmail:\nBusiness type:", "internship": "Hello RuffNeck Entertainment,\n\nI am applying for the Remote Internship Programme 2026.\n\nFull name:\nPhone/WhatsApp:\nEmail:\nPreferred track (Data/AI, Admin, Content, Support, Operations):\nShort intro:", "volunteer": "Hello RuffNeck Entertainment,\n\nI am applying for the Volunteer Programme 2026.\n\nFull name:\nPhone/WhatsApp:\nEmail:\nSkills / availability:", "ai_training": "Hello RuffNeck Entertainment,\n\nI am interested in AI training / automation for my team or myself.\n\nName:\nOrganisation (if any):\nTeam size:\nGoals:"},
+  link: function(key) {
+    var t = this.templates[key] || this.templates.general;
+    return "https://wa.me/" + this.phone + "?text=" + encodeURIComponent(t);
+  },
+  open: function(key) {
+    window.open(this.link(key), "_blank", "noopener,noreferrer");
+  }
 };
 </script>
 
@@ -3357,10 +3281,7 @@ window.RNCms = {
   },
   async listProducts(){
     try {
-      var ctrl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
-      var t = ctrl ? setTimeout(function(){ try { ctrl.abort(); } catch(e){} }, 2500) : null;
-      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store', signal: ctrl ? ctrl.signal : undefined });
-      if (t) clearTimeout(t);
+      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
       var data = await res.json();
       if (res.ok && data.ok && Array.isArray(data.products)) {
         return { source:'db', products: data.products.map(function(p){
@@ -3420,7 +3341,7 @@ window.RNCms = {
 };
 </script>
 
-<!-- rn-admin-store-load removed: was causing mobile loading hang -->
+
 
 
 <script id="rn-phase-d-analytics">
@@ -3492,189 +3413,10 @@ window.RNCms = {
 </script>
 
 
-<style id="rn-audit-final-2c-store">
-/* ==== RN-AUDIT-FINAL-2C-STORE (preview) ==== */
-/* Visual only — no Flutterwave / product ID / checkout logic changes */
-
-.products-grid {
-  display: grid !important;
-  gap: 1.1rem !important;
-  align-items: stretch !important;
-}
-.product-card {
-  display: flex !important;
-  flex-direction: column !important;
-  height: 100% !important;
-  border: 1px solid #d9e3e8 !important;
-  border-radius: 0.9rem !important;
-  background: #fff !important;
-  box-shadow: 0 8px 24px rgba(16, 32, 43, 0.07) !important;
-  overflow: hidden !important;
-}
-.product-card:hover {
-  border-color: rgba(15, 107, 120, 0.45) !important;
-  box-shadow: 0 14px 30px rgba(16, 32, 43, 0.12) !important;
-}
-.product-img {
-  width: 100% !important;
-  aspect-ratio: 16 / 10 !important;
-  object-fit: cover !important;
-  background: #f5f8fa !important;
-  display: block !important;
-}
-.product-body { padding: 1rem !important; flex: 1 !important; }
-.product-cat {
-  display: inline-flex !important;
-  padding: 0.25rem 0.65rem !important;
-  border-radius: 999px !important;
-  font-size: 0.72rem !important;
-  font-weight: 700 !important;
-  color: #0f6b78 !important;
-  background: rgba(15, 107, 120, 0.1) !important;
-  margin-bottom: 0.35rem !important;
-}
-.product-name {
-  color: #10202b !important;
-  line-height: 1.3 !important;
-  font-weight: 800 !important;
-  margin: 0 0 0.35rem !important;
-}
-.product-desc {
-  color: #5d6b75 !important;
-  line-height: 1.6 !important;
-  opacity: 1 !important;
-}
-.product-price,
-.price-val {
-  color: #084e59 !important;
-  font-weight: 800 !important;
-  font-size: 1.1rem !important;
-  opacity: 1 !important;
-}
-.product-footer {
-  margin-top: auto !important;
-  padding: 0.85rem 1rem 1rem !important;
-  border-top: 1px solid #eef2f4 !important;
-  display: flex !important;
-  flex-wrap: wrap !important;
-  gap: 0.65rem !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-}
-.product-card .btn,
-.product-footer .btn {
-  min-height: 2.75rem !important;
-  font-weight: 700 !important;
-  border-radius: 0.65rem !important;
-}
-.filter-btn {
-  color: #10202b !important;
-  opacity: 1 !important;
-  border: 1.5px solid #d9e3e8 !important;
-  background: #fff !important;
-  border-radius: 999px !important;
-  min-height: 2.4rem !important;
-  font-weight: 650 !important;
-}
-.filter-btn.active,
-.filter-btn:hover {
-  background: #0b1e3a !important;
-  color: #fff !important;
-  border-color: #0b1e3a !important;
-}
-@media (max-width: 640px) {
-  .products-grid { grid-template-columns: 1fr !important; }
-  .product-footer { flex-direction: column !important; align-items: stretch !important; }
-  .product-footer .btn { width: 100% !important; justify-content: center !important; }
-}
-/* ==== END RN-AUDIT-FINAL-2C-STORE ==== */
-</style>
 
 
-<style id="rn-screenshot-fix-store">
-/* ==== RN-SCREENSHOT-FIX-STORE ==== */
-/* Faded pay banner + weak chips from screenshots */
 
-/* Top pay / delivery notice — was light grey on white */
-.store-top-note,
-.pay-banner,
-.store-banner,
-.announcement-bar,
-.top-notice,
-header + .container > p,
-.hero-note,
-[class*="pay-note"],
-.store-subhead {
-  color: #0f172a !important;
-  opacity: 1 !important;
-  -webkit-text-fill-color: #0f172a !important;
-}
 
-/* Common store intro strip */
-body p {
-  /* do not global override all p — scoped below */
-}
-.store-hero p,
-.hero p,
-.hero-sub,
-.store-lead {
-  color:#374151 !important;
-  opacity: 1 !important;
-}
-
-/* Light strip under nav (pay in Naira line) */
-.container > p,
-.store-page > p,
-main > p:first-of-type {
-  color: #1e293b !important;
-  opacity: 1 !important;
-  font-weight: 500 !important;
-  -webkit-text-fill-color: #1e293b !important;
-}
-
-/* Filters */
-.filter-btn,
-button.filter-btn {
-  color: #0b1e3a !important;
-  background: #fff !important;
-  border: 1.5px solid #94a3b8 !important;
-  opacity: 1 !important;
-  font-weight: 700 !important;
-  -webkit-text-fill-color: #0b1e3a !important;
-}
-.filter-btn.active,
-.filter-btn:hover {
-  background: #0b1e3a !important;
-  color: #fff !important;
-  -webkit-text-fill-color: #fff !important;
-  border-color: #0b1e3a !important;
-}
-
-/* Currency toggle readable */
-.currency-toggle,
-.currency-btn,
-[data-currency],
-.fx-toggle {
-  color: #0b1e3a !important;
-  font-weight: 700 !important;
-  opacity: 1 !important;
-}
-
-/* Product text */
-.product-name { color: #0f172a !important; }
-.product-desc { color: #475569 !important; opacity: 1 !important; }
-.product-price, .price-val { color: #084e59 !important; font-weight: 800 !important; opacity: 1 !important; }
-
-/* Secure checkout banner — avoid cut-off feel */
-.checkout-banner,
-.secure-banner,
-.store-alert {
-  white-space: normal !important;
-  line-height: 1.45 !important;
-  padding: 0.85rem 1rem !important;
-}
-/* ==== END RN-SCREENSHOT-FIX-STORE ==== */
-</style>
 
 
 <style id="rn-site-wide-contrast">
@@ -4314,56 +4056,26 @@ button[data-cat].active {
 
 
 <script>
-/* Translator removed: clear any leftover Google Translate cookie */
 (function(){
-  try {
-    document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-    document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
-  } catch(e) {}
-})();
-</script>
-
-
-<script>
-(function(){
-  try {
-    document.documentElement.style.overflow = 'auto';
-    document.body.style.overflow = '';
-    document.body.classList.remove('rn-modal-open','rn-cart-open','nav-open');
-    var pm = document.getElementById('productModal');
-    if (pm) { pm.classList.remove('open'); pm.setAttribute('aria-hidden','true'); }
-    var co = document.getElementById('cartOverlay');
-    var cs = document.getElementById('cartSidebar');
-    if (co) co.classList.remove('open');
-    if (cs) { cs.classList.remove('open'); cs.setAttribute('aria-hidden','true'); }
-  } catch(e) {}
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(regs){
-      regs.forEach(function(r){ r.unregister(); });
-    }).catch(function(){});
-    if (window.caches && caches.keys) {
-      caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
+  function go(){
+    document.documentElement.style.overflowY = 'auto';
+    document.body.style.overflowY = 'auto';
+    document.body.style.height = 'auto';
+    document.body.classList.remove('rn-modal-open','rn-cart-open');
+    document.querySelectorAll('.product-card').forEach(function(c){
+      c.style.display = '';
+      c.removeAttribute('hidden');
+    });
+    var all = document.querySelector('.filter-btn[data-cat="all"]');
+    if (all) {
+      document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+      all.classList.add('active');
     }
   }
-})();
-</script>
-
-
-<script id="rn-html-parse-fix">
-(function(){
-  try {
-    document.documentElement.style.overflow = 'auto';
-    document.body.style.overflow = '';
-    document.body.classList.remove('rn-modal-open','rn-cart-open','nav-open');
-  } catch(e) {}
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.getRegistrations().then(function(regs){
-      regs.forEach(function(r){ r.unregister(); });
-    }).catch(function(){});
-    if (window.caches && caches.keys) {
-      caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
-    }
-  }
+  go();
+  document.addEventListener('DOMContentLoaded', go);
+  window.addEventListener('load', go);
+  setTimeout(go, 300);
 })();
 </script>
 
