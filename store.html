@@ -1173,6 +1173,24 @@ section.section-teaser {
 }
 </script>
 
+
+<style id="rn-screenshot-fix-v2">
+html{overflow-x:hidden!important;overflow-y:scroll!important;height:auto!important;max-height:none!important}
+body{overflow-x:hidden!important;overflow-y:auto!important;height:auto!important;max-height:none!important;position:relative!important}
+body.rn-modal-open,body.rn-cart-open{overflow:hidden!important}
+#newArrivalsSection:not([data-has-items]),#newArrivalsGrid:empty{display:none!important;height:0!important;margin:0!important;padding:0!important}
+.store-main,.products-grid,#productsGrid{height:auto!important;min-height:0!important;overflow:visible!important}
+.products-grid{display:grid!important;grid-template-columns:1fr!important;gap:1rem!important;padding-bottom:2rem!important}
+@media(min-width:641px){.products-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(min-width:1025px){.products-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+.product-card{display:flex!important;height:auto!important}
+.product-card[hidden]{display:none!important}
+.modal-overlay:not(.open),.cart-overlay:not(.open){display:none!important;pointer-events:none!important}
+.nav-logo img{animation:none!important}
+.cart-btn::before,.cart-btn::after{display:none!important;content:none!important;animation:none!important}
+.section-heading{margin-top:1.25rem!important;margin-bottom:0.75rem!important}
+</style>
+
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -4328,6 +4346,59 @@ button[data-cat].active {
       caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
     }
   }
+})();
+</script>
+
+
+<script id="rn-screenshot-fix-js">
+(function () {
+  function unlock() {
+    try {
+      document.documentElement.style.setProperty('overflow-y', 'scroll', 'important');
+      document.documentElement.style.setProperty('height', 'auto', 'important');
+      document.body.style.setProperty('overflow-y', 'auto', 'important');
+      document.body.style.setProperty('height', 'auto', 'important');
+      document.body.style.setProperty('position', 'relative', 'important');
+      document.body.classList.remove('rn-modal-open', 'rn-cart-open', 'nav-open');
+      var pm = document.getElementById('productModal');
+      if (pm && !pm.classList.contains('open')) {
+        pm.style.display = 'none';
+      }
+      var co = document.getElementById('cartOverlay');
+      var cs = document.getElementById('cartSidebar');
+      if (co && !co.classList.contains('open')) co.style.display = 'none';
+      if (cs && !cs.classList.contains('open')) {
+        cs.classList.remove('open');
+      }
+      // Show all products if filter left them hidden incorrectly
+      var allBtn = document.querySelector('.filter-btn[data-cat="all"]');
+      if (allBtn && !allBtn.classList.contains('active')) {
+        document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+        allBtn.classList.add('active');
+      }
+      document.querySelectorAll('.product-card').forEach(function (card) {
+        if (!card.hasAttribute('data-force-hide')) {
+          card.style.display = '';
+          card.removeAttribute('hidden');
+        }
+      });
+      var empty = document.getElementById('searchEmpty');
+      if (empty) empty.style.display = 'none';
+      var na = document.getElementById('newArrivalsSection');
+      var ng = document.getElementById('newArrivalsGrid');
+      if (na && ng && !ng.children.length) {
+        na.style.display = 'none';
+      }
+    } catch (e) {}
+  }
+  unlock();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', unlock);
+  }
+  window.addEventListener('load', unlock);
+  // Re-unlock after a short delay in case something locks scroll later
+  setTimeout(unlock, 500);
+  setTimeout(unlock, 2000);
 })();
 </script>
 
