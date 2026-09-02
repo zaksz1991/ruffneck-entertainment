@@ -429,7 +429,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
   0%,100%{box-shadow:0 0 0 0 rgba(0,180,216,0.5)}
   50%{box-shadow:0 0 0 6px rgba(0,180,216,0)}
 }
-.nav-logo img{border-radius:8px;animation:logoPulse 2.8s ease-in-out infinite}
+.nav-logo img{border-radius:8px;animation:none!important}
 @media(prefers-reduced-motion:reduce){.nav-logo img{animation:none}}
 
 /* ── CHATBOT (mobile-safe, single source of truth) ── */
@@ -1894,7 +1894,7 @@ button,a,.btn{touch-action:manipulation}
       <span>Prices are shown in Nigerian Naira. Payment is processed securely by Flutterwave.</span>
       <span>If payment succeeds but delivery is missing, contact WhatsApp <a href="https://wa.me/2348033807856">+234 803 380 7856</a> with your payment reference.</span>
     </div>
-    <button class="btn btn-gold pay-btn"<button class="btn btn-gold pay-btn" type="button" onclick="initiatePayment()">🔒 Pay with Flutterwave</button>
+    <button class="btn btn-gold pay-btn" type="button" onclick="initiatePayment()">🔒 Pay with Flutterwave</button>
     <p class="cart-note">Digital delivery is available after successful payment. Please enter an email address you can access. For verified payment or delivery issues, contact RuffNeck support.</p>
   </div>
 </div>
@@ -4282,6 +4282,31 @@ button[data-cat].active {
     document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
     document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
   } catch(e) {}
+})();
+</script>
+
+
+<script>
+(function(){
+  try {
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = '';
+    document.body.classList.remove('rn-modal-open','rn-cart-open','nav-open');
+    var pm = document.getElementById('productModal');
+    if (pm) { pm.classList.remove('open'); pm.setAttribute('aria-hidden','true'); }
+    var co = document.getElementById('cartOverlay');
+    var cs = document.getElementById('cartSidebar');
+    if (co) co.classList.remove('open');
+    if (cs) { cs.classList.remove('open'); cs.setAttribute('aria-hidden','true'); }
+  } catch(e) {}
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(regs){
+      regs.forEach(function(r){ r.unregister(); });
+    }).catch(function(){});
+    if (window.caches && caches.keys) {
+      caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
+    }
+  }
 })();
 </script>
 
