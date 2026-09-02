@@ -1192,6 +1192,47 @@ section.section-teaser {
 
 <link rel="stylesheet" href="/css/rn-spacing.css"/>
 <link rel="stylesheet" href="/css/rn-interactions.css"/>
+
+<style id="rn-blog-one-search">
+/* ONE visible search on blog — hide duplicates */
+#rnBlogSearchWrap,
+rn-search,
+.rn-search,
+#rn-p1-blog-search,
+.rn-wc-catalog-tools rn-search,
+.rn-wc-catalog-tools .rn-search {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+/* Primary search */
+#searchInput,
+input#searchInput {
+  display: block !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 44px !important;
+  font-size: 16px !important;
+  box-sizing: border-box !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+.blog-search-wrap,
+.search-box,
+.filters-inner .search-wrap {
+  display: block !important;
+  width: 100% !important;
+  max-width: 1120px !important;
+  margin: 0.75rem auto !important;
+  padding: 0 16px !important;
+  box-sizing: border-box !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -1204,7 +1245,6 @@ section.section-teaser {
     labels='{"all":"All articles","ai":"AI & Automation","careers":"AI Careers","operations":"Operations","marketing":"Marketing","ethics":"Ethics","prompts":"Prompts"}'
     status="#blog-status"
   ></rn-filter-bar>
-  <rn-search placeholder="Search articles" target=".blog-card, .article-card, .rn-cms-post, [data-post], .post-card" filter-bar="rn-filter-bar"></rn-search>
   <p id="blog-status" class="sr-only" aria-live="polite"></p>
 </div>
 
@@ -1289,7 +1329,7 @@ button,a,.btn{touch-action:manipulation}
   margin: 6px 0 0;
 }
 </style>
-<div id="rnBlogSearchWrap" style="display:none!important" hidden>
+<div id="rnBlogSearchWrap" style="display:none!important" hidden aria-hidden="true">
   <label for="rnBlogSearch" class="sr-only" style="position:absolute;left:-9999px">Search articles</label>
   <input type="search" id="rnBlogSearch" placeholder="Search articles…" autocomplete="off" enterkeyhint="search"/>
   <p id="rnBlogSearchCount" aria-live="polite"></p>
@@ -3324,5 +3364,22 @@ div.rn-blog-meta p {
 
 <rn-footer></rn-footer>
 <script type="module" src="/js/components/index.js"></script>
+
+<script id="rn-blog-search-sync">
+(function(){
+  function sync(){
+    var a = document.getElementById('searchInput');
+    var b = document.getElementById('rnBlogSearch');
+    if (!a) return;
+    a.addEventListener('input', function(){
+      if (b) b.value = a.value;
+      if (typeof filterBlog === 'function') filterBlog();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', sync);
+  else sync();
+})();
+</script>
+
 </body>
 </html>
