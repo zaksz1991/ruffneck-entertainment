@@ -964,58 +964,7 @@ section.section-teaser {
 </style>
 
 
-<style id="rn-store-phase-c">
-/* Stronger product cards & purchase clarity */
-.product-card, .store-card, [class*="product-card"] {
-  border-radius: 14px !important;
-  border: 1px solid rgba(0,180,216,0.28) !important;
-  background: #0B1E3A !important;
-  padding: 14px !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-  min-height: 0 !important;
-}
-.product-card img, .store-card img {
-  width: 100% !important;
-  height: auto !important;
-  max-height: 180px !important;
-  object-fit: cover !important;
-  border-radius: 10px !important;
-  background: #151D2E !important;
-}
-.product-card .price, .store-card .price, [class*="price"] {
-  font-size: 1.15rem !important;
-  font-weight: 800 !important;
-  color: #F9FAFB !important;
-}
-.product-card .btn, .product-card button, .store-card .btn, .buy-btn {
-  min-height: 44px !important;
-  border-radius: 10px !important;
-  font-weight: 800 !important;
-  width: 100% !important;
-  margin-top: auto !important;
-}
-.rn-store-trust {
-  display: block !important;
-  max-width: 900px;
-  margin: 12px auto 20px;
-  padding: 12px 14px;
-  background: rgba(0,180,216,0.08);
-  border: 1px solid rgba(0,180,216,0.3);
-  border-radius: 12px;
-  color: #CBD5E1;
-  font-size: 13px;
-  line-height: 1.45;
-  text-align: center;
-}
-@media (max-width: 600px) {
-  .products-grid, .store-grid, #productsGrid, .product-grid {
-    grid-template-columns: 1fr !important;
-    gap: 14px !important;
-  }
-}
-</style>
+<!-- rn-store-phase-c removed: forced dark bg and min-height:0 on all product-cards -->
 
 
 <script type="application/ld+json" id="rn-phase-d-store-schema">
@@ -1125,6 +1074,116 @@ body.rn-modal-open, body.rn-cart-open { overflow: hidden !important; }
 #newArrivalsSection { display: none !important; }
 html, body { overflow-y: auto !important; height: auto !important; }
 </style>
+
+<style id="rn-display-debug-fix">
+/*
+  DISPLAY DEBUG FIX
+  Problem: section headings visible, product cards not
+  Conflicts found:
+  - .product-card[hidden] { display: none !important }  (JS was setting hidden)
+  - "Stronger product cards" set background:#0B1E3A and min-height:0
+  - Multiple competing display:flex / grid rules
+*/
+.products-grid,
+#productsGrid,
+div.products-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  padding: 12px 16px 32px !important;
+  margin: 0 auto !important;
+}
+@media (min-width: 700px) {
+  .products-grid, #productsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (min-width: 1024px) {
+  .products-grid, #productsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Highest practical specificity for cards inside grids */
+div.products-grid > div.product-card,
+#productsGrid > div.product-card,
+.products-grid .product-card {
+  display: flex !important;
+  flex-direction: column !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  height: auto !important;
+  max-height: none !important;
+  min-height: 200px !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow: visible !important;
+  background: #ffffff !important;
+  color: #0f172a !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 14px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* If JS left hidden attribute, still show until user filters */
+div.products-grid > div.product-card[hidden],
+#productsGrid > div.product-card[hidden] {
+  display: flex !important;
+}
+
+.product-name, .product-body h3 {
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+.product-desc, .product-body p {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+  opacity: 1 !important;
+}
+.product-cat {
+  color: #0891b2 !important;
+}
+.product-price, .price-val {
+  color: #0f766e !important;
+  -webkit-text-fill-color: #0f766e !important;
+}
+.product-img {
+  display: flex !important;
+  min-height: 100px !important;
+  height: auto !important;
+  visibility: visible !important;
+}
+.product-footer {
+  display: flex !important;
+  visibility: visible !important;
+}
+.product-footer .btn,
+.product-card .btn {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  min-height: 44px !important;
+  background: #00b4d8 !important;
+  color: #0b1e3a !important;
+}
+.section-heading {
+  display: block !important;
+  visibility: visible !important;
+}
+#newArrivalsSection { display: none !important; }
+</style>
+
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -4114,5 +4173,31 @@ button[data-cat].active {
   setTimeout(showAll, 1500);
 })();
 </script>
+
+<script id="rn-display-debug-js">
+(function(){
+  function fix(){
+    document.querySelectorAll('.products-grid .product-card, #productsGrid .product-card').forEach(function(c){
+      c.removeAttribute('hidden');
+      c.style.removeProperty('display');
+      c.style.setProperty('display', 'flex', 'important');
+      c.style.setProperty('visibility', 'visible', 'important');
+      c.style.setProperty('opacity', '1', 'important');
+      c.style.setProperty('height', 'auto', 'important');
+      c.style.setProperty('min-height', '200px', 'important');
+      c.style.setProperty('background', '#ffffff', 'important');
+    });
+    var si = document.getElementById('searchInput');
+    if (si && si.value) { si.value = ''; }
+  }
+  fix();
+  document.addEventListener('DOMContentLoaded', fix);
+  window.addEventListener('load', fix);
+  setTimeout(fix, 50);
+  setTimeout(fix, 300);
+  setTimeout(fix, 1000);
+})();
+</script>
+
 </body>
 </html>
