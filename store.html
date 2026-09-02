@@ -1980,7 +1980,7 @@ function handlePaymentSuccess(name, email, ref) {
 
   const linksEl = document.getElementById('downloadLinks');
   linksEl.innerHTML = links.map(l => `
-    <a href="${l.url}" target="_blank" class="btn btn-primary btn-sm" style="justify-content:center;">
+    <a href="${l.url}" target="_blank" class="btn btn-primary btn-sm" style="justify-content:center;" rel="noopener noreferrer">
       📥 Download: ${l.name} (${l.level})
     </a>
   `).join('');

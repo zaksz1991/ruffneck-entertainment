@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/css/professional-ux.css"/>
-  <link rel="stylesheet" href="/css/cleanup.css"/>
-
 <style id="rn-live-audit-blog-2b">
 /* ==== RN-LIVE-AUDIT-BLOG-2B (preview) ==== */
 .card-meta,
@@ -347,7 +344,7 @@ button{cursor:pointer;border:none;background:none;font-family:inherit}
 /* BLOG GRID */
 .blog-main{padding:0 0 80px}
 .grid-heading{font-size:20px;font-weight:700;color:var(--text-dark);margin-bottom:24px;padding-bottom:12px;border-bottom:2px solid var(--border);display:flex;align-items:center;gap:10px}
-.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:48px}
+.blog-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-bottom:48px}
 .blog-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:all 0.25s;display:flex;flex-direction:column}
 .blog-card:hover{border-color:var(--cyan);box-shadow:var(--shadow-md);transform:translateY(-3px)}
 .blog-thumb{height:140px;display:flex;align-items:center;justify-content:center;font-size:44px;position:relative}
@@ -1164,6 +1161,35 @@ section.section-teaser {
 
 
 <link rel="stylesheet" href="/css/rn-site-ux.css"/>
+
+<style id="rn-blog-mobile-grid-fix">
+.blog-grid,#blogGrid,#cmsPostsGrid,.posts-grid,.articles-grid{
+  display:grid!important;width:100%!important;max-width:100%!important;
+  box-sizing:border-box!important;gap:16px!important;
+  padding-left:16px!important;padding-right:16px!important;
+  grid-template-columns:1fr!important;
+}
+@media(min-width:600px){
+  .blog-grid,#blogGrid,#cmsPostsGrid,.posts-grid,.articles-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(min-width:960px){
+  .blog-grid,#blogGrid,#cmsPostsGrid,.posts-grid,.articles-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+}
+.blog-card,.article-card,.rn-cms-post,.post-card{
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  box-sizing:border-box!important;
+}
+.blog-card h3,.blog-card-body{overflow-wrap:anywhere;word-break:normal;}
+.blog-card h3{font-size:clamp(1rem,4vw,1.15rem)!important;line-height:1.35!important;}
+#cmsPostsGrid[style]{grid-template-columns:1fr!important;}
+@media(min-width:600px){#cmsPostsGrid[style]{grid-template-columns:repeat(2,minmax(0,1fr))!important;}}
+@media(min-width:960px){#cmsPostsGrid[style]{grid-template-columns:repeat(3,minmax(0,1fr))!important;}}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -1422,7 +1448,7 @@ button,a,.btn{touch-action:manipulation}
 <div id="cmsPostsSection" class="cms-posts-section" style="max-width:1100px;margin:0 auto 28px;padding:0 16px;">
   <h2 class="grid-heading" style="margin-bottom:12px;">🆕 Latest from Admin</h2>
   <p id="cmsPostsStatus" style="font-size:13px;color:#64748b;margin:0 0 12px;">Loading new posts…</p>
-  <div id="cmsPostsGrid" class="blog-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;"></div>
+  <div id="cmsPostsGrid" class="blog-grid" style="display:grid;gap:16px;"></div>
 </div>
 
 <!-- BLOG GRID -->
@@ -1675,12 +1701,12 @@ button,a,.btn{touch-action:manipulation}
 <div class="blog-footer">
   <div class="container">
     <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:12px;">
-  <a href="https://linkedin.com/company/ruffneck-entertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;">💼 LinkedIn</a>
-  <a href="https://facebook.com/RuffNeckEntertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;">📘 Facebook</a>
-  <a href="https://instagram.com/ruffneckentertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;">📸 Instagram</a>
-  <a href="https://youtube.com/@RuffNeckEntertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;">▶️ YouTube</a>
-  <a href="https://tiktok.com/@ruffneckentertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;">🎵 TikTok</a>
-  <a href="https://x.com/RuffNeckEnterta" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;">𝕏 Twitter/X</a>
+  <a href="https://linkedin.com/company/ruffneck-entertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;" rel="noopener noreferrer">💼 LinkedIn</a>
+  <a href="https://facebook.com/RuffNeckEntertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;" rel="noopener noreferrer">📘 Facebook</a>
+  <a href="https://instagram.com/ruffneckentertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;" rel="noopener noreferrer">📸 Instagram</a>
+  <a href="https://youtube.com/@RuffNeckEntertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;" rel="noopener noreferrer">▶️ YouTube</a>
+  <a href="https://tiktok.com/@ruffneckentertainment" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;" rel="noopener noreferrer">🎵 TikTok</a>
+  <a href="https://x.com/RuffNeckEnterta" target="_blank" style="color:var(--cyan);font-size:13px;text-decoration:none;" rel="noopener noreferrer">𝕏 Twitter/X</a>
 </div>
     <p style="margin-top:12px;">© 2026 <a href="/">RuffNeck Entertainment</a> · CAC Reg No. 3770977 · <a href="mailto:ruffneckhassan@gmail.com">ruffneckhassan@gmail.com</a> · <a href="/store">Visit Store</a></p>
   </div>
@@ -2353,10 +2379,10 @@ const RN_BOT_RESPONSES = {
   },
   contact:{
     keys:['contact','whatsapp','phone number','reach you','get in touch','tuntuɓe','kan si','ọ̀rọ̀','kpọtụrụ'],
-    reply:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Book a free consultation</a>`,
-    reply_ha:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Yi rijistar shawara kyauta</a>`,
-    reply_yo:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Ṣe ìpàdé ọ̀fẹ́</a>`,
-    reply_ig:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank">Debanye maka nkata efu</a>`
+    reply:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank" rel="noopener noreferrer">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener noreferrer">Book a free consultation</a>`,
+    reply_ha:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank" rel="noopener noreferrer">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener noreferrer">Yi rijistar shawara kyauta</a>`,
+    reply_yo:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank" rel="noopener noreferrer">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener noreferrer">Ṣe ìpàdé ọ̀fẹ́</a>`,
+    reply_ig:`📧 ruffneckhassan@gmail.com<br>💬 <a href="https://wa.me/2348033807856" target="_blank" rel="noopener noreferrer">WhatsApp: +234 803 380 7856</a><br>📅 <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener noreferrer">Debanye maka nkata efu</a>`
   }
 };
 

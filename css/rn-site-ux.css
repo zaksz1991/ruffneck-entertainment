@@ -410,3 +410,19 @@ rn-footer, .rn-footer {
 rn-footer a, .rn-footer a {
   color: var(--color-primary, #0f766e);
 }
+
+/* rn-blog-mobile-first */
+.blog-grid,#blogGrid,#cmsPostsGrid,.posts-grid,.articles-grid{
+  display:grid!important;grid-template-columns:1fr!important;gap:16px!important;width:100%!important;
+}
+@media(min-width:600px){
+  .blog-grid,#blogGrid,#cmsPostsGrid,.posts-grid,.articles-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(min-width:960px){
+  .blog-grid,#blogGrid,#cmsPostsGrid,.posts-grid,.articles-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+}
+.blog-card,.article-card{min-width:0!important;width:100%!important;max-width:100%!important;}
