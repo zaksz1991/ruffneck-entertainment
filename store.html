@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 <link rel="stylesheet" href="/css/professional-ux.css"/>
   <link rel="stylesheet" href="/css/cleanup.css"/>
 
@@ -143,9 +146,7 @@
 }
 /* ==== END RN-UX-STORE-PASS-4 ==== */
 </style>
-<!DOCTYPE html>
-<html lang="en">
-<head>
+
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="preload" href="/logo.png" as="image"/>
@@ -1172,6 +1173,7 @@ section.section-teaser {
 }
 </script>
 
+</head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
 <style id="rn-a11y-phase-e">
@@ -1293,7 +1295,7 @@ button,a,.btn{touch-action:manipulation}
 
 </nav>
 
-<main\1 id="main">
+<main id="main">
 
 <p id="rn-ng-pay-note" style="text-align:center;color:#1e293b;font-size:13px;font-weight:600;max-width:640px;margin:8px auto 16px;padding:0 16px;line-height:1.5">
   Pay in <strong style="color:#0f172a">₦ Naira</strong> via Flutterwave. Digital delivery after successful payment. Need help? WhatsApp +234 803 380 7856.
@@ -1357,7 +1359,7 @@ button,a,.btn{touch-action:manipulation}
       <div class="search-box">
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Search products..." oninput="filterProducts()"/>
-        <button type="button" class="search-btn" onclick="filterProducts()" aria-label="Search" type="button" data-search-btn onclick="filterProducts()">Search</button>
+        <button type="button" class="search-btn" onclick="filterProducts()" aria-label="Search" data-search-btn>Search</button>
       </div>
       <div class="currency-toggle" role="group" aria-label="Currency selector">
         <button class="curr-btn active" id="currBtnNGN" onclick="setCurrency('NGN')" aria-pressed="true">₦ NGN</button>
@@ -4298,6 +4300,25 @@ button[data-cat].active {
     var cs = document.getElementById('cartSidebar');
     if (co) co.classList.remove('open');
     if (cs) { cs.classList.remove('open'); cs.setAttribute('aria-hidden','true'); }
+  } catch(e) {}
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(function(regs){
+      regs.forEach(function(r){ r.unregister(); });
+    }).catch(function(){});
+    if (window.caches && caches.keys) {
+      caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
+    }
+  }
+})();
+</script>
+
+
+<script id="rn-html-parse-fix">
+(function(){
+  try {
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = '';
+    document.body.classList.remove('rn-modal-open','rn-cart-open','nav-open');
   } catch(e) {}
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(function(regs){

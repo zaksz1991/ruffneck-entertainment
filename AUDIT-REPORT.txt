@@ -1,0 +1,32 @@
+HTML PARSE AUDIT — RuffNeck Store
+===================================
+
+CRITICAL ERRORS FOUND AND FIXED
+-------------------------------
+1. CORRUPTED TAG: <main\1 id="main">
+   A bad regex left literal \1 in the main element.
+   Browsers may fail to parse the main content region.
+   FIXED → <main id="main">
+
+2. INVALID DOCUMENT START
+   ~3.8KB of <link> and <style> appeared BEFORE <!DOCTYPE html>.
+   That is invalid HTML; parsers treat the document incorrectly.
+   FIXED → moved that content inside <head>
+
+3. MISSING </head>
+   <head> never closed before <body>.
+   FIXED → inserted </head>
+
+4. SEARCH BUTTON
+   Duplicate type="button" and duplicate onclick on same button.
+   FIXED → single clean attributes
+
+5. (Previously) broken pay button double-open tag — verified clean
+
+OPTIONAL HARDENING
+------------------
+- Logo pulse animation disabled (looked like a spinner)
+- Service worker unregister on load
+- Body scroll unlocked on load
+
+UPLOAD store.html and hard-refresh / Incognito test.
