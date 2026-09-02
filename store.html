@@ -361,6 +361,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 }
 .modal-close { position: absolute; top: 0.5rem; right: 0.5rem; border: none; background: #f1f5f9; width: var(--touch); height: var(--touch); border-radius: 8px; cursor: pointer; font-size: 1.25rem; }
 </style>
+<link rel="stylesheet" href="/css/rn-site-ux.css"/>
 </head>
 <body>
 
@@ -540,6 +541,8 @@ button, a { -webkit-tap-highlight-color: transparent; }
     <h2 id="catalogue-heading">Digital products</h2>
     <p>Downloadable guides, templates, prompt libraries, planners, toolkits, and playbooks.</p>
   </div>
+  <rn-search placeholder="Search guides, templates, and toolkits" target="[data-product-card]" filter-bar="rn-filter-bar"></rn-search>
+  <rn-filter-bar target="[data-product-card]" category-attr="data-category" status="#catalog-status" style="display:none" id="rn-wc-filter-fallback"></rn-filter-bar>
   <div class="catalog-tools">
     <label class="catalog-search">
       <span class="sr-only">Search products</span>
@@ -2113,5 +2116,7 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 
 </script>
+<rn-footer></rn-footer>
+<script type="module" src="/js/components/index.js"></script>
 </body>
 </html>

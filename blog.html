@@ -1168,6 +1168,19 @@ section.section-teaser {
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
 
+<div class="rn-wc-catalog-tools" style="max-width:1120px;margin:0 auto;">
+  <rn-filter-bar
+    target=".blog-card, .article-card, .rn-cms-post, [data-post], .post-card"
+    category-attr="data-cat"
+    categories="all,ai,careers,operations,marketing,ethics,prompts"
+    labels='{"all":"All articles","ai":"AI & Automation","careers":"AI Careers","operations":"Operations","marketing":"Marketing","ethics":"Ethics","prompts":"Prompts"}'
+    status="#blog-status"
+  ></rn-filter-bar>
+  <rn-search placeholder="Search articles" target=".blog-card, .article-card, .rn-cms-post, [data-post], .post-card" filter-bar="rn-filter-bar"></rn-search>
+  <p id="blog-status" class="sr-only" aria-live="polite"></p>
+</div>
+
+
 
 <script id="rn-filterblog-stub">
 window.filterBlog = window.filterBlog || function(){ /* defined later */ };
@@ -3281,5 +3294,7 @@ div.rn-blog-meta p {
 }
 </style>
 
+<rn-footer></rn-footer>
+<script type="module" src="/js/components/index.js"></script>
 </body>
 </html>
