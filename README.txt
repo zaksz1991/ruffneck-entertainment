@@ -1,20 +1,23 @@
-SPACING + ALIGNMENT — MOBILE & DESKTOP
-======================================
-css/rn-spacing.css   — spacing tokens, grids, touch targets
-css/rn-site-ux.css   — prior UX + spacing merged
+HOME + STORE INTERACTION FIXES
+==============================
+ROOT CAUSES FOUND
+1. Service tabs (All Services, AI & Tech, …) had data-filter attributes
+   and cards had data-category — but NO JavaScript connected them.
+2. /js/app.js was returning the 404 HTML page (file missing).
+3. Store sticky header + overlay pointer-events could feel "frozen".
+4. Search/filter layout uneven mobile vs desktop.
 
-Also on HTML pages:
-- /logo.png → /icon-192.png
-- removed professional-ux.css & cleanup.css links (404)
-- type="button" on buttons missing type
-- blog grid default 1 column (then 2/3 via CSS breakpoints)
+THIS PACKAGE
+- js/rn-services-filter.js — wires tab filters + Show all services
+- js/app.js — real file (stops 404 HTML-as-JS)
+- css/rn-interactions.css — tabs layout, search visible both viewports,
+  header alignment, overlay unlock
+- index.html, store.html, blog.html updated to load the above
 
-Breakpoints:
-  phone:  1 column cards
-  600px+: 2 columns
-  960px+: 3 columns (blog); products up to 4 at 1100px+
-  filters: horizontal scroll on small screens
+NOT changed: Flutterwave, payment, API, vercel rewrites.
 
-NOT changed: Flutterwave, APIs, vercel.json rewrites
-
-Upload preserving paths. Test phone 375px and desktop 1280px.
+TEST
+- Home: tap All Services / AI & Tech / Marketing — cards filter
+- Home: Show all services — all cards return
+- Store: scroll page; header should not lock the page
+- Store: search visible on phone and desktop

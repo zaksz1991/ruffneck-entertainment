@@ -363,6 +363,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 </style>
 <link rel="stylesheet" href="/css/rn-site-ux.css"/>
 <link rel="stylesheet" href="/css/rn-spacing.css"/>
+<link rel="stylesheet" href="/css/rn-interactions.css"/>
 </head>
 <body>
 
@@ -2119,5 +2120,23 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 <rn-footer></rn-footer>
 <script type="module" src="/js/components/index.js"></script>
+<script>
+(function(){
+  function unlock(){
+    try {
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      document.body.classList.remove('rn-modal-open','rn-cart-open','nav-open');
+      document.querySelectorAll('.cart-overlay:not(.open),.modal-overlay:not(.open)').forEach(function(el){
+        el.style.pointerEvents = 'none';
+      });
+    } catch(e) {}
+  }
+  unlock();
+  document.addEventListener('DOMContentLoaded', unlock);
+  window.addEventListener('load', unlock);
+  setTimeout(unlock, 400);
+})();
+</script>
 </body>
 </html>
