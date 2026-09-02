@@ -1,20 +1,16 @@
-RUFFNECK STORE — CLEAN REBUILD
-==============================
-Rebuilt layout/CSS from scratch.
+MOBILE CSS OPTIMIZATION
+=======================
+CSS only. No payment/API/link changes.
 
-KEPT UNCHANGED (your links & payment):
-- Flutterwave public key FLWPUBK-a7c7c21e3c8f82914ddd8cfec761df9c-X
-- checkout.flutterwave.com script
-- initiatePayment / cart / modal logic from your site
-- WhatsApp https://wa.me/2348033807856
-- Product IDs and PRODUCTS object
-- All product cards
+Mobile improvements:
+- 44px touch targets (buttons, cart, filters)
+- Inputs at 16px (no iOS zoom on focus)
+- Filters: horizontal scroll + search/currency full width on small screens
+- Product grid: 1 col phone / 2 tablet / 3 desktop
+- Full-width "View options" on narrow screens
+- Cart: full-width sheet on phones + safe-area padding
+- Modal: bottom sheet on mobile, centered on desktop
+- Sticky nav/filters respect notch (safe-area-inset)
+- No horizontal page overflow
 
-REMOVED:
-- Broken accumulated CSS (height conflicts, dark navy cards, hidden traps)
-- Service worker registration
-- Translator
-- CMS auto-load on open
-- Dual search that hid cards
-
-Upload store.html only. Test in Incognito. Scroll — every section should show cards under its title.
+Upload store.html only.
