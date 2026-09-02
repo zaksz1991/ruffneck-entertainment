@@ -1,18 +1,10 @@
-WHAT YOUR SCREENSHOTS SHOWED
-============================
-1. Spinner on Cart button
-2. One product card (Computer Support) then huge empty white area
-3. Cannot reach the rest of the products
+STORE LOAD LIGHT
+================
+Parse fixes already on server.
+This build also:
+- Removes /css/professional-ux.css and cleanup.css (they 404 and waste requests)
+- Loads Flutterwave AFTER first paint (not blocking)
+- Forces product grids visible + body scrollable
 
-WHAT THIS FIX DOES
-==================
-- Forces the page to SCROLL (unlocks body/html overflow)
-- Closes any stuck modal/cart overlay
-- Shows all product cards (All Products filter)
-- Hides empty New Arrivals section (was eating space)
-- Tight product grid on mobile so cards stack with no giant gaps
-- Kills logo pulse that looked like loading
-
-Upload store.html
-Open in Incognito and SCROLL DOWN past the first product.
-You should see AI Career Guides, Prompts, Templates, etc.
+Upload store.html only.
+Test in Incognito first.

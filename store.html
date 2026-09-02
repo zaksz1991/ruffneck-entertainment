@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="/css/professional-ux.css"/>
-  <link rel="stylesheet" href="/css/cleanup.css"/>
-
 <style id="rn-ux-store-pass-4">
 /* ==== RN-UX-STORE-PASS-4 (preview) — visual only ==== */
 /* Does not change Flutterwave, product IDs, payment or download logic. */
@@ -206,7 +203,28 @@
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
-<script src="https://checkout.flutterwave.com/v3.js"></script>
+<script>
+window.loadFlutterwave = function(cb){
+  if (window.FlutterwaveCheckout) { if(cb) cb(); return; }
+  if (window.__fwLoading) { window.__fwLoading.push(cb); return; }
+  window.__fwLoading = cb ? [cb] : [];
+  var s = document.createElement('script');
+  s.src = 'https://checkout.flutterwave.com/v3.js';
+  s.async = true;
+  s.onload = function(){
+    var q = window.__fwLoading || [];
+    window.__fwLoading = null;
+    q.forEach(function(fn){ try{ if(fn) fn(); }catch(e){} });
+  };
+  document.head.appendChild(s);
+};
+// Preload after page is interactive (does not block first paint)
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(function(){ window.loadFlutterwave(); }, { timeout: 4000 });
+} else {
+  window.addEventListener('load', function(){ setTimeout(function(){ window.loadFlutterwave(); }, 1500); });
+}
+</script>
 <script>
 // Search input enhancements — runs after DOM is fully ready
 document.addEventListener('DOMContentLoaded', function(){
@@ -1174,23 +1192,14 @@ section.section-teaser {
 </script>
 
 
-<style id="rn-screenshot-fix-v2">
-html{overflow-x:hidden!important;overflow-y:scroll!important;height:auto!important;max-height:none!important}
-body{overflow-x:hidden!important;overflow-y:auto!important;height:auto!important;max-height:none!important;position:relative!important}
-body.rn-modal-open,body.rn-cart-open{overflow:hidden!important}
-#newArrivalsSection:not([data-has-items]),#newArrivalsGrid:empty{display:none!important;height:0!important;margin:0!important;padding:0!important}
-.store-main,.products-grid,#productsGrid{height:auto!important;min-height:0!important;overflow:visible!important}
-.products-grid{display:grid!important;grid-template-columns:1fr!important;gap:1rem!important;padding-bottom:2rem!important}
-@media(min-width:641px){.products-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media(min-width:1025px){.products-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
-.product-card{display:flex!important;height:auto!important}
-.product-card[hidden]{display:none!important}
-.modal-overlay:not(.open),.cart-overlay:not(.open){display:none!important;pointer-events:none!important}
-.nav-logo img{animation:none!important}
-.cart-btn::before,.cart-btn::after{display:none!important;content:none!important;animation:none!important}
-.section-heading{margin-top:1.25rem!important;margin-bottom:0.75rem!important}
+<style id="rn-force-visible">
+html, body { overflow: auto !important; height: auto !important; }
+body.rn-modal-open, body.rn-cart-open { overflow: hidden !important; }
+.product-card { display: flex !important; }
+.product-card[hidden] { display: none !important; }
+.products-grid { display: grid !important; }
+#newArrivalsGrid:empty { display: none !important; }
 </style>
-
 </head>
 <body>
 <a class="rn-skip" href="#main" style="position:absolute;left:-9999px;top:0;background:#00B4D8;color:#0B1E3A;padding:8px 12px;z-index:100000;font-weight:700">Skip to content</a>
@@ -2946,6 +2955,15 @@ function toggleCart(open) {
 // PAYMENT — FLUTTERWAVE
 // ============================================================
 function initiatePayment() {
+  if (typeof FlutterwaveCheckout === "undefined") {
+    if (window.loadFlutterwave) {
+      window.loadFlutterwave(function(){ try { initiatePayment(); } catch(e){} });
+      return;
+    }
+    alert("Payment system loading, try again in a moment.");
+    return;
+  }
+
   const name = document.getElementById('buyerName').value.trim();
   const email = document.getElementById('buyerEmail').value.trim();
   if (!name) { showToast('Please enter your full name'); return; }
@@ -4346,59 +4364,6 @@ button[data-cat].active {
       caches.keys().then(function(keys){ keys.forEach(function(k){ caches.delete(k); }); }).catch(function(){});
     }
   }
-})();
-</script>
-
-
-<script id="rn-screenshot-fix-js">
-(function () {
-  function unlock() {
-    try {
-      document.documentElement.style.setProperty('overflow-y', 'scroll', 'important');
-      document.documentElement.style.setProperty('height', 'auto', 'important');
-      document.body.style.setProperty('overflow-y', 'auto', 'important');
-      document.body.style.setProperty('height', 'auto', 'important');
-      document.body.style.setProperty('position', 'relative', 'important');
-      document.body.classList.remove('rn-modal-open', 'rn-cart-open', 'nav-open');
-      var pm = document.getElementById('productModal');
-      if (pm && !pm.classList.contains('open')) {
-        pm.style.display = 'none';
-      }
-      var co = document.getElementById('cartOverlay');
-      var cs = document.getElementById('cartSidebar');
-      if (co && !co.classList.contains('open')) co.style.display = 'none';
-      if (cs && !cs.classList.contains('open')) {
-        cs.classList.remove('open');
-      }
-      // Show all products if filter left them hidden incorrectly
-      var allBtn = document.querySelector('.filter-btn[data-cat="all"]');
-      if (allBtn && !allBtn.classList.contains('active')) {
-        document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
-        allBtn.classList.add('active');
-      }
-      document.querySelectorAll('.product-card').forEach(function (card) {
-        if (!card.hasAttribute('data-force-hide')) {
-          card.style.display = '';
-          card.removeAttribute('hidden');
-        }
-      });
-      var empty = document.getElementById('searchEmpty');
-      if (empty) empty.style.display = 'none';
-      var na = document.getElementById('newArrivalsSection');
-      var ng = document.getElementById('newArrivalsGrid');
-      if (na && ng && !ng.children.length) {
-        na.style.display = 'none';
-      }
-    } catch (e) {}
-  }
-  unlock();
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', unlock);
-  }
-  window.addEventListener('load', unlock);
-  // Re-unlock after a short delay in case something locks scroll later
-  setTimeout(unlock, 500);
-  setTimeout(unlock, 2000);
 })();
 </script>
 
