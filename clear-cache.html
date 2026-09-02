@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Clear RuffNeck Cache</title>
+  <style>
+    body{font-family:system-ui,sans-serif;max-width:420px;margin:40px auto;padding:20px;line-height:1.5}
+    button{display:block;width:100%;padding:14px;margin:12px 0;font-size:16px;border:none;border-radius:10px;background:#00B4D8;color:#0B1E3A;font-weight:700}
+    .ok{color:green;font-weight:700}
+  </style>
+</head>
+<body>
+  <h1>Clear Store Cache</h1>
+  <p>Tap the button once. Wait for the green message. Then open the Store.</p>
+  <button type="button" id="btn">Clear cache &amp; service worker</button>
+  <p id="msg"></p>
+  <p><a href="/store">Go to Store →</a></p>
+  <script>
+  document.getElementById('btn').onclick = async function(){
+    var msg = document.getElementById('msg');
+    msg.textContent = 'Working…';
+    try {
+      if (navigator.serviceWorker) {
+        var regs = await navigator.serviceWorker.getRegistrations();
+        for (var i=0;i<regs.length;i++) await regs[i].unregister();
+      }
+      if (window.caches) {
+        var keys = await caches.keys();
+        for (var j=0;j<keys.length;j++) await caches.delete(keys[j]);
+      }
+      msg.innerHTML = '<span class="ok">Done. Open Store now.</span>';
+    } catch (e) {
+      msg.textContent = 'Error: ' + e.message;
+    }
+  };
+  </script>
+</body>
+</html>

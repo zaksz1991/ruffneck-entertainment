@@ -3200,7 +3200,6 @@ function rnQuickAsk(topic){
 
 <script>
 if ('serviceWorker' in navigator) {
-  /* DISABLED on store — was keeping mobile browser in loading state */
   window.addEventListener('load', function(){
     navigator.serviceWorker.getRegistrations().then(function(regs){
       regs.forEach(function(r){ r.unregister(); });
