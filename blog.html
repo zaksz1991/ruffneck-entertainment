@@ -218,7 +218,7 @@
 
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="preload" href="/logo.png" as="image"/>
+<link rel="preload" href="/icon-192.png" as="image"/>
 <link rel="canonical" href="https://ruffneck-entertainment.vercel.app/blog"/>
 <title>AI, Operations and Digital Growth Insights | RuffNeck</title>
 <meta name="author" content="Hassan Zakariya, RuffNeck Entertainment"/>
@@ -239,7 +239,7 @@
     "@type": "Organization",
     "name": "RuffNeck Entertainment",
     "url": "https://ruffneck-entertainment.vercel.app/",
-    "logo": "https://ruffneck-entertainment.vercel.app/logo.png"
+    "logo": "https://ruffneck-entertainment.vercel.app/icon-192.png"
   },
   "author": {
     "@type": "Person",
@@ -1190,6 +1190,7 @@ section.section-teaser {
 @media(min-width:960px){#cmsPostsGrid[style]{grid-template-columns:repeat(3,minmax(0,1fr))!important;}}
 </style>
 
+<link rel="stylesheet" href="/css/rn-spacing.css"/>
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -1404,14 +1405,14 @@ button,a,.btn{touch-action:manipulation}
 <div class="blog-filters">
   <div class="container">
     <div class="filters-inner">
-      <button class="filter-btn active" data-cat="all">All Articles</button>
-      <button class="filter-btn" data-cat="ai">AI & Automation</button>
-      <button class="filter-btn" data-cat="career">AI Careers</button>
-      <button class="filter-btn" data-cat="operations">Operations</button>
-      <button class="filter-btn" data-cat="marketing">Digital Marketing</button>
-      <button class="filter-btn" data-cat="ethics">AI Ethics</button>
-      <button class="filter-btn" data-cat="content">Content & Prompts</button>
-      <button class="filter-btn" data-cat="business">Business Growth</button>
+      <button type="button" class="filter-btn active" data-cat="all">All Articles</button>
+      <button type="button" class="filter-btn" data-cat="ai">AI & Automation</button>
+      <button type="button" class="filter-btn" data-cat="career">AI Careers</button>
+      <button type="button" class="filter-btn" data-cat="operations">Operations</button>
+      <button type="button" class="filter-btn" data-cat="marketing">Digital Marketing</button>
+      <button type="button" class="filter-btn" data-cat="ethics">AI Ethics</button>
+      <button type="button" class="filter-btn" data-cat="content">Content & Prompts</button>
+      <button type="button" class="filter-btn" data-cat="business">Business Growth</button>
       <div class="blog-search">
         <span>🔍</span>
         <input type="text" id="searchInput" placeholder="Search articles..." oninput="filterBlog()"/>
@@ -1437,7 +1438,7 @@ button,a,.btn{touch-action:manipulation}
           <span class="card-dot"></span>
           <span class="read-time">12 min read</span>
         </div>
-        <button class="btn btn-primary btn-sm">Read Full Article →</button>
+        <button type="button" class="btn btn-primary btn-sm">Read Full Article →</button>
       </div>
     </div>
   </div>
@@ -1681,7 +1682,7 @@ button,a,.btn{touch-action:manipulation}
     <p>Join readers across Africa and beyond who get practical AI and business insights from RuffNeck Entertainment every week in 2026.</p>
     <div class="newsletter-form">
       <input type="email" id="nlEmail" placeholder="Your email address" style="flex:1;min-width:220px;padding:13px 18px;border-radius:var(--radius-sm);border:none;font-family:var(--font-display);font-size:14px;color:var(--text-dark);outline:none;"/>
-      <button class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe Free</button>
+      <button type="button" class="btn btn-primary" onclick="subscribeNewsletter()">Subscribe Free</button>
     </div>
     <p id="nlMsg" style="font-size:13px;color:var(--cyan);margin-top:12px;display:none;">✅ You're subscribed! Expect insights in your inbox soon.</p>
   </div>
@@ -1717,7 +1718,7 @@ button,a,.btn{touch-action:manipulation}
   <div class="article-modal" id="articleModal">
     <div class="article-modal-header">
       <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:4px;">
-        <button class="article-back-btn" onclick="closeArticle()">← Back to Blog</button>
+        <button type="button" class="article-back-btn" onclick="closeArticle()">← Back to Blog</button>
         <a href="/" class="article-home-btn">🏠 Homepage</a>
       </div>
       <div class="article-label" id="articleLabel"></div>
@@ -1742,13 +1743,13 @@ button,a,.btn{touch-action:manipulation}
         <div class="comment-form">
           <input type="text" id="commentName" class="comment-input" placeholder="Your name"/>
           <textarea id="commentText" class="comment-textarea" placeholder="Share your thoughts…" rows="3"></textarea>
-          <button class="btn btn-primary btn-sm" onclick="postComment()">Post Comment →</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="postComment()">Post Comment →</button>
         </div>
         <div class="comments-list" id="commentsList"></div>
       </div>
 
       <div class="article-nav-btns">
-        <button class="btn btn-outline btn-sm" onclick="closeArticle()">← All Articles</button>
+        <button type="button" class="btn btn-outline btn-sm" onclick="closeArticle()">← All Articles</button>
         <a href="/" class="btn btn-primary btn-sm">🏠 Homepage</a>
       </div>
     </div>
@@ -2189,7 +2190,7 @@ function renderComments(articleId){
           <div class="comment-name">${escapeHtml(c.name)}</div>
           <div class="comment-date">${c.date}</div>
         </div>
-        <button class="comment-delete" onclick="deleteComment(${i})" title="Delete your comment">🗑️</button>
+        <button type="button" class="comment-delete" onclick="deleteComment(${i})" title="Delete your comment">🗑️</button>
       </div>
       <div class="comment-text">${escapeHtml(c.text)}</div>
     </div>
@@ -2300,25 +2301,25 @@ function subscribeNewsletter() {
         <div class="rn-chat-name">RuffNeck Assistant</div>
         <div class="rn-chat-status">Online now</div>
       </div>
-      <button class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat" aria-label="Close">✕</button>
+      <button type="button" class="rn-chat-close" onclick="rnToggleChat()" aria-label="Close chat" aria-label="Close">✕</button>
     </div>
     <div class="rn-chat-messages" id="rnChatMessages">
       <div class="rn-msg bot">👋 Hi! I'm here to help with <strong>services</strong>, <strong>products</strong>, <strong>AI careers</strong>, and more. I understand Hausa, Yoruba, and Igbo too — feel free to ask in your language! What can I help with today?</div>
     </div>
     <div class="rn-chat-quick" id="rnQuickReplies">
-      <button class="rn-quick-btn" onclick="rnQuickAsk('services')">Services</button>
-      <button class="rn-quick-btn" onclick="rnQuickAsk('store')">Store</button>
-      <button class="rn-quick-btn" onclick="rnQuickAsk('careers')">AI Careers</button>
-      <button class="rn-quick-btn" onclick="rnQuickAsk('contact')">Contact</button>
+      <button type="button" class="rn-quick-btn" onclick="rnQuickAsk('services')">Services</button>
+      <button type="button" class="rn-quick-btn" onclick="rnQuickAsk('store')">Store</button>
+      <button type="button" class="rn-quick-btn" onclick="rnQuickAsk('careers')">AI Careers</button>
+      <button type="button" class="rn-quick-btn" onclick="rnQuickAsk('contact')">Contact</button>
     </div>
     <div class="rn-chat-input-row">
       <input class="rn-chat-input" id="rnChatInput" type="text" placeholder="Type a message…" onkeydown="if(event.key==='Enter')rnSendChat()"/>
-      <button class="rn-chat-send" onclick="rnSendChat()">
+      <button type="button" class="rn-chat-send" onclick="rnSendChat()">
         <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
       </button>
     </div>
   </div>
-  <button class="rn-chat-toggle" onclick="rnToggleChat()" aria-label="Open chat">
+  <button type="button" class="rn-chat-toggle" onclick="rnToggleChat()" aria-label="Open chat">
     <svg viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/></svg>
   </button>
 </div>

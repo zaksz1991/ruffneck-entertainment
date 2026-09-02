@@ -1,17 +1,20 @@
-LOGO + ADMIN EDIT/DELETE
-========================
-1) store.html — logo src /logo.png → /icon-192.png (file that exists)
-2) admin.html — Edit + Delete on CMS posts and products
-   - Edit loads form, Save uses PUT when id present, POST when new
-   - Delete calls DELETE /api/cms/posts or /products with {id}
-   - Requires admin login session (same as before)
+SPACING + ALIGNMENT — MOBILE & DESKTOP
+======================================
+css/rn-spacing.css   — spacing tokens, grids, touch targets
+css/rn-site-ux.css   — prior UX + spacing merged
 
-NOTE: Static products hardcoded in store.html are NOT in CMS.
-Only products/posts returned by /api/cms/* appear in admin lists.
+Also on HTML pages:
+- /logo.png → /icon-192.png
+- removed professional-ux.css & cleanup.css links (404)
+- type="button" on buttons missing type
+- blog grid default 1 column (then 2/3 via CSS breakpoints)
 
-Upload:
-  store.html
-  admin.html
-  (optional index.html if included)
+Breakpoints:
+  phone:  1 column cards
+  600px+: 2 columns
+  960px+: 3 columns (blog); products up to 4 at 1100px+
+  filters: horizontal scroll on small screens
 
-Do NOT replace vercel.json unless you need routing recovery.
+NOT changed: Flutterwave, APIs, vercel.json rewrites
+
+Upload preserving paths. Test phone 375px and desktop 1280px.

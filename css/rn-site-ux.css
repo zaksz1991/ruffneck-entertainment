@@ -426,3 +426,201 @@ rn-footer a, .rn-footer a {
   }
 }
 .blog-card,.article-card{min-width:0!important;width:100%!important;max-width:100%!important;}
+
+
+/* ===== SPACING SYSTEM MOBILE+DESKTOP ===== */
+
+/* rn-spacing-system — mobile + desktop */
+:root {
+  --rn-space-1: 0.25rem;
+  --rn-space-2: 0.5rem;
+  --rn-space-3: 0.75rem;
+  --rn-space-4: 1rem;
+  --rn-space-5: 1.5rem;
+  --rn-space-6: 2rem;
+  --rn-space-7: 3rem;
+  --rn-max: 1120px;
+  --rn-touch: 44px;
+  --rn-gutter: 16px;
+}
+@media (min-width: 768px) {
+  :root { --rn-gutter: 24px; }
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  overflow-x: hidden;
+  margin: 0;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Shared content width */
+.container,
+.nav-inner,
+.filters-inner,
+.store-main,
+.section-head,
+.catalog-tools,
+.rn-section-head,
+.wrap {
+  width: min(100% - (var(--rn-gutter) * 2), var(--rn-max)) !important;
+  max-width: var(--rn-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Section rhythm */
+.section,
+.rn-section,
+.store-hero,
+.blog-hero,
+.page-hero {
+  padding-top: clamp(1.5rem, 4vw, 3rem) !important;
+  padding-bottom: clamp(1.5rem, 4vw, 3rem) !important;
+}
+
+/* Touch-friendly controls — mobile + desktop */
+button,
+.btn,
+.filter-btn,
+.filter-chip,
+.curr-btn,
+.search-btn,
+.cart-btn,
+.button,
+.button--primary,
+.button--secondary,
+a.btn {
+  min-height: var(--rn-touch) !important;
+  min-width: 2.75rem;
+  padding-left: 0.9rem !important;
+  padding-right: 0.9rem !important;
+  box-sizing: border-box !important;
+  -webkit-tap-highlight-color: transparent;
+}
+input[type="search"],
+input[type="text"],
+input[type="email"],
+textarea,
+.select,
+select {
+  font-size: 16px !important; /* no iOS zoom */
+  min-height: var(--rn-touch);
+  box-sizing: border-box;
+}
+
+/* Blog + generic card grids — mobile first */
+.blog-grid,
+#blogGrid,
+#cmsPostsGrid,
+.posts-grid,
+.articles-grid,
+.products-grid,
+#productsGrid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: var(--rn-space-4) !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  padding-left: var(--rn-gutter) !important;
+  padding-right: var(--rn-gutter) !important;
+  box-sizing: border-box !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+@media (min-width: 600px) {
+  .blog-grid,
+  #blogGrid,
+  #cmsPostsGrid,
+  .posts-grid,
+  .articles-grid,
+  .products-grid,
+  #productsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: var(--rn-space-5) !important;
+  }
+}
+@media (min-width: 960px) {
+  .blog-grid,
+  #blogGrid,
+  #cmsPostsGrid,
+  .posts-grid,
+  .articles-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  .products-grid,
+  #productsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+@media (min-width: 1100px) {
+  .products-grid,
+  #productsGrid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+.blog-card,
+.article-card,
+.product-card,
+.post-card {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Filter rows: horizontal scroll on mobile, wrap ok on wide */
+.filters-inner,
+.rn-filter-row,
+.blog-filters,
+.filter-bar {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: var(--rn-space-2) !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--rn-space-2) var(--rn-gutter) !important;
+  align-items: center !important;
+}
+@media (min-width: 900px) {
+  .filters-inner,
+  .rn-filter-row {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+  }
+}
+
+/* Sticky bars offset */
+.store-filters,
+.rn-filter-bar,
+.blog-filters {
+  top: 56px;
+}
+
+/* Kill horizontal scroll from 100vw tricks */
+.blog-grid,
+.filters-inner,
+.nav-inner {
+  max-width: 100% !important;
+}
+
+/* Footer safe area */
+footer,
+.site-footer,
+.rn-footer {
+  padding-bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+/* Focus visible — keyboard + mobile a11y */
+:focus-visible {
+  outline: 3px solid #f59e0b !important;
+  outline-offset: 3px !important;
+}
