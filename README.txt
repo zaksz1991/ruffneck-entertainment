@@ -1,16 +1,11 @@
-MOBILE CSS OPTIMIZATION
-=======================
-CSS only. No payment/API/link changes.
+UX/UI STORE UPGRADE
+===================
+Hierarchy: announce → header → hero → trust → filters → featured → catalogue → services → process → FAQ → CTA → footer
 
-Mobile improvements:
-- 44px touch targets (buttons, cart, filters)
-- Inputs at 16px (no iOS zoom on focus)
-- Filters: horizontal scroll + search/currency full width on small screens
-- Product grid: 1 col phone / 2 tablet / 3 desktop
-- Full-width "View options" on narrow screens
-- Cart: full-width sheet on phones + safe-area padding
-- Modal: bottom sheet on mobile, centered on desktop
-- Sticky nav/filters respect notch (safe-area-inset)
-- No horizontal page overflow
+NOT changed:
+- Flutterwave key & checkout script
+- initiatePayment / cart / modal commerce JS
+- WhatsApp, home, blog URLs
+- Product IDs and openModal targets
 
-Upload store.html only.
+Client-side only: category filter, search, mobile menu, result count.
