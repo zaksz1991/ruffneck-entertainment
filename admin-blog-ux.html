@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>RuffNeck Admin</title>
+<meta name="robots" content="noindex,nofollow"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#020617;color:#f8fafc}
+a{color:#38bdf8;text-decoration:none}
+
+/* LOGIN */
+#loginScreen{
+  min-height:100vh;min-height:100dvh;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  background:radial-gradient(ellipse at 30% 40%,#0B1E3A 0%,#020617 70%);
+}
+#loginScreen.hidden{display:none!important}
+.login-card{
+  width:100%;max-width:400px;
+  background:#0f172a;border:1px solid #1e293b;border-radius:16px;
+  padding:28px 22px;
+}
+.login-card h1{font-size:1.35rem;margin-bottom:6px}
+.login-card p{color:#94a3b8;font-size:13px;margin-bottom:18px}
+.login-card label{display:block;font-size:13px;margin:12px 0 6px;color:#cbd5e1}
+.login-card input{
+  width:100%;padding:14px;border-radius:10px;border:1px solid #334155;
+  background:#fff;color:#0f172a;font-size:16px;
+}
+.login-card button{
+  width:100%;margin-top:16px;padding:14px;border:none;border-radius:10px;
+  background:#0ea5e9;color:#0f172a;font-weight:700;font-size:15px;cursor:pointer;
+}
+.login-card button:active{opacity:.9}
+#loginError{display:none;margin-top:12px;padding:10px;border-radius:8px;background:rgba(239,68,68,.15);color:#fca5a5;font-size:13px}
+.login-hint{margin-top:14px;font-size:12px;color:#64748b;text-align:center;line-height:1.5}
+
+/* SHELL */
+#adminShell{display:none;min-height:100vh;min-height:100dvh;flex-direction:column}
+#adminShell.visible{display:flex!important}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 16px;background:#0f172a;border-bottom:1px solid #1e293b;
+}
+.topbar strong{font-size:15px}
+.topbar .muted{color:#94a3b8;font-size:12px}
+.topbar-actions{display:flex;gap:8px;align-items:center}
+.topbar-actions a,.topbar-actions button{
+  border:1px solid #334155;background:transparent;color:#e2e8f0;
+  padding:8px 12px;border-radius:8px;font-size:12px;cursor:pointer;
+}
+#banner{
+  padding:10px 14px;text-align:center;font-size:12px;
+  background:#0f172a;border-bottom:1px solid #1e293b;color:#fbbf24;
+}
+
+/* NAV */
+.nav{
+  display:flex;flex-wrap:wrap;gap:8px;padding:12px;
+  background:#0f172a;border-bottom:1px solid #1e293b;
+}
+.nav button{
+  flex:1 1 30%;min-width:90px;
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:12px 8px;border-radius:12px;border:1px solid #334155;
+  background:#1e293b;color:#f8fafc;font-size:11px;cursor:pointer;
+}
+.nav button.active{border-color:#0ea5e9;background:rgba(14,165,233,.2)}
+.nav button span{font-size:18px}
+
+/* MAIN */
+.main{flex:1;padding:16px;width:100%;max-width:900px;margin:0 auto}
+.page{display:none}
+.page.active{display:block}
+.page h2{font-size:1.25rem;margin-bottom:6px}
+.page .sub{color:#94a3b8;font-size:13px;margin-bottom:16px}
+.card{
+  background:#0f172a;border:1px solid #1e293b;border-radius:12px;
+  padding:14px;margin-bottom:12px;
+}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat .n{font-size:1.5rem;font-weight:700}
+.stat .l{font-size:12px;color:#94a3b8}
+label.field{display:block;font-size:13px;margin:10px 0 6px;color:#cbd5e1}
+input.field,select.field,textarea.field{
+  width:100%;padding:12px;border-radius:8px;border:1px solid #334155;
+  background:#fff;color:#0f172a;font-size:16px;margin-bottom:8px;
+}
+textarea.field{min-height:140px;resize:vertical}
+.btn{
+  display:inline-block;padding:12px 16px;border:none;border-radius:10px;
+  background:#0ea5e9;color:#0f172a;font-weight:700;cursor:pointer;font-size:14px;
+}
+.btn.secondary{background:#1e293b;color:#f8fafc;border:1px solid #334155}
+.btn.danger{background:#7f1d1d;color:#fecaca}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.list-item{
+  display:flex;justify-content:space-between;gap:10px;align-items:flex-start;
+  padding:12px 0;border-bottom:1px solid #1e293b;
+}
+.list-item:last-child{border-bottom:none}
+.badge{font-size:11px;padding:2px 8px;border-radius:999px;background:#1e293b;color:#94a3b8}
+.badge.ok{background:rgba(16,185,129,.15);color:#6ee7b7}
+.badge.warn{background:rgba(245,158,11,.15);color:#fcd34d}
+.empty{color:#64748b;font-size:14px;padding:20px 0;text-align:center}
+@media(min-width:800px){
+  .nav button{flex-direction:row;justify-content:flex-start;gap:10px;font-size:13px}
+  .stats{grid-template-columns:repeat(4,1fr)}
+}
+
+.list-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.list-actions button{
+  min-height:40px;padding:8px 12px;border-radius:8px;border:1px solid #334155;
+  background:#1e293b;color:#f8fafc;font-weight:600;cursor:pointer;font-size:13px
+}
+.list-actions button.edit{border-color:#0ea5e9;color:#7dd3fc}
+.list-actions button.del{border-color:#f87171;color:#fca5a5}
+.list-item{flex-wrap:wrap}
+#editPostId,#editProductId{display:none}
+.edit-banner{display:none;background:#0c4a6e;color:#e0f2fe;padding:10px 12px;border-radius:8px;margin-bottom:12px;font-size:13px;font-weight:600}
+.edit-banner.show{display:block}
+
+</style>
+
+<style id="rn-audit-impl-css">
+/* ===== Audit implementation: mobile, a11y, performance-ish ===== */
+img, video { max-width: 100%; height: auto; }
+iframe { max-width: 100%; }
+
+/* Touch targets ≥ 44px */
+.social-icon, footer a[href*="linkedin"], footer a[href*="facebook"],
+footer a[href*="instagram"], footer a[href*="twitter"], footer a[href*="x.com"],
+footer .social a, .footer-social a {
+  min-width: 44px !important;
+  min-height: 44px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 8px !important;
+}
+
+/* Focus visible */
+:focus-visible {
+  outline: 3px solid #00B4D8 !important;
+  outline-offset: 2px !important;
+}
+
+/* Skip link */
+.rn-skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: #00B4D8;
+  color: #0B1E3A;
+  padding: 10px 14px;
+  z-index: 2147483647;
+  font-weight: 800;
+  text-decoration: none;
+}
+.rn-skip-link:focus {
+  left: 12px;
+  top: 12px;
+}
+
+@media (max-width: 768px) {
+  .service-card,
+  .pricing-tier,
+  .pricing-card,
+  #servicesGrid > *,
+  .services-grid > * {
+    flex: 1 1 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .pricing-grid,
+  .services-grid,
+  #servicesGrid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+  /* Expand panels must not force horizontal scroll */
+  .service-card .details,
+  .service-card .expand-body,
+  .accordion-body,
+  [class*="expand"] {
+    max-width: 100% !important;
+    overflow-x: auto !important;
+    overflow-wrap: anywhere !important;
+  }
+  h1 { font-size: clamp(1.5rem, 7vw, 2.2rem) !important; line-height: 1.15 !important; }
+  .btn, button.btn, a.btn {
+    min-height: 44px !important;
+    padding: 12px 16px !important;
+  }
+}
+
+/* Contrast: muted text slightly brighter on dark bg */
+.muted, .text-muted, .hero-sub, .section-sub {
+  color: #CBD5E1 !important;
+}
+
+/* font-display hint for linked fonts */
+</style>
+
+
+<meta property="og:title" content="RuffNeck Admin"/>
+<meta property="og:description" content="RuffNeck Entertainment admin login."/>
+<meta property="og:url" content="https://ruffneck-entertainment.vercel.app/admin"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="canonical" href="https://ruffneck-entertainment.vercel.app/admin"/>
+<meta name="description" content="RuffNeck Entertainment admin login."/>
+</head>
+<body>
+
+<!-- LOGIN (always visible until signed in) -->
+<div id="loginScreen">
+  <div class="login-card">
+    <h1>RuffNeck Admin</h1>
+    <p>Sign in to manage blog posts and store products.</p>
+    <label for="adminPass">Password</label>
+    <input id="adminPass" type="password" autocomplete="current-password" placeholder="Enter admin password"/>
+    <button type="button" id="loginBtn">Sign in</button>
+    <div id="loginError"></div>
+    <p class="login-hint">Password: your <code>ADMIN_PASSWORD</code> on Vercel<br/>or fallback <code>ruffneck2026admin</code></p>
+  </div>
+</div>
+
+<!-- ADMIN SHELL -->
+<div id="adminShell">
+  <header class="topbar">
+    <div>
+      <strong>RuffNeck Admin</strong>
+      <div class="muted" id="topDate"></div>
+    </div>
+    <div class="topbar-actions">
+      <a href="/" target="_blank" rel="noopener">View site</a>
+      <button type="button" id="logoutBtn">Sign out</button>
+    </div>
+  </header>
+  <div id="banner">Checking database…</div>
+  <nav class="nav" id="nav">
+    <button type="button" data-page="dashboard" class="active"><span>📊</span>Dashboard</button>
+    <button type="button" data-page="products"><span>🛒</span>Products</button>
+    <button type="button" data-page="add-product"><span>➕</span>Add product</button>
+    <button type="button" data-page="blog"><span>📝</span>Blog</button>
+    <button type="button" data-page="add-blog"><span>✍️</span>Add post</button>
+    <button type="button" data-page="settings"><span>⚙️</span>Settings</button>
+  </nav>
+  <main class="main">
+    <section class="page active" id="page-dashboard">
+      <h2>Dashboard</h2>
+      <p class="sub">Overview — posts and products from your database.</p>
+      <div class="stats">
+        <div class="card stat"><div class="n" id="statProducts">0</div><div class="l">Products</div></div>
+        <div class="card stat"><div class="n" id="statPosts">0</div><div class="l">Blog posts</div></div>
+        <div class="card stat"><div class="n" id="statPublished">0</div><div class="l">Published</div></div>
+        <div class="card stat"><div class="n" id="statDb">…</div><div class="l">Database</div></div>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <p style="font-size:14px;color:#cbd5e1">Use <strong>Add post</strong> or <strong>Add product</strong>, set status to Published/Active, then check the public Blog or Store pages.</p>
+      </div>
+    </section>
+
+    <section class="page" id="page-products">
+      <h2>Products</h2>
+      <p class="sub">Store items in the database.</p>
+      <div class="card" id="productList"><div class="empty">Loading…</div></div>
+    </section>
+
+    <section class="page" id="page-add-product">
+      <h2>Add product</h2>
+      <p class="sub">Saved to Supabase when connected.</p>
+      <div class="card">
+        <label class="field">Name</label>
+        <input type="hidden" id="editProductId" value=""/>
+<div class="edit-banner" id="productEditBanner">Editing product — Save updates this item. <button type="button" id="cancelProductEdit" style="margin-left:8px">Cancel</button></div>
+<input class="field" id="pName" placeholder="Product name"/>
+        <label class="field">Category</label>
+        <input class="field" id="pCat" placeholder="e.g. IT Services"/>
+        <label class="field">Short description</label>
+        <textarea class="field" id="pDesc" placeholder="What the buyer gets"></textarea>
+        <label class="field">Price (₦)</label>
+        <input class="field" id="pPrice" type="number" placeholder="0"/>
+        <label class="field">Price tiers optional JSON</label>
+<textarea class="field" id="pTiers" rows="3" placeholder='{"basic":3500,"standard":7000,"premium":12000}'></textarea>
+<p style="font-size:12px;color:#94a3b8">Leave empty for single price. Storefront must support tiers to show levels.</p>
+<label class="field">Status</label>
+        <select class="field" id="pStatus">
+          <option value="active">Active (visible on store)</option>
+          <option value="draft">Draft</option>
+        </select>
+        <div class="row">
+          <button type="button" class="btn" id="saveProductBtn">Save product</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-blog">
+      <h2>Blog posts</h2>
+      <p class="sub">Posts stored in the database.</p>
+      <div class="card" id="blogList"><div class="empty">Loading…</div></div>
+    </section>
+
+    <section class="page" id="page-add-blog">
+      <h2>Add blog post</h2>
+      <p class="sub">Published posts appear on /blog.</p>
+      <div class="card">
+        <label class="field">Title</label>
+        <input type="hidden" id="editPostId" value=""/>
+<div class="edit-banner" id="postEditBanner">Editing post — Save updates this item. <button type="button" id="cancelPostEdit" style="margin-left:8px">Cancel</button></div>
+<input class="field" id="bTitle" placeholder="Post title"/>
+        <label class="field">Category</label>
+        <input class="field" id="bCat" placeholder="e.g. AI & Automation"/>
+        <label class="field">Short summary</label>
+        <textarea class="field" id="bDesc" placeholder="One or two sentences"></textarea>
+        <label class="field">Body</label>
+        <label class="field">Tags (comma-separated)</label>
+<input class="field" id="bTags" placeholder="AI, careers, Nigeria"/>
+<label class="field">Image URL (optional)</label>
+<input class="field" id="bImage" placeholder="https://..."/>
+<textarea class="field" id="bBody" placeholder="Full article text" style="min-height:200px"></textarea>
+        <label class="field">Status</label>
+        <select class="field" id="bStatus">
+          <option value="published">Published (visible on blog)</option>
+          <option value="draft">Draft</option>
+        </select>
+        <div class="row">
+          <button type="button" class="btn" id="saveBlogBtn">Save post</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="page" id="page-settings">
+      <h2>Settings</h2>
+      <p class="sub">Admin access notes.</p>
+      <div class="card">
+        <p style="font-size:14px;line-height:1.6;color:#cbd5e1">
+          Login uses <code>ADMIN_PASSWORD</code> from Vercel when the API is available.
+          Fallback password: <code>ruffneck2026admin</code>.
+          Database: <code>SUPABASE_URL</code> + <code>SUPABASE_SERVICE_KEY</code> on Vercel.
+          No language translator on this admin page (translator is on the public site only).
+        </p>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+(function(){
+  var FALLBACK = 'ruffneck2026admin';
+  var loginScreen = document.getElementById('loginScreen');
+  var shell = document.getElementById('adminShell');
+  var banner = document.getElementById('banner');
+  var passInput = document.getElementById('adminPass');
+  var loginError = document.getElementById('loginError');
+
+  document.getElementById('topDate').textContent = new Date().toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'short', year:'numeric'});
+
+  function showError(msg){
+    loginError.style.display = 'block';
+    loginError.textContent = msg;
+  }
+
+  function showShell(){
+    loginScreen.classList.add('hidden');
+    shell.classList.add('visible');
+    try { sessionStorage.setItem('rn_admin_ok', '1'); } catch(e) {}
+    refreshDb();
+    loadLists();
+  }
+
+  function showLogin(){
+    try { sessionStorage.removeItem('rn_admin_ok'); } catch(e) {}
+    shell.classList.remove('visible');
+    loginScreen.classList.remove('hidden');
+  }
+
+  async function doLogin(){
+    var val = (passInput.value || '').trim();
+    if (!val) { showError('Enter the password.'); return; }
+
+    // Try server auth
+    try {
+      var res = await fetch('/api/admin-login', {
+        method: 'POST',
+        credentials: 'same-origin',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: val })
+      });
+      if (res.status === 200) {
+        var data = await res.json();
+        if (data.ok) { showShell(); return; }
+      }
+    } catch (e) {}
+
+    if (val === FALLBACK) { showShell(); return; }
+    showError('Incorrect password. Use ADMIN_PASSWORD or ruffneck2026admin');
+    passInput.value = '';
+    passInput.focus();
+  }
+
+  document.getElementById('loginBtn').onclick = doLogin;
+  passInput.addEventListener('keydown', function(e){ if (e.key === 'Enter') doLogin(); });
+  document.getElementById('logoutBtn').onclick = function(){
+    fetch('/api/admin-logout', { method:'POST', credentials:'same-origin' }).catch(function(){});
+    showLogin();
+  };
+
+  // Navigation
+  document.querySelectorAll('#nav button').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-page');
+      document.querySelectorAll('#nav button').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
+      var page = document.getElementById('page-' + id);
+      if (page) page.classList.add('active');
+      if (id === 'blog' || id === 'products' || id === 'dashboard') loadLists();
+    });
+  });
+
+  async function refreshDb(){
+    try {
+      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
+      var data = await res.json();
+      if (res.ok && data.ok) {
+        banner.style.color = '#86efac';
+        banner.textContent = 'Storage: Database connected (Supabase)';
+        document.getElementById('statDb').textContent = 'ON';
+        return true;
+      }
+      if (data && data.code === 'NO_DB') {
+        banner.style.color = '#fbbf24';
+        banner.textContent = 'Storage: browser only — set SUPABASE_URL + SUPABASE_SERVICE_KEY on Vercel, then redeploy';
+        document.getElementById('statDb').textContent = 'OFF';
+        return false;
+      }
+      banner.style.color = '#fbbf24';
+      banner.textContent = 'Storage: API error ' + res.status;
+      document.getElementById('statDb').textContent = 'ERR';
+    } catch (e) {
+      banner.style.color = '#fbbf24';
+      banner.textContent = 'Storage: cannot reach API';
+      document.getElementById('statDb').textContent = 'ERR';
+    }
+    return false;
+  }
+
+  function localPosts(){
+    try { return JSON.parse(localStorage.getItem('rn_blog_posts') || '[]'); } catch(e){ return []; }
+  }
+  function localProducts(){
+    try { return JSON.parse(localStorage.getItem('rn_products') || '[]'); } catch(e){ return []; }
+  }
+  function saveLocalPosts(list){
+    localStorage.setItem('rn_blog_posts', JSON.stringify(list));
+  }
+  function saveLocalProducts(list){
+    localStorage.setItem('rn_products', JSON.stringify(list));
+  }
+
+  async function fetchPosts(){
+    try {
+      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
+      var data = await res.json();
+      if (res.ok && data.ok && Array.isArray(data.posts)) return data.posts;
+    } catch(e) {}
+    return localPosts();
+  }
+  async function fetchProducts(){
+    try {
+      var res = await fetch('/api/cms/products', { credentials:'same-origin', cache:'no-store' });
+      var data = await res.json();
+      if (res.ok && data.ok && Array.isArray(data.products)) return data.products;
+    } catch(e) {}
+    return localProducts();
+  }
+
+  async function loadLists(){
+    var posts = await fetchPosts();
+    var products = await fetchProducts();
+    document.getElementById('statPosts').textContent = posts.length;
+    document.getElementById('statProducts').textContent = products.length;
+    document.getElementById('statPublished').textContent = posts.filter(function(p){ return (p.status||'') === 'published'; }).length;
+
+    var bl = document.getElementById('blogList');
+    if (!posts.length) bl.innerHTML = '<div class="empty">No posts yet. Use Add post.</div>';
+    else bl.innerHTML = posts.map(function(p){
+      var st = (p.status||'draft');
+      var id = escapeHtml(p.id||'');
+      return '<div class="list-item"><div style="flex:1;min-width:180px"><strong>'+escapeHtml(p.title||'Untitled')+'</strong><div style="font-size:12px;color:#94a3b8;margin-top:4px">'+escapeHtml(p.cat||'')+' · '+escapeHtml(p.created||'')+' · id:'+id+'</div><div class="list-actions"><button type="button" class="edit" data-edit-post="'+id+'">Edit</button><button type="button" class="del" data-del-post="'+id+'">Delete</button></div></div><span class="badge '+(st==='published'?'ok':'warn')+'">'+escapeHtml(st)+'</span></div>';
+    }).join('');
+
+    var pl = document.getElementById('productList');
+    if (!products.length) pl.innerHTML = '<div class="empty">No products yet. Use Add product.</div>';
+    else pl.innerHTML = products.map(function(p){
+      var st = (p.status||'active');
+      var id = escapeHtml(p.id||'');
+      return '<div class="list-item"><div style="flex:1;min-width:180px"><strong>'+escapeHtml(p.name||'Untitled')+'</strong><div style="font-size:12px;color:#94a3b8;margin-top:4px">'+escapeHtml(p.cat||'')+' · ₦'+escapeHtml(String(p.price!=null?p.price:0))+' · id:'+id+'</div><div class="list-actions"><button type="button" class="edit" data-edit-product="'+id+'">Edit</button><button type="button" class="del" data-del-product="'+id+'">Delete</button></div></div><span class="badge '+(st==='active'?'ok':'warn')+'">'+escapeHtml(st)+'</span></div>';
+    }).join('');
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  
+
+  // —— Edit / Delete (uses existing PUT/DELETE APIs) ——
+  window.__rnPostsCache = [];
+  window.__rnProductsCache = [];
+
+  var _origLoadLists = loadLists;
+  loadLists = async function(){
+    var posts = await fetchPosts();
+    var products = await fetchProducts();
+    window.__rnPostsCache = posts;
+    window.__rnProductsCache = products;
+    return _origLoadLists();
+  };
+
+  function clearPostForm(){
+    var idEl = document.getElementById('editPostId');
+    if (idEl) idEl.value = '';
+    ['bTitle','bCat','bDesc','bBody'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.value = '';
+    });
+    var st = document.getElementById('bStatus'); if (st) st.value = 'published';
+    var ban = document.getElementById('postEditBanner'); if (ban) ban.classList.remove('show');
+    var h = document.querySelector('#page-add-blog h2'); if (h) h.textContent = 'Add blog post';
+  }
+  function clearProductForm(){
+    var idEl = document.getElementById('editProductId');
+    if (idEl) idEl.value = '';
+    ['pName','pCat','pDesc','pPrice'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.value = '';
+    });
+    var st = document.getElementById('pStatus'); if (st) st.value = 'active';
+    var ban = document.getElementById('productEditBanner'); if (ban) ban.classList.remove('show');
+    var h = document.querySelector('#page-add-product h2'); if (h) h.textContent = 'Add product';
+  }
+
+  document.getElementById('cancelPostEdit') && document.getElementById('cancelPostEdit').addEventListener('click', clearPostForm);
+  document.getElementById('cancelProductEdit') && document.getElementById('cancelProductEdit').addEventListener('click', clearProductForm);
+
+  document.addEventListener('click', async function(e){
+    var editPost = e.target.closest('[data-edit-post]');
+    var delPost = e.target.closest('[data-del-post]');
+    var editProd = e.target.closest('[data-edit-product]');
+    var delProd = e.target.closest('[data-del-product]');
+
+    if (editPost) {
+      var id = editPost.getAttribute('data-edit-post');
+      var p = (window.__rnPostsCache||[]).find(function(x){ return String(x.id)===String(id); });
+      if (!p) { alert('Post not found in list'); return; }
+      document.getElementById('editPostId').value = p.id || '';
+      document.getElementById('bTitle').value = p.title || '';
+      document.getElementById('bCat').value = p.cat || '';
+      document.getElementById('bDesc').value = p.desc || '';
+      document.getElementById('bBody').value = p.body || '';
+      if(document.getElementById('bTags'))document.getElementById('bTags').value=Array.isArray(p.tags)?p.tags.join(', '):(p.tags||'');
+      if(document.getElementById('bImage'))document.getElementById('bImage').value=p.image||'';
+      if (document.getElementById('bStatus')) document.getElementById('bStatus').value = p.status || 'draft';
+      var ban = document.getElementById('postEditBanner'); if (ban) ban.classList.add('show');
+      var h = document.querySelector('#page-add-blog h2'); if (h) h.textContent = 'Edit blog post';
+      var tab = document.querySelector('[data-page="add-blog"]'); if (tab) tab.click();
+      else {
+        document.querySelectorAll('.page').forEach(function(pg){ pg.classList.remove('active'); });
+        var page = document.getElementById('page-add-blog'); if (page) page.classList.add('active');
+      }
+      return;
+    }
+
+    if (delPost) {
+      var id = delPost.getAttribute('data-del-post');
+      if (!confirm('Delete this blog post permanently?')) return;
+      try {
+        var res = await fetch('/api/cms/posts', {
+          method:'DELETE', credentials:'same-origin',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ id: id })
+        });
+        var data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
+        alert('Post deleted');
+      } catch (err) {
+        var list = localPosts().filter(function(x){ return String(x.id)!==String(id); });
+        saveLocalPosts(list);
+        alert('Removed locally (' + (err.message||'API') + ')');
+      }
+      loadLists();
+      return;
+    }
+
+    if (editProd) {
+      var id = editProd.getAttribute('data-edit-product');
+      var p = (window.__rnProductsCache||[]).find(function(x){ return String(x.id)===String(id); });
+      if (!p) { alert('Product not found in list'); return; }
+      document.getElementById('editProductId').value = p.id || '';
+      document.getElementById('pName').value = p.name || '';
+      document.getElementById('pCat').value = p.cat || '';
+      document.getElementById('pDesc').value = p.desc || '';
+      document.getElementById('pPrice').value = p.price != null ? p.price : '';
+      if(document.getElementById('pTiers'))document.getElementById('pTiers').value=(p.tiers&&typeof p.tiers==='object'&&Object.keys(p.tiers).length)?JSON.stringify(p.tiers):'';
+      if (document.getElementById('pStatus')) document.getElementById('pStatus').value = p.status || 'active';
+      var ban = document.getElementById('productEditBanner'); if (ban) ban.classList.add('show');
+      var h = document.querySelector('#page-add-product h2'); if (h) h.textContent = 'Edit product';
+      var tab = document.querySelector('[data-page="add-product"]'); if (tab) tab.click();
+      else {
+        document.querySelectorAll('.page').forEach(function(pg){ pg.classList.remove('active'); });
+        var page = document.getElementById('page-add-product'); if (page) page.classList.add('active');
+      }
+      return;
+    }
+
+    if (delProd) {
+      var id = delProd.getAttribute('data-del-product');
+      if (!confirm('Delete this product permanently?')) return;
+      try {
+        var res = await fetch('/api/cms/products', {
+          method:'DELETE', credentials:'same-origin',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ id: id })
+        });
+        var data = await res.json();
+        if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
+        alert('Product deleted');
+      } catch (err) {
+        var list = localProducts().filter(function(x){ return String(x.id)!==String(id); });
+        saveLocalProducts(list);
+        alert('Removed locally (' + (err.message||'API') + ')');
+      }
+      loadLists();
+      return;
+    }
+  });
+
+document.getElementById('saveBlogBtn').onclick = async function(){
+    var editingId = (document.getElementById('editPostId')||{}).value || '';
+    var post = {
+      id: editingId || String(Date.now()),
+      title: document.getElementById('bTitle').value.trim(),
+      cat: document.getElementById('bCat').value.trim() || 'General',
+      desc: document.getElementById('bDesc').value.trim(),
+      body: document.getElementById('bBody').value.trim(),
+      tags: (document.getElementById('bTags')&&document.getElementById('bTags').value||'').split(/[,;]/).map(function(t){return t.trim();}).filter(Boolean),
+      image: (document.getElementById('bImage')&&document.getElementById('bImage').value||'').trim()||null,
+      status: document.getElementById('bStatus').value,
+      author: 'RuffNeck Entertainment',
+      readTime: '5',
+      emoji: '📝',
+      created: new Date().toLocaleDateString('en-GB'),
+      updated: new Date().toLocaleDateString('en-GB')
+    };
+    if (!post.title) { alert('Enter a title'); return; }
+    if (!post.body) { alert('Enter body text'); return; }
+    try {
+      var res = await fetch('/api/cms/posts', {
+        method: editingId ? 'PUT' : 'POST', credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(post)
+      });
+      var data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || 'API save failed');
+      alert('Saved to database: ' + post.title);
+    } catch (err) {
+      var list = localPosts();
+      list.unshift(post);
+      saveLocalPosts(list);
+      alert('Saved on this browser only (' + (err.message||'no DB') + ')');
+    }
+    document.getElementById('bTitle').value = '';
+    document.getElementById('bDesc').value = '';
+    document.getElementById('bBody').value = '';
+    loadLists();
+    document.querySelector('[data-page="blog"]').click();
+  };
+
+  document.getElementById('saveProductBtn').onclick = async function(){
+    var editingId = (document.getElementById('editProductId')||{}).value || '';
+    var product = {
+      id: editingId || String(Date.now()),
+      name: document.getElementById('pName').value.trim(),
+      cat: document.getElementById('pCat').value.trim() || 'General',
+      desc: document.getElementById('pDesc').value.trim(),
+      price: Number(document.getElementById('pPrice').value) || 0,
+      status: document.getElementById('pStatus').value,
+      emoji: '📦',
+      tiers: (function(){try{var t=(document.getElementById('pTiers')&&document.getElementById('pTiers').value||'').trim();return t?JSON.parse(t):{};}catch(e){return{};}})(),
+      created: new Date().toLocaleDateString('en-GB'),
+      updated: new Date().toLocaleDateString('en-GB')
+    };
+    if (!product.name) { alert('Enter a name'); return; }
+    try {
+      var res = await fetch('/api/cms/products', {
+        method: editingId ? 'PUT' : 'POST', credentials:'same-origin',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify(product)
+      });
+      var data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || 'API save failed');
+      alert('Saved to database: ' + product.name);
+    } catch (err) {
+      var list = localProducts();
+      list.unshift(product);
+      saveLocalProducts(list);
+      alert('Saved on this browser only (' + (err.message||'no DB') + ')');
+    }
+    document.getElementById('pName').value = '';
+    document.getElementById('pDesc').value = '';
+    document.getElementById('pPrice').value = '';
+    loadLists();
+    document.querySelector('[data-page="products"]').click();
+  };
+
+  // Auto session
+  try {
+    if (sessionStorage.getItem('rn_admin_ok') === '1') showShell();
+  } catch(e) {}
+  // Also check server session
+  fetch('/api/admin-session', { credentials:'same-origin', cache:'no-store' })
+    .then(function(r){ return r.json(); })
+    .then(function(d){ if (d && d.authenticated) showShell(); })
+    .catch(function(){});
+})();
+</script>
+
+<script id="rn-phase-d-analytics">
+(function(){
+  window.rnTrack = function(name, params){
+    try {
+      params = params || {};
+      if (typeof gtag === 'function') {
+        gtag('event', name, params);
+      }
+      if (window.dataLayer && Array.isArray(window.dataLayer)) {
+        window.dataLayer.push(Object.assign({ event: name }, params));
+      }
+    } catch (e) {}
+  };
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a,button');
+    if (!a) return;
+    var href = (a.getAttribute('href') || '').toLowerCase();
+    var text = (a.textContent || '').trim().slice(0, 80);
+    if (href.indexOf('wa.me') !== -1 || href.indexOf('whatsapp') !== -1) {
+      window.rnTrack('whatsapp_click', { link_text: text });
+    } else if (href.indexOf('calendly') !== -1) {
+      window.rnTrack('consultation_start', { link_text: text });
+    } else if (href.indexOf('free-guide') !== -1 || href.indexOf('start-here') !== -1) {
+      window.rnTrack('free_guide_click', { link_text: text });
+    } else if (href.indexOf('/store') !== -1) {
+      window.rnTrack('store_nav_click', { link_text: text });
+    } else if (href.indexOf('/services/') !== -1) {
+      window.rnTrack('service_view', { link_url: href });
+    } else if (href.indexOf('flutterwave') !== -1 || /buy|checkout|pay/i.test(text)) {
+      window.rnTrack('checkout_start', { link_text: text });
+    }
+  }, true);
+})();
+</script>
+
+
+<script id="rn-audit-impl-js">
+(function(){
+  // Lazy-load images missing loading attr
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('img:not([loading])').forEach(function(img){
+      if (!img.closest('header') && !img.closest('#nav')) {
+        img.setAttribute('loading', 'lazy');
+        img.setAttribute('decoding', 'async');
+      }
+    });
+    // ARIA for expand toggles
+    document.querySelectorAll('[data-expand], .view-details, .service-card button, .accordion-trigger').forEach(function(btn){
+      if (!btn.getAttribute('aria-expanded')) btn.setAttribute('aria-expanded', 'false');
+      btn.addEventListener('click', function(){
+        var ex = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', ex ? 'false' : 'true');
+      });
+    });
+    // Footer social aria-labels if missing
+    document.querySelectorAll('footer a[href]').forEach(function(a){
+      if (a.getAttribute('aria-label')) return;
+      var h = (a.getAttribute('href')||'').toLowerCase();
+      if (h.indexOf('linkedin')!==-1) a.setAttribute('aria-label','LinkedIn');
+      else if (h.indexOf('facebook')!==-1) a.setAttribute('aria-label','Facebook');
+      else if (h.indexOf('instagram')!==-1) a.setAttribute('aria-label','Instagram');
+      else if (h.indexOf('twitter')!==-1 || h.indexOf('x.com')!==-1) a.setAttribute('aria-label','X (Twitter)');
+      else if (h.indexOf('wa.me')!==-1 || h.indexOf('whatsapp')!==-1) a.setAttribute('aria-label','WhatsApp');
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
