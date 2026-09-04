@@ -125,6 +125,20 @@ textarea.field{min-height:140px;resize:vertical}
 
 </style>
 
+<style id="rn-admin-editor">
+.rn-toolbar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px;padding:8px;background:#0f172a;border:1px solid #334155;border-radius:10px}
+.rn-toolbar button{min-height:36px;min-width:36px;padding:6px 10px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#f8fafc;font-weight:700;cursor:pointer;font-size:13px}
+.rn-toolbar button:hover{background:#334155}
+.rn-toolbar select{min-height:36px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#f8fafc;padding:0 8px}
+#bBodyEditor{min-height:220px;padding:12px 14px;border-radius:10px;border:1px solid #334155;background:#020617;color:#f8fafc;line-height:1.7;font-size:15px;overflow-y:auto}
+#bBodyEditor:focus{outline:2px solid #38bdf8;outline-offset:1px}
+#bBodyEditor p{margin:0 0 .85rem}
+#bBodyEditor h3{margin:1rem 0 .5rem;font-size:1.1rem}
+textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.rn-editor-hint{font-size:12px;color:#94a3b8;margin:0 0 8px}
+</style>
+
+
 <style id="rn-audit-impl-css">
 /* ===== Audit implementation: mobile, a11y, performance-ish ===== */
 img, video { max-width: 100%; height: auto; }
@@ -795,6 +809,74 @@ document.getElementById('saveBlogBtn').onclick = async function(){
       else if (h.indexOf('wa.me')!==-1 || h.indexOf('whatsapp')!==-1) a.setAttribute('aria-label','WhatsApp');
     });
   });
+})();
+</script>
+
+
+<script id="rn-admin-rich-editor">
+(function(){
+  function $(id){ return document.getElementById(id); }
+  function syncToTextarea(){
+    var ed=$('bBodyEditor'), ta=$('bBody');
+    if(ed&&ta) ta.value = ed.innerHTML;
+  }
+  function loadEditorFromTa(){
+    var ed=$('bBodyEditor'), ta=$('bBody');
+    if(!ed||!ta) return;
+    var v=ta.value||'';
+    if(v && !/<[a-z][\s\S]*>/i.test(v)){
+      ed.innerHTML=v.split(/\n\s*\n/).filter(Boolean).map(function(p){
+        return '<p>'+String(p).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>')+'</p>';
+      }).join('')||'<p><br></p>';
+    } else {
+      ed.innerHTML=v||'<p><br></p>';
+    }
+  }
+  function cmd(command, value){
+    var ed=$('bBodyEditor');
+    if(!ed) return;
+    ed.focus();
+    try { document.execCommand(command, false, value || null); } catch(e) {}
+    syncToTextarea();
+  }
+  function boot(){
+    var ed=$('bBodyEditor'), ta=$('bBody');
+    if(!ed||!ta) return;
+    loadEditorFromTa();
+    ed.addEventListener('input', syncToTextarea);
+    ed.addEventListener('blur', syncToTextarea);
+    var bar=$('rnEditorToolbar');
+    if(bar){
+      bar.addEventListener('click', function(e){
+        var btn=e.target.closest('button[data-cmd]');
+        if(!btn) return;
+        e.preventDefault();
+        var c=btn.getAttribute('data-cmd');
+        var v=btn.getAttribute('data-value');
+        if(c==='formatBlock') cmd('formatBlock', v || 'p');
+        else cmd(c);
+      });
+    }
+    var color=$('rnTextColor');
+    if(color){
+      color.addEventListener('change', function(){
+        if(!color.value) return;
+        cmd('foreColor', color.value);
+        color.value='';
+      });
+    }
+    var clear=$('rnClearFormat');
+    if(clear) clear.addEventListener('click', function(e){ e.preventDefault(); cmd('removeFormat'); });
+    var save=$('saveBlogBtn');
+    if(save) save.addEventListener('click', function(){ syncToTextarea(); }, true);
+    document.addEventListener('click', function(e){
+      if(e.target && e.target.closest && e.target.closest('[data-edit-post]')){
+        setTimeout(loadEditorFromTa, 80);
+      }
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
 </script>
 
