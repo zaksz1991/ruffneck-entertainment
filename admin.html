@@ -125,18 +125,7 @@ textarea.field{min-height:140px;resize:vertical}
 
 </style>
 
-<style id="rn-admin-editor">
-.rn-toolbar{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px;padding:8px;background:#0f172a;border:1px solid #334155;border-radius:10px}
-.rn-toolbar button{min-height:36px;min-width:36px;padding:6px 10px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#f8fafc;font-weight:700;cursor:pointer;font-size:13px}
-.rn-toolbar button:hover{background:#334155}
-.rn-toolbar select{min-height:36px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#f8fafc;padding:0 8px}
-#bBodyEditor{min-height:220px;padding:12px 14px;border-radius:10px;border:1px solid #334155;background:#020617;color:#f8fafc;line-height:1.7;font-size:15px;overflow-y:auto}
-#bBodyEditor:focus{outline:2px solid #38bdf8;outline-offset:1px}
-#bBodyEditor p{margin:0 0 .85rem}
-#bBodyEditor h3{margin:1rem 0 .5rem;font-size:1.1rem}
-textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
-.rn-editor-hint{font-size:12px;color:#94a3b8;margin:0 0 8px}
-</style>
+
 
 
 <style id="rn-audit-impl-css">
@@ -228,6 +217,38 @@ footer .social a, .footer-social a {
 <meta name="twitter:card" content="summary_large_image"/>
 <link rel="canonical" href="https://ruffneck-entertainment.vercel.app/admin"/>
 <meta name="description" content="RuffNeck Entertainment admin login."/>
+
+<style id="rn-admin-editor">
+.rn-editor-hint{font-size:12px;color:#94a3b8;margin:6px 0 8px;line-height:1.4}
+.rn-toolbar{
+  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
+  margin:0 0 8px;padding:10px;background:#0f172a;
+  border:1px solid #334155;border-radius:10px;
+}
+.rn-toolbar button{
+  min-height:40px;min-width:40px;padding:6px 12px;border-radius:8px;
+  border:1px solid #475569;background:#1e293b;color:#f8fafc;
+  font-weight:700;cursor:pointer;font-size:13px;
+}
+.rn-toolbar button:hover{background:#334155}
+.rn-toolbar select{
+  min-height:40px;border-radius:8px;border:1px solid #475569;
+  background:#1e293b;color:#f8fafc;padding:0 8px;
+}
+#bBodyEditor{
+  min-height:240px;padding:14px 16px;border-radius:10px;
+  border:1px solid #334155;background:#020617;color:#f8fafc;
+  line-height:1.75;font-size:15px;overflow-y:auto;
+  margin-bottom:10px;
+}
+#bBodyEditor:focus{outline:2px solid #38bdf8;outline-offset:1px}
+#bBodyEditor p{margin:0 0 .9rem}
+#bBodyEditor h3{margin:1rem 0 .5rem;font-size:1.15rem;color:#e2e8f0}
+#bBodyEditor ul{margin:0 0 1rem 1.2rem}
+#bBodyEditor li{margin-bottom:.35rem}
+textarea#bBody{display:none!important}
+</style>
+
 </head>
 <body>
 
@@ -337,6 +358,28 @@ footer .social a, .footer-social a {
 <input class="field" id="bTags" placeholder="AI, careers, Nigeria"/>
 <label class="field">Image URL (optional)</label>
 <input class="field" id="bImage" placeholder="https://..."/>
+
+<p class="rn-editor-hint">Format with the toolbar: Bold, Italic, Underline, bullets, heading, colors. Content saves as HTML to the blog.</p>
+<div class="rn-toolbar" id="rnEditorToolbar" role="toolbar" aria-label="Text formatting">
+  <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+  <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+  <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
+  <button type="button" data-cmd="insertUnorderedList" title="Bullet list">• List</button>
+  <button type="button" data-cmd="formatBlock" data-value="h3" title="Heading">H</button>
+  <button type="button" data-cmd="formatBlock" data-value="p" title="Paragraph">¶</button>
+  <select id="rnTextColor" title="Text color" aria-label="Text color">
+    <option value="">Color</option>
+    <option value="#f8fafc">White</option>
+    <option value="#38bdf8">Cyan</option>
+    <option value="#fbbf24">Gold</option>
+    <option value="#4ade80">Green</option>
+    <option value="#f87171">Red</option>
+    <option value="#0B1E3A">Navy</option>
+  </select>
+  <button type="button" id="rnClearFormat" title="Clear formatting">Clear</button>
+</div>
+<div id="bBodyEditor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Post body"></div>
+
 <textarea class="field" id="bBody" placeholder="Full article text" style="min-height:200px"></textarea>
         <label class="field">Status</label>
         <select class="field" id="bStatus">
@@ -813,23 +856,26 @@ document.getElementById('saveBlogBtn').onclick = async function(){
 </script>
 
 
+
+
+
 <script id="rn-admin-rich-editor">
 (function(){
   function $(id){ return document.getElementById(id); }
   function syncToTextarea(){
     var ed=$('bBodyEditor'), ta=$('bBody');
-    if(ed&&ta) ta.value = ed.innerHTML;
+    if(ed && ta) ta.value = ed.innerHTML;
   }
   function loadEditorFromTa(){
     var ed=$('bBodyEditor'), ta=$('bBody');
-    if(!ed||!ta) return;
-    var v=ta.value||'';
+    if(!ed || !ta) return;
+    var v = ta.value || '';
     if(v && !/<[a-z][\s\S]*>/i.test(v)){
-      ed.innerHTML=v.split(/\n\s*\n/).filter(Boolean).map(function(p){
-        return '<p>'+String(p).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>')+'</p>';
-      }).join('')||'<p><br></p>';
+      ed.innerHTML = v.split(/\n\s*\n/).filter(Boolean).map(function(p){
+        return '<p>' + String(p).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>') + '</p>';
+      }).join('') || '<p><br></p>';
     } else {
-      ed.innerHTML=v||'<p><br></p>';
+      ed.innerHTML = v || '<p><br></p>';
     }
   }
   function cmd(command, value){
@@ -841,19 +887,22 @@ document.getElementById('saveBlogBtn').onclick = async function(){
   }
   function boot(){
     var ed=$('bBodyEditor'), ta=$('bBody');
-    if(!ed||!ta) return;
+    if(!ed || !ta){
+      console.warn('[rn] editor missing', !!ed, !!ta);
+      return;
+    }
     loadEditorFromTa();
     ed.addEventListener('input', syncToTextarea);
     ed.addEventListener('blur', syncToTextarea);
     var bar=$('rnEditorToolbar');
     if(bar){
       bar.addEventListener('click', function(e){
-        var btn=e.target.closest('button[data-cmd]');
+        var btn = e.target.closest('button[data-cmd]');
         if(!btn) return;
         e.preventDefault();
-        var c=btn.getAttribute('data-cmd');
-        var v=btn.getAttribute('data-value');
-        if(c==='formatBlock') cmd('formatBlock', v || 'p');
+        var c = btn.getAttribute('data-cmd');
+        var v = btn.getAttribute('data-value');
+        if(c === 'formatBlock') cmd('formatBlock', v || 'p');
         else cmd(c);
       });
     }
@@ -862,20 +911,26 @@ document.getElementById('saveBlogBtn').onclick = async function(){
       color.addEventListener('change', function(){
         if(!color.value) return;
         cmd('foreColor', color.value);
-        color.value='';
+        color.value = '';
       });
     }
     var clear=$('rnClearFormat');
-    if(clear) clear.addEventListener('click', function(e){ e.preventDefault(); cmd('removeFormat'); });
+    if(clear){
+      clear.addEventListener('click', function(e){
+        e.preventDefault();
+        cmd('removeFormat');
+      });
+    }
     var save=$('saveBlogBtn');
     if(save) save.addEventListener('click', function(){ syncToTextarea(); }, true);
     document.addEventListener('click', function(e){
       if(e.target && e.target.closest && e.target.closest('[data-edit-post]')){
-        setTimeout(loadEditorFromTa, 80);
+        setTimeout(loadEditorFromTa, 100);
       }
     });
+    console.info('[rn] rich editor ready');
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
 </script>

@@ -1234,6 +1234,143 @@ input#searchInput {
 </style>
 
 <link rel="stylesheet" href="/css/rn-blog-ux.css"/>
+
+<style id="rn-blog-layout-v2">
+/* Professional blog layout */
+.blog-filters .container { max-width: 1120px; margin: 0 auto; }
+.blog-filters .filters-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px 16px !important;
+}
+@media (min-width: 900px) {
+  .blog-filters .filters-inner {
+    flex-wrap: wrap !important;
+    justify-content: center !important;
+    overflow-x: visible !important;
+  }
+}
+.blog-filters .filter-btn {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  white-space: nowrap !important;
+  min-height: 42px !important;
+  border-radius: 999px !important;
+}
+.blog-filters .blog-search {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  padding: 4px 10px !important;
+  border: 1.5px solid #cbd5e1 !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  box-sizing: border-box !important;
+}
+@media (min-width: 900px) {
+  .blog-filters .blog-search {
+    flex: 1 1 240px !important;
+    max-width: 320px !important;
+    width: auto !important;
+  }
+}
+.blog-filters .blog-search input {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  border: none !important;
+  outline: none !important;
+  font-size: 16px !important;
+  background: transparent !important;
+}
+.blog-grid, #blogGrid, #cmsPostsGrid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 1.25rem !important;
+  max-width: 1120px !important;
+  margin: 0 auto 2rem !important;
+  padding: 0 16px !important;
+  box-sizing: border-box !important;
+}
+@media (min-width: 640px) {
+  .blog-grid, #blogGrid, #cmsPostsGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (min-width: 1024px) {
+  .blog-grid, #blogGrid, #cmsPostsGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+.blog-card, .rn-cms-post, article.blog-card {
+  display: flex !important;
+  flex-direction: column !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  background: #fff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  box-shadow: 0 8px 24px rgba(15,23,42,.06) !important;
+}
+.blog-card-body {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 !important;
+  gap: 8px !important;
+  padding: 16px !important;
+}
+.blog-card-body h3 {
+  font-size: 1.05rem !important;
+  line-height: 1.35 !important;
+  margin: 0 !important;
+  color: #0B1E3A !important;
+}
+.blog-card-body p {
+  margin: 0 !important;
+  color: #64748b !important;
+  line-height: 1.55 !important;
+  font-size: .92rem !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.grid-heading, .section-heading {
+  max-width: 1120px;
+  margin: 1.5rem auto .75rem;
+  padding: 0 16px;
+  font-size: 1.25rem;
+  color: #0B1E3A;
+}
+/* Read more as clear button */
+.rn-read-btn {
+  margin-top: auto !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 40px !important;
+  padding: 8px 12px !important;
+  border-radius: 10px !important;
+  border: none !important;
+  background: #0B1E3A !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  width: fit-content !important;
+}
+.rn-read-btn[aria-expanded="true"] {
+  background: #0e7490 !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -3384,5 +3521,77 @@ div.rn-blog-meta p {
 
 <script defer src="/js/rn-blog-fix.js"></script>
 <script defer src="/js/rn-expand-toggle.js"></script>
+
+<script id="rn-blog-read-toggle">
+(function(){
+  function ensureReadButtons(){
+    document.querySelectorAll('.blog-card, .rn-cms-post, article.blog-card').forEach(function(card){
+      if (card.dataset.rnReadBound) return;
+      card.dataset.rnReadBound = '1';
+      var body = card.querySelector('.blog-card-body, .blog-body') || card;
+      var btn = body.querySelector('.rn-read-btn');
+      if (!btn) {
+        btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'rn-read-btn';
+        btn.textContent = 'Read article';
+        body.appendChild(btn);
+      }
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var id = card.getAttribute('data-post-id') || card.getAttribute('data-id') || card.getAttribute('onclick');
+        // CMS / static openArticle path
+        if (card.getAttribute('data-post-id') && typeof window.openArticle === 'function') {
+          window.openArticle(card.getAttribute('data-post-id'));
+          return;
+        }
+        // Featured / static cards with openArticle('featured')
+        var oc = card.getAttribute('onclick') || '';
+        var m = oc.match(/openArticle\(['\"]([^'\"]+)['\"]\)/);
+        if (m && typeof window.openArticle === 'function') {
+          window.openArticle(m[1]);
+          return;
+        }
+        // Inline expand fallback
+        var panel = card.querySelector('.blog-popup, .rn-expand-panel, .card-preview-full');
+        if (panel) {
+          var open = !card.classList.contains('open');
+          card.classList.toggle('open', open);
+          panel.hidden = !open;
+          panel.style.setProperty('display', open ? 'block' : 'none', 'important');
+          btn.textContent = open ? 'Collapse' : 'Read article';
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+          return;
+        }
+        // Last resort: click card handler
+        card.click();
+      });
+    });
+  }
+  // Modal close must restore page
+  function patchClose(){
+    if (typeof window.closeArticle === 'function' && !window.closeArticle.__rn2) {
+      var orig = window.closeArticle;
+      window.closeArticle = function(){
+        try { orig(); } catch(e) {}
+        document.body.style.overflow = '';
+        var ov = document.getElementById('articleOverlay');
+        if (ov) ov.classList.remove('open');
+      };
+      window.closeArticle.__rn2 = true;
+    }
+    // Escape closes
+    document.addEventListener('keydown', function(e){
+      if (e.key === 'Escape' && typeof window.closeArticle === 'function') window.closeArticle();
+    });
+  }
+  function boot(){ ensureReadButtons(); patchClose(); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  var n=0, t=setInterval(function(){ n++; ensureReadButtons(); patchClose(); if(n>50) clearInterval(t); }, 200);
+})();
+</script>
+
 </body>
 </html>
