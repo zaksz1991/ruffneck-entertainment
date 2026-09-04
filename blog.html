@@ -1412,6 +1412,19 @@ input#searchInput {
 }
 </style>
 
+
+<style id="rn-kill-translator">
+#rnFixedLang,#rnFixedLangBtn,#rnFixedLangMenu,#rnLang,#rnLangMenu,#rnLangLabel,
+#rnLangToggle,.rn-lang-menu,.rn-lang-btn,#google_translate_element,
+.goog-te-banner-frame,.goog-te-menu-frame,iframe.goog-te-banner-frame,
+iframe.goog-te-menu-frame,body>.skiptranslate,.goog-te-gadget,.goog-te-combo,
+[id*="google_translate"],button[data-lang]{
+  display:none!important;visibility:hidden!important;opacity:0!important;
+  pointer-events:none!important;width:0!important;height:0!important;
+  overflow:hidden!important;position:absolute!important;left:-9999px!important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -3635,6 +3648,36 @@ div.rn-blog-meta p {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
   var n=0, t=setInterval(function(){ n++; ensureReadButtons(); patchClose(); if(n>50) clearInterval(t); }, 200);
+})();
+</script>
+
+
+<script id="rn-kill-translator-js">
+(function(){
+  function nuke(){
+    try{
+      ['rnFixedLang','rnFixedLangBtn','rnFixedLangMenu','rnLang','rnLangMenu','google_translate_element'].forEach(function(id){
+        var el=document.getElementById(id); if(el&&el.parentNode)el.parentNode.removeChild(el);
+      });
+      document.querySelectorAll('button[data-lang],.goog-te-combo,.goog-te-gadget').forEach(function(el){
+        if(el&&el.parentNode)el.parentNode.removeChild(el);
+      });
+      document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+      try{localStorage.removeItem('rn_lang');localStorage.removeItem('rn_lang_label');}catch(e){}
+      // prevent dynamic inject of google translate
+      var obs=new MutationObserver(function(){
+        var g=document.getElementById('google_translate_element');
+        if(g&&g.parentNode)g.parentNode.removeChild(g);
+        var f=document.getElementById('rnFixedLang');
+        if(f&&f.parentNode)f.parentNode.removeChild(f);
+      });
+      obs.observe(document.documentElement,{childList:true,subtree:true});
+      setTimeout(function(){try{obs.disconnect();}catch(e){}},5000);
+    }catch(e){}
+  }
+  nuke();
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',nuke);
+  setTimeout(nuke,400); setTimeout(nuke,1500);
 })();
 </script>
 
