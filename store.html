@@ -364,6 +364,47 @@ button, a { -webkit-tap-highlight-color: transparent; }
 <link rel="stylesheet" href="/css/rn-site-ux.css"/>
 <link rel="stylesheet" href="/css/rn-spacing.css"/>
 <link rel="stylesheet" href="/css/rn-interactions.css"/>
+
+<style id="rn-full-image-css">
+/* Full image visible — no crop cut-off */
+.rn-thumb-frame, .blog-thumb.rn-thumb-frame, .product-media, .rn-product-media {
+  width: 100% !important;
+  aspect-ratio: 16 / 10;
+  max-height: none !important;
+  min-height: 140px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  background: #0B1E3A !important;
+}
+.rn-full-img, img.rn-full-img, .product-media img, .rn-product-media img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important; /* show entire image */
+  object-position: center center !important;
+  display: block !important;
+}
+/* Modal / article body images */
+#articleBody img, .article-body img, .rn-article-img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0.75rem 0 !important;
+  border-radius: 12px;
+}
+@media (max-width: 600px) {
+  .rn-thumb-frame, .blog-thumb.rn-thumb-frame, .product-media, .rn-product-media {
+    aspect-ratio: 4 / 3;
+    min-height: 120px !important;
+  }
+}
+</style>
+
 </head>
 <body>
 
@@ -2138,5 +2179,37 @@ document.addEventListener('DOMContentLoaded', function() {
   setTimeout(unlock, 400);
 })();
 </script>
+
+<script id="rn-store-product-images">
+(function(){
+  function applyImages(){
+    // If product cards expose data-image or CMS injects products with image
+    document.querySelectorAll('[data-product-image], .product-card[data-image]').forEach(function(card){
+      var src = card.getAttribute('data-product-image') || card.getAttribute('data-image');
+      if(!src) return;
+      var media = card.querySelector('.product-media, .rn-product-media, .product-thumb, .card-media');
+      if(!media){
+        media = document.createElement('div');
+        media.className = 'product-media rn-product-media';
+        card.insertBefore(media, card.firstChild);
+      }
+      if(media.querySelector('img.rn-full-img')) return;
+      var img = document.createElement('img');
+      img.className = 'rn-full-img';
+      img.alt = card.getAttribute('data-name') || 'Product';
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.src = src;
+      media.innerHTML = '';
+      media.appendChild(img);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', applyImages);
+  else applyImages();
+  setTimeout(applyImages, 500);
+  setTimeout(applyImages, 1500);
+})();
+</script>
+
 </body>
 </html>

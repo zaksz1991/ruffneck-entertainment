@@ -249,6 +249,21 @@ footer .social a, .footer-social a {
 textarea#bBody{display:none!important}
 </style>
 
+
+<style id="rn-image-upload-css">
+.rn-upload-box{border:1.5px dashed #475569;border-radius:12px;padding:12px;background:#0b1220;margin:0 0 12px}
+.rn-upload-box label{display:block;font-size:13px;color:#94a3b8;margin-bottom:8px}
+.rn-upload-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.rn-upload-row input[type=file]{color:#e2e8f0;font-size:13px;max-width:100%}
+.rn-upload-preview{
+  width:100%;max-width:280px;max-height:200px;margin-top:10px;
+  border-radius:10px;background:#020617;border:1px solid #334155;
+  display:none;object-fit:contain;object-position:center;
+}
+.rn-upload-preview.is-on{display:block}
+.rn-upload-meta{font-size:11px;color:#64748b;margin-top:6px}
+</style>
+
 </head>
 <body>
 
@@ -324,6 +339,19 @@ textarea#bBody{display:none!important}
         <label class="field">Price tiers optional JSON</label>
 <textarea class="field" id="pTiers" rows="3" placeholder='{"basic":3500,"standard":7000,"premium":12000}'></textarea>
 <p style="font-size:12px;color:#94a3b8">Leave empty for single price. Storefront must support tiers to show levels.</p>
+<label class="field">Product image (from your device)</label>
+<div class="rn-upload-box">
+  <label for="pImageFile">Choose image — full image shown on Store (not cropped)</label>
+  <div class="rn-upload-row">
+    <input type="file" id="pImageFile" accept="image/jpeg,image/png,image/webp,image/gif"/>
+    <button type="button" id="pImageClear" class="btn">Remove</button>
+  </div>
+  <img id="pImagePreview" class="rn-upload-preview" alt="Product image preview"/>
+  <p class="rn-upload-meta" id="pImageMeta"></p>
+  <input type="hidden" id="pImage" value=""/>
+  <label class="field" style="margin-top:10px">Or paste image URL (optional)</label>
+  <input class="field" id="pImageUrl" placeholder="https://..."/>
+</div>
 <label class="field">Status</label>
         <select class="field" id="pStatus">
           <option value="active">Active (visible on store)</option>
@@ -356,8 +384,19 @@ textarea#bBody{display:none!important}
         <label class="field">Body</label>
         <label class="field">Tags (comma-separated)</label>
 <input class="field" id="bTags" placeholder="AI, careers, Nigeria"/>
-<label class="field">Image URL (optional)</label>
-<input class="field" id="bImage" placeholder="https://..."/>
+<label class="field">Cover image (from your device)</label>
+<div class="rn-upload-box">
+  <label for="bImageFile">Choose image — JPG, PNG, WebP (auto-resized for the web)</label>
+  <div class="rn-upload-row">
+    <input type="file" id="bImageFile" accept="image/jpeg,image/png,image/webp,image/gif"/>
+    <button type="button" id="bImageClear" class="btn">Remove</button>
+  </div>
+  <img id="bImagePreview" class="rn-upload-preview" alt="Blog image preview"/>
+  <p class="rn-upload-meta" id="bImageMeta"></p>
+  <input type="hidden" id="bImage" value=""/>
+  <label class="field" style="margin-top:10px">Or paste image URL (optional)</label>
+  <input class="field" id="bImageUrl" placeholder="https://..."/>
+</div>
 
 <p class="rn-editor-hint">Format with the toolbar: Bold, Italic, Underline, bullets, heading, colors. Content saves as HTML to the blog.</p>
 <div class="rn-toolbar" id="rnEditorToolbar" role="toolbar" aria-label="Text formatting">
@@ -663,6 +702,7 @@ textarea#bBody{display:none!important}
       document.getElementById('pCat').value = p.cat || '';
       document.getElementById('pDesc').value = p.desc || '';
       document.getElementById('pPrice').value = p.price != null ? p.price : '';
+      (function(){var img=p.image||'';var h=document.getElementById('pImage');var u=document.getElementById('pImageUrl');var prev=document.getElementById('pImagePreview');if(h)h.value=(img&&img.indexOf('data:')===0)?img:'';if(u)u.value=(img&&img.indexOf('data:')!==0)?img:'';if(prev&&img){prev.src=img;prev.classList.add('is-on');}})();
       if(document.getElementById('pTiers'))document.getElementById('pTiers').value=(p.tiers&&typeof p.tiers==='object'&&Object.keys(p.tiers).length)?JSON.stringify(p.tiers):'';
       if (document.getElementById('pStatus')) document.getElementById('pStatus').value = p.status || 'active';
       var ban = document.getElementById('productEditBanner'); if (ban) ban.classList.add('show');
@@ -706,7 +746,7 @@ document.getElementById('saveBlogBtn').onclick = async function(){
       desc: document.getElementById('bDesc').value.trim(),
       body: document.getElementById('bBody').value.trim(),
       tags: (document.getElementById('bTags')&&document.getElementById('bTags').value||'').split(/[,;]/).map(function(t){return t.trim();}).filter(Boolean),
-      image: (document.getElementById('bImage')&&document.getElementById('bImage').value||'').trim()||null,
+      image: (function(){var h=(document.getElementById('bImage')&&document.getElementById('bImage').value)||'';var u=(document.getElementById('bImageUrl')&&document.getElementById('bImageUrl').value||'').trim();return (h||u||'').trim()||null;})(),
       status: document.getElementById('bStatus').value,
       author: 'RuffNeck Entertainment',
       readTime: '5',
@@ -748,6 +788,8 @@ document.getElementById('saveBlogBtn').onclick = async function(){
       price: Number(document.getElementById('pPrice').value) || 0,
       status: document.getElementById('pStatus').value,
       emoji: '📦',
+      image: (function(){var h=(document.getElementById('pImage')&&document.getElementById('pImage').value)||'';var u=(document.getElementById('pImageUrl')&&document.getElementById('pImageUrl').value||'').trim();return h||u||null;})(),
+      image: (function(){var h=(document.getElementById('pImage')&&document.getElementById('pImage').value)||'';var u=(document.getElementById('pImageUrl')&&document.getElementById('pImageUrl').value||'').trim();return h||u||null;})(),
       tiers: (function(){try{var t=(document.getElementById('pTiers')&&document.getElementById('pTiers').value||'').trim();return t?JSON.parse(t):{};}catch(e){return{};}})(),
       created: new Date().toLocaleDateString('en-GB'),
       updated: new Date().toLocaleDateString('en-GB')
@@ -931,6 +973,98 @@ document.getElementById('saveBlogBtn').onclick = async function(){
     console.info('[rn] rich editor ready');
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
+
+<script id="rn-image-upload-js">
+(function(){
+  function compressFile(file, maxW, maxH, quality){
+    return new Promise(function(resolve, reject){
+      if(!file || !file.type || file.type.indexOf('image/') !== 0){
+        reject(new Error('Please choose an image file'));
+        return;
+      }
+      var reader = new FileReader();
+      reader.onerror = function(){ reject(new Error('Could not read file')); };
+      reader.onload = function(){
+        var img = new Image();
+        img.onload = function(){
+          var w = img.naturalWidth || img.width;
+          var h = img.naturalHeight || img.height;
+          var scale = Math.min(1, maxW / w, maxH / h);
+          var cw = Math.max(1, Math.round(w * scale));
+          var ch = Math.max(1, Math.round(h * scale));
+          var canvas = document.createElement('canvas');
+          canvas.width = cw;
+          canvas.height = ch;
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#ffffff';
+          ctx.fillRect(0,0,cw,ch);
+          ctx.drawImage(img, 0, 0, cw, ch);
+          var mime = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+          var dataUrl = canvas.toDataURL(mime, quality);
+          resolve({ dataUrl: dataUrl, width: cw, height: ch, bytes: Math.round((dataUrl.length * 3) / 4) });
+        };
+        img.onerror = function(){ reject(new Error('Invalid image')); };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function wire(fileId, hiddenId, previewId, metaId, clearId, urlId){
+    var fileEl = document.getElementById(fileId);
+    var hidden = document.getElementById(hiddenId);
+    var prev = document.getElementById(previewId);
+    var meta = document.getElementById(metaId);
+    var clear = document.getElementById(clearId);
+    var urlEl = document.getElementById(urlId);
+    if(!fileEl || !hidden) return;
+
+    fileEl.addEventListener('change', function(){
+      var f = fileEl.files && fileEl.files[0];
+      if(!f) return;
+      if(meta) meta.textContent = 'Processing image…';
+      compressFile(f, 1400, 1400, 0.82).then(function(res){
+        hidden.value = res.dataUrl;
+        if(urlEl) urlEl.value = '';
+        if(prev){ prev.src = res.dataUrl; prev.classList.add('is-on'); }
+        if(meta) meta.textContent = res.width + '×' + res.height + ' · ~' + Math.round(res.bytes/1024) + ' KB (optimized)';
+      }).catch(function(err){
+        if(meta) meta.textContent = err.message || 'Upload failed';
+        alert(err.message || 'Upload failed');
+      });
+    });
+
+    if(clear){
+      clear.addEventListener('click', function(){
+        hidden.value = '';
+        if(fileEl) fileEl.value = '';
+        if(urlEl) urlEl.value = '';
+        if(prev){ prev.removeAttribute('src'); prev.classList.remove('is-on'); }
+        if(meta) meta.textContent = '';
+      });
+    }
+
+    if(urlEl){
+      urlEl.addEventListener('input', function(){
+        var v = urlEl.value.trim();
+        if(v){
+          hidden.value = '';
+          if(prev){ prev.src = v; prev.classList.add('is-on'); }
+          if(meta) meta.textContent = 'Using image URL';
+        }
+      });
+    }
+  }
+
+  function boot(){
+    wire('bImageFile','bImage','bImagePreview','bImageMeta','bImageClear','bImageUrl');
+    wire('pImageFile','pImage','pImagePreview','pImageMeta','pImageClear','pImageUrl');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
 </script>

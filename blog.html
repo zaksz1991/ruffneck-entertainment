@@ -1371,6 +1371,47 @@ input#searchInput {
 }
 </style>
 
+
+<style id="rn-full-image-css">
+/* Full image visible — no crop cut-off */
+.rn-thumb-frame, .blog-thumb.rn-thumb-frame, .product-media, .rn-product-media {
+  width: 100% !important;
+  aspect-ratio: 16 / 10;
+  max-height: none !important;
+  min-height: 140px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+  background: #0B1E3A !important;
+}
+.rn-full-img, img.rn-full-img, .product-media img, .rn-product-media img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  object-fit: contain !important; /* show entire image */
+  object-position: center center !important;
+  display: block !important;
+}
+/* Modal / article body images */
+#articleBody img, .article-body img, .rn-article-img {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0.75rem 0 !important;
+  border-radius: 12px;
+}
+@media (max-width: 600px) {
+  .rn-thumb-frame, .blog-thumb.rn-thumb-frame, .product-media, .rn-product-media {
+    aspect-ratio: 4 / 3;
+    min-height: 120px !important;
+  }
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -2894,10 +2935,14 @@ window.RNCms.listPosts = async function () {
     var title = escapeHtml(p.title || "Untitled");
     var desc = escapeHtml(p.desc || "");
     var author = escapeHtml(p.author || "RuffNeck Entertainment");
+    var imgSrc = p.image ? String(p.image) : "";
+    var thumbInner = imgSrc
+      ? ('<img class="rn-full-img" src="' + imgSrc.replace(/"/g, "&quot;") + '" alt="' + title + '" loading="lazy" decoding="async"/>')
+      : ('<span style="font-size:28px;">' + emoji + "</span>");
 
     card.innerHTML =
-      '<div class="blog-thumb" style="background:#0B1E3A;color:#fff;min-height:88px;display:flex;align-items:center;justify-content:center;position:relative;">' +
-        '<span style="font-size:28px;">' + emoji + "</span>" +
+      '<div class="blog-thumb rn-thumb-frame" style="background:#0B1E3A;color:#fff;position:relative;">' +
+        thumbInner +
         '<span class="card-cat-badge" style="position:absolute;left:10px;bottom:10px;background:#00B4D8;color:#0B1E3A;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;">' + cat + "</span>" +
         '<span class="card-new" style="position:absolute;right:10px;top:10px;background:#FBBF24;color:#0B1E3A;font-size:10px;font-weight:800;padding:3px 7px;border-radius:999px;">NEW</span>' +
       "</div>" +
