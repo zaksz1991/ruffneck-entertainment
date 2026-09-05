@@ -264,6 +264,7 @@ textarea#bBody{display:none!important}
 .rn-upload-meta{font-size:11px;color:#64748b;margin-top:6px}
 </style>
 
+<link rel="stylesheet" href="/css/rn-audit.css"/>
 </head>
 <body>
 
@@ -336,10 +337,7 @@ textarea#bBody{display:none!important}
         <textarea class="field" id="pDesc" placeholder="What the buyer gets"></textarea>
         <label class="field">Price (₦)</label>
         <input class="field" id="pPrice" type="number" placeholder="0"/>
-        <label class="field">Price tiers optional JSON</label>
-<textarea class="field" id="pTiers" rows="3" placeholder='{"basic":3500,"standard":7000,"premium":12000}'></textarea>
-<p style="font-size:12px;color:#94a3b8">Leave empty for single price. Storefront must support tiers to show levels.</p>
-<label class="field">Product image (from your device)</label>
+        <label class="field">Product image (from your device)</label>
 <div class="rn-upload-box">
   <label for="pImageFile">Choose image — full image shown on Store (not cropped)</label>
   <div class="rn-upload-row">
@@ -703,7 +701,6 @@ textarea#bBody{display:none!important}
       document.getElementById('pDesc').value = p.desc || '';
       document.getElementById('pPrice').value = p.price != null ? p.price : '';
       (function(){var img=p.image||'';var h=document.getElementById('pImage');var u=document.getElementById('pImageUrl');var prev=document.getElementById('pImagePreview');if(h)h.value=(img&&img.indexOf('data:')===0)?img:'';if(u)u.value=(img&&img.indexOf('data:')!==0)?img:'';if(prev&&img){prev.src=img;prev.classList.add('is-on');}})();
-      if(document.getElementById('pTiers'))document.getElementById('pTiers').value=(p.tiers&&typeof p.tiers==='object'&&Object.keys(p.tiers).length)?JSON.stringify(p.tiers):'';
       if (document.getElementById('pStatus')) document.getElementById('pStatus').value = p.status || 'active';
       var ban = document.getElementById('productEditBanner'); if (ban) ban.classList.add('show');
       var h = document.querySelector('#page-add-product h2'); if (h) h.textContent = 'Edit product';
@@ -790,7 +787,7 @@ document.getElementById('saveBlogBtn').onclick = async function(){
       emoji: '📦',
       image: (function(){var h=(document.getElementById('pImage')&&document.getElementById('pImage').value)||'';var u=(document.getElementById('pImageUrl')&&document.getElementById('pImageUrl').value||'').trim();return h||u||null;})(),
       image: (function(){var h=(document.getElementById('pImage')&&document.getElementById('pImage').value)||'';var u=(document.getElementById('pImageUrl')&&document.getElementById('pImageUrl').value||'').trim();return h||u||null;})(),
-      tiers: (function(){try{var t=(document.getElementById('pTiers')&&document.getElementById('pTiers').value||'').trim();return t?JSON.parse(t):{};}catch(e){return{};}})(),
+      tiers: {},
       created: new Date().toLocaleDateString('en-GB'),
       updated: new Date().toLocaleDateString('en-GB')
     };
@@ -1069,5 +1066,6 @@ document.getElementById('saveBlogBtn').onclick = async function(){
 })();
 </script>
 
+<script defer src="/js/rn-audit.js"></script>
 </body>
 </html>

@@ -1425,18 +1425,12 @@ iframe.goog-te-menu-frame,body>.skiptranslate,.goog-te-gadget,.goog-te-combo,
 }
 </style>
 
+<link rel="stylesheet" href="/css/rn-audit.css"/>
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
 
 <div class="rn-wc-catalog-tools" style="max-width:1120px;margin:0 auto;">
-  <rn-filter-bar
-    target=".blog-card, .article-card, .rn-cms-post, [data-post], .post-card"
-    category-attr="data-cat"
-    categories="all,ai,careers,operations,marketing,ethics,prompts"
-    labels='{"all":"All articles","ai":"AI & Automation","careers":"AI Careers","operations":"Operations","marketing":"Marketing","ethics":"Ethics","prompts":"Prompts"}'
-    status="#blog-status"
-  ></rn-filter-bar>
   <p id="blog-status" class="sr-only" aria-live="polite"></p>
 </div>
 
@@ -1638,21 +1632,15 @@ button,a,.btn{touch-action:manipulation}
 <div class="blog-filters">
   <div class="container">
     <div class="filters-inner">
-      <button type="button" class="filter-btn active" data-cat="all">All Articles</button>
-      <button type="button" class="filter-btn" data-cat="ai">AI & Automation</button>
-      <button type="button" class="filter-btn" data-cat="career">AI Careers</button>
-      <button type="button" class="filter-btn" data-cat="operations">Operations</button>
-      <button type="button" class="filter-btn" data-cat="marketing">Digital Marketing</button>
-      <button type="button" class="filter-btn" data-cat="ethics">AI Ethics</button>
-      <button type="button" class="filter-btn" data-cat="content">Content & Prompts</button>
-      <button type="button" class="filter-btn" data-cat="business">Business Growth</button>
       <div class="blog-search">
-        <span>🔍</span>
-        <input type="text" id="searchInput" placeholder="Search articles..." oninput="filterBlog()"/>
-        <button type="button" class="search-btn" onclick="filterBlog()" aria-label="Search" type="button" data-search-btn onclick="filterBlog()">Search</button>
+        <span aria-hidden="true">🔍</span>
+        <label class="sr-only" for="searchInput" style="position:absolute;left:-9999px">Search articles</label>
+        <input type="search" id="searchInput" placeholder="Search articles..." oninput="filterBlog()" autocomplete="off"/>
+        <button type="button" class="search-btn" onclick="filterBlog()" aria-label="Search">Search</button>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <!-- FEATURED -->
@@ -3681,5 +3669,6 @@ div.rn-blog-meta p {
 })();
 </script>
 
+<script defer src="/js/rn-audit.js"></script>
 </body>
 </html>
