@@ -2653,20 +2653,14 @@ button, .btn, a.btn {
 
 
 
-<style id="rn-header-static-lang">
-/* ===== Fixed header layout + compact language ===== */
 
-/* Header scrolls away with page (static), full width bar */
-#nav.nav,
-nav#nav.nav,
-nav#nav {
+<style id="rn-header-static-lang">
+/* Static header + clear Language control */
+#nav.nav, nav#nav.nav, nav#nav {
   position: static !important;
-  top: auto !important;
   width: 100% !important;
   z-index: 100 !important;
 }
-
-/* Google Translate must not push layout */
 body {
   top: 0 !important;
   position: static !important;
@@ -2675,11 +2669,9 @@ body {
 }
 .goog-te-banner-frame,
 iframe.goog-te-banner-frame,
-body > .skiptranslate,
-.goog-te-spinner-pos {
+body > .skiptranslate {
   display: none !important;
   height: 0 !important;
-  visibility: hidden !important;
 }
 #google_translate_element {
   position: absolute !important;
@@ -2688,159 +2680,103 @@ body > .skiptranslate,
   height: 1px !important;
   overflow: hidden !important;
   opacity: 0 !important;
-  pointer-events: none !important;
 }
 
-/* Nav row: logo | spacer/links | lang | menu */
-#nav .nav-inner,
-nav#nav .nav-inner {
+#nav .container {
+  max-width: 1120px !important;
+  margin: 0 auto !important;
+  padding: 0 10px !important;
+  box-sizing: border-box !important;
+}
+#nav .nav-inner {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: center !important;
-  justify-content: space-between !important;
   gap: 8px !important;
   width: 100% !important;
-  max-width: 1120px !important;
-  margin: 0 auto !important;
-  padding: 10px 12px !important;
-  box-sizing: border-box !important;
   min-height: 56px !important;
+  padding: 8px 0 !important;
+  box-sizing: border-box !important;
 }
-
 #nav .nav-logo {
-  flex: 0 0 auto !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
-  min-width: 0 !important;
+  overflow: hidden !important;
 }
 
-/* Desktop links stay in flow; mobile menu handled by existing hamburger */
-#nav .nav-links {
-  flex: 1 1 auto !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  gap: 4px !important;
-  min-width: 0 !important;
-}
-
-/* Language: compact chip — does not grow the header */
-#rnLangWrap.rn-lang-wrap,
-.rn-lang-wrap {
+/* Clear language control */
+#rnLangWrap.rn-lang-wrap {
   display: inline-flex !important;
-  align-items: center !important;
   flex: 0 0 auto !important;
-  width: auto !important;
-  max-width: 7.25rem !important;
-  margin: 0 4px 0 0 !important;
-  padding: 0 !important;
-  position: relative !important;
-  left: auto !important;
-  right: auto !important;
-  top: auto !important;
-  float: none !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 6px !important;
+  order: 3 !important;
+  margin: 0 !important;
+  padding: 4px 8px !important;
+  border-radius: 12px !important;
+  border: 1.5px solid rgba(0, 180, 216, 0.55) !important;
+  background: rgba(11, 30, 58, 0.95) !important;
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-  z-index: 5 !important;
-  order: 3 !important;
+  position: relative !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  z-index: 6 !important;
 }
-.rn-lang-wrap label {
-  display: none !important; /* save space; select has aria-label */
+#rnLangWrap .rn-lang-title {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.02em !important;
+  color: #00B4D8 !important;
+  white-space: nowrap !important;
+  margin: 0 !important;
+}
+#rnLangWrap .rn-lang-title .rn-lang-ico {
+  font-size: 14px !important;
+  line-height: 1 !important;
 }
 #rnLangSelect {
   display: inline-block !important;
-  width: auto !important;
-  max-width: 7.25rem !important;
-  min-width: 4.5rem !important;
-  min-height: 36px !important;
-  height: 36px !important;
-  padding: 0 8px !important;
+  min-height: 32px !important;
+  height: 32px !important;
+  min-width: 6.5rem !important;
+  max-width: 9rem !important;
+  padding: 0 6px !important;
   margin: 0 !important;
   border-radius: 8px !important;
-  border: 1px solid rgba(0,180,216,.5) !important;
-  background: rgba(11,30,58,.95) !important;
-  color: #e0f2fe !important;
+  border: 1px solid rgba(148, 163, 184, 0.5) !important;
+  background: #020617 !important;
+  color: #f8fafc !important;
   font-weight: 700 !important;
   font-size: 12px !important;
-  line-height: 1.2 !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
 }
-
-#nav .nav-hamburger,
-#hamburger {
+#nav .nav-hamburger, #hamburger {
   flex: 0 0 auto !important;
   order: 4 !important;
   margin: 0 !important;
 }
-
-/* Prevent translate font from blowing up header */
-#nav, #nav * {
-  max-width: 100%;
+@media (max-width: 380px) {
+  #rnLangWrap .rn-lang-title .rn-lang-text { display: none !important; }
+  #rnLangSelect { min-width: 5.5rem !important; max-width: 7rem !important; }
 }
-#nav .nav-logo span,
-#nav .nav-logo .logo-text {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 42vw;
-}
-
 @media (min-width: 901px) {
-  #nav .nav-hamburger,
-  #hamburger {
-    display: none !important;
-  }
-  #rnLangWrap.rn-lang-wrap {
-    order: 2 !important;
-    margin-left: 8px !important;
-  }
+  #nav .nav-hamburger, #hamburger { display: none !important; }
+  #rnLangWrap.rn-lang-wrap { order: 2 !important; }
 }
-@media (max-width: 900px) {
-  #nav .nav-links {
-    /* existing mobile menu CSS should control open state; don't force full width here */
-  }
-  #rnLangSelect {
-    max-width: 4.75rem !important;
-    min-width: 3.75rem !important;
-    font-size: 11px !important;
-    padding: 0 6px !important;
-  }
-}
-
-
-#rnLangSelect {
-  width: auto !important;
-  min-width: 5.5rem !important;
-  max-width: 9.5rem !important;
-  font-size: 12px !important;
-  text-align: left !important;
-  padding: 0 8px !important;
-}
-#rnLangWrap, .rn-lang-wrap {
-  width: auto !important;
-  min-width: 5.5rem !important;
-  max-width: 9.5rem !important;
-}
-@media (max-width: 900px) {
-  #rnLangSelect {
-    min-width: 5.25rem !important;
-    max-width: 7.5rem !important;
-    font-size: 11px !important;
-  }
-  #rnLangWrap, .rn-lang-wrap {
-    min-width: 5.25rem !important;
-    max-width: 7.5rem !important;
-  }
-  #nav .nav-logo {
-    max-width: calc(100% - 9.5rem) !important;
-  }
-}
-
 </style>
+
 
 
 </head>
@@ -5532,35 +5468,42 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 
 
 
+
 <script id="rn-header-lang-js">
 (function(){
   var LANGUAGES = [
-    {code:'en',label:'English'},
-    {code:'ha',label:'Hausa'},
-    {code:'ig',label:'Igbo'},
-    {code:'yo',label:'Yoruba'},
-    {code:'fr',label:'Français'},
-    {code:'ar',label:'العربية'},
-    {code:'es',label:'Español'},
-    {code:'pt',label:'Português'}
+    {code:'en', label:'English'},
+    {code:'ha', label:'Hausa'},
+    {code:'ig', label:'Igbo'},
+    {code:'yo', label:'Yoruba'},
+    {code:'fr', label:'Français'},
+    {code:'ar', label:'العربية'},
+    {code:'es', label:'Español'},
+    {code:'pt', label:'Português'}
   ];
-  var FULL = {en:'English',ha:'Hausa',ig:'Igbo',yo:'Yoruba',fr:'Français',ar:'Arabic',es:'Español',pt:'Português'};
 
   function placeWidget(){
     var navInner = document.querySelector('#nav .nav-inner, nav#nav .nav-inner');
     if(!navInner) return;
+
     var wrap = document.getElementById('rnLangWrap');
     if(!wrap){
       wrap = document.createElement('div');
       wrap.id = 'rnLangWrap';
       wrap.className = 'rn-lang-wrap';
-      wrap.innerHTML = '<select id="rnLangSelect" aria-label="Language" title="Language"></select>';
+      wrap.setAttribute('role', 'group');
+      wrap.setAttribute('aria-label', 'Language translator');
+      wrap.innerHTML =
+        '<span class="rn-lang-title">' +
+          '<span class="rn-lang-ico" aria-hidden="true">🌐</span>' +
+          '<span class="rn-lang-text">Language</span>' +
+        '</span>' +
+        '<select id="rnLangSelect" aria-label="Choose language" title="Choose language"></select>';
       var sel = wrap.querySelector('#rnLangSelect');
       LANGUAGES.forEach(function(L){
         var o = document.createElement('option');
         o.value = L.code;
         o.textContent = L.label;
-        o.title = FULL[L.code] || L.label;
         sel.appendChild(o);
       });
       try { sel.value = localStorage.getItem('rn_lang') || 'en'; } catch(e) { sel.value = 'en'; }
@@ -5569,10 +5512,31 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
         try { localStorage.setItem('rn_lang', lang); } catch(e) {}
         setLang(lang);
       });
+    } else {
+      // ensure title exists if old widget without it
+      if(!wrap.querySelector('.rn-lang-title')){
+        var t = document.createElement('span');
+        t.className = 'rn-lang-title';
+        t.innerHTML = '<span class="rn-lang-ico" aria-hidden="true">🌐</span><span class="rn-lang-text">Language</span>';
+        wrap.insertBefore(t, wrap.firstChild);
+      }
+      var sel = document.getElementById('rnLangSelect');
+      if(sel){
+        // rebuild options with full names
+        var cur = sel.value || 'en';
+        sel.innerHTML = '';
+        LANGUAGES.forEach(function(L){
+          var o = document.createElement('option');
+          o.value = L.code;
+          o.textContent = L.label;
+          sel.appendChild(o);
+        });
+        sel.value = cur;
+      }
     }
-    // Always re-seat in correct slot: before hamburger
-    var ham = navInner.querySelector('#hamburger, .nav-hamburger');
+
     if(wrap.parentNode) wrap.parentNode.removeChild(wrap);
+    var ham = navInner.querySelector('#hamburger, .nav-hamburger');
     if(ham) navInner.insertBefore(wrap, ham);
     else navInner.appendChild(wrap);
 
@@ -5628,11 +5592,8 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
   }
 
   function fixGoogleLayout(){
-    // Stop Google from offsetting the page
     document.body.style.top = '0';
     document.body.style.position = '';
-    var b = document.querySelector('.goog-te-banner-frame');
-    if(b) b.style.display = 'none';
   }
 
   function boot(){
@@ -5649,9 +5610,10 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
-  setInterval(fixGoogleLayout, 1000);
+  setInterval(fixGoogleLayout, 1200);
 })();
 </script>
+
 
 
 </body>
