@@ -2655,20 +2655,41 @@ button, .btn, a.btn {
 
 
 <style id="rn-header-static-lang">
-/* Static header + compact language control (dropdown list = full language names via JS) */
+/* Header: static, full brand visible, language compact */
 #nav.nav, nav#nav.nav, nav#nav {
   position: static !important;
   width: 100% !important;
   z-index: 100 !important;
 }
-body { top: 0 !important; position: static !important; padding-top: 0 !important; margin-top: 0 !important; }
-.goog-te-banner-frame, iframe.goog-te-banner-frame, body > .skiptranslate {
-  display: none !important; height: 0 !important;
+body {
+  top: 0 !important;
+  position: static !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame,
+body > .skiptranslate {
+  display: none !important;
+  height: 0 !important;
 }
 #google_translate_element {
-  position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important;
-  overflow: hidden !important; opacity: 0 !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
 }
+
+#nav .container {
+  width: 100% !important;
+  max-width: 1120px !important;
+  margin: 0 auto !important;
+  padding: 0 10px !important;
+  box-sizing: border-box !important;
+}
+
 #nav .nav-inner {
   display: flex !important;
   flex-direction: row !important;
@@ -2677,45 +2698,100 @@ body { top: 0 !important; position: static !important; padding-top: 0 !important
   gap: 8px !important;
   width: 100% !important;
   min-height: 56px !important;
-  padding: 8px 12px !important;
+  padding: 8px 0 !important;
   box-sizing: border-box !important;
 }
+
+/* Brand: never crop mid-word */
 #nav .nav-logo {
   flex: 1 1 auto !important;
   min-width: 0 !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
+  overflow: visible !important;
+  text-decoration: none !important;
 }
+#nav .nav-logo img,
+#nav .nav-logo .logo-img {
+  flex: 0 0 auto !important;
+  width: 40px !important;
+  height: 40px !important;
+  object-fit: contain !important;
+}
+#nav .nav-logo > div {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  line-height: 1.15 !important;
+  min-width: 0 !important;
+}
+#nav .nav-logo strong {
+  display: block !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: #fff !important;
+  white-space: nowrap !important;
+}
+#nav .nav-logo span {
+  display: block !important;
+  font-size: 0.72rem !important;
+  font-weight: 600 !important;
+  color: #00B4D8 !important;
+  white-space: nowrap !important;
+}
+
+/* Language */
 #rnLangWrap, .rn-lang-wrap {
   display: inline-flex !important;
   flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: 6.75rem !important;
+  margin: 0 !important;
   order: 3 !important;
+  position: relative !important;
   visibility: visible !important;
   opacity: 1 !important;
   pointer-events: auto !important;
-  position: relative !important;
-  left: auto !important;
   z-index: 6 !important;
 }
 .rn-lang-wrap label { display: none !important; }
 #rnLangSelect {
+  display: block !important;
+  width: 100% !important;
+  max-width: 6.75rem !important;
+  min-width: 5.5rem !important;
+  height: 36px !important;
   min-height: 36px !important;
-  max-width: 7.5rem !important;
-  padding: 0 8px !important;
+  padding: 0 6px !important;
   border-radius: 10px !important;
   border: 1.5px solid #00B4D8 !important;
   background: #0B1E3A !important;
   color: #e0f2fe !important;
   font-weight: 700 !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
+  box-sizing: border-box !important;
   cursor: pointer !important;
 }
+
 #nav .nav-hamburger, #hamburger {
   flex: 0 0 auto !important;
   order: 4 !important;
+  width: 44px !important;
+  height: 44px !important;
+  margin: 0 !important;
 }
+
 @media (min-width: 901px) {
+  #nav .nav-logo > div {
+    flex-direction: row !important;
+    align-items: baseline !important;
+    gap: 6px !important;
+  }
+  #nav .nav-logo strong { font-size: 1.05rem !important; }
+  #nav .nav-logo span { font-size: 1.05rem !important; color: #00B4D8 !important; }
+  #rnLangSelect { max-width: 8rem !important; font-size: 12px !important; }
   #nav .nav-hamburger, #hamburger { display: none !important; }
 }
 </style>
@@ -5414,14 +5490,14 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 <script id="rn-header-lang-js">
 (function(){
   var LANGUAGES = [
-    {code:'en', label:'English'},
-    {code:'ha', label:'Hausa'},
-    {code:'ig', label:'Igbo'},
-    {code:'yo', label:'Yoruba'},
-    {code:'fr', label:'Français'},
-    {code:'ar', label:'العربية'},
-    {code:'es', label:'Español'},
-    {code:'pt', label:'Português'}
+    {code:'en',label:'English'},
+    {code:'ha',label:'Hausa'},
+    {code:'ig',label:'Igbo'},
+    {code:'yo',label:'Yoruba'},
+    {code:'fr',label:'Français'},
+    {code:'ar',label:'العربية'},
+    {code:'es',label:'Español'},
+    {code:'pt',label:'Português'}
   ];
   var FULL = {en:'English',ha:'Hausa',ig:'Igbo',yo:'Yoruba',fr:'Français',ar:'Arabic',es:'Español',pt:'Português'};
 
