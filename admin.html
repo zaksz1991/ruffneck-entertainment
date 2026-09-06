@@ -265,6 +265,49 @@ textarea#bBody{display:none!important}
 </style>
 
 <link rel="stylesheet" href="/css/rn-audit.css"/>
+
+<style id="rn-admin-power-css">
+.rn-toolbar{
+  display:flex!important;flex-wrap:wrap!important;gap:6px!important;align-items:center!important;
+  margin:0 0 8px!important;padding:10px!important;background:#0f172a!important;
+  border:1px solid #334155!important;border-radius:10px!important;
+}
+.rn-toolbar button{
+  min-height:40px!important;min-width:40px!important;padding:6px 12px!important;
+  border-radius:8px!important;border:1px solid #475569!important;background:#1e293b!important;
+  color:#f8fafc!important;font-weight:700!important;cursor:pointer!important;
+}
+.rn-toolbar select{
+  min-height:40px!important;border-radius:8px!important;border:1px solid #475569!important;
+  background:#1e293b!important;color:#f8fafc!important;padding:0 8px!important;
+}
+#bBodyEditor{
+  display:block!important;min-height:240px!important;padding:14px 16px!important;
+  border-radius:10px!important;border:1px solid #334155!important;background:#020617!important;
+  color:#f8fafc!important;line-height:1.75!important;font-size:15px!important;overflow-y:auto!important;
+  margin-bottom:12px!important;
+}
+#bBodyEditor:focus{outline:2px solid #38bdf8!important;outline-offset:1px!important}
+textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.rn-upload-box{
+  border:1.5px dashed #475569!important;border-radius:12px!important;padding:14px!important;
+  background:#0b1220!important;margin:0 0 14px!important;
+}
+.rn-upload-preview{
+  width:100%!important;max-width:280px!important;max-height:200px!important;margin-top:10px!important;
+  border-radius:10px!important;object-fit:contain!important;background:#020617!important;
+  border:1px solid #334155!important;display:none!important;
+}
+.rn-upload-preview.is-on{display:block!important}
+.rn-editor-hint{font-size:12px!important;color:#94a3b8!important;margin:6px 0 8px!important}
+label.field{display:block;margin-top:10px;margin-bottom:4px;font-weight:600;color:#cbd5e1}
+input.field, textarea.field, select.field{
+  width:100%;box-sizing:border-box;min-height:44px;font-size:16px;padding:10px 12px;
+  border-radius:10px;border:1px solid #334155;background:#020617;color:#f8fafc;
+}
+textarea.field{min-height:100px}
+</style>
+
 </head>
 <body>
 
@@ -335,8 +378,24 @@ textarea#bBody{display:none!important}
         <input class="field" id="pCat" placeholder="e.g. IT Services"/>
         <label class="field">Short description</label>
         <textarea class="field" id="pDesc" placeholder="What the buyer gets"></textarea>
-        <label class="field">Price (₦)</label>
-        <input class="field" id="pPrice" type="number" placeholder="0"/>
+        <label class="field">Base price (₦)</label>
+        <input class="field" id="pPrice" type="number" min="0" step="1" placeholder="e.g. 5000"/>
+        <p class="sub" style="font-size:12px;color:#94a3b8;margin:4px 0 10px">Main price buyers see. Optional levels below only if you sell packages.</p>
+        <label class="field">Optional package prices (leave blank if single price)</label>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px">
+          <div>
+            <label class="field" for="pPriceBasic" style="font-size:12px">Basic (₦)</label>
+            <input class="field" id="pPriceBasic" type="number" min="0" step="1" placeholder="—"/>
+          </div>
+          <div>
+            <label class="field" for="pPriceStandard" style="font-size:12px">Standard (₦)</label>
+            <input class="field" id="pPriceStandard" type="number" min="0" step="1" placeholder="—"/>
+          </div>
+          <div>
+            <label class="field" for="pPricePremium" style="font-size:12px">Premium (₦)</label>
+            <input class="field" id="pPricePremium" type="number" min="0" step="1" placeholder="—"/>
+          </div>
+        </div>
         <label class="field">Product image (from your device)</label>
 <div class="rn-upload-box">
   <label for="pImageFile">Choose image — full image shown on Store (not cropped)</label>
@@ -700,6 +759,15 @@ textarea#bBody{display:none!important}
       document.getElementById('pCat').value = p.cat || '';
       document.getElementById('pDesc').value = p.desc || '';
       document.getElementById('pPrice').value = p.price != null ? p.price : '';
+      (function(){
+        var t = p.tiers || {};
+        var pb = document.getElementById('pPriceBasic');
+        var ps = document.getElementById('pPriceStandard');
+        var pp = document.getElementById('pPricePremium');
+        if (pb) pb.value = t.basic != null ? t.basic : '';
+        if (ps) ps.value = t.standard != null ? t.standard : '';
+        if (pp) pp.value = t.premium != null ? t.premium : '';
+      })();
       (function(){var img=p.image||'';var h=document.getElementById('pImage');var u=document.getElementById('pImageUrl');var prev=document.getElementById('pImagePreview');if(h)h.value=(img&&img.indexOf('data:')===0)?img:'';if(u)u.value=(img&&img.indexOf('data:')!==0)?img:'';if(prev&&img){prev.src=img;prev.classList.add('is-on');}})();
       if (document.getElementById('pStatus')) document.getElementById('pStatus').value = p.status || 'active';
       var ban = document.getElementById('productEditBanner'); if (ban) ban.classList.add('show');
@@ -786,8 +854,16 @@ document.getElementById('saveBlogBtn').onclick = async function(){
       status: document.getElementById('pStatus').value,
       emoji: '📦',
       image: (function(){var h=(document.getElementById('pImage')&&document.getElementById('pImage').value)||'';var u=(document.getElementById('pImageUrl')&&document.getElementById('pImageUrl').value||'').trim();return h||u||null;})(),
-      image: (function(){var h=(document.getElementById('pImage')&&document.getElementById('pImage').value)||'';var u=(document.getElementById('pImageUrl')&&document.getElementById('pImageUrl').value||'').trim();return h||u||null;})(),
-      tiers: {},
+      tiers: (function(){
+        var t = {};
+        var b = Number((document.getElementById('pPriceBasic')||{}).value);
+        var s = Number((document.getElementById('pPriceStandard')||{}).value);
+        var p = Number((document.getElementById('pPricePremium')||{}).value);
+        if (b > 0) t.basic = b;
+        if (s > 0) t.standard = s;
+        if (p > 0) t.premium = p;
+        return t;
+      })(),
       created: new Date().toLocaleDateString('en-GB'),
       updated: new Date().toLocaleDateString('en-GB')
     };
@@ -810,6 +886,9 @@ document.getElementById('saveBlogBtn').onclick = async function(){
     document.getElementById('pName').value = '';
     document.getElementById('pDesc').value = '';
     document.getElementById('pPrice').value = '';
+    var _pb=document.getElementById('pPriceBasic'); if(_pb)_pb.value='';
+    var _ps=document.getElementById('pPriceStandard'); if(_ps)_ps.value='';
+    var _pp=document.getElementById('pPricePremium'); if(_pp)_pp.value='';
     loadLists();
     document.querySelector('[data-page="products"]').click();
   };
@@ -1067,5 +1146,58 @@ document.getElementById('saveBlogBtn').onclick = async function(){
 </script>
 
 <script defer src="/js/rn-audit.js"></script>
+
+<script id="rn-admin-power-sync">
+(function(){
+  function syncBody(){
+    var ed = document.getElementById('bBodyEditor');
+    var ta = document.getElementById('bBody');
+    if(ed && ta) ta.value = ed.innerHTML;
+  }
+  function boot(){
+    var save = document.getElementById('saveBlogBtn');
+    if(save) save.addEventListener('click', syncBody, true);
+    var ed = document.getElementById('bBodyEditor');
+    if(ed){
+      ed.addEventListener('input', syncBody);
+      ed.addEventListener('blur', syncBody);
+    }
+    // toolbar
+    var bar = document.getElementById('rnEditorToolbar');
+    if(bar && !bar.dataset.bound){
+      bar.dataset.bound = '1';
+      bar.addEventListener('click', function(e){
+        var btn = e.target.closest('button[data-cmd]');
+        if(!btn) return;
+        e.preventDefault();
+        var ed = document.getElementById('bBodyEditor');
+        if(ed) ed.focus();
+        var cmd = btn.getAttribute('data-cmd');
+        var val = btn.getAttribute('data-value');
+        try {
+          if(cmd === 'formatBlock') document.execCommand('formatBlock', false, val || 'p');
+          else document.execCommand(cmd, false, null);
+        } catch(err) {}
+        syncBody();
+      });
+    }
+    var color = document.getElementById('rnTextColor');
+    if(color && !color.dataset.bound){
+      color.dataset.bound = '1';
+      color.addEventListener('change', function(){
+        if(!color.value) return;
+        var ed = document.getElementById('bBodyEditor');
+        if(ed) ed.focus();
+        try { document.execCommand('foreColor', false, color.value); } catch(e) {}
+        color.value = '';
+        syncBody();
+      });
+    }
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
 </body>
 </html>

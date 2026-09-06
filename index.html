@@ -2492,6 +2492,177 @@ iframe.goog-te-menu-frame,body>.skiptranslate,.goog-te-gadget,.goog-te-combo,
 </style>
 
 <link rel="stylesheet" href="/css/rn-audit.css"/>
+
+<style id="rn-home-polish">
+/* Home conversion polish */
+:root {
+  --hp-ink: #0B1E3A;
+  --hp-cyan: #00B4D8;
+  --hp-muted: #64748b;
+  --hp-border: #e2e8f0;
+  --hp-max: 1120px;
+}
+
+/* Kill language toggle */
+#rnFixedLang, #rnFixedLangBtn, #rnFixedLangMenu, #rnLang, #rnLangMenu,
+#google_translate_element, .goog-te-banner-frame, .goog-te-menu-frame,
+iframe.goog-te-banner-frame, body > .skiptranslate, button[data-lang],
+.goog-te-gadget, .goog-te-combo {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Content width */
+.container, .nav-inner {
+  width: min(100% - 32px, var(--hp-max)) !important;
+  max-width: var(--hp-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Service tabs */
+.services-tabs {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  gap: 8px !important;
+  overflow-x: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding: 8px 4px 12px !important;
+  justify-content: flex-start !important;
+  max-width: var(--hp-max);
+  margin: 0 auto !important;
+}
+@media (min-width: 900px) {
+  .services-tabs {
+    flex-wrap: wrap !important;
+    overflow-x: visible !important;
+    justify-content: center !important;
+  }
+}
+.services-tabs .tab-btn {
+  flex: 0 0 auto !important;
+  width: auto !important;
+  white-space: nowrap !important;
+  min-height: 44px !important;
+  padding: 0.45rem 1rem !important;
+  border-radius: 999px !important;
+  border: 1.5px solid #94a3b8 !important;
+  background: #fff !important;
+  color: var(--hp-ink) !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+}
+.services-tabs .tab-btn.active,
+.services-tabs .tab-btn[aria-pressed="true"] {
+  background: var(--hp-ink) !important;
+  color: #fff !important;
+  border-color: var(--hp-ink) !important;
+}
+.service-card.rn-svc-hidden,
+.service-card[hidden] {
+  display: none !important;
+}
+
+/* Service cards grid */
+#services .services-grid,
+.services-grid {
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 1rem !important;
+  max-width: var(--hp-max);
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+}
+@media (min-width: 640px) {
+  #services .services-grid, .services-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+@media (min-width: 960px) {
+  #services .services-grid, .services-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+}
+
+/* Founder photo — show full face */
+#founder img,
+.founder-photo img,
+img[alt*="Founder"],
+img[src="/founder.png"] {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center top !important;
+  display: block !important;
+  border-radius: 16px;
+}
+#founder .founder-grid-compact,
+.founder-grid-compact {
+  max-width: var(--hp-max);
+  margin: 0 auto !important;
+  padding: 0 16px !important;
+}
+
+/* Hero CTAs */
+.hero-ctas, .hero .cta-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+}
+.hero-ctas .btn, .hero .btn {
+  min-height: 48px !important;
+  padding: 0.75rem 1.25rem !important;
+  font-weight: 800 !important;
+}
+
+/* Sticky bottom bar clearance */
+body {
+  padding-bottom: 0;
+}
+@media (max-width: 900px) {
+  main, .section:last-of-type, #services {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .rn-chat-bubble, #rnChatBubble {
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* Sticky CTA bar if present */
+.rn-sticky-cta, .sticky-cta-bar, [class*="sticky"][class*="bar"] {
+  z-index: 80;
+}
+
+#showAllServices {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  width: 100% !important;
+  max-width: 28rem !important;
+  margin: 1rem auto !important;
+  font-weight: 700 !important;
+  border-radius: 12px !important;
+}
+
+:focus-visible {
+  outline: 3px solid #f59e0b !important;
+  outline-offset: 3px !important;
+}
+
+button, .btn, a.btn {
+  min-height: 44px;
+  box-sizing: border-box;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -3214,7 +3385,7 @@ button,a,.btn{touch-action:manipulation}
       <!-- LEFT: Avatar + Social Links -->
       <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.2);border-radius:16px;padding:28px 20px;text-align:center;">
         <div style="width:100px;height:100px;margin:0 auto 14px;border-radius:50%;overflow:hidden;border:3px solid var(--cyan);box-shadow:0 4px 20px rgba(0,180,216,0.3);">
-          <img loading="lazy" decoding="async" src="/founder.png" width="400" height="500" alt="Hassan Zakariya, Founder of RuffNeck Entertainment" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" onerror="this.onerror=null;this.style.display='none';if(this.parentElement)this.parentElement.classList.add('img-fallback');">
+          <img loading="lazy" decoding="async" src="/founder.png" width="400" height="500" alt="Hassan Zakariya, Founder of RuffNeck Entertainment" style="width:100%;height:100%;object-fit:contain;object-position:center top;display:block;" onerror="this.onerror=null;this.style.display='none';if(this.parentElement)this.parentElement.classList.add('img-fallback');">
         </div>
         <div style="font-size:19px;font-weight:700;color:var(--white);margin-bottom:3px;">Hassan Zakariya</div>
         <div style="font-size:11px;color:var(--cyan);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:6px;">FOUNDER & CEO · RUFFNECK ENTERTAINMENT</div>
@@ -5131,5 +5302,84 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 </script>
 
 <script defer src="/js/rn-audit.js"></script>
+
+<script id="rn-home-polish-js">
+(function(){
+  function nukeLang(){
+    try {
+      ['rnFixedLang','rnFixedLangBtn','rnFixedLangMenu','rnLang','rnLangMenu','google_translate_element'].forEach(function(id){
+        var el=document.getElementById(id);
+        if(el&&el.parentNode) el.parentNode.removeChild(el);
+      });
+      document.querySelectorAll('button[data-lang],.goog-te-combo').forEach(function(el){
+        if(el&&el.parentNode) el.parentNode.removeChild(el);
+      });
+      document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+      try{ localStorage.removeItem('rn_lang'); localStorage.removeItem('rn_lang_label'); }catch(e){}
+    } catch(e) {}
+  }
+
+  function wireServiceTabs(){
+    var tabs = document.querySelectorAll('.services-tabs .tab-btn[data-filter], .tab-btn[data-filter]');
+    if(!tabs.length) return;
+    function cards(){
+      return document.querySelectorAll('#services .service-card[data-category], .service-card[data-category]');
+    }
+    function apply(filter){
+      filter = filter || 'all';
+      cards().forEach(function(card){
+        var cat = card.getAttribute('data-category') || '';
+        var match = filter === 'all' || cat === filter;
+        card.hidden = !match;
+        card.style.display = match ? '' : 'none';
+        card.classList.toggle('rn-svc-hidden', !match);
+      });
+      tabs.forEach(function(btn){
+        var on = (btn.getAttribute('data-filter')||'') === filter;
+        btn.classList.toggle('active', on);
+        btn.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+    }
+    tabs.forEach(function(btn){
+      btn.addEventListener('click', function(){
+        apply(btn.getAttribute('data-filter') || 'all');
+      });
+    });
+    var showAll = document.getElementById('showAllServices');
+    if(showAll){
+      showAll.addEventListener('click', function(){
+        apply('all');
+        cards().forEach(function(c){
+          c.hidden = false;
+          c.style.display = '';
+          c.classList.remove('rn-svc-hidden');
+        });
+      });
+    }
+    var active = document.querySelector('.tab-btn.active[data-filter]');
+    apply(active ? active.getAttribute('data-filter') : 'all');
+  }
+
+  function founderImg(){
+    document.querySelectorAll('img[src="/founder.png"], img[alt*="Founder"]').forEach(function(img){
+      img.style.objectFit = 'contain';
+      img.style.objectPosition = 'center top';
+      img.style.width = '100%';
+      img.style.height = 'auto';
+    });
+  }
+
+  function boot(){
+    nukeLang();
+    wireServiceTabs();
+    founderImg();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  setTimeout(boot, 400);
+  setTimeout(nukeLang, 1200);
+})();
+</script>
+
 </body>
 </html>
