@@ -2479,18 +2479,6 @@ body { top: 0 !important; position: static !important; }
 <script defer src="/js/rn-services-filter.js"></script>
 <script defer src="/js/app.js"></script>
 
-<style id="rn-kill-translator">
-#rnFixedLang,#rnFixedLangBtn,#rnFixedLangMenu,#rnLang,#rnLangMenu,#rnLangLabel,
-#rnLangToggle,.rn-lang-menu,.rn-lang-btn,#google_translate_element,
-.goog-te-banner-frame,.goog-te-menu-frame,iframe.goog-te-banner-frame,
-iframe.goog-te-menu-frame,body>.skiptranslate,.goog-te-gadget,.goog-te-combo,
-[id*="google_translate"],button[data-lang]{
-  display:none!important;visibility:hidden!important;opacity:0!important;
-  pointer-events:none!important;width:0!important;height:0!important;
-  overflow:hidden!important;position:absolute!important;left:-9999px!important;
-}
-</style>
-
 <link rel="stylesheet" href="/css/rn-audit.css"/>
 
 <style id="rn-home-polish">
@@ -2660,6 +2648,80 @@ body {
 button, .btn, a.btn {
   min-height: 44px;
   box-sizing: border-box;
+}
+</style>
+
+
+<style id="rn-header-static-lang">
+/* Static header */
+#nav.nav, nav.nav#nav, nav#nav, .nav {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+}
+body { padding-top: 0 !important; top: 0 !important; }
+
+/* Show language control */
+.rn-lang-wrap {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-left: 8px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: relative !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  pointer-events: auto !important;
+  z-index: 20 !important;
+}
+.rn-lang-wrap label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(255,255,255,.9);
+}
+#rnLangSelect {
+  min-height: 40px !important;
+  min-width: 7.5rem !important;
+  padding: 6px 10px !important;
+  border-radius: 10px !important;
+  border: 1.5px solid rgba(0,180,216,.55) !important;
+  background: #0B1E3A !important;
+  color: #e0f2fe !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+}
+/* Override previous hide rules for our widget only */
+#rnLangWrap, #rnLangSelect, .rn-lang-wrap {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  position: relative !important;
+  left: auto !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+}
+#rnLangSelect { display: inline-block !important; }
+
+#google_translate_element {
+  position: absolute !important;
+  left: -9999px !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden !important;
+}
+.goog-te-banner-frame, iframe.goog-te-banner-frame, body > .skiptranslate {
+  display: none !important;
+  height: 0 !important;
+}
+@media (max-width: 700px) {
+  .rn-lang-wrap label { display: none !important; }
+  #rnLangSelect { min-width: 4.75rem !important; font-size: 12px !important; }
 }
 </style>
 
@@ -5272,37 +5334,6 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 <rn-footer></rn-footer>
 <script type="module" src="/js/components/index.js"></script>
 
-<script id="rn-kill-translator-js">
-(function(){
-  function nuke(){
-    try{
-      ['rnFixedLang','rnFixedLangBtn','rnFixedLangMenu','rnLang','rnLangMenu','google_translate_element'].forEach(function(id){
-        var el=document.getElementById(id); if(el&&el.parentNode)el.parentNode.removeChild(el);
-      });
-      document.querySelectorAll('button[data-lang],.goog-te-combo,.goog-te-gadget').forEach(function(el){
-        if(el&&el.parentNode)el.parentNode.removeChild(el);
-      });
-      document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-      try{localStorage.removeItem('rn_lang');localStorage.removeItem('rn_lang_label');}catch(e){}
-      // prevent dynamic inject of google translate
-      var obs=new MutationObserver(function(){
-        var g=document.getElementById('google_translate_element');
-        if(g&&g.parentNode)g.parentNode.removeChild(g);
-        var f=document.getElementById('rnFixedLang');
-        if(f&&f.parentNode)f.parentNode.removeChild(f);
-      });
-      obs.observe(document.documentElement,{childList:true,subtree:true});
-      setTimeout(function(){try{obs.disconnect();}catch(e){}},5000);
-    }catch(e){}
-  }
-  nuke();
-  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',nuke);
-  setTimeout(nuke,400); setTimeout(nuke,1500);
-})();
-</script>
-
-<script defer src="/js/rn-audit.js"></script>
-
 <script id="rn-home-polish-js">
 (function(){
   function nukeLang(){
@@ -5378,6 +5409,107 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
   else boot();
   setTimeout(boot, 400);
   setTimeout(nukeLang, 1200);
+})();
+</script>
+
+
+<script id="rn-header-lang-js">
+(function(){
+  var LANGUAGES = [
+    {code:'en',label:'English'},
+    {code:'ha',label:'Hausa'},
+    {code:'ig',label:'Igbo'},
+    {code:'yo',label:'Yoruba'},
+    {code:'fr',label:'Français'},
+    {code:'ar',label:'العربية'},
+    {code:'es',label:'Español'},
+    {code:'pt',label:'Português'}
+  ];
+
+  function ensureWidget(){
+    if(document.getElementById('rnLangSelect')) return;
+    var navInner = document.querySelector('#nav .nav-inner, nav#nav .nav-inner, .nav .nav-inner');
+    if(!navInner) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'rn-lang-wrap';
+    wrap.id = 'rnLangWrap';
+    wrap.innerHTML = '<label for="rnLangSelect">Lang</label><select id="rnLangSelect" aria-label="Choose language"></select>';
+    var sel = wrap.querySelector('#rnLangSelect');
+    LANGUAGES.forEach(function(L){
+      var o=document.createElement('option');
+      o.value=L.code; o.textContent=L.label; sel.appendChild(o);
+    });
+    var ham = navInner.querySelector('#hamburger, .nav-hamburger');
+    if(ham) navInner.insertBefore(wrap, ham);
+    else navInner.appendChild(wrap);
+
+    if(!document.getElementById('google_translate_element')){
+      var ge=document.createElement('div');
+      ge.id='google_translate_element';
+      document.body.appendChild(ge);
+    }
+    try { sel.value = localStorage.getItem('rn_lang') || 'en'; } catch(e) { sel.value='en'; }
+    sel.addEventListener('change', function(){
+      var lang = sel.value || 'en';
+      try { localStorage.setItem('rn_lang', lang); } catch(e) {}
+      setLang(lang);
+    });
+  }
+
+  function setLang(lang){
+    if(lang==='en'){
+      document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+      document.cookie='googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.'+location.hostname;
+      location.reload();
+      return;
+    }
+    document.cookie='googtrans=/en/'+lang+';path=/;';
+    document.cookie='googtrans=/en/'+lang+';path=/;domain=.'+location.hostname;
+    var combo=document.querySelector('.goog-te-combo');
+    if(combo){ combo.value=lang; combo.dispatchEvent(new Event('change')); }
+    else {
+      loadGT(function(){
+        setTimeout(function(){
+          var c=document.querySelector('.goog-te-combo');
+          if(c){ c.value=lang; c.dispatchEvent(new Event('change')); }
+          else location.reload();
+        }, 700);
+      });
+    }
+  }
+
+  function loadGT(cb){
+    if(window.google && google.translate){ if(cb) cb(); return; }
+    if(document.getElementById('rnGoogleTranslateScript')){ if(cb) setTimeout(cb,500); return; }
+    window.rnInitGoogleTranslate=function(){
+      try{
+        new google.translate.TranslateElement({
+          pageLanguage:'en',
+          includedLanguages:'en,ha,ig,yo,fr,ar,es,pt',
+          autoDisplay:false
+        }, 'google_translate_element');
+      }catch(e){}
+      if(cb) cb();
+    };
+    var s=document.createElement('script');
+    s.id='rnGoogleTranslateScript';
+    s.async=true;
+    s.src='https://translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate';
+    document.head.appendChild(s);
+  }
+
+  function boot(){
+    ensureWidget();
+    loadGT(function(){
+      var lang='en';
+      try{ lang=localStorage.getItem('rn_lang')||'en'; }catch(e){}
+      var sel=document.getElementById('rnLangSelect');
+      if(sel) sel.value=lang;
+      if(lang && lang!=='en') setLang(lang);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
 </script>
 
