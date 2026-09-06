@@ -2810,6 +2810,36 @@ nav#nav .nav-inner {
     padding: 0 6px !important;
   }
 }
+
+
+#rnLangSelect {
+  width: auto !important;
+  min-width: 5.5rem !important;
+  max-width: 9.5rem !important;
+  font-size: 12px !important;
+  text-align: left !important;
+  padding: 0 8px !important;
+}
+#rnLangWrap, .rn-lang-wrap {
+  width: auto !important;
+  min-width: 5.5rem !important;
+  max-width: 9.5rem !important;
+}
+@media (max-width: 900px) {
+  #rnLangSelect {
+    min-width: 5.25rem !important;
+    max-width: 7.5rem !important;
+    font-size: 11px !important;
+  }
+  #rnLangWrap, .rn-lang-wrap {
+    min-width: 5.25rem !important;
+    max-width: 7.5rem !important;
+  }
+  #nav .nav-logo {
+    max-width: calc(100% - 9.5rem) !important;
+  }
+}
+
 </style>
 
 
@@ -5505,14 +5535,14 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 <script id="rn-header-lang-js">
 (function(){
   var LANGUAGES = [
-    {code:'en',label:'EN'},
-    {code:'ha',label:'HA'},
-    {code:'ig',label:'IG'},
-    {code:'yo',label:'YO'},
-    {code:'fr',label:'FR'},
-    {code:'ar',label:'AR'},
-    {code:'es',label:'ES'},
-    {code:'pt',label:'PT'}
+    {code:'en',label:'English'},
+    {code:'ha',label:'Hausa'},
+    {code:'ig',label:'Igbo'},
+    {code:'yo',label:'Yoruba'},
+    {code:'fr',label:'Français'},
+    {code:'ar',label:'العربية'},
+    {code:'es',label:'Español'},
+    {code:'pt',label:'Português'}
   ];
   var FULL = {en:'English',ha:'Hausa',ig:'Igbo',yo:'Yoruba',fr:'Français',ar:'Arabic',es:'Español',pt:'Português'};
 
