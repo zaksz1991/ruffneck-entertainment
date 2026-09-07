@@ -2691,6 +2691,19 @@ body {
 }
 </style>
 
+
+<style id="rn-translate-fix">
+/* Keep Google from shifting layout; keep our lang control readable */
+.goog-te-banner-frame, iframe.goog-te-banner-frame, body > .skiptranslate {
+  display: none !important; height: 0 !important; visibility: hidden !important;
+}
+body { top: 0 !important; }
+#google_translate_element { position: absolute !important; left: -9999px !important; height: 1px !important; width: 1px !important; overflow: hidden !important; opacity: 0 !important; }
+/* Do not translate the language picker labels */
+#rnLangWrap, #rnLangSelect, #rnLangSelect option { }
+font font { background: transparent !important; box-shadow: none !important; }
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -5244,6 +5257,7 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 
 
 
+
 <script id="rn-nav-fix-js">
 (function(){
   var LANGS = [
@@ -5268,21 +5282,98 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
     document.documentElement.style.setProperty('--rn-nav-h', nh + 'px');
     document.documentElement.style.setProperty('--rn-header-h', (ah + nh) + 'px');
     document.body.style.paddingTop = (ah + nh) + 'px';
+    document.body.style.top = '0';
   }
 
   function cleanBrand(logo){
     if(!logo) return;
-    // Remove every node except img and one rn-brand-text
     var img = logo.querySelector('img');
-    var keep = [];
-    if(img) keep.push(img);
-    // wipe all children and rebuild once
     while(logo.firstChild) logo.removeChild(logo.firstChild);
     if(img) logo.appendChild(img);
     var div = document.createElement('div');
     div.className = 'rn-brand-text';
     div.innerHTML = '<strong>RuffNeck</strong><span>Entertainment</span>';
     logo.appendChild(div);
+  }
+
+  function setTranslateCookie(lang){
+    var host = location.hostname;
+    var expireOff = 'Thu, 01 Jan 1970 00:00:00 GMT';
+    var expireOn = 'Wed, 01 Jan 2031 00:00:00 GMT';
+    [ '', host, '.' + host ].forEach(function(d){
+      var domain = d ? (';domain=' + d + ';') : '';
+      document.cookie = 'googtrans=;expires=' + expireOff + ';path=/;' + domain;
+    });
+    if(lang && lang !== 'en'){
+      var val = '/en/' + lang;
+      document.cookie = 'googtrans=' + val + ';expires=' + expireOn + ';path=/';
+      document.cookie = 'googtrans=' + val + ';expires=' + expireOn + ';path=/;domain=' + host;
+      document.cookie = 'googtrans=' + val + ';expires=' + expireOn + ';path=/;domain=.' + host;
+    }
+  }
+
+  function readLang(){
+    try {
+      var m = document.cookie.match(/(?:^|; )googtrans=\/en\/([a-zA-Z-]+)/);
+      if(m) return m[1].toLowerCase();
+      return localStorage.getItem('rn_lang') || 'en';
+    } catch(e){ return 'en'; }
+  }
+
+  function fireGoogleCombo(lang){
+    var combo = document.querySelector('select.goog-te-combo');
+    if(!combo) return false;
+    if(combo.value === lang) {
+      // force re-trigger
+      combo.value = 'en';
+      combo.dispatchEvent(new Event('change'));
+    }
+    combo.value = lang;
+    combo.dispatchEvent(new Event('change'));
+    try {
+      var evt = document.createEvent('HTMLEvents');
+      evt.initEvent('change', true, true);
+      combo.dispatchEvent(evt);
+    } catch(e) {}
+    return true;
+  }
+
+  function applyTranslation(lang){
+    document.body.style.top = '0';
+    if(!lang || lang === 'en'){
+      // clear and leave English
+      setTranslateCookie('en');
+      try { localStorage.setItem('rn_lang', 'en'); } catch(e) {}
+      return;
+    }
+    setTranslateCookie(lang);
+    // Poll for Google's hidden select and activate it
+    var tries = 0;
+    var iv = setInterval(function(){
+      tries++;
+      var ok = fireGoogleCombo(lang);
+      document.body.style.top = '0';
+      if(ok || tries > 40) clearInterval(iv);
+    }, 250);
+  }
+
+  function switchLanguage(lang){
+    lang = (lang || 'en').toLowerCase();
+    try { localStorage.setItem('rn_lang', lang); } catch(e) {}
+    setTranslateCookie(lang);
+    // Hash method helps some browsers pick up translation on reload
+    if(lang === 'en'){
+      if(location.hash.indexOf('googtrans') >= 0){
+        location.hash = '';
+      }
+      location.reload();
+      return;
+    }
+    // Reload with hash so Google Translate applies on next paint
+    var base = location.pathname + location.search;
+    location.href = base + '#googtrans(en|' + lang + ')';
+    // If hash-only navigation does not reload, force reload
+    setTimeout(function(){ location.reload(); }, 50);
   }
 
   function setupRow(){
@@ -5306,8 +5397,13 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
     if(!lang){
       lang = document.createElement('div');
       lang.id = 'rnLangWrap';
+      // mark control so Google does not translate the language names themselves
+      lang.className = 'notranslate';
+      lang.setAttribute('translate', 'no');
       var sel = document.createElement('select');
       sel.id = 'rnLangSelect';
+      sel.className = 'notranslate';
+      sel.setAttribute('translate', 'no');
       sel.setAttribute('aria-label', 'Choose language');
       LANGS.forEach(function(L){
         var o = document.createElement('option');
@@ -5315,34 +5411,21 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
         o.textContent = L.label;
         sel.appendChild(o);
       });
-      var saved = 'en';
-      try { saved = localStorage.getItem('rn_lang') || 'en'; } catch(e) {}
-      var cm = document.cookie.match(/googtrans=\/en\/([a-z]+)/);
-      if(cm) saved = cm[1];
+      var saved = readLang();
+      // hash override e.g. #googtrans(en|ha)
+      var hm = location.hash.match(/googtrans\(en\|([a-zA-Z-]+)\)/);
+      if(hm) saved = hm[1].toLowerCase();
       sel.value = saved;
       sel.addEventListener('change', function(){
-        var code = sel.value || 'en';
-        try { localStorage.setItem('rn_lang', code); } catch(e) {}
-        var exp = code === 'en' ? 'Thu, 01 Jan 1970 00:00:00 GMT' : 'Wed, 01 Jan 2031 00:00:00 GMT';
-        var val = code === 'en' ? '' : ('/en/' + code);
-        document.cookie = 'googtrans=' + val + ';expires=' + exp + ';path=/';
-        document.cookie = 'googtrans=' + val + ';expires=' + exp + ';path=/;domain=' + location.hostname;
-        document.cookie = 'googtrans=' + val + ';expires=' + exp + ';path=/;domain=.' + location.hostname;
-        location.reload();
+        switchLanguage(sel.value || 'en');
       });
       lang.appendChild(sel);
     }
 
-    // Order in DOM: logo first, then controls (lang, ham)
     if(logo) inner.insertBefore(logo, inner.firstChild);
     inner.appendChild(box);
     box.appendChild(lang);
     if(ham) box.appendChild(ham);
-
-    // Hide any leftover duplicate brand text outside rn-brand-text
-    inner.querySelectorAll('.nav-logo strong, .nav-logo span').forEach(function(el){
-      if(!el.closest('.rn-brand-text')) el.remove();
-    });
   }
 
   function wireMenu(){
@@ -5353,7 +5436,6 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
     if(btn.parentNode) btn.parentNode.replaceChild(fresh, btn);
     btn = fresh;
     btn.id = 'hamburger';
-    // ensure still in controls
     var box = document.getElementById('rnNavControls');
     if(box && btn.parentNode !== box) box.appendChild(btn);
     btn.addEventListener('click', function(e){
@@ -5376,21 +5458,56 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
     if(!document.getElementById('google_translate_element')){
       var ge = document.createElement('div');
       ge.id = 'google_translate_element';
+      ge.style.cssText = 'position:absolute;left:-9999px;height:1px;width:1px;overflow:hidden;opacity:0;';
       document.body.appendChild(ge);
     }
-    if(document.getElementById('rnGTScript')) return;
+    var lang = readLang();
+    var hm = location.hash.match(/googtrans\(en\|([a-zA-Z-]+)\)/);
+    if(hm) lang = hm[1].toLowerCase();
+
+    function onReady(){
+      document.body.style.top = '0';
+      if(lang && lang !== 'en'){
+        applyTranslation(lang);
+      }
+      var sel = document.getElementById('rnLangSelect');
+      if(sel) sel.value = lang || 'en';
+    }
+
+    if(window.google && google.translate && google.translate.TranslateElement){
+      try {
+        if(!window.__rnTE){
+          window.__rnTE = new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,ha,ig,yo,fr,ar,es,pt',
+            autoDisplay: false,
+            multilanguagePage: true
+          }, 'google_translate_element');
+        }
+      } catch(e) {}
+      onReady();
+      return;
+    }
+    if(document.getElementById('rnGTScript')){
+      var n = 0, t = setInterval(function(){
+        n++;
+        if((window.google && google.translate) || n > 50){
+          clearInterval(t);
+          bootGT();
+        }
+      }, 200);
+      return;
+    }
     window.googleTranslateElementInit = function(){
       try {
-        new google.translate.TranslateElement({
+        window.__rnTE = new google.translate.TranslateElement({
           pageLanguage: 'en',
           includedLanguages: 'en,ha,ig,yo,fr,ar,es,pt',
-          autoDisplay: false
+          autoDisplay: false,
+          multilanguagePage: true
         }, 'google_translate_element');
       } catch(e) {}
-      document.body.style.top = '0';
-      document.documentElement.setAttribute('dir','ltr');
-      var n = document.getElementById('nav');
-      if(n) n.setAttribute('dir','ltr');
+      onReady();
     };
     var s = document.createElement('script');
     s.id = 'rnGTScript';
@@ -5405,11 +5522,14 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
     measure();
     bootGT();
     setTimeout(function(){ setupRow(); wireMenu(); measure(); }, 150);
+    setTimeout(measure, 600);
+    window.addEventListener('resize', measure);
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
 </script>
+
 
 </body>
 </html>
