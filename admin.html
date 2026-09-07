@@ -232,44 +232,21 @@ footer .social a, .footer-social a {
 .rn-upload-meta{font-size:11px;color:#64748b;margin-top:6px}
 </style>
 
-<link rel="stylesheet" href="/css/rn-audit.css"/>
-
 
 <style id="rn-admin-editor-css">
-.rn-editor-hint{font-size:12px;color:#94a3b8;margin:8px 0;line-height:1.4}
-.rn-toolbar{
-  display:flex;flex-wrap:wrap;gap:6px;align-items:center;
-  margin:0 0 8px;padding:10px;background:#0f172a;
-  border:1px solid #334155;border-radius:10px;
-}
-.rn-toolbar button{
-  min-height:44px;min-width:44px;padding:8px 12px;border-radius:8px;
-  border:1px solid #475569;background:#1e293b;color:#f8fafc;
-  font-weight:700;cursor:pointer;font-size:14px;
-  -webkit-user-select:none;user-select:none;
-  touch-action:manipulation;
-}
-.rn-toolbar button:active{background:#334155}
-.rn-toolbar select{
-  min-height:44px;border-radius:8px;border:1px solid #475569;
-  background:#1e293b;color:#f8fafc;padding:0 8px;font-size:14px;
-}
-#bBodyEditor{
-  display:block!important;min-height:240px;padding:14px 16px;
-  border-radius:10px;border:1px solid #334155;background:#020617;
-  color:#f8fafc;line-height:1.75;font-size:16px;overflow-y:auto;
-  margin-bottom:12px;-webkit-user-modify:read-write;
-}
+.rn-editor-hint{font-size:12px;color:#94a3b8;margin:6px 0 8px;line-height:1.4}
+.rn-toolbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0 0 8px;padding:10px;background:#0f172a;border:1px solid #334155;border-radius:10px}
+.rn-toolbar button{min-height:44px;min-width:44px;padding:8px 12px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#f8fafc;font-weight:700;cursor:pointer;font-size:14px;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+.rn-toolbar select{min-height:44px;border-radius:8px;border:1px solid #475569;background:#1e293b;color:#f8fafc;padding:0 8px}
+#bBodyEditor{display:block!important;min-height:240px;padding:14px 16px;border-radius:10px;border:1px solid #334155;background:#020617;color:#f8fafc;line-height:1.75;font-size:16px;overflow-y:auto;margin-bottom:12px}
 #bBodyEditor:focus{outline:2px solid #38bdf8;outline-offset:1px}
-#bBodyEditor p{margin:0 0 .85rem}
-#bBodyEditor h3{margin:1rem 0 .5rem;font-size:1.15rem;color:#e2e8f0}
-#bBodyEditor ul{margin:0 0 1rem 1.25rem}
 #bBodyEditor b,#bBodyEditor strong{font-weight:700}
 #bBodyEditor i,#bBodyEditor em{font-style:italic}
-textarea#bBody{
-  position:absolute!important;left:-9999px!important;width:1px!important;
-  height:1px!important;opacity:0!important;pointer-events:none!important;
-}
+textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}
+.rn-upload-box{border:1.5px dashed #475569;border-radius:12px;padding:12px;background:#0b1220;margin:0 0 12px}
+.rn-upload-preview{max-width:280px;max-height:180px;margin-top:8px;display:none;object-fit:contain;border-radius:8px}
+.rn-upload-preview.is-on{display:block}
+#banner{min-height:1.5rem}
 </style>
 
 </head>
@@ -394,53 +371,52 @@ textarea#bBody{
       <h2>Add blog post</h2>
       <p class="sub">Published posts appear on /blog.</p>
       <div class="card">
+
         <label class="field">Title</label>
         <input type="hidden" id="editPostId" value=""/>
-<div class="edit-banner" id="postEditBanner">Editing post — Save updates this item. <button type="button" id="cancelPostEdit" style="margin-left:8px">Cancel</button></div>
-<input class="field" id="bTitle" placeholder="Post title"/>
+        <div class="edit-banner" id="postEditBanner">Editing post — Save updates this item. <button type="button" id="cancelPostEdit" style="margin-left:8px">Cancel</button></div>
+        <input class="field" id="bTitle" placeholder="Post title"/>
         <label class="field">Category</label>
         <input class="field" id="bCat" placeholder="e.g. AI & Automation"/>
         <label class="field">Short summary</label>
         <textarea class="field" id="bDesc" placeholder="One or two sentences"></textarea>
         <label class="field">Body</label>
+        <p class="rn-editor-hint">1) Tap in the box 2) Type 3) Select text 4) Tap Bold / Italic / List</p>
+        <div class="rn-toolbar" id="rnEditorToolbar" role="toolbar" aria-label="Text formatting">
+          <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
+          <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
+          <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
+          <button type="button" data-cmd="insertUnorderedList" title="Bullet list">• List</button>
+          <button type="button" data-cmd="formatBlock" data-value="h3" title="Heading">H</button>
+          <button type="button" data-cmd="formatBlock" data-value="p" title="Paragraph">¶</button>
+          <select id="rnTextColor" title="Text color" aria-label="Text color">
+            <option value="">Color</option>
+            <option value="#38bdf8">Cyan</option>
+            <option value="#fbbf24">Gold</option>
+            <option value="#4ade80">Green</option>
+            <option value="#f87171">Red</option>
+            <option value="#f8fafc">White</option>
+          </select>
+          <button type="button" data-cmd="removeFormat" title="Clear formatting">Clear</button>
+        </div>
+        <div id="bBodyEditor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Post body"></div>
+        <textarea class="field" id="bBody" placeholder="Full article text" style="min-height:200px"></textarea>
         <label class="field">Tags (comma-separated)</label>
-<input class="field" id="bTags" placeholder="AI, careers, Nigeria"/>
-<label class="field">Cover image (from your device)</label>
-<div class="rn-upload-box">
-  <label for="bImageFile">Choose image — JPG, PNG, WebP (auto-resized for the web)</label>
-  <div class="rn-upload-row">
-    <input type="file" id="bImageFile" accept="image/jpeg,image/png,image/webp,image/gif"/>
-    <button type="button" id="bImageClear" class="btn">Remove</button>
-  </div>
-  <img id="bImagePreview" class="rn-upload-preview" alt="Blog image preview"/>
-  <p class="rn-upload-meta" id="bImageMeta"></p>
-  <input type="hidden" id="bImage" value=""/>
-  <label class="field" style="margin-top:10px">Or paste image URL (optional)</label>
-  <input class="field" id="bImageUrl" placeholder="https://..."/>
-</div>
+        <input class="field" id="bTags" placeholder="AI, careers, Nigeria"/>
+        <label class="field">Cover image (from your device)</label>
+        <div class="rn-upload-box">
+          <label for="bImageFile">Choose image — JPG, PNG, WebP</label>
+          <div class="rn-upload-row">
+            <input type="file" id="bImageFile" accept="image/jpeg,image/png,image/webp,image/gif"/>
+            <button type="button" id="bImageClear" class="btn">Remove</button>
+          </div>
+          <img id="bImagePreview" class="rn-upload-preview" alt="Blog image preview"/>
+          <p class="rn-upload-meta" id="bImageMeta"></p>
+          <input type="hidden" id="bImage" value=""/>
+          <label class="field" style="margin-top:10px">Or paste image URL (optional)</label>
+          <input class="field" id="bImageUrl" placeholder="https://..."/>
+        </div>
 
-
-<p class="rn-editor-hint">Select text in the box below, then tap Bold / Italic / List. Works on phone.</p>
-<div class="rn-toolbar" id="rnEditorToolbar" role="toolbar" aria-label="Text formatting">
-  <button type="button" data-cmd="bold" title="Bold"><b>B</b></button>
-  <button type="button" data-cmd="italic" title="Italic"><i>I</i></button>
-  <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
-  <button type="button" data-cmd="insertUnorderedList" title="Bullet list">• List</button>
-  <button type="button" data-cmd="formatBlock" data-value="h3" title="Heading">H</button>
-  <button type="button" data-cmd="formatBlock" data-value="p" title="Paragraph">¶</button>
-  <select id="rnTextColor" title="Text color" aria-label="Text color">
-    <option value="">Color</option>
-    <option value="#38bdf8">Cyan</option>
-    <option value="#fbbf24">Gold</option>
-    <option value="#4ade80">Green</option>
-    <option value="#f87171">Red</option>
-    <option value="#f8fafc">White</option>
-  </select>
-  <button type="button" data-cmd="removeFormat" title="Clear formatting">Clear</button>
-</div>
-<div id="bBodyEditor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="Post body"></div>
-
-<textarea class="field" id="bBody" placeholder="Full article text" style="min-height:200px"></textarea>
         <label class="field">Status</label>
         <select class="field" id="bStatus">
           <option value="published">Published (visible on blog)</option>
@@ -487,8 +463,16 @@ textarea#bBody{
     loginScreen.classList.add('hidden');
     shell.classList.add('visible');
     try { sessionStorage.setItem('rn_admin_ok', '1'); } catch(e) {}
-    refreshDb();
-    loadLists();
+    Promise.resolve()
+      .then(function(){ return refreshDb(); })
+      .then(function(){ return loadLists(); })
+      .catch(function(err){
+        if (banner) {
+          banner.style.color = '#fbbf24';
+          banner.textContent = 'Storage: load issue — try refresh';
+        }
+        console.warn(err);
+      });
   }
 
   function showLogin(){
@@ -1032,149 +1016,82 @@ document.getElementById('saveBlogBtn').onclick = async function(){
 })();
 </script>
 
-<script defer src="/js/rn-audit.js"></script>
-
 
 <script id="rn-admin-rich-editor">
 (function(){
-  function $(id){ return document.getElementById(id); }
-
   var savedRange = null;
-
-  function getEditor(){ return $('bBodyEditor'); }
-  function getTA(){ return $('bBody'); }
-
-  function sync(){
-    var ed = getEditor(), ta = getTA();
-    if(ed && ta) ta.value = ed.innerHTML;
+  function ed(){ return document.getElementById('bBodyEditor'); }
+  function ta(){ return document.getElementById('bBody'); }
+  function sync(){ var e=ed(), t=ta(); if(e&&t) t.value = e.innerHTML; }
+  function saveSel(){
+    var e=ed(); if(!e) return;
+    var s=window.getSelection(); if(!s||!s.rangeCount) return;
+    var r=s.getRangeAt(0);
+    if(e.contains(r.commonAncestorContainer)||e===r.commonAncestorContainer) savedRange=r.cloneRange();
   }
-
-  function saveSelection(){
-    var ed = getEditor();
-    if(!ed) return;
-    var sel = window.getSelection();
-    if(!sel || sel.rangeCount === 0) return;
-    var range = sel.getRangeAt(0);
-    if(ed.contains(range.commonAncestorContainer) || ed === range.commonAncestorContainer){
-      savedRange = range.cloneRange();
-    }
-  }
-
-  function restoreSelection(){
-    var ed = getEditor();
-    if(!ed) return;
-    ed.focus();
+  function restoreSel(){
+    var e=ed(); if(!e) return;
+    e.focus();
     if(!savedRange) return;
-    try {
-      var sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(savedRange);
-    } catch(e) {}
+    try{ var s=window.getSelection(); s.removeAllRanges(); s.addRange(savedRange); }catch(err){}
   }
-
-  function runCmd(command, value){
-    var ed = getEditor();
-    if(!ed) return;
-    ed.focus();
-    restoreSelection();
-    try {
-      // formatBlock values need angle brackets in some browsers
-      if(command === 'formatBlock' && value && value.charAt(0) !== '<'){
-        document.execCommand('formatBlock', false, '<' + value + '>');
-      } else {
-        document.execCommand(command, false, value || null);
-      }
-    } catch(e) {
-      try { document.execCommand(command, false, value || null); } catch(e2) {}
-    }
-    saveSelection();
-    sync();
+  function cmd(command, value){
+    var e=ed(); if(!e) return;
+    e.focus(); restoreSel();
+    try{
+      if(command==='formatBlock' && value && value[0]!=='<') document.execCommand('formatBlock', false, '<'+value+'>');
+      else document.execCommand(command, false, value||null);
+    }catch(err){}
+    saveSel(); sync();
   }
-
-  function loadFromTA(){
-    var ed = getEditor(), ta = getTA();
-    if(!ed || !ta) return;
-    var v = ta.value || '';
+  function load(){
+    var e=ed(), t=ta(); if(!e||!t) return;
+    var v=t.value||'';
     if(v && !/<[a-z][\s\S]*>/i.test(v)){
-      ed.innerHTML = v.split(/\n\s*\n/).filter(Boolean).map(function(p){
-        return '<p>' + String(p)
-          .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-          .replace(/\n/g,'<br>') + '</p>';
-      }).join('') || '<p><br></p>';
-    } else {
-      ed.innerHTML = v || '<p><br></p>';
-    }
+      e.innerHTML=v.split(/\n\s*\n/).filter(Boolean).map(function(p){
+        return '<p>'+String(p).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>')+'</p>';
+      }).join('')||'<p><br></p>';
+    } else e.innerHTML=v||'<p><br></p>';
   }
-
   function boot(){
-    var ed = getEditor(), ta = getTA(), bar = $('rnEditorToolbar');
-    if(!ed){
-      console.warn('[rn-editor] #bBodyEditor missing');
-      return;
-    }
-    if(!ta){
-      console.warn('[rn-editor] #bBody missing');
-      return;
-    }
-
-    loadFromTA();
-    ed.addEventListener('input', sync);
-    ed.addEventListener('blur', function(){ saveSelection(); sync(); });
-    ed.addEventListener('keyup', saveSelection);
-    ed.addEventListener('mouseup', saveSelection);
-    ed.addEventListener('touchend', function(){ setTimeout(saveSelection, 0); });
-
+    var e=ed(), bar=document.getElementById('rnEditorToolbar');
+    if(!e) return;
+    load();
+    e.addEventListener('input', sync);
+    e.addEventListener('blur', function(){ saveSel(); sync(); });
+    e.addEventListener('keyup', saveSel);
+    e.addEventListener('mouseup', saveSel);
+    e.addEventListener('touchend', function(){ setTimeout(saveSel,0); });
     if(bar){
-      // CRITICAL: mousedown preventDefault keeps text selected on mobile
-      bar.addEventListener('mousedown', function(e){
-        var t = e.target.closest('button[data-cmd], select');
-        if(t) e.preventDefault();
+      bar.addEventListener('mousedown', function(ev){
+        if(ev.target.closest('button[data-cmd],select')) ev.preventDefault();
       });
-      bar.addEventListener('touchstart', function(e){
-        var t = e.target.closest('button[data-cmd]');
-        if(t){
-          e.preventDefault();
-          saveSelection();
-        }
+      bar.addEventListener('touchstart', function(ev){
+        if(ev.target.closest('button[data-cmd]')){ ev.preventDefault(); saveSel(); }
       }, {passive:false});
-
-      bar.addEventListener('click', function(e){
-        var btn = e.target.closest('button[data-cmd]');
+      bar.addEventListener('click', function(ev){
+        var btn=ev.target.closest('button[data-cmd]');
         if(!btn) return;
-        e.preventDefault();
-        e.stopPropagation();
-        var cmd = btn.getAttribute('data-cmd');
-        var val = btn.getAttribute('data-value');
-        runCmd(cmd, val);
+        ev.preventDefault();
+        cmd(btn.getAttribute('data-cmd'), btn.getAttribute('data-value'));
       });
     }
-
-    var color = $('rnTextColor');
+    var color=document.getElementById('rnTextColor');
     if(color){
-      color.addEventListener('mousedown', function(e){ e.preventDefault(); saveSelection(); });
+      color.addEventListener('mousedown', function(ev){ ev.preventDefault(); saveSel(); });
       color.addEventListener('change', function(){
         if(!color.value) return;
-        runCmd('foreColor', color.value);
-        color.value = '';
+        cmd('foreColor', color.value);
+        color.value='';
       });
     }
-
-    var save = $('saveBlogBtn');
-    if(save){
-      save.addEventListener('click', function(){ sync(); }, true);
-    }
-
-    // When editing an existing post, reload editor after fields filled
-    document.addEventListener('click', function(e){
-      if(e.target && e.target.closest && e.target.closest('[data-edit-post]')){
-        setTimeout(loadFromTA, 120);
-      }
+    var save=document.getElementById('saveBlogBtn');
+    if(save) save.addEventListener('click', function(){ sync(); }, true);
+    document.addEventListener('click', function(ev){
+      if(ev.target.closest && ev.target.closest('[data-edit-post]')) setTimeout(load, 150);
     });
-
-    console.info('[rn-editor] ready — select text then tap B/I');
   }
-
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
 </script>
