@@ -2483,8 +2483,15 @@ body { top: 0 !important; position: static !important; }
 
 
 
+
+
 <style id="rn-nav-fix">
-/* ===== FIXED HEADER (stays visible on scroll) ===== */
+/* Fixed header — full clearance so content is not covered */
+:root {
+  --rn-announce-h: 52px;
+  --rn-nav-h: 58px;
+  --rn-header-h: calc(var(--rn-announce-h) + var(--rn-nav-h));
+}
 .rn-announce {
   position: fixed !important;
   top: 0 !important;
@@ -2492,69 +2499,53 @@ body { top: 0 !important; position: static !important; }
   right: 0 !important;
   z-index: 1002 !important;
   width: 100% !important;
+  box-sizing: border-box !important;
 }
-#nav,
-#nav.nav,
-nav#nav {
+#nav, #nav.nav, nav#nav {
   position: fixed !important;
-  top: 36px !important; /* under announcement bar */
+  top: var(--rn-announce-h) !important;
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
   z-index: 1001 !important;
   background: #0B1E3A !important;
   box-shadow: 0 2px 12px rgba(0,0,0,.25) !important;
-  transform: none !important;
+  min-height: var(--rn-nav-h) !important;
 }
-/* Offset page content so it is not under fixed header */
+/* Push ALL page content below fixed header */
 body {
-  padding-top: 96px !important;
+  padding-top: var(--rn-header-h) !important;
   top: 0 !important;
   position: static !important;
   margin-top: 0 !important;
 }
+/* Hero / first sections must not sit under header */
+#home, .hero, main, #main, #main-content {
+  scroll-margin-top: calc(var(--rn-header-h) + 12px) !important;
+}
 
-/* Hide Google banner */
-.goog-te-banner-frame,
-iframe.goog-te-banner-frame,
-body > .skiptranslate {
-  display: none !important;
-  height: 0 !important;
+.goog-te-banner-frame, iframe.goog-te-banner-frame, body > .skiptranslate {
+  display: none !important; height: 0 !important; visibility: hidden !important;
 }
 #google_translate_element {
-  position: absolute !important;
-  left: -9999px !important;
-  width: 1px !important;
-  height: 1px !important;
-  overflow: hidden !important;
-  opacity: 0 !important;
+  position: absolute !important; left: -9999px !important; width: 1px !important; height: 1px !important;
+  overflow: hidden !important; opacity: 0 !important;
 }
-#rnFixedLang, #rnFixedLangBtn, #rnFixedLangMenu {
-  display: none !important;
-}
+#rnFixedLang, #rnFixedLangBtn, #rnFixedLangMenu { display: none !important; }
 
-/* ===== NAV ROW: logo | lang | menu ===== */
-#nav .container {
-  width: 100% !important;
-  max-width: 1120px !important;
-  margin: 0 auto !important;
-  padding: 0 10px !important;
-  box-sizing: border-box !important;
-}
 #nav .nav-inner {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: center !important;
-  justify-content: space-between !important;
-  gap: 8px !important;
+  gap: 6px !important;
   width: 100% !important;
-  min-height: 56px !important;
-  padding: 6px 0 !important;
+  min-height: var(--rn-nav-h) !important;
+  padding: 6px 10px !important;
   box-sizing: border-box !important;
 }
 
-/* Logo — one line, does not break into letters */
+/* FULL brand name: RuffNeck Entertainment */
 #nav .nav-logo {
   display: flex !important;
   flex-direction: row !important;
@@ -2562,63 +2553,60 @@ body > .skiptranslate {
   gap: 8px !important;
   flex: 1 1 auto !important;
   min-width: 0 !important;
-  max-width: calc(100% - 11rem) !important;
+  max-width: none !important;
+  overflow: visible !important;
   text-decoration: none !important;
-  overflow: hidden !important;
 }
-#nav .nav-logo img,
-#nav .nav-logo .logo-img {
+#nav .nav-logo img, #nav .nav-logo .logo-img {
   width: 40px !important;
   height: 40px !important;
   flex: 0 0 auto !important;
   object-fit: contain !important;
 }
 #nav .nav-logo > div {
-  display: flex !important;
+  display: inline-flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: baseline !important;
-  gap: 4px !important;
+  gap: 5px !important;
   min-width: 0 !important;
-  overflow: hidden !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
 }
 #nav .nav-logo strong,
 #nav .nav-logo span {
   display: inline !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   white-space: nowrap !important;
-  font-size: 0.9rem !important;
-  line-height: 1.2 !important;
+  font-size: clamp(0.72rem, 2.8vw, 0.95rem) !important;
+  line-height: 1.15 !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  max-width: none !important;
+  width: auto !important;
+  height: auto !important;
+  position: static !important;
+  left: auto !important;
 }
 #nav .nav-logo strong { color: #fff !important; font-weight: 800 !important; }
 #nav .nav-logo span { color: #00B4D8 !important; font-weight: 600 !important; }
 
-/* Desktop nav links hidden on mobile (drawer used instead) */
 @media (max-width: 900px) {
-  #nav .nav-links {
-    display: none !important;
-  }
+  #nav .nav-links { display: none !important; }
 }
 
-/* Language — after logo, before hamburger */
 #rnLangWrap {
   display: inline-flex !important;
   flex: 0 0 auto !important;
   order: 3 !important;
-  margin: 0 !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: relative !important;
-  left: auto !important;
-  right: auto !important;
-  top: auto !important;
   z-index: 1003 !important;
   pointer-events: auto !important;
 }
 #rnLangSelect {
   min-height: 40px !important;
-  height: 40px !important;
-  max-width: 7.5rem !important;
-  padding: 0 8px !important;
+  max-width: 7rem !important;
+  padding: 0 6px !important;
   border-radius: 10px !important;
   border: 1.5px solid #00B4D8 !important;
   background: #071526 !important;
@@ -2626,55 +2614,40 @@ body > .skiptranslate {
   font-weight: 700 !important;
   font-size: 12px !important;
   cursor: pointer !important;
-  pointer-events: auto !important;
 }
-
-/* Hamburger last */
-#hamburger,
-.nav-hamburger {
+#hamburger, .nav-hamburger {
   display: inline-flex !important;
   flex: 0 0 auto !important;
   order: 4 !important;
   width: 44px !important;
   height: 44px !important;
-  min-width: 44px !important;
-  min-height: 44px !important;
   align-items: center !important;
   justify-content: center !important;
-  margin: 0 !important;
-  cursor: pointer !important;
-  pointer-events: auto !important;
-  z-index: 1003 !important;
   border: 1.5px solid rgba(0,180,216,.5) !important;
   border-radius: 10px !important;
   background: #071526 !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+  z-index: 1003 !important;
 }
 
-/* Mobile drawer */
 #mobileMenu.nav-mobile {
   position: fixed !important;
-  top: 92px !important;
+  top: var(--rn-header-h) !important;
   left: 0 !important;
   right: 0 !important;
   z-index: 1000 !important;
   display: none !important;
   flex-direction: column !important;
   background: #0B1E3A !important;
-  border-top: 1px solid rgba(0,180,216,.3) !important;
   padding: 8px 12px 20px !important;
-  max-height: calc(100vh - 92px) !important;
+  max-height: calc(100vh - var(--rn-header-h)) !important;
   overflow-y: auto !important;
-  box-shadow: 0 12px 32px rgba(0,0,0,.45) !important;
 }
-#mobileMenu.nav-mobile.is-open {
+#mobileMenu.nav-mobile.is-open, #mobileMenu.is-open {
   display: flex !important;
 }
-#mobileMenu[hidden] {
-  display: none !important;
-}
-#mobileMenu.is-open {
-  display: flex !important;
-}
+#mobileMenu[hidden]:not(.is-open) { display: none !important; }
 #mobileMenu a {
   display: block !important;
   padding: 14px 10px !important;
@@ -2683,21 +2656,14 @@ body > .skiptranslate {
   font-weight: 600 !important;
   border-bottom: 1px solid rgba(148,163,184,.2) !important;
   min-height: 44px !important;
-  box-sizing: border-box !important;
 }
-
 @media (min-width: 901px) {
   #hamburger, .nav-hamburger { display: none !important; }
-  #mobileMenu.nav-mobile { display: none !important; }
-  #nav .nav-links { display: flex !important; }
-  #nav .nav-logo { max-width: none !important; }
+  #mobileMenu { display: none !important; }
   #nav .nav-logo strong, #nav .nav-logo span { font-size: 1rem !important; }
 }
-@media (max-width: 360px) {
-  #nav .nav-logo span { display: none !important; } /* show RuffNeck only on very small screens */
-  #rnLangSelect { max-width: 6.5rem !important; font-size: 11px !important; }
-}
 </style>
+
 
 </head>
 <body class="rn-ux-page">
@@ -4371,68 +4337,7 @@ if ('serviceWorker' in navigator) {
 <script defer src="/_vercel/speed-insights/script.js"></script>
 
 
-<script>
-(function(){
-  function loadGT(){
-    if (window.google && google.translate) return;
-    var s = document.createElement('script');
-    s.src = '//translate.google.com/translate_a/element.js?cb=rnInitGoogleTranslate';
-    document.head.appendChild(s);
-  }
-  window.rnInitGoogleTranslate = function(){
-    new google.translate.TranslateElement({
-      pageLanguage: 'en',
-      includedLanguages: 'en,ha,yo,ig,fr,es,ar',
-      autoDisplay: false,
-      layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-    }, 'google_translate_element');
-  };
-  function setLang(lang, label){
-    document.querySelectorAll('#rnLangMenu button').forEach(function(b){
-      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
-    });
-    var lab = document.getElementById('rnLangLabel');
-    if (lab) lab.textContent = label || lang.toUpperCase();
-    localStorage.setItem('rn_lang', lang);
-    localStorage.setItem('rn_lang_label', label || lang.toUpperCase());
-    if (lang === 'en') {
-      // clear translate cookie-ish by reloading without googtrans
-      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-      document.cookie = 'googtrans=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.' + location.hostname;
-      if (location.href.indexOf('googtrans') >= 0) location.href = location.pathname + location.search + location.hash;
-      else location.reload();
-      return;
-    }
-    document.cookie = 'googtrans=/en/' + lang + ';path=/;';
-    document.cookie = 'googtrans=/en/' + lang + ';path=/;domain=.' + location.hostname;
-    location.reload();
-  }
-  document.addEventListener('DOMContentLoaded', function(){
-    loadGT();
-    var wrap = document.getElementById('rnLang');
-    var btn = document.getElementById('rnLangBtn');
-    var menu = document.getElementById('rnLangMenu');
-    if (!btn || !menu) return;
-    var saved = localStorage.getItem('rn_lang');
-    var savedL = localStorage.getItem('rn_lang_label');
-    if (saved && savedL) {
-      var lab = document.getElementById('rnLangLabel');
-      if (lab) lab.textContent = savedL;
-    }
-    btn.addEventListener('click', function(e){
-      e.stopPropagation();
-      wrap.classList.toggle('open');
-      btn.setAttribute('aria-expanded', wrap.classList.contains('open'));
-    });
-    menu.querySelectorAll('button').forEach(function(b){
-      b.addEventListener('click', function(){
-        setLang(b.getAttribute('data-lang'), b.getAttribute('data-label'));
-      });
-    });
-    document.addEventListener('click', function(){ wrap.classList.remove('open'); });
-  });
-})();
-</script>
+
 
 
 
@@ -5310,6 +5215,7 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 
 
 
+
 <script id="rn-nav-fix-js">
 (function(){
   var LANGS = [
@@ -5323,67 +5229,102 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
     {code:'pt', label:'Português'}
   ];
 
-  function wireMenu(){
-    var btn = document.getElementById('hamburger') || document.querySelector('.nav-hamburger');
-    var menu = document.getElementById('mobileMenu');
-    if(!btn || !menu){
-      console.warn('[rn-nav] missing', !!btn, !!menu);
+  function setGoogTransCookie(lang){
+    var host = location.hostname;
+    var expireOff = 'Thu, 01 Jan 1970 00:00:00 GMT';
+    var expireOn = 'Wed, 01 Jan 2031 00:00:00 GMT';
+    // clear first
+    [ '', host, '.' + host ].forEach(function(d){
+      var domain = d ? (';domain=' + d + ';') : '';
+      document.cookie = 'googtrans=;expires=' + expireOff + ';path=/;' + domain;
+    });
+    if(lang && lang !== 'en'){
+      var val = '/en/' + lang;
+      document.cookie = 'googtrans=' + val + ';expires=' + expireOn + ';path=/';
+      document.cookie = 'googtrans=' + val + ';expires=' + expireOn + ';path=/;domain=' + host;
+      document.cookie = 'googtrans=' + val + ';expires=' + expireOn + ';path=/;domain=.' + host;
+    }
+  }
+
+  function readSavedLang(){
+    try {
+      var m = document.cookie.match(/(?:^|; )googtrans=\/en\/([a-zA-Z-]+)/);
+      if(m) return m[1];
+      return localStorage.getItem('rn_lang') || 'en';
+    } catch(e){ return 'en'; }
+  }
+
+  function fireCombo(lang){
+    var combo = document.querySelector('select.goog-te-combo');
+    if(!combo) return false;
+    combo.value = lang;
+    // Google listens to change
+    combo.dispatchEvent(new Event('change'));
+    // some browsers need this too
+    if(typeof Event === 'function'){
+      try { combo.dispatchEvent(new HTMLEvents && false); } catch(e) {}
+    }
+    var evt = document.createEvent ? document.createEvent('HTMLEvents') : null;
+    if(evt){
+      evt.initEvent('change', true, true);
+      combo.dispatchEvent(evt);
+    }
+    return true;
+  }
+
+  // Single Google Translate bootstrap
+  function bootTranslate(cb){
+    if(!document.getElementById('google_translate_element')){
+      var ge = document.createElement('div');
+      ge.id = 'google_translate_element';
+      document.body.appendChild(ge);
+    }
+    if(window.google && google.translate && google.translate.TranslateElement){
+      try {
+        // avoid double-init error
+        if(!window.__rnTE){
+          window.__rnTE = new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,ha,ig,yo,fr,ar,es,pt',
+            autoDisplay: false
+          }, 'google_translate_element');
+        }
+      } catch(e) {}
+      document.body.style.top = '0';
+      if(cb) cb();
       return;
     }
-    // ensure button is clickable
-    btn.style.pointerEvents = 'auto';
-    btn.style.cursor = 'pointer';
-
-    function isOpen(){
-      return menu.classList.contains('is-open');
+    if(document.getElementById('rnGTScript')){
+      var n=0, t=setInterval(function(){
+        n++;
+        if((window.google && google.translate) || n>40){
+          clearInterval(t);
+          bootTranslate(cb);
+        }
+      }, 200);
+      return;
     }
-    function openMenu(){
-      menu.classList.add('is-open');
-      menu.removeAttribute('hidden');
-      menu.hidden = false;
-      btn.setAttribute('aria-expanded', 'true');
-      btn.setAttribute('aria-label', 'Close menu');
-    }
-    function closeMenu(){
-      menu.classList.remove('is-open', 'open');
-      menu.setAttribute('hidden', '');
-      menu.hidden = true;
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', 'Open menu');
-    }
-    function toggle(e){
-      if(e){
-        e.preventDefault();
-        e.stopPropagation();
-      }
-      if(isOpen()) closeMenu();
-      else openMenu();
-    }
-
-    // Remove old listeners by cloning button
-    var newBtn = btn.cloneNode(true);
-    btn.parentNode.replaceChild(newBtn, btn);
-    btn = newBtn;
-    btn.id = 'hamburger';
-    btn.className = (btn.className || '') + (btn.className.indexOf('nav-hamburger')>=0 ? '' : ' nav-hamburger');
-    btn.addEventListener('click', toggle, true);
-    btn.addEventListener('touchend', function(e){
-      e.preventDefault();
-      toggle(e);
-    }, {passive:false});
-
-    menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', closeMenu);
-    });
-    document.addEventListener('keydown', function(e){
-      if(e.key === 'Escape') closeMenu();
-    });
-    console.info('[rn-nav] menu ready');
+    window.googleTranslateElementInit = function(){
+      try {
+        window.__rnTE = new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          includedLanguages: 'en,ha,ig,yo,fr,ar,es,pt',
+          autoDisplay: false
+        }, 'google_translate_element');
+      } catch(e) {}
+      document.body.style.top = '0';
+      if(cb) cb();
+    };
+    var s = document.createElement('script');
+    s.id = 'rnGTScript';
+    s.async = true;
+    s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.head.appendChild(s);
   }
 
   function placeLang(){
     var navInner = document.querySelector('#nav .nav-inner');
-    if(!navInner) return null;
+    if(!navInner) return;
     var wrap = document.getElementById('rnLangWrap');
     if(!wrap){
       wrap = document.createElement('div');
@@ -5401,61 +5342,110 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
       sel.addEventListener('change', function(){
         var lang = sel.value || 'en';
         try { localStorage.setItem('rn_lang', lang); } catch(e) {}
-        var expire = lang === 'en' ? 'Thu, 01 Jan 1970 00:00:00 UTC' : 'Sat, 01 Jan 2035 00:00:00 UTC';
-        var v = lang === 'en' ? '' : ('/en/' + lang);
-        document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/';
-        document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/;domain=' + location.hostname;
-        document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/;domain=.' + location.hostname;
-        location.reload();
+        setGoogTransCookie(lang);
+        // Prefer combo if already live; else reload so cookie applies
+        bootTranslate(function(){
+          setTimeout(function(){
+            if(lang === 'en'){
+              location.reload();
+              return;
+            }
+            if(!fireCombo(lang)) location.reload();
+            else {
+              // if still not translated after combo, reload
+              setTimeout(function(){
+                if(!document.querySelector('html.translated-ltr, html.translated-rtl, .goog-te-done, font[style*="vertical"]')){
+                  location.reload();
+                }
+                document.body.style.top = '0';
+              }, 1200);
+            }
+          }, 400);
+        });
       });
     }
-    // Order: logo, then lang, then hamburger
     var ham = navInner.querySelector('#hamburger, .nav-hamburger');
     if(wrap.parentNode) wrap.parentNode.removeChild(wrap);
     if(ham) navInner.insertBefore(wrap, ham);
     else navInner.appendChild(wrap);
 
-    // If hamburger is before wrap in wrong order, force append order via flex order in CSS
-    if(ham && wrap.nextElementSibling !== ham){
-      if(ham.parentNode) ham.parentNode.appendChild(ham);
-    }
-
     var sel = document.getElementById('rnLangSelect');
-    var saved = 'en';
-    try { saved = localStorage.getItem('rn_lang') || 'en'; } catch(e) {}
-    var cm = document.cookie.match(/googtrans=\/en\/([a-z]+)/);
-    if(cm) saved = cm[1];
+    var saved = readSavedLang();
     if(sel) sel.value = saved;
 
-    if(!document.getElementById('google_translate_element')){
-      var ge = document.createElement('div');
-      ge.id = 'google_translate_element';
-      document.body.appendChild(ge);
+    // On load: init GT and apply saved language
+    bootTranslate(function(){
+      document.body.style.top = '0';
+      if(saved && saved !== 'en'){
+        setGoogTransCookie(saved);
+        var tries = 0;
+        var iv = setInterval(function(){
+          tries++;
+          if(fireCombo(saved) || tries > 25) clearInterval(iv);
+          document.body.style.top = '0';
+        }, 300);
+      }
+    });
+  }
+
+  function wireMenu(){
+    var btn = document.getElementById('hamburger') || document.querySelector('.nav-hamburger');
+    var menu = document.getElementById('mobileMenu');
+    if(!btn || !menu) return;
+    var fresh = btn.cloneNode(true);
+    btn.parentNode.replaceChild(fresh, btn);
+    btn = fresh;
+    btn.id = 'hamburger';
+    function openM(){
+      menu.classList.add('is-open');
+      menu.hidden = false;
+      menu.removeAttribute('hidden');
+      btn.setAttribute('aria-expanded','true');
     }
-    if(!document.getElementById('rnGTScript')){
-      window.googleTranslateElementInit = function(){
-        try {
-          new google.translate.TranslateElement({
-            pageLanguage: 'en',
-            includedLanguages: 'en,ha,ig,yo,fr,ar,es,pt',
-            autoDisplay: false
-          }, 'google_translate_element');
-        } catch(e) {}
-        document.body.style.top = '0';
-      };
-      var s = document.createElement('script');
-      s.id = 'rnGTScript';
-      s.async = true;
-      s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      document.head.appendChild(s);
+    function closeM(){
+      menu.classList.remove('is-open','open');
+      menu.hidden = true;
+      menu.setAttribute('hidden','');
+      btn.setAttribute('aria-expanded','false');
     }
-    return sel;
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      if(menu.classList.contains('is-open')) closeM(); else openM();
+    });
+    menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', closeM); });
   }
 
   function boot(){
     placeLang();
     wireMenu();
     document.body.style.top = '0';
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
+
+<script id="rn-header-offset-js">
+(function(){
+  function measure(){
+    var ann = document.querySelector('.rn-announce');
+    var nav = document.getElementById('nav');
+    var ah = ann ? Math.ceil(ann.getBoundingClientRect().height) : 52;
+    var nh = nav ? Math.ceil(nav.getBoundingClientRect().height) : 58;
+    if(ah < 36) ah = 36;
+    if(nh < 52) nh = 52;
+    document.documentElement.style.setProperty('--rn-announce-h', ah + 'px');
+    document.documentElement.style.setProperty('--rn-nav-h', nh + 'px');
+    document.documentElement.style.setProperty('--rn-header-h', (ah + nh) + 'px');
+    document.body.style.paddingTop = (ah + nh) + 'px';
+  }
+  function boot(){
+    measure();
+    window.addEventListener('resize', measure);
+    setTimeout(measure, 100);
+    setTimeout(measure, 500);
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
