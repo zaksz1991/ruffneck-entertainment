@@ -2482,35 +2482,44 @@ body { top: 0 !important; position: static !important; }
 <link rel="stylesheet" href="/css/rn-audit.css"/>
 
 
+
 <style id="rn-nav-fix">
-/* 1) Header STATIC — not sticky, not fixed */
+/* ===== FIXED HEADER (stays visible on scroll) ===== */
+.rn-announce {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1002 !important;
+  width: 100% !important;
+}
 #nav,
 #nav.nav,
-nav#nav,
-nav.nav,
-.nav {
-  position: static !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
+nav#nav {
+  position: fixed !important;
+  top: 36px !important; /* under announcement bar */
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1001 !important;
+  background: #0B1E3A !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,.25) !important;
   transform: none !important;
 }
-
-/* Google Translate must not shift page */
+/* Offset page content so it is not under fixed header */
 body {
+  padding-top: 96px !important;
   top: 0 !important;
   position: static !important;
   margin-top: 0 !important;
-  padding-top: 0 !important;
 }
+
+/* Hide Google banner */
 .goog-te-banner-frame,
 iframe.goog-te-banner-frame,
 body > .skiptranslate {
   display: none !important;
-  visibility: hidden !important;
   height: 0 !important;
-  max-height: 0 !important;
 }
 #google_translate_element {
   position: absolute !important;
@@ -2520,30 +2529,77 @@ body > .skiptranslate {
   overflow: hidden !important;
   opacity: 0 !important;
 }
-
-/* Hide old fixed lang widget if present */
 #rnFixedLang, #rnFixedLangBtn, #rnFixedLangMenu {
   display: none !important;
 }
 
-/* Nav row layout */
+/* ===== NAV ROW: logo | lang | menu ===== */
+#nav .container {
+  width: 100% !important;
+  max-width: 1120px !important;
+  margin: 0 auto !important;
+  padding: 0 10px !important;
+  box-sizing: border-box !important;
+}
 #nav .nav-inner {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
   align-items: center !important;
+  justify-content: space-between !important;
   gap: 8px !important;
   width: 100% !important;
-  box-sizing: border-box !important;
-  padding: 8px 12px !important;
   min-height: 56px !important;
-}
-#nav .nav-logo {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
+  padding: 6px 0 !important;
+  box-sizing: border-box !important;
 }
 
-/* Language select — full names in list, no extra title text */
+/* Logo — one line, does not break into letters */
+#nav .nav-logo {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  max-width: calc(100% - 11rem) !important;
+  text-decoration: none !important;
+  overflow: hidden !important;
+}
+#nav .nav-logo img,
+#nav .nav-logo .logo-img {
+  width: 40px !important;
+  height: 40px !important;
+  flex: 0 0 auto !important;
+  object-fit: contain !important;
+}
+#nav .nav-logo > div {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: baseline !important;
+  gap: 4px !important;
+  min-width: 0 !important;
+  overflow: hidden !important;
+}
+#nav .nav-logo strong,
+#nav .nav-logo span {
+  display: inline !important;
+  white-space: nowrap !important;
+  font-size: 0.9rem !important;
+  line-height: 1.2 !important;
+}
+#nav .nav-logo strong { color: #fff !important; font-weight: 800 !important; }
+#nav .nav-logo span { color: #00B4D8 !important; font-weight: 600 !important; }
+
+/* Desktop nav links hidden on mobile (drawer used instead) */
+@media (max-width: 900px) {
+  #nav .nav-links {
+    display: none !important;
+  }
+}
+
+/* Language — after logo, before hamburger */
 #rnLangWrap {
   display: inline-flex !important;
   flex: 0 0 auto !important;
@@ -2553,71 +2609,93 @@ body > .skiptranslate {
   opacity: 1 !important;
   position: relative !important;
   left: auto !important;
-  z-index: 20 !important;
+  right: auto !important;
+  top: auto !important;
+  z-index: 1003 !important;
+  pointer-events: auto !important;
 }
 #rnLangSelect {
   min-height: 40px !important;
-  max-width: 9rem !important;
+  height: 40px !important;
+  max-width: 7.5rem !important;
   padding: 0 8px !important;
   border-radius: 10px !important;
   border: 1.5px solid #00B4D8 !important;
-  background: #0B1E3A !important;
+  background: #071526 !important;
   color: #e0f2fe !important;
   font-weight: 700 !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   cursor: pointer !important;
+  pointer-events: auto !important;
 }
 
-#hamburger, .nav-hamburger {
-  display: flex !important;
+/* Hamburger last */
+#hamburger,
+.nav-hamburger {
+  display: inline-flex !important;
   flex: 0 0 auto !important;
   order: 4 !important;
+  width: 44px !important;
+  height: 44px !important;
   min-width: 44px !important;
   min-height: 44px !important;
   align-items: center !important;
   justify-content: center !important;
+  margin: 0 !important;
   cursor: pointer !important;
-  z-index: 21 !important;
   pointer-events: auto !important;
-  background: transparent !important;
-  border: 1px solid rgba(0,180,216,.4) !important;
+  z-index: 1003 !important;
+  border: 1.5px solid rgba(0,180,216,.5) !important;
   border-radius: 10px !important;
+  background: #071526 !important;
 }
 
-/* Mobile menu panel */
+/* Mobile drawer */
 #mobileMenu.nav-mobile {
+  position: fixed !important;
+  top: 92px !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
   display: none !important;
   flex-direction: column !important;
-  gap: 0 !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-  padding: 12px 16px 20px !important;
   background: #0B1E3A !important;
-  border-top: 1px solid rgba(0,180,216,.25) !important;
+  border-top: 1px solid rgba(0,180,216,.3) !important;
+  padding: 8px 12px 20px !important;
+  max-height: calc(100vh - 92px) !important;
+  overflow-y: auto !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,.45) !important;
 }
 #mobileMenu.nav-mobile.is-open {
   display: flex !important;
 }
-#mobileMenu.nav-mobile a {
-  display: block !important;
-  padding: 14px 8px !important;
-  color: #f8fafc !important;
-  text-decoration: none !important;
-  font-weight: 600 !important;
-  border-bottom: 1px solid rgba(148,163,184,.15) !important;
-  min-height: 44px !important;
-}
 #mobileMenu[hidden] {
   display: none !important;
 }
-#mobileMenu.is-open[hidden] {
+#mobileMenu.is-open {
   display: flex !important;
+}
+#mobileMenu a {
+  display: block !important;
+  padding: 14px 10px !important;
+  color: #f8fafc !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid rgba(148,163,184,.2) !important;
+  min-height: 44px !important;
+  box-sizing: border-box !important;
 }
 
 @media (min-width: 901px) {
   #hamburger, .nav-hamburger { display: none !important; }
   #mobileMenu.nav-mobile { display: none !important; }
-  #rnLangWrap { order: 2 !important; }
+  #nav .nav-links { display: flex !important; }
+  #nav .nav-logo { max-width: none !important; }
+  #nav .nav-logo strong, #nav .nav-logo span { font-size: 1rem !important; }
+}
+@media (max-width: 360px) {
+  #nav .nav-logo span { display: none !important; } /* show RuffNeck only on very small screens */
+  #rnLangSelect { max-width: 6.5rem !important; font-size: 11px !important; }
 }
 </style>
 
@@ -5231,6 +5309,7 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 <script type="module" src="/js/components/index.js"></script>
 
 
+
 <script id="rn-nav-fix-js">
 (function(){
   var LANGS = [
@@ -5244,44 +5323,65 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
     {code:'pt', label:'Português'}
   ];
 
-  /* ===== MENU ===== */
   function wireMenu(){
     var btn = document.getElementById('hamburger') || document.querySelector('.nav-hamburger');
     var menu = document.getElementById('mobileMenu');
     if(!btn || !menu){
-      console.warn('[rn] menu elements missing', !!btn, !!menu);
+      console.warn('[rn-nav] missing', !!btn, !!menu);
       return;
     }
-    function closeMenu(){
-      menu.classList.remove('is-open', 'open');
-      menu.setAttribute('hidden', '');
-      btn.setAttribute('aria-expanded', 'false');
-      btn.setAttribute('aria-label', 'Open menu');
+    // ensure button is clickable
+    btn.style.pointerEvents = 'auto';
+    btn.style.cursor = 'pointer';
+
+    function isOpen(){
+      return menu.classList.contains('is-open');
     }
     function openMenu(){
       menu.classList.add('is-open');
       menu.removeAttribute('hidden');
+      menu.hidden = false;
       btn.setAttribute('aria-expanded', 'true');
       btn.setAttribute('aria-label', 'Close menu');
     }
-    function toggleMenu(e){
-      if(e){ e.preventDefault(); e.stopPropagation(); }
-      if(menu.classList.contains('is-open')) closeMenu();
+    function closeMenu(){
+      menu.classList.remove('is-open', 'open');
+      menu.setAttribute('hidden', '');
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+    }
+    function toggle(e){
+      if(e){
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      if(isOpen()) closeMenu();
       else openMenu();
     }
-    btn.addEventListener('click', toggleMenu);
-    // close when a link is tapped
+
+    // Remove old listeners by cloning button
+    var newBtn = btn.cloneNode(true);
+    btn.parentNode.replaceChild(newBtn, btn);
+    btn = newBtn;
+    btn.id = 'hamburger';
+    btn.className = (btn.className || '') + (btn.className.indexOf('nav-hamburger')>=0 ? '' : ' nav-hamburger');
+    btn.addEventListener('click', toggle, true);
+    btn.addEventListener('touchend', function(e){
+      e.preventDefault();
+      toggle(e);
+    }, {passive:false});
+
     menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ closeMenu(); });
+      a.addEventListener('click', closeMenu);
     });
-    // close on escape
     document.addEventListener('keydown', function(e){
       if(e.key === 'Escape') closeMenu();
     });
+    console.info('[rn-nav] menu ready');
   }
 
-  /* ===== LANGUAGE ===== */
-  function ensureLangUI(){
+  function placeLang(){
     var navInner = document.querySelector('#nav .nav-inner');
     if(!navInner) return null;
     var wrap = document.getElementById('rnLangWrap');
@@ -5298,79 +5398,63 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
         sel.appendChild(o);
       });
       wrap.appendChild(sel);
+      sel.addEventListener('change', function(){
+        var lang = sel.value || 'en';
+        try { localStorage.setItem('rn_lang', lang); } catch(e) {}
+        var expire = lang === 'en' ? 'Thu, 01 Jan 1970 00:00:00 UTC' : 'Sat, 01 Jan 2035 00:00:00 UTC';
+        var v = lang === 'en' ? '' : ('/en/' + lang);
+        document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/';
+        document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/;domain=' + location.hostname;
+        document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/;domain=.' + location.hostname;
+        location.reload();
+      });
     }
+    // Order: logo, then lang, then hamburger
     var ham = navInner.querySelector('#hamburger, .nav-hamburger');
     if(wrap.parentNode) wrap.parentNode.removeChild(wrap);
     if(ham) navInner.insertBefore(wrap, ham);
     else navInner.appendChild(wrap);
+
+    // If hamburger is before wrap in wrong order, force append order via flex order in CSS
+    if(ham && wrap.nextElementSibling !== ham){
+      if(ham.parentNode) ham.parentNode.appendChild(ham);
+    }
+
+    var sel = document.getElementById('rnLangSelect');
+    var saved = 'en';
+    try { saved = localStorage.getItem('rn_lang') || 'en'; } catch(e) {}
+    var cm = document.cookie.match(/googtrans=\/en\/([a-z]+)/);
+    if(cm) saved = cm[1];
+    if(sel) sel.value = saved;
 
     if(!document.getElementById('google_translate_element')){
       var ge = document.createElement('div');
       ge.id = 'google_translate_element';
       document.body.appendChild(ge);
     }
-    return document.getElementById('rnLangSelect');
-  }
-
-  function setCookie(lang){
-    // Standard googtrans cookie format
-    var v = lang === 'en' ? '' : ('/en/' + lang);
-    var expire = lang === 'en'
-      ? 'Thu, 01 Jan 1970 00:00:00 UTC'
-      : 'Sat, 01 Jan 2035 00:00:00 UTC';
-    document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/';
-    document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/;domain=' + location.hostname;
-    document.cookie = 'googtrans=' + v + ';expires=' + expire + ';path=/;domain=.' + location.hostname;
-  }
-
-  function applyLang(lang){
-    try { localStorage.setItem('rn_lang', lang); } catch(e) {}
-    setCookie(lang);
-    // Reload so Google Translate applies the googtrans cookie
-    location.reload();
-  }
-
-  function loadGoogleTranslate(cb){
-    if(window.google && google.translate){ if(cb) cb(); return; }
-    if(document.getElementById('rnGTScript')){ if(cb) setTimeout(cb, 400); return; }
-    window.googleTranslateElementInit = function(){
-      try {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          includedLanguages: 'en,ha,ig,yo,fr,ar,es,pt',
-          autoDisplay: false
-        }, 'google_translate_element');
-      } catch(e) {}
-      if(cb) cb();
-    };
-    var s = document.createElement('script');
-    s.id = 'rnGTScript';
-    s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-    s.async = true;
-    document.head.appendChild(s);
-  }
-
-  function wireLang(){
-    var sel = ensureLangUI();
-    if(!sel) return;
-    var saved = 'en';
-    try { saved = localStorage.getItem('rn_lang') || 'en'; } catch(e) {}
-    // sync from cookie if present
-    var m = document.cookie.match(/googtrans=\/en\/([a-z]+)/);
-    if(m && m[1]) saved = m[1];
-    sel.value = saved;
-    sel.addEventListener('change', function(){
-      var lang = sel.value || 'en';
-      applyLang(lang);
-    });
-    loadGoogleTranslate(function(){
-      document.body.style.top = '0';
-    });
+    if(!document.getElementById('rnGTScript')){
+      window.googleTranslateElementInit = function(){
+        try {
+          new google.translate.TranslateElement({
+            pageLanguage: 'en',
+            includedLanguages: 'en,ha,ig,yo,fr,ar,es,pt',
+            autoDisplay: false
+          }, 'google_translate_element');
+        } catch(e) {}
+        document.body.style.top = '0';
+      };
+      var s = document.createElement('script');
+      s.id = 'rnGTScript';
+      s.async = true;
+      s.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      document.head.appendChild(s);
+    }
+    return sel;
   }
 
   function boot(){
+    placeLang();
     wireMenu();
-    wireLang();
     document.body.style.top = '0';
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
