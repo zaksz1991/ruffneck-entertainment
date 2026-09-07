@@ -1,12 +1,8 @@
 /**
  * /api/cms/posts
- * GET    — list posts
- * POST   — create { title, cat, body, ... }
- * PUT    — update { id, ...fields }
- * DELETE — { id }
- *
- * Env: SUPABASE_URL, SUPABASE_SERVICE_KEY (or SUPABASE_ANON_KEY)
- * Optional: ADMIN_PASSWORD check for mutating methods via cookie session
+ * GET    — list posts (large images stripped from list for speed)
+ * GET ?id= — single full post (includes image)
+ * POST / PUT / DELETE — admin mutations
  */
 const crypto = require("crypto");
 
@@ -63,41 +59,61 @@ async function sbFetch(path, options = {}) {
 }
 
 function verifyAdmin(req) {
-  // Soft check: if ADMIN_SECRET set, require valid session cookie for writes
   const secret = process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD || "";
-  if (!secret) return true; // allow if not configured (dev)
+  if (!secret) return true;
   const header = req.headers.cookie || "";
   const m = header.match(/(?:^|;\s*)rn_admin_session=([^;]+)/);
   if (!m) return false;
   const token = decodeURIComponent(m[1]);
   const parts = token.split(".");
   if (parts.length !== 2) return false;
-  const expected = crypto.createHmac("sha256", secret).update(parts[0]).digest("base64url");
-  try {
-    if (parts[1] !== expected) return false;
-    const payload = JSON.parse(Buffer.from(parts[0], "base64url").toString("utf8"));
-    if (!payload.exp || Date.now() > payload.exp) return false;
-    return true;
-  } catch (e) {
-    return false;
+  const expected = crypto.createHmac("sha256", secret).update(parts[0]).digest("hex");
+  return parts[1] === expected;
+}
+
+function lightPost(row) {
+  const p = Object.assign({}, row);
+  if (typeof p.image === "string" && p.image.length > 80000) {
+    p.has_image = true;
+    p.image = null;
   }
+  return p;
 }
 
 module.exports = async function handler(req, res) {
-  if (req.method === "OPTIONS") return json(res, 204, {});
+  if (req.method === "OPTIONS") {
+    res.statusCode = 204;
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    return res.end();
+  }
 
-  if (!sb().ok) {
+  const { ok } = sb();
+  if (!ok) {
     return json(res, 503, {
       ok: false,
-      error: "Database not configured. Set SUPABASE_URL and SUPABASE_SERVICE_KEY on Vercel.",
       code: "NO_DB",
+      error: "Database not configured (SUPABASE_URL / SUPABASE_SERVICE_KEY)",
     });
   }
 
   try {
     if (req.method === "GET") {
+      // Parse id from query string
+      const q = (req.url || "").split("?")[1] || "";
+      const params = new URLSearchParams(q);
+      const id = params.get("id");
+      if (id) {
+        const rows = await sbFetch(
+          "blog_posts?id=eq." + encodeURIComponent(id) + "&select=*"
+        );
+        return json(res, 200, { ok: true, posts: rows || [] });
+      }
       const rows = await sbFetch("blog_posts?select=*&order=created_at.desc");
-      return json(res, 200, { ok: true, posts: rows || [] });
+      // Strip multi‑MB base64 images from LIST so admin/mobile can load
+      const posts = (rows || []).map(lightPost);
+      return json(res, 200, { ok: true, posts: posts });
     }
 
     if (!verifyAdmin(req)) {

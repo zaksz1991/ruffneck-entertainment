@@ -567,10 +567,20 @@ textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!impo
 
   async function fetchPosts(){
     try {
-      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store' });
+      var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+      var timer = setTimeout(function(){ try{ if(ctrl) ctrl.abort(); }catch(e){} }, 45000);
+      var res = await fetch('/api/cms/posts', { credentials:'same-origin', cache:'no-store', signal: ctrl ? ctrl.signal : undefined });
+      clearTimeout(timer);
       var data = await res.json();
       if (res.ok && data.ok && Array.isArray(data.posts)) return data.posts;
-    } catch(e) {}
+    } catch(e) {
+      console.warn('fetchPosts', e);
+      var banner = document.getElementById('banner');
+      if (banner) {
+        banner.style.color = '#fbbf24';
+        banner.textContent = 'Posts load failed or timed out (often a multi‑MB image in one post). Use Wi‑Fi or deploy posts API light list.';
+      }
+    }
     return localPosts();
   }
   async function fetchProducts(){
@@ -1093,6 +1103,48 @@ document.getElementById('saveBlogBtn').onclick = async function(){
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
+})();
+</script>
+
+
+<script id="rn-admin-fast-load">
+(function(){
+  // Timeout wrapper so mobile is not stuck on "Loading..." forever
+  function fetchTimeout(url, opts, ms){
+    ms = ms || 25000;
+    var ctrl = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    var timer = setTimeout(function(){ try{ if(ctrl) ctrl.abort(); }catch(e){} }, ms);
+    var o = Object.assign({}, opts || {});
+    if(ctrl) o.signal = ctrl.signal;
+    return fetch(url, o).then(function(r){
+      clearTimeout(timer);
+      return r;
+    }, function(err){
+      clearTimeout(timer);
+      throw err;
+    });
+  }
+
+  // After main admin defines functions, we cannot easily replace them.
+  // Instead: if still "Checking database" after 8s, show progress tip.
+  function tip(){
+    var banner = document.getElementById('banner');
+    if(!banner) return;
+    if(/Checking database/i.test(banner.textContent||'')){
+      banner.style.color = '#fbbf24';
+      banner.textContent = 'Still loading… one post has a very large image (multi‑MB). Prefer Wi‑Fi. Deploy api/cms/posts.js fix to speed this up.';
+    }
+    var bl = document.getElementById('blogList');
+    var pl = document.getElementById('productList');
+    if(bl && /Loading/i.test(bl.textContent||'')){
+      bl.innerHTML = '<div class="empty">Still loading posts… large image in database can make this slow on mobile. Try Wi‑Fi or desktop.</div>';
+    }
+    if(pl && /Loading/i.test(pl.textContent||'')){
+      pl.innerHTML = '<div class="empty">Still loading products…</div>';
+    }
+  }
+  setTimeout(tip, 8000);
+  setTimeout(tip, 20000);
 })();
 </script>
 
