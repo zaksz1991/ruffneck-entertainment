@@ -1682,49 +1682,31 @@ rn-filter-bar { display: none !important; }
 </style>
 
 
+
 <style id="rn-blog-expand-css">
-.blog-card .rn-expand-btn,
-.rn-cms-post .rn-expand-btn,
-article.blog-card .rn-expand-btn {
-  display: inline-flex !important;
-  align-items: center !important;
-  gap: 6px !important;
-  margin-top: 12px !important;
-  min-height: 40px !important;
-  padding: 8px 14px !important;
-  border-radius: 10px !important;
-  border: 1.5px solid #00B4D8 !important;
-  background: #f0f9ff !important;
-  color: #0B1E3A !important;
-  font-weight: 700 !important;
-  font-size: 13px !important;
-  cursor: pointer !important;
-  width: fit-content !important;
+.rn-expand-btn{
+  display:inline-flex!important;align-items:center!important;
+  margin-top:12px!important;min-height:44px!important;
+  padding:10px 16px!important;border-radius:10px!important;
+  border:2px solid #00B4D8!important;background:#e0f2fe!important;
+  color:#0B1E3A!important;font-weight:800!important;font-size:14px!important;
+  cursor:pointer!important;pointer-events:auto!important;z-index:5!important;
+  position:relative!important;-webkit-tap-highlight-color:transparent;
 }
-.blog-card .rn-expand-btn[aria-expanded="true"] {
-  background: #0B1E3A !important;
-  color: #e0f2fe !important;
-  border-color: #0B1E3A !important;
+.rn-expand-btn[aria-expanded="true"]{
+  background:#0B1E3A!important;color:#fff!important;border-color:#0B1E3A!important;
 }
-.blog-card .rn-expand-panel {
-  display: none;
-  margin-top: 10px;
-  padding: 12px;
-  border-radius: 10px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #334155;
-  font-size: 14px;
-  line-height: 1.65;
-  white-space: pre-wrap;
-  word-break: break-word;
+.rn-expand-panel{
+  display:none!important;margin-top:12px!important;padding:14px!important;
+  border-radius:12px!important;background:#f1f5f9!important;
+  border:1px solid #cbd5e1!important;color:#0f172a!important;
+  font-size:14px!important;line-height:1.7!important;
+  white-space:pre-wrap!important;word-break:break-word!important;
+  max-height:none!important;
 }
-.blog-card.is-expanded .rn-expand-panel,
-.blog-card .rn-expand-panel.is-open {
-  display: block !important;
+.rn-expand-panel.rn-open{
+  display:block!important;
 }
-.blog-card .rn-expand-panel p { margin: 0 0 0.75rem; }
-.blog-card .rn-card-excerpt.is-hidden { display: none !important; }
 </style>
 
 </head>
@@ -4005,110 +3987,133 @@ div.rn-blog-meta p {
 </script>
 
 
+
 <script id="rn-blog-expand-toggle">
 (function(){
-  function textFromHtml(html){
-    var d = document.createElement('div');
-    d.innerHTML = html || '';
-    return (d.textContent || d.innerText || '').replace(/\s+/g, ' ').trim();
+  function plain(html){
+    var d=document.createElement('div');
+    d.innerHTML=html||'';
+    return (d.textContent||'').replace(/\s+/g,' ').trim();
   }
 
-  function bindCard(card){
-    if(!card || card.dataset.rnExpandBound === '1') return;
-    card.dataset.rnExpandBound = '1';
+  function fullTextForCard(card){
+    // 1) data attributes
+    var t = card.getAttribute('data-body') || card.getAttribute('data-full') || '';
+    if(t && t.length > 20) return plain(t);
 
+    // 2) static articles map via openArticle id
+    var id = card.getAttribute('data-post-id') || '';
+    if(!id){
+      var oc = card.getAttribute('onclick') || '';
+      var m = oc.match(/openArticle\(\s*['"]([^'"]+)['"]\s*\)/);
+      if(m) id = m[1];
+    }
+    if(id && window.articles && window.articles[id]){
+      var a = window.articles[id];
+      var body = a.body || a.desc || a.content || '';
+      if(body) return plain(body).slice(0, 4000);
+    }
+
+    // 3) existing popup
+    var popup = card.querySelector('.blog-popup, .card-preview-full');
+    if(popup) return plain(popup.innerHTML).slice(0, 4000);
+
+    // 4) visible paragraphs joined
+    var ps = card.querySelectorAll('.blog-card-body p, .blog-body p');
+    var bits = [];
+    ps.forEach(function(p){ var x=(p.textContent||'').trim(); if(x) bits.push(x); });
+    if(bits.length) return bits.join('\n\n');
+
+    return 'Full article text is available when you open the post.';
+  }
+
+  function ensureUI(card){
+    if(!card || !card.querySelector) return;
     var body = card.querySelector('.blog-card-body') || card;
-    // Prefer existing desc paragraph
-    var excerptEl = body.querySelector('p');
-    var fullText = card.getAttribute('data-full') || '';
-    if(!fullText){
-      // CMS posts may have body in dataset later
-      fullText = card.getAttribute('data-body') || '';
-    }
-    if(!fullText && excerptEl){
-      fullText = (excerptEl.textContent || '').trim();
-    }
-    // Try popup content
-    var popup = card.querySelector('.blog-popup, .rn-expand-panel, .card-preview-full');
-    if(popup && !fullText){
-      fullText = textFromHtml(popup.innerHTML);
-    }
 
-    // Build panel
-    var panel = body.querySelector('.rn-expand-panel');
+    var panel = card.querySelector(':scope > .rn-expand-panel, .blog-card-body > .rn-expand-panel');
     if(!panel){
       panel = document.createElement('div');
       panel.className = 'rn-expand-panel';
-      panel.hidden = true;
       body.appendChild(panel);
     }
-    if(fullText){
-      panel.textContent = fullText;
-    } else {
-      panel.innerHTML = '<p>Open the full article for the complete post.</p>';
-    }
 
-    // Button
-    var btn = body.querySelector('.rn-expand-btn');
+    var btn = card.querySelector('.rn-expand-btn');
     if(!btn){
       btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'rn-expand-btn';
+      btn.textContent = 'Expand';
+      btn.setAttribute('aria-expanded', 'false');
       body.appendChild(btn);
     }
-    btn.setAttribute('aria-expanded', 'false');
-    btn.textContent = 'Expand ▾';
-
-    function setOpen(open){
-      card.classList.toggle('is-expanded', open);
-      panel.hidden = !open;
-      panel.classList.toggle('is-open', open);
-      panel.style.display = open ? 'block' : 'none';
-      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-      btn.textContent = open ? 'Collapse ▴' : 'Expand ▾';
-      if(popup){
-        popup.hidden = !open;
-        popup.style.display = open ? 'block' : 'none';
-      }
-      if(excerptEl && fullText && fullText.length > 160){
-        excerptEl.classList.toggle('is-hidden', open);
-      }
-    }
-
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      var open = btn.getAttribute('aria-expanded') !== 'true';
-      setOpen(open);
-    });
-
-    // Prevent card click from firing when using button
-    card.addEventListener('click', function(e){
-      if(e.target.closest('.rn-expand-btn')) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-    }, true);
+    return {btn: btn, panel: panel, body: body};
   }
+
+  function setExpanded(card, open){
+    var ui = ensureUI(card);
+    if(!ui) return;
+    if(open){
+      ui.panel.textContent = fullTextForCard(card);
+      ui.panel.classList.add('rn-open');
+      ui.btn.setAttribute('aria-expanded', 'true');
+      ui.btn.textContent = 'Collapse';
+      card.classList.add('is-expanded');
+    } else {
+      ui.panel.classList.remove('rn-open');
+      ui.btn.setAttribute('aria-expanded', 'false');
+      ui.btn.textContent = 'Expand';
+      card.classList.remove('is-expanded');
+    }
+  }
+
+  function onClick(e){
+    var btn = e.target.closest && e.target.closest('.rn-expand-btn');
+    if(!btn) return;
+    // STOP card onclick / openArticle
+    e.preventDefault();
+    e.stopPropagation();
+    if(e.stopImmediatePropagation) e.stopImmediatePropagation();
+
+    var card = btn.closest('.blog-card, .rn-cms-post, article');
+    if(!card) return;
+    var open = btn.getAttribute('aria-expanded') !== 'true';
+    setExpanded(card, open);
+  }
+
+  // Capture phase so we beat card onclick
+  document.addEventListener('click', onClick, true);
+  document.addEventListener('touchend', function(e){
+    var btn = e.target.closest && e.target.closest('.rn-expand-btn');
+    if(!btn) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var card = btn.closest('.blog-card, .rn-cms-post, article');
+    if(!card) return;
+    var open = btn.getAttribute('aria-expanded') !== 'true';
+    setExpanded(card, open);
+  }, true);
 
   function scan(){
-    document.querySelectorAll('.blog-card, .rn-cms-post, article.blog-card').forEach(bindCard);
+    document.querySelectorAll('.blog-card, .rn-cms-post').forEach(function(card){
+      ensureUI(card);
+    });
   }
 
-  // When CMS injects cards, re-bind
-  var obs = new MutationObserver(function(){ scan(); });
   function boot(){
     scan();
-    var grid = document.getElementById('blogGrid') || document.getElementById('cmsPostsGrid') || document.body;
-    try { obs.observe(grid, { childList: true, subtree: true }); } catch(e) {}
-    setTimeout(scan, 500);
-    setTimeout(scan, 1500);
-    setTimeout(scan, 4000);
+    setTimeout(scan, 300);
+    setTimeout(scan, 1000);
+    setTimeout(scan, 2500);
+    setTimeout(scan, 5000);
+    // Observe CMS grid
+    var grid = document.getElementById('blogGrid') || document.getElementById('cmsPostsGrid');
+    if(grid && window.MutationObserver){
+      new MutationObserver(function(){ scan(); }).observe(grid, {childList:true, subtree:true});
+    }
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
-
-  // Expose for CMS after render
   window.rnBindBlogExpand = scan;
 })();
 </script>
