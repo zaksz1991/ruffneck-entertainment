@@ -2704,6 +2704,51 @@ body { top: 0 !important; }
 font font { background: transparent !important; box-shadow: none !important; }
 </style>
 
+
+<style id="rn-services-clean">
+/* Remove ghost / floating View details under fixed header */
+#nav + *,
+.rn-announce + #nav {
+  position: relative;
+  z-index: 1001;
+}
+/* expand hints only inside service cards, never float over header */
+.expand-hint {
+  position: static !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  transform: none !important;
+  z-index: 1 !important;
+  display: inline-flex !important;
+  margin-top: 8px !important;
+}
+/* Hide any expand-hint that escaped outside service section layout */
+body > .expand-hint,
+#nav .expand-hint,
+header .expand-hint {
+  display: none !important;
+}
+/* Service cards: clean professional look */
+#services .service-card,
+.services-grid .service-card,
+.service-card {
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 14px !important;
+}
+#services .service-card .expand-hint {
+  background: rgba(0,180,216,0.1) !important;
+  color: #0B1E3A !important;
+  border: none !important;
+}
+/* Don't leave sticky white chips under the fixed header */
+.service-card.is-open,
+.service-card.expanded {
+  z-index: 2 !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>

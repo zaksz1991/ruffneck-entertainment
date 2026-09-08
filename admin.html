@@ -499,7 +499,7 @@ textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!impo
       }
     } catch (e) {}
 
-    if (val === FALLBACK) { showShell(); return; }
+    if (val === FALLBACK) { showShell(); try{ var b=document.getElementById('banner'); if(b){ b.style.color='#fbbf24'; b.textContent='Local login: Edit/Save may work; Delete/Publish to database needs real ADMIN password login.'; } }catch(e){} return; }
     showError('Incorrect password. Use ADMIN_PASSWORD or ruffneck2026admin');
     passInput.value = '';
     passInput.focus();
@@ -689,22 +689,31 @@ textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!impo
 
     if (delPost) {
       var id = delPost.getAttribute('data-del-post');
-      if (!confirm('Delete this blog post permanently?')) return;
+      if (!confirm('Delete this blog post permanently from the database?')) return;
       try {
         var res = await fetch('/api/cms/posts', {
           method:'DELETE', credentials:'same-origin',
           headers:{'Content-Type':'application/json'},
           body: JSON.stringify({ id: id })
         });
-        var data = await res.json();
-        if (!res.ok || !data.ok) throw new Error(data.error || 'Delete failed');
-        alert('Post deleted');
+        var data = await res.json().catch(function(){ return {}; });
+        if (res.status === 401) {
+          alert('Delete blocked: you are not logged in on the server.\n\nSign out, then sign in again with your real ADMIN password (not only the local fallback).');
+          return;
+        }
+        if (!res.ok || !data.ok) throw new Error((data && data.error) || ('HTTP ' + res.status));
+        if (window.__rnPostsCache) {
+          window.__rnPostsCache = window.__rnPostsCache.filter(function(x){ return String(x.id) !== String(id); });
+        }
+        try {
+          var list = localPosts().filter(function(x){ return String(x.id)!==String(id); });
+          saveLocalPosts(list);
+        } catch(e) {}
+        alert('Post deleted from database');
+        await loadLists();
       } catch (err) {
-        var list = localPosts().filter(function(x){ return String(x.id)!==String(id); });
-        saveLocalPosts(list);
-        alert('Removed locally (' + (err.message||'API') + ')');
+        alert('Delete failed: ' + (err.message || err) + '\n\nIf this keeps happening, sign out and sign in again.');
       }
-      loadLists();
       return;
     }
 
@@ -1027,86 +1036,6 @@ document.getElementById('saveBlogBtn').onclick = async function(){
 </script>
 
 
-<script id="rn-admin-rich-editor">
-(function(){
-  var savedRange = null;
-  function ed(){ return document.getElementById('bBodyEditor'); }
-  function ta(){ return document.getElementById('bBody'); }
-  function sync(){ var e=ed(), t=ta(); if(e&&t) t.value = e.innerHTML; }
-  function saveSel(){
-    var e=ed(); if(!e) return;
-    var s=window.getSelection(); if(!s||!s.rangeCount) return;
-    var r=s.getRangeAt(0);
-    if(e.contains(r.commonAncestorContainer)||e===r.commonAncestorContainer) savedRange=r.cloneRange();
-  }
-  function restoreSel(){
-    var e=ed(); if(!e) return;
-    e.focus();
-    if(!savedRange) return;
-    try{ var s=window.getSelection(); s.removeAllRanges(); s.addRange(savedRange); }catch(err){}
-  }
-  function cmd(command, value){
-    var e=ed(); if(!e) return;
-    e.focus(); restoreSel();
-    try{
-      if(command==='formatBlock' && value && value[0]!=='<') document.execCommand('formatBlock', false, '<'+value+'>');
-      else document.execCommand(command, false, value||null);
-    }catch(err){}
-    saveSel(); sync();
-  }
-  function load(){
-    var e=ed(), t=ta(); if(!e||!t) return;
-    var v=t.value||'';
-    if(v && !/<[a-z][\s\S]*>/i.test(v)){
-      e.innerHTML=v.split(/\n\s*\n/).filter(Boolean).map(function(p){
-        return '<p>'+String(p).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>')+'</p>';
-      }).join('')||'<p><br></p>';
-    } else e.innerHTML=v||'<p><br></p>';
-  }
-  function boot(){
-    var e=ed(), bar=document.getElementById('rnEditorToolbar');
-    if(!e) return;
-    load();
-    e.addEventListener('input', sync);
-    e.addEventListener('blur', function(){ saveSel(); sync(); });
-    e.addEventListener('keyup', saveSel);
-    e.addEventListener('mouseup', saveSel);
-    e.addEventListener('touchend', function(){ setTimeout(saveSel,0); });
-    if(bar){
-      bar.addEventListener('mousedown', function(ev){
-        if(ev.target.closest('button[data-cmd],select')) ev.preventDefault();
-      });
-      bar.addEventListener('touchstart', function(ev){
-        if(ev.target.closest('button[data-cmd]')){ ev.preventDefault(); saveSel(); }
-      }, {passive:false});
-      bar.addEventListener('click', function(ev){
-        var btn=ev.target.closest('button[data-cmd]');
-        if(!btn) return;
-        ev.preventDefault();
-        cmd(btn.getAttribute('data-cmd'), btn.getAttribute('data-value'));
-      });
-    }
-    var color=document.getElementById('rnTextColor');
-    if(color){
-      color.addEventListener('mousedown', function(ev){ ev.preventDefault(); saveSel(); });
-      color.addEventListener('change', function(){
-        if(!color.value) return;
-        cmd('foreColor', color.value);
-        color.value='';
-      });
-    }
-    var save=document.getElementById('saveBlogBtn');
-    if(save) save.addEventListener('click', function(){ sync(); }, true);
-    document.addEventListener('click', function(ev){
-      if(ev.target.closest && ev.target.closest('[data-edit-post]')) setTimeout(load, 150);
-    });
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-</script>
-
-
 <script id="rn-admin-fast-load">
 (function(){
   // Timeout wrapper so mobile is not stuck on "Loading..." forever
@@ -1145,6 +1074,152 @@ document.getElementById('saveBlogBtn').onclick = async function(){
   }
   setTimeout(tip, 8000);
   setTimeout(tip, 20000);
+})();
+</script>
+
+
+<script id="rn-admin-rich-editor">
+(function(){
+  var savedRange = null;
+  function ed(){ return document.getElementById('bBodyEditor'); }
+  function ta(){ return document.getElementById('bBody'); }
+  function sync(){ var e=ed(), t=ta(); if(e&&t) t.value = e.innerHTML; }
+
+  function saveSel(){
+    var e=ed(); if(!e) return;
+    var s=window.getSelection(); if(!s||!s.rangeCount) return;
+    var r=s.getRangeAt(0);
+    if(e.contains(r.commonAncestorContainer)||e===r.commonAncestorContainer){
+      try { savedRange = r.cloneRange(); } catch(err){}
+    }
+  }
+  function restoreSel(){
+    var e=ed(); if(!e) return false;
+    e.focus();
+    if(!savedRange) return false;
+    try {
+      var s=window.getSelection();
+      s.removeAllRanges();
+      s.addRange(savedRange);
+      return true;
+    } catch(err){ return false; }
+  }
+
+  function wrapSelection(tagName){
+    var e=ed(); if(!e) return false;
+    e.focus();
+    restoreSel();
+    var s=window.getSelection();
+    if(!s||!s.rangeCount) return false;
+    var range=s.getRangeAt(0);
+    if(range.collapsed) return false;
+    try {
+      var el=document.createElement(tagName);
+      range.surroundContents(el);
+      s.removeAllRanges();
+      var nr=document.createRange();
+      nr.selectNodeContents(el);
+      s.addRange(nr);
+      savedRange = nr.cloneRange();
+      return true;
+    } catch(err){
+      try {
+        var el=document.createElement(tagName);
+        el.appendChild(range.extractContents());
+        range.insertNode(el);
+        return true;
+      } catch(err2){ return false; }
+    }
+  }
+
+  function cmd(command, value){
+    var e=ed(); if(!e) return;
+    e.focus();
+    restoreSel();
+    var ok=false;
+    try {
+      if(command==='bold') ok = document.execCommand('bold', false, null) || wrapSelection('strong');
+      else if(command==='italic') ok = document.execCommand('italic', false, null) || wrapSelection('em');
+      else if(command==='underline') ok = document.execCommand('underline', false, null) || wrapSelection('u');
+      else if(command==='formatBlock' && value){
+        ok = document.execCommand('formatBlock', false, '<'+value+'>') || document.execCommand('formatBlock', false, value);
+      } else if(command==='foreColor' && value){
+        ok = document.execCommand('foreColor', false, value);
+      } else if(command==='insertUnorderedList'){
+        ok = document.execCommand('insertUnorderedList', false, null);
+      } else if(command==='removeFormat'){
+        ok = document.execCommand('removeFormat', false, null);
+      } else {
+        ok = document.execCommand(command, false, value||null);
+      }
+    } catch(err){}
+    saveSel();
+    sync();
+    return ok;
+  }
+
+  function load(){
+    var e=ed(), t=ta(); if(!e||!t) return;
+    var v=t.value||'';
+    if(v && !/<[a-z][\s\S]*>/i.test(v)){
+      e.innerHTML = v.split(/\n\s*\n/).filter(Boolean).map(function(p){
+        return '<p>'+String(p).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n/g,'<br>')+'</p>';
+      }).join('') || '<p><br></p>';
+    } else e.innerHTML = v || '<p><br></p>';
+  }
+
+  function boot(){
+    var e=ed(), bar=document.getElementById('rnEditorToolbar');
+    if(!e){ console.warn('[editor] missing'); return; }
+    load();
+    e.addEventListener('input', sync);
+    e.addEventListener('blur', function(){ saveSel(); sync(); });
+    e.addEventListener('keyup', saveSel);
+    e.addEventListener('mouseup', saveSel);
+    e.addEventListener('touchend', function(){ setTimeout(saveSel, 10); });
+    e.addEventListener('touchstart', function(){ setTimeout(saveSel, 10); });
+
+    if(bar){
+      bar.addEventListener('mousedown', function(ev){
+        if(ev.target.closest('button[data-cmd], select')){
+          ev.preventDefault();
+          saveSel();
+        }
+      });
+      bar.addEventListener('touchstart', function(ev){
+        if(ev.target.closest('button[data-cmd]')){
+          ev.preventDefault();
+          saveSel();
+        }
+      }, {passive:false});
+      bar.addEventListener('click', function(ev){
+        var btn = ev.target.closest('button[data-cmd]');
+        if(!btn) return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        saveSel();
+        cmd(btn.getAttribute('data-cmd'), btn.getAttribute('data-value'));
+      });
+    }
+    var color = document.getElementById('rnTextColor');
+    if(color){
+      color.addEventListener('mousedown', function(ev){ ev.preventDefault(); saveSel(); });
+      color.addEventListener('change', function(){
+        if(!color.value) return;
+        cmd('foreColor', color.value);
+        color.value = '';
+      });
+    }
+    var save = document.getElementById('saveBlogBtn');
+    if(save) save.addEventListener('click', function(){ sync(); }, true);
+
+    document.addEventListener('click', function(ev){
+      if(ev.target.closest && ev.target.closest('[data-edit-post]')) setTimeout(load, 200);
+    });
+    console.info('[editor] ready');
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
 </script>
 
