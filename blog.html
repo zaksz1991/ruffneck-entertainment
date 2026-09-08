@@ -1709,6 +1709,82 @@ rn-filter-bar { display: none !important; }
 }
 </style>
 
+
+
+
+<style id="rn-blog-discover">
+.rn-blog-discover {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 100% !important;
+  max-width: 720px !important;
+  margin: 1rem auto 1.25rem !important;
+  padding: 0 1rem !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 5 !important;
+}
+.rn-blog-discover-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.6rem !important;
+  background: #fff !important;
+  border: 1px solid #e2e8f0 !important;
+  border-radius: 1rem !important;
+  padding: 0.85rem !important;
+  box-shadow: 0 4px 16px rgba(15,23,42,0.06) !important;
+}
+#rnBlogQ, #rnBlogCat {
+  display: block !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  padding: 0.7rem 0.9rem !important;
+  border-radius: 0.7rem !important;
+  border: 1.5px solid #94a3b8 !important;
+  font-size: 16px !important;
+  color: #0B1E3A !important;
+  background: #f8fafc !important;
+  box-sizing: border-box !important;
+}
+#rnBlogQ:focus, #rnBlogCat:focus {
+  border-color: #00B4D8 !important;
+  background: #fff !important;
+  outline: none !important;
+}
+#rnBlogMeta {
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  color: #64748b !important;
+  margin-top: 0.4rem !important;
+}
+.blog-card.rn-discover-hide,
+.rn-cms-post.rn-discover-hide {
+  display: none !important;
+}
+/* Kill old broken filter UI only */
+.blog-filters,
+.filters-inner,
+.blog-search,
+button[data-cat],
+#searchInput,
+button.search-btn {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+@media (min-width: 640px) {
+  .rn-blog-discover-inner {
+    flex-direction: row !important;
+    align-items: center !important;
+  }
+  #rnBlogQ { flex: 1 1 auto !important; }
+  #rnBlogCat { width: 210px !important; flex: 0 0 210px !important; }
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -1912,21 +1988,28 @@ button,a,.btn{touch-action:manipulation}
 </div>
 
 <!-- FILTERS -->
-<div class="blog-filters">
-  <div class="container">
-    <div class="filters-inner">
-      <div class="blog-search">
-        <span aria-hidden="true">🔍</span>
-        <label class="sr-only" for="searchInput" style="position:absolute;left:-9999px">Search articles</label>
-        <input type="search" id="searchInput" placeholder="Search articles..." oninput="filterBlog()" autocomplete="off"/>
-        <button type="button" class="search-btn" onclick="filterBlog()" aria-label="Search">Search</button>
-      </div>
-    </div>
-  </div>
+
 </div>
 </div>
 
 <!-- FEATURED -->
+
+<!-- RN working discovery -->
+<div class="rn-blog-discover" id="rnBlogDiscover">
+  <div class="rn-blog-discover-inner">
+    <input type="search" id="rnBlogQ" placeholder="Search articles..." autocomplete="off" />
+    <select id="rnBlogCat" aria-label="Category">
+      <option value="all">All topics</option>
+      <option value="ai">AI &amp; Automation</option>
+      <option value="ops">Operations</option>
+      <option value="marketing">Marketing</option>
+      <option value="career">Careers</option>
+      <option value="it">IT &amp; Productivity</option>
+    </select>
+  </div>
+  <div class="rn-blog-discover-meta" id="rnBlogMeta">Showing all articles</div>
+</div>
+
 <div class="featured-section">
   <div class="container">
     <div class="featured-card" onclick="openArticle('featured')">
@@ -4115,6 +4198,116 @@ div.rn-blog-meta p {
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
   window.rnBindBlogExpand = scan;
+})();
+</script>
+
+
+
+<script id="rn-blog-discover-js">
+(function(){
+  function $(id){ return document.getElementById(id); }
+
+  function allCards(){
+    return Array.prototype.slice.call(document.querySelectorAll(
+      '.blog-card, .rn-cms-post, #blogGrid .blog-card, #cmsPostsGrid .blog-card, .blog-grid .blog-card'
+    ));
+  }
+
+  function norm(s){
+    return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
+  }
+
+  function catOf(card){
+    var c = norm(card.getAttribute('data-cat') || card.getAttribute('data-category') || '');
+    if(!c){
+      var badge = card.querySelector('.card-cat-badge, .blog-cat, .featured-label');
+      if(badge) c = norm(badge.textContent);
+    }
+    // Normalize every variant used on this site
+    if(c === 'ai' || c.indexOf('ai') !== -1 || c.indexOf('automation') !== -1) return 'ai';
+    if(c === 'ops' || c === 'operations' || c.indexOf('operation') !== -1) return 'ops';
+    if(c === 'marketing' || c.indexOf('market') !== -1) return 'marketing';
+    if(c === 'career' || c === 'careers' || c.indexOf('career') !== -1) return 'career';
+    if(c === 'it' || c.indexOf('productiv') !== -1 || c.indexOf('it &') !== -1) return 'it';
+    if(c === 'business' || c.indexOf('business') !== -1) return 'ops';
+    return c || 'all';
+  }
+
+  function textOf(card){
+    return norm(
+      (card.getAttribute('data-title') || '') + ' ' +
+      (card.getAttribute('data-body') || '') + ' ' +
+      (card.getAttribute('data-full') || '') + ' ' +
+      (card.textContent || '')
+    );
+  }
+
+  function applyFilter(){
+    var qEl = $('rnBlogQ') || $('searchInput');
+    var cEl = $('rnBlogCat');
+    var meta = $('rnBlogMeta');
+    var q = qEl ? norm(qEl.value) : '';
+    var cat = cEl ? norm(cEl.value) : 'all';
+    if(!cat) cat = 'all';
+
+    var list = allCards();
+    var shown = 0;
+    list.forEach(function(card){
+      // never hide featured-section outer
+      var t = textOf(card);
+      var c = catOf(card);
+      var okQ = !q || t.indexOf(q) !== -1;
+      var okC = (cat === 'all') || (c === cat) || (t.indexOf(cat) !== -1);
+      var show = okQ && okC;
+      if(show){
+        card.classList.remove('rn-discover-hide');
+        card.style.removeProperty('display');
+        shown++;
+      } else {
+        card.classList.add('rn-discover-hide');
+        card.style.setProperty('display', 'none', 'important');
+      }
+    });
+    if(meta){
+      meta.textContent = shown + ' article' + (shown === 1 ? '' : 's') + ' shown';
+    }
+    return shown;
+  }
+
+  // Override old filterBlog so any leftover calls still work
+  window.filterBlog = function(){ return applyFilter(); };
+
+  function bind(){
+    var q = $('rnBlogQ');
+    var c = $('rnBlogCat');
+    if(q && !q.dataset.rnBound){
+      q.dataset.rnBound = '1';
+      q.addEventListener('input', applyFilter);
+      q.addEventListener('search', applyFilter);
+      q.addEventListener('keyup', applyFilter);
+    }
+    if(c && !c.dataset.rnBound){
+      c.dataset.rnBound = '1';
+      c.addEventListener('change', applyFilter);
+    }
+    applyFilter();
+  }
+
+  function boot(){
+    bind();
+    [300, 800, 1500, 3000, 6000].forEach(function(ms){
+      setTimeout(function(){ bind(); applyFilter(); }, ms);
+    });
+    var grid = $('blogGrid') || $('cmsPostsGrid') || document.querySelector('.blog-grid');
+    if(grid && window.MutationObserver){
+      new MutationObserver(function(){
+        applyFilter();
+      }).observe(grid, { childList: true, subtree: true });
+    }
+  }
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
 </script>
 
