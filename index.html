@@ -2705,47 +2705,93 @@ font font { background: transparent !important; box-shadow: none !important; }
 </style>
 
 
-<style id="rn-services-clean">
-/* Remove ghost / floating View details under fixed header */
-#nav + *,
-.rn-announce + #nav {
-  position: relative;
-  z-index: 1001;
+
+<style id="rn-ghost-kill">
+/* Kill empty white pills / ghost View details under header */
+.skip-link {
+  position: absolute !important;
+  left: -9999px !important;
+  top: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
 }
-/* expand hints only inside service cards, never float over header */
+/* Fixed header stack must stay dark and visible */
+.rn-announce {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 10020 !important;
+  background: #0B1E3A !important;
+}
+#nav, nav#nav, nav.nav {
+  position: fixed !important;
+  top: var(--rn-announce-h, 52px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 10010 !important;
+  background: #0B1E3A !important;
+  min-height: 56px !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+#nav .nav-inner {
+  display: flex !important;
+  visibility: visible !important;
+  min-height: 56px !important;
+  background: #0B1E3A !important;
+}
+#nav .nav-logo, #rnNavControls, #rnLangSelect, #hamburger {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Expand hints NEVER float under the fixed header */
 .expand-hint {
   position: static !important;
+  float: none !important;
   top: auto !important;
   left: auto !important;
   right: auto !important;
+  bottom: auto !important;
+  z-index: auto !important;
   transform: none !important;
-  z-index: 1 !important;
-  display: inline-flex !important;
   margin-top: 8px !important;
 }
-/* Hide any expand-hint that escaped outside service section layout */
+/* Hide expand-hint if it sits as a lone chip (common bug) */
+#home .expand-hint,
+.hero .expand-hint,
 body > .expand-hint,
-#nav .expand-hint,
-header .expand-hint {
+main > .expand-hint {
   display: none !important;
 }
-/* Service cards: clean professional look */
-#services .service-card,
-.services-grid .service-card,
-.service-card {
-  position: relative !important;
-  overflow: hidden !important;
-  border-radius: 14px !important;
+/* Only allow expand-hint inside service cards */
+.service-card .expand-hint {
+  display: inline-flex !important;
 }
-#services .service-card .expand-hint {
-  background: rgba(0,180,216,0.1) !important;
-  color: #0B1E3A !important;
+
+/* White empty rounded bar under announce: often an open mobile menu shell or empty card */
+#mobileMenu:not(.is-open) {
+  display: none !important;
+  height: 0 !important;
+  padding: 0 !important;
   border: none !important;
+  overflow: hidden !important;
 }
-/* Don't leave sticky white chips under the fixed header */
-.service-card.is-open,
-.service-card.expanded {
-  z-index: 2 !important;
+#mobileMenu:not(.is-open)[hidden] {
+  display: none !important;
+}
+
+/* Content starts below header; no weird white strip from double padding */
+body {
+  padding-top: var(--rn-header-h, 110px) !important;
+  background: #0B1E3A;
+}
+/* Page sections that are light should own their background */
+#services, .services, main section {
+  background-clip: padding-box;
 }
 </style>
 
@@ -5575,6 +5621,35 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 })();
 </script>
 
+
+
+<script id="rn-ghost-kill-js">
+(function(){
+  function clean(){
+    document.querySelectorAll('.expand-hint').forEach(function(el){
+      if(!el.closest('.service-card') && !el.closest('#services')){
+        el.style.display = 'none';
+        try { el.remove(); } catch(e){}
+      }
+    });
+    // empty white pills with only whitespace
+    document.querySelectorAll('div,span').forEach(function(el){
+      if(el.children.length === 0 && !(el.textContent||'').trim()){
+        var st = window.getComputedStyle(el);
+        if(st.position === 'fixed' || st.position === 'sticky'){
+          if(el.id !== 'nav' && !el.closest('#nav') && !el.classList.contains('rn-announce')){
+            el.style.display = 'none';
+          }
+        }
+      }
+    });
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', clean);
+  else clean();
+  setTimeout(clean, 300);
+  setTimeout(clean, 1200);
+})();
+</script>
 
 </body>
 </html>

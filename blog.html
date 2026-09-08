@@ -1681,6 +1681,52 @@ rn-filter-bar { display: none !important; }
 }
 </style>
 
+
+<style id="rn-blog-expand-css">
+.blog-card .rn-expand-btn,
+.rn-cms-post .rn-expand-btn,
+article.blog-card .rn-expand-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin-top: 12px !important;
+  min-height: 40px !important;
+  padding: 8px 14px !important;
+  border-radius: 10px !important;
+  border: 1.5px solid #00B4D8 !important;
+  background: #f0f9ff !important;
+  color: #0B1E3A !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  cursor: pointer !important;
+  width: fit-content !important;
+}
+.blog-card .rn-expand-btn[aria-expanded="true"] {
+  background: #0B1E3A !important;
+  color: #e0f2fe !important;
+  border-color: #0B1E3A !important;
+}
+.blog-card .rn-expand-panel {
+  display: none;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 14px;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.blog-card.is-expanded .rn-expand-panel,
+.blog-card .rn-expand-panel.is-open {
+  display: block !important;
+}
+.blog-card .rn-expand-panel p { margin: 0 0 0.75rem; }
+.blog-card .rn-card-excerpt.is-hidden { display: none !important; }
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -3180,6 +3226,8 @@ window.RNCms.listPosts = async function () {
     card.setAttribute("data-admin-post", "1");
     card.setAttribute("data-post-id", p.id || "");
     card.setAttribute("data-title", p.title || "");
+    card.setAttribute("data-body", (p.body || p.desc || "").toString().replace(/<[^>]+>/g," ").slice(0, 2500));
+    card.setAttribute("data-full", (p.desc || "").toString());
     card.setAttribute("data-cat", mapDataCat(p.cat));
     card.setAttribute("data-category", p.cat || "Blog");
     card.style.cssText = "display:flex;flex-direction:column;background:#fff;border:1px solid #e2e8f0;border-radius:14px;overflow:hidden;cursor:pointer;min-height:180px;";
@@ -3821,80 +3869,6 @@ div.rn-blog-meta p {
 </script>
 
 <script defer src="/js/rn-blog-fix.js"></script>
-<script defer src="/js/rn-expand-toggle.js"></script>
-
-<script id="rn-blog-read-toggle">
-(function(){
-  function ensureReadButtons(){
-    document.querySelectorAll('.blog-card, .rn-cms-post, article.blog-card').forEach(function(card){
-      if (card.dataset.rnReadBound) return;
-      card.dataset.rnReadBound = '1';
-      var body = card.querySelector('.blog-card-body, .blog-body') || card;
-      var btn = body.querySelector('.rn-read-btn');
-      if (!btn) {
-        btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'rn-read-btn';
-        btn.textContent = 'Read article';
-        body.appendChild(btn);
-      }
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        var id = card.getAttribute('data-post-id') || card.getAttribute('data-id') || card.getAttribute('onclick');
-        // CMS / static openArticle path
-        if (card.getAttribute('data-post-id') && typeof window.openArticle === 'function') {
-          window.openArticle(card.getAttribute('data-post-id'));
-          return;
-        }
-        // Featured / static cards with openArticle('featured')
-        var oc = card.getAttribute('onclick') || '';
-        var m = oc.match(/openArticle\(['\"]([^'\"]+)['\"]\)/);
-        if (m && typeof window.openArticle === 'function') {
-          window.openArticle(m[1]);
-          return;
-        }
-        // Inline expand fallback
-        var panel = card.querySelector('.blog-popup, .rn-expand-panel, .card-preview-full');
-        if (panel) {
-          var open = !card.classList.contains('open');
-          card.classList.toggle('open', open);
-          panel.hidden = !open;
-          panel.style.setProperty('display', open ? 'block' : 'none', 'important');
-          btn.textContent = open ? 'Collapse' : 'Read article';
-          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
-          return;
-        }
-        // Last resort: click card handler
-        card.click();
-      });
-    });
-  }
-  // Modal close must restore page
-  function patchClose(){
-    if (typeof window.closeArticle === 'function' && !window.closeArticle.__rn2) {
-      var orig = window.closeArticle;
-      window.closeArticle = function(){
-        try { orig(); } catch(e) {}
-        document.body.style.overflow = '';
-        var ov = document.getElementById('articleOverlay');
-        if (ov) ov.classList.remove('open');
-      };
-      window.closeArticle.__rn2 = true;
-    }
-    // Escape closes
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && typeof window.closeArticle === 'function') window.closeArticle();
-    });
-  }
-  function boot(){ ensureReadButtons(); patchClose(); }
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-  var n=0, t=setInterval(function(){ n++; ensureReadButtons(); patchClose(); if(n>50) clearInterval(t); }, 200);
-})();
-</script>
-
-
 <script id="rn-kill-translator-js">
 (function(){
   function nuke(){
@@ -4027,6 +4001,115 @@ div.rn-blog-meta p {
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
   var n=0, t=setInterval(function(){ n++; patchOpen(); patchClose(); addReadButtons(); if(n>40) clearInterval(t); }, 250);
+})();
+</script>
+
+
+<script id="rn-blog-expand-toggle">
+(function(){
+  function textFromHtml(html){
+    var d = document.createElement('div');
+    d.innerHTML = html || '';
+    return (d.textContent || d.innerText || '').replace(/\s+/g, ' ').trim();
+  }
+
+  function bindCard(card){
+    if(!card || card.dataset.rnExpandBound === '1') return;
+    card.dataset.rnExpandBound = '1';
+
+    var body = card.querySelector('.blog-card-body') || card;
+    // Prefer existing desc paragraph
+    var excerptEl = body.querySelector('p');
+    var fullText = card.getAttribute('data-full') || '';
+    if(!fullText){
+      // CMS posts may have body in dataset later
+      fullText = card.getAttribute('data-body') || '';
+    }
+    if(!fullText && excerptEl){
+      fullText = (excerptEl.textContent || '').trim();
+    }
+    // Try popup content
+    var popup = card.querySelector('.blog-popup, .rn-expand-panel, .card-preview-full');
+    if(popup && !fullText){
+      fullText = textFromHtml(popup.innerHTML);
+    }
+
+    // Build panel
+    var panel = body.querySelector('.rn-expand-panel');
+    if(!panel){
+      panel = document.createElement('div');
+      panel.className = 'rn-expand-panel';
+      panel.hidden = true;
+      body.appendChild(panel);
+    }
+    if(fullText){
+      panel.textContent = fullText;
+    } else {
+      panel.innerHTML = '<p>Open the full article for the complete post.</p>';
+    }
+
+    // Button
+    var btn = body.querySelector('.rn-expand-btn');
+    if(!btn){
+      btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'rn-expand-btn';
+      body.appendChild(btn);
+    }
+    btn.setAttribute('aria-expanded', 'false');
+    btn.textContent = 'Expand ▾';
+
+    function setOpen(open){
+      card.classList.toggle('is-expanded', open);
+      panel.hidden = !open;
+      panel.classList.toggle('is-open', open);
+      panel.style.display = open ? 'block' : 'none';
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'Collapse ▴' : 'Expand ▾';
+      if(popup){
+        popup.hidden = !open;
+        popup.style.display = open ? 'block' : 'none';
+      }
+      if(excerptEl && fullText && fullText.length > 160){
+        excerptEl.classList.toggle('is-hidden', open);
+      }
+    }
+
+    btn.addEventListener('click', function(e){
+      e.preventDefault();
+      e.stopPropagation();
+      var open = btn.getAttribute('aria-expanded') !== 'true';
+      setOpen(open);
+    });
+
+    // Prevent card click from firing when using button
+    card.addEventListener('click', function(e){
+      if(e.target.closest('.rn-expand-btn')) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+  }
+
+  function scan(){
+    document.querySelectorAll('.blog-card, .rn-cms-post, article.blog-card').forEach(bindCard);
+  }
+
+  // When CMS injects cards, re-bind
+  var obs = new MutationObserver(function(){ scan(); });
+  function boot(){
+    scan();
+    var grid = document.getElementById('blogGrid') || document.getElementById('cmsPostsGrid') || document.body;
+    try { obs.observe(grid, { childList: true, subtree: true }); } catch(e) {}
+    setTimeout(scan, 500);
+    setTimeout(scan, 1500);
+    setTimeout(scan, 4000);
+  }
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+
+  // Expose for CMS after render
+  window.rnBindBlogExpand = scan;
 })();
 </script>
 
