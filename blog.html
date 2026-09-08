@@ -1712,76 +1712,69 @@ rn-filter-bar { display: none !important; }
 
 
 
-<style id="rn-blog-discover">
-.rn-blog-discover {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  width: 100% !important;
-  max-width: 720px !important;
-  margin: 1rem auto 1.25rem !important;
-  padding: 0 1rem !important;
-  box-sizing: border-box !important;
-  position: relative !important;
-  z-index: 5 !important;
-}
-.rn-blog-discover-inner {
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 0.6rem !important;
-  background: #fff !important;
-  border: 1px solid #e2e8f0 !important;
-  border-radius: 1rem !important;
-  padding: 0.85rem !important;
-  box-shadow: 0 4px 16px rgba(15,23,42,0.06) !important;
-}
-#rnBlogQ, #rnBlogCat {
-  display: block !important;
-  width: 100% !important;
-  min-height: 48px !important;
-  padding: 0.7rem 0.9rem !important;
-  border-radius: 0.7rem !important;
-  border: 1.5px solid #94a3b8 !important;
-  font-size: 16px !important;
-  color: #0B1E3A !important;
-  background: #f8fafc !important;
-  box-sizing: border-box !important;
-}
-#rnBlogQ:focus, #rnBlogCat:focus {
-  border-color: #00B4D8 !important;
-  background: #fff !important;
-  outline: none !important;
-}
-#rnBlogMeta {
-  font-size: 12px !important;
-  font-weight: 700 !important;
-  color: #64748b !important;
-  margin-top: 0.4rem !important;
-}
-.blog-card.rn-discover-hide,
-.rn-cms-post.rn-discover-hide {
+
+<style id="rn-simple-search-css">
+/* Old filters completely off */
+.blog-filters, .filters-inner, .blog-search, button[data-cat],
+#searchInput, button.search-btn, .rn-blog-discover, #rnBlogDiscover {
   display: none !important;
-}
-/* Kill old broken filter UI only */
-.blog-filters,
-.filters-inner,
-.blog-search,
-button[data-cat],
-#searchInput,
-button.search-btn {
-  display: none !important;
-  visibility: hidden !important;
   height: 0 !important;
   overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
   pointer-events: none !important;
 }
-@media (min-width: 640px) {
-  .rn-blog-discover-inner {
-    flex-direction: row !important;
-    align-items: center !important;
-  }
-  #rnBlogQ { flex: 1 1 auto !important; }
-  #rnBlogCat { width: 210px !important; flex: 0 0 210px !important; }
+.rn-simple-search {
+  display: block !important;
+  width: calc(100% - 2rem) !important;
+  max-width: 640px !important;
+  margin: 1rem auto 1.25rem !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  position: relative !important;
+  z-index: 20 !important;
+}
+.rn-simple-search-label {
+  display: block !important;
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  color: #64748b !important;
+  margin: 0 0 0.4rem 0.15rem !important;
+}
+#rnQ {
+  display: block !important;
+  width: 100% !important;
+  min-height: 52px !important;
+  padding: 0.85rem 1rem !important;
+  border: 2px solid #0B1E3A !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  line-height: 1.3 !important;
+  color: #0B1E3A !important;
+  background: #ffffff !important;
+  box-sizing: border-box !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+}
+#rnQ:focus {
+  border-color: #00B4D8 !important;
+  box-shadow: 0 0 0 3px rgba(0,180,216,0.25) !important;
+  outline: none !important;
+}
+.rn-simple-search-status {
+  margin: 0.45rem 0 0 0.15rem !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #475569 !important;
+  min-height: 1.2em !important;
+}
+.blog-card.rn-hide,
+.rn-cms-post.rn-hide,
+article.blog-card.rn-hide {
+  display: none !important;
 }
 </style>
 
@@ -1994,20 +1987,11 @@ button,a,.btn{touch-action:manipulation}
 
 <!-- FEATURED -->
 
-<!-- RN working discovery -->
-<div class="rn-blog-discover" id="rnBlogDiscover">
-  <div class="rn-blog-discover-inner">
-    <input type="search" id="rnBlogQ" placeholder="Search articles..." autocomplete="off" />
-    <select id="rnBlogCat" aria-label="Category">
-      <option value="all">All topics</option>
-      <option value="ai">AI &amp; Automation</option>
-      <option value="ops">Operations</option>
-      <option value="marketing">Marketing</option>
-      <option value="career">Careers</option>
-      <option value="it">IT &amp; Productivity</option>
-    </select>
-  </div>
-  <div class="rn-blog-discover-meta" id="rnBlogMeta">Showing all articles</div>
+
+<div id="rnSimpleSearch" class="rn-simple-search">
+  <label for="rnQ" class="rn-simple-search-label">Search articles</label>
+  <input type="search" id="rnQ" name="rnQ" placeholder="Type to filter articles…" autocomplete="off" enterkeyhint="search" />
+  <p id="rnQStatus" class="rn-simple-search-status" aria-live="polite"></p>
 </div>
 
 <div class="featured-section">
@@ -4203,110 +4187,61 @@ div.rn-blog-meta p {
 
 
 
-<script id="rn-blog-discover-js">
+
+<script id="rn-simple-search-js">
 (function(){
-  function $(id){ return document.getElementById(id); }
-
-  function allCards(){
-    return Array.prototype.slice.call(document.querySelectorAll(
-      '.blog-card, .rn-cms-post, #blogGrid .blog-card, #cmsPostsGrid .blog-card, .blog-grid .blog-card'
-    ));
+  function cards(){
+    return Array.prototype.slice.call(document.querySelectorAll('.blog-card, .rn-cms-post'));
   }
-
-  function norm(s){
-    return String(s || '').toLowerCase().replace(/\s+/g, ' ').trim();
-  }
-
-  function catOf(card){
-    var c = norm(card.getAttribute('data-cat') || card.getAttribute('data-category') || '');
-    if(!c){
-      var badge = card.querySelector('.card-cat-badge, .blog-cat, .featured-label');
-      if(badge) c = norm(badge.textContent);
-    }
-    // Normalize every variant used on this site
-    if(c === 'ai' || c.indexOf('ai') !== -1 || c.indexOf('automation') !== -1) return 'ai';
-    if(c === 'ops' || c === 'operations' || c.indexOf('operation') !== -1) return 'ops';
-    if(c === 'marketing' || c.indexOf('market') !== -1) return 'marketing';
-    if(c === 'career' || c === 'careers' || c.indexOf('career') !== -1) return 'career';
-    if(c === 'it' || c.indexOf('productiv') !== -1 || c.indexOf('it &') !== -1) return 'it';
-    if(c === 'business' || c.indexOf('business') !== -1) return 'ops';
-    return c || 'all';
-  }
-
-  function textOf(card){
-    return norm(
-      (card.getAttribute('data-title') || '') + ' ' +
-      (card.getAttribute('data-body') || '') + ' ' +
-      (card.getAttribute('data-full') || '') + ' ' +
-      (card.textContent || '')
-    );
-  }
-
-  function applyFilter(){
-    var qEl = $('rnBlogQ') || $('searchInput');
-    var cEl = $('rnBlogCat');
-    var meta = $('rnBlogMeta');
-    var q = qEl ? norm(qEl.value) : '';
-    var cat = cEl ? norm(cEl.value) : 'all';
-    if(!cat) cat = 'all';
-
-    var list = allCards();
-    var shown = 0;
-    list.forEach(function(card){
-      // never hide featured-section outer
-      var t = textOf(card);
-      var c = catOf(card);
-      var okQ = !q || t.indexOf(q) !== -1;
-      var okC = (cat === 'all') || (c === cat) || (t.indexOf(cat) !== -1);
-      var show = okQ && okC;
+  function run(){
+    var input = document.getElementById('rnQ');
+    var status = document.getElementById('rnQStatus');
+    if(!input) return;
+    var q = (input.value || '').toLowerCase().replace(/\s+/g,' ').trim();
+    var list = cards();
+    var n = 0;
+    for(var i=0;i<list.length;i++){
+      var card = list[i];
+      var hay = (
+        (card.getAttribute('data-title')||'') + ' ' +
+        (card.getAttribute('data-cat')||'') + ' ' +
+        (card.getAttribute('data-category')||'') + ' ' +
+        (card.getAttribute('data-body')||'') + ' ' +
+        (card.textContent||'')
+      ).toLowerCase();
+      var show = !q || hay.indexOf(q) !== -1;
       if(show){
-        card.classList.remove('rn-discover-hide');
+        card.classList.remove('rn-hide');
         card.style.removeProperty('display');
-        shown++;
+        n++;
       } else {
-        card.classList.add('rn-discover-hide');
-        card.style.setProperty('display', 'none', 'important');
+        card.classList.add('rn-hide');
+        card.style.setProperty('display','none','important');
+      }
+    }
+    if(status){
+      if(!q) status.textContent = n + ' articles';
+      else if(n === 0) status.textContent = 'No articles match “' + input.value + '”';
+      else status.textContent = n + ' match' + (n===1?'':'es');
+    }
+  }
+  function boot(){
+    var input = document.getElementById('rnQ');
+    if(!input) return;
+    input.addEventListener('input', run);
+    input.addEventListener('keyup', run);
+    input.addEventListener('search', run);
+    run();
+    [500, 1500, 4000].forEach(function(t){ setTimeout(run, t); });
+    var grids = [document.getElementById('blogGrid'), document.getElementById('cmsPostsGrid')];
+    grids.forEach(function(g){
+      if(g && window.MutationObserver){
+        new MutationObserver(run).observe(g, {childList:true, subtree:true});
       }
     });
-    if(meta){
-      meta.textContent = shown + ' article' + (shown === 1 ? '' : 's') + ' shown';
-    }
-    return shown;
   }
-
-  // Override old filterBlog so any leftover calls still work
-  window.filterBlog = function(){ return applyFilter(); };
-
-  function bind(){
-    var q = $('rnBlogQ');
-    var c = $('rnBlogCat');
-    if(q && !q.dataset.rnBound){
-      q.dataset.rnBound = '1';
-      q.addEventListener('input', applyFilter);
-      q.addEventListener('search', applyFilter);
-      q.addEventListener('keyup', applyFilter);
-    }
-    if(c && !c.dataset.rnBound){
-      c.dataset.rnBound = '1';
-      c.addEventListener('change', applyFilter);
-    }
-    applyFilter();
-  }
-
-  function boot(){
-    bind();
-    [300, 800, 1500, 3000, 6000].forEach(function(ms){
-      setTimeout(function(){ bind(); applyFilter(); }, ms);
-    });
-    var grid = $('blogGrid') || $('cmsPostsGrid') || document.querySelector('.blog-grid');
-    if(grid && window.MutationObserver){
-      new MutationObserver(function(){
-        applyFilter();
-      }).observe(grid, { childList: true, subtree: true });
-    }
-  }
-
-  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  window.filterBlog = run;
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
 })();
 </script>
