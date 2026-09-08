@@ -3039,6 +3039,37 @@ section.rn-results {
 }
 </style>
 
+
+<style id="rn-kill-cta-gap">
+/* Remove large empty space below Book a Free Consultation */
+#services {
+  padding-bottom: 0.75rem !important;
+  margin-bottom: 0 !important;
+}
+#services .container {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+.services-cta-wrap {
+  margin: 0.5rem auto 0.5rem !important;
+  padding: 0 1rem 0 !important;
+}
+#results,
+#results.rn-results,
+section.rn-results,
+section#results {
+  padding-top: 1.25rem !important;
+  margin-top: 0 !important;
+}
+/* Bottom sticky WhatsApp bar: add padding on results/footer instead of services */
+body {
+  padding-bottom: 0 !important;
+}
+main, #main, #main-content {
+  padding-bottom: 4.5rem !important; /* room for bottom sticky bar site-wide */
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -5365,7 +5396,7 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 /* Keep sticky bottom bar from covering hero CTAs on small screens */
 @media (max-width: 900px) {
   .hero {
-    padding-bottom: 5.5rem !important;
+    padding-bottom: 0.75rem !important;
   }
 }
 /* ==== END RN-HERO-UX-REPAIR ==== */
@@ -5578,7 +5609,7 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 
 @media (max-width: 900px) {
   #services {
-    padding-bottom: 5.5rem !important; /* clear sticky bar */
+    padding-bottom: 1rem !important;
   }
 }
 /* ==== END RN-SERVICES-UX-REPAIR ==== */
