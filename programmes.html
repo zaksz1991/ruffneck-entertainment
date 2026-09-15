@@ -1483,75 +1483,113 @@
     </div>
   </footer>
 
-  <script>
-    (function () {
-      var form = document.getElementById("rdepForm");
-      var errorBox = document.getElementById("formError");
-      var successBox = document.getElementById("formSuccess");
+  
 
-      if (!form) return;
+<script id="rdep-form-submit">
+(function () {
+  var form = document.getElementById("rdepForm");
+  var errorBox = document.getElementById("formError");
+  var successBox = document.getElementById("formSuccess");
+  if (!form) return;
 
-      form.addEventListener("submit", function (event) {
-        event.preventDefault();
+  function showError(msg) {
+    if (!errorBox) { alert(msg); return; }
+    errorBox.textContent = msg;
+    errorBox.hidden = false;
+    if (successBox) successBox.hidden = true;
+  }
+  function showSuccess(msg) {
+    if (!successBox) return;
+    successBox.textContent = msg;
+    successBox.hidden = false;
+    if (errorBox) errorBox.hidden = true;
+  }
 
-        errorBox.hidden = true;
-        successBox.hidden = true;
-        errorBox.textContent = "";
-        successBox.textContent = "";
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    event.stopPropagation();
 
-        if (!form.checkValidity()) {
-          errorBox.textContent =
-            "Please complete all required fields correctly before submitting.";
-          errorBox.hidden = false;
-          form.reportValidity();
-          return;
-        }
+    if (errorBox) { errorBox.hidden = true; errorBox.textContent = ""; }
+    if (successBox) { successBox.hidden = true; successBox.textContent = ""; }
 
-        var data = new FormData(form);
-        var fullName = data.get("fullName").trim();
-        var email = data.get("email").trim();
-        var whatsapp = data.get("whatsapp").trim();
-        var location = data.get("location").trim();
-        var track = data.get("track");
-        var level = data.get("level");
-        var status = data.get("status").trim();
-        var access = data.get("access");
-        var why = data.get("why").trim();
-        var achieve = data.get("achieve").trim();
-        var availability = data.get("availability").trim();
+    if (!form.checkValidity()) {
+      showError("Please complete all required fields correctly before submitting.");
+      try { form.reportValidity(); } catch (e) {}
+      return;
+    }
 
-        var subject =
-          "RDEP Programme Application - " + fullName;
+    var data = new FormData(form);
+    function g(name) {
+      var v = data.get(name);
+      return (v == null ? "" : String(v)).trim();
+    }
 
-        var body = [
-          "RuffNeck Digital Empowerment Programme Application",
-          "",
-          "Full name: " + fullName,
-          "Email: " + email,
-          "WhatsApp: " + whatsapp,
-          "Location: " + location,
-          "Programme track: " + track,
-          "Digital skills level: " + level,
-          "Occupation / education status: " + status,
-          "Device and internet access: " + access,
-          "Why they want to join: " + why,
-          "What they hope to achieve: " + achieve,
-          "Availability: " + availability
-        ].join("
-");
+    var fullName = g("fullName");
+    var email = g("email");
+    var whatsapp = g("whatsapp");
+    var locationVal = g("location");
+    var track = g("track");
+    var level = g("level");
+    var status = g("status");
+    var access = g("access");
+    var why = g("why");
+    var achieve = g("achieve");
+    var availability = g("availability");
 
-        var mailto =
-          "mailto:ruffneckhassan@gmail.com" +
-          "?subject=" + encodeURIComponent(subject) +
-          "&body=" + encodeURIComponent(body);
+    var NL = String.fromCharCode(10);
+    var subject = "RDEP Programme Application - " + fullName;
+    var body = [
+      "RuffNeck Digital Empowerment Programme Application",
+      "",
+      "Full name: " + fullName,
+      "Email: " + email,
+      "WhatsApp: " + whatsapp,
+      "Location: " + locationVal,
+      "Programme track: " + track,
+      "Digital skills level: " + level,
+      "Occupation / education status: " + status,
+      "Device and internet access: " + access,
+      "Why they want to join: " + why,
+      "What they hope to achieve: " + achieve,
+      "Availability: " + availability
+    ].join(NL);
 
-        successBox.textContent =
-          "Your email application is being prepared. If your email app does not open, use the WhatsApp application option.";
-        successBox.hidden = false;
+    var waUrl = "https://wa.me/2348033807856?text=" + encodeURIComponent(body);
+    var mailto =
+      "mailto:ruffneckhassan@gmail.com" +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
 
-        window.location.href = mailto;
-      });
-    })();
-  </script>
+    showSuccess(
+      "Application ready. Opening WhatsApp to send it to RuffNeck. If nothing opens, use the buttons below."
+    );
+
+    try { window.location.href = waUrl; } catch (e) {}
+
+    setTimeout(function () {
+      if (document.getElementById("rdepFallbackLinks")) return;
+      var div = document.createElement("div");
+      div.id = "rdepFallbackLinks";
+      div.style.cssText = "margin-top:12px;display:flex;flex-direction:column;gap:10px;";
+      var a1 = document.createElement("a");
+      a1.href = waUrl;
+      a1.target = "_blank";
+      a1.rel = "noopener";
+      a1.textContent = "Send via WhatsApp";
+      a1.style.cssText = "display:block;text-align:center;padding:12px;border-radius:10px;background:#25D366;color:#fff;font-weight:800;text-decoration:none;";
+      var a2 = document.createElement("a");
+      a2.href = mailto;
+      a2.textContent = "Send via Email app";
+      a2.style.cssText = "display:block;text-align:center;padding:12px;border-radius:10px;background:#0B1E3A;color:#fff;font-weight:800;text-decoration:none;";
+      div.appendChild(a1);
+      div.appendChild(a2);
+      if (successBox) successBox.appendChild(div);
+      else form.appendChild(div);
+    }, 400);
+  });
+})();
+</script>
+
+
 </body>
 </html>
