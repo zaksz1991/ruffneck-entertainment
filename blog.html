@@ -68,10 +68,10 @@
 .rn-blog-meta p,
 .rn-blog-meta span,
 .rn-blog-meta strong {
-  color: #1f2937 !important;
+  color: #f8fafc !important;
   opacity: 1 !important;
 }
-.rn-blog-meta a { color: #0e7490 !important; font-weight: 700 !important; }
+.rn-blog-meta a { color: #67e8f9 !important; font-weight: 700 !important; }
 @media (max-width: 600px) {
   .card-meta,
   .article-meta,
@@ -302,7 +302,7 @@ body{
 /* ==== RN-UX-BLOG-PASS-3 (preview) — visual only; no content/URL/JS changes ==== */
 .rn-blog-meta {
   line-height: 1.55 !important;
-  color: #374151 !important;
+  color: #f8fafc !important;
 }
 .rn-blog-meta a {
   color: #087f99 !important;
@@ -395,11 +395,10 @@ body{
 .rn-blog-meta p,
 .rn-blog-meta span,
 .rn-blog-meta strong {
-  color: #1f2937 !important;
+  color: #f8fafc !important;
   opacity: 1 !important;
 }
-.rn-blog-meta a {
-  color: #0e7490 !important;
+.rn-blog-meta a { color: #67e8f9 !important;
   font-weight: 700 !important;
 }
 .blog-card,
@@ -414,7 +413,7 @@ body{
   color: #0b1e3a !important;
 }
 .filter-btn {
-  color: #1f2937 !important;
+  color: #f8fafc !important;
   border-color:#374151 !important;
   background: #fff !important;
   opacity: 1 !important;
@@ -2360,6 +2359,231 @@ body.rn-ux-page #rn-blog-footer p {
 }
 </style>
 
+
+<style id="rn-blog-modal-close">
+/* Remove featured block completely */
+.featured-section,
+.featured-card {
+  display: none !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+/* Article modal: always-visible close controls */
+body.rn-ux-page .article-overlay,
+.article-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 10000 !important;
+  display: none;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px !important;
+  background: rgba(15, 23, 42, 0.75) !important;
+}
+body.rn-ux-page .article-overlay.open,
+.article-overlay.open,
+.article-overlay[style*="flex"],
+.article-overlay[style*="block"] {
+  display: flex !important;
+}
+
+.article-modal {
+  position: relative !important;
+  width: min(720px, 100%) !important;
+  max-height: none !important;
+  margin: 12px auto 32px !important;
+  border-radius: 14px !important;
+  overflow: visible !important;
+  background: #fff !important;
+}
+
+.article-modal-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 5 !important;
+  background: #0b1e3a !important;
+  color: #fff !important;
+  padding: 12px 14px 14px !important;
+  border-radius: 14px 14px 0 0 !important;
+}
+
+.rn-modal-toolbar {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  margin-bottom: 10px !important;
+}
+
+.article-back-btn,
+.rn-modal-close {
+  display: inline-flex !important;
+  align-items: center !important;
+  min-height: 40px !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255,255,255,0.25) !important;
+  background: rgba(255,255,255,0.12) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+}
+
+.rn-modal-x {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255,255,255,0.25) !important;
+  background: rgba(255,255,255,0.12) !important;
+  color: #fff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+}
+
+.article-body {
+  padding: 18px 16px 24px !important;
+  background: #fff !important;
+}
+
+/* Extra close at bottom of article so user is never stuck */
+.rn-modal-close-bottom {
+  display: flex !important;
+  width: 100% !important;
+  min-height: 48px !important;
+  margin: 16px 0 8px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: #0b1e3a !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+}
+</style>
+
+
+<style id="rn-blog-color-fix">
+.blog-hero .label {
+  color: #67e8f9 !important;
+  -webkit-text-fill-color: #67e8f9 !important;
+}
+.blog-hero h1 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.blog-hero h1 em {
+  color: #22d3ee !important;
+  -webkit-text-fill-color: #22d3ee !important;
+}
+.blog-hero p {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.25) !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta,
+.rn-blog-meta *,
+.rn-blog-meta p,
+.rn-blog-meta span,
+.rn-blog-meta div,
+.rn-blog-meta strong {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta a,
+.rn-blog-meta a * {
+  color: #67e8f9 !important;
+  -webkit-text-fill-color: #67e8f9 !important;
+  font-weight: 700 !important;
+  opacity: 1 !important;
+}
+</style>
+
+
+<style id="rn-blog-search-ui">
+/* Visible Search button next to input */
+body.rn-ux-page .rn-simple-search,
+#rnSimpleSearch {
+  width: min(36rem, calc(100% - 1.5rem)) !important;
+  margin: -1.25rem auto 1.5rem !important;
+  z-index: 6 !important;
+}
+body.rn-ux-page .rn-search-row,
+#rnSimpleSearch .rn-search-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  gap: 0.5rem !important;
+  width: 100% !important;
+}
+body.rn-ux-page #rnQ,
+#rnQ {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  min-height: 48px !important;
+  margin: 0 !important;
+  display: block !important;
+}
+body.rn-ux-page #rnQBtn,
+#rnQBtn,
+.rn-search-btn {
+  display: inline-flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 0 0 auto !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  min-width: 96px !important;
+  padding: 0 1rem !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: #0b1e3a !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  font-size: 0.95rem !important;
+  cursor: pointer !important;
+  font-family: inherit !important;
+}
+body.rn-ux-page #rnQStatus,
+#rnQStatus {
+  display: block !important;
+  margin-top: 0.45rem !important;
+  color: #64748b !important;
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+}
+@media (max-width: 420px) {
+  body.rn-ux-page .rn-search-row {
+    flex-direction: column !important;
+  }
+  body.rn-ux-page #rnQBtn {
+    width: 100% !important;
+  }
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -2550,7 +2774,7 @@ button,a,.btn{touch-action:manipulation}
   <div class="container">
     <div class="label">Resources · Insights · Guides · 2026</div>
     <h1>RuffNeck <em>Knowledge Hub</em></h1>
-<div class="rn-blog-meta" style="max-width:720px;margin:0 0 24px;padding:14px 16px;border:1px solid #e5e7eb;border-radius:12px;background:#f8fafc;font-size:14px;line-height:1.5;color:#374151">
+<div class="rn-blog-meta" style="max-width:720px;margin:0 0 24px;padding:14px 16px;border:1px solid rgba(255,255,255,0.22);border-radius:12px;background:rgba(255,255,255,0.1);font-size:14px;line-height:1.5;color:#f8fafc;">
   <strong>Author:</strong> Hassan Zakariya · RuffNeck Entertainment<br>
   <strong>Updated:</strong> August 2026 · <a href="/founder" style="color:#087f99;font-weight:700">About the founder</a>
   · <a href="/services-ai.html" style="color:#087f99;font-weight:700">AI services</a>
@@ -2572,34 +2796,15 @@ button,a,.btn{touch-action:manipulation}
 
 <div id="rnSimpleSearch" class="rn-simple-search">
   <label for="rnQ" class="rn-simple-search-label">Search articles</label>
-  <input type="search" id="rnQ" name="rnQ" placeholder="Type to filter articles…" autocomplete="off" enterkeyhint="search" />
-  <p id="rnQStatus" class="rn-simple-search-status" aria-live="polite"></p>
-</div>
-
-<div class="featured-section">
-  <div class="container">
-    <div class="featured-card" onclick="openArticle('featured')">
-      <div class="featured-thumb">🤖</div>
-      <div class="featured-body">
-        <div class="featured-label">AI & Automation · 2026</div>
-        <h2>Top 12 AI Career Roles You Can Start in 2026 — No Coding Required</h2>
-        <p>AI Data Annotator, Evaluator, Ethics Reviewer, Content Writer, Tutor, Research Assistant — the complete breakdown of every AI role you can step into today, with realistic income expectations and step-by-step entry paths.</p>
-        <div class="featured-meta">
-          <span>RuffNeck Entertainment</span>
-          <span class="card-dot"></span>
-          <span>June 2026</span>
-          <span class="card-dot"></span>
-          <span class="read-time">12 min read</span>
-        </div>
-        <button type="button" class="btn btn-primary btn-sm rn-native-read" onclick="event.stopPropagation(); openArticle('featured');">Read full article</button>
-      </div>
-    </div>
+  <div class="rn-search-row">
+    <input type="search" id="rnQ" name="rnQ" placeholder="Search articles…" autocomplete="off" enterkeyhint="search" />
+    <button type="button" id="rnQBtn" class="rn-search-btn">Search</button>
   </div>
+  <p id="rnQStatus" class="rn-simple-search-status" aria-live="polite">Type a keyword, then press Search or Enter</p>
 </div>
 
-
-<!-- CMS published posts (Admin) — always visible -->
-<div id="cmsPostsSection" class="cms-posts-section" style="max-width:1100px;margin:0 auto 28px;padding:0 16px;">
+<!-- featured removed -->
+id="cmsPostsSection" class="cms-posts-section" style="max-width:1100px;margin:0 auto 28px;padding:0 16px;">
   <h2 class="grid-heading" style="margin-bottom:12px;">Latest from RuffNeck</h2>
   <p id="cmsPostsStatus" style="font-size:13px;color:#64748b;margin:0 0 12px;">Loading new posts…</p>
   <div id="cmsPostsGrid" class="blog-grid" style="display:grid;gap:16px;"></div>
@@ -2870,9 +3075,9 @@ button,a,.btn{touch-action:manipulation}
 <div class="article-overlay" id="articleOverlay">
   <div class="article-modal" id="articleModal">
     <div class="article-modal-header">
-      <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-bottom:4px;">
-        <button type="button" class="article-back-btn" onclick="closeArticle()">← Back to Blog</button>
-        <a href="/" class="article-home-btn">🏠 Homepage</a>
+      <div class="rn-modal-toolbar">
+        <button type="button" class="article-back-btn rn-modal-close" onclick="closeArticle()" aria-label="Close article">← Back to articles</button>
+        <button type="button" class="rn-modal-x" onclick="closeArticle()" aria-label="Close">✕</button>
       </div>
       <div class="article-label" id="articleLabel"></div>
       <h2 id="articleTitle"></h2>
@@ -4189,11 +4394,10 @@ window.RNCms.listPosts = async function () {
 .rn-blog-meta p,
 .rn-blog-meta span,
 .rn-blog-meta strong {
-  color: #1f2937 !important;
+  color: #f8fafc !important;
   opacity: 1 !important;
 }
-.rn-blog-meta a {
-  color: #0e7490 !important;
+.rn-blog-meta a { color: #67e8f9 !important;
   font-weight: 700 !important;
 }
 .filter-btn {
@@ -4292,8 +4496,7 @@ button.filter-btn.active {
   opacity: 1 !important;
   -webkit-text-fill-color: #0f172a !important;
 }
-.rn-blog-meta a {
-  color: #0e7490 !important;
+.rn-blog-meta a { color: #67e8f9 !important;
   -webkit-text-fill-color: #0e7490 !important;
   font-weight: 700 !important;
 }
@@ -4473,8 +4676,7 @@ div.rn-blog-meta p {
   -webkit-text-fill-color: #0f172a !important;
   opacity: 1 !important;
 }
-.rn-blog-meta a {
-  color: #0e7490 !important;
+.rn-blog-meta a { color: #67e8f9 !important;
   -webkit-text-fill-color: #0e7490 !important;
   font-weight: 700 !important;
 }
@@ -4637,70 +4839,6 @@ div.rn-blog-meta p {
 
 
 
-<script id="rn-simple-search-js">
-(function(){
-  function cards(){
-    return Array.prototype.slice.call(document.querySelectorAll('.blog-card, .rn-cms-post'));
-  }
-  function run(){
-    var input = document.getElementById('rnQ');
-    var status = document.getElementById('rnQStatus');
-    if(!input) return;
-    var q = (input.value || '').toLowerCase().replace(/\s+/g,' ').trim();
-    var list = cards();
-    var n = 0;
-    for(var i=0;i<list.length;i++){
-      var card = list[i];
-      var hay = (
-        (card.getAttribute('data-title')||'') + ' ' +
-        (card.getAttribute('data-cat')||'') + ' ' +
-        (card.getAttribute('data-category')||'') + ' ' +
-        (card.getAttribute('data-body')||'') + ' ' +
-        (card.textContent||'')
-      ).toLowerCase();
-      var show = !q || hay.indexOf(q) !== -1;
-      if(show){
-        card.classList.remove('rn-hide');
-        card.style.removeProperty('display');
-        n++;
-      } else {
-        card.classList.add('rn-hide');
-        card.style.setProperty('display','none','important');
-      }
-    }
-    if(status){
-      if(!q) status.textContent = n + ' articles';
-      else if(n === 0) status.textContent = 'No articles match “' + input.value + '”';
-      else status.textContent = n + ' match' + (n===1?'':'es');
-    }
-  }
-  function boot(){
-    var input = document.getElementById('rnQ');
-    if(!input) return;
-    input.addEventListener('input', run);
-    input.addEventListener('keyup', run);
-    input.addEventListener('search', run);
-    run();
-    [500, 1500, 4000].forEach(function(t){ setTimeout(run, t); });
-    var grids = [document.getElementById('blogGrid'), document.getElementById('cmsPostsGrid')];
-    grids.forEach(function(g){
-      if(g && window.MutationObserver){
-        new MutationObserver(run).observe(g, {childList:true, subtree:true});
-      }
-    });
-  }
-  window.filterBlog = run;
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-</script>
-
-
-
-
-
-
-
 <footer id="rn-blog-footer">
   <div>
     <a href="/">Home</a>
@@ -4753,6 +4891,172 @@ div.rn-blog-meta p {
     var g = document.getElementById("blogGrid") || document.getElementById("cmsPostsGrid");
     if (g && window.MutationObserver) new MutationObserver(scan).observe(g, { childList: true, subtree: true });
   }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+</script>
+
+
+<script id="rn-blog-modal-close-js">
+(function () {
+  function ensureBottomClose() {
+    var body = document.getElementById("articleBody");
+    var footer = document.querySelector(".article-footer");
+    if (!body) return;
+    var existing = document.getElementById("rnModalCloseBottom");
+    if (existing) return;
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.id = "rnModalCloseBottom";
+    btn.className = "rn-modal-close-bottom";
+    btn.textContent = "Close article";
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (typeof window.closeArticle === "function") window.closeArticle();
+    });
+    if (footer && footer.parentNode) {
+      footer.parentNode.insertBefore(btn, footer);
+    } else {
+      body.appendChild(btn);
+    }
+  }
+
+  // Click outside modal closes
+  var overlay = document.getElementById("articleOverlay");
+  if (overlay && !overlay.dataset.rnOutside) {
+    overlay.dataset.rnOutside = "1";
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay && typeof window.closeArticle === "function") {
+        window.closeArticle();
+      }
+    });
+  }
+
+  // Escape key closes
+  if (!window.__rnEscClose) {
+    window.__rnEscClose = true;
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && typeof window.closeArticle === "function") {
+        window.closeArticle();
+      }
+    });
+  }
+
+  // Wrap openArticle to ensure bottom close exists after open
+  function wrap() {
+    if (typeof window.openArticle !== "function" || window.openArticle.__rnWrapped) return;
+    var orig = window.openArticle;
+    window.openArticle = function (id) {
+      var r = orig.apply(this, arguments);
+      setTimeout(ensureBottomClose, 0);
+      setTimeout(ensureBottomClose, 100);
+      // scroll modal toolbar into view
+      try {
+        var header = document.querySelector(".article-modal-header");
+        if (header) header.scrollIntoView({ block: "start" });
+        var ov = document.getElementById("articleOverlay");
+        if (ov) ov.scrollTop = 0;
+      } catch (err) {}
+      return r;
+    };
+    window.openArticle.__rnWrapped = true;
+  }
+
+  wrap();
+  setTimeout(wrap, 500);
+  setTimeout(wrap, 2000);
+})();
+</script>
+
+
+
+<script id="rn-simple-search-js">
+(function () {
+  function cards() {
+    return Array.prototype.slice.call(
+      document.querySelectorAll(".blog-card, .rn-cms-post, #blogGrid > *, #cmsPostsGrid > *")
+    ).filter(function (el) {
+      return el && (el.classList.contains("blog-card") || el.classList.contains("rn-cms-post") || el.getAttribute("data-title"));
+    });
+  }
+
+  function run() {
+    var input = document.getElementById("rnQ");
+    var status = document.getElementById("rnQStatus");
+    if (!input) return;
+
+    var q = (input.value || "").toLowerCase().replace(/\s+/g, " ").trim();
+    var list = cards();
+    var n = 0;
+
+    for (var i = 0; i < list.length; i++) {
+      var card = list[i];
+      var hay = (
+        (card.getAttribute("data-title") || "") + " " +
+        (card.getAttribute("data-cat") || "") + " " +
+        (card.getAttribute("data-category") || "") + " " +
+        (card.textContent || "")
+      ).toLowerCase();
+      var show = !q || hay.indexOf(q) !== -1;
+      card.style.display = show ? "" : "none";
+      if (show) n++;
+    }
+
+    if (status) {
+      if (!q) {
+        status.textContent = "Showing all " + list.length + " articles. Type a word, then press Search or Enter.";
+      } else if (n === 0) {
+        status.textContent = "No articles match \u201c" + input.value.trim() + "\u201d. Clear the box to see all.";
+      } else {
+        status.textContent = n + " article" + (n === 1 ? "" : "s") + " match \u201c" + input.value.trim() + "\u201d.";
+        // Scroll to first visible card
+        for (var j = 0; j < list.length; j++) {
+          if (list[j].style.display !== "none") {
+            try {
+              list[j].scrollIntoView({ behavior: "smooth", block: "start" });
+            } catch (e) {}
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  function boot() {
+    var input = document.getElementById("rnQ");
+    var btn = document.getElementById("rnQBtn");
+    if (!input) return;
+
+    if (input.placeholder === "Type to filter articles..." || !input.placeholder) {
+      input.placeholder = "Type a keyword\u2026";
+    }
+
+    if (btn) {
+      btn.type = "button";
+      btn.textContent = "Search";
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        run();
+      });
+    }
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        run();
+      }
+    });
+
+    // Optional: filter as you type (still works without button)
+    input.addEventListener("input", function () {
+      // only auto-filter when empty (reset) or after 2+ chars
+      var v = (input.value || "").trim();
+      if (v.length === 0 || v.length >= 2) run();
+    });
+
+    run();
+  }
+
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();
