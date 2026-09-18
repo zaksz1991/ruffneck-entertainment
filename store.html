@@ -603,6 +603,7 @@ footer, .site-footer {
 }
 </style>
 
+<link rel="stylesheet" href="/css/rn-site-system.css"/>
 </head>
 <body>
 
@@ -615,7 +616,7 @@ footer, .site-footer {
   <div class="header-inner">
     <a class="logo" href="/">
       <img src="/icon-192.png" width="36" height="36" alt="RuffNeck Entertainment"/>
-      <span>RuffNeck</span>
+      <span class="rn-brand-full">RuffNeck Entertainment</span>
     </a>
     <nav class="nav-desktop" aria-label="Primary">
       <a href="/store">Store</a>
@@ -689,7 +690,12 @@ footer, .site-footer {
     <h2 id="featured-heading">Featured products</h2>
     <p>Start with high-demand guides and templates from the catalogue.</p>
   </div>
-  <div class="products-grid">
+  
+<div class="rn-store-search-row rn-search-row" style="margin:12px 0 18px;padding:0 4px;">
+  <input type="search" id="rnStoreQ" placeholder="Search products…" aria-label="Search products" style="flex:1;min-height:44px;border:1.5px solid #e2e8f0;border-radius:10px;padding:10px 14px;"/>
+  <button type="button" id="rnStoreQBtn" style="min-height:44px;min-width:84px;border:0;border-radius:10px;background:#0b1e3a;color:#fff;font-weight:800;cursor:pointer;">Search</button>
+</div>
+<div class="products-grid">
     
 <article class="product-card" data-product-card data-category="ai-career" data-cat="ai-career" data-name="AI Data Annotator Guide" data-id="p001">
   <div class="product-card__top">
@@ -2492,6 +2498,32 @@ document.addEventListener('DOMContentLoaded', function() {
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
   setTimeout(boot, 600);
+})();
+</script>
+
+
+<script id="rn-store-search-js">
+(function(){
+  function cards(){
+    return Array.prototype.slice.call(document.querySelectorAll('.product-card, .store-card, [data-product], #productGrid > *'));
+  }
+  function run(){
+    var input = document.getElementById('rnStoreQ');
+    if(!input) return;
+    var q = (input.value||'').toLowerCase().trim();
+    cards().forEach(function(c){
+      var hay = (c.getAttribute('data-title')||c.textContent||'').toLowerCase();
+      c.style.display = (!q || hay.indexOf(q)!==-1) ? '' : 'none';
+    });
+  }
+  function boot(){
+    var b = document.getElementById('rnStoreQBtn');
+    var i = document.getElementById('rnStoreQ');
+    if(b) b.addEventListener('click', run);
+    if(i) i.addEventListener('keydown', function(e){ if(e.key==='Enter'){ e.preventDefault(); run(); }});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
 })();
 </script>
 

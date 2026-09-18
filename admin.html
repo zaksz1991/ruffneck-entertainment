@@ -249,6 +249,7 @@ textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!impo
 #banner{min-height:1.5rem}
 </style>
 
+<link rel="stylesheet" href="/css/rn-site-system.css"/>
 </head>
 <body>
 
@@ -1275,6 +1276,41 @@ document.getElementById('saveBlogBtn').onclick = async function(){
       if(ev.target.closest && ev.target.closest('[data-edit-post]')){
         setTimeout(loadIntoEditor, 250);
       }
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+})();
+</script>
+
+
+<script id="rn-editor-toolbar-js">
+(function(){
+  function sync(){
+    var ed = document.getElementById('bBodyEditor');
+    var ta = document.getElementById('bBody');
+    if(ed && ta) ta.value = ed.innerHTML;
+  }
+  function boot(){
+    var ed = document.getElementById('bBodyEditor');
+    var ta = document.getElementById('bBody');
+    if(ed && ta && ta.value) ed.innerHTML = ta.value;
+    document.querySelectorAll('#rn-editor-toolbar [data-cmd]').forEach(function(btn){
+      btn.addEventListener('mousedown', function(e){ e.preventDefault(); });
+      btn.addEventListener('click', function(e){
+        e.preventDefault();
+        var cmd = btn.getAttribute('data-cmd');
+        document.execCommand(cmd, false, null);
+        sync();
+      });
+    });
+    if(ed){
+      ed.addEventListener('input', sync);
+      ed.addEventListener('blur', sync);
+    }
+    // also sync before form submit
+    document.querySelectorAll('form').forEach(function(f){
+      f.addEventListener('submit', sync);
     });
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);

@@ -1,0 +1,142 @@
+/* RuffNeck shared design system — core pages */
+:root {
+  --rn-navy: #0b1e3a;
+  --rn-navy-2: #04101f;
+  --rn-cyan: #00b4d8;
+  --rn-cyan-soft: #67e8f9;
+  --rn-gold: #fbbf24;
+  --rn-bg: #f6f8fb;
+  --rn-surface: #ffffff;
+  --rn-ink: #0f172a;
+  --rn-muted: #475569;
+  --rn-line: #e2e8f0;
+  --rn-radius: 14px;
+  --rn-shadow: 0 8px 26px rgba(11,30,58,.08);
+  --rn-header-h: 64px;
+}
+
+/* Sticky header — full brand */
+.rn-site-header,
+header.site-header,
+.nav#nav,
+header.rn-top {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1000 !important;
+  background: var(--rn-navy) !important;
+  color: #fff !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,.06);
+}
+
+.rn-site-header .rn-brand,
+.site-header .logo,
+.nav-logo,
+.rn-top .rn-brand {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+  color: #fff !important;
+  text-decoration: none !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+  white-space: nowrap !important;
+  max-width: 100%;
+}
+
+.rn-site-header .rn-brand span,
+.site-header .logo span,
+.nav-logo span,
+.rn-top .rn-brand span {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+
+/* Prefer full brand text where present */
+.rn-brand-full { font-weight: 800; letter-spacing: -0.02em; }
+
+/* Primary CTA */
+.rn-btn-primary,
+.btn-primary,
+button.rn-read-one {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--rn-navy);
+  color: #fff !important;
+  font-weight: 800;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.rn-btn-primary:hover,
+.btn-primary:hover {
+  background: #14304f;
+}
+
+/* Cards */
+.rn-card,
+.blog-card,
+.product-card,
+.store-card {
+  background: var(--rn-surface);
+  border: 1px solid var(--rn-line);
+  border-radius: var(--rn-radius);
+  box-shadow: var(--rn-shadow);
+  overflow: hidden;
+}
+
+/* Search row */
+.rn-search-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+  max-width: 520px;
+}
+.rn-search-row input {
+  flex: 1;
+  min-height: 44px;
+  border: 1.5px solid var(--rn-line);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 15px;
+}
+.rn-search-row button {
+  min-height: 44px;
+  min-width: 84px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--rn-navy);
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* Readable on dark heroes */
+.blog-hero .rn-blog-meta,
+.blog-hero .rn-blog-meta *:not(a) {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+.blog-hero .rn-blog-meta a {
+  color: var(--rn-cyan-soft) !important;
+}
+
+/* Store: never hide product grid with display:none from upgrades */
+#productGrid, .products-grid, .store-grid {
+  min-height: 40px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .rn-site-header .rn-brand span,
+  .site-header .logo span {
+    font-size: 13px;
+  }
+  .nav-desktop { display: none; }
+}
