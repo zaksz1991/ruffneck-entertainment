@@ -2623,6 +2623,70 @@ button.rn-read-btn {
 }
 </style>
 
+<style id="rn-article-modal-hero">
+/* Modal header: always readable white text + flyer image */
+.article-modal-header,
+.article-modal-header * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.article-modal-header .article-label,
+#articleLabel {
+  color: #67e8f9 !important;
+  -webkit-text-fill-color: #67e8f9 !important;
+  font-size: 12px !important;
+  letter-spacing: 1.5px !important;
+  text-transform: uppercase !important;
+  font-weight: 700 !important;
+  margin-bottom: 8px !important;
+}
+.article-modal-header h2,
+#articleTitle {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: clamp(18px, 4vw, 26px) !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  margin: 0 0 8px !important;
+}
+.article-modal-header .article-meta,
+#articleMeta {
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+  font-size: 13px !important;
+  opacity: 1 !important;
+}
+.rn-article-hero {
+  display: none;
+  width: 100%;
+  margin: 0 0 14px 0;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #04101f;
+}
+.rn-article-hero-img,
+#articleHeroImg img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 280px !important;
+  object-fit: cover !important;
+  border-radius: 10px !important;
+}
+@media (max-width: 640px) {
+  .rn-article-hero-img,
+  #articleHeroImg img {
+    max-height: 200px !important;
+  }
+}
+/* Keep toolbar buttons visible */
+.article-modal-header .rn-modal-toolbar,
+.article-modal-header .rn-modal-toolbar * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+</style>
+
 
 <style id="rn-hide-blog-cats">
 /* Hide category chip row on blog */
@@ -3151,9 +3215,10 @@ button,a,.btn{touch-action:manipulation}
         <button type="button" class="article-back-btn rn-modal-close" onclick="closeArticle()" aria-label="Close article">← Back to articles</button>
         <button type="button" class="rn-modal-x" onclick="closeArticle()" aria-label="Close">✕</button>
       </div>
-      <div class="article-label" id="articleLabel"></div>
-      <h2 id="articleTitle"></h2>
-      <div class="article-meta" id="articleMeta"></div>
+      <div id="articleHeroImg" class="rn-article-hero" style="display:none;"></div>
+      <div class="article-label" id="articleLabel" style="color:#67e8f9 !important;"></div>
+      <h2 id="articleTitle" style="color:#ffffff !important;"></h2>
+      <div class="article-meta" id="articleMeta" style="color:#e2e8f0 !important;"></div>
     </div>
     <div class="article-body" id="articleBody"></div>
     <div class="article-footer">
@@ -3173,7 +3238,7 @@ button,a,.btn{touch-action:manipulation}
         <div class="comment-form">
           <input type="text" id="commentName" class="comment-input" placeholder="Your name"/>
           <textarea id="commentText" class="comment-textarea" placeholder="Share your thoughts…" rows="3"></textarea>
-          <button type="button" class="btn btn-primary btn-sm rn-native-read" onclick="event.stopPropagation();openArticle('featured');">Read full article</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="postComment()">Post comment</button>
         </div>
         <div class="comments-list" id="commentsList"></div>
       </div>
@@ -3571,11 +3636,27 @@ function openArticle(id) {
   const article = articles[id];
   if (!article) return;
 
-  document.getElementById('articleLabel').textContent = article.label;
-  document.getElementById('articleTitle').textContent = article.title;
-  document.getElementById('articleMeta').textContent = article.meta;
+  var labelEl = document.getElementById('articleLabel');
+  var titleEl = document.getElementById('articleTitle');
+  var metaEl = document.getElementById('articleMeta');
+  if(labelEl){ labelEl.textContent = article.label || ''; labelEl.style.color = '#67e8f9'; }
+  if(titleEl){ titleEl.textContent = article.title || ''; titleEl.style.color = '#ffffff'; }
+  if(metaEl){ metaEl.textContent = article.meta || ''; metaEl.style.color = '#e2e8f0'; }
   (function(){var raw=article.body||'';var el=document.getElementById('articleBody');if(!el)return;if(/<[a-z][\s\S]*>/i.test(raw)){el.innerHTML=raw;return;}var esc=String(raw).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');var parts=esc.split(/\n\s*\n/).filter(function(p){return p.trim();});el.innerHTML=parts.length?parts.map(function(p){return '<p>'+p.trim().replace(/\n/g,'<br>')+'</p>';}).join(''):('<p>'+esc.replace(/\n/g,'<br>')+'</p>');})();
   document.getElementById('articleTags').innerHTML = (Array.isArray(article.tags)?article.tags:(typeof article.tags==='string'&&article.tags?article.tags.split(/[,;]/):[])).map(t => `<span class="article-tag">${String(t).replace(/</g,'')}</span>`).join('');
+
+  // Flyer / cover image
+  var hero = document.getElementById('articleHeroImg');
+  if(hero){
+    var imgUrl = article.image ? String(article.image) : '';
+    if(imgUrl){
+      hero.style.display = 'block';
+      hero.innerHTML = '<img class="rn-article-hero-img" src="'+imgUrl.replace(/"/g,'&quot;')+'" alt="'+(article.title||'').replace(/"/g,'&quot;')+'" loading="eager" decoding="async"/>';
+    } else {
+      hero.style.display = 'none';
+      hero.innerHTML = '';
+    }
+  }
 
   currentArticleId = id;
   renderComments(id);
@@ -4146,7 +4227,19 @@ window.RNCms.listPosts = async function () {
     var cat = escapeHtml(p.cat || "Blog");
     var title = escapeHtml(p.title || "Untitled");
     var desc = escapeHtml(p.desc || "");
+    
     var author = escapeHtml(p.author || "RuffNeck Entertainment");
+    var createdRaw = p.created || p.created_at || "";
+    var updatedRaw = p.updated || p.updated_at || p.modified || "";
+    var dateNote = "";
+    if (updatedRaw && createdRaw && String(updatedRaw) !== String(createdRaw)) {
+      dateNote = " · Updated " + escapeHtml(String(updatedRaw));
+    } else if (updatedRaw) {
+      dateNote = " · Updated " + escapeHtml(String(updatedRaw));
+    } else if (createdRaw) {
+      dateNote = " · " + escapeHtml(String(createdRaw));
+    }
+
     var imgSrc = p.image ? String(p.image) : "";
     var thumbInner = imgSrc
       ? ('<img class="rn-full-img" src="' + imgSrc.replace(/"/g, "&quot;") + '" alt="' + title + '" loading="lazy" decoding="async"/>')
@@ -4161,7 +4254,7 @@ window.RNCms.listPosts = async function () {
       '<div class="blog-card-body" style="padding:14px 16px 16px;color:#0f172a;">' +
         '<h3 style="margin:0 0 8px;font-size:16px;line-height:1.35;color:#0B1E3A;">' + title + "</h3>" +
         '<p style="margin:0;font-size:13px;line-height:1.5;color:#475569;">' + desc + "</p>" +
-        '<p style="margin:10px 0 0;font-size:12px;color:#64748b;">' + author + "</p>" +
+        '<p style="margin:10px 0 0;font-size:12px;color:#64748b;">' + author + dateNote + "</p>" +
       "</div>";
 
     function open() {
@@ -4231,13 +4324,30 @@ window.RNCms.listPosts = async function () {
 
     published.forEach(function (p) {
       if (!p || !p.id) return;
-      window.articles[p.id] = {
-        label: p.cat || "Blog",
-        title: p.title || "Untitled",
-        meta: (p.author || "RuffNeck Entertainment") + (p.created ? " · " + p.created : ""),
-        body: p.body || p.desc || "",
-        tags: p.tags || []
-      };
+      window.articles[p.id] = (function(){
+        var author = p.author || "RuffNeck Entertainment";
+        var created = p.created || p.created_at || "";
+        var updated = p.updated || p.updated_at || p.modified || "";
+        // Prefer display date: updated if different from created, else created
+        var dateLine = "";
+        if (updated && created && String(updated) !== String(created)) {
+          dateLine = " · Updated " + updated + " · Published " + created;
+        } else if (updated) {
+          dateLine = " · Updated " + updated;
+        } else if (created) {
+          dateLine = " · " + created;
+        }
+        return {
+          label: p.cat || "Blog",
+          title: p.title || "Untitled",
+          meta: author + dateLine,
+          body: p.body || p.desc || "",
+          tags: p.tags || [],
+          image: p.image || "",
+          created: created,
+          updated: updated
+        };
+      })();
       var card = buildCard(p);
       if (cmsGrid) cmsGrid.appendChild(card.cloneNode(true));
       // re-bind events on clone - better append same builder twice
@@ -4837,13 +4947,25 @@ div.rn-blog-meta p {
         var meta = document.getElementById('articleMeta');
         var bodyEl = document.getElementById('articleBody');
         var tagsEl = document.getElementById('articleTags');
-        if(label) label.textContent = article.label || '';
-        if(title) title.textContent = article.title || '';
-        if(meta) meta.textContent = article.meta || '';
+        if(label){ label.textContent = article.label || ''; label.style.color = '#67e8f9'; }
+        if(title){ title.textContent = article.title || ''; title.style.color = '#ffffff'; }
+        if(meta){ meta.textContent = article.meta || ''; meta.style.color = '#e2e8f0'; }
         if(bodyEl) bodyEl.innerHTML = bodyHtml || '<p></p>';
         if(tagsEl) tagsEl.innerHTML = article.tags.map(function(t){
           return '<span class="article-tag">'+String(t).replace(/</g,'')+'</span>';
         }).join('');
+        // Show flyer / cover image if present
+        var hero = document.getElementById('articleHeroImg');
+        if(hero){
+          var imgUrl = article.image ? String(article.image) : '';
+          if(imgUrl){
+            hero.style.display = 'block';
+            hero.innerHTML = '<img class="rn-article-hero-img" src="'+imgUrl.replace(/"/g,'&quot;')+'" alt="'+(article.title||'').replace(/"/g,'&quot;')+'" loading="eager" decoding="async"/>';
+          } else {
+            hero.style.display = 'none';
+            hero.innerHTML = '';
+          }
+        }
         if(typeof window.currentArticleId !== 'undefined') window.currentArticleId = id;
         if(typeof window.renderComments === 'function') window.renderComments(id);
         var ov = document.getElementById('articleOverlay');
