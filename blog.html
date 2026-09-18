@@ -2037,18 +2037,28 @@ body {
 </style>
 
 
-<style id="rn-blog-expand-css">
-/* Clean card actions: Expand + Read full */
+
+<style id="rn-blog-card-actions-css">
+/* Hide legacy duplicate read labels */
+.blog-card .read-link,
+.featured-card .read-link,
+span.read-link {
+  display: none !important;
+}
+/* Hide any old injected duplicates if present from cache */
+.rn-card-actions .rn-read-one-legacy:nth-of-type(2),
+.blog-card .rn-read-one-legacy + .rn-read-one-legacy {
+  display: none !important;
+}
 .rn-card-actions {
   display: flex !important;
   flex-direction: column !important;
   gap: 8px !important;
   margin-top: 14px !important;
   width: 100% !important;
-  box-sizing: border-box !important;
 }
-.rn-card-actions .rn-exp-btn,
-.rn-card-actions .rn-read-full {
+.rn-exp-btn,
+.rn-read-one {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -2060,31 +2070,22 @@ body {
   font-weight: 800 !important;
   cursor: pointer !important;
   box-sizing: border-box !important;
-  text-decoration: none !important;
-  border: 1.5px solid transparent !important;
   font-family: inherit !important;
-}
-.rn-card-actions .rn-exp-btn {
-  background: #f1f5f9 !important;
+  border: 1.5px solid #cbd5e1 !important;
+  background: #f8fafc !important;
   color: #0b1e3a !important;
-  border-color: #cbd5e1 !important;
 }
-.rn-card-actions .rn-exp-btn[aria-expanded="true"] {
-  background: #e2e8f0 !important;
-  border-color: #94a3b8 !important;
-}
-.rn-card-actions .rn-read-full {
+.rn-read-one {
   background: #0b1e3a !important;
   color: #fff !important;
   border-color: #0b1e3a !important;
 }
-.rn-card-actions .rn-read-full:hover,
-.rn-card-actions .rn-exp-btn:hover {
-  filter: brightness(1.05);
+.rn-exp-btn[aria-expanded="true"] {
+  background: #e2e8f0 !important;
 }
 .rn-exp-panel {
   display: none !important;
-  margin-top: 12px !important;
+  margin: 12px 0 0 !important;
   padding: 14px 16px !important;
   border-radius: 12px !important;
   background: #f8fafc !important;
@@ -2095,23 +2096,19 @@ body {
   white-space: pre-wrap !important;
   word-break: break-word !important;
 }
-.rn-exp-panel.open {
-  display: block !important;
+.rn-exp-panel.open { display: block !important; }
+.featured-card .rn-native-read {
+  margin-top: 16px !important;
+  min-height: 44px !important;
+  padding: 12px 18px !important;
+  font-weight: 800 !important;
+  cursor: pointer !important;
 }
-/* Hide duplicate old read links that clutter cards once we inject actions */
-.blog-card .read-link,
-.blog-card .rn-expand-btn,
-.blog-card .rn-blog-hint {
-  display: none !important;
-}
+/* Don't inject a second read on featured — native button is enough */
+.featured-card .rn-card-actions { display: none !important; }
 @media (min-width: 640px) {
-  .rn-card-actions {
-    flex-direction: row !important;
-  }
-  .rn-card-actions .rn-exp-btn,
-  .rn-card-actions .rn-read-full {
-    flex: 1 1 0 !important;
-  }
+  .rn-card-actions { flex-direction: row !important; }
+  .rn-exp-btn, .rn-read-one { flex: 1 1 0 !important; }
 }
 </style>
 
@@ -2346,7 +2343,7 @@ button,a,.btn{touch-action:manipulation}
           <span class="card-dot"></span>
           <span class="read-time">12 min read</span>
         </div>
-        <button type="button" class="btn btn-primary btn-sm">Read Full Article →</button>
+        <button type="button" class="btn btn-primary btn-sm rn-native-read" onclick="event.stopPropagation(); openArticle('featured');">Read full article</button>
       </div>
     </div>
   </div>
@@ -4452,7 +4449,8 @@ div.rn-blog-meta p {
 
 
 
-<script id="rn-blog-expand-toggle">
+
+<script id="rn-blog-card-actions">
 (function () {
   function plain(html) {
     var d = document.createElement("div");
@@ -4465,142 +4463,97 @@ div.rn-blog-meta p {
     if (id) return id;
     var oc = card.getAttribute("onclick") || "";
     var m = oc.match(/openArticle\(\s*['"]([^'"]+)['"]\s*\)/);
-    if (m) return m[1];
-    var rl = card.querySelector("[onclick*='openArticle']");
-    if (rl) {
-      var o2 = rl.getAttribute("onclick") || "";
-      var m2 = o2.match(/openArticle\(\s*['"]([^'"]+)['"]\s*\)/);
-      if (m2) return m2[1];
-    }
-    return "";
+    return m ? m[1] : "";
   }
 
-  function bodyFor(card) {
+  function previewText(card) {
     var t = card.getAttribute("data-body") || card.getAttribute("data-full") || "";
-    if (t && t.length > 40) return plain(t).slice(0, 4000);
-
+    if (t && t.length > 40) return plain(t).slice(0, 3500);
     var id = articleId(card);
     if (id && window.articles && window.articles[id] && window.articles[id].body) {
-      return plain(window.articles[id].body).slice(0, 4000);
+      return plain(window.articles[id].body).slice(0, 3500);
     }
-
-    var ps = card.querySelectorAll(".blog-card-body > p, .blog-intro");
     var bits = [];
-    ps.forEach(function (p) {
+    card.querySelectorAll(".blog-card-body > p").forEach(function (p) {
       var x = (p.textContent || "").trim();
       if (x) bits.push(x);
     });
-    if (bits.length) return bits.join("\n\n");
-
-    return "Preview not available. Use Read full article.";
+    return bits.length ? bits.join("\n\n") : "Preview not available.";
   }
 
-  function bind(card) {
-    if (!card || card.dataset.rnActions === "1") return;
-    card.dataset.rnActions = "1";
+  function bindBlogCard(card) {
+    if (!card || card.dataset.rnAct === "1") return;
+    if (card.classList.contains("featured-card")) return; // featured has its own single button
+    card.dataset.rnAct = "1";
 
     var host = card.querySelector(".blog-card-body") || card;
-
-    // clean previous injects
-    host.querySelectorAll(".rn-card-actions, .rn-exp-panel, .rn-exp-btn, .rn-read-full").forEach(function (n) {
-      n.remove();
-    });
+    host.querySelectorAll(".rn-card-actions, .rn-exp-panel").forEach(function (n) { n.remove(); });
 
     var panel = document.createElement("div");
     panel.className = "rn-exp-panel";
-    panel.setAttribute("hidden", "hidden");
 
-    var actions = document.createElement("div");
-    actions.className = "rn-card-actions";
+    var row = document.createElement("div");
+    row.className = "rn-card-actions";
 
-    var expBtn = document.createElement("button");
-    expBtn.type = "button";
-    expBtn.className = "rn-exp-btn";
-    expBtn.textContent = "Expand";
-    expBtn.setAttribute("aria-expanded", "false");
+    var exp = document.createElement("button");
+    exp.type = "button";
+    exp.className = "rn-exp-btn";
+    exp.textContent = "Expand";
+    exp.setAttribute("aria-expanded", "false");
 
-    var readBtn = document.createElement("button");
-    readBtn.type = "button";
-    readBtn.className = "rn-read-full";
-    readBtn.textContent = "Read full article";
+    var read = document.createElement("button");
+    read.type = "button";
+    read.className = "rn-read-one";
+    read.textContent = "Read full article";
 
-    expBtn.addEventListener("click", function (e) {
+    exp.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
       if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-
-      var open = expBtn.getAttribute("aria-expanded") !== "true";
+      var open = exp.getAttribute("aria-expanded") !== "true";
       if (open) {
-        panel.textContent = bodyFor(card);
+        panel.textContent = previewText(card);
         panel.classList.add("open");
-        panel.removeAttribute("hidden");
-        expBtn.setAttribute("aria-expanded", "true");
-        expBtn.textContent = "Collapse";
+        exp.setAttribute("aria-expanded", "true");
+        exp.textContent = "Collapse";
       } else {
-        panel.classList.remove("open");
-        panel.setAttribute("hidden", "hidden");
         panel.textContent = "";
-        expBtn.setAttribute("aria-expanded", "false");
-        expBtn.textContent = "Expand";
+        panel.classList.remove("open");
+        exp.setAttribute("aria-expanded", "false");
+        exp.textContent = "Expand";
       }
     });
 
-    readBtn.addEventListener("click", function (e) {
+    read.addEventListener("click", function (e) {
       e.preventDefault();
       e.stopPropagation();
       if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-
       var id = articleId(card);
       if (id && typeof window.openArticle === "function") {
         window.openArticle(id);
-        return;
+      } else if (typeof window.openArticle === "function" && card.getAttribute("onclick")) {
+        try { card.onclick(); } catch (err) {}
       }
-      // CMS posts: try data attributes to fill modal if openArticle missing id
-      if (typeof window.openArticle === "function" && card.getAttribute("data-title")) {
-        // fallback: open with synthetic content if articles map missing
-        try {
-          window.openArticle(id || "cms");
-        } catch (err) {}
-      }
-      // last resort: expand panel with full text
-      panel.textContent = bodyFor(card);
-      panel.classList.add("open");
-      panel.removeAttribute("hidden");
-      expBtn.setAttribute("aria-expanded", "true");
-      expBtn.textContent = "Collapse";
     });
 
-    actions.appendChild(expBtn);
-    actions.appendChild(readBtn);
+    row.appendChild(exp);
+    row.appendChild(read);
     host.appendChild(panel);
-    host.appendChild(actions);
-
-    // Prevent whole-card onclick from stealing button clicks
-    card.addEventListener(
-      "click",
-      function (e) {
-        if (e.target.closest && e.target.closest(".rn-card-actions, .rn-exp-btn, .rn-read-full, .rn-exp-panel")) {
-          e.stopPropagation();
-        }
-      },
-      true
-    );
+    host.appendChild(row);
   }
 
   function scan() {
-    document.querySelectorAll(".blog-card, .rn-cms-post").forEach(bind);
+    document.querySelectorAll(".blog-card").forEach(bindBlogCard);
+    // CMS cards
+    document.querySelectorAll(".rn-cms-post").forEach(bindBlogCard);
   }
 
   function boot() {
     scan();
-    [300, 1000, 2500, 5000].forEach(function (t) {
-      setTimeout(scan, t);
-    });
+    [400, 1500, 4000].forEach(function (t) { setTimeout(scan, t); });
     var g = document.getElementById("blogGrid") || document.getElementById("cmsPostsGrid");
     if (g && window.MutationObserver) {
-      new MutationObserver(function () {
-        scan();
-      }).observe(g, { childList: true, subtree: true });
+      new MutationObserver(scan).observe(g, { childList: true, subtree: true });
     }
   }
 
