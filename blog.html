@@ -2567,6 +2567,62 @@ body.rn-ux-page #rnSimpleSearch {
 }
 </style>
 
+
+<style id="rn-blog-dedupe-read">
+/* One CTA only on cards */
+.blog-card .read-link,
+.rn-cms-post .read-link,
+span.read-link,
+.rn-read-btn,
+button.rn-read-btn {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  overflow: hidden !important;
+}
+/* Single primary button */
+.rn-read-one {
+  display: flex !important;
+  width: 100% !important;
+  min-height: 44px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin-top: 10px !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: #0b1e3a !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+}
+/* Meta box readable */
+.rn-blog-meta, .rn-blog-meta * {
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  opacity: 1 !important;
+}
+.rn-blog-meta a, .rn-blog-meta a * {
+  color: #67e8f9 !important;
+  -webkit-text-fill-color: #67e8f9 !important;
+}
+/* Search not covered: leave space for chat widget */
+#rnSimpleSearch {
+  padding-right: 0 !important;
+  margin-bottom: 1.5rem !important;
+}
+#rnSimpleSearch .rn-search-row {
+  max-width: 100% !important;
+}
+#rnQBtn {
+  min-width: 84px !important;
+  z-index: 2 !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4073,7 +4129,7 @@ window.RNCms.listPosts = async function () {
       '<div class="blog-card-body" style="padding:14px 16px 16px;color:#0f172a;">' +
         '<h3 style="margin:0 0 8px;font-size:16px;line-height:1.35;color:#0B1E3A;">' + title + "</h3>" +
         '<p style="margin:0;font-size:13px;line-height:1.5;color:#475569;">' + desc + "</p>" +
-        '<p style="margin:10px 0 0;font-size:12px;color:#64748b;">' + author + " · Read →</p>" +
+        '<p style="margin:10px 0 0;font-size:12px;color:#64748b;">' + author + "</p>" +
       "</div>";
 
     function open() {
@@ -4783,33 +4839,7 @@ div.rn-blog-meta p {
       if(e.key === 'Escape' && typeof window.closeArticle === 'function') window.closeArticle();
     });
   }
-  function addReadButtons(){
-    document.querySelectorAll('.blog-card, .rn-cms-post, .featured-card').forEach(function(card){
-      if(card.dataset.bpRead) return;
-      card.dataset.bpRead = '1';
-      var body = card.querySelector('.blog-card-body, .featured-body, .blog-body') || card;
-      var existing = body.querySelector('.rn-read-btn');
-      if(!existing){
-        var btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'rn-read-btn';
-        btn.textContent = card.classList.contains('featured-card') ? 'Read full article' : 'Read article';
-        body.appendChild(btn);
-        existing = btn;
-      }
-      existing.addEventListener('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        var id = card.getAttribute('data-post-id');
-        if(id && typeof window.openArticle === 'function'){ window.openArticle(id); return; }
-        var oc = card.getAttribute('onclick') || '';
-        var m = oc.match(/openArticle\(['\"]([^'\"]+)['\"]\)/);
-        if(m && typeof window.openArticle === 'function'){ window.openArticle(m[1]); return; }
-        if(typeof window.openArticle === 'function' && card.closest('.featured-card'))
-          window.openArticle('featured');
-      });
-    });
-  }
+  function addReadButtons(){ /* disabled - use single Read full article only */ }
   function boot(){
     patchOpen();
     patchClose();
@@ -4833,52 +4863,6 @@ div.rn-blog-meta p {
   </div>
   <p>RuffNeck Entertainment · Knowledge Hub · © 2026</p>
 </footer>
-
-
-<script id="rn-blog-card-actions">
-(function () {
-  function articleId(card) {
-    var id = card.getAttribute("data-post-id") || card.getAttribute("data-id") || "";
-    if (id) return id;
-    var oc = card.getAttribute("onclick") || "";
-    var m = oc.match(/openArticle\(\s*['"]([^'"]+)['"]\s*\)/);
-    return m ? m[1] : "";
-  }
-  function bind(card) {
-    if (!card || card.dataset.rnAct === "1") return;
-    if (card.classList.contains("featured-card")) return;
-    card.dataset.rnAct = "1";
-    var host = card.querySelector(".blog-card-body") || card;
-    host.querySelectorAll(".rn-card-actions,.rn-read-one,.rn-exp-btn,.rn-exp-panel").forEach(function (n) { n.remove(); });
-    var row = document.createElement("div");
-    row.className = "rn-card-actions";
-    var btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = "rn-read-one";
-    btn.textContent = "Read full article";
-    btn.addEventListener("click", function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-      var id = articleId(card);
-      if (id && typeof window.openArticle === "function") window.openArticle(id);
-    });
-    row.appendChild(btn);
-    host.appendChild(row);
-  }
-  function scan() {
-    document.querySelectorAll(".blog-card,.rn-cms-post").forEach(bind);
-  }
-  function boot() {
-    scan();
-    [500, 2000, 5000].forEach(function (t) { setTimeout(scan, t); });
-    var g = document.getElementById("blogGrid") || document.getElementById("cmsPostsGrid");
-    if (g && window.MutationObserver) new MutationObserver(scan).observe(g, { childList: true, subtree: true });
-  }
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
-  else boot();
-})();
-</script>
 
 
 <script id="rn-blog-modal-close-js">
@@ -5041,6 +5025,55 @@ div.rn-blog-meta p {
     run();
   }
 
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
+  else boot();
+})();
+</script>
+
+
+<script id="rn-blog-card-actions">
+(function () {
+  function articleId(card) {
+    var id = card.getAttribute("data-post-id") || card.getAttribute("data-id") || "";
+    if (id) return id;
+    var oc = card.getAttribute("onclick") || "";
+    var m = oc.match(/openArticle\(\s*['"]([^'"]+)['"]\s*\)/);
+    return m ? m[1] : "";
+  }
+  function bind(card) {
+    if (!card || card.dataset.rnAct === "1") return;
+    if (card.classList.contains("featured-card")) return;
+    card.dataset.rnAct = "1";
+    var host = card.querySelector(".blog-card-body") || card;
+    // remove ALL old read/expand injects
+    host.querySelectorAll(".rn-card-actions, .rn-read-one, .rn-read-btn, .rn-exp-btn, .rn-exp-panel").forEach(function (n) {
+      n.remove();
+    });
+    var row = document.createElement("div");
+    row.className = "rn-card-actions";
+    var btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "rn-read-one";
+    btn.textContent = "Read full article";
+    btn.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+      var id = articleId(card);
+      if (id && typeof window.openArticle === "function") window.openArticle(id);
+    });
+    row.appendChild(btn);
+    host.appendChild(row);
+  }
+  function scan() {
+    document.querySelectorAll(".blog-card, .rn-cms-post").forEach(bind);
+  }
+  function boot() {
+    scan();
+    [300, 1000, 2500, 5000].forEach(function (t) { setTimeout(scan, t); });
+    var g = document.getElementById("blogGrid") || document.getElementById("cmsPostsGrid");
+    if (g && window.MutationObserver) new MutationObserver(scan).observe(g, { childList: true, subtree: true });
+  }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();
