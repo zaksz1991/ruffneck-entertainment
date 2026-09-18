@@ -2476,24 +2476,78 @@ body.rn-ux-page .article-overlay.open,
 </style>
 
 
-<style id="rn-blog-color-fix">
-.blog-hero .label {
-  color: #67e8f9 !important;
-  -webkit-text-fill-color: #67e8f9 !important;
+<style id="rn-blog-search-ui">
+#rnSimpleSearch.rn-simple-search,
+body.rn-ux-page #rnSimpleSearch {
+  width: min(36rem, calc(100% - 1.5rem)) !important;
+  margin: -1.25rem auto 1.75rem !important;
+  padding: 0 !important;
+  position: relative !important;
+  z-index: 6 !important;
 }
-.blog-hero h1 {
-  color: #ffffff !important;
-  -webkit-text-fill-color: #ffffff !important;
+#rnSimpleSearch .rn-simple-search-label {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0,0,0,0) !important;
 }
-.blog-hero h1 em {
-  color: #22d3ee !important;
-  -webkit-text-fill-color: #22d3ee !important;
+#rnSimpleSearch .rn-search-row {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  background: transparent !important;
 }
-.blog-hero p {
-  color: #e2e8f0 !important;
-  -webkit-text-fill-color: #e2e8f0 !important;
+#rnSimpleSearch #rnQ {
+  flex: 1 1 auto !important;
+  width: auto !important;
+  min-width: 0 !important;
+  min-height: 48px !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 12px 14px !important;
+  border: 1px solid #d0d7e2 !important;
+  border-radius: 12px !important;
+  background: #ffffff !important;
+  color: #0b1e3a !important;
+  font-size: 16px !important;
+  box-shadow: 0 8px 24px rgba(11,30,58,0.1) !important;
+  display: block !important;
   opacity: 1 !important;
+  visibility: visible !important;
 }
+#rnSimpleSearch #rnQBtn {
+  flex: 0 0 auto !important;
+  min-height: 48px !important;
+  min-width: 88px !important;
+  padding: 0 16px !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: #0b1e3a !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  font-size: 15px !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+#rnSimpleSearch #rnQStatus {
+  margin: 8px 0 0 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+}
+</style>
+
+
+<style id="rn-blog-color-fix">
+.blog-hero .label { color: #67e8f9 !important; -webkit-text-fill-color: #67e8f9 !important; }
+.blog-hero h1 { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+.blog-hero h1 em { color: #22d3ee !important; -webkit-text-fill-color: #22d3ee !important; }
+.blog-hero p { color: #e2e8f0 !important; -webkit-text-fill-color: #e2e8f0 !important; opacity: 1 !important; }
 .rn-blog-meta {
   color: #f8fafc !important;
   -webkit-text-fill-color: #f8fafc !important;
@@ -2501,86 +2555,15 @@ body.rn-ux-page .article-overlay.open,
   border: 1px solid rgba(255,255,255,0.25) !important;
   opacity: 1 !important;
 }
-.rn-blog-meta,
-.rn-blog-meta *,
-.rn-blog-meta p,
-.rn-blog-meta span,
-.rn-blog-meta div,
-.rn-blog-meta strong {
+.rn-blog-meta, .rn-blog-meta *, .rn-blog-meta p, .rn-blog-meta span, .rn-blog-meta strong {
   color: #f8fafc !important;
   -webkit-text-fill-color: #f8fafc !important;
   opacity: 1 !important;
 }
-.rn-blog-meta a,
-.rn-blog-meta a * {
+.rn-blog-meta a, .rn-blog-meta a * {
   color: #67e8f9 !important;
   -webkit-text-fill-color: #67e8f9 !important;
   font-weight: 700 !important;
-  opacity: 1 !important;
-}
-</style>
-
-
-<style id="rn-blog-search-ui">
-/* Visible Search button next to input */
-body.rn-ux-page .rn-simple-search,
-#rnSimpleSearch {
-  width: min(36rem, calc(100% - 1.5rem)) !important;
-  margin: -1.25rem auto 1.5rem !important;
-  z-index: 6 !important;
-}
-body.rn-ux-page .rn-search-row,
-#rnSimpleSearch .rn-search-row {
-  display: flex !important;
-  flex-direction: row !important;
-  align-items: stretch !important;
-  gap: 0.5rem !important;
-  width: 100% !important;
-}
-body.rn-ux-page #rnQ,
-#rnQ {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-  min-height: 48px !important;
-  margin: 0 !important;
-  display: block !important;
-}
-body.rn-ux-page #rnQBtn,
-#rnQBtn,
-.rn-search-btn {
-  display: inline-flex !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  flex: 0 0 auto !important;
-  align-items: center !important;
-  justify-content: center !important;
-  min-height: 48px !important;
-  min-width: 96px !important;
-  padding: 0 1rem !important;
-  border: 0 !important;
-  border-radius: 12px !important;
-  background: #0b1e3a !important;
-  color: #ffffff !important;
-  font-weight: 800 !important;
-  font-size: 0.95rem !important;
-  cursor: pointer !important;
-  font-family: inherit !important;
-}
-body.rn-ux-page #rnQStatus,
-#rnQStatus {
-  display: block !important;
-  margin-top: 0.45rem !important;
-  color: #64748b !important;
-  font-size: 0.82rem !important;
-  font-weight: 600 !important;
-}
-@media (max-width: 420px) {
-  body.rn-ux-page .rn-search-row {
-    flex-direction: column !important;
-  }
-  body.rn-ux-page #rnQBtn {
-    width: 100% !important;
-  }
 }
 </style>
 
@@ -2794,17 +2777,18 @@ button,a,.btn{touch-action:manipulation}
 <!-- FEATURED -->
 
 
+
 <div id="rnSimpleSearch" class="rn-simple-search">
   <label for="rnQ" class="rn-simple-search-label">Search articles</label>
   <div class="rn-search-row">
-    <input type="search" id="rnQ" name="rnQ" placeholder="Search articles…" autocomplete="off" enterkeyhint="search" />
+    <input type="search" id="rnQ" name="rnQ" placeholder="Type a keyword…" autocomplete="off" enterkeyhint="search" />
     <button type="button" id="rnQBtn" class="rn-search-btn">Search</button>
   </div>
   <p id="rnQStatus" class="rn-simple-search-status" aria-live="polite">Type a keyword, then press Search or Enter</p>
 </div>
 
 <!-- featured removed -->
-id="cmsPostsSection" class="cms-posts-section" style="max-width:1100px;margin:0 auto 28px;padding:0 16px;">
+<div id="cmsPostsSection" class="cms-posts-section" style="max-width:1100px;margin:0 auto 28px;padding:0 16px;">
   <h2 class="grid-heading" style="margin-bottom:12px;">Latest from RuffNeck</h2>
   <p id="cmsPostsStatus" style="font-size:13px;color:#64748b;margin:0 0 12px;">Loading new posts…</p>
   <div id="cmsPostsGrid" class="blog-grid" style="display:grid;gap:16px;"></div>
