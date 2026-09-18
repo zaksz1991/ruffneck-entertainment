@@ -1,8 +1,11 @@
 /**
  * /api/cms/posts
- * GET    — list posts (large images stripped from list for speed)
- * GET ?id= — single full post (includes image)
- * POST / PUT / DELETE — admin mutations
+ * GET    — list posts
+ * POST   — create
+ * PUT    — update
+ * DELETE — { id, password? }
+ *
+ * Writes: session cookie OR body.password === ADMIN_PASSWORD
  */
 const crypto = require("crypto");
 
@@ -58,7 +61,7 @@ async function sbFetch(path, options = {}) {
   return data;
 }
 
-function verifyAdmin(req) {
+function verifyAdminCookie(req) {
   const secret = process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD || "";
   if (!secret) return true;
   const header = req.headers.cookie || "";
@@ -67,61 +70,58 @@ function verifyAdmin(req) {
   const token = decodeURIComponent(m[1]);
   const parts = token.split(".");
   if (parts.length !== 2) return false;
-  const expected = crypto.createHmac("sha256", secret).update(parts[0]).digest("hex");
-  return parts[1] === expected;
+  const expected = crypto.createHmac("sha256", secret).update(parts[0]).digest("base64url");
+  try {
+    if (parts[1] !== expected) return false;
+    const payload = JSON.parse(Buffer.from(parts[0], "base64url").toString("utf8"));
+    if (!payload.exp || Date.now() > payload.exp) return false;
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
-function lightPost(row) {
-  const p = Object.assign({}, row);
-  if (typeof p.image === "string" && p.image.length > 80000) {
-    p.has_image = true;
-    p.image = null;
-  }
-  return p;
+function verifyAdminPassword(password) {
+  const expected = process.env.ADMIN_PASSWORD || "";
+  if (!expected) return false;
+  return String(password || "") === expected;
+}
+
+function verifyAdmin(req, body) {
+  const secret = process.env.ADMIN_SECRET || process.env.ADMIN_PASSWORD || "";
+  if (!secret) return true;
+  if (verifyAdminCookie(req)) return true;
+  if (body && verifyAdminPassword(body.password || body.adminPassword)) return true;
+  return false;
 }
 
 module.exports = async function handler(req, res) {
-  if (req.method === "OPTIONS") {
-    res.statusCode = 204;
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    return res.end();
-  }
+  if (req.method === "OPTIONS") return json(res, 204, {});
 
-  const { ok } = sb();
-  if (!ok) {
+  if (!sb().ok) {
     return json(res, 503, {
       ok: false,
+      error: "Database not configured. Set SUPABASE_URL and SUPABASE_SERVICE_KEY on Vercel.",
       code: "NO_DB",
-      error: "Database not configured (SUPABASE_URL / SUPABASE_SERVICE_KEY)",
     });
   }
 
   try {
     if (req.method === "GET") {
-      // Parse id from query string
-      const q = (req.url || "").split("?")[1] || "";
-      const params = new URLSearchParams(q);
-      const id = params.get("id");
-      if (id) {
-        const rows = await sbFetch(
-          "blog_posts?id=eq." + encodeURIComponent(id) + "&select=*"
-        );
-        return json(res, 200, { ok: true, posts: rows || [] });
-      }
       const rows = await sbFetch("blog_posts?select=*&order=created_at.desc");
-      // Strip multi‑MB base64 images from LIST so admin/mobile can load
-      const posts = (rows || []).map(lightPost);
-      return json(res, 200, { ok: true, posts: posts });
+      return json(res, 200, { ok: true, posts: rows || [] });
     }
 
-    if (!verifyAdmin(req)) {
-      return json(res, 401, { ok: false, error: "Admin login required" });
+    const body = await readBody(req);
+
+    if (!verifyAdmin(req, body)) {
+      return json(res, 401, {
+        ok: false,
+        error: "Admin login required. Enter ADMIN_PASSWORD when prompted.",
+      });
     }
 
     if (req.method === "POST") {
-      const body = await readBody(req);
       const row = {
         id: body.id || String(Date.now()),
         title: body.title || "Untitled",
@@ -146,11 +146,12 @@ module.exports = async function handler(req, res) {
     }
 
     if (req.method === "PUT") {
-      const body = await readBody(req);
       if (!body.id) return json(res, 400, { ok: false, error: "id required" });
       const id = body.id;
       const patch = { ...body, updated: new Date().toLocaleDateString("en-GB") };
       delete patch.id;
+      delete patch.password;
+      delete patch.adminPassword;
       if (patch.readTime) {
         patch.read_time = patch.readTime;
         delete patch.readTime;
@@ -164,7 +165,6 @@ module.exports = async function handler(req, res) {
     }
 
     if (req.method === "DELETE") {
-      const body = await readBody(req);
       if (!body.id) return json(res, 400, { ok: false, error: "id required" });
       await sbFetch("blog_posts?id=eq." + encodeURIComponent(body.id), {
         method: "DELETE",

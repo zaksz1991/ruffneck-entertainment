@@ -702,53 +702,64 @@ textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!impo
       var id = delPost.getAttribute('data-del-post');
       if (!confirm('Delete this blog post permanently from the database?')) return;
 
-      async function ensureServerSession(){
-        var pw = '';
-        try { pw = sessionStorage.getItem('rn_admin_pw') || ''; } catch(e) {}
-        if (!pw) {
-          pw = prompt('Enter ADMIN password to delete from database:') || '';
-        }
-        if (!pw) throw new Error('Password required to delete');
-        var res = await fetch('/api/admin-login', {
-          method:'POST', credentials:'same-origin',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ password: pw })
-        });
-        var data = await res.json().catch(function(){ return {}; });
-        if (!res.ok || !data.ok) {
-          throw new Error((data && data.error) || 'Server login failed. Set Vercel ADMIN_PASSWORD to match the password you type.');
-        }
-        try { sessionStorage.setItem('rn_admin_pw', pw); } catch(e) {}
-        return true;
-      }
-
       try {
-        // Always refresh server session before delete
-        await ensureServerSession();
-        var res = await fetch('/api/cms/posts', {
-          method:'DELETE', credentials:'same-origin',
-          headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ id: id })
-        });
-        var data = await res.json().catch(function(){ return {}; });
-        if (res.status === 401) {
-          // one more try after fresh login
-          await ensureServerSession();
-          res = await fetch('/api/cms/posts', {
-            method:'DELETE', credentials:'same-origin',
-            headers:{'Content-Type':'application/json'},
-            body: JSON.stringify({ id: id })
-          });
-          data = await res.json().catch(function(){ return {}; });
+        var pw = '';
+        try { pw = sessionStorage.getItem('rn_admin_pw') || ''; } catch (e) {}
+        if (!pw) {
+          pw = prompt('Enter Vercel ADMIN_PASSWORD to delete:') || '';
         }
-        if (!res.ok || !data.ok) throw new Error((data && data.error) || ('HTTP ' + res.status));
+        pw = (pw || '').trim();
+        if (!pw) {
+          alert('Password required. It must match ADMIN_PASSWORD in Vercel → Settings → Environment Variables.');
+          return;
+        }
+        try { sessionStorage.setItem('rn_admin_pw', pw); } catch (e) {}
+
+        // Try server login (cookie) then delete with password in body (works even if cookie fails)
+        try {
+          await fetch('/api/admin-login', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: pw })
+          });
+        } catch (e) {}
+
+        var res = await fetch('/api/cms/posts', {
+          method: 'DELETE',
+          credentials: 'include',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ id: id, password: pw })
+        });
+        var data = await res.json().catch(function () { return {}; });
+
+        if (res.status === 401) {
+          pw = prompt('Password rejected. Enter the exact ADMIN_PASSWORD from Vercel:') || '';
+          pw = (pw || '').trim();
+          if (!pw) return;
+          try { sessionStorage.setItem('rn_admin_pw', pw); } catch (e) {}
+          res = await fetch('/api/cms/posts', {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: id, password: pw })
+          });
+          data = await res.json().catch(function () { return {}; });
+        }
+
+        if (!res.ok || !data.ok) {
+          throw new Error((data && data.error) || ('HTTP ' + res.status));
+        }
+
         if (window.__rnPostsCache) {
-          window.__rnPostsCache = window.__rnPostsCache.filter(function(x){ return String(x.id) !== String(id); });
+          window.__rnPostsCache = window.__rnPostsCache.filter(function (x) {
+            return String(x.id) !== String(id);
+          });
         }
         try {
-          var list = localPosts().filter(function(x){ return String(x.id)!==String(id); });
+          var list = localPosts().filter(function (x) { return String(x.id) !== String(id); });
           saveLocalPosts(list);
-        } catch(e) {}
+        } catch (e) {}
         alert('Post deleted from database');
         if (typeof loadLists === 'function') await loadLists();
       } catch (err) {
