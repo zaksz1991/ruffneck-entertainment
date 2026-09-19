@@ -6224,108 +6224,165 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 </script>
 
 
-<style id="rn-mobile-menu-force">
-#mobileMenu.is-open,
-#mobileMenu.open,
-.nav-mobile.is-open,
-.nav-mobile.open {
-  display: flex !important;
-  flex-direction: column !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  height: auto !important;
-  max-height: 70vh !important;
-  overflow-y: auto !important;
-  overflow-x: hidden !important;
-  position: fixed !important;
-  top: var(--rn-header-h, 96px) !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  z-index: 2147483646 !important;
-  margin: 0 !important;
-  padding: 8px 14px 16px !important;
-  background: #0b1e3a !important;
-  border-top: 1px solid rgba(0,180,216,0.25) !important;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.4) !important;
+
+<style id="rn-menu-final">
+/* Never clip the drawer inside the fixed header */
+#nav.nav, .nav#nav, #nav {
+  overflow: visible !important;
 }
-#mobileMenu.is-open a,
-#mobileMenu.open a,
-.nav-mobile.is-open a,
-.nav-mobile.open a {
-  display: block !important;
-  color: #f1f5f9 !important;
-  padding: 12px 8px !important;
-  font-weight: 600 !important;
-  font-size: 15px !important;
-  text-decoration: none !important;
-  border-bottom: 1px solid rgba(148,163,184,0.15) !important;
+#rnMenuPanel {
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 96px;
+  z-index: 2147483647;
+  background: #0b1e3a;
+  border-top: 1px solid rgba(0,180,216,.3);
+  box-shadow: 0 16px 40px rgba(0,0,0,.45);
+  max-height: 75vh;
+  overflow-y: auto;
+  padding: 6px 0 16px;
+  -webkit-overflow-scrolling: touch;
 }
-#mobileMenu[hidden]:not(.is-open),
-.nav-mobile[hidden]:not(.is-open) {
+#rnMenuPanel.open { display: block !important; }
+#rnMenuPanel a {
+  display: block;
+  color: #f8fafc !important;
+  padding: 14px 18px;
+  font-size: 16px;
+  font-weight: 650;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(148,163,184,.15);
+}
+#rnMenuPanel a:active { background: rgba(0,180,216,.12); }
+#rnMenuBackdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: 96px;
+  z-index: 2147483646;
+  background: rgba(0,0,0,.45);
+}
+#rnMenuBackdrop.open { display: block !important; }
+/* Hide the old drawer so it cannot fight us */
+#mobileMenu, .nav-mobile {
   display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
 }
 </style>
-<script id="rn-mobile-menu-force-js">
+<script id="rn-menu-final-js">
 (function(){
-  function openMenu(btn, menu){
-    if(!menu.__rnHome){
-      menu.__rnHome = menu.parentNode;
-      menu.__rnNext = menu.nextSibling;
+  var LINKS = [
+    {href:'#services', label:'Services'},
+    {href:'/store', label:'Store'},
+    {href:'/blog', label:'Blog'},
+    {href:'/programmes', label:'Community Impact'},
+    {href:'#free-guide', label:'Free Guide'},
+    {href:'#about', label:'About'},
+    {href:'#founder', label:'Founder'},
+    {href:'#pricing', label:'Pricing'},
+    {href:'#contact', label:'Contact'},
+    {href:'https://calendly.com/hassanzakariyabiz/30min', label:'Book a Call', external:true},
+    {href:'https://wa.me/2348033807856', label:'WhatsApp', external:true}
+  ];
+
+  function headerBottom(){
+    var nav = document.getElementById('nav');
+    var ann = document.querySelector('.rn-announce');
+    var bottom = 96;
+    if(nav){
+      var r = nav.getBoundingClientRect();
+      bottom = Math.max(r.bottom, 56);
+    } else if(ann){
+      bottom = ann.getBoundingClientRect().bottom + 56;
     }
-    document.body.appendChild(menu);
-    menu.classList.add('is-open','open');
-    menu.hidden = false;
-    menu.removeAttribute('hidden');
-    menu.style.setProperty('display','flex','important');
-    menu.style.setProperty('flex-direction','column','important');
-    menu.style.setProperty('visibility','visible','important');
-    menu.style.setProperty('opacity','1','important');
-    menu.style.setProperty('position','fixed','important');
-    menu.style.setProperty('top','var(--rn-header-h, 96px)','important');
-    menu.style.setProperty('left','0','important');
-    menu.style.setProperty('right','0','important');
-    menu.style.setProperty('width','100%','important');
-    menu.style.setProperty('z-index','2147483646','important');
-    menu.style.setProperty('background','#0b1e3a','important');
-    menu.style.setProperty('height','auto','important');
-    menu.style.setProperty('max-height','70vh','important');
-    menu.style.setProperty('overflow-y','auto','important');
-    menu.style.setProperty('padding','8px 14px 16px','important');
-    menu.style.setProperty('margin','0','important');
-    menu.style.setProperty('box-shadow','0 12px 28px rgba(0,0,0,.4)','important');
+    return Math.round(bottom);
+  }
+
+  function ensurePanel(){
+    var panel = document.getElementById('rnMenuPanel');
+    var backdrop = document.getElementById('rnMenuBackdrop');
+    if(!panel){
+      backdrop = document.createElement('div');
+      backdrop.id = 'rnMenuBackdrop';
+      panel = document.createElement('div');
+      panel.id = 'rnMenuPanel';
+      panel.setAttribute('role','navigation');
+      panel.setAttribute('aria-label','Mobile menu');
+      LINKS.forEach(function(item){
+        var a = document.createElement('a');
+        a.href = item.href;
+        a.textContent = item.label;
+        if(item.external){ a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+        a.addEventListener('click', close);
+        panel.appendChild(a);
+      });
+      document.body.appendChild(backdrop);
+      document.body.appendChild(panel);
+      backdrop.addEventListener('click', close);
+    }
+    return {panel: panel, backdrop: backdrop || document.getElementById('rnMenuBackdrop')};
+  }
+
+  function open(){
+    var parts = ensurePanel();
+    var top = headerBottom();
+    parts.panel.style.top = top + 'px';
+    parts.backdrop.style.top = top + 'px';
+    parts.panel.classList.add('open');
+    parts.backdrop.classList.add('open');
+    var btn = document.getElementById('hamburger') || document.querySelector('.nav-hamburger');
     if(btn) btn.setAttribute('aria-expanded','true');
+    document.body.style.overflow = 'hidden';
   }
-  function closeMenu(btn, menu){
-    menu.classList.remove('is-open','open');
-    menu.hidden = true;
-    menu.setAttribute('hidden','');
-    menu.style.setProperty('display','none','important');
+
+  function close(){
+    var panel = document.getElementById('rnMenuPanel');
+    var backdrop = document.getElementById('rnMenuBackdrop');
+    if(panel) panel.classList.remove('open');
+    if(backdrop) backdrop.classList.remove('open');
+    var btn = document.getElementById('hamburger') || document.querySelector('.nav-hamburger');
     if(btn) btn.setAttribute('aria-expanded','false');
-    // keep on body; fine for reuse
+    document.body.style.overflow = '';
   }
+
+  function toggle(e){
+    if(e){ e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation(); }
+    var panel = document.getElementById('rnMenuPanel');
+    if(panel && panel.classList.contains('open')) close();
+    else open();
+  }
+
   function bind(){
     var btn = document.getElementById('hamburger') || document.querySelector('.nav-hamburger');
-    var menu = document.getElementById('mobileMenu');
-    if(!btn || !menu) return;
-    if(btn.dataset.rnForceBound === '2') return;
-    btn.dataset.rnForceBound = '2';
-    btn.addEventListener('click', function(e){
-      e.preventDefault();
-      e.stopPropagation();
-      var willOpen = !menu.classList.contains('is-open');
-      if(willOpen) openMenu(btn, menu);
-      else closeMenu(btn, menu);
+    if(!btn) return;
+    // Replace button to kill every previous listener
+    var fresh = btn.cloneNode(true);
+    fresh.id = 'hamburger';
+    fresh.className = btn.className || 'nav-hamburger';
+    fresh.setAttribute('aria-label','Open menu');
+    fresh.setAttribute('aria-expanded','false');
+    if(btn.parentNode) btn.parentNode.replaceChild(fresh, btn);
+    fresh.addEventListener('click', toggle, true);
+    // also pointerup for stubborn mobile browsers
+    fresh.addEventListener('pointerup', function(e){
+      if(e.pointerType === 'touch' || e.pointerType === 'pen'){
+        // avoid double-toggle with click
+      }
     }, true);
-    menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){ closeMenu(btn, menu); });
-    });
+    ensurePanel();
   }
+
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
   else bind();
-  setTimeout(bind, 200);
-  setTimeout(bind, 800);
-  setTimeout(bind, 2000);
+  setTimeout(bind, 100);
+  setTimeout(bind, 600);
+  setTimeout(bind, 1500);
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
 })();
 </script>
 
