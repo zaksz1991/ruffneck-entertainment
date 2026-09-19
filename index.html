@@ -6225,7 +6225,6 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 
 
 <style id="rn-mobile-menu-force">
-/* Must win over every earlier display:none on the drawer */
 #mobileMenu.is-open,
 #mobileMenu.open,
 .nav-mobile.is-open,
@@ -6235,7 +6234,7 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
   visibility: visible !important;
   opacity: 1 !important;
   height: auto !important;
-  max-height: min(70vh, 520px) !important;
+  max-height: 70vh !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
   position: fixed !important;
@@ -6243,12 +6242,12 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
-  z-index: 10080 !important;
+  z-index: 2147483646 !important;
   margin: 0 !important;
   padding: 8px 14px 16px !important;
   background: #0b1e3a !important;
   border-top: 1px solid rgba(0,180,216,0.25) !important;
-  box-shadow: 0 12px 28px rgba(0,0,0,0.35) !important;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.4) !important;
 }
 #mobileMenu.is-open a,
 #mobileMenu.open a,
@@ -6269,44 +6268,64 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
 </style>
 <script id="rn-mobile-menu-force-js">
 (function(){
+  function openMenu(btn, menu){
+    if(!menu.__rnHome){
+      menu.__rnHome = menu.parentNode;
+      menu.__rnNext = menu.nextSibling;
+    }
+    document.body.appendChild(menu);
+    menu.classList.add('is-open','open');
+    menu.hidden = false;
+    menu.removeAttribute('hidden');
+    menu.style.setProperty('display','flex','important');
+    menu.style.setProperty('flex-direction','column','important');
+    menu.style.setProperty('visibility','visible','important');
+    menu.style.setProperty('opacity','1','important');
+    menu.style.setProperty('position','fixed','important');
+    menu.style.setProperty('top','var(--rn-header-h, 96px)','important');
+    menu.style.setProperty('left','0','important');
+    menu.style.setProperty('right','0','important');
+    menu.style.setProperty('width','100%','important');
+    menu.style.setProperty('z-index','2147483646','important');
+    menu.style.setProperty('background','#0b1e3a','important');
+    menu.style.setProperty('height','auto','important');
+    menu.style.setProperty('max-height','70vh','important');
+    menu.style.setProperty('overflow-y','auto','important');
+    menu.style.setProperty('padding','8px 14px 16px','important');
+    menu.style.setProperty('margin','0','important');
+    menu.style.setProperty('box-shadow','0 12px 28px rgba(0,0,0,.4)','important');
+    if(btn) btn.setAttribute('aria-expanded','true');
+  }
+  function closeMenu(btn, menu){
+    menu.classList.remove('is-open','open');
+    menu.hidden = true;
+    menu.setAttribute('hidden','');
+    menu.style.setProperty('display','none','important');
+    if(btn) btn.setAttribute('aria-expanded','false');
+    // keep on body; fine for reuse
+  }
   function bind(){
     var btn = document.getElementById('hamburger') || document.querySelector('.nav-hamburger');
     var menu = document.getElementById('mobileMenu');
-    if(!btn || !menu || btn.dataset.rnForceBound) return;
-    btn.dataset.rnForceBound = '1';
+    if(!btn || !menu) return;
+    if(btn.dataset.rnForceBound === '2') return;
+    btn.dataset.rnForceBound = '2';
     btn.addEventListener('click', function(e){
       e.preventDefault();
       e.stopPropagation();
       var willOpen = !menu.classList.contains('is-open');
-      if(willOpen){
-        menu.classList.add('is-open','open');
-        menu.hidden = false;
-        menu.removeAttribute('hidden');
-        menu.style.setProperty('display','flex','important');
-        menu.style.setProperty('visibility','visible','important');
-        btn.setAttribute('aria-expanded','true');
-      } else {
-        menu.classList.remove('is-open','open');
-        menu.hidden = true;
-        menu.setAttribute('hidden','');
-        menu.style.setProperty('display','none','important');
-        btn.setAttribute('aria-expanded','false');
-      }
+      if(willOpen) openMenu(btn, menu);
+      else closeMenu(btn, menu);
     }, true);
     menu.querySelectorAll('a').forEach(function(a){
-      a.addEventListener('click', function(){
-        menu.classList.remove('is-open','open');
-        menu.hidden = true;
-        menu.setAttribute('hidden','');
-        menu.style.setProperty('display','none','important');
-        btn.setAttribute('aria-expanded','false');
-      });
+      a.addEventListener('click', function(){ closeMenu(btn, menu); });
     });
   }
   if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bind);
   else bind();
-  setTimeout(bind, 300);
-  setTimeout(bind, 1200);
+  setTimeout(bind, 200);
+  setTimeout(bind, 800);
+  setTimeout(bind, 2000);
 })();
 </script>
 
