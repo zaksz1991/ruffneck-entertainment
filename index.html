@@ -3107,28 +3107,63 @@ main, #main, #main-content {
 
 
 <style id="rn-index-header-restore">
-/* RESTORE header — undo accidental display:none layers */
+/* Tight fixed header: kill empty gaps above/below nav */
+:root {
+  --rn-announce-h: 40px !important;
+  --rn-nav-h: 56px !important;
+  --rn-header-h: 96px !important;
+}
+
+.rn-announce {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 10060 !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 6px 10px !important;
+  background: #04101f !important;
+  color: #cbd5e1 !important;
+  text-align: center !important;
+  font-size: 11px !important;
+  line-height: 1.35 !important;
+  box-sizing: border-box !important;
+}
+
 #nav.nav,
 .nav#nav,
 nav.nav,
 #nav {
-  display: block !important;
-  visibility: visible !important;
-  opacity: 1 !important;
-  position: sticky !important;
-  top: 0 !important;
+  position: fixed !important;
+  top: var(--rn-announce-h) !important;
   left: 0 !important;
   right: 0 !important;
   z-index: 10050 !important;
   width: 100% !important;
-  min-height: 56px !important;
+  min-height: var(--rn-nav-h) !important;
   height: auto !important;
-  background: #0b1e3a !important;
-  color: #fff !important;
+  max-height: calc(100vh - var(--rn-announce-h)) !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
   margin: 0 !important;
   padding: 0 !important;
-  overflow: visible !important;
+  background: #0b1e3a !important;
+  color: #fff !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  box-shadow: 0 1px 0 rgba(255,255,255,0.06) !important;
 }
+
+body,
+body.rn-ux-page {
+  padding-top: var(--rn-header-h) !important;
+  margin-top: 0 !important;
+}
+
 #nav .container,
 #nav .nav-inner {
   display: flex !important;
@@ -3136,55 +3171,67 @@ nav.nav,
   flex-wrap: nowrap !important;
   align-items: center !important;
   justify-content: space-between !important;
-  gap: 10px !important;
-  min-height: 56px !important;
+  gap: 8px !important;
+  min-height: var(--rn-nav-h) !important;
   width: 100% !important;
   max-width: 1120px !important;
   margin: 0 auto !important;
-  padding: 8px 14px !important;
+  padding: 6px 12px !important;
   box-sizing: border-box !important;
 }
+
 #nav .nav-logo {
   display: inline-flex !important;
   align-items: center !important;
   gap: 8px !important;
   visibility: visible !important;
   opacity: 1 !important;
-  flex: 0 1 auto !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
   text-decoration: none !important;
   color: #fff !important;
 }
+
 #nav .nav-logo img,
 #nav .logo-img {
   display: block !important;
-  width: 36px !important;
-  height: 36px !important;
+  width: 34px !important;
+  height: 34px !important;
   object-fit: contain !important;
-  visibility: visible !important;
+  flex-shrink: 0 !important;
 }
+
 #nav .rn-brand-text {
   display: block !important;
   visibility: visible !important;
-  opacity: 1 !important;
-  font-size: 14px !important;
-  line-height: 1.2 !important;
-  white-space: nowrap !important;
+  line-height: 1.15 !important;
 }
+
 #nav .rn-brand-text strong {
   display: inline !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   color: #fff !important;
   font-weight: 800 !important;
 }
+
 #nav .rn-brand-text span {
   display: inline !important;
-  font-size: 14px !important;
+  font-size: 13px !important;
   color: #67e8f9 !important;
   font-weight: 600 !important;
   margin-left: 4px !important;
 }
 
-/* Desktop links visible */
+#rnNavControls {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 0 0 auto !important;
+  margin-left: auto !important;
+}
+
+/* Desktop links */
 @media (min-width: 901px) {
   #nav .nav-links,
   #nav ul.nav-links {
@@ -3192,12 +3239,10 @@ nav.nav,
     flex-direction: row !important;
     flex-wrap: wrap !important;
     align-items: center !important;
-    gap: 6px 12px !important;
+    gap: 4px 12px !important;
     list-style: none !important;
     margin: 0 !important;
     padding: 0 !important;
-    visibility: visible !important;
-    opacity: 1 !important;
   }
   #nav .nav-links a {
     color: #e2e8f0 !important;
@@ -3209,9 +3254,13 @@ nav.nav,
   .nav-hamburger {
     display: none !important;
   }
+  .nav-mobile,
+  #mobileMenu {
+    display: none !important;
+  }
 }
 
-/* Mobile: hide desktop links, SHOW hamburger */
+/* Mobile */
 @media (max-width: 900px) {
   #nav .nav-links,
   #nav ul.nav-links {
@@ -3224,48 +3273,81 @@ nav.nav,
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    width: 44px !important;
-    height: 44px !important;
-    min-width: 44px !important;
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
     border: 1.5px solid rgba(0,180,216,.5) !important;
     border-radius: 10px !important;
     background: #071526 !important;
     cursor: pointer !important;
     visibility: visible !important;
     opacity: 1 !important;
-    z-index: 10060 !important;
+    padding: 0 !important;
   }
   #hamburger span,
   .nav-hamburger span {
     display: block !important;
-    width: 20px !important;
+    width: 18px !important;
     height: 2px !important;
     margin: 2px 0 !important;
     background: #f8fafc !important;
   }
 }
 
-/* Mobile drawer when open */
-.nav-mobile:not([hidden]),
-#mobileMenu:not([hidden]),
-.nav-mobile.open,
-#mobileMenu.open {
-  display: flex !important;
+/* Menu drawer sits tight under the bar (inside #nav) */
+.nav-mobile,
+#mobileMenu {
+  display: none !important;
   flex-direction: column !important;
-  gap: 4px !important;
-  padding: 12px 16px 20px !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 4px 12px 12px !important;
   background: #0b1e3a !important;
-  border-top: 1px solid rgba(0,180,216,.25) !important;
+  border-top: 1px solid rgba(0,180,216,.2) !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.nav-mobile.is-open,
+#mobileMenu.is-open,
+.nav-mobile.open,
+#mobileMenu.open,
+.nav-mobile:not([hidden]),
+#mobileMenu:not([hidden]) {
+  display: flex !important;
   visibility: visible !important;
   opacity: 1 !important;
-  z-index: 10055 !important;
 }
+
+.nav-mobile[hidden],
+#mobileMenu[hidden] {
+  display: none !important;
+}
+
 .nav-mobile a,
 #mobileMenu a {
   color: #e2e8f0 !important;
-  padding: 10px 8px !important;
+  padding: 11px 6px !important;
   text-decoration: none !important;
   font-weight: 600 !important;
+  font-size: 15px !important;
+  border-bottom: 1px solid rgba(148,163,184,0.12) !important;
+  margin: 0 !important;
+}
+
+/* Hero should not add a second top gap under fixed header */
+.hero,
+section.hero,
+#home.hero {
+  padding-top: 1.25rem !important;
+  margin-top: 0 !important;
+}
+@media (min-width: 901px) {
+  .hero,
+  section.hero,
+  #home.hero {
+    padding-top: 2rem !important;
+  }
 }
 </style>
 
@@ -6007,8 +6089,19 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
       e.preventDefault();
       e.stopPropagation();
       var open = menu.classList.toggle('is-open');
-      if(open){ menu.hidden = false; menu.removeAttribute('hidden'); }
-      else { menu.hidden = true; menu.setAttribute('hidden',''); }
+      if(open){
+        menu.hidden = false;
+        menu.removeAttribute('hidden');
+        menu.style.display = 'flex';
+        menu.setAttribute('aria-hidden','false');
+        btn.setAttribute('aria-expanded','true');
+      } else {
+        menu.hidden = true;
+        menu.setAttribute('hidden','');
+        menu.style.display = 'none';
+        menu.setAttribute('aria-hidden','true');
+        btn.setAttribute('aria-expanded','false');
+      }
     });
     menu.querySelectorAll('a').forEach(function(a){
       a.addEventListener('click', function(){
