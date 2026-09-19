@@ -138,5 +138,5 @@ button.rn-read-one {
   .site-header .logo span {
     font-size: 13px;
   }
-  .nav-desktop { display: none; }
+  /* .nav-desktop left to page CSS */
 }

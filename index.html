@@ -3104,24 +3104,171 @@ main, #main, #main-content {
 
 <link rel="stylesheet" href="/css/rn-site-system.css"/>
 
-<style id="rn-index-header-fix">
-#nav.nav, .nav#nav, header.nav {
-  position: fixed !important;
+
+
+<style id="rn-index-header-restore">
+/* RESTORE header — undo accidental display:none layers */
+#nav.nav,
+.nav#nav,
+nav.nav,
+#nav {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: sticky !important;
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
-  z-index: 9999 !important;
+  z-index: 10050 !important;
   width: 100% !important;
+  min-height: 56px !important;
+  height: auto !important;
   background: #0b1e3a !important;
-}
-body { padding-top: 0; }
-/* offset first section if needed */
-.nav-logo, .nav-logo span, .nav-brand {
   color: #fff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: visible !important;
+}
+#nav .container,
+#nav .nav-inner {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 10px !important;
+  min-height: 56px !important;
+  width: 100% !important;
+  max-width: 1120px !important;
+  margin: 0 auto !important;
+  padding: 8px 14px !important;
+  box-sizing: border-box !important;
+}
+#nav .nav-logo {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  flex: 0 1 auto !important;
+  text-decoration: none !important;
+  color: #fff !important;
+}
+#nav .nav-logo img,
+#nav .logo-img {
+  display: block !important;
+  width: 36px !important;
+  height: 36px !important;
+  object-fit: contain !important;
+  visibility: visible !important;
+}
+#nav .rn-brand-text {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
   white-space: nowrap !important;
 }
-.rn-brand-full { color: #fff !important; font-weight: 800 !important; }
+#nav .rn-brand-text strong {
+  display: inline !important;
+  font-size: 14px !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+}
+#nav .rn-brand-text span {
+  display: inline !important;
+  font-size: 14px !important;
+  color: #67e8f9 !important;
+  font-weight: 600 !important;
+  margin-left: 4px !important;
+}
+
+/* Desktop links visible */
+@media (min-width: 901px) {
+  #nav .nav-links,
+  #nav ul.nav-links {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
+    gap: 6px 12px !important;
+    list-style: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  #nav .nav-links a {
+    color: #e2e8f0 !important;
+    text-decoration: none !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+  }
+  #hamburger,
+  .nav-hamburger {
+    display: none !important;
+  }
+}
+
+/* Mobile: hide desktop links, SHOW hamburger */
+@media (max-width: 900px) {
+  #nav .nav-links,
+  #nav ul.nav-links {
+    display: none !important;
+  }
+  #hamburger,
+  .nav-hamburger,
+  button.nav-hamburger {
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    min-width: 44px !important;
+    border: 1.5px solid rgba(0,180,216,.5) !important;
+    border-radius: 10px !important;
+    background: #071526 !important;
+    cursor: pointer !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    z-index: 10060 !important;
+  }
+  #hamburger span,
+  .nav-hamburger span {
+    display: block !important;
+    width: 20px !important;
+    height: 2px !important;
+    margin: 2px 0 !important;
+    background: #f8fafc !important;
+  }
+}
+
+/* Mobile drawer when open */
+.nav-mobile:not([hidden]),
+#mobileMenu:not([hidden]),
+.nav-mobile.open,
+#mobileMenu.open {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  padding: 12px 16px 20px !important;
+  background: #0b1e3a !important;
+  border-top: 1px solid rgba(0,180,216,.25) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 10055 !important;
+}
+.nav-mobile a,
+#mobileMenu a {
+  color: #e2e8f0 !important;
+  padding: 10px 8px !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+}
 </style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
