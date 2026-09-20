@@ -3633,9 +3633,25 @@ const articles = {
 // ============================================================
 let currentArticleId = null;
 
+
+// Expose static articles for CMS merge + patched openArticle
+window.articles = Object.assign({}, typeof articles !== 'undefined' ? articles : {}, window.articles || {});
+
 function openArticle(id) {
-  const article = articles[id];
-  if (!article) return;
+  // Prefer window.articles (CMS + static merge), fall back to local articles
+  window.articles = window.articles || {};
+  if (typeof articles === 'object' && articles) {
+    for (var __k in articles) {
+      if (Object.prototype.hasOwnProperty.call(articles, __k) && !window.articles[__k]) {
+        window.articles[__k] = articles[__k];
+      }
+    }
+  }
+  const article = window.articles[id] || (typeof articles === 'object' ? articles[id] : null);
+  if (!article) {
+    console.warn('[blog] article missing:', id);
+    return;
+  }
 
   var labelEl = document.getElementById('articleLabel');
   var titleEl = document.getElementById('articleTitle');
@@ -5231,6 +5247,113 @@ div.rn-blog-meta p {
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
+})();
+</script>
+
+
+<script id="rn-blog-open-force">
+(function(){
+  function mergeStatic(){
+    try {
+      if (typeof articles === 'object' && articles) {
+        window.articles = window.articles || {};
+        Object.keys(articles).forEach(function(k){
+          if (!window.articles[k]) window.articles[k] = articles[k];
+        });
+      }
+    } catch (e) {}
+  }
+  function bindCards(){
+    mergeStatic();
+    // Static cards with onclick=openArticle('id')
+    document.querySelectorAll('[onclick*="openArticle"]').forEach(function(el){
+      if (el.dataset.rnBoundOpen) return;
+      el.dataset.rnBoundOpen = '1';
+      var m = (el.getAttribute('onclick') || '').match(/openArticle\s*\(\s*['"]([^'"]+)['"]/);
+      if (!m) return;
+      var id = m[1];
+      el.addEventListener('click', function(e){
+        // let inline run too; also force
+        setTimeout(function(){
+          if (typeof window.openArticle === 'function') window.openArticle(id);
+        }, 0);
+      }, true);
+    });
+    // CMS / rn-read-one buttons
+    document.querySelectorAll('.rn-read-one, .blog-card, .rn-cms-post').forEach(function(el){
+      if (el.dataset.rnBoundOpen2) return;
+      el.dataset.rnBoundOpen2 = '1';
+      el.addEventListener('click', function(e){
+        var card = el.closest('.blog-card, .rn-cms-post') || el;
+        var id = card.getAttribute('data-post-id') || card.getAttribute('data-id');
+        if (!id) {
+          var btn = e.target.closest && e.target.closest('.rn-read-one');
+          // static: try extract from parent onclick
+          var host = card.closest('[onclick*="openArticle"]') || card;
+          var m = ((host.getAttribute && host.getAttribute('onclick')) || '').match(/openArticle\s*\(\s*['"]([^'"]+)['"]/);
+          if (m) id = m[1];
+        }
+        if (!id) return;
+        // If click is on button or card, open
+        var isBtn = e.target.closest && e.target.closest('.rn-read-one');
+        if (isBtn || el.classList.contains('blog-card') || el.classList.contains('rn-cms-post')) {
+          if (typeof window.openArticle === 'function') {
+            e.preventDefault();
+            window.openArticle(id);
+          }
+        }
+      }, true);
+    });
+  }
+  // Wrap openArticle once more to always merge + open overlay
+  function wrapOpen(){
+    if (typeof window.openArticle !== 'function' || window.openArticle.__rnForce) return;
+    var orig = window.openArticle;
+    window.openArticle = function(id){
+      mergeStatic();
+      var art = (window.articles && window.articles[id]) || (typeof articles === 'object' && articles[id]);
+      if (!art) {
+        console.warn('[blog] still missing', id);
+        return orig.apply(this, arguments);
+      }
+      window.articles[id] = art;
+      var r = orig.apply(this, arguments);
+      var ov = document.getElementById('articleOverlay');
+      if (ov) {
+        ov.classList.add('open');
+        ov.style.setProperty('display', 'flex', 'important');
+        ov.scrollTop = 0;
+      }
+      document.body.style.overflow = 'hidden';
+      return r;
+    };
+    window.openArticle.__rnForce = true;
+  }
+  function wrapClose(){
+    if (typeof window.closeArticle !== 'function' || window.closeArticle.__rnForce) return;
+    var orig = window.closeArticle;
+    window.closeArticle = function(){
+      try { orig.apply(this, arguments); } catch(e) {}
+      var ov = document.getElementById('articleOverlay');
+      if (ov) {
+        ov.classList.remove('open');
+        ov.style.setProperty('display', 'none', 'important');
+      }
+      document.body.style.overflow = '';
+    };
+    window.closeArticle.__rnForce = true;
+  }
+  function boot(){
+    mergeStatic();
+    wrapOpen();
+    wrapClose();
+    bindCards();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+  else boot();
+  setTimeout(boot, 500);
+  setTimeout(boot, 1500);
+  setTimeout(boot, 3000);
 })();
 </script>
 

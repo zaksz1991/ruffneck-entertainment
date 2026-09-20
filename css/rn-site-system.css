@@ -140,3 +140,26 @@ button.rn-read-one {
   }
   /* .nav-desktop left to page CSS */
 }
+
+
+/* ===== Site-wide color parity ===== */
+a { color: #00b4d8; }
+a:hover { color: #67e8f9; }
+.rn-site-header,
+header.site-header,
+header,
+.top {
+  background: #0b1e3a !important;
+  color: #fff !important;
+}
+header a, .top a, .rn-site-header a {
+  color: #e2e8f0 !important;
+}
+header a:hover, .top a:hover {
+  color: #67e8f9 !important;
+}
+/* Light legal/simple pages */
+body {
+  --navy: #0b1e3a;
+  --cyan: #00b4d8;
+}
