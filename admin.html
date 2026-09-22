@@ -250,6 +250,16 @@ textarea#bBody{position:absolute!important;left:-9999px!important;width:1px!impo
 </style>
 
 <link rel="stylesheet" href="/css/rn-site-system.css"/>
+<style id="rn-color-parity">
+:root{--navy:#0b1e3a;--cyan:#00b4d8;--rn-navy:#0b1e3a;--rn-cyan:#00b4d8;}
+a{color:#00b4d8;}
+a:hover{color:#67e8f9;}
+header,.top,.site-header{background:#0b1e3a!important;color:#fff!important;}
+header a,.top a{color:#e2e8f0!important;}
+header a:hover,.top a:hover{color:#67e8f9!important;}
+.btn-primary,button.primary,.cta-primary{background:#0b1e3a!important;color:#fff!important;border:none;}
+.btn-cyan,.btn-accent{background:#00b4d8!important;color:#0b1e3a!important;}
+</style>
 </head>
 <body>
 
@@ -1133,190 +1143,247 @@ document.getElementById('saveBlogBtn').onclick = async function(){
 
 <script id="rn-admin-rich-editor">
 (function(){
-  var rangeRef = null;
+  var savedRange = null;
 
-  function editor(){ return document.getElementById('bBodyEditor'); }
-  function hidden(){ return document.getElementById('bBody'); }
+  function ed(){ return document.getElementById('bBodyEditor'); }
+  function ta(){ return document.getElementById('bBody'); }
 
   function sync(){
-    var e = editor(), h = hidden();
-    if(e && h) h.value = e.innerHTML;
+    var e = ed(), h = ta();
+    if(e && h) h.value = e.innerHTML || '';
   }
 
-  function saveRange(){
-    var e = editor(); if(!e) return;
+  function withinEditor(node){
+    var e = ed();
+    if(!e || !node) return false;
+    return e === node || e.contains(node);
+  }
+
+  function saveSel(){
+    var e = ed();
+    if(!e) return;
     var sel = window.getSelection();
     if(!sel || sel.rangeCount === 0) return;
     var r = sel.getRangeAt(0);
-    if(e.contains(r.commonAncestorContainer) || e === r.commonAncestorContainer){
-      try { rangeRef = r.cloneRange(); } catch(err) {}
+    if(withinEditor(r.commonAncestorContainer)){
+      try { savedRange = r.cloneRange(); } catch(err) {}
     }
   }
 
-  function restoreRange(){
-    var e = editor(); if(!e || !rangeRef) return false;
+  function restoreSel(){
+    var e = ed();
+    if(!e) return false;
     try {
       e.focus();
       var sel = window.getSelection();
+      if(savedRange){
+        sel.removeAllRanges();
+        sel.addRange(savedRange);
+        return true;
+      }
+      var r = document.createRange();
+      r.selectNodeContents(e);
+      r.collapse(false);
       sel.removeAllRanges();
-      sel.addRange(rangeRef);
+      sel.addRange(r);
+      savedRange = r.cloneRange();
       return true;
     } catch(err){ return false; }
   }
 
-  function wrapTag(tag){
-    var e = editor(); if(!e) return false;
-    e.focus();
-    restoreRange();
+  function wrap(tag){
+    var e = ed();
+    if(!e) return false;
+    restoreSel();
     var sel = window.getSelection();
     if(!sel || !sel.rangeCount) return false;
     var range = sel.getRangeAt(0);
-    if(range.collapsed){
-      // no selection: insert placeholder formatted text
-      var node = document.createElement(tag);
-      node.appendChild(document.createTextNode('formatted'));
-      range.insertNode(node);
-      return true;
-    }
     try {
+      if(range.collapsed){
+        var n = document.createElement(tag);
+        n.appendChild(document.createTextNode('text'));
+        range.insertNode(n);
+        var nr = document.createRange();
+        nr.selectNodeContents(n);
+        sel.removeAllRanges();
+        sel.addRange(nr);
+        savedRange = nr.cloneRange();
+        return true;
+      }
       var el = document.createElement(tag);
       el.appendChild(range.extractContents());
       range.insertNode(el);
-      // select inside
-      var nr = document.createRange();
-      nr.selectNodeContents(el);
+      var nr2 = document.createRange();
+      nr2.selectNodeContents(el);
       sel.removeAllRanges();
-      sel.addRange(nr);
-      rangeRef = nr.cloneRange();
+      sel.addRange(nr2);
+      savedRange = nr2.cloneRange();
       return true;
     } catch(err){
       return false;
     }
   }
 
-  function run(cmd, val){
-    var e = editor(); if(!e) return;
-    e.focus();
-    restoreRange();
-    var ok = false;
+  function applyList(){
+    restoreSel();
     try {
-      if(cmd === 'bold') ok = document.execCommand('bold', false, null) || wrapTag('strong');
-      else if(cmd === 'italic') ok = document.execCommand('italic', false, null) || wrapTag('em');
-      else if(cmd === 'underline') ok = document.execCommand('underline', false, null) || wrapTag('u');
-      else if(cmd === 'insertUnorderedList') ok = document.execCommand('insertUnorderedList', false, null);
-      else if(cmd === 'formatBlock') ok = document.execCommand('formatBlock', false, val || 'h3');
-      else if(cmd === 'foreColor') ok = document.execCommand('foreColor', false, val);
-      else if(cmd === 'removeFormat') ok = document.execCommand('removeFormat', false, null);
-      else ok = document.execCommand(cmd, false, val || null);
-    } catch(err) {}
-    if(!ok && (cmd==='bold'||cmd==='italic'||cmd==='underline')){
-      wrapTag(cmd==='bold'?'strong':cmd==='italic'?'em':'u');
+      if(document.execCommand('insertUnorderedList', false, null)) return true;
+    } catch(err){}
+    var sel = window.getSelection();
+    if(!sel || !sel.rangeCount) return false;
+    var range = sel.getRangeAt(0);
+    var text = range.toString() || 'List item';
+    var ul = document.createElement('ul');
+    text.split(/\n+/).forEach(function(line){
+      var li = document.createElement('li');
+      li.textContent = line || 'Item';
+      ul.appendChild(li);
+    });
+    range.deleteContents();
+    range.insertNode(ul);
+    return true;
+  }
+
+  function applyHeading(tag){
+    restoreSel();
+    try {
+      if(document.execCommand('formatBlock', false, tag)) return true;
+    } catch(err){}
+    return wrap(tag === 'p' ? 'p' : 'h3');
+  }
+
+  function applyColor(color){
+    if(!color) return false;
+    restoreSel();
+    try {
+      if(document.execCommand('foreColor', false, color)) return true;
+    } catch(err){}
+    var sel = window.getSelection();
+    if(!sel || !sel.rangeCount) return false;
+    var range = sel.getRangeAt(0);
+    var span = document.createElement('span');
+    span.style.color = color;
+    if(range.collapsed){
+      span.appendChild(document.createTextNode('text'));
+      range.insertNode(span);
+    } else {
+      span.appendChild(range.extractContents());
+      range.insertNode(span);
     }
-    saveRange();
+    return true;
+  }
+
+  function run(cmd, val){
+    var e = ed();
+    if(!e) return;
+    e.focus();
+    restoreSel();
+    if(cmd === 'bold'){
+      var ok = false;
+      try { ok = document.execCommand('bold', false, null); } catch(err){}
+      if(!ok) wrap('strong');
+    } else if(cmd === 'italic'){
+      var ok2 = false;
+      try { ok2 = document.execCommand('italic', false, null); } catch(err){}
+      if(!ok2) wrap('em');
+    } else if(cmd === 'underline'){
+      var ok3 = false;
+      try { ok3 = document.execCommand('underline', false, null); } catch(err){}
+      if(!ok3) wrap('u');
+    } else if(cmd === 'insertUnorderedList'){
+      applyList();
+    } else if(cmd === 'formatBlock'){
+      applyHeading(val || 'h3');
+    } else if(cmd === 'foreColor'){
+      applyColor(val);
+    } else if(cmd === 'removeFormat'){
+      try { document.execCommand('removeFormat', false, null); } catch(err){}
+    }
     sync();
+    saveSel();
   }
 
   function loadIntoEditor(){
-    var e = editor(), h = hidden();
+    var e = ed(), h = ta();
     if(!e || !h) return;
-    var v = h.value || '';
-    if(v && !/<[a-z][\s\S]*>/i.test(v)){
-      e.innerHTML = '<p>' + String(v)
-        .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-        .replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
-    } else {
-      e.innerHTML = v || '<p><br></p>';
-    }
+    var v = (h.value || '').trim();
+    if(!v){ e.innerHTML = '<p><br></p>'; return; }
+    if(/<[a-z][\s\S]*>/i.test(v)) e.innerHTML = v;
+    else e.innerHTML = '<p>' + v.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/\n\n/g,'</p><p>').replace(/\n/g,'<br>') + '</p>';
+  }
+
+  function onToolbarAction(btn){
+    if(!btn) return;
+    var cmd = btn.getAttribute('data-cmd');
+    if(!cmd) return;
+    run(cmd, btn.getAttribute('data-value') || null);
   }
 
   function boot(){
-    var e = editor();
+    var e = ed();
     var bar = document.getElementById('rnEditorToolbar');
-    if(!e){ return; }
+    if(!e) return;
+    if(e.dataset.rnEditorReady === '1') return;
+    e.dataset.rnEditorReady = '1';
     loadIntoEditor();
-    e.addEventListener('input', sync);
-    e.addEventListener('keyup', saveRange);
-    e.addEventListener('mouseup', saveRange);
-    e.addEventListener('touchend', function(){ setTimeout(saveRange, 30); });
-    e.addEventListener('blur', function(){ saveRange(); sync(); });
+
+    e.addEventListener('input', function(){ sync(); saveSel(); });
+    e.addEventListener('keyup', saveSel);
+    e.addEventListener('mouseup', saveSel);
+    e.addEventListener('touchend', function(){ setTimeout(saveSel, 10); });
+    e.addEventListener('blur', function(){ saveSel(); sync(); });
 
     if(bar){
-      // Prevent toolbar from stealing selection
-      bar.addEventListener('mousedown', function(ev){
-        if(ev.target.closest('button, select')){
-          ev.preventDefault();
-          saveRange();
-        }
-      });
+      // Save selection before focus leaves editor (mobile critical)
+      bar.addEventListener('pointerdown', function(ev){
+        if(ev.target.closest('button[data-cmd], select')) saveSel();
+      }, true);
       bar.addEventListener('touchstart', function(ev){
-        if(ev.target.closest('button')){
-          ev.preventDefault();
-          saveRange();
-        }
-      }, {passive:false});
+        if(ev.target.closest('button[data-cmd]')) saveSel();
+      }, {passive:true});
+
       bar.addEventListener('click', function(ev){
         var btn = ev.target.closest('button[data-cmd]');
         if(!btn) return;
         ev.preventDefault();
         ev.stopPropagation();
-        run(btn.getAttribute('data-cmd'), btn.getAttribute('data-value'));
+        onToolbarAction(btn);
       });
     }
+
     var color = document.getElementById('rnTextColor');
     if(color){
-      color.addEventListener('mousedown', function(ev){ ev.preventDefault(); saveRange(); });
+      color.addEventListener('pointerdown', function(){ saveSel(); }, true);
       color.addEventListener('change', function(){
-        if(color.value){ run('foreColor', color.value); color.value=''; }
+        if(color.value){
+          run('foreColor', color.value);
+          color.selectedIndex = 0;
+        }
       });
     }
+
     var saveBtn = document.getElementById('saveBlogBtn');
     if(saveBtn) saveBtn.addEventListener('click', function(){ sync(); }, true);
 
     document.addEventListener('click', function(ev){
       if(ev.target.closest && ev.target.closest('[data-edit-post]')){
-        setTimeout(loadIntoEditor, 250);
+        setTimeout(function(){
+          var e2 = ed();
+          if(e2) e2.dataset.rnEditorReady = '';
+          loadIntoEditor();
+        }, 250);
       }
     });
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
+  setTimeout(boot, 300);
 })();
 </script>
 
 
-<script id="rn-editor-toolbar-js">
-(function(){
-  function sync(){
-    var ed = document.getElementById('bBodyEditor');
-    var ta = document.getElementById('bBody');
-    if(ed && ta) ta.value = ed.innerHTML;
-  }
-  function boot(){
-    var ed = document.getElementById('bBodyEditor');
-    var ta = document.getElementById('bBody');
-    if(ed && ta && ta.value) ed.innerHTML = ta.value;
-    document.querySelectorAll('#rn-editor-toolbar [data-cmd]').forEach(function(btn){
-      btn.addEventListener('mousedown', function(e){ e.preventDefault(); });
-      btn.addEventListener('click', function(e){
-        e.preventDefault();
-        var cmd = btn.getAttribute('data-cmd');
-        document.execCommand(cmd, false, null);
-        sync();
-      });
-    });
-    if(ed){
-      ed.addEventListener('input', sync);
-      ed.addEventListener('blur', sync);
-    }
-    // also sync before form submit
-    document.querySelectorAll('form').forEach(function(f){
-      f.addEventListener('submit', sync);
-    });
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', boot);
-  else boot();
-})();
-</script>
+
 
 </body>
 </html>
