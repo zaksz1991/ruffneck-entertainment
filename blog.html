@@ -219,7 +219,7 @@ body{
 }
 
 .read-link{
-  color:#087f99
+  color:#00b4d8
 }
 
 .article-overlay{
@@ -305,7 +305,7 @@ body{
   color: #f8fafc !important;
 }
 .rn-blog-meta a {
-  color: #087f99 !important;
+  color: #00b4d8 !important;
 }
 .card-meta,
 .article-meta,
@@ -371,7 +371,7 @@ body{
   display: inline-flex !important;
   margin-top: 10px !important;
   font-weight: 700 !important;
-  color: #087f99 !important;
+  color: #00b4d8 !important;
 }
 .card-author {
   font-weight: 600 !important;
@@ -2717,6 +2717,16 @@ button.rn-read-btn {
 </style>
 
 <link rel="stylesheet" href="/css/rn-site-system.css"/>
+<style id="rn-color-parity">
+:root{--navy:#0b1e3a;--cyan:#00b4d8;--rn-navy:#0b1e3a;--rn-cyan:#00b4d8;}
+a{color:#00b4d8;}
+a:hover{color:#67e8f9;}
+header,.top,.site-header{background:#0b1e3a!important;color:#fff!important;}
+header a,.top a{color:#e2e8f0!important;}
+header a:hover,.top a:hover{color:#67e8f9!important;}
+.btn-primary,button.primary,.cta-primary{background:#0b1e3a!important;color:#fff!important;border:none;}
+.btn-cyan,.btn-accent{background:#00b4d8!important;color:#0b1e3a!important;}
+</style>
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -5251,6 +5261,50 @@ div.rn-blog-meta p {
 </script>
 
 
+
+<style id="rn-article-modal-force">
+#articleOverlay,
+.article-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 2147483000 !important;
+  background: rgba(15, 23, 42, 0.75) !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  padding: 12px !important;
+}
+#articleOverlay:not(.open),
+.article-overlay:not(.open) {
+  display: none !important;
+}
+#articleOverlay.open,
+.article-overlay.open {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+#articleOverlay .article-modal,
+.article-overlay .article-modal {
+  position: relative !important;
+  z-index: 1 !important;
+  width: min(720px, 100%) !important;
+  margin: 12px auto 40px !important;
+  background: #fff !important;
+  border-radius: 14px !important;
+  pointer-events: auto !important;
+}
+.rn-read-one {
+  position: relative !important;
+  z-index: 2 !important;
+  pointer-events: auto !important;
+  touch-action: manipulation !important;
+  min-height: 44px !important;
+  cursor: pointer !important;
+}
+</style>
 <script id="rn-blog-open-force">
 (function(){
   function mergeStatic(){
@@ -5263,97 +5317,144 @@ div.rn-blog-meta p {
       }
     } catch (e) {}
   }
-  function bindCards(){
-    mergeStatic();
-    // Static cards with onclick=openArticle('id')
-    document.querySelectorAll('[onclick*="openArticle"]').forEach(function(el){
-      if (el.dataset.rnBoundOpen) return;
-      el.dataset.rnBoundOpen = '1';
-      var m = (el.getAttribute('onclick') || '').match(/openArticle\s*\(\s*['"]([^'"]+)['"]/);
-      if (!m) return;
-      var id = m[1];
-      el.addEventListener('click', function(e){
-        // let inline run too; also force
-        setTimeout(function(){
-          if (typeof window.openArticle === 'function') window.openArticle(id);
-        }, 0);
-      }, true);
-    });
-    // CMS / rn-read-one buttons
-    document.querySelectorAll('.rn-read-one, .blog-card, .rn-cms-post').forEach(function(el){
-      if (el.dataset.rnBoundOpen2) return;
-      el.dataset.rnBoundOpen2 = '1';
-      el.addEventListener('click', function(e){
-        var card = el.closest('.blog-card, .rn-cms-post') || el;
-        var id = card.getAttribute('data-post-id') || card.getAttribute('data-id');
-        if (!id) {
-          var btn = e.target.closest && e.target.closest('.rn-read-one');
-          // static: try extract from parent onclick
-          var host = card.closest('[onclick*="openArticle"]') || card;
-          var m = ((host.getAttribute && host.getAttribute('onclick')) || '').match(/openArticle\s*\(\s*['"]([^'"]+)['"]/);
-          if (m) id = m[1];
-        }
-        if (!id) return;
-        // If click is on button or card, open
-        var isBtn = e.target.closest && e.target.closest('.rn-read-one');
-        if (isBtn || el.classList.contains('blog-card') || el.classList.contains('rn-cms-post')) {
-          if (typeof window.openArticle === 'function') {
-            e.preventDefault();
-            window.openArticle(id);
-          }
-        }
-      }, true);
-    });
+
+  function showOverlay(){
+    var ov = document.getElementById('articleOverlay');
+    if (!ov) return;
+    ov.classList.add('open');
+    ov.style.setProperty('display', 'flex', 'important');
+    ov.style.setProperty('visibility', 'visible', 'important');
+    ov.style.setProperty('opacity', '1', 'important');
+    ov.style.setProperty('z-index', '2147483000', 'important');
+    ov.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
   }
-  // Wrap openArticle once more to always merge + open overlay
+
+  function hideOverlay(){
+    var ov = document.getElementById('articleOverlay');
+    if (!ov) return;
+    ov.classList.remove('open');
+    ov.style.setProperty('display', 'none', 'important');
+    document.body.style.overflow = '';
+  }
+
+  function openById(id){
+    if (!id) return false;
+    mergeStatic();
+    if (typeof window.openArticle === 'function') {
+      try { window.openArticle(id); } catch (e) { console.warn(e); }
+    }
+    // always force visible after open
+    setTimeout(showOverlay, 0);
+    setTimeout(showOverlay, 50);
+    return true;
+  }
+
+  function idFromCard(el){
+    if (!el) return null;
+    var card = el.closest ? (el.closest('.blog-card, .rn-cms-post, [data-post-id], [onclick*="openArticle"]') || el) : el;
+    var id = card.getAttribute && (card.getAttribute('data-post-id') || card.getAttribute('data-id'));
+    if (id) return id;
+    var oc = (card.getAttribute && card.getAttribute('onclick')) || '';
+    var m = oc.match(/openArticle\s*\(\s*['"]([^'"]+)['"]/);
+    if (m) return m[1];
+    // search parent chain
+    var p = card.parentElement;
+    for (var i = 0; i < 4 && p; i++) {
+      oc = p.getAttribute && p.getAttribute('onclick') || '';
+      m = oc.match(/openArticle\s*\(\s*['"]([^'"]+)['"]/);
+      if (m) return m[1];
+      id = p.getAttribute && (p.getAttribute('data-post-id') || p.getAttribute('data-id'));
+      if (id) return id;
+      p = p.parentElement;
+    }
+    return null;
+  }
+
+  function onActivate(e){
+    var t = e.target;
+    if (!t || !t.closest) return;
+    // close controls
+    if (t.closest('.rn-modal-x, .rn-modal-close, .article-back-btn, .rn-modal-close-bottom, [data-close-article]')) {
+      e.preventDefault();
+      if (typeof window.closeArticle === 'function') window.closeArticle();
+      hideOverlay();
+      return;
+    }
+    // read button or card
+    var btn = t.closest('.rn-read-one, .read-link, [data-open-article]');
+    var card = t.closest('.blog-card, .rn-cms-post');
+    if (!btn && !card) return;
+    // ignore pure link navigation inside card
+    if (t.closest('a[href]') && !t.closest('.rn-read-one')) return;
+    var id = idFromCard(btn || card);
+    if (!id) return;
+    e.preventDefault();
+    e.stopPropagation();
+    openById(id);
+  }
+
   function wrapOpen(){
-    if (typeof window.openArticle !== 'function' || window.openArticle.__rnForce) return;
+    if (typeof window.openArticle !== 'function' || window.openArticle.__rnForce2) return;
     var orig = window.openArticle;
     window.openArticle = function(id){
       mergeStatic();
       var art = (window.articles && window.articles[id]) || (typeof articles === 'object' && articles[id]);
-      if (!art) {
-        console.warn('[blog] still missing', id);
-        return orig.apply(this, arguments);
+      if (art) {
+        window.articles = window.articles || {};
+        window.articles[id] = art;
       }
-      window.articles[id] = art;
       var r = orig.apply(this, arguments);
-      var ov = document.getElementById('articleOverlay');
-      if (ov) {
-        ov.classList.add('open');
-        ov.style.setProperty('display', 'flex', 'important');
-        ov.scrollTop = 0;
-      }
-      document.body.style.overflow = 'hidden';
+      showOverlay();
       return r;
     };
-    window.openArticle.__rnForce = true;
+    window.openArticle.__rnForce2 = true;
   }
+
   function wrapClose(){
-    if (typeof window.closeArticle !== 'function' || window.closeArticle.__rnForce) return;
+    if (typeof window.closeArticle !== 'function' || window.closeArticle.__rnForce2) return;
     var orig = window.closeArticle;
     window.closeArticle = function(){
-      try { orig.apply(this, arguments); } catch(e) {}
-      var ov = document.getElementById('articleOverlay');
-      if (ov) {
-        ov.classList.remove('open');
-        ov.style.setProperty('display', 'none', 'important');
-      }
-      document.body.style.overflow = '';
+      try { orig.apply(this, arguments); } catch (e) {}
+      hideOverlay();
     };
-    window.closeArticle.__rnForce = true;
+    window.closeArticle.__rnForce2 = true;
   }
+
   function boot(){
     mergeStatic();
     wrapOpen();
     wrapClose();
-    bindCards();
+    // one delegated listener for click + touch
+    if (!window.__rnBlogOpenBound) {
+      window.__rnBlogOpenBound = true;
+      document.addEventListener('click', onActivate, true);
+      document.addEventListener('touchend', function(e){
+        // only treat as activate if target is read button / card footer
+        var t = e.target;
+        if (!t || !t.closest) return;
+        if (t.closest('.rn-read-one, .rn-modal-x, .rn-modal-close, .article-back-btn, .rn-modal-close-bottom')) {
+          onActivate(e);
+        }
+      }, {passive:false, capture:true});
+    }
+    // Escape closes
+    if (!window.__rnBlogEsc) {
+      window.__rnBlogEsc = true;
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape') {
+          if (typeof window.closeArticle === 'function') window.closeArticle();
+          hideOverlay();
+        }
+      });
+    }
   }
+
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
   else boot();
-  setTimeout(boot, 500);
-  setTimeout(boot, 1500);
-  setTimeout(boot, 3000);
+  setTimeout(boot, 200);
+  setTimeout(boot, 1000);
+  setTimeout(boot, 2500);
 })();
 </script>
 
