@@ -431,8 +431,29 @@ body{
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <link rel="preload" href="/icon-192.png" as="image"/>
-<link rel="canonical" href="https://ruffneck-entertainment.vercel.app/blog"/>
 <title>AI, Operations and Digital Growth Insights | RuffNeck</title>
+<!-- LinkedIn / social preview (Open Graph + Twitter) -->
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="en_NG"/>
+<meta property="og:site_name" content="RuffNeck Entertainment"/>
+<meta property="og:url" content="https://ruffneck-entertainment.vercel.app/blog"/>
+<meta property="og:title" content="RuffNeck Knowledge Hub — AI, Operations &amp; Digital Growth for Nigerian Businesses"/>
+<meta property="og:description" content="Practical AI tools, digital operations, marketing, IT skills and career guides for Nigerian SMEs and professionals. From RuffNeck Entertainment, Kano, Nigeria."/>
+<meta property="og:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
+<meta property="og:image:secure_url" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
+<meta property="og:image:type" content="image/png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="RuffNeck Entertainment — AI and digital systems for Nigerian businesses"/>
+<link rel="canonical" href="https://ruffneck-entertainment.vercel.app/blog"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@RuffNeckEnterta"/>
+<meta name="twitter:url" content="https://ruffneck-entertainment.vercel.app/blog"/>
+<meta name="twitter:title" content="RuffNeck Knowledge Hub — AI &amp; Digital Growth Insights"/>
+<meta name="twitter:description" content="Practical AI tools, operations, marketing and career guides for Nigerian SMEs and professionals."/>
+<meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
+<meta name="twitter:image:alt" content="RuffNeck Entertainment Knowledge Hub"/>
+
 <meta name="author" content="Hassan Zakariya, RuffNeck Entertainment"/>
 <meta name="description" content="Practical guides on AI for business, digital operations, IT skills, marketing and careers from RuffNeck Entertainment in Nigeria."/>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"/>
@@ -465,22 +486,7 @@ body{
 
 
 <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
-<meta property="og:type" content="website"/>
-<meta property="og:url" content="https://ruffneck-entertainment.vercel.app/blog"/>
-<meta property="og:title" content="AI, Operations and Digital Growth Insights | RuffNeck"/>
-<meta property="og:description" content="Practical guides on AI for business, digital operations, IT skills, marketing and careers from RuffNeck Entertainment in Nigeria."/>
-<meta property="og:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
-<meta property="og:image:width" content="1200"/>
-<meta property="og:image:height" content="630"/>
-<meta property="og:site_name" content="RuffNeck Entertainment"/>
-
 <!-- Twitter Card -->
-<meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:url" content="https://ruffneck-entertainment.vercel.app/blog"/>
-<meta name="twitter:title" content="AI, Operations and Digital Growth Insights | RuffNeck"/>
-<meta name="twitter:description" content="Practical guides on AI for business, digital operations, IT skills, marketing and careers from RuffNeck Entertainment in Nigeria."/>
-<meta name="twitter:image" content="https://ruffneck-entertainment.vercel.app/og-image.png"/>
-
 <!-- Google Analytics (GA4) — replace G-XF92RSFBHX with your real Measurement ID -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XF92RSFBHX"></script>
 <script>
@@ -5521,6 +5527,65 @@ div.rn-blog-meta p {
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', openFromQuery);
   else openFromQuery();
   setTimeout(openFromQuery, 1200);
+})();
+</script>
+
+
+<script id="rn-linkedin-share-meta">
+(function(){
+  var ORIGIN = 'https://ruffneck-entertainment.vercel.app';
+  function setMeta(attr, key, val){
+    if(!val) return;
+    var sel = attr === 'property' ? 'meta[property="'+key+'"]' : 'meta[name="'+key+'"]';
+    var el = document.querySelector(sel);
+    if(!el){
+      el = document.createElement('meta');
+      el.setAttribute(attr, key);
+      document.head.appendChild(el);
+    }
+    el.setAttribute('content', val);
+  }
+  function updatePreviewMeta(article){
+    if(!article) return;
+    var title = (article.title || 'RuffNeck Blog') + ' | RuffNeck Entertainment';
+    var desc = (article.meta || '') + ' — ' + String(article.body || article.desc || '').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim().slice(0,160);
+    if(desc.length < 40) desc = title + ' — Practical AI and digital growth insights from RuffNeck Entertainment, Nigeria.';
+    setMeta('property', 'og:title', title);
+    setMeta('property', 'og:description', desc);
+    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:description', desc.slice(0,200));
+    setMeta('property', 'og:type', 'article');
+    if(article.image){
+      var img = String(article.image);
+      if(img.indexOf('http') !== 0) img = ORIGIN + (img.charAt(0)==='/' ? img : '/' + img);
+      setMeta('property', 'og:image', img);
+      setMeta('name', 'twitter:image', img);
+    }
+    try { document.title = title; } catch(e){}
+  }
+  function wrap(){
+    if(typeof window.openArticle !== 'function' || window.openArticle.__liMeta) return;
+    var orig = window.openArticle;
+    window.openArticle = function(id){
+      var r = orig.apply(this, arguments);
+      try {
+        window.currentArticleId = id;
+        if(typeof currentArticleId !== 'undefined') currentArticleId = id;
+        var art = (window.articles && window.articles[id]) || (typeof articles==='object' && articles[id]);
+        if(art) updatePreviewMeta(art);
+        // Keep URL shareable without reload
+        if(window.history && window.history.replaceState){
+          var u = ORIGIN + '/blog?article=' + encodeURIComponent(String(id));
+          window.history.replaceState({article:id}, '', u.replace(ORIGIN, '') || ('/blog?article='+encodeURIComponent(String(id))));
+        }
+      } catch(e){}
+      return r;
+    };
+    window.openArticle.__liMeta = true;
+  }
+  wrap();
+  setTimeout(wrap, 400);
+  setTimeout(wrap, 1500);
 })();
 </script>
 
