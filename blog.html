@@ -3175,18 +3175,21 @@ button,a,.btn{touch-action:manipulation}
   <div class="container">
     <div class="label">Resources · Insights · Guides · 2026</div>
     <h1>RuffNeck <em>Knowledge Hub</em></h1>
-<div class="rn-blog-meta" style="max-width:720px;margin:16px auto 24px;padding:16px;border:1px solid rgba(255,255,255,0.28);border-radius:14px;background:rgba(0,0,0,0.35);font-size:14px;line-height:1.55;color:#ffffff !important;">
+<div class="rn-blog-meta" style="max-width:720px;margin:16px auto 24px;padding:18px 16px;border:1px solid rgba(255,255,255,0.28);border-radius:14px;background:rgba(0,0,0,0.35);font-size:14px;line-height:1.6;color:#ffffff !important;">
   <div style="color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;">
-    <span style="color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;"><strong style="color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;">Author:</strong> Hassan Zakariya · RuffNeck Entertainment</span><br>
-    <span style="color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;"><strong style="color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;">Updated:</strong> August 2026</span>
-    · <a href="/founder" style="color:#7dd3fc !important;-webkit-text-fill-color:#7dd3fc !important;font-weight:700;text-decoration:underline;">About the founder</a>
-    · <a href="/services-ai.html" style="color:#7dd3fc !important;-webkit-text-fill-color:#7dd3fc !important;font-weight:700;text-decoration:underline;">AI services</a>
-    · <a href="/store" style="color:#7dd3fc !important;-webkit-text-fill-color:#7dd3fc !important;font-weight:700;text-decoration:underline;">Digital store</a>
+    <div style="margin-bottom:8px;"><strong style="color:#ffffff !important;">Author:</strong> Hassan Zakariya · RuffNeck Entertainment</div>
+    <div style="margin-bottom:10px;"><strong style="color:#ffffff !important;">Updated:</strong> October 2026</div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px 14px;margin-bottom:12px;">
+      <a href="/founder" style="color:#7dd3fc !important;font-weight:700;text-decoration:underline;">About the founder</a>
+      <a href="/services-ai.html" style="color:#7dd3fc !important;font-weight:700;text-decoration:underline;">AI services</a>
+      <a href="/store" style="color:#7dd3fc !important;font-weight:700;text-decoration:underline;">Digital store</a>
+      <a href="https://calendly.com/hassanzakariyabiz/30min" style="color:#7dd3fc !important;font-weight:700;text-decoration:underline;">Book a discovery call</a>
+    </div>
   </div>
-  <p style="margin:10px 0 0;color:#e2e8f0 !important;-webkit-text-fill-color:#e2e8f0 !important;">Articles are written for Nigerian and African businesses and professionals. Prefer a service conversation? <a href="https://calendly.com/hassanzakariyabiz/30min" style="color:#7dd3fc !important;-webkit-text-fill-color:#7dd3fc !important;font-weight:700;text-decoration:underline;">Book a discovery call</a>.</p>
+  <p style="margin:0;color:#e2e8f0 !important;-webkit-text-fill-color:#e2e8f0 !important;">Practical guides for Nigerian and African businesses — AI tools, operations, digital skills, careers, and growth systems you can use this year.</p>
 </div>
 
-    <p>Practical AI, operations, digital marketing, career development, and business growth insights from RuffNeck Entertainment.</p>
+    <p>AI, operations, marketing, IT skills, and career growth — written for founders and professionals across Nigeria and Africa.</p>
   </div>
 </div>
 
@@ -3210,8 +3213,8 @@ button,a,.btn{touch-action:manipulation}
 
 <!-- featured removed -->
 <div id="cmsPostsSection" class="cms-posts-section" style="max-width:1100px;margin:0 auto 28px;padding:0 16px;">
-  <h2 class="grid-heading" style="margin-bottom:12px;">Latest from RuffNeck</h2>
-  <p id="cmsPostsStatus" style="font-size:13px;color:#64748b;margin:0 0 12px;">Loading new posts…</p>
+  <h2 class="grid-heading" style="margin-bottom:8px;">Latest from RuffNeck</h2>
+  <p id="cmsPostsStatus" style="font-size:13px;color:#64748b;margin:0 0 14px;">New posts published from Admin — newest first.</p>
   <div id="cmsPostsGrid" class="blog-grid" style="display:grid;gap:16px;"></div>
 </div>
 
@@ -4697,9 +4700,9 @@ window.RNCms.listPosts = async function () {
     if (statusEl) {
       statusEl.textContent =
         published.length +
-        " published post" +
+        " new post" +
         (published.length === 1 ? "" : "s") +
-        " from Admin (including newest at top).";
+        " from Admin · newest first."
       statusEl.style.color = "#0f766e";
     }
 
