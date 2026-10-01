@@ -4456,29 +4456,22 @@ window.RNCms.listPosts = async function () {
     var titleRaw = String(p.title || "Untitled");
     var catLower = catRaw.toLowerCase();
     var titleLower = titleRaw.toLowerCase();
-    // Category / title based icon when admin post has no image
-    var emojiMap = {
-      careers: "📄", career: "📄", jobs: "📄", cv: "📄",
-      business: "⚙️", growth: "📈", automation: "⚙️",
-      operations: "📊", ops: "📊", warehouse: "📦",
-      marketing: "📱", content: "✍️", prompts: "⚡", prompt: "⚡",
-      ai: "🤖", automation: "⚙️", ethics: "🛡️",
-      it: "💻", productivity: "💻", training: "🎓",
-      blog: "✨", default: "✨"
-    };
-    var emojiPick = p.emoji || "";
-    if (!emojiPick) {
-      if (/cv|cover letter|linkedin|job/.test(titleLower)) emojiPick = "📄";
-      else if (/automat|sop/.test(titleLower)) emojiPick = "⚙️";
-      else if (/prompt/.test(titleLower)) emojiPick = "⚡";
-      else if (/warehouse|report/.test(titleLower)) emojiPick = "📦";
-      else {
-        for (var ek in emojiMap) {
-          if (catLower.indexOf(ek) >= 0) { emojiPick = emojiMap[ek]; break; }
-        }
-      }
-      if (!emojiPick) emojiPick = "✨";
-    }
+    var hay = catLower + " " + titleLower;
+    // Always pick icon from topic — ignore generic admin default 📝
+    var emojiPick = "";
+    if (/whatsapp|telegram|storage|phone|android|cache|folder/.test(hay)) emojiPick = "📱";
+    else if (/privacy|footprint|digital privacy|credential|security/.test(hay)) emojiPick = "🔒";
+    else if (/course|learn|training|education|tutorial/.test(hay)) emojiPick = "🎓";
+    else if (/webinar|event|workshop/.test(hay)) emojiPick = "🎥";
+    else if (/cv|cover letter|linkedin|job|career/.test(hay)) emojiPick = "📄";
+    else if (/automat|sop|operations|warehouse|report/.test(hay)) emojiPick = "⚙️";
+    else if (/prompt/.test(hay)) emojiPick = "⚡";
+    else if (/market|instagram|content creation|carousel/.test(hay)) emojiPick = "📈";
+    else if (/ai|chatgpt|productivity|agent/.test(hay)) emojiPick = "🤖";
+    else if (/ethics|policy/.test(hay)) emojiPick = "🛡️";
+    else if (/money|profit|digital product|sell/.test(hay)) emojiPick = "💰";
+    else if (p.emoji && String(p.emoji).trim() && String(p.emoji).trim() !== "📝") emojiPick = String(p.emoji).trim();
+    else emojiPick = "✨";
     var emoji = escapeHtml(emojiPick);
     var cat = escapeHtml(catRaw);
     var title = escapeHtml(titleRaw);
@@ -4497,11 +4490,14 @@ window.RNCms.listPosts = async function () {
     }
 
     var gradient = "linear-gradient(145deg,#0b1e3a,#0e7490)";
-    if (/career|cv|job/.test(catLower+titleLower)) gradient = "linear-gradient(145deg,#0b1e3a,#1e3a5f)";
-    else if (/ops|operation|business|automat/.test(catLower+titleLower)) gradient = "linear-gradient(145deg,#0b1e3a,#115e59)";
-    else if (/market/.test(catLower)) gradient = "linear-gradient(145deg,#0b1e3a,#1d4ed8)";
-    else if (/prompt|content/.test(catLower+titleLower)) gradient = "linear-gradient(145deg,#0b1e3a,#0f766e)";
-    else if (/ai/.test(catLower+titleLower)) gradient = "linear-gradient(145deg,#0b1e3a,#0e7490)";
+    if (/privacy|security|footprint/.test(hay)) gradient = "linear-gradient(145deg,#0b1e3a,#1e3a5f)";
+    else if (/storage|whatsapp|telegram|phone|android/.test(hay)) gradient = "linear-gradient(145deg,#0b1e3a,#0f766e)";
+    else if (/course|learn|training/.test(hay)) gradient = "linear-gradient(145deg,#0b1e3a,#1d4ed8)";
+    else if (/career|cv|job/.test(hay)) gradient = "linear-gradient(145deg,#0b1e3a,#1e3a5f)";
+    else if (/ops|operation|business|automat|sop/.test(hay)) gradient = "linear-gradient(145deg,#0b1e3a,#115e59)";
+    else if (/market/.test(hay)) gradient = "linear-gradient(145deg,#0b1e3a,#1d4ed8)";
+    else if (/prompt|content/.test(hay)) gradient = "linear-gradient(145deg,#0b1e3a,#0f766e)";
+    else if (/ai|webinar/.test(hay)) gradient = "linear-gradient(145deg,#0b1e3a,#0e7490)";
 
     var imgSrc = p.image ? String(p.image).trim() : "";
     var thumbInner = imgSrc
