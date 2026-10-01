@@ -5558,9 +5558,14 @@ div.rn-blog-meta p {
   }
 
   function postUrl(id){
-    var u = ORIGIN + '/blog';
-    if (id) u += '?article=' + encodeURIComponent(String(id));
-    return u;
+    if (!id) return ORIGIN + '/blog';
+    var sid = String(id);
+    // Static posts: dedicated URL so LinkedIn shows the real article title
+    if (!/^\d+$/.test(sid)) {
+      return ORIGIN + '/posts/' + encodeURIComponent(sid) + '.html';
+    }
+    // CMS numeric ids: blog deep link (preview stays Knowledge Hub until CMS pages exist)
+    return ORIGIN + '/blog?article=' + encodeURIComponent(sid);
   }
 
   function setId(id){
