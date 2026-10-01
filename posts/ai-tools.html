@@ -50,10 +50,27 @@ h1{font-size:1.65rem;line-height:1.25;margin:8px 0 12px;color:#0b1e3a}
   <p><strong>Read the full article on the RuffNeck Knowledge Hub</strong> (layout, images, and formatting).</p>
   </article>
   <div class="cta">
+    <button type="button" class="copy-link-btn" data-url="https://ruffneck-entertainment.vercel.app/posts/ai-tools.html" style="display:inline-block;padding:12px 18px;border-radius:10px;font-weight:700;border:none;background:#0b1e3a;color:#fff;cursor:pointer">Copy link</button>
+
     <a class="primary" href="https://ruffneck-entertainment.vercel.app/blog?article=ai-tools">Open in Knowledge Hub</a>
     <a class="ghost" href="/blog">All articles</a>
     <a class="ghost" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener">Book a call</a>
   </div>
 </main>
+
+<script>
+document.querySelectorAll('.copy-link-btn').forEach(function(b){
+  b.addEventListener('click', function(){
+    var u = b.getAttribute('data-url');
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(u).then(function(){
+        var t = b.textContent; b.textContent = 'Copied!';
+        setTimeout(function(){ b.textContent = t; }, 2000);
+      });
+    } else { prompt('Copy link', u); }
+  });
+});
+</script>
+
 </body>
 </html>

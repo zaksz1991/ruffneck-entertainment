@@ -2772,6 +2772,23 @@ div.newsletter {
 }
 </style>
 
+
+<style id="rn-copy-link-css">
+.share-btn.share-copy{
+  background:#0b1e3a!important;
+  color:#f8fafc!important;
+  border:1px solid #00b4d8!important;
+  cursor:pointer;
+  min-height:40px;
+  padding:8px 14px;
+  border-radius:8px;
+  font-weight:700;
+  font-size:13px;
+}
+.share-btn.share-copy:active{opacity:.85}
+#rnCopyLinkMsg{color:#00b4d8!important}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -3286,6 +3303,8 @@ button,a,.btn{touch-action:manipulation}
         <button type="button" class="share-btn share-fb" onclick="shareArticle('facebook')" aria-label="Share on Facebook">Facebook</button>
         <button type="button" class="share-btn share-tw" onclick="shareArticle('twitter')" aria-label="Share on X">X</button>
         <button type="button" class="share-btn share-li" onclick="shareArticle('linkedin')" aria-label="Share on LinkedIn">LinkedIn</button>
+        <button type="button" class="share-btn share-copy" id="rnCopyLinkBtn" onclick="copyPostLink()" aria-label="Copy article link">Copy link</button>
+        <span id="rnCopyLinkMsg" style="display:none;font-size:12px;color:#00b4d8;font-weight:600;margin-left:4px;">Copied!</span>
       </div>
 
       <!-- COMMENTS SECTION -->
@@ -5661,6 +5680,81 @@ div.rn-blog-meta p {
   setTimeout(boot, 400);
   setTimeout(boot, 1200);
   setTimeout(boot, 3000);
+})();
+</script>
+
+
+<script id="rn-copy-post-link">
+(function(){
+  function getPostShareUrl(){
+    var ORIGIN = (location.origin || 'https://ruffneck-entertainment.vercel.app').replace(/\/$/, '');
+    var id = window.currentArticleId || '';
+    try {
+      if (!id && typeof currentArticleId !== 'undefined' && currentArticleId) id = currentArticleId;
+    } catch(e){}
+    var ov = document.getElementById('articleOverlay');
+    if (!id && ov) id = ov.getAttribute('data-article-id') || '';
+    if (!id) {
+      var q = new URLSearchParams(location.search || '');
+      id = q.get('article') || q.get('id') || '';
+    }
+    if (!id && window.articles) {
+      var titleEl = document.getElementById('articleTitle');
+      var title = titleEl && titleEl.textContent ? titleEl.textContent.trim() : '';
+      if (title) {
+        Object.keys(window.articles).some(function(k){
+          var a = window.articles[k];
+          if (a && a.title && a.title.trim() === title) { id = k; return true; }
+        });
+      }
+    }
+    if (!id) return ORIGIN + '/blog';
+    if (!/^\d+$/.test(String(id))) {
+      return ORIGIN + '/posts/' + encodeURIComponent(String(id)) + '.html';
+    }
+    return ORIGIN + '/blog?article=' + encodeURIComponent(String(id));
+  }
+
+  window.copyPostLink = function(){
+    var url = getPostShareUrl();
+    var msg = document.getElementById('rnCopyLinkMsg');
+    var btn = document.getElementById('rnCopyLinkBtn');
+    function ok(){
+      if (msg) {
+        msg.style.display = 'inline';
+        msg.textContent = 'Copied!';
+        setTimeout(function(){ msg.style.display = 'none'; }, 2000);
+      }
+      if (btn) {
+        var prev = btn.getAttribute('data-label') || 'Copy link';
+        btn.setAttribute('data-label', prev);
+        btn.textContent = 'Copied!';
+        setTimeout(function(){ btn.textContent = prev; }, 2000);
+      }
+    }
+    function fallback(){
+      try { window.prompt('Copy this link:', url); } catch(e) { alert(url); }
+    }
+    function tryExec(){
+      try {
+        var ta = document.createElement('textarea');
+        ta.value = url;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        var done = document.execCommand('copy');
+        document.body.removeChild(ta);
+        if (done) ok(); else fallback();
+      } catch(err) { fallback(); }
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(ok).catch(tryExec);
+    } else {
+      tryExec();
+    }
+  };
 })();
 </script>
 
