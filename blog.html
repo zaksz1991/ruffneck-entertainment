@@ -2789,6 +2789,139 @@ div.newsletter {
 #rnCopyLinkMsg{color:#00b4d8!important}
 </style>
 
+
+<style id="rn-thumb-emoji-force">
+/* Force topic icons visible on all blog cards */
+body.rn-ux-page .blog-thumb,
+.blog-thumb,
+div.blog-thumb {
+  min-height: 140px !important;
+  height: 140px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  overflow: hidden !important;
+  font-size: 52px !important;
+  line-height: 1 !important;
+  color: #fff !important;
+}
+.blog-thumb > span:first-child {
+  display: block !important;
+  font-size: 52px !important;
+  line-height: 1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 2 !important;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+}
+.blog-thumb .card-cat-badge {
+  position: absolute !important;
+  left: 12px !important;
+  bottom: 12px !important;
+  z-index: 3 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: .03em !important;
+  text-transform: uppercase !important;
+  background: rgba(15,23,42,.8) !important;
+  color: #f1f5f9 !important;
+  padding: 4px 10px !important;
+  border-radius: 999px !important;
+  line-height: 1.2 !important;
+}
+.blog-thumb .card-new {
+  position: absolute !important;
+  right: 12px !important;
+  top: 12px !important;
+  z-index: 3 !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  background: #fbbf24 !important;
+  color: #0b1e3a !important;
+  padding: 3px 8px !important;
+  border-radius: 999px !important;
+}
+.blog-thumb-ai { background: linear-gradient(145deg, #0b1e3a, #0e7490) !important; }
+.blog-thumb-ops { background: linear-gradient(145deg, #0b1e3a, #115e59) !important; }
+.blog-thumb-marketing { background: linear-gradient(145deg, #0b1e3a, #1d4ed8) !important; }
+.blog-thumb-content { background: linear-gradient(145deg, #0b1e3a, #0f766e) !important; }
+.blog-thumb-ethics { background: linear-gradient(145deg, #0b1e3a, #5b21b6) !important; }
+.blog-thumb-consult { background: linear-gradient(145deg, #0b1e3a, #0369a1) !important; }
+.blog-thumb-intern { background: linear-gradient(145deg, #0b1e3a, #0e7490) !important; }
+.blog-thumb-career { background: linear-gradient(145deg, #0b1e3a, #1e3a5f) !important; }
+</style>
+
+
+<style id="rn-thumb-icons">
+.blog-thumb,
+.blog-card .blog-thumb,
+div.blog-thumb {
+  height: 150px !important;
+  min-height: 150px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  border-radius: 12px 12px 0 0 !important;
+  overflow: hidden !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+.blog-thumb > span:first-child,
+.blog-thumb span:first-of-type {
+  display: block !important;
+  font-size: 56px !important;
+  line-height: 1 !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  position: relative !important;
+  z-index: 2 !important;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.3)) !important;
+}
+.blog-thumb-ai { background: linear-gradient(145deg, #0b1e3a 0%, #0e7490 100%) !important; }
+.blog-thumb-ops { background: linear-gradient(145deg, #0b1e3a 0%, #115e59 100%) !important; }
+.blog-thumb-marketing { background: linear-gradient(145deg, #0b1e3a 0%, #1d4ed8 100%) !important; }
+.blog-thumb-content { background: linear-gradient(145deg, #0b1e3a 0%, #0f766e 100%) !important; }
+.blog-thumb-ethics { background: linear-gradient(145deg, #0b1e3a 0%, #4c1d95 100%) !important; }
+.blog-thumb-consult { background: linear-gradient(145deg, #0b1e3a 0%, #0e7490 100%) !important; }
+.blog-thumb-intern { background: linear-gradient(145deg, #0b1e3a 0%, #0369a1 100%) !important; }
+.blog-thumb-career { background: linear-gradient(145deg, #0b1e3a 0%, #1e3a5f 100%) !important; }
+.blog-thumb .card-cat-badge {
+  position: absolute !important; left: 12px !important; bottom: 12px !important; z-index: 3 !important;
+  font-size: 11px !important; font-weight: 700 !important; letter-spacing: .03em !important;
+  text-transform: uppercase !important; background: rgba(15,23,42,.8) !important;
+  color: #e2e8f0 !important; padding: 4px 10px !important; border-radius: 999px !important;
+  display: inline-block !important;
+}
+.blog-thumb .card-new {
+  position: absolute !important; right: 12px !important; top: 12px !important; z-index: 3 !important;
+  font-size: 11px !important; font-weight: 700 !important; background: #fbbf24 !important;
+  color: #0b1e3a !important; padding: 3px 8px !important; border-radius: 999px !important;
+  display: inline-block !important;
+}
+/* If thumb has only background and no span, show a default via ::after - won't work without content */
+.blog-thumb:empty::after {
+  content: "✦";
+  font-size: 48px;
+  color: #67e8f9;
+}
+</style>
+
+
+<style id="rn-cms-thumb-fallback">
+.blog-thumb.rn-thumb-frame{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:150px!important;
+  height:150px!important;
+}
+.rn-cms-emoji{font-size:56px!important;line-height:1!important;display:block!important;opacity:1!important;visibility:visible!important;z-index:1!important}
+.rn-thumb-frame .rn-full-img{width:100%!important;height:100%!important;object-fit:cover!important}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -3053,7 +3186,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="operations" data-title="How to Build a Warehouse Reporting System in 2026" onclick="openArticle('warehouse')">
-        <div class="blog-thumb blog-thumb-ops"><span>📊</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-ops"><span style="font-size:56px;line-height:1;display:block">📊</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
         <div class="blog-card-body">
           <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>9 min</span></div>
           <h3>How to Build a Warehouse Data Reporting System in 2026</h3>
@@ -3066,7 +3199,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="marketing" data-title="Growing Your African Business Brand Globally in 2026" onclick="openArticle('global-brand')">
-        <div class="blog-thumb blog-thumb-marketing"><span>🌍</span><span class="card-cat-badge">Digital Marketing</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-marketing"><span style="font-size:56px;line-height:1;display:block">🌍</span><span class="card-cat-badge">Digital Marketing</span><span class="card-new">2026</span></div>
         <div class="blog-card-body">
           <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>8 min</span></div>
           <h3>Growing Your African Business Brand Globally in 2026</h3>
@@ -3105,7 +3238,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="content" data-title="Prompt Engineering for Business: The 2026 Practical Guide" onclick="openArticle('prompts')">
-        <div class="blog-thumb blog-thumb-content"><span>⚡</span><span class="card-cat-badge">Prompts</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-content"><span style="font-size:56px;line-height:1;display:block">⚡</span><span class="card-cat-badge">Prompts</span><span class="card-new">2026</span></div>
         <div class="blog-card-body">
           <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>10 min</span></div>
           <h3>Prompt Engineering for Business: The 2026 Practical Guide</h3>
@@ -3118,7 +3251,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="business" data-title="Do You Need a Business Consultant? 5 Signs the Answer Is Yes" onclick="openArticle('consultant')">
-        <div class="blog-thumb blog-thumb-consult"><span>🧠</span><span class="card-cat-badge">Business Growth</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-consult"><span style="font-size:56px;line-height:1;display:block">🧠</span><span class="card-cat-badge">Business Growth</span><span class="card-new">2026</span></div>
         <div class="blog-card-body">
           <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>5 min</span></div>
           <h3>Do You Need a Business Consultant? 5 Signs the Answer Is Yes in 2026</h3>
@@ -3131,7 +3264,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="career" data-title="Remote AI Internships in 2026: How to Apply and What to Expect" onclick="openArticle('internship')">
-        <div class="blog-thumb blog-thumb-intern"><span>🌐</span><span class="card-cat-badge">AI Career</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-intern"><span style="font-size:56px;line-height:1;display:block">🌐</span><span class="card-cat-badge">AI Career</span><span class="card-new">2026</span></div>
         <div class="blog-card-body">
           <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>6 min</span></div>
           <h3>Remote AI Internships in 2026: How to Apply and What to Expect</h3>
@@ -3144,7 +3277,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="ai" data-title="AI-Powered Content Creation: Instagram, Video, Email & More" onclick="openArticle('ai-content')">
-        <div class="blog-thumb blog-thumb-content"><span>📱</span><span class="card-cat-badge">AI & Content</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-content"><span style="font-size:56px;line-height:1;display:block">📱</span><span class="card-cat-badge">AI & Content</span><span class="card-new">2026</span></div>
         <div class="blog-card-body">
           <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>8 min</span></div>
           <h3>AI-Powered Content Creation in 2026: Instagram Captions, Video Scripts, Carousels & More</h3>
@@ -3157,7 +3290,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="business" data-title="Profitable Digital Products to Sell in 2026" onclick="openArticle('digital-products')">
-        <div class="blog-thumb blog-thumb-marketing"><span>💰</span><span class="card-cat-badge">Business Growth</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-marketing"><span style="font-size:56px;line-height:1;display:block">💰</span><span class="card-cat-badge">Business Growth</span><span class="card-new">2026</span></div>
         <div class="blog-card-body">
           <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>9 min</span></div>
           <h3>Top Profitable Digital Products to Sell in 2026 — The Complete Strategy Guide</h3>
@@ -3170,7 +3303,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="operations" data-title="How to Write SOPs for Your Business in 2026" onclick="openArticle('sops')">
-        <div class="blog-thumb blog-thumb-ops"><span>📋</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-ops"><span style="font-size:56px;line-height:1;display:block">📋</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
         <div class="blog-card-body">
           <div class="card-meta"><span>RuffNeck Entertainment</span><span class="card-dot"></span><span>June 2026</span><span class="card-dot"></span><span>7 min</span></div>
           <h3>How to Write SOPs for Your Business in 2026 — A Practical Guide</h3>
@@ -3183,7 +3316,7 @@ button,a,.btn{touch-action:manipulation}
       </div>
 
       <div class="blog-card" data-cat="operations" data-title="Microsoft Office and Excel for Nigerian Businesses">
-        <div class="blog-thumb blog-thumb-ops"><span>📊</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-ops"><span style="font-size:56px;line-height:1;display:block">📊</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
         <div class="blog-body">
           <div class="blog-cat">Operations</div>
           <h3>Microsoft Office &amp; Excel for Nigerian Businesses</h3>
@@ -3192,7 +3325,7 @@ button,a,.btn{touch-action:manipulation}
         </div>
       </div>
       <div class="blog-card" data-cat="ai" data-title="AI Technology Consulting for Small Businesses">
-        <div class="blog-thumb blog-thumb-ai"><span>🤖</span><span class="card-cat-badge">AI</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-ai"><span style="font-size:56px;line-height:1;display:block">🤖</span><span class="card-cat-badge">AI</span><span class="card-new">2026</span></div>
         <div class="blog-body">
           <div class="blog-cat">AI &amp; Automation</div>
           <h3>AI Technology Consulting for Small Businesses</h3>
@@ -3201,7 +3334,7 @@ button,a,.btn{touch-action:manipulation}
         </div>
       </div>
       <div class="blog-card" data-cat="operations" data-title="Computer Setup Wi-Fi and Printer Support">
-        <div class="blog-thumb blog-thumb-ops"><span>📊</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-ops"><span style="font-size:56px;line-height:1;display:block">📊</span><span class="card-cat-badge">Operations</span><span class="card-new">2026</span></div>
         <div class="blog-body">
           <div class="blog-cat">IT Support</div>
           <h3>Computer Setup, Wi-Fi &amp; Printer Support</h3>
@@ -3210,7 +3343,7 @@ button,a,.btn{touch-action:manipulation}
         </div>
       </div>
       <div class="blog-card" data-cat="careers" data-title="CV Cover Letter and LinkedIn for Job Seekers">
-        <div class="blog-thumb blog-thumb-career"><span>📄</span><span class="card-cat-badge">Careers</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-career"><span style="font-size:56px;line-height:1;display:block">📋</span><span class="card-cat-badge">Careers</span><span class="card-new">2026</span></div>
         <div class="blog-body">
           <div class="blog-cat">Careers</div>
           <h3>CV, Cover Letter &amp; LinkedIn That Get Replies</h3>
@@ -3219,7 +3352,7 @@ button,a,.btn{touch-action:manipulation}
         </div>
       </div>
       <div class="blog-card" data-cat="business" data-title="Business Automation Services That Stick">
-        <div class="blog-thumb blog-thumb-ops"><span>⚙️</span><span class="card-cat-badge">Business Growth</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-ops" style="background:linear-gradient(145deg,#0b1e3a,#115e59)"><span style="font-size:56px;line-height:1;display:block">⚙️</span><span class="card-cat-badge">Business Growth</span><span class="card-new">2026</span></div>
         <div class="blog-body">
           <div class="blog-cat">Business Growth</div>
           <h3>Business Automation Services That Actually Stick</h3>
@@ -3228,7 +3361,7 @@ button,a,.btn{touch-action:manipulation}
         </div>
       </div>
       <div class="blog-card" data-cat="prompts" data-title="Free 20 AI Prompts Guide Nigerian Businesses">
-        <div class="blog-thumb blog-thumb-content"><span>✨</span><span class="card-cat-badge">Insights</span><span class="card-new">2026</span></div>
+        <div class="blog-thumb blog-thumb-content" style="background:linear-gradient(145deg,#0b1e3a,#0f766e)"><span style="font-size:56px;line-height:1;display:block">⚡</span><span class="card-cat-badge">Content &amp; Prompts</span><span class="card-new">2026</span></div>
         <div class="blog-body">
           <div class="blog-cat">Content &amp; Prompts</div>
           <h3>Free: 20 AI Prompts Every Nigerian Business Should Use</h3>
@@ -4319,9 +4452,36 @@ window.RNCms.listPosts = async function () {
     card.tabIndex = 0;
     card.setAttribute("role", "button");
 
-    var emoji = escapeHtml(p.emoji || "📝");
-    var cat = escapeHtml(p.cat || "Blog");
-    var title = escapeHtml(p.title || "Untitled");
+    var catRaw = String(p.cat || p.category || "Blog");
+    var titleRaw = String(p.title || "Untitled");
+    var catLower = catRaw.toLowerCase();
+    var titleLower = titleRaw.toLowerCase();
+    // Category / title based icon when admin post has no image
+    var emojiMap = {
+      careers: "📄", career: "📄", jobs: "📄", cv: "📄",
+      business: "⚙️", growth: "📈", automation: "⚙️",
+      operations: "📊", ops: "📊", warehouse: "📦",
+      marketing: "📱", content: "✍️", prompts: "⚡", prompt: "⚡",
+      ai: "🤖", automation: "⚙️", ethics: "🛡️",
+      it: "💻", productivity: "💻", training: "🎓",
+      blog: "✨", default: "✨"
+    };
+    var emojiPick = p.emoji || "";
+    if (!emojiPick) {
+      if (/cv|cover letter|linkedin|job/.test(titleLower)) emojiPick = "📄";
+      else if (/automat|sop/.test(titleLower)) emojiPick = "⚙️";
+      else if (/prompt/.test(titleLower)) emojiPick = "⚡";
+      else if (/warehouse|report/.test(titleLower)) emojiPick = "📦";
+      else {
+        for (var ek in emojiMap) {
+          if (catLower.indexOf(ek) >= 0) { emojiPick = emojiMap[ek]; break; }
+        }
+      }
+      if (!emojiPick) emojiPick = "✨";
+    }
+    var emoji = escapeHtml(emojiPick);
+    var cat = escapeHtml(catRaw);
+    var title = escapeHtml(titleRaw);
     var desc = escapeHtml(p.desc || "");
     
     var author = escapeHtml(p.author || "RuffNeck Entertainment");
@@ -4336,16 +4496,23 @@ window.RNCms.listPosts = async function () {
       dateNote = " · " + escapeHtml(String(createdRaw));
     }
 
-    var imgSrc = p.image ? String(p.image) : "";
+    var gradient = "linear-gradient(145deg,#0b1e3a,#0e7490)";
+    if (/career|cv|job/.test(catLower+titleLower)) gradient = "linear-gradient(145deg,#0b1e3a,#1e3a5f)";
+    else if (/ops|operation|business|automat/.test(catLower+titleLower)) gradient = "linear-gradient(145deg,#0b1e3a,#115e59)";
+    else if (/market/.test(catLower)) gradient = "linear-gradient(145deg,#0b1e3a,#1d4ed8)";
+    else if (/prompt|content/.test(catLower+titleLower)) gradient = "linear-gradient(145deg,#0b1e3a,#0f766e)";
+    else if (/ai/.test(catLower+titleLower)) gradient = "linear-gradient(145deg,#0b1e3a,#0e7490)";
+
+    var imgSrc = p.image ? String(p.image).trim() : "";
     var thumbInner = imgSrc
-      ? ('<img class="rn-full-img" src="' + imgSrc.replace(/"/g, "&quot;") + '" alt="' + title + '" loading="lazy" decoding="async"/>')
-      : ('<span style="font-size:28px;">' + emoji + "</span>");
+      ? ('<img class="rn-full-img" src="' + imgSrc.replace(/"/g, "&quot;") + '" alt="' + title + '" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:cover;display:block;"/>')
+      : ('<span class="rn-cms-emoji" style="font-size:56px;line-height:1;display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35));">' + emoji + "</span>");
 
     card.innerHTML =
-      '<div class="blog-thumb rn-thumb-frame" style="background:#0B1E3A;color:#fff;position:relative;">' +
+      '<div class="blog-thumb rn-thumb-frame" style="background:' + gradient + ';color:#fff;position:relative;display:flex;align-items:center;justify-content:center;min-height:150px;height:150px;overflow:hidden;border-radius:12px 12px 0 0;">' +
         thumbInner +
-        '<span class="card-cat-badge" style="position:absolute;left:10px;bottom:10px;background:#00B4D8;color:#0B1E3A;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;">' + cat + "</span>" +
-        '<span class="card-new" style="position:absolute;right:10px;top:10px;background:#FBBF24;color:#0B1E3A;font-size:10px;font-weight:800;padding:3px 7px;border-radius:999px;">NEW</span>' +
+        '<span class="card-cat-badge" style="position:absolute;left:10px;bottom:10px;background:rgba(15,23,42,.85);color:#e2e8f0;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;z-index:2;">' + cat + "</span>" +
+        '<span class="card-new" style="position:absolute;right:10px;top:10px;background:#FBBF24;color:#0B1E3A;font-size:10px;font-weight:800;padding:3px 7px;border-radius:999px;z-index:2;">NEW</span>' +
       "</div>" +
       '<div class="blog-card-body" style="padding:14px 16px 16px;color:#0f172a;">' +
         '<h3 style="margin:0 0 8px;font-size:16px;line-height:1.35;color:#0B1E3A;">' + title + "</h3>" +
