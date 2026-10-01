@@ -2911,43 +2911,77 @@ div.blog-thumb {
 
 
 
+
 <style id="rn-cms-thumb-fallback">
-/* CMS thumbs: show FULL cover image (no crop). Emoji cards stay centered. */
+/* CMS emoji thumbs */
 .blog-thumb.rn-thumb-frame{
   display:flex!important;
   align-items:center!important;
   justify-content:center!important;
-  min-height:160px!important;
-  height:auto!important;
-  max-height:none!important;
-  aspect-ratio:16/10!important;
-  overflow:hidden!important;
+  min-height:150px!important;
   background:#0b1e3a!important;
+  overflow:hidden!important;
+  border-radius:12px 12px 0 0!important;
+  position:relative!important;
 }
-.blog-thumb.rn-thumb-frame:has(img.rn-full-img),
-.blog-thumb.rn-thumb-frame:has(.rn-full-img){
-  aspect-ratio:16/10!important;
+/* CMS posts WITH a real cover image: never crop */
+.blog-thumb.rn-thumb-frame:has(img),
+.blog-thumb.rn-thumb-frame.rn-has-cover{
   height:auto!important;
-  min-height:180px!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  padding:0!important;
+  align-items:stretch!important;
+}
+.blog-thumb.rn-thumb-frame img,
+.blog-thumb.rn-thumb-frame img.rn-full-img,
+.blog-thumb img.rn-full-img,
+img.rn-full-img{
+  width:100%!important;
+  height:auto!important;
+  max-width:100%!important;
+  max-height:none!important;
+  object-fit:unset!important;
+  object-position:center top!important;
+  display:block!important;
+  border-radius:12px 12px 0 0!important;
 }
 .rn-cms-emoji{
   font-size:56px!important;
   line-height:1!important;
   display:block!important;
-  opacity:1!important;
-  visibility:visible!important;
   z-index:1!important;
 }
-.rn-thumb-frame .rn-full-img,
-.blog-thumb.rn-thumb-frame img.rn-full-img,
-.blog-thumb img.rn-full-img{
-  width:100%!important;
-  height:100%!important;
-  max-width:100%!important;
-  max-height:100%!important;
-  object-fit:contain!important; /* entire flyer visible — not cropped */
-  object-position:center center!important;
-  display:block!important;
+.blog-thumb.rn-thumb-frame .card-cat-badge,
+.blog-thumb.rn-thumb-frame .card-new{
+  z-index:3!important;
+}
+</style>
+
+
+<style id="rn-cover-no-crop">
+/* Last word: Admin cover photos show in full — no zoom crop */
+.blog-card .blog-thumb.rn-has-cover,
+.blog-thumb.rn-has-cover,
+div.rn-has-cover {
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  display: block !important;
+  overflow: hidden !important;
+}
+.blog-card .blog-thumb.rn-has-cover img,
+.blog-thumb.rn-has-cover img,
+.rn-has-cover img.rn-full-img,
+.rn-has-cover .rn-full-img {
+  width: 100% !important;
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  object-position: center top !important;
+  display: block !important;
 }
 </style>
 
@@ -4530,11 +4564,15 @@ window.RNCms.listPosts = async function () {
 
     var imgSrc = p.image ? String(p.image).trim() : "";
     var thumbInner = imgSrc
-      ? ('<img class="rn-full-img" src="' + imgSrc.replace(/"/g, "&quot;") + '" alt="' + title + '" loading="lazy" decoding="async" style="width:100%;height:100%;object-fit:contain;object-position:center;display:block;"/>')
+      ? ('<img class="rn-full-img" src="' + imgSrc.replace(/"/g, "&quot;") + '" alt="' + title + '" loading="lazy" decoding="async" style="width:100%;height:auto;max-width:100%;display:block;object-fit:unset;"/>')
       : ('<span class="rn-cms-emoji" style="font-size:56px;line-height:1;display:block;filter:drop-shadow(0 4px 8px rgba(0,0,0,.35));">' + emoji + "</span>");
 
+    var thumbClass = imgSrc ? 'blog-thumb rn-thumb-frame rn-has-cover' : 'blog-thumb rn-thumb-frame';
+    var thumbStyle = imgSrc
+      ? 'background:#0b1e3a;color:#fff;position:relative;overflow:hidden;border-radius:12px 12px 0 0;height:auto;min-height:0;'
+      : 'background:' + gradient + ';color:#fff;position:relative;display:flex;align-items:center;justify-content:center;min-height:150px;overflow:hidden;border-radius:12px 12px 0 0;';
     card.innerHTML =
-      '<div class="blog-thumb rn-thumb-frame" style="background:' + gradient + ';color:#fff;position:relative;display:flex;align-items:center;justify-content:center;min-height:180px;height:auto;aspect-ratio:16/10;overflow:hidden;border-radius:12px 12px 0 0;">' +
+      '<div class="' + thumbClass + '" style="' + thumbStyle + '">' +
         thumbInner +
         '<span class="card-cat-badge" style="position:absolute;left:10px;bottom:10px;background:rgba(15,23,42,.85);color:#e2e8f0;font-size:11px;font-weight:700;padding:4px 8px;border-radius:999px;z-index:2;">' + cat + "</span>" +
         '<span class="card-new" style="position:absolute;right:10px;top:10px;background:#FBBF24;color:#0B1E3A;font-size:10px;font-weight:800;padding:3px 7px;border-radius:999px;z-index:2;">NEW</span>' +
