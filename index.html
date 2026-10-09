@@ -3405,7 +3405,14 @@ button,a,.btn{touch-action:manipulation}
           </div>
         </li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">Learn</a></li>
+        <li class="nav-dropdown">
+          <a href="#platforms" class="nav-drop-trigger">Platforms <span class="nav-caret">▾</span></a>
+          <div class="nav-drop-menu">
+            <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">RuffNeck Learn (LMS)</a>
+            <a href="https://kano-run.vercel.app" target="_blank" rel="noopener">Kano Run — Keke Napep</a>
+            <a href="/store">Digital Store</a>
+          </div>
+        </li>
         <li><a href="#free-guide">Free Guide</a></li>
         <li><a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="nav-cta">Book a Call</a></li>
       </ul>
@@ -3418,7 +3425,8 @@ button,a,.btn{touch-action:manipulation}
     <a href="#services">Services</a>
     <a href="/store">Store</a>
     <a href="/blog">Blog</a>
-    <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">Learn</a>
+    <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">RuffNeck Learn (LMS)</a>
+    <a href="https://kano-run.vercel.app" target="_blank" rel="noopener">Kano Run — Keke Napep</a>
     <a href="/programmes">Community Impact</a>
     <a href="#free-guide">Free Guide</a>
     <a href="#about">About</a>
@@ -3559,7 +3567,7 @@ button,a,.btn{touch-action:manipulation}
 <!-- SERVICES -->
 
 <!-- RuffNeck Learn — high contrast CTA -->
-<section id="learn" aria-label="RuffNeck Learn courses" style="
+<section id="platforms" id="learn" aria-label="RuffNeck Learn courses" style="
   padding: 56px 20px 72px;
   background: linear-gradient(160deg, #071526 0%, #0B1E3A 45%, #0e3a5c 100%);
   border-top: 1px solid rgba(0,180,216,0.25);
@@ -3591,6 +3599,40 @@ button,a,.btn{touch-action:manipulation}
     </p>
   </div>
 </section>
+
+<!-- Kano Run game -->
+<section id="kano-run" aria-label="Kano Run Keke Napep game" style="
+  padding: 56px 20px 72px;
+  background: linear-gradient(160deg, #0a1628 0%, #132a4a 50%, #1a3a5c 100%);
+  border-top: 1px solid rgba(0,180,216,0.2);
+">
+  <div style="max-width: 920px; margin: 0 auto;">
+    <p style="margin:0 0 10px; color:#5eead4 !important; font-weight:800; letter-spacing:0.08em; font-size:12px; text-transform:uppercase;">
+      Kano Run
+    </p>
+    <h2 style="margin:0 0 14px; font-size:clamp(1.45rem, 4vw, 2rem); line-height:1.25; color:#ffffff !important; font-weight:800;">
+      Keke Napep street run — play free
+    </h2>
+    <p style="margin:0 0 22px; max-width:560px; line-height:1.6; font-size:1.02rem; color:#e2e8f0 !important;">
+      A fun Kano-inspired endless runner. Dodge traffic, collect coins, and race the streets of Kano on a keke napep. Built by RuffNeck Entertainment.
+    </p>
+    <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
+      <a href="https://kano-run.vercel.app" target="_blank" rel="noopener" style="
+        display:inline-block; background:#00B4D8; color:#06101c !important; font-weight:800;
+        padding:14px 22px; border-radius:12px; text-decoration:none; font-size:0.95rem;
+      ">Play Kano Run</a>
+      <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener" style="
+        display:inline-block; background:transparent; color:#ffffff !important; font-weight:700;
+        padding:14px 22px; border-radius:12px; text-decoration:none; font-size:0.95rem;
+        border:1.5px solid rgba(255,255,255,0.55);
+      ">RuffNeck Learn</a>
+    </div>
+    <p style="margin:18px 0 0; font-size:0.88rem; color:#94a3b8 !important;">
+      Opens in a new tab · kano-run.vercel.app
+    </p>
+  </div>
+</section>
+
 <section class="section" id="services">
   <div class="container">
     <div class="fade-up">
