@@ -3485,6 +3485,119 @@ img,video,iframe,svg{max-width:100%;height:auto;}
 }
 </style>
 
+
+<style id="rn-dark-section-text">
+/* Dark navy sections: force light titles/body (overrides global .section-title dark blue) */
+#pricing,
+#pricing .container,
+section#pricing,
+#blog,
+section#blog,
+#founder,
+section#founder,
+#faq,
+#path,
+#platforms,
+#kano-challenge,
+#platforms-strip,
+footer,
+.footer,
+.site-footer {
+  /* context */
+}
+#pricing .section-title,
+#pricing h2.section-title,
+#blog .section-title,
+#blog h2.section-title,
+#founder .section-title,
+#faq h2,
+section#pricing h2,
+section#blog h2 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  max-width: none !important;
+}
+#pricing .section-sub,
+#pricing p.section-sub,
+#blog .section-sub,
+#blog p.section-sub,
+#blog p,
+section#pricing .section-sub,
+section#blog .section-sub {
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+#pricing .section-label,
+#blog .section-label,
+section#pricing .section-label,
+section#blog .section-label {
+  color: #22d3ee !important;
+  -webkit-text-fill-color: #22d3ee !important;
+  opacity: 1 !important;
+}
+
+/* Footer links readable */
+footer a,
+.footer a,
+.footer-bottom a,
+.site-footer a,
+.rn-footer-platforms a {
+  color: #5eead4 !important;
+  opacity: 1 !important;
+}
+footer,
+.footer,
+.footer-bottom,
+.footer p,
+.footer-bottom p,
+.footer-legal,
+.footer-legal a {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+.footer-legal a,
+.footer-bottom a {
+  color: #cbd5e1 !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Social row in footer */
+.footer-social a,
+.social-links a,
+footer .social a {
+  color: #f1f5f9 !important;
+  opacity: 1 !important;
+}
+
+/* Blog cards on homepage stay fine; ensure intro text only */
+#blog .section-title + p,
+#blog .fade-up p {
+  color: #cbd5e1 !important;
+}
+
+@media (max-width:700px){
+  #pricing .section-title,
+  #blog .section-title {
+    font-size: 1.4rem !important;
+    line-height: 1.25 !important;
+    padding: 0 8px !important;
+  }
+  #pricing .section-sub,
+  #blog .section-sub {
+    font-size: 0.92rem !important;
+    padding: 0 10px !important;
+  }
+  .footer-bottom,
+  .footer-legal {
+    font-size: 0.8rem !important;
+    line-height: 1.6 !important;
+    padding-bottom: 88px !important; /* clear sticky bar */
+  }
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4782,8 +4895,8 @@ button,a,.btn{touch-action:manipulation}
   <div class="container">
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Investment · 2026 Rates</div>
-      <h2 class="section-title">Clear engagement options</h2>
-      <p class="section-sub" style="margin:0 auto;">Three 2026 tiers — Starter, Growth, and Scale. Prefer to start free? Use the path above (guide → store → platforms), then book a call when you need done-with-you support. Final quote depends on scope.</p>
+      <h2 class="section-title" style="color:#ffffff !important;">Clear engagement options</h2>
+      <p class="section-sub" style="margin:0 auto;color:#cbd5e1 !important;">Three 2026 tiers — Starter, Growth, and Scale. Prefer to start free? Use the path above (guide → store → platforms), then book a call when you need done-with-you support. Final quote depends on scope.</p>
     </div>
     <div class="pricing-grid fade-up">
       <div class="pricing-card">
@@ -4906,7 +5019,7 @@ button,a,.btn{touch-action:manipulation}
   <div class="container">
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Resources · Insights · 2026</div>
-      <h2 class="section-title">Practical guides for AI, IT &amp; growth</h2>
+      <h2 class="section-title" style="color:#ffffff !important;">Practical guides for AI, IT &amp; growth</h2>
       <p class="section-sub" style="margin:0 auto;">Click any card to expand a short preview, then open the full article on the blog. Topics: AI, computer &amp; Office skills, careers, IT support, and digital operations — updated through 2026.</p>
     </div>
     <div class="blog-grid fade-up">
