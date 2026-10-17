@@ -413,47 +413,55 @@ body { top: 0 !important; }
 
 
 <style id="rn-contrast-fix">
-/* Readable text on light surfaces */
-.service-card h3,
-.product-name,
-.section-title { color: #0B1E3A !important; }
-.service-intro,
-.product-desc,
-.section-sub { color: #4B5563 !important; }
-.service-list li { color: #374151 !important; }
-.hero-next-hint {
-  color: rgba(255,255,255,0.95) !important;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.45) !important;
-  opacity: 1 !important;
+/* Force readable text on dark upgrade sections */
+#path, #path * { color: inherit; }
+#path h2, #path h3 { color: #ffffff !important; }
+#path p, #path li { color: #e2e8f0 !important; }
+#path a { color: #5eead4 !important; font-weight: 700 !important; }
+#path .rn-path-grid > div p:first-child { color: #5eead4 !important; }
+#path .rn-path-grid > div:last-child p:first-child,
+#path [style*="fbbf24"] { }
+#path a[href*="calendly"] { color: #fbbf24 !important; }
+
+#kano-challenge h2 { color: #ffffff !important; }
+#kano-challenge p { color: #e2e8f0 !important; }
+#kano-challenge p:first-of-type { color: #fbbf24 !important; }
+#kano-challenge a[href*="kano-run"] {
+  background: #fbbf24 !important; color: #06101c !important; font-weight: 800 !important;
 }
-/* Dark mode readable */
-
-
-
-
-
-
-
-/* Theme button always visible */
-.rn-theme-btn {
-  display: inline-flex !important;
-  align-items: center;
-  justify-content: center;
-  width: 42px !important;
-  height: 42px !important;
-  min-width: 42px;
-  border-radius: 11px !important;
-  border: 1.5px solid rgba(0,180,216,0.5) !important;
-  background: rgba(0,180,216,0.15) !important;
-  color: #fff !important;
-  font-size: 18px !important;
-  cursor: pointer !important;
-  z-index: 60;
-  flex-shrink: 0;
-  margin-left: 8px;
+#kano-challenge a[href*="wa.me"] {
+  background: #25D366 !important; color: #ffffff !important; font-weight: 800 !important;
 }
-.nav-inner { display: flex; align-items: center; }
 
+#platforms h2, #platforms h3 { color: #ffffff !important; }
+#platforms p, #platforms li { color: #e2e8f0 !important; }
+#platforms article p:first-child { color: #5eead4 !important; }
+#platforms article a {
+  background: #00B4D8 !important; color: #06101c !important; font-weight: 800 !important;
+}
+#platforms #kano-run a, #platforms article#kano-run a {
+  background: #fbbf24 !important; color: #06101c !important;
+}
+
+#platforms-strip p { color: #5eead4 !important; }
+#platforms-strip a { color: #ffffff !important; }
+#platforms-strip a div { color: inherit !important; }
+
+#faq h2, #faq summary { color: #ffffff !important; }
+#faq p { color: #e2e8f0 !important; }
+
+/* Path cards body text */
+#path .rn-path-grid h3 { color: #ffffff !important; }
+#path .rn-path-grid p { color: #cbd5e1 !important; }
+
+@media (max-width:700px){
+  #service-platform-links { margin: 16px 12px !important; width: auto !important; max-width: none !important; }
+  #service-platform-links a { width: 100% !important; text-align: center !important; box-sizing: border-box !important; }
+  #path h2, #kano-challenge h2, #platforms h2 {
+    font-size: 1.35rem !important; line-height: 1.25 !important;
+  }
+  #kano-challenge p, #path p { font-size: 0.95rem !important; }
+}
 </style>
 
 
@@ -3668,36 +3676,34 @@ button,a,.btn{touch-action:manipulation}
 </section>
 
 <!-- Offer ladder -->
-<section id="path" aria-label="How to work with RuffNeck" style="
-  padding:56px 20px; background:#0a1628; border-top:1px solid rgba(0,180,216,0.18);
-">
+<section id="path" aria-label="How to work with RuffNeck" style="padding:56px 20px;background:#0a1628;border-top:1px solid rgba(0,180,216,0.18);color:#e2e8f0;">
   <div style="max-width:960px;margin:0 auto;">
-    <p style="margin:0 0 8px;color:#5eead4;font-weight:800;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Your path</p>
-    <h2 style="margin:0 0 10px;color:#fff;font-size:clamp(1.35rem,3vw,1.85rem);font-weight:800;">Start free. Grow when you are ready.</h2>
-    <p style="margin:0 0 28px;color:#94a3b8;max-width:560px;line-height:1.55;">A clear ladder — no confusion about what to do next.</p>
+    <p style="margin:0 0 8px;color:#5eead4 !important;font-weight:800;font-size:12px;letter-spacing:0.1em;text-transform:uppercase;">Your path</p>
+    <h2 style="margin:0 0 10px;color:#ffffff !important;font-size:clamp(1.35rem,3vw,1.85rem);font-weight:800;">Start free. Grow when you are ready.</h2>
+    <p style="margin:0 0 28px;color:#cbd5e1 !important;max-width:560px;line-height:1.55;">A clear ladder — no confusion about what to do next.</p>
     <div class="rn-path-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;width:100%;">
       <div style="background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.25);border-radius:14px;padding:18px 16px;">
         <p style="margin:0 0 6px;color:#5eead4;font-size:11px;font-weight:800;letter-spacing:0.06em;">01 · FREE</p>
-        <h3 style="margin:0 0 8px;color:#fff;font-size:1.05rem;">AI prompts guide</h3>
-        <p style="margin:0 0 12px;color:#cbd5e1;font-size:0.9rem;line-height:1.5;">20 prompts for Nigerian businesses. Instant PDF.</p>
+        <h3 style="margin:0 0 8px;color:#ffffff !important;font-size:1.05rem;">AI prompts guide</h3>
+        <p style="margin:0 0 12px;color:#e2e8f0 !important;font-size:0.9rem;line-height:1.5;">20 prompts for Nigerian businesses. Instant PDF.</p>
         <a href="#free-guide" style="color:#00B4D8;font-weight:700;text-decoration:none;font-size:0.9rem;">Get the guide →</a>
       </div>
       <div style="background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.25);border-radius:14px;padding:18px 16px;">
         <p style="margin:0 0 6px;color:#5eead4;font-size:11px;font-weight:800;letter-spacing:0.06em;">02 · ₦ STORE</p>
-        <h3 style="margin:0 0 8px;color:#fff;font-size:1.05rem;">Guides &amp; templates</h3>
-        <p style="margin:0 0 12px;color:#cbd5e1;font-size:0.9rem;line-height:1.5;">Practical downloads. Pay in naira. Instant delivery.</p>
+        <h3 style="margin:0 0 8px;color:#ffffff !important;font-size:1.05rem;">Guides &amp; templates</h3>
+        <p style="margin:0 0 12px;color:#e2e8f0 !important;font-size:0.9rem;line-height:1.5;">Practical downloads. Pay in naira. Instant delivery.</p>
         <a href="/store" style="color:#00B4D8;font-weight:700;text-decoration:none;font-size:0.9rem;">Browse store →</a>
       </div>
       <div style="background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.25);border-radius:14px;padding:18px 16px;">
         <p style="margin:0 0 6px;color:#5eead4;font-size:11px;font-weight:800;letter-spacing:0.06em;">03 · PLATFORMS</p>
-        <h3 style="margin:0 0 8px;color:#fff;font-size:1.05rem;">Learn · Prospect · Connect</h3>
-        <p style="margin:0 0 12px;color:#cbd5e1;font-size:0.9rem;line-height:1.5;">Skills, leads, and collaborators — use the tools yourself.</p>
+        <h3 style="margin:0 0 8px;color:#ffffff !important;font-size:1.05rem;">Learn · Prospect · Connect</h3>
+        <p style="margin:0 0 12px;color:#e2e8f0 !important;font-size:0.9rem;line-height:1.5;">Skills, leads, and collaborators — use the tools yourself.</p>
         <a href="#platforms" style="color:#00B4D8;font-weight:700;text-decoration:none;font-size:0.9rem;">Open platforms →</a>
       </div>
       <div style="background:rgba(15,39,68,0.9);border:1px solid rgba(251,191,36,0.35);border-radius:14px;padding:18px 16px;">
         <p style="margin:0 0 6px;color:#fbbf24;font-size:11px;font-weight:800;letter-spacing:0.06em;">04 · DONE WITH YOU</p>
-        <h3 style="margin:0 0 8px;color:#fff;font-size:1.05rem;">Discovery call</h3>
-        <p style="margin:0 0 12px;color:#cbd5e1;font-size:0.9rem;line-height:1.5;">AI, ops, or growth support tailored to your business.</p>
+        <h3 style="margin:0 0 8px;color:#ffffff !important;font-size:1.05rem;">Discovery call</h3>
+        <p style="margin:0 0 12px;color:#e2e8f0 !important;font-size:0.9rem;line-height:1.5;">AI, ops, or growth support tailored to your business.</p>
         <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" style="color:#fbbf24;font-weight:700;text-decoration:none;font-size:0.9rem;">Book free call →</a>
       </div>
     </div>
@@ -3908,17 +3914,13 @@ button,a,.btn{touch-action:manipulation}
 </section>
 
 <!-- Kano Run viral / challenge -->
-<section id="kano-challenge" aria-label="Kano Run challenge" style="
-  padding:48px 20px 56px;
-  background:linear-gradient(160deg,#0a0a12 0%,#1a1205 40%,#0B1E3A 100%);
-  border-top:1px solid rgba(251,191,36,0.35);
-">
+<section id="kano-challenge" aria-label="Kano Run challenge" style="padding:48px 20px 56px;background:linear-gradient(160deg,#0a0a12 0%,#1a1205 40%,#0B1E3A 100%);border-top:1px solid rgba(251,191,36,0.35);color:#e2e8f0;">
   <div style="max-width:920px;margin:0 auto;text-align:center;">
-    <p style="margin:0 0 8px;color:#fbbf24;font-weight:800;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Kano Run · Challenge</p>
-    <h2 style="margin:0 0 12px;color:#fff;font-size:clamp(1.4rem,3.5vw,1.95rem);font-weight:800;line-height:1.25;">
+    <p style="margin:0 0 8px;color:#fbbf24 !important;font-weight:800;font-size:12px;letter-spacing:0.12em;text-transform:uppercase;">Kano Run · Challenge</p>
+    <h2 style="margin:0 0 12px;color:#ffffff !important;font-size:clamp(1.4rem,3.5vw,1.95rem);font-weight:800;line-height:1.25;">
       Drive the keke. Beat your high score. Share it.
     </h2>
-    <p style="margin:0 auto 22px;max-width:520px;color:#cbd5e1;line-height:1.6;font-size:1.02rem;">
+    <p style="margin:0 auto 22px;max-width:520px;color:#e2e8f0 !important;line-height:1.6;font-size:1.02rem;">
       Free browser game set in Kano — pick up passengers, collect fares, dodge traffic.
       Challenge a friend on WhatsApp or post your score on status.
     </p>
@@ -3932,7 +3934,7 @@ button,a,.btn{touch-action:manipulation}
         padding:14px 22px;border-radius:12px;text-decoration:none;font-size:0.95rem;
       ">Share on WhatsApp</a>
     </div>
-    <p style="margin:0;color:#64748b;font-size:0.85rem;">
+    <p style="margin:0;color:#94a3b8 !important;font-size:0.85rem;">
       Built by RuffNeck Entertainment · kano-run.vercel.app
     </p>
   </div>
@@ -3946,17 +3948,23 @@ button,a,.btn{touch-action:manipulation}
       <h2 class="section-title">Services built around three outcomes</h2>
 
 <div id="service-platform-links" style="
-  max-width:960px;margin:20px auto 0;padding:16px 18px;border-radius:12px;
-  background:rgba(0,180,216,0.08);border:1px solid rgba(0,180,216,0.25);
+  max-width:960px;margin:20px auto 12px;padding:18px 16px;border-radius:14px;
+  background:#F0FDFF;border:1.5px solid #67E8F9;box-sizing:border-box;width:100%;
 ">
-  <p style="margin:0 0 8px;color:#5eead4;font-size:12px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;">Grow with our tools</p>
-  <p style="margin:0 0 10px;color:#e2e8f0;font-size:0.92rem;line-height:1.5;">
-    Need clients for web, AI, or marketing work? Use <strong style="color:#fff;">RuffNeck Prospector</strong> to find leads.
-    Upskill your team with <strong style="color:#fff;">RuffNeck Learn</strong>.
+  <p style="margin:0 0 8px;color:#0E7490 !important;font-size:12px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;">Grow with our tools</p>
+  <p style="margin:0 0 14px;color:#1E293B !important;font-size:0.95rem;line-height:1.55;">
+    Need clients for web, AI, or marketing work? Use <strong style="color:#0B1E3A !important;">RuffNeck Prospector</strong> to find leads.
+    Upskill your team with <strong style="color:#0B1E3A !important;">RuffNeck Learn</strong>.
   </p>
-  <div style="display:flex;flex-wrap:wrap;gap:8px;">
-    <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener" style="color:#0B1E3A;background:#00B4D8;font-weight:800;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:0.85rem;">Open Prospector</a>
-    <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener" style="color:#fff;border:1px solid rgba(255,255,255,0.4);font-weight:700;padding:8px 14px;border-radius:8px;text-decoration:none;font-size:0.85rem;">Open Learn</a>
+  <div style="display:flex;flex-wrap:wrap;gap:10px;">
+    <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener" style="
+      display:inline-block;color:#06101c !important;background:#00B4D8;font-weight:800;
+      padding:12px 16px;border-radius:10px;text-decoration:none;font-size:0.9rem;min-height:44px;line-height:1.2;
+    ">Open Prospector</a>
+    <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener" style="
+      display:inline-block;color:#0B1E3A !important;background:#fff;border:2px solid #0B1E3A;
+      font-weight:800;padding:12px 16px;border-radius:10px;text-decoration:none;font-size:0.9rem;min-height:44px;line-height:1.2;
+    ">Open Learn</a>
   </div>
 </div>
 
