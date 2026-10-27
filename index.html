@@ -3965,6 +3965,135 @@ a[href="/blog"] {
 }
 </style>
 
+
+<style id="rn-next-founder-analytics">
+/* LinkedIn-style founder profile card */
+#founder {
+  background: #F3F2EF !important;
+  padding: 48px 16px !important;
+}
+#founder .section-label { color: #0A66C2 !important; }
+#founder .section-title {
+  color: #191919 !important;
+  -webkit-text-fill-color: #191919 !important;
+  max-width: none !important;
+}
+#founder .founder-grid-compact {
+  grid-template-columns: 1fr !important;
+  gap: 16px !important;
+  max-width: 560px !important;
+  margin: 0 auto 24px !important;
+}
+@media (min-width: 800px) {
+  #founder .founder-grid-compact {
+    grid-template-columns: 280px 1fr !important;
+    max-width: 960px !important;
+    gap: 24px !important;
+  }
+}
+/* Profile card = LinkedIn top card */
+#founder .founder-grid-compact > div:first-child {
+  background: #fff !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.06) !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  text-align: left !important;
+}
+#founder .rn-li-cover {
+  height: 72px;
+  background: linear-gradient(90deg, #0A66C2 0%, #004182 50%, #00B4D8 100%);
+}
+#founder .rn-li-avatar-wrap {
+  margin: -36px 16px 0 !important;
+  width: 88px !important;
+  height: 88px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  border: 3px solid #fff !important;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08) !important;
+}
+#founder .rn-li-avatar-wrap img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+}
+#founder .rn-li-body { padding: 12px 16px 16px !important; text-align: left !important; }
+#founder .rn-li-name {
+  color: #191919 !important;
+  font-size: 1.25rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 2px !important;
+  line-height: 1.25 !important;
+}
+#founder .rn-li-headline {
+  color: #191919 !important;
+  font-size: 0.95rem !important;
+  margin: 0 0 6px !important;
+  line-height: 1.4 !important;
+  font-weight: 400 !important;
+}
+#founder .rn-li-loc {
+  color: #666 !important;
+  font-size: 0.85rem !important;
+  margin: 0 0 10px !important;
+}
+#founder .rn-li-open {
+  display: inline-block !important;
+  background: #E8F3FF !important;
+  color: #0A66C2 !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  padding: 4px 10px !important;
+  border-radius: 12px !important;
+  margin-bottom: 12px !important;
+}
+#founder .rn-li-actions {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  margin-top: 4px !important;
+}
+#founder .rn-li-actions a {
+  border-radius: 24px !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  padding: 8px 16px !important;
+  text-decoration: none !important;
+  min-height: 40px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+#founder .rn-li-primary {
+  background: #0A66C2 !important;
+  color: #fff !important;
+}
+#founder .rn-li-secondary {
+  background: #fff !important;
+  color: #0A66C2 !important;
+  border: 1.5px solid #0A66C2 !important;
+}
+/* Bio side card */
+#founder .founder-grid-compact > div:last-child {
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.06) !important;
+  padding: 20px 18px !important;
+  color: #191919 !important;
+}
+#founder .founder-grid-compact > div:last-child p,
+#founder .founder-grid-compact > div:last-child li {
+  color: #666 !important;
+  line-height: 1.55 !important;
+}
+#founder .founder-grid-compact > div:last-child h3,
+#founder .founder-grid-compact > div:last-child strong {
+  color: #191919 !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4065,8 +4194,8 @@ button,a,.btn{touch-action:manipulation}
         </p>
 
         <div class="hero-actions">
-          <a href="#free-guide" class="btn btn-primary">Get the free AI prompts guide</a>
-          <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-outline">Book a free discovery call</a>
+          <a href="#free-guide" class="btn btn-primary" data-rn-event="free_guide">Get the free AI prompts guide</a>
+          <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-outline" data-rn-event="book_call">Book a free discovery call</a>
         </div>
         <p class="hero-next-hint" style="margin-top:12px;">
           <a href="#platforms" style="color:#5eead4;font-weight:700;text-decoration:none;">Explore platforms →</a>
@@ -4971,26 +5100,27 @@ button,a,.btn{touch-action:manipulation}
     <!-- PROFILE + BIO GRID -->
     <div class="founder-grid-compact fade-up" style="display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:start;max-width:1100px;margin:0 auto 56px;">
 
-      <!-- LEFT: Avatar + Social Links -->
-      <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(0,180,216,0.2);border-radius:16px;padding:28px 20px;text-align:center;">
-        <div style="width:100px;height:100px;margin:0 auto 14px;border-radius:50%;overflow:hidden;border:3px solid var(--cyan);box-shadow:0 4px 20px rgba(0,180,216,0.3);">
-          <img loading="lazy" decoding="async" src="/founder.png" width="400" height="500" alt="Hassan Zakariya, Founder of RuffNeck Entertainment" style="width:100%;height:100%;object-fit:contain;object-position:center top;display:block;" onerror="this.onerror=null;this.style.display='none';if(this.parentElement)this.parentElement.classList.add('img-fallback');">
+      <!-- LEFT: LinkedIn-style profile card -->
+      <div class="rn-li-profile-card">
+        <div class="rn-li-cover" aria-hidden="true"></div>
+        <div class="rn-li-avatar-wrap">
+          <img loading="lazy" decoding="async" src="/founder.png" width="400" height="500" alt="Hassan Zakariya, Founder of RuffNeck Entertainment" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block;" onerror="this.onerror=null;this.src='https://ruffneck-entertainment.vercel.app/founder.png';"/>
         </div>
-        <div style="font-size:19px;font-weight:700;color:var(--white);margin-bottom:3px;">Hassan Zakariya</div>
-        <div style="font-size:11px;color:var(--cyan);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:6px;">FOUNDER & CEO · RUFFNECK ENTERTAINMENT</div>
-        <div style="display:flex;flex-direction:column;gap:7px;">
-          <a href="https://linkedin.com/in/hassanzakariya" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(0,119,181,0.12);border:1px solid rgba(0,119,181,0.25);border-radius:8px;padding:9px 14px;font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.123 2.062 2.062 0 0 1 0 4.123zM7.114 20.452H3.558V9h3.556v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a>
-          <a href="https://facebook.com/iamzaksz" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(24,119,242,0.1);border:1px solid rgba(24,119,242,0.2);border-radius:8px;padding:9px 14px;font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.063 24 12.073z"/></svg> Facebook</a>
-          <a href="https://instagram.com/iamzaksz" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(228,64,95,0.1);border:1px solid rgba(228,64,95,0.2);border-radius:8px;padding:9px 14px;font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12s.014 3.668.072 4.948c.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.668-.014 4.948-.072c4.354-.2 6.782-2.618 6.98-6.98.059-1.28.073-1.689.073-4.948s-.014-3.667-.072-4.947c-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg> Instagram</a>
-          <a href="https://youtube.com/@iamzaksz" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(255,0,0,0.1);border:1px solid rgba(255,0,0,0.2);border-radius:8px;padding:9px 14px;font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg> YouTube</a>
-          <a href="https://tiktok.com/@iamzaksz" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 14px;font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M19.589 6.686a4.793 4.793 0 0 1-3.77-4.245V2h-3.445v13.672a2.896 2.896 0 0 1-5.201 1.743l-.002-.001.002.001a2.895 2.895 0 0 1 3.183-4.51v-3.5a6.329 6.329 0 0 0-5.394 10.692 6.33 6.33 0 0 0 10.857-4.424V8.687a8.182 8.182 0 0 0 4.773 1.526V6.79a4.831 4.831 0 0 1-1.003-.104z"/></svg> TikTok</a>
-          <a href="https://x.com/iamzaksz" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:9px 14px;font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg> Twitter/X</a>
-          <a href="https://sites.google.com/view/iamzaksz" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(255,193,7,0.1);border:1px solid rgba(255,193,7,0.2);border-radius:8px;padding:9px 14px;font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm6.93 6h-2.95a15.65 15.65 0 0 0-1.38-3.56A8.03 8.03 0 0 1 18.93 6zM12 2.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM2.26 14C2.1 13.36 2 12.69 2 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2s.06 1.34.14 2H2.26zm.81 2h2.95c.32 1.25.78 2.45 1.38 3.56A7.987 7.987 0 0 1 3.07 16zm2.95-8H3.07a7.987 7.987 0 0 1 4.33-3.56A15.65 15.65 0 0 0 6.02 8zM12 21.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 16H9.66c-.09-.65-.16-1.32-.16-2s.07-1.35.16-2h4.68c.09.65.16 1.32.16 2s-.07 1.35-.16 2zm.25 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a7.987 7.987 0 0 1-4.33 3.56zM16.36 14c.08-.66.14-1.32.14-2s-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2h-3.38z"/></svg> Portfolio</a>
-          <a href="https://wa.me/2348033807856" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.2);border-radius:8px;padding:9px 14px;font-size:13px;color:rgba(255,255,255,0.85);text-decoration:none;" rel="noopener noreferrer"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.55 4.112 1.516 5.834L0 24l6.334-1.499A11.934 11.934 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.95 0-3.785-.506-5.378-1.393l-.386-.224-3.99.944.999-3.867-.252-.402A9.936 9.936 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg> WhatsApp</a>
+        <div class="rn-li-body">
+          <h3 class="rn-li-name">Hassan Zakariya</h3>
+          <p class="rn-li-headline">Founder &amp; CEO · RuffNeck Entertainment · Practical AI for Nigerian SMEs</p>
+          <p class="rn-li-loc">Kano, Nigeria · Remote across Africa</p>
+          <span class="rn-li-open">Open to work with SMEs &amp; professionals</span>
+          <div class="rn-li-actions">
+            <a class="rn-li-primary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" data-rn-event="founder_book_call">Book a call</a>
+            <a class="rn-li-secondary" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%20Entertainment" target="_blank" rel="noopener" data-rn-event="founder_whatsapp">WhatsApp</a>
+            <a class="rn-li-secondary" href="https://linkedin.com/in/hassanzakariya" target="_blank" rel="noopener" data-rn-event="founder_linkedin">LinkedIn</a>
+          </div>
         </div>
       </div>
 
-      <!-- RIGHT: Bio + Roles + Education -->
+      
+<!-- RIGHT: Bio + Roles + Education -->
       <div>
         <!-- Bio -->
         <p style="font-size:15px;color:rgba(255,255,255,0.8);line-height:1.8;margin-bottom:24px;">IT and Operations Administration Specialist with 5+ years of experience in logistics, warehouse management, data systems, AI content creation, and digital business development. certified by Anthropic, Microsoft, NASBA, PMI, LinkedIn, and the UN. Founder of RuffNeck Entertainment — a CAC-registered, SMEDAN-certified AI &amp; digital solutions company serving businesses across Nigeria and globally.</p>
@@ -7320,6 +7450,34 @@ a:not(.btn):not(.btn-primary):not(.nav-cta):not(.filter-btn) {
   setTimeout(bind, 600);
   setTimeout(bind, 1500);
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape') close(); });
+})();
+</script>
+
+
+<script id="rn-conversion-events">
+(function(){
+  function fire(name, detail){
+    try {
+      if (window.dataLayer) window.dataLayer.push({event: name, ...(detail||{})});
+      if (typeof gtag === 'function') gtag('event', name, detail||{});
+      window.dispatchEvent(new CustomEvent('rn:'+name, {detail: detail||{}}));
+    } catch(e){}
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('[data-rn-event], a[href*="calendly"], a[href*="wa.me"], a[href="/store"], a[href="#platforms"], a[href="#free-guide"], a[href="#path"]') : null;
+    if(!a) return;
+    var name = a.getAttribute('data-rn-event');
+    if(!name){
+      var h = a.getAttribute('href')||'';
+      if(h.indexOf('calendly')>=0) name='book_call';
+      else if(h.indexOf('wa.me')>=0) name='whatsapp';
+      else if(h.indexOf('/store')>=0) name='store';
+      else if(h.indexOf('#platforms')>=0) name='platforms';
+      else if(h.indexOf('#free-guide')>=0) name='free_guide';
+      else if(h.indexOf('#path')>=0) name='path';
+    }
+    if(name) fire(name, {href: a.getAttribute('href')});
+  }, true);
 })();
 </script>
 
