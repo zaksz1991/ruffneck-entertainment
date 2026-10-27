@@ -3638,6 +3638,290 @@ footer .social a {
 }
 </style>
 
+
+<style id="rn-social-feed-ui">
+/* =========================================================
+   RuffNeck — LinkedIn / Facebook style system
+   Clean feed cards · soft elevation · high readability
+   ========================================================= */
+:root {
+  --li-bg: #F3F2EF;
+  --li-card: #FFFFFF;
+  --li-border: #E0DFDC;
+  --li-text: #191919;
+  --li-muted: #666666;
+  --li-link: #0A66C2;
+  --li-link-hover: #004182;
+  --fb-blue: #1877F2;
+  --rn-cyan: #00B4D8;
+  --rn-navy: #0B1E3A;
+  --li-radius: 12px;
+  --li-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.06);
+  --li-shadow-hover: 0 0 0 1px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.10);
+}
+
+/* Body / light sections = LinkedIn canvas */
+#results,
+#services,
+#about,
+.rn-results {
+  background: var(--li-bg) !important;
+  color: var(--li-text) !important;
+}
+
+#results .section-title,
+#services .section-title,
+#about .section-title {
+  color: var(--li-text) !important;
+  -webkit-text-fill-color: var(--li-text) !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  max-width: none !important;
+}
+#results .section-label,
+#services .section-label {
+  color: var(--li-link) !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+}
+
+/* Feed-style cards (LinkedIn post / FB card) */
+#results .container > div[style*="grid"] > div,
+#results [style*="grid-template"] > div {
+  background: var(--li-card) !important;
+  border: none !important;
+  border-radius: var(--li-radius) !important;
+  box-shadow: var(--li-shadow) !important;
+  padding: 16px 16px 14px !important;
+  transition: box-shadow .2s ease, transform .15s ease;
+}
+#results .container > div[style*="grid"] > div:hover {
+  box-shadow: var(--li-shadow-hover) !important;
+  transform: translateY(-1px);
+}
+#results h3 {
+  color: var(--li-text) !important;
+  font-size: 1.05rem !important;
+  font-weight: 650 !important;
+  line-height: 1.3 !important;
+}
+#results p {
+  color: var(--li-muted) !important;
+  font-size: 0.92rem !important;
+  line-height: 1.5 !important;
+}
+
+/* Primary CTA = LinkedIn blue-ish with RN cyan option */
+#results a[href*="calendly"],
+#path a[href*="calendly"],
+.btn-primary,
+a.btn.btn-primary {
+  background: var(--li-link) !important;
+  color: #fff !important;
+  border-radius: 24px !important;
+  font-weight: 700 !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 12px 24px !important;
+}
+#results a[href*="calendly"]:hover,
+a.btn.btn-primary:hover {
+  background: var(--li-link-hover) !important;
+}
+
+/* Blog cards = LinkedIn article cards */
+#blog .blog-card,
+.blog-card {
+  background: var(--li-card) !important;
+  border: none !important;
+  border-radius: var(--li-radius) !important;
+  box-shadow: var(--li-shadow) !important;
+  overflow: hidden !important;
+  transition: box-shadow .2s ease, transform .15s ease !important;
+}
+#blog .blog-card:hover,
+.blog-card:hover {
+  box-shadow: var(--li-shadow-hover) !important;
+  transform: translateY(-2px) !important;
+  border-color: transparent !important;
+}
+#blog .blog-card h3,
+.blog-card h3 {
+  color: var(--li-text) !important;
+  -webkit-text-fill-color: var(--li-text) !important;
+  font-weight: 650 !important;
+  font-size: 1.05rem !important;
+  line-height: 1.35 !important;
+}
+#blog .blog-card p,
+.blog-card p,
+.blog-card .blog-body p {
+  color: var(--li-muted) !important;
+  -webkit-text-fill-color: var(--li-muted) !important;
+  font-size: 0.9rem !important;
+  line-height: 1.5 !important;
+  opacity: 1 !important;
+}
+#blog .blog-card .blog-cat,
+.blog-card .blog-cat {
+  color: var(--li-link) !important;
+  font-weight: 700 !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+}
+#blog .blog-card .rn-blog-hint,
+.blog-card .rn-blog-hint {
+  color: var(--li-link) !important;
+  background: #E8F3FF !important;
+  border-radius: 16px !important;
+  font-weight: 700 !important;
+  font-size: 12px !important;
+  padding: 6px 12px !important;
+}
+
+/* Pricing cards = clean product cards */
+#pricing .pricing-card {
+  background: var(--li-card) !important;
+  border: none !important;
+  border-radius: var(--li-radius) !important;
+  box-shadow: var(--li-shadow) !important;
+  color: var(--li-text) !important;
+}
+#pricing .pricing-card:hover {
+  box-shadow: var(--li-shadow-hover) !important;
+}
+
+/* Service platform tools box — FB-style callout */
+#service-platform-links {
+  background: var(--li-card) !important;
+  border: none !important;
+  box-shadow: var(--li-shadow) !important;
+  border-radius: var(--li-radius) !important;
+  padding: 16px !important;
+}
+#service-platform-links p {
+  color: var(--li-text) !important;
+}
+#service-platform-links p:first-child {
+  color: var(--li-link) !important;
+}
+#service-platform-links a {
+  border-radius: 24px !important;
+  font-weight: 700 !important;
+}
+#service-platform-links a[href*="prospector"] {
+  background: var(--li-link) !important;
+  color: #fff !important;
+  border: none !important;
+}
+#service-platform-links a[href*="lms"],
+#service-platform-links a[href*="Learn"] {
+  background: #fff !important;
+  color: var(--li-link) !important;
+  border: 1.5px solid var(--li-link) !important;
+}
+
+/* Path ladder cards on dark — keep dark but LinkedIn-like structure */
+#path .rn-path-grid > div {
+  border-radius: var(--li-radius) !important;
+  box-shadow: var(--li-shadow) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+/* Platform strip — compact social chips */
+#platforms-strip a {
+  border-radius: var(--li-radius) !important;
+  box-shadow: var(--li-shadow) !important;
+  transition: transform .15s ease, box-shadow .2s ease !important;
+}
+#platforms-strip a:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--li-shadow-hover) !important;
+}
+
+/* Hero primary = strong social CTA */
+.hero-actions .btn-primary {
+  background: var(--li-link) !important;
+  color: #fff !important;
+  border-radius: 28px !important;
+  font-weight: 700 !important;
+  border: none !important;
+}
+.hero-actions .btn-outline {
+  border-radius: 28px !important;
+  border: 1.5px solid rgba(255,255,255,0.45) !important;
+  color: #fff !important;
+  font-weight: 650 !important;
+}
+
+/* Trust pills = LinkedIn skill chips */
+.rn-proof-band .rn-proof-item {
+  background: rgba(255,255,255,0.1) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  border-radius: 16px !important;
+  color: #e2e8f0 !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 5px 12px !important;
+}
+
+/* Sticky mobile bar = app-like */
+#rnMobileBar {
+  background: rgba(255,255,255,0.96) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border-top: 1px solid var(--li-border) !important;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.08) !important;
+}
+#rnMobileBar a {
+  border-radius: 10px !important;
+  font-weight: 700 !important;
+  font-size: 11px !important;
+}
+#rnMobileBar a[href*="wa.me"],
+#rnMobileBar a[href*="whatsapp"] {
+  background: #25D366 !important;
+  color: #fff !important;
+}
+#rnMobileBar a[href*="calendly"] {
+  background: var(--li-link) !important;
+  color: #fff !important;
+}
+
+/* Typography — social feed readable */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.blog-card .blog-body {
+  padding: 12px 16px 8px !important;
+}
+
+/* View all / secondary buttons */
+a[href="/blog"] {
+  border-radius: 24px !important;
+  background: var(--li-link) !important;
+  color: #fff !important;
+  font-weight: 700 !important;
+}
+
+@media (max-width:700px) {
+  #results .container > div[style*="grid"],
+  #results [style*="grid-template"] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  #blog .blog-card,
+  .blog-card {
+    margin-bottom: 4px !important;
+  }
+  .hero-actions .btn {
+    border-radius: 28px !important;
+  }
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4530,7 +4814,8 @@ button,a,.btn{touch-action:manipulation}
 
 <section class="section rn-results" id="results" style="padding:40px 16px;background:#F8FAFC;">
   <div class="container" style="max-width:960px;margin:0 auto;">
-    <p class="section-label" style="text-align:center;color:#0891b2 !important;">Proof &amp; focus</p>
+    <p class="section-label" style="text-align:center;color:#0A66C2 !important;">Proof &amp; focus</p>
+    <p class="rn-proof-meta" style="text-align:center;color:#666 !important;font-size:13px;margin:0 0 8px;">RuffNeck Entertainment · Practical AI for Nigerian SMEs</p>
     <h2 class="section-title" style="text-align:center;color:#0B1E3A !important;max-width:none !important;margin:0 auto 12px;">Built for how Nigerian businesses actually work</h2>
     <p style="text-align:center;color:#475569 !important;max-width:520px;margin:0 auto 24px;line-height:1.55;font-size:0.95rem;">
       Clear outcomes — clients, operations, and skills — with tools you can use the same week.
