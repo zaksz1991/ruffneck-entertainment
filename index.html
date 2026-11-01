@@ -4094,6 +4094,48 @@ a[href="/blog"] {
 }
 </style>
 
+
+<style id="rn-mobile-menu-platforms">
+#mobileMenu .rn-mobile-label {
+  display: block !important;
+  margin: 14px 10px 6px !important;
+  padding: 0 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #5eead4 !important;
+  border: none !important;
+  background: transparent !important;
+}
+#mobileMenu a {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #f8fafc !important;
+  -webkit-text-fill-color: #f8fafc !important;
+  padding: 12px 10px !important;
+  font-weight: 600 !important;
+  border-bottom: 1px solid rgba(148,163,184,.2) !important;
+  text-decoration: none !important;
+}
+#mobileMenu a.mobile-cta {
+  background: #0A66C2 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+  border-radius: 10px !important;
+  margin-top: 10px !important;
+  text-align: center !important;
+  border-bottom: none !important;
+}
+#mobileMenu.is-open,
+#mobileMenu:not([hidden]) {
+  max-height: min(80vh, 640px) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4160,18 +4202,21 @@ button,a,.btn{touch-action:manipulation}
   </div>
   <div class="nav-mobile" id="mobileMenu" hidden>
     <a href="#services">Services</a>
-    <a href="/store">Store</a>
     <a href="/blog">Blog</a>
-    <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">RuffNeck Learn — LMS &amp; courses</a>
-    <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener">RuffNeck Prospector — Leads</a>
-    <a href="https://ruffneck-connect.vercel.app" target="_blank" rel="noopener">RuffNeck Connect — Community</a>
-    <a href="https://ruffneck-social-hub.vercel.app" target="_blank" rel="noopener">RuffNeck Social Hub — Social ops</a>
-    <a href="https://kano-run.vercel.app" target="_blank" rel="noopener">Kano Run — 3D Keke game</a>
-    <a href="/programmes">Community Impact</a>
     <a href="#free-guide">Free Guide</a>
+    <p class="rn-mobile-label">Platforms</p>
+    <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">🎓 Learn — LMS &amp; courses</a>
+    <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener">🔎 Prospector — Leads</a>
+    <a href="https://ruffneck-connect.vercel.app" target="_blank" rel="noopener">🤝 Connect — Community</a>
+    <a href="https://ruffneck-social-hub.vercel.app" target="_blank" rel="noopener">📣 Social Hub — Social ops</a>
+    <a href="https://kano-run.vercel.app" target="_blank" rel="noopener">🛵 Kano Run — 3D game</a>
+    <a href="/store">🛒 Digital Store</a>
+    <p class="rn-mobile-label">Company</p>
+    <a href="/programmes">Community Impact</a>
     <a href="#about">About</a>
     <a href="#founder">Founder</a>
     <a href="#pricing">Pricing</a>
+    <a href="#platforms">All platforms on this page</a>
     <a href="#contact">Contact</a>
     <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="mobile-cta">Book a Call</a>
     <a href="https://wa.me/2348033807856" target="_blank" rel="noopener">WhatsApp</a>
