@@ -4361,6 +4361,23 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 }
 </style>
 
+
+<style id="rn-fix-services-hide">
+/* Correct: hide full services grid on homepage; teaser remains */
+#services #servicesGrid,
+#servicesGrid,
+#servicesMoreWrap,
+#showAllServices,
+.services-grid,
+#services .service-card {
+  display: none !important;
+}
+#rn-services-teaser,
+#service-platform-links {
+  display: block !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4712,7 +4729,7 @@ button,a,.btn{touch-action:manipulation}
       RuffNeck platforms — skills, clients, community, social ops, culture
     </h2>
     <p style="margin:0 0 36px; max-width:640px; line-height:1.65; font-size:1.05rem; color:#cbd5e1 !important;">
-      Live products from RuffNeck Entertainment: practical skills training, multi-platform lead discovery, community collaboration, and a Kano-made 3D keke driving game.
+      Live products: Learn (free course + certificate), Prospector, Connect, Social Hub, and Kano Run — one RuffNeck brand.
     </p>
 
     <div class="rn-plat-cards" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; width:100%;">
@@ -4724,10 +4741,9 @@ button,a,.btn{touch-action:manipulation}
       ">
         <p style="margin:0; color:#5eead4 !important; font-weight:800; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;">01 · Learning</p>
         <h3 style="margin:0; color:#ffffff !important; font-size:1.2rem; font-weight:800;">RuffNeck Learn</h3>
-        <p style="margin:0; color:#94a3b8 !important; font-size:0.88rem; font-weight:600;">Upskill for real workplace tasks</p>
+        <p style="margin:0; color:#94a3b8 !important; font-size:0.88rem; font-weight:600;">Free course + free certificate</p>
         <p style="margin:0; color:#e2e8f0 !important; line-height:1.6; font-size:0.95rem; flex:1;">
-          Practical AI and digital skills courses for Nigerian professionals, founders, freelancers, and teams.
-          Structured lessons, free starter access, and progress tracking — skills you can use at work, not theory only.
+          Free course with a free certificate on completion. Practical AI and digital skills for Nigerian professionals — use at work, not theory only.
         </p>
         <ul style="margin:0; padding-left:1.1rem; color:#cbd5e1 !important; font-size:0.9rem; line-height:1.65;">
           <li style="color:#cbd5e1 !important;">AI literacy, productivity &amp; data skills</li>
@@ -6006,7 +6022,7 @@ button,a,.btn{touch-action:manipulation}
       </details>
       <details style="background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.22);border-radius:12px;padding:14px 16px;">
         <summary style="color:#fff;font-weight:700;cursor:pointer;">What are Learn, Prospector, Connect, and Kano Run?</summary>
-        <p style="margin:10px 0 0;color:#cbd5e1;line-height:1.55;font-size:0.95rem;"><strong>Learn</strong> = courses and skills. <strong>Prospector</strong> = find leads. <strong>Connect</strong> = community and collaboration. <strong>Kano Run</strong> = free 3D keke game from Kano.</p>
+        <p style="margin:10px 0 0;color:#cbd5e1;line-height:1.55;font-size:0.95rem;"><strong>Learn</strong> = free course + certificate. <strong>Prospector</strong> = find leads. <strong>Connect</strong> = community. <strong>Social Hub</strong> = social operations. <strong>Kano Run</strong> = free 3D keke game.</p>
       </details>
       <details style="background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.22);border-radius:12px;padding:14px 16px;">
         <summary style="color:#fff;font-weight:700;cursor:pointer;">Is RuffNeck a registered business?</summary>
