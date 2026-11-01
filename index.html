@@ -4271,6 +4271,96 @@ a.btn.btn-primary,
 }
 </style>
 
+
+<style id="rn-final-global-polish">
+/* ========== RuffNeck final global polish ========== */
+html { scroll-behavior: smooth; }
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:focus-visible {
+  outline: 2px solid #0A66C2 !important;
+  outline-offset: 3px !important;
+}
+a:focus-visible, button:focus-visible, .btn:focus-visible {
+  outline: 2px solid #0A66C2 !important;
+  outline-offset: 3px !important;
+}
+
+/* Skip link */
+.rn-skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100000;
+  background: #0A66C2;
+  color: #fff !important;
+  padding: 10px 16px;
+  font-weight: 700;
+  border-radius: 0 0 8px 0;
+}
+.rn-skip:focus {
+  left: 0;
+}
+
+/* Hero refined */
+.hero h1 {
+  letter-spacing: -0.03em !important;
+  font-weight: 800 !important;
+}
+.hero-sub {
+  max-width: 36rem !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* Sticky bar elevation */
+#rnMobileBar {
+  z-index: 99990 !important;
+}
+
+/* Platform cards hover */
+#platforms article,
+#platforms-strip a {
+  transition: transform .18s ease, box-shadow .18s ease !important;
+}
+#platforms article:hover {
+  transform: translateY(-3px);
+}
+
+/* Path cards */
+#path .rn-path-grid > div {
+  transition: border-color .2s ease, transform .18s ease !important;
+}
+#path .rn-path-grid > div:hover {
+  transform: translateY(-2px);
+  border-color: rgba(94,234,212,0.55) !important;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(10, 102, 194, 0.25);
+  color: inherit;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print: hide chrome */
+@media print {
+  #rnMobileBar, .site-header, nav, .rn-skip { display: none !important; }
+  body { background: #fff !important; color: #000 !important; }
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -5928,8 +6018,8 @@ button,a,.btn{touch-action:manipulation}
 
 
 <section id="rn-final-cta" aria-label="Get started">
-  <h2>Ready to get clients, skills, or systems?</h2>
-  <p>Start free, buy a guide, open a platform, or book a short discovery call.</p>
+  <h2>Start free. Level up when you are ready.</h2>
+  <p>Free guide · free course with certificate · ₦ store · platforms · discovery call.</p>
   <div class="rn-teaser-cta">
     <a class="primary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" data-rn-event="book_call">Book a free call</a>
     <a class="secondary" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%20Entertainment" target="_blank" rel="noopener" data-rn-event="whatsapp" style="background:transparent!important;color:#5eead4!important;border:1.5px solid #5eead4!important;">WhatsApp</a>
