@@ -4452,6 +4452,108 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 }
 </style>
 
+
+<style id="rn-video-play-contrast">
+#rnYtPlay,
+#rnYtPlay span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  opacity: 1 !important;
+}
+#rnYtPlay span[style*="background:#00B4D8"],
+#rnYtPlay span[style*="background: #00B4D8"] {
+  color: #0B1E3A !important;
+  -webkit-text-fill-color: #0B1E3A !important;
+}
+.rn-video-card,
+#founder .rn-video-card {
+  background: #0B1E3A !important;
+}
+.rn-video-card h3 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.rn-video-card p {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}
+/* Certifications under founder on light bg */
+#founder + * ,
+#founder [style*="CERTIFICATIONS"],
+#founder div[style*="CERTIFICATIONS"] {
+}
+</style>
+
+
+<style id="rn-footer-link-contrast">
+footer a,
+.site-footer a,
+.rn-footer a {
+  opacity: 1 !important;
+}
+/* bottom legal strip often washed out */
+footer .rn-legal a,
+.footer-legal a,
+footer a[href*="privacy"],
+footer a[href*="terms"],
+footer a[href*="cookie"],
+footer a[href*="refund"] {
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+footer p,
+.site-footer p {
+  color: #94a3b8 !important;
+  opacity: 1 !important;
+}
+</style>
+
+
+<style id="rn-footer-mobile-contrast">
+/* Footer legal — never washed out */
+.footer-bottom a,
+.footer-bottom p,
+.footer-bottom {
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+.footer-bottom a {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+  text-decoration: underline !important;
+  text-underline-offset: 2px;
+}
+.footer-platforms a,
+.rn-footer-platforms a,
+.footer a[href*="vercel.app"],
+.footer a[href="/store"],
+.footer a[href*="wa.me"] {
+  color: #5eead4 !important;
+  -webkit-text-fill-color: #5eead4 !important;
+  opacity: 1 !important;
+}
+/* Space for sticky mobile bar so last lines aren't hidden under it */
+@media (max-width:900px) {
+  body {
+    padding-bottom: 72px !important;
+  }
+  .footer,
+  footer.footer {
+    padding-bottom: 88px !important;
+  }
+  .footer-bottom {
+    padding-bottom: 12px !important;
+  }
+}
+/* Play button label */
+#rnYtPlay span {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -5599,7 +5701,7 @@ button,a,.btn{touch-action:manipulation}
         <div id="rnYtWrap" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#0B1E3A,#123050);box-shadow:0 8px 32px rgba(0,0,0,0.35);">
           <button type="button" id="rnYtPlay" aria-label="Play RuffNeck Entertainment showcase video" style="position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:transparent;color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;">
             <span style="width:56px;height:56px;border-radius:50%;background:#00B4D8;color:#0B1E3A;display:flex;align-items:center;justify-content:center;font-size:22px;">▶</span>
-            <span>Play RuffNeck showcase</span>
+            <span style="color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;font-weight:700;">Play RuffNeck showcase</span>
           </button>
         </div>
         <script>
@@ -5612,7 +5714,7 @@ button,a,.btn{touch-action:manipulation}
           });
         })();
         </script>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin:12px 0 0;"><span style="color:#94a3b8 !important;">RuffNeck Entertainment · Knowledge Hub</span></p>
+        <p style="font-size:12px;margin:12px 0 0;color:#cbd5e1 !important;-webkit-text-fill-color:#cbd5e1 !important;">RuffNeck Entertainment · Knowledge Hub</p>
       </div>
     </div>
 
@@ -6279,9 +6381,9 @@ button,a,.btn{touch-action:manipulation}
 </div>
 <div class="footer-bottom">
       <p>© 2026 RuffNeck Entertainment. All rights reserved. CAC Reg No. 3770977. &nbsp;·&nbsp;
-        <a href="#" onclick="openPolicy('privacy');return false;" style="color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;">Privacy Policy</a> &nbsp;·&nbsp;
-        <a href="#" onclick="openPolicy('terms');return false;" style="color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;">Terms of Service</a> &nbsp;·&nbsp;
-        <a href="#" onclick="openPolicy('cookie');return false;" style="color:rgba(255,255,255,0.35);text-decoration:none;font-size:12px;">Cookie Policy</a>
+        <a href="#" onclick="openPolicy('privacy');return false;" style="color:#cbd5e1 !important;text-decoration:none;font-size:12px;">Privacy Policy</a> &nbsp;·&nbsp;
+        <a href="#" onclick="openPolicy('terms');return false;" style="color:#cbd5e1 !important;text-decoration:none;font-size:12px;">Terms of Service</a> &nbsp;·&nbsp;
+        <a href="#" onclick="openPolicy('cookie');return false;" style="color:#cbd5e1 !important;text-decoration:none;font-size:12px;">Cookie Policy</a>
       </p>
     </div>
   </div>
