@@ -4136,6 +4136,120 @@ a[href="/blog"] {
 }
 </style>
 
+
+<style id="rn-commercial-homepage">
+/* =========================================================
+   Commercial homepage: short path, hide depth, keep anchors
+   ========================================================= */
+
+/* Hide heavy depth on homepage — detail lives on linked pages/sections still in DOM for SEO optional */
+#services #servicesGrid,
+#services #servicesMoreWrap,
+#services .services-grid,
+#services .service-card,
+body:not(.rn-show-all-services) #servicesGrid {
+  /* keep first 0 — use explicit hide of grid */
+}
+#services #servicesGrid,
+#services #servicesMoreWrap {
+  display: none !important;
+}
+#showAllServices { display: none !important; }
+
+/* Pricing: keep max 3 cards */
+#pricing .pricing-grid > .pricing-card:nth-child(n+4) {
+  display: none !important;
+}
+
+/* Blog: keep max 3 */
+#blog .blog-grid > .blog-card:nth-child(n+4) {
+  display: none !important;
+}
+
+/* Founder: hide long extras after profile grid */
+#founder .rn-founder-extra,
+#founder #kano-challenge,
+#founder .cert-grid,
+#founder [id*="certification" i] {
+  display: none !important;
+}
+
+/* About: compact */
+#about .about-long,
+#about .about-grid > div:nth-child(n+3) {
+  display: none !important;
+}
+
+/* Kano challenge: keep but tighter */
+#kano-challenge {
+  padding: 36px 16px !important;
+}
+
+/* Tighter vertical rhythm */
+.section {
+  padding-top: 40px !important;
+  padding-bottom: 44px !important;
+}
+@media (max-width:700px) {
+  .section {
+    padding-top: 32px !important;
+    padding-bottom: 36px !important;
+  }
+  #platforms .rn-plat-cards {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Commercial teaser bars */
+.rn-teaser-cta {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  margin-top: 18px !important;
+}
+.rn-teaser-cta a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 44px !important;
+  padding: 10px 18px !important;
+  border-radius: 24px !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+  font-size: 0.92rem !important;
+}
+.rn-teaser-cta a.primary {
+  background: #0A66C2 !important;
+  color: #fff !important;
+}
+.rn-teaser-cta a.secondary {
+  background: #fff !important;
+  color: #0A66C2 !important;
+  border: 1.5px solid #0A66C2 !important;
+}
+
+/* Final commercial CTA band */
+#rn-final-cta {
+  background: #0B1E3A !important;
+  padding: 48px 16px !important;
+  text-align: center !important;
+  border-top: 1px solid rgba(0,180,216,0.25) !important;
+}
+#rn-final-cta h2 {
+  color: #fff !important;
+  font-size: clamp(1.35rem, 3vw, 1.75rem) !important;
+  margin: 0 0 10px !important;
+  font-weight: 800 !important;
+}
+#rn-final-cta p {
+  color: #cbd5e1 !important;
+  margin: 0 auto 20px !important;
+  max-width: 420px !important;
+  line-height: 1.5 !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4373,6 +4487,21 @@ button,a,.btn{touch-action:manipulation}
     </div>
   </div>
 </section>
+
+<section id="rn-store-teaser" class="section" style="background:#F3F2EF;padding:40px 16px;">
+  <div style="max-width:720px;margin:0 auto;text-align:center;">
+    <p style="margin:0 0 6px;color:#0A66C2;font-weight:800;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Digital store</p>
+    <h2 style="margin:0 0 10px;color:#191919;font-size:clamp(1.25rem,3vw,1.6rem);font-weight:800;">Guides &amp; templates from ₦2,000</h2>
+    <p style="margin:0 0 18px;color:#666;line-height:1.5;font-size:0.95rem;">
+      Pay in naira via Flutterwave. Instant digital delivery. WhatsApp support if you need help.
+    </p>
+    <div class="rn-teaser-cta">
+      <a class="primary" href="/store" data-rn-event="store">Browse the store</a>
+      <a class="secondary" href="#free-guide" data-rn-event="free_guide">Get the free guide first</a>
+    </div>
+  </div>
+</section>
+
 
 
 
@@ -4656,6 +4785,17 @@ button,a,.btn{touch-action:manipulation}
     ">Open Learn</a>
   </div>
 </div>
+<div id="rn-services-teaser" style="max-width:720px;margin:20px auto 0;text-align:center;">
+  <p style="color:#475569 !important;line-height:1.55;margin:0 0 14px;font-size:0.95rem;">
+    AI adoption, clearer operations, and digital growth — scoped to your business.
+    Start free, buy a guide, use a platform, or book a call when you need hands-on support.
+  </p>
+  <div class="rn-teaser-cta">
+    <a class="primary" href="#path">See the full path</a>
+    <a class="secondary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" data-rn-event="book_call">Book a discovery call</a>
+  </div>
+</div>
+
 
       <p class="section-sub">Adopt practical AI, improve operations, and grow digitally. Filter a category, then open a card for deliverables, tools, and what you can request next.</p>
     </div>
@@ -5457,7 +5597,7 @@ button,a,.btn{touch-action:manipulation}
     <div class="fade-up" style="text-align:center;margin-bottom:48px;">
       <div class="section-label">Investment · 2026 Rates</div>
       <h2 class="section-title" style="color:#ffffff !important;">Clear engagement options</h2>
-      <p class="section-sub" style="margin:0 auto;color:#cbd5e1 !important;">Starter, Growth, and Scale from ₦80K. Prefer free first? Use the path above, then book a call for a scoped quote.</p>
+      <p class="section-sub" style="margin:0 auto;color:#cbd5e1 !important;">Three tiers from ₦80K. Prefer free first? Path above → store → platforms → call for a scoped quote.</p>
     </div>
     <div class="pricing-grid fade-up">
       <div class="pricing-card">
@@ -5756,6 +5896,16 @@ button,a,.btn{touch-action:manipulation}
         <p style="margin:10px 0 0;color:#cbd5e1;line-height:1.55;font-size:0.95rem;">Yes. CAC registration 3770977 and SMEDAN certification. Est. 2022.</p>
       </details>
     </div>
+  </div>
+</section>
+
+
+<section id="rn-final-cta" aria-label="Get started">
+  <h2>Ready to get clients, skills, or systems?</h2>
+  <p>Start free, buy a guide, open a platform, or book a short discovery call.</p>
+  <div class="rn-teaser-cta">
+    <a class="primary" href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" data-rn-event="book_call">Book a free call</a>
+    <a class="secondary" href="https://wa.me/2348033807856?text=Hello%20RuffNeck%20Entertainment" target="_blank" rel="noopener" data-rn-event="whatsapp" style="background:transparent!important;color:#5eead4!important;border:1.5px solid #5eead4!important;">WhatsApp</a>
   </div>
 </section>
 
