@@ -4378,6 +4378,80 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 }
 </style>
 
+
+<style id="rn-founder-contrast-fix">
+#founder {
+  background: #F3F2EF !important;
+  color: #191919 !important;
+}
+#founder .section-title,
+#founder h2 {
+  color: #191919 !important;
+  -webkit-text-fill-color: #191919 !important;
+}
+#founder .section-label {
+  color: #0A66C2 !important;
+}
+/* Bio / roles column — never white text on light */
+#founder .founder-grid-compact > div:last-child,
+#founder .founder-grid-compact > div:last-child * {
+  color: inherit;
+}
+#founder .founder-grid-compact > div:last-child {
+  background: #ffffff !important;
+  color: #191919 !important;
+}
+#founder .founder-grid-compact > div:last-child p,
+#founder .founder-grid-compact > div:last-child li,
+#founder .founder-grid-compact > div:last-child span,
+#founder .founder-grid-compact > div:last-child div {
+  color: #334155 !important;
+  -webkit-text-fill-color: #334155 !important;
+  opacity: 1 !important;
+}
+#founder .founder-grid-compact > div:last-child h3,
+#founder .founder-grid-compact > div:last-child h4,
+#founder .founder-grid-compact > div:last-child strong {
+  color: #0B1E3A !important;
+  -webkit-text-fill-color: #0B1E3A !important;
+}
+/* Gold labels stay readable */
+#founder [style*="color:var(--gold)"],
+#founder [style*="color: var(--gold)"],
+#founder .section-label[style*="gold"] {
+  color: #b45309 !important;
+  -webkit-text-fill-color: #b45309 !important;
+}
+#founder div[style*="Current Roles"],
+#founder div[style*="uppercase"] {
+  color: #b45309 !important;
+  -webkit-text-fill-color: #b45309 !important;
+}
+/* Role cards if they use white */
+#founder [style*="color:var(--white)"],
+#founder [style*="color: var(--white)"],
+#founder [style*="color:#fff"],
+#founder [style*="color: #fff"],
+#founder [style*="color:#ffffff"] {
+  color: #0B1E3A !important;
+  -webkit-text-fill-color: #0B1E3A !important;
+}
+#founder [style*="rgba(255,255,255"] {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+}
+/* Video card always dark */
+.rn-video-card,
+#founder .rn-video-card {
+  background: #0B1E3A !important;
+}
+.rn-video-card h3,
+.rn-video-card p {
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -5480,23 +5554,23 @@ button,a,.btn{touch-action:manipulation}
 
         <!-- Current Roles -->
         <div style="margin-bottom:24px;">
-          <div style="font-size:11px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Current Roles · 2026</div>
+          <div style="font-size:11px;font-weight:700;color:var(--gold);font-family:var(--font-mono);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;;color:#b45309 !important;-webkit-text-fill-color:#b45309 !important;">Current Roles · 2026</div>
           <div style="display:flex;flex-direction:column;gap:8px;">
             <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.04);border-radius:8px;padding:12px 14px;">
               <span style="font-size:18px;flex-shrink:0;">✍️</span>
               <div>
-                <div style="font-size:14px;font-weight:600;color:var(--white);">AI Technical Content Writing Internship — Platoon Leader</div>
+                <div style="font-size:14px;font-weight:600;color:#0B1E3A;">AI Technical Content Writing Internship — Platoon Leader</div>
                 <div style="font-size:12px;color:rgba(255,255,255,0.55);">GAO Tek Inc. · March 2026 – July 2026</div>
-                <div style="font-size:12px;color:rgba(255,255,255,0.75);margin-top:6px;line-height:1.45;">AI, technical content, AI-assisted research, Tech Support, and team leadership. Credentials: Certificate of Training in AI · Certificate of Completion (4-month programme) · Certificate of Training in Tech Support. ID: GAO-ZAKARIYA-HAS-20260311-MAT · Issued Aug 21, 2026.</div>
+                <div style="font-size:12px;color:#475569;margin-top:6px;line-height:1.45;">AI, technical content, AI-assisted research, Tech Support, and team leadership. Credentials: Certificate of Training in AI · Certificate of Completion (4-month programme) · Certificate of Training in Tech Support. ID: GAO-ZAKARIYA-HAS-20260311-MAT · Issued Aug 21, 2026.</div>
               </div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.04);border-radius:8px;padding:12px 14px;">
               <span style="font-size:18px;flex-shrink:0;">🎓</span>
-              <div><div style="font-size:14px;font-weight:600;color:var(--white);">Teaching Assistant — AI Literacy</div><div style="font-size:12px;color:rgba(255,255,255,0.5);">African AI Network (AAN) · 2026–Present</div></div>
+              <div><div style="font-size:14px;font-weight:600;color:#0B1E3A;">Teaching Assistant — AI Literacy</div><div style="font-size:12px;color:#64748b;">African AI Network (AAN) · 2026–Present</div></div>
             </div>
             <div style="display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,0.04);border-radius:8px;padding:12px 14px;">
               <span style="font-size:18px;flex-shrink:0;">🏭</span>
-              <div><div style="font-size:14px;font-weight:600;color:var(--white);">IT &amp; Operations Administration Officer</div><div style="font-size:12px;color:rgba(255,255,255,0.5);">Ilera Agro Processing Nig Ltd, Kano · 2022–2026</div></div>
+              <div><div style="font-size:14px;font-weight:600;color:#0B1E3A;">IT &amp; Operations Administration Officer</div><div style="font-size:12px;color:#64748b;">Ilera Agro Processing Nig Ltd, Kano · 2022–2026</div></div>
             </div>
           </div>
         </div>
@@ -5518,10 +5592,10 @@ button,a,.btn{touch-action:manipulation}
 
     <!-- RUFFNECK VIDEO SHOWCASE -->
     <div class="fade-up" style="max-width:1100px;margin:0 auto 48px;">
-      <div style="background:linear-gradient(135deg,rgba(0,180,216,0.08),rgba(123,47,255,0.08));border:1.5px solid rgba(0,180,216,0.2);border-radius:16px;padding:28px 24px;">
-        <div style="font-size:11px;font-weight:700;color:var(--gold,#F5C518);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:8px;">🎥 RUFFNECK ENTERTAINMENT · VIDEO</div>
-        <h3 style="font-size:20px;font-weight:700;color:var(--white,#fff);margin:0 0 10px;">Knowledge showcase</h3>
-        <p style="font-size:14px;color:rgba(255,255,255,0.8);margin:0 0 16px;line-height:1.6;">Practical AI and digital skills from RuffNeck Entertainment. Click play to load the video (saves page speed until you need it).</p>
+      <div class="rn-video-card" style="background:#0B1E3A !important;border:1.5px solid rgba(0,180,216,0.35);border-radius:16px;padding:28px 24px;">
+        <div style="font-size:11px;font-weight:700;color:#F5C518 !important;font-family:var(--font-mono);letter-spacing:1px;margin-bottom:8px;">🎥 RUFFNECK ENTERTAINMENT · VIDEO</div>
+        <h3 style="font-size:20px;font-weight:700;color:#ffffff !important;-webkit-text-fill-color:#ffffff !important;margin:0 0 10px;">Knowledge showcase</h3>
+        <p style="font-size:14px;color:#e2e8f0 !important;-webkit-text-fill-color:#e2e8f0 !important;margin:0 0 16px;line-height:1.6;">Practical AI and digital skills from RuffNeck Entertainment. Click play to load the video (saves page speed until you need it).</p>
         <div id="rnYtWrap" style="position:relative;width:100%;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:linear-gradient(135deg,#0B1E3A,#123050);box-shadow:0 8px 32px rgba(0,0,0,0.35);">
           <button type="button" id="rnYtPlay" aria-label="Play RuffNeck Entertainment showcase video" style="position:absolute;inset:0;width:100%;height:100%;border:0;cursor:pointer;background:transparent;color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:10px;">
             <span style="width:56px;height:56px;border-radius:50%;background:#00B4D8;color:#0B1E3A;display:flex;align-items:center;justify-content:center;font-size:22px;">▶</span>
@@ -5538,7 +5612,7 @@ button,a,.btn{touch-action:manipulation}
           });
         })();
         </script>
-        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin:12px 0 0;">RuffNeck Entertainment · Knowledge Hub</p>
+        <p style="font-size:12px;color:rgba(255,255,255,0.5);margin:12px 0 0;"><span style="color:#94a3b8 !important;">RuffNeck Entertainment · Knowledge Hub</span></p>
       </div>
     </div>
 
