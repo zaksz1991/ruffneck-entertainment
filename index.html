@@ -4642,10 +4642,7 @@ footer p,
   margin-left: auto !important;
   margin-right: auto !important;
 }
-/* Hide duplicate CAC/SMEDAN cards — pills above already cover trust */
-.hero-trust-cards {
-  display: none !important;
-}
+/* Trust cards styled in rn-hero-block-css */
 .hero-store-chip {
   display: flex !important;
   align-items: center !important;
@@ -4730,6 +4727,214 @@ footer p,
 #nav.nav, #nav {
   background: #0B1E3A !important;
   z-index: 10050 !important;
+}
+</style>
+
+
+<style id="rn-hero-block-css">
+/* ===== Hero secondary links + trust + store — real layout ===== */
+.rn-hero-secondary {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  justify-content: center !important;
+  margin: 16px auto 0 !important;
+  max-width: 520px !important;
+}
+.rn-hero-sec-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-height: 44px !important;
+  padding: 10px 18px !important;
+  border-radius: 999px !important;
+  border: 1.5px solid rgba(0, 180, 216, 0.55) !important;
+  background: rgba(15, 39, 68, 0.65) !important;
+  color: #5eead4 !important;
+  -webkit-text-fill-color: #5eead4 !important;
+  font-weight: 700 !important;
+  font-size: 0.9rem !important;
+  text-decoration: none !important;
+  opacity: 1 !important;
+}
+.rn-hero-sec-btn:hover {
+  background: rgba(0, 180, 216, 0.15) !important;
+  border-color: #00B4D8 !important;
+  color: #a5f3fc !important;
+  -webkit-text-fill-color: #a5f3fc !important;
+}
+
+/* Trust pills */
+.rn-proof-band {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  justify-content: center !important;
+  margin: 20px auto 0 !important;
+  max-width: 560px !important;
+}
+.rn-proof-band .rn-proof-item {
+  display: inline-flex !important;
+  align-items: center !important;
+  padding: 6px 12px !important;
+  border-radius: 999px !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+  line-height: 1.3 !important;
+}
+.rn-proof-band .rn-proof-item strong {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-weight: 800 !important;
+}
+
+/* Meta column: store + credential grid */
+.hero-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  gap: 14px !important;
+  margin: 22px auto 0 !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  padding: 0 8px !important;
+  box-sizing: border-box !important;
+}
+
+.hero-store-chip {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 14px 16px !important;
+  border-radius: 14px !important;
+  background: rgba(0, 180, 216, 0.12) !important;
+  border: 1.5px solid rgba(0, 180, 216, 0.4) !important;
+  text-decoration: none !important;
+  color: #fff !important;
+  box-sizing: border-box !important;
+  transition: background .15s ease, border-color .15s ease !important;
+}
+.hero-store-chip:hover {
+  background: rgba(0, 180, 216, 0.2) !important;
+  border-color: #00B4D8 !important;
+}
+.hero-store-icon {
+  font-size: 1.25rem !important;
+  flex-shrink: 0 !important;
+}
+.hero-store-text {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  min-width: 0 !important;
+  text-align: left !important;
+}
+.hero-store-chip strong {
+  display: block !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  opacity: 1 !important;
+}
+.hero-store-chip small {
+  display: block !important;
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+  font-size: 0.78rem !important;
+  opacity: 1 !important;
+  margin: 0 !important;
+}
+.hero-store-arrow {
+  margin-left: auto !important;
+  color: #67e8f9 !important;
+  -webkit-text-fill-color: #67e8f9 !important;
+  font-weight: 800 !important;
+  font-size: 1.1rem !important;
+  flex-shrink: 0 !important;
+}
+
+/* Credential cards — visible, readable, grid */
+.hero-trust-cards {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  width: 100% !important;
+  margin: 0 !important;
+}
+@media (min-width: 480px) {
+  .hero-trust-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+.hero-trust-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  min-height: 64px !important;
+  padding: 12px 8px !important;
+  border-radius: 12px !important;
+  background: rgba(15, 39, 68, 0.85) !important;
+  border: 1px solid rgba(148, 163, 184, 0.28) !important;
+  text-align: center !important;
+  box-sizing: border-box !important;
+}
+.hero-trust-card .htc-label {
+  display: block !important;
+  color: #94a3b8 !important;
+  -webkit-text-fill-color: #94a3b8 !important;
+  font-size: 0.65rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
+  opacity: 1 !important;
+}
+.hero-trust-card .htc-value {
+  display: block !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.8rem !important;
+  font-weight: 800 !important;
+  line-height: 1.25 !important;
+  opacity: 1 !important;
+}
+
+/* Outline secondary CTA under primary */
+.hero-actions {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin-top: 20px !important;
+}
+.hero-actions .btn {
+  width: min(100%, 360px) !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  border-radius: 999px !important;
+  font-weight: 700 !important;
+}
+.hero-actions .btn-outline {
+  background: transparent !important;
+  border: 1.5px solid rgba(255,255,255,0.45) !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+.hero-actions .btn-primary {
+  background: #0A66C2 !important;
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  border: none !important;
 }
 </style>
 
@@ -4850,11 +5055,11 @@ button,a,.btn{touch-action:manipulation}
           <a href="#free-guide" class="btn btn-primary" data-rn-event="free_guide">Get the free AI prompts guide</a>
           <a href="https://calendly.com/hassanzakariyabiz/30min" target="_blank" rel="noopener" class="btn btn-outline" data-rn-event="book_call">Book a free discovery call</a>
         </div>
-        <p class="hero-next-hint" style="margin-top:12px;">
-          <a href="#platforms" style="color:#5eead4;font-weight:700;text-decoration:none;">Explore platforms →</a>
-          <span style="color:#64748b;"> · </span>
-          <a href="#path" style="color:#5eead4;font-weight:700;text-decoration:none;">See the full path →</a>
-        </p>
+                <div class="rn-hero-secondary">
+          <a href="#platforms" class="rn-hero-sec-btn">Explore platforms →</a>
+          <a href="#path" class="rn-hero-sec-btn">See the full path →</a>
+        </div>
+
         <div class="rn-proof-band" role="list">
           <span class="rn-proof-item"><strong>Trusted</strong></span>
           <span class="rn-proof-item">CAC 3770977</span>
@@ -4865,12 +5070,12 @@ button,a,.btn{touch-action:manipulation}
 
         <div class="hero-meta">
           <a href="/store" class="hero-store-chip">
-            <span class="hero-store-icon">🛒</span>
-            <span>
+            <span class="hero-store-icon" aria-hidden="true">🛒</span>
+            <span class="hero-store-text">
               <strong>Digital products</strong>
               <small>Guides &amp; templates · Instant delivery</small>
             </span>
-            <span class="hero-store-arrow">→</span>
+            <span class="hero-store-arrow" aria-hidden="true">→</span>
           </a>
           <div class="hero-trust-cards" aria-label="Credentials">
             <div class="hero-trust-card">
