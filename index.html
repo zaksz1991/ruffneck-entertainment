@@ -2138,11 +2138,11 @@ p.section-sub,
   display: flex !important;
   align-items: center !important;
   gap: 6px !important;
-  flex: 1 1 auto !important;
+  flex: 0 0 auto !important;
   min-width: 0 !important;
-  max-width: calc(100% - 52px) !important;
-  margin: 0 !important;
-  order: 1 !important;
+  max-width: none !important;
+  margin: 0 12px 0 0 !important;
+  order: 0 !important;
 }
 #nav .nav-logo img,
 .nav-logo img {
@@ -2541,13 +2541,13 @@ body {
 }
 /* Logo left — single brand */
 #nav .nav-logo {
-  order: 1 !important;
+  order: 0 !important;
   display: flex !important;
   align-items: center !important;
   gap: 8px !important;
-  flex: 1 1 auto !important;
+  flex: 0 0 auto !important;
   min-width: 0 !important;
-  margin-right: auto !important;
+  margin-right: 12px !important;
   text-decoration: none !important;
   overflow: hidden !important;
 }
@@ -4590,6 +4590,149 @@ footer p,
 }
 </style>
 
+
+<style id="rn-header-hero-desktop-fix">
+/* ========== Desktop header: brand LEFT ========== */
+@media (min-width: 901px) {
+  #nav .nav-inner,
+  .nav .nav-inner {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    gap: 12px !important;
+  }
+  #nav .nav-logo,
+  .nav-logo,
+  #nav a.nav-logo {
+    order: 0 !important;
+    flex: 0 0 auto !important;
+    max-width: none !important;
+    margin: 0 12px 0 0 !important;
+    margin-right: 12px !important;
+  }
+  #nav .nav-links,
+  #nav ul.nav-links {
+    order: 1 !important;
+    flex: 1 1 auto !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-start !important;
+    gap: 2px 6px !important;
+  }
+  #rnNavControls {
+    order: 20 !important;
+    margin-left: auto !important;
+  }
+  #hamburger, .nav-hamburger {
+    order: 21 !important;
+  }
+}
+
+/* ========== Hero trust / store chips — clean, readable ========== */
+.hero-meta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 14px !important;
+  margin-top: 18px !important;
+  width: 100% !important;
+  max-width: 520px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+/* Hide duplicate CAC/SMEDAN cards — pills above already cover trust */
+.hero-trust-cards {
+  display: none !important;
+}
+.hero-store-chip {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  width: 100% !important;
+  max-width: 420px !important;
+  padding: 14px 16px !important;
+  border-radius: 14px !important;
+  background: rgba(15, 39, 68, 0.95) !important;
+  border: 1.5px solid rgba(0, 180, 216, 0.45) !important;
+  text-decoration: none !important;
+  color: #fff !important;
+  box-sizing: border-box !important;
+  margin: 0 auto !important;
+}
+.hero-store-chip strong {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-size: 0.95rem !important;
+}
+.hero-store-chip small {
+  color: #cbd5e1 !important;
+  -webkit-text-fill-color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+.hero-store-arrow {
+  color: #67e8f9 !important;
+  -webkit-text-fill-color: #67e8f9 !important;
+}
+.rn-proof-band,
+.rn-proof-band .rn-proof-item {
+  color: #e2e8f0 !important;
+}
+.rn-proof-item {
+  background: rgba(255,255,255,0.1) !important;
+  border: 1px solid rgba(255,255,255,0.18) !important;
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+}
+
+/* ========== Store teaser — never white-on-cream ========== */
+#rn-store-teaser {
+  background: #F3F2EF !important;
+}
+#rn-store-teaser h2,
+#rn-store-teaser .section-title {
+  color: #0B1E3A !important;
+  -webkit-text-fill-color: #0B1E3A !important;
+  opacity: 1 !important;
+}
+#rn-store-teaser p {
+  color: #475569 !important;
+  -webkit-text-fill-color: #475569 !important;
+  opacity: 1 !important;
+}
+#rn-store-teaser p:first-child {
+  color: #0A66C2 !important;
+  -webkit-text-fill-color: #0A66C2 !important;
+}
+#rn-store-teaser a.primary {
+  background: #0A66C2 !important;
+  color: #fff !important;
+  -webkit-text-fill-color: #fff !important;
+}
+#rn-store-teaser a.secondary {
+  background: #fff !important;
+  color: #0A66C2 !important;
+  -webkit-text-fill-color: #0A66C2 !important;
+  border: 1.5px solid #0A66C2 !important;
+}
+
+/* Path cards — ensure text above sticky conflicts stays readable */
+#path h3, #path p, #path a {
+  position: relative;
+  z-index: 1;
+}
+#path {
+  padding-top: 48px !important;
+}
+
+/* Sticky nav must not let page text bleed through */
+#nav.nav, #nav {
+  background: #0B1E3A !important;
+  z-index: 10050 !important;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4847,10 +4990,10 @@ button,a,.btn{touch-action:manipulation}
   </div>
 </section>
 
-<section id="rn-store-teaser" class="section" style="background:#F3F2EF;padding:40px 16px;">
+<section id="rn-store-teaser" class="section" style="background:#F3F2EF !important;padding:40px 16px;">
   <div style="max-width:720px;margin:0 auto;text-align:center;">
     <p style="margin:0 0 6px;color:#0A66C2;font-weight:800;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;">Digital store</p>
-    <h2 style="margin:0 0 10px;color:#191919;font-size:clamp(1.25rem,3vw,1.6rem);font-weight:800;">Guides &amp; templates from ₦2,000</h2>
+    <h2 style="margin:0 0 10px;color:#0B1E3A !important;-webkit-text-fill-color:#0B1E3A !important;font-size:clamp(1.25rem,3vw,1.6rem);font-weight:800;">Guides &amp; templates from ₦2,000</h2>
     <p style="margin:0 0 18px;color:#666;line-height:1.5;font-size:0.95rem;">
       Pay in naira via Flutterwave. Instant digital delivery. WhatsApp support if you need help.
     </p>
