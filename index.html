@@ -4554,6 +4554,42 @@ footer p,
 }
 </style>
 
+
+<style id="rn-packaging-reliability">
+/* Dropdown category labels */
+.nav-drop-menu .rn-drop-label {
+  display: block;
+  padding: 10px 14px 4px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #5eead4;
+  pointer-events: none;
+}
+.nav-drop-menu a { white-space: nowrap; }
+
+/* Reliability: footer legal always readable */
+.footer-bottom a {
+  color: #e2e8f0 !important;
+  -webkit-text-fill-color: #e2e8f0 !important;
+  opacity: 1 !important;
+  text-decoration: underline !important;
+}
+.footer-bottom p {
+  color: #cbd5e1 !important;
+  opacity: 1 !important;
+}
+
+/* Trust line under hero chips if present */
+.rn-domain-trust {
+  text-align: center;
+  font-size: 0.8rem;
+  color: #94a3b8 !important;
+  margin: 8px 0 0;
+}
+</style>
+
 </head>
 <body class="rn-ux-page">
 <div class="rn-announce" role="note">Practical AI &amp; digital systems for Nigerian professionals · <a href="/store">Digital store</a> · <a href="https://wa.me/2348033807856">WhatsApp support</a></div>
@@ -4601,16 +4637,18 @@ button,a,.btn{touch-action:manipulation}
         <li class="nav-dropdown">
           <a href="#platforms" class="nav-drop-trigger">Platforms <span class="nav-caret">▾</span></a>
           <div class="nav-drop-menu">
-            <a href="#platforms">All platforms (on this page)</a>
-            <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">RuffNeck Learn — Free course + certificate</a>
-            <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener">RuffNeck Prospector — Leads</a>
-            <a href="https://ruffneck-connect.vercel.app" target="_blank" rel="noopener">RuffNeck Connect — Community</a>
-            <a href="https://ruffneck-social-hub.vercel.app" target="_blank" rel="noopener">RuffNeck Social Hub — Social ops</a>
-            <a href="https://ruffneck-exchange.vercel.app" target="_blank" rel="noopener">RuffNeck Exchange — B2B marketplace</a>
-            <a href="https://kano-run.vercel.app" target="_blank" rel="noopener">Kano Run — 3D Keke game</a>
-            <a href="https://kano-keke.vercel.app" target="_blank" rel="noopener">Kano Keke — Driver life sim</a>
-            <a href="https://calloria.vercel.app" target="_blank" rel="noopener">Calloria — Call centre sim</a>
+            <a href="#platforms">All on this page</a>
+            <span class="rn-drop-label">Business tools</span>
+            <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">Learn — Free course + certificate</a>
+            <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener">Prospector — Leads</a>
+            <a href="https://ruffneck-exchange.vercel.app" target="_blank" rel="noopener">Exchange — B2B marketplace</a>
+            <a href="https://ruffneck-connect.vercel.app" target="_blank" rel="noopener">Connect — Community</a>
+            <a href="https://ruffneck-social-hub.vercel.app" target="_blank" rel="noopener">Social Hub — Social ops</a>
             <a href="/store">Digital Store</a>
+            <span class="rn-drop-label">Games</span>
+            <a href="https://kano-run.vercel.app" target="_blank" rel="noopener">Kano Run — 3D game</a>
+            <a href="https://kano-keke.vercel.app" target="_blank" rel="noopener">Kano Keke — Driver life</a>
+            <a href="https://calloria.vercel.app" target="_blank" rel="noopener">Calloria — Call centre sim</a>
           </div>
         </li>
         <li><a href="#free-guide">Free Guide</a></li>
@@ -4625,16 +4663,17 @@ button,a,.btn{touch-action:manipulation}
     <a href="#services">Services</a>
     <a href="/blog">Blog</a>
     <a href="#free-guide">Free Guide</a>
-    <p class="rn-mobile-label">Platforms</p>
+    <p class="rn-mobile-label">Business tools</p>
     <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener">🎓 Learn — Free course + certificate</a>
     <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener">🔎 Prospector — Leads</a>
+    <a href="https://ruffneck-exchange.vercel.app" target="_blank" rel="noopener">🏢 Exchange — B2B marketplace</a>
     <a href="https://ruffneck-connect.vercel.app" target="_blank" rel="noopener">🤝 Connect — Community</a>
     <a href="https://ruffneck-social-hub.vercel.app" target="_blank" rel="noopener">📣 Social Hub — Social ops</a>
-    <a href="https://ruffneck-exchange.vercel.app" target="_blank" rel="noopener">🏢 Exchange — B2B marketplace</a>
-    <a href="https://kano-run.vercel.app" target="_blank" rel="noopener">🛵 Kano Run — 3D game</a>
-    <a href="https://kano-keke.vercel.app" target="_blank" rel="noopener">🛺 Kano Keke — Driver life sim</a>
-    <a href="https://calloria.vercel.app" target="_blank" rel="noopener">📞 Calloria — Call centre sim</a>
     <a href="/store">🛒 Digital Store</a>
+    <p class="rn-mobile-label">Games</p>
+    <a href="https://kano-run.vercel.app" target="_blank" rel="noopener">🛵 Kano Run — 3D game</a>
+    <a href="https://kano-keke.vercel.app" target="_blank" rel="noopener">🛺 Kano Keke — Driver life</a>
+    <a href="https://calloria.vercel.app" target="_blank" rel="noopener">📞 Calloria — Call centre sim</a>
     <p class="rn-mobile-label">Company</p>
     <a href="/programmes">Community Impact</a>
     <a href="#about">About</a>
@@ -4717,69 +4756,54 @@ button,a,.btn{touch-action:manipulation}
 <!-- Quick platforms strip -->
 <section id="platforms-strip" aria-label="Quick links to RuffNeck platforms" style="padding:28px 16px;background:#071526;border-bottom:1px solid rgba(0,180,216,0.2);">
   <div style="max-width:1080px;margin:0 auto;width:100%;box-sizing:border-box;">
-    <p style="margin:0 0 14px;text-align:center;color:#5eead4;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;">RuffNeck platforms</p>
-    <p style="margin:0 0 14px;text-align:center;color:#94a3b8;font-size:0.88rem;line-height:1.45;max-width:520px;margin-left:auto;margin-right:auto;">One brand · skills, clients, marketplace, community, social ops &amp; culture</p>
-    <div class="rn-plat-strip-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;width:100%;">
-      <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener" style="
-        text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;
-        background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;
-      ">
+    <p style="margin:0 0 6px;text-align:center;color:#5eead4;font-size:11px;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;">RuffNeck platforms</p>
+    <p style="margin:0 0 18px;text-align:center;color:#94a3b8;font-size:0.88rem;line-height:1.45;max-width:560px;margin-left:auto;margin-right:auto;">Business tools for clients, skills &amp; operations — plus Kano-rooted games.</p>
+    <p style="margin:0 0 10px;color:#5eead4;font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;">Business tools</p>
+    <div class="rn-plat-strip-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;width:100%;margin-bottom:18px;">
+      <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;">
         <div style="font-size:1.4rem;margin-bottom:6px;">🎓</div>
         <div style="font-weight:800;font-size:0.92rem;color:#fff;">Learn</div>
         <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Free course + certificate</div>
       </a>
-      <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener" style="
-        text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;
-        background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;
-      ">
+      <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;">
         <div style="font-size:1.4rem;margin-bottom:6px;">🔎</div>
         <div style="font-weight:800;font-size:0.92rem;color:#fff;">Prospector</div>
-        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Customers who need you</div>
+        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Find leads</div>
       </a>
-      <a href="https://ruffneck-connect.vercel.app" target="_blank" rel="noopener" style="
-        text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;
-        background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;
-      ">
-        <div style="font-size:1.4rem;margin-bottom:6px;">🤝</div>
-        <div style="font-weight:800;font-size:0.92rem;color:#fff;">Connect</div>
-        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Collaborators &amp; action</div>
-      </a>
-      <a href="https://ruffneck-social-hub.vercel.app" target="_blank" rel="noopener" style="
-        text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;
-        background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;
-      ">
-        <div style="font-size:1.4rem;margin-bottom:6px;">📣</div>
-        <div style="font-weight:800;font-size:0.92rem;color:#fff;">Social Hub</div>
-        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Social operations</div>
-      </a>
-      <a href="https://ruffneck-exchange.vercel.app" target="_blank" rel="noopener" style="
-        text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;
-        background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;
-      ">
+      <a href="https://ruffneck-exchange.vercel.app" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;">
         <div style="font-size:1.4rem;margin-bottom:6px;">🏢</div>
         <div style="font-weight:800;font-size:0.92rem;color:#fff;">Exchange</div>
         <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">B2B marketplace</div>
       </a>
-      <a href="https://kano-run.vercel.app" target="_blank" rel="noopener" style="
-        text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;
-        background:rgba(15,39,68,0.9);border:1px solid rgba(251,191,36,0.35);color:#fff;
-      ">
+      <a href="https://ruffneck-connect.vercel.app" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;">
+        <div style="font-size:1.4rem;margin-bottom:6px;">🤝</div>
+        <div style="font-weight:800;font-size:0.92rem;color:#fff;">Connect</div>
+        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Community</div>
+      </a>
+      <a href="https://ruffneck-social-hub.vercel.app" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;">
+        <div style="font-size:1.4rem;margin-bottom:6px;">📣</div>
+        <div style="font-weight:800;font-size:0.92rem;color:#fff;">Social Hub</div>
+        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Social ops</div>
+      </a>
+      <a href="/store" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;">
+        <div style="font-size:1.4rem;margin-bottom:6px;">🛒</div>
+        <div style="font-weight:800;font-size:0.92rem;color:#fff;">Store</div>
+        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Guides &amp; templates</div>
+      </a>
+    </div>
+    <p style="margin:0 0 10px;color:#94a3b8;font-size:11px;font-weight:800;letter-spacing:0.08em;text-transform:uppercase;">Games</p>
+    <div class="rn-plat-strip-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;width:100%;">
+      <a href="https://kano-run.vercel.app" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(148,163,184,0.25);color:#fff;">
         <div style="font-size:1.4rem;margin-bottom:6px;">🛵</div>
         <div style="font-weight:800;font-size:0.92rem;color:#fff;">Kano Run</div>
-        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Play Kano · share score</div>
+        <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">3D keke game</div>
       </a>
-      <a href="https://kano-keke.vercel.app" target="_blank" rel="noopener" style="
-        text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;
-        background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;
-      ">
+      <a href="https://kano-keke.vercel.app" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(148,163,184,0.25);color:#fff;">
         <div style="font-size:1.4rem;margin-bottom:6px;">🛺</div>
         <div style="font-weight:800;font-size:0.92rem;color:#fff;">Kano Keke</div>
         <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Driver life sim</div>
       </a>
-      <a href="https://calloria.vercel.app" target="_blank" rel="noopener" style="
-        text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;
-        background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.3);color:#fff;
-      ">
+      <a href="https://calloria.vercel.app" target="_blank" rel="noopener" style="text-decoration:none;text-align:center;padding:16px 10px;border-radius:12px;background:rgba(15,39,68,0.9);border:1px solid rgba(148,163,184,0.25);color:#fff;">
         <div style="font-size:1.4rem;margin-bottom:6px;">📞</div>
         <div style="font-weight:800;font-size:0.92rem;color:#fff;">Calloria</div>
         <div style="font-size:0.75rem;color:#94a3b8;margin-top:4px;">Call centre sim</div>
@@ -4935,7 +4959,7 @@ button,a,.btn{touch-action:manipulation}
       RuffNeck platforms — skills, clients, community, social ops, culture
     </h2>
     <p style="margin:0 0 36px; max-width:640px; line-height:1.65; font-size:1.05rem; color:#cbd5e1 !important;">
-      Live products: Learn (free course + certificate), Prospector, Connect, Social Hub, and Kano Run — one RuffNeck brand.
+      Business tools (Learn, Prospector, Exchange, Connect, Social Hub, Store) and games (Kano Run, Kano Keke, Calloria) — one RuffNeck brand.
     </p>
 
     <div class="rn-plat-cards" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:20px; width:100%;">
@@ -6303,7 +6327,7 @@ button,a,.btn{touch-action:manipulation}
       </details>
       <details style="background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.22);border-radius:12px;padding:14px 16px;">
         <summary style="color:#fff;font-weight:700;cursor:pointer;">What are Learn, Prospector, Connect, and Kano Run?</summary>
-        <p style="margin:10px 0 0;color:#cbd5e1;line-height:1.55;font-size:0.95rem;"><strong>Learn</strong> = free course + certificate. <strong>Prospector</strong> = find leads. <strong>Connect</strong> = community. <strong>Social Hub</strong> = social operations. <strong>Kano Run</strong> = free 3D keke game. <strong>Kano Keke</strong> = driver life simulator. <strong>Calloria</strong> = call centre simulation game. <strong>Exchange</strong> = B2B products, services &amp; procurement.</p>
+        <p style="margin:10px 0 0;color:#cbd5e1;line-height:1.55;font-size:0.95rem;"><strong>Business tools:</strong> Learn (free course + certificate), Prospector, Exchange (B2B), Connect, Social Hub, Store. <strong>Games:</strong> Kano Run, Kano Keke, Calloria.</p>
       </details>
       <details style="background:rgba(15,39,68,0.9);border:1px solid rgba(0,180,216,0.22);border-radius:12px;padding:14px 16px;">
         <summary style="color:#fff;font-weight:700;cursor:pointer;">Is RuffNeck a registered business?</summary>
@@ -6473,17 +6497,20 @@ button,a,.btn{touch-action:manipulation}
     
 <div class="rn-footer-platforms" style="margin:16px 0;padding-top:12px;border-top:1px solid rgba(148,163,184,0.25);">
   <p style="margin:0 0 8px;font-size:12px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;">Platforms</p>
-  <p style="margin:0;line-height:1.8;font-size:0.9rem;">
-    <a href="https://ruffneck-entertainment.vercel.app" style="color:#5eead4;">Main website</a> ·
+  <p style="margin:0 0 6px;color:#94a3b8;font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;">Business tools</p>
+  <p style="margin:0 0 12px;line-height:1.8;font-size:0.9rem;">
     <a href="https://ruffneck-lms.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Learn</a> ·
     <a href="https://ruffneck-prospector.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Prospector</a> ·
+    <a href="https://ruffneck-exchange.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Exchange</a> ·
     <a href="https://ruffneck-connect.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Connect</a> ·
     <a href="https://ruffneck-social-hub.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Social Hub</a> ·
-    <a href="https://ruffneck-exchange.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Exchange</a> ·
+    <a href="/store" style="color:#5eead4;">Store</a>
+  </p>
+  <p style="margin:0 0 6px;color:#94a3b8;font-size:11px;font-weight:800;letter-spacing:0.06em;text-transform:uppercase;">Games</p>
+  <p style="margin:0;line-height:1.8;font-size:0.9rem;">
     <a href="https://kano-run.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Kano Run</a> ·
     <a href="https://kano-keke.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Kano Keke</a> ·
     <a href="https://calloria.vercel.app" target="_blank" rel="noopener" style="color:#5eead4;">Calloria</a> ·
-    <a href="/store" style="color:#5eead4;">Store</a> ·
     <a href="https://wa.me/2348033807856" target="_blank" rel="noopener" style="color:#5eead4;">WhatsApp</a>
   </p>
 </div>

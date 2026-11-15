@@ -1,0 +1,27 @@
+RuffNeck go-live — packaging + reliability
+==========================================
+IN THIS BUILD (index.html):
+- Platforms menu: Business tools vs Games
+- Mobile menu: same split
+- Homepage strip: Business tools row + Games row
+- Footer: two labelled groups
+- FAQ updated
+- Footer legal contrast + canonical tag
+
+YOU STILL DO (domain-level trust):
+1. Buy domain (e.g. ruffneckentertainment.com)
+2. Vercel → Project → Settings → Domains → add domain
+3. Point DNS as Vercel shows
+4. Update canonical in index.html to https://yourdomain.com/
+5. Prefer email on that domain for professional contact
+
+RELIABILITY PASS (5 minutes after deploy):
+[ ] Hero CTAs open (guide / call)
+[ ] WhatsApp opens with prefill
+[ ] Calendly opens
+[ ] /store loads
+[ ] Each Business tool URL loads
+[ ] Each Game URL loads
+[ ] Privacy / Terms / Cookie open (modal or page)
+[ ] Mobile: Platforms menu shows Tools then Games
+[ ] Hard-refresh after deploy (clear cache)
