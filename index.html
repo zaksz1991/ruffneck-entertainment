@@ -4362,21 +4362,26 @@ a:focus-visible, button:focus-visible, .btn:focus-visible {
 </style>
 
 
-<style id="rn-fix-services-hide">
-/* Correct: hide full services grid on homepage; teaser remains */
+<style id="rn-restore-services-visible">
+/* Restored: full services list + cards visible again */
 #services #servicesGrid,
 #servicesGrid,
-#servicesMoreWrap,
-#showAllServices,
 .services-grid,
 #services .service-card {
-  display: none !important;
+  display: grid !important;
 }
-#rn-services-teaser,
-#service-platform-links {
+#services .service-card {
+  display: flex !important;
+}
+#servicesMoreWrap,
+#showAllServices {
+  display: block !important;
+}
+#rn-services-teaser {
   display: block !important;
 }
 </style>
+
 
 
 <style id="rn-founder-contrast-fix">
